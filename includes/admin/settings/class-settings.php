@@ -358,7 +358,7 @@ class Affiliate_WP_Settings {
 		if ( ! empty( $args['options'] ) ) {
 			foreach( $args['options'] as $key => $option ) {
 				if( isset( $this->options[$args['id']][$key] ) ) { $enabled = $option; } else { $enabled = NULL; }
-				echo '<input name="affwp_settings[' . $args['id'] . '][' . $key . ']" id="affwp_settings[' . $args['id'] . '][' . $key . ']" type="checkbox" value="' . $option . '" ' . checked($option, $enabled, false) . '/>&nbsp;';
+				echo '<input name="affwp_settings[' . $args['id'] . '][' . $key . ']" id="affwp_settings[' . $args['id'] . '][' . $key . ']" type="checkbox" value="' . esc_attr( strip_tags( $option ) ) . '" ' . checked($option, $enabled, false) . '/>&nbsp;';
 				echo '<label for="affwp_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label><br/>';
 			}
 			echo '<p class="description">' . $args['desc'] . '</p>';

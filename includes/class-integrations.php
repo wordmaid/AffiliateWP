@@ -13,6 +13,7 @@ class Affiliate_WP_Integrations {
 		return apply_filters( 'affwp_integrations', array(
 			'edd'         => 'Easy Digital Downloads',
 			'exchange'    => 'iThemes Exchange',
+			'gumroad'     => 'Gumroad (see <a href="http://affiliatewp.com/docs/gumroad">documentation</a>)',
 			'membermouse' => 'MemberMouse',
 			'jigoshop'    => 'Jigoshop',
 			'rcp'         => 'Restrict Content Pro',

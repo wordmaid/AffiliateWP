@@ -83,7 +83,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			$cart_shipping = $this->order->get_total_shipping();
 
 			$items = $this->order->get_items();
-			//echo '<pre>'; print_r( $items ); echo '</pre>'; exit;
+
 			// Calculate the referral amount based on product prices
 			$amount = 0.00;
 			foreach( $items as $product ) {
@@ -115,10 +115,6 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				}
 
 				$amount += $this->calculate_referral_amount( $product_total, $order_id, $product['product_id'] );
-
-				if( 'flat' == affwp_get_affiliate_rate_type( $this->affiliate_id ) ) {
-					$amount *= $product['qty'];
-				}
 
 			}
 

@@ -181,7 +181,7 @@ class Affiliate_WP_Settings {
 			$input[ $key ]     = $value;
 
 			if ( $type ) {
-				
+
 				if( $sanitize_callback && is_callable( $sanitize_callback ) ) {
 
 					add_filter( 'affwp_settings_sanitize_' . $type, $sanitize_callback, 10, 2 );
@@ -563,6 +563,11 @@ class Affiliate_WP_Settings {
 						'name' => __( 'Ignore Zero Referrals?', 'affiliate-wp' ),
 						'desc' => __( 'Check this box if you would like AffiliateWP to completely ignore referrals for a zero total amount. This can be useful for multi-price products that start at zero, or if a discount was used, which resulted in a zero amount. Please note: if this setting is enabled and a visit results in a zero referral, then the visit would be considered not converted.', 'affiliate-wp' ),
 						'type' => 'checkbox'
+					),
+					'referral_url_blacklist' => array(
+						'name' => __( 'Referral URL Blacklist', 'affiliate-wp' ),
+						'desc' => __( 'URLs placed in this box below will be prevented from making referrals. Enter URLs one per line.', 'affiliate-wp' ),
+						'type' => 'textarea'
 					),
 					'uninstall_on_delete' => array(
 						'name' => __( 'Remove Data on Uninstall?', 'affiliate-wp' ),

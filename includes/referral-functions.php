@@ -256,13 +256,13 @@ function affwp_get_banned_urls() {
  */
 function affwp_is_url_banned( $url = '' ) {
 	if( empty( $url ) ) {
-		return false;
+		$ret = false;
 	}
 
 	$banned_urls = affwp_get_banned_urls();
 
 	if( ! is_array( $banned_urls ) || empty( $banned_urls ) ) {
-		return false;
+		$ret = false;
 	}
 
 	foreach( $banned_urls as $banned_url ) {

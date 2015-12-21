@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP v1.2.5\n"
 "Report-Msgid-Bugs-To: http://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2015-12-21 14:46-0200\n"
-"PO-Revision-Date: 2015-12-21 14:52-0200\n"
+"POT-Creation-Date: 2015-12-21 15:40-0200\n"
+"PO-Revision-Date: 2015-12-21 15:41-0200\n"
 "Last-Translator: Rhuan Carlos <rhcarlosweb@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -761,7 +761,7 @@ msgstr "Falha ao deletar indicação, tente novamente"
 # @ affiliate-wp
 #: includes/admin/class-notices.php:137
 msgid "Creative updated successfully"
-msgstr ""
+msgstr "Campanha atualizada com sucesso"
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:139
@@ -772,22 +772,22 @@ msgstr "<a href=\"%s\">Voltar para Banners / Links</a>"
 # @ affiliate-wp
 #: includes/admin/class-notices.php:145
 msgid "Creative added successfully"
-msgstr ""
+msgstr "Campanha adicionada com sucesso"
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:151
 msgid "Creative deleted successfully"
-msgstr ""
+msgstr "Campanha deletada com sucesso"
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:157
 msgid "Creative activated"
-msgstr ""
+msgstr "Campanha ativada"
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:163
 msgid "Creative deactivated"
-msgstr ""
+msgstr "Campanha desativada"
 
 # @ affiliate-wp
 #: includes/admin/class-notices.php:169
@@ -931,7 +931,7 @@ msgstr ""
 
 #: includes/admin/class-welcome.php:204
 msgid "reCaptcha v2.0"
-msgstr ""
+msgstr "reCaptcha v2.0"
 
 #: includes/admin/class-welcome.php:205
 msgid ""
@@ -942,7 +942,7 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:207
 msgid "Additional Updates"
-msgstr ""
+msgstr "Atualizações Adicionais"
 
 #: includes/admin/class-welcome.php:209
 msgid "Improved User Searching"
@@ -988,7 +988,7 @@ msgstr ""
 
 #: includes/admin/class-welcome.php:221
 msgid "Import Users By Role"
-msgstr ""
+msgstr "Importar Usuários por Tipo"
 
 #: includes/admin/class-welcome.php:222
 msgid ""
@@ -999,13 +999,13 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:228 includes/admin/class-welcome.php:315
 msgid "Go to AffiliateWP Settings"
-msgstr ""
+msgstr "Vá para configurações do AffiliateWP"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:245 includes/admin/class-welcome.php:341
 #, php-format
 msgid "Welcome to AffiliateWP %s"
-msgstr ""
+msgstr "Bem-vindo ao AffiliateWP %s"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:251
@@ -1017,12 +1017,12 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:254
 msgid "Overview of Affiliates and Referrals"
-msgstr ""
+msgstr "Visão geral de Afiliados e Indicações"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:259
 msgid "The Overview Page"
-msgstr ""
+msgstr "Página Visão Geral"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:260
@@ -1046,12 +1046,12 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:265
 msgid "Adding Affiliates"
-msgstr ""
+msgstr "Adicionando Afiliados"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:270
 msgid "Affiliates &rarr; Add New"
-msgstr ""
+msgstr "Afiliados &rarr; Adicionar Novo"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:271
@@ -1063,7 +1063,7 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:273
 msgid "Affiliate Registration"
-msgstr ""
+msgstr "Registro de Afiliado"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:274
@@ -1077,7 +1077,7 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:276
 msgid "Moderate Registrations"
-msgstr ""
+msgstr "Moderar Registros"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:277
@@ -1098,12 +1098,12 @@ msgstr ""
 #: includes/admin/class-welcome.php:281
 #: includes/admin/settings/class-settings.php:316 includes/install.php:29
 msgid "Affiliate Area"
-msgstr ""
+msgstr "Área Afiliado"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:286
 msgid "A Dashboard For Your Affiliates"
-msgstr ""
+msgstr "Um Painel Para Seus Afiliados"
 
 #: includes/admin/class-welcome.php:287
 msgid ""
@@ -1129,7 +1129,7 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:294
 msgid "Quick Terminology"
-msgstr ""
+msgstr "Terminologia rápida"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:299
@@ -1156,12 +1156,12 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:319
 msgid "Need Help?"
-msgstr ""
+msgstr "Precisa de Ajuda?"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:322
 msgid "Phenomenal Support"
-msgstr ""
+msgstr "Suporte Fenomenal"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:323
@@ -1174,7 +1174,7 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:342
 msgid "Thank you for updating to the latest version!"
-msgstr ""
+msgstr "Obrigado por atualizar para a versão mais recente!"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:347
@@ -1183,28 +1183,31 @@ msgid ""
 "provide the #1 affiliate platform for WordPress. Here are just some of the "
 "faces that have helped build AffiliateWP:"
 msgstr ""
+"AffiliateWP é criado por desenvolvedores de todo o mundo que visam fornecer "
+"a plataforma número #1 de afiliados para o WordPress. Aqui estão apenas "
+"alguns dos rostos que ajudaram a construir o AffiliateWP:"
 
 # @ affiliate-wp
 #: includes/admin/class-welcome.php:374
 #, php-format
 msgid "View %s"
-msgstr ""
+msgstr "Ver %s"
 
 # @ affiliate-wp
 #: includes/admin/creatives/actions.php:16
 #: includes/admin/creatives/actions.php:80
 msgid "You do not have permission to manage creatives"
-msgstr ""
+msgstr "Você não tem permissão para gerenciar as campanhas"
 
 # @ affiliate-wp
 #: includes/admin/creatives/actions.php:44
 msgid "You do not have permission to delete a creative"
-msgstr ""
+msgstr "Você não tem permissão para deletar a campanha"
 
 # @ affiliate-wp
 #: includes/admin/creatives/actions.php:52
 msgid "No creative IDs specified for deletion"
-msgstr ""
+msgstr "Nenhum ID de campanha especificado para deletar"
 
 # @ affiliate-wp
 #: includes/admin/creatives/creatives.php:160
@@ -1240,7 +1243,7 @@ msgstr "Você tem certeza que deseja deletar essa campanha?"
 #, php-format
 msgctxt "Creative ID, creative name"
 msgid "Creative ID #%d: %s"
-msgstr ""
+msgstr "ID Campanha #%d: %s"
 
 # @ affiliate-wp
 #: includes/admin/creatives/edit.php:6
@@ -1320,6 +1323,8 @@ msgstr "Nova Campanha"
 msgid ""
 "Use this screen to add a new creative, such as a text link or image banner."
 msgstr ""
+"Use essa tela para adicionar uma nova campanha, pode ser um texto para link "
+"ou imagem para banner"
 
 # @ affiliate-wp
 #: includes/admin/creatives/new.php:74
@@ -1492,7 +1497,7 @@ msgstr ""
 #: includes/admin/visits/contextual-help.php:31
 #, php-format
 msgid "<a href=\"%s\">Post an issue</a> on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "<a href=\"%s\">Publicar um problema</a> no <a href=\"%s\">GitHub.</a>"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:39
@@ -1505,11 +1510,13 @@ msgid ""
 "<strong>Reference</strong>: this refers to the order number (or similar) "
 "that created this referral."
 msgstr ""
+"<strong>Referência:</strong> refere-se ao número de ordem (ou similar) que "
+"criou esta referência."
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:41
 msgid "Referral statuses:"
-msgstr ""
+msgstr "Status de indicação:"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:43
@@ -1517,6 +1524,7 @@ msgid ""
 "<strong>Paid</strong> - this is a referral that has been paid to the "
 "affiliate"
 msgstr ""
+"<strong>Pago</strong> - esta é uma indicação  que já foi paga ao afiliado."
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:44
@@ -1524,12 +1532,16 @@ msgid ""
 "<strong>Unpaid</strong> - this is a referral that has been accepted but not "
 "yet paid to the affiliate"
 msgstr ""
+"<strong>Não Pago</strong> - esta é uma referência que foi aceita mas ainda "
+"não paga ao afiliado."
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:45
 msgid ""
 "<strong>Pending</strong> - this is a referral that is waiting to be accepted"
 msgstr ""
+"<strong>Pendente -</strong> esta é uma referência que está esperando para "
+"ser aceita."
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:46
@@ -1537,21 +1549,23 @@ msgid ""
 "<strong>Rejected</strong> - this is a referral that has been rejected and "
 "will not be paid to the affiliate"
 msgstr ""
+"<strong>Rejeitado</strong> - esta é uma indicação que foi rejeitada e não "
+"será paga ao afiliado."
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:52
 msgid "Searching Referrals"
-msgstr ""
+msgstr "Pesquisando indicações"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:54
 msgid "Referrals can be searched in several different ways:"
-msgstr ""
+msgstr "Indicações podem ser pesquisadas de várias maneiras:"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:56
 msgid "You can enter the referral's ID number"
-msgstr ""
+msgstr "Você pode inserir o ID da referência"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:57
@@ -1567,17 +1581,17 @@ msgstr ""
 #: includes/admin/referrals/contextual-help.php:59
 #: includes/admin/visits/contextual-help.php:58
 msgid "You can enter the affiliate's ID number prefixed by 'affiliate:'"
-msgstr ""
+msgstr "Você pode inserir o ID de afiliado precedido de 'affiliate:'"
 
 #: includes/admin/referrals/contextual-help.php:60
 #: includes/admin/visits/contextual-help.php:59
 msgid "You can enter a URL campaign prefixed by 'campaign:'"
-msgstr ""
+msgstr "Você pode inserir a URL da campanha precedido de 'campaign:'"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:66
 msgid "Exporting Referrals"
-msgstr ""
+msgstr "Exportar Indicações"
 
 # @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:68
@@ -1614,14 +1628,14 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:49 includes/admin/referrals/new.php:51
 msgid "Enter a description for this referral."
-msgstr ""
+msgstr "Insira uma descrição para essa indicação."
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:57 includes/admin/referrals/new.php:59
 #: includes/admin/referrals/referrals.php:228
 #: includes/admin/tools/export/class-export-referrals.php:67
 msgid "Reference"
-msgstr ""
+msgstr "Indicação"
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:62 includes/admin/referrals/new.php:64
@@ -1634,7 +1648,7 @@ msgstr ""
 #: includes/admin/referrals/edit.php:70 includes/admin/referrals/new.php:72
 #: includes/admin/tools/export/class-export-referrals.php:68
 msgid "Context"
-msgstr ""
+msgstr "Contexto"
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:75 includes/admin/referrals/new.php:77
@@ -1648,19 +1662,19 @@ msgstr ""
 #: includes/admin/referrals/referrals.php:208
 #: includes/admin/tools/tools.php:260 includes/referral-functions.php:53
 msgid "Unpaid"
-msgstr ""
+msgstr "Não Pago"
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:89 includes/admin/referrals/new.php:91
 #: includes/admin/referrals/referrals.php:207
 #: includes/admin/tools/tools.php:259 includes/referral-functions.php:52
 msgid "Paid"
-msgstr ""
+msgstr "Pago"
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:93 includes/admin/referrals/new.php:95
 msgid "Select the status of the referral."
-msgstr ""
+msgstr "Selecione um status para a referência."
 
 # @ affiliate-wp
 #: includes/admin/referrals/edit.php:106
@@ -1670,7 +1684,7 @@ msgstr "Atualizar Indicação"
 # @ affiliate-wp
 #: includes/admin/referrals/new.php:3
 msgid "New Referral"
-msgstr ""
+msgstr "Nova Referência"
 
 # @ affiliate-wp
 #: includes/admin/referrals/new.php:9
@@ -1688,7 +1702,7 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/referrals/new.php:108
 msgid "Add Referral"
-msgstr ""
+msgstr "Adicionar Referência"
 
 # @ affiliate-wp
 #: includes/admin/referrals/referrals.php:40
@@ -2144,7 +2158,7 @@ msgstr "Parabéns {name}!"
 #: includes/emails/actions.php:107
 #, php-format
 msgid "Your affiliate application on %s has been accepted!"
-msgstr ""
+msgstr "Seu sistema de afiliados no %s foi aceito!"
 
 #: includes/admin/settings/class-settings.php:496
 msgid "Log into your affiliate area at"
@@ -2152,7 +2166,7 @@ msgstr "Faça login na sua área de afiliado em"
 
 #: includes/admin/settings/class-settings.php:499
 msgid "New Referral Email Subject"
-msgstr ""
+msgstr "Assunto Email Nova Indicação"
 
 #: includes/admin/settings/class-settings.php:500
 msgid ""
@@ -2240,15 +2254,15 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:536
 msgid "reCAPTCHA Site Key"
-msgstr ""
+msgstr "reCAPTCHA Chave Site"
 
 #: includes/admin/settings/class-settings.php:537
 msgid "This is used to identify your site to Google reCAPTCHA."
-msgstr ""
+msgstr "Isso é usado para identificar seu site no Google reCAPTCHA"
 
 #: includes/admin/settings/class-settings.php:541
 msgid "reCAPTCHA Secret Key"
-msgstr ""
+msgstr "reCAPTCHA Chave Secreta"
 
 #: includes/admin/settings/class-settings.php:542
 msgid ""
@@ -2406,12 +2420,12 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:929
 msgid "Upload File"
-msgstr ""
+msgstr "Enviar Arquivo"
 
 # @ affiliate-wp
 #: includes/admin/settings/display-settings.php:73
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 # @ affiliate-wp
 #: includes/admin/settings/display-settings.php:75
@@ -2421,14 +2435,14 @@ msgstr "Emails"
 # @ affiliate-wp
 #: includes/admin/settings/display-settings.php:76
 msgid "Misc"
-msgstr ""
+msgstr "Diversos"
 
 # @ affiliate-wp
 #: includes/admin/tools/export/class-export-affiliates.php:48
 #: includes/admin/tools/export/class-export-referrals-payout.php:40
 #: includes/admin/tools/export/class-export-referrals.php:62
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 # @ affiliate-wp
 #: includes/admin/tools/export/class-export-affiliates.php:52
@@ -2437,27 +2451,27 @@ msgstr "Tipo de Taxa"
 
 #: includes/admin/tools/export/class-export-affiliates.php:57
 msgid "Date Registered"
-msgstr ""
+msgstr "Data de Registro"
 
 #: includes/admin/tools/export/class-export-referrals.php:66
 #: templates/dashboard-tab-stats.php:56
 msgid "Campaign"
-msgstr ""
+msgstr "Campanha"
 
 # @ affiliate-wp
 #: includes/admin/tools/export/class-export.php:173
 msgid "You do not have permission to export data."
-msgstr ""
+msgstr "Você não tem permissão para exportar dados."
 
 # @ affiliate-wp
 #: includes/admin/tools/import/import.php:23
 msgid "Please upload a valid .json file"
-msgstr ""
+msgstr "Por favor envie um arquivo .json válido"
 
 # @ affiliate-wp
 #: includes/admin/tools/import/import.php:29
 msgid "Please upload a file to import"
-msgstr ""
+msgstr "Por favor envie um arquivo para importar"
 
 # @ affiliate-wp
 #: includes/admin/tools/migration.php:19
@@ -2470,17 +2484,17 @@ msgstr ""
 #: includes/admin/tools/migration.php:20
 #, php-format
 msgid "Step %d running"
-msgstr ""
+msgstr "Etapa %d sendo executada"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:75
 msgid "Export / Import"
-msgstr ""
+msgstr "Exportar / Importar"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:76
 msgid "Recount Stats"
-msgstr ""
+msgstr "Recontar estatísticas"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:77
@@ -2501,7 +2515,7 @@ msgstr ""
 #: includes/admin/tools/tools.php:99 includes/admin/tools/tools.php:251
 #: includes/admin/visits/visits.php:35
 msgid "Affiliate name"
-msgstr ""
+msgstr "Nome Afiliado"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:108
@@ -2513,7 +2527,7 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:113
 msgid "Recount"
-msgstr ""
+msgstr "Recontagem"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:145
@@ -2524,7 +2538,7 @@ msgstr ""
 
 #: includes/admin/tools/tools.php:150
 msgid "User Accounts"
-msgstr ""
+msgstr "Contas de Usuários"
 
 #: includes/admin/tools/tools.php:152
 msgid ""

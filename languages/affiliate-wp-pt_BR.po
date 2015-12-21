@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: AffiliateWP v1.2.5\n"
 "Report-Msgid-Bugs-To: http://affiliatewp.com/support/\n"
 "POT-Creation-Date: 2015-12-21 15:40-0200\n"
-"PO-Revision-Date: 2015-12-21 15:41-0200\n"
+"PO-Revision-Date: 2015-12-21 21:39-0200\n"
 "Last-Translator: Rhuan Carlos <rhcarlosweb@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -2346,7 +2346,7 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:596
 msgid "Hi {name}!"
-msgstr ""
+msgstr "Olá {name}!"
 
 #: includes/admin/settings/class-settings.php:596
 #: includes/emails/actions.php:148
@@ -2597,28 +2597,28 @@ msgstr "Exportar Afiliados"
 
 #: includes/admin/tools/tools.php:225
 msgid "Export affiliates to a CSV file."
-msgstr ""
+msgstr "Exportar afiliados para um arquivo CSV."
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:229 includes/admin/tools/tools.php:258
 msgid "All Statuses"
-msgstr ""
+msgstr "Todos os Status"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:238 includes/admin/tools/tools.php:270
 #: includes/admin/tools/tools.php:284
 msgid "Export"
-msgstr ""
+msgstr "Exportar"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:245
 msgid "Export Referrals"
-msgstr ""
+msgstr "Exportar Indicações"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:247
 msgid "Export referrals to a CSV file."
-msgstr ""
+msgstr "Exportar Indicações para um arquivo CSV."
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:265
@@ -2626,11 +2626,13 @@ msgid ""
 "To search for a affiliate, enter the affiliate's login name, first name, or "
 "last name. Leave blank to export referrals for all affiliates."
 msgstr ""
+"Para buscar um afiliado, insira o nome de login, nome ou sobrenome do "
+"afiliado. Deixe em branco para exportar as indicações de todos afiliados."
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:277
 msgid "Export Settings"
-msgstr ""
+msgstr "Exportar Configurações"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:279
@@ -2638,11 +2640,13 @@ msgid ""
 "Export the AffiliateWP settings for this site as a .json file. This allows "
 "you to easily import the configuration into another site."
 msgstr ""
+"Exportar Configurações do AffiliateWP deste site para um arquivo .json. Isso "
+"permite importar facilmente as configurações para outro site."
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:291
 msgid "Import Settings"
-msgstr ""
+msgstr "Importar Configurações"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:293
@@ -2650,16 +2654,19 @@ msgid ""
 "Import the AffiliateWP settings from a .json file. This file can be obtained "
 "by exporting the settings on another site using the form above."
 msgstr ""
+"Importe as configurações do AffiliateWP de um arquivo de .json. Este arquivo "
+"pode ser obtido por exportar as configurações em outro site usando o "
+"formulário abaixo."
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:301
 msgid "Import"
-msgstr ""
+msgstr "Importar"
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:39
 msgid "This screen provides access to your site's visit history."
-msgstr ""
+msgstr "Esta tela fornece acesso ao histórico de indicações do seu site."
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:40
@@ -2694,7 +2701,7 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:44
 msgid "<strong>IP</strong>: this is the IP address of the visitor."
-msgstr ""
+msgstr "<strong>IP</strong>: esse é o endereço de IP do visitante."
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:45
@@ -2706,17 +2713,19 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:50
 msgid "Searching Visits"
-msgstr ""
+msgstr "Pesquisando Visitas"
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:52
 msgid "Visit records can be searched in several different ways:"
-msgstr ""
+msgstr "Registros de visita podem ser pesquisados de várias formas diferentes:"
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:54
 msgid "You can enter an IP address to find all visits from a specific IP"
 msgstr ""
+"Você pode inserir um endereço IP para localizar todas as visitas de um IP "
+"específico"
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:55
@@ -2739,20 +2748,20 @@ msgstr ""
 
 #: includes/admin/visits/screen-options.php:22
 msgid "Number of visits per page:"
-msgstr ""
+msgstr "Número de visitas por página:"
 
 #: includes/admin/visits/visits.php:44
 msgid "Filter by status"
-msgstr ""
+msgstr "Filtrar por status"
 
 #: includes/admin/visits/visits.php:48
 msgid "Unconverted"
-msgstr ""
+msgstr "Não convertidos"
 
 # @ affiliate-wp
 #: includes/admin/visits/visits.php:143
 msgid "Landing Page"
-msgstr ""
+msgstr "Página de Destino"
 
 # @ affiliate-wp
 #: includes/admin/visits/visits.php:144 templates/dashboard-tab-visits.php:22
@@ -2762,17 +2771,17 @@ msgstr "URL de origem"
 # @ affiliate-wp
 #: includes/admin/visits/visits.php:146
 msgid "Referral ID"
-msgstr ""
+msgstr "ID do Afiliado:"
 
 # @ affiliate-wp
 #: includes/admin/visits/visits.php:147
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 # @ affiliate-wp
 #: includes/admin/visits/visits.php:212 templates/dashboard-tab-visits.php:33
 msgid "Direct traffic"
-msgstr ""
+msgstr "Tráfego Direto"
 
 # @ affiliate-wp
 #: includes/admin/visits/visits.php:237
@@ -2788,7 +2797,7 @@ msgstr "Porcentagem (%)"
 #: includes/affiliate-functions.php:307
 #, php-format
 msgid "Flat %s"
-msgstr ""
+msgstr "Taxa fixa %s"
 
 # @ affiliate-wp
 #: includes/class-graph.php:332
@@ -2908,7 +2917,7 @@ msgstr ""
 
 #: includes/class-register.php:82
 msgid "Invalid username. Usernames must include at least one letter"
-msgstr ""
+msgstr "Username inválido. Username precisa ter ao menos uma letra"
 
 # @ affiliate-wp
 #: includes/class-register.php:86
@@ -2942,7 +2951,7 @@ msgstr "Por favor, nos confirme que não é um robô"
 # @ affiliate-wp
 #: includes/class-register.php:113
 msgid "Nice try honey bear, don't touch our honey"
-msgstr ""
+msgstr "Boa tentativa, doçura!"
 
 # @ affiliate-wp
 #: includes/class-register.php:117
@@ -2972,7 +2981,7 @@ msgstr "Visitas não convertidas"
 # @ affiliate-wp
 #: includes/creative-functions.php:31 includes/creative-functions.php:63
 msgid "Creative"
-msgstr ""
+msgstr "Campanha"
 
 #: includes/emails/actions.php:46
 msgid "A new affiliate has registered on your site, "
@@ -3110,7 +3119,7 @@ msgstr "Nenhuma razão fornecida"
 #: includes/integrations/class-zippycourses.php:258
 #, php-format
 msgid "Referral #%d for %s recorded for %s"
-msgstr ""
+msgstr "AffiliateWP: Referência gravada de #%d de %s para %s"
 
 # @ affiliate-wp
 #: includes/integrations/class-edd.php:411
@@ -3118,7 +3127,7 @@ msgstr ""
 #: includes/integrations/class-rcp.php:197
 #: includes/integrations/class-woocommerce.php:281
 msgid "Affiliate Discount?"
-msgstr ""
+msgstr "Desconto de Afiliado?"
 
 # @ edd
 # @ affiliate-wp
@@ -3131,11 +3140,13 @@ msgid ""
 "If you would like to connect this discount to an affiliate, enter the name "
 "of the affiliate it belongs to."
 msgstr ""
+"Se você gostaria de conectar este desconto a um afiliado, digite o nome do "
+"filiado."
 
 # @ affiliate-wp
 #: includes/integrations/class-edd.php:511
 msgid "Adjust EDD Commissions"
-msgstr ""
+msgstr "Ajustar comissões EDD"
 
 # @ affiliate-wp
 #: includes/integrations/class-edd.php:512
@@ -3147,7 +3158,7 @@ msgstr ""
 
 #: includes/integrations/class-edd.php:532
 msgid "Disable Renewal Referrals"
-msgstr ""
+msgstr "Desabilitar a renovação indicações"
 
 #: includes/integrations/class-edd.php:533
 msgid ""
@@ -3159,13 +3170,13 @@ msgstr ""
 #: includes/integrations/class-edd.php:554
 #: includes/integrations/class-zippycourses.php:70
 msgid "Affiliate Rates:"
-msgstr ""
+msgstr "Taxas de indicação:"
 
 #: includes/integrations/class-edd.php:567
 #: includes/integrations/class-zippycourses.php:83
 #, php-format
 msgid "Disable referrals on this %s"
-msgstr ""
+msgstr "Desativar indicações sobre este %s"
 
 #: includes/integrations/class-edd.php:571
 #: includes/integrations/class-memberpress.php:166
@@ -3199,27 +3210,27 @@ msgstr "Descrição da indicação"
 #: includes/integrations/class-formidablepro.php:80
 #: includes/integrations/class-formidablepro.php:106
 msgid "Select Field"
-msgstr ""
+msgstr "Selecionar Campo"
 
 #: includes/integrations/class-formidablepro.php:102
 msgid "Purchase Amount"
-msgstr ""
+msgstr "Compra Montante"
 
 #: includes/integrations/class-formidablepro.php:198
 #, php-format
 msgid "AffiliateWP: Referral #%d for %s recorded for %s"
-msgstr ""
+msgstr "AffiliateWP: Referência gravada de #%d de %s para %s"
 
 #: includes/integrations/class-formidablepro.php:223
 #, php-format
 msgid "AffiliateWP: Referral #%d for %s for %s rejected"
-msgstr ""
+msgstr "AffiliateWP: Referência #%d de %s para %s rejeitado"
 
 #: includes/integrations/class-gravityforms.php:131
 #: includes/integrations/class-sproutinvoices.php:76
 #, php-format
 msgid "Referral #%d for %s for %s rejected"
-msgstr ""
+msgstr "AffiliateWP: Referência #%d de %s para %s rejeitado"
 
 # @ affiliate-wp
 #: includes/integrations/class-gravityforms.php:172
@@ -3238,7 +3249,7 @@ msgstr "Aceitar indicações"
 #: includes/integrations/class-rcp.php:304
 #: includes/integrations/class-woocommerce.php:401
 msgid "Affiliate Rate"
-msgstr ""
+msgstr "Taxa de Afiliado"
 
 # @ affiliate-wp
 #: includes/integrations/class-memberpress.php:162
@@ -3289,7 +3300,7 @@ msgstr "Configuração Afiliado"
 
 #: includes/integrations/extras/class-exchange-feature.php:39
 msgid "Disable referrals on this product"
-msgstr ""
+msgstr "Desativar indicações para este produto"
 
 #: includes/integrations/extras/class-exchange-feature.php:194
 msgid "Manage per-product affiliate rates."

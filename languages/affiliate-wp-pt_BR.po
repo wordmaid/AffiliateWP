@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: AffiliateWP v1.2.5\n"
 "Report-Msgid-Bugs-To: http://affiliatewp.com/support/\n"
 "POT-Creation-Date: 2015-12-21 15:40-0200\n"
-"PO-Revision-Date: 2015-12-22 01:02-0200\n"
+"PO-Revision-Date: 2015-12-22 12:56-0200\n"
 "Last-Translator: Rhuan Carlos <rhcarlosweb@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -2372,7 +2372,7 @@ msgstr ""
 #: includes/admin/settings/class-settings.php:602
 #: includes/emails/actions.php:180
 msgid "Your Affiliate Application Has Been Rejected"
-msgstr ""
+msgstr "Seu programa de afiliado foi rejeitado"
 
 #: includes/admin/settings/class-settings.php:605
 msgid "Application Rejection Email Content"
@@ -2386,7 +2386,7 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:608
 msgid "Hi {name},"
-msgstr ""
+msgstr "Olá {name},"
 
 #: includes/admin/settings/class-settings.php:608
 #: includes/emails/actions.php:185
@@ -2398,12 +2398,12 @@ msgstr ""
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:749
 msgid "Your license is valid!"
-msgstr ""
+msgstr "Sua licença é válida!"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:752
 msgid "Renew Your License"
-msgstr ""
+msgstr "Renove sua licença"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:753
@@ -2411,6 +2411,8 @@ msgid ""
 "Your license has expired, renew today to continue getting updates and "
 "support!"
 msgstr ""
+"Sua licença expirou, renove hoje para continuar recebendo atualizações e "
+"suporte!"
 
 # @ affiliate-wp
 #: includes/admin/settings/class-settings.php:854
@@ -2500,17 +2502,17 @@ msgstr "Recontar estatísticas"
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:77
 msgid "Migration Assistant"
-msgstr ""
+msgstr "Assistente de Migração"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:93
 msgid "Recount Affiliate Stats"
-msgstr ""
+msgstr "Recontagem Estatísticas de Afiliados"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:95
 msgid "Use this tool to recount affiliate statistics."
-msgstr ""
+msgstr "Use essa ferramenta para recortar as estatísticas dos afiliados."
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:99 includes/admin/tools/tools.php:251
@@ -2555,7 +2557,7 @@ msgstr ""
 
 #: includes/admin/tools/tools.php:155
 msgid "Select User Roles"
-msgstr ""
+msgstr "Selecionar Funções do Usuário"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:168
@@ -2589,7 +2591,7 @@ msgstr ""
 
 #: includes/admin/tools/tools.php:199
 msgid "Migrate Data from WP Affiliate"
-msgstr ""
+msgstr "Migrar dados para um WP Affiliate"
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:223
@@ -2675,6 +2677,9 @@ msgid ""
 "<strong>Landing Page</strong>: this is the page on your site that the "
 "visitor first landed on. It is the URL that the affiliate link pointed to."
 msgstr ""
+"<strong>Página de destino</strong>: esta é a página em seu site que o "
+"visitante visitou pela primeira vez. É a URL que o link de afiliado está "
+"apontando."
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:41
@@ -2690,7 +2695,7 @@ msgstr ""
 msgid ""
 "<strong>Affiliate</strong>: this the affiliate that the visit was attributed "
 "to."
-msgstr ""
+msgstr "<strong>Afiliado</strong>: este o afiliado que a visita foi atribuída."
 
 # @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:43
@@ -3089,7 +3094,7 @@ msgstr "A URL para login de afiliado em seu site"
 # @ affiliate-wp
 #: includes/emails/class-affwp-emails.php:457
 msgid "The amount of a given referral"
-msgstr ""
+msgstr "A quantidade de uma determinada indicação"
 
 #: includes/emails/class-affwp-emails.php:462
 msgid "Your site name"
@@ -3186,6 +3191,8 @@ msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
 "blank to use the site default referral rate."
 msgstr ""
+"Essas configurações serão usadas para calcular os lucros por venda do "
+"afiliado. Deixe em branco para usar a taxa de referência padrão."
 
 # @ affiliate-wp
 #: includes/integrations/class-exchange.php:269
@@ -3197,6 +3204,8 @@ msgid ""
 "If you would like to connect this coupon to an affiliate, enter the name of "
 "the affiliate it belongs to."
 msgstr ""
+"Se você gostaria de conectar este desconto a um afiliado, digite o nome do "
+"afiliado."
 
 # @ affiliate-wp
 #: includes/integrations/class-formidablepro.php:71

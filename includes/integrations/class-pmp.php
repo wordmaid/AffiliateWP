@@ -21,8 +21,14 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 
 	public function add_pending_referral( $order ) {
 
+		$coupon_affiliate_id = false;
+
 		// Check if an affiliate coupon was used
-		$coupon_affiliate_id = $this->get_coupon_affiliate_id( $order->discount_code );
+		if( ! empty( $order->discount_code ) ) {
+
+			$coupon_affiliate_id = $this->get_coupon_affiliate_id( $order->discount_code );
+
+		}
 
 		if ( $this->was_referred() || $coupon_affiliate_id ) {
 

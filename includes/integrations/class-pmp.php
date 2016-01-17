@@ -43,6 +43,10 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 
 			if ( $user instanceof WP_User && $this->is_affiliate_email( $user->user_email, $affiliate_id ) ) {
 
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
+
 				return; // Customers cannot refer themselves
 			}
 

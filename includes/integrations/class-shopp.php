@@ -31,6 +31,11 @@ class Affiliate_WP_Shopp extends Affiliate_WP_Base {
 			$customer_email = $this->order->email;
 
 			if ( $this->is_affiliate_email( $customer_email ) ) {
+			
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
+
 				return; // Customers cannot refer themselves
 			}
 

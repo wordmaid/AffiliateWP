@@ -76,6 +76,10 @@ function affwp_get_tools_tabs() {
 	$tabs['recount']       = __( 'Recount Stats', 'affiliate-wp' );
 	$tabs['migration']     = __( 'Migration Assistant', 'affiliate-wp' );
 
+	if( affiliate_wp()->settings->get( 'debug_mode', false ) ) {	
+		$tabs['debug']     = __( 'Debug Assistant', 'affiliate-wp' );
+	}
+
 	return apply_filters( 'affwp_tools_tabs', $tabs );
 }
 
@@ -308,3 +312,58 @@ function affwp_export_import_tab() {
 <?php
 }
 add_action( 'affwp_tools_tab_export_import', 'affwp_export_import_tab' );
+
+/**
+ * Debug Tab
+ *
+ * @since       1.7.15
+ * @return      void
+ */
+function affwp_debug_tab() {
+
+	$logs = new Affiliate_WP_Logging;
+?>
+	<div id="affwp-dashboard-widgets-wrap">
+		<div class="metabox-holder">
+			<div class="postbox">
+				<h3><span><?php _e( 'Debug Log', 'affiliate-wp' ); ?></span></h3>
+				<div class="inside">
+					<form id="affwp-debug-log" method="post">
+						<p><?php _e( 'Use this tool to help debug referral tracking.', 'affiliate-wp' ); ?></p>
+						<textarea class="large-text" rows="15"><?php echo esc_textarea( $logs->get_log() ); ?></textarea>
+						<input type="submit" class="button" name="affwp-clear-debug-log" value="<?php _e( 'Clear Debug Log', 'affiliate-wp' ); ?>"/>
+						<?php wp_nonce_field( 'affwp-clear-debug' ); ?>
+					</form>
+				</div><!-- .inside -->
+			</div><!-- .postbox -->
+		</div><!-- .metabox-holder -->
+	</div><!-- #affwp-dashboard-widgets-wrap -->
+<?php
+}
+add_action( 'affwp_tools_tab_debug', 'affwp_debug_tab' );
+
+/**
+ * Clear the debug log
+ *
+ * @since       1.7.15
+ * @return      void
+ */
+function affwp_clear_debug_log() {
+
+	if( empty( $_POST['affwp-clear-debug-log'] ) ) {
+		return;
+	}
+
+	if( ! current_user_can( 'manage_affiliate_options' ) ) {
+		return;
+	}
+
+	check_admin_referer( 'affwp-clear-debug' );
+
+	$logs = new Affiliate_WP_Logging;
+	$logs->clear_log();
+
+	wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-tools&tab=debug' ) ); exit;
+
+}
+add_action( 'admin_init', 'affwp_clear_debug_log' );

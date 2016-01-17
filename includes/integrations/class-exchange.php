@@ -77,10 +77,20 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 					$affiliate_id = get_post_meta( $coupon['id'], 'affwp_coupon_affiliate', true );
 
 					if ( ! $affiliate_id ) {
+
+						if( $this->debug ) {
+							$this->log( 'Referral not created because of missing affiliate ID.' );
+						}
+
 						continue;
 					}
 
 					if ( ! affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
+						
+						if( $this->debug ) {
+							$this->log( 'Referral not created because affiliate is invalid.' );
+						}
+
 						continue;
 					}
 
@@ -96,6 +106,10 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 			$email                = isset( $guest_checkout_email ) ? $guest_checkout_email : $this->transaction->shipping_address['email'];
 
 			if ( $this->is_affiliate_email( $email, $affiliate_id ) ) {
+
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
 
 				return; // Customers cannot refer themselves
 			}

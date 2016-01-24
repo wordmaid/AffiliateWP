@@ -71,7 +71,7 @@ abstract class Affiliate_WP_Base {
 		// get affiliate ID
 		$this->affiliate_id = isset( $data['affiliate_id'] ) ? $data['affiliate_id'] : $this->get_affiliate_id( $reference, $this->context );
 
-		if ( ! (bool) apply_filters( 'affwp_integration_create_referral', true, $this->affiliate_id, $reference ) ) {
+		if ( ! (bool) apply_filters( 'affwp_integration_create_referral', true, array( $this->affiliate_id, $amount, $reference, $description, $products, $data ) ) ) {
 			return false; // Allow extensions to prevent referrals from being created
 		}
 

@@ -38,9 +38,11 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 
 			$this->step_forward( $step, 'affiliates' );
 
-		}
+		} else {
 
-		$this->finish();
+			$this->finish();
+
+		}
 
 	}
 

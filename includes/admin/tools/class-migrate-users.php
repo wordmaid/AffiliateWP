@@ -60,10 +60,11 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 
 		$redirect = add_query_arg(
 			array(
-				'page' => 'affiliate-wp-migrate',
-				'type' => 'users',
-				'part' => $part,
-				'step' => $step
+				'page'  => 'affiliate-wp-migrate',
+				'type'  => 'users',
+				'part'  => $part,
+				'step'  => $step,
+				'roles' => implode( ',', array_map( 'sanitize_text_field', $this->roles ) )
 			),
 			admin_url( 'index.php' )
 		);

@@ -341,9 +341,11 @@ class Affiliate_WP_Settings {
 						'name' => __( 'Default Referral Format', 'affiliate-wp' ),
 						'desc' => sprintf( __( 'Show referral URLs to affiliates with either their affiliate ID or Username appended.<br/> For example: <strong>%s or %s</strong>.', 'affiliate-wp' ), esc_url( add_query_arg( affiliate_wp()->tracking->get_referral_var(), '1', home_url( '/' ) ) ), esc_url( add_query_arg( affiliate_wp()->tracking->get_referral_var(), $username, home_url( '/' ) ) ) ),
 						'type' => 'select',
-						'options' => array(
-							'id'       => __( 'ID', 'affiliate-wp' ),
-							'username' => __( 'Username', 'affiliate-wp' ),
+						'options' => apply_filters( 'affwp_settings_referral_format',
+							array(
+								'id'       => __( 'ID', 'affiliate-wp' ),
+								'username' => __( 'Username', 'affiliate-wp' ),
+							)
 						),
 						'std' => 'id'
 					),

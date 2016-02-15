@@ -934,7 +934,7 @@ function affwp_get_affiliate_referral_url( $args = array() ) {
 	$args = wp_parse_args( $args, $defaults );
 
 	// get affiliate ID if passed in
-	$affiliate_id = isset( $args['affiliate_id'] ) ? $args['affiliate_id'] : '';
+	$affiliate_id = isset( $args['affiliate_id'] ) ? $args['affiliate_id'] : affwp_get_affiliate_id();
 
 	// get format, username or id
 	$format = isset( $args['format'] ) ? $args['format'] : affwp_get_referral_format();
@@ -988,7 +988,7 @@ function affwp_get_affiliate_referral_url( $args = array() ) {
 	} else {
 		$referral_url = $non_pretty_urls;
 	}
-
+	
 	return $referral_url;
 
 }

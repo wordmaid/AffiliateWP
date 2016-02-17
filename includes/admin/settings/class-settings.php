@@ -1040,11 +1040,16 @@ class Affiliate_WP_Settings {
 			);
 
 			// Call the custom API.
-			$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
+			$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 
 			// make sure the response came back okay
-			if ( is_wp_error( $response ) )
+			if ( is_wp_error( $response ) ) {
+
+				// Connection failed, try again in three hours
+				set_transient( 'affwp_license_check', $response, 10800 );
+
 				return false;
+			}
 
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 

@@ -12,7 +12,7 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 
 		$this->context = 'ninja-forms';
 
-		if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) && ! get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
+		if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>=' ) && ! get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
 			add_action( 'nf_affiliatewp_add_referral', array( $this, 'add_referral' ) );
 			add_filter( 'ninja_forms_register_actions', array( $this, 'register_actions' ) );
 		} else {

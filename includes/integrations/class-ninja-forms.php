@@ -12,12 +12,12 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 
 		$this->context = 'ninja-forms';
 
-		if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) || get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
-			add_action('nf_save_sub', array($this, 'deprecated_add_referral'));
-			add_filter( 'ninja_forms_form_settings_restrictions', array( $this, 'deprecated_add_restriction_setting' ) );
-		} else {
+		if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) && ! get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
 			add_action( 'nf_affiliatewp_add_referral', array( $this, 'add_referral' ) );
 			add_filter( 'ninja_forms_register_actions', array( $this, 'register_actions' ) );
+		} else {
+			add_action('nf_save_sub', array($this, 'deprecated_add_referral'));
+			add_filter( 'ninja_forms_form_settings_restrictions', array( $this, 'deprecated_add_restriction_setting' ) );
 		}
 
 		add_action( 'untrash_post', array( $this, 'restore_referral' ) );
@@ -184,7 +184,6 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 	 * @return  array
 	 */
 	public function deprecated_add_restriction_setting( $restrictions ) {
-
 		$restrictions['settings'][] = array(
 			'name'          => 'affwp_allow_referrals',
 			'type'          => 'checkbox',

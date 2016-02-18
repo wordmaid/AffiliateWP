@@ -26,7 +26,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 		add_action( 'wp_trash_post', array( $this, 'revoke_referral_on_delete' ), 10 );
 
 		// coupon code tracking actions and filters
-		add_action( 'it_exchange_basics_coupon_coupon_edit_screen_end_fields', array( $this, 'coupon_edit' ) );
+		add_action( 'it_libraries_loaded', array( $this, 'add_coupon_edit_hooks' ) );
 		add_action( 'it_exchange_basic_coupons_saved_coupon', array( $this, 'store_coupon_affiliate' ), 10, 2 );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
@@ -245,6 +245,23 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 		$url = get_edit_post_link( $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
+	}
+
+	/**
+	 * Add coupon edit hooks depending on version of Exchange active.
+	 *
+	 * The 'genera' tab did not become active until version 1.33
+	 *
+	 * @access public
+	 * @since 1.8
+	 */
+	public function add_coupon_edit_hooks() {
+
+		if ( version_compare( $GLOBALS['it_exchange']['version'], '1.33.0', '>' ) ) {
+			add_action( 'it_exchange_basic_coupons_coupon_edit_tab_general', array( $this, 'coupon_edit' ) );
+		} else {
+			add_action( 'it_exchange_basics_coupon_coupon_edit_screen_end_fields', array( $this, 'coupon_edit' ) );
+		}
 	}
 
 	/**

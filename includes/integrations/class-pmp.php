@@ -54,15 +54,8 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 				// paid membership level
 				$membership_name = $order->membership_name;
 			} else {
-				// free membership level
-
-				// get the membership ID
-				$membership_id = $order->membership_id;
-
-				// get the level
-				$level = $wpdb->get_row( "SELECT * FROM $wpdb->pmpro_membership_levels WHERE id = '$membership_id' LIMIT 1", OBJECT );
-
-				$membership_name = $level->name;
+				// free membership
+				$membership_name = $wpdb->get_var( $wpdb->prepare( "SELECT name FROM $wpdb->pmpro_membership_levels WHERE id = %d LIMIT 1", $order->membership_id ) );
 			}
 
 			$referral_id = $this->insert_pending_referral( $referral_total, $order->id, $membership_name, '', array( 'affiliate_id' => $affiliate_id ) );

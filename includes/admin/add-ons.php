@@ -46,6 +46,14 @@ function affwp_add_ons_admin() {
 
 		</h2>
 		<div id="tab_container">
+
+			<?php if ( 'pro' === $active_tab ) : ?>
+				<p>Pro add-ons are only available with a Professional or Ultimate license. If you already have one of these licenses, simply <a href="https://affiliatewp.com/account/?utm_source=plugin-add-ons-page&utm_medium=plugin&utm_campaign=AffiliateWP%20Add-ons%20Page&utm_content=Account">log in to your account</a> to download any of these add-ons.</p>
+				<p>If you have a Personal or Plus license, you can easily upgrade from your account page to <a href="https://affiliatewp.com/account/?utm_source=plugin-add-ons-page&utm_medium=plugin&utm_campaign=AffiliateWP%20Add-ons%20Page&utm_content=Account">get access to all of these add-ons</a>!</p>
+			<?php else : ?>
+				<p>Our official free add-ons are available to all license holders!</p>
+			<?php endif; ?>
+
 			<?php echo affwp_add_ons_get_feed( $active_tab ); ?>
 			<div class="affwp-add-ons-footer">
 				<a href="https://affiliatewp.com/addons/?utm_source=plugin-add-ons-page&utm_medium=plugin&utm_campaign=AffiliateWP%20Add-ons%20Page&utm_content=All%20Add-ons" class="button-primary" title="<?php _e( 'Browse all add-ons', 'affiliate-wp' ); ?>" target="_blank"><?php _e( 'Browse all add-ons', 'affiliate-wp' ); ?></a>

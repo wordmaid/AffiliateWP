@@ -214,6 +214,45 @@ table.affwp_table td a {
 	top: 22px;
 }
 
+/* Add-ons */
+
+#affwp-add-ons h2 {
+  margin: 0 0 15px;
+}
+
+#affwp-add-ons .affwp-add-on {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 11px 14px 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  width: 320px;
+  padding: 14px;
+  min-height: 360px;
+  position: relative;
+}
+
+#affwp-add-ons .affwp-add-on h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+#affwp-add-ons .affwp-add-on .button-secondary {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+}
+
+#affwp-add-ons .affwp-add-on .wp-post-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.affwp-add-ons-footer {
+  padding-top: 10px;
+}
+
 /* Media Queries */
 @media screen and ( max-width: 782px ) {
 	#affwp-affiliates-filter .column-affiliate_id,

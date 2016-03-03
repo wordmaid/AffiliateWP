@@ -988,7 +988,7 @@ function affwp_get_affiliate_referral_url( $args = array() ) {
 	} else {
 		$referral_url = $non_pretty_urls;
 	}
-	
+
 	return $referral_url;
 
 }
@@ -1005,6 +1005,12 @@ function affwp_get_affiliate_base_url() {
 		$base_url = urldecode( $_GET['url'] );
 	} else {
 		$base_url = home_url( '/' );
+	}
+
+	$default_referral_url = affiliate_wp()->settings->get( 'default_referral_url' );
+
+	if ( $default_referral_url ) {
+		$base_url = $default_referral_url;
 	}
 
 	return apply_filters( 'affwp_affiliate_referral_url_base', $base_url );

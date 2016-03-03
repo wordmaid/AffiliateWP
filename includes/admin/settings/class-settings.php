@@ -22,6 +22,7 @@ class Affiliate_WP_Settings {
 		add_filter( 'affwp_settings_emails', array( $this, 'email_approval_settings' ) );
 		add_filter( 'affwp_settings_sanitize', array( $this, 'sanitize_referral_variable' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_text', array( $this, 'sanitize_text_fields' ), 10, 2 );
+		add_filter( 'affwp_settings_sanitize_url', array( $this, 'sanitize_url_fields' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_checkbox', array( $this, 'sanitize_cb_fields' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_number', array( $this, 'sanitize_number_fields' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_rich_editor', array( $this, 'sanitize_rich_editor_fields' ), 10, 2 );
@@ -247,6 +248,16 @@ class Affiliate_WP_Settings {
 	 * @return string
 	*/
 	public function sanitize_text_fields( $value = '', $key = '' ) {
+		return sanitize_text_field( $value );
+	}
+
+	/**
+	 * Sanitize URL fields
+	 *
+	 * @since 1.7.15
+	 * @return string
+	*/
+	public function sanitize_url_fields( $value = '', $key = '' ) {
 		return sanitize_text_field( $value );
 	}
 
@@ -529,6 +540,11 @@ class Affiliate_WP_Settings {
 						'desc' => __( 'Automatically register new users as affiliates?', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
+					'default_referral_url' => array(
+						'name' => __( 'Default Referral URL', 'affiliate-wp' ),
+						'desc' => __( 'The default referral URL shown in the affiliate area. Also changes the URL shown in the referral URL generator and {referral_url} email tag.', 'affiliate-wp' ),
+						'type' => 'url'
+					),
 					'recaptcha_enabled' => array(
 						'name' => __( 'Enable reCAPTCHA', 'affiliate-wp' ),
 						'desc' => __( 'Would you like to prevent bots from registering affiliate accounts using Google reCAPTCHA?', 'affiliate-wp' ),
@@ -724,6 +740,30 @@ class Affiliate_WP_Settings {
 
 		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
 		$html = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+		$html .= '<p class="description">'  . $args['desc'] . '</p>';
+
+		echo $html;
+	}
+
+	/**
+	 * URL Callback
+	 *
+	 * Renders URL fields.
+	 *
+	 * @since 1.7.15
+	 * @param array $args Arguments passed by the setting
+	 * @global $this->options Array of all the AffiliateWP Options
+	 * @return void
+	 */
+	function url_callback( $args ) {
+
+		if ( isset( $this->options[ $args['id'] ] ) )
+			$value = $this->options[ $args['id'] ];
+		else
+			$value = isset( $args['std'] ) ? $args['std'] : '';
+
+		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
+		$html = '<input type="url" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
 		$html .= '<p class="description">'  . $args['desc'] . '</p>';
 
 		echo $html;

@@ -42,6 +42,11 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 
 		// Customers cannot refer themselves
 		if ( $this->is_affiliate_email( $this->get_submitted_email() ) ) {
+
+			if( $this->debug ) {
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
+			}
+
 			return;
 		}
 

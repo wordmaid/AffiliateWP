@@ -521,7 +521,7 @@ function affwp_increase_affiliate_earnings( $affiliate_id = 0, $amount = '' ) {
 
 	$earnings = affwp_get_affiliate_earnings( $affiliate_id );
 	$earnings += $amount;
-	$earnings = round( $earnings, 2 );
+	$earnings = round( $earnings, affwp_get_decimal_count() );
 	if ( affiliate_wp()->affiliates->update( $affiliate_id, array( 'earnings' => $earnings ), '', 'affiliate' ) ) {
 		$alltime = get_option( 'affwp_alltime_earnings' );
 		$alltime += $amount;
@@ -555,7 +555,7 @@ function affwp_decrease_affiliate_earnings( $affiliate_id = 0, $amount = '' ) {
 
 	$earnings = affwp_get_affiliate_earnings( $affiliate_id );
 	$earnings -= $amount;
-	$earnings = round( $earnings, 2 );
+	$earnings = round( $earnings, affwp_get_decimal_count() );
 	if ( $earnings < 0 ) {
 		$earnings = 0;
 	}
@@ -934,7 +934,7 @@ function affwp_get_affiliate_referral_url( $args = array() ) {
 	$args = wp_parse_args( $args, $defaults );
 
 	// get affiliate ID if passed in
-	$affiliate_id = isset( $args['affiliate_id'] ) ? $args['affiliate_id'] : '';
+	$affiliate_id = isset( $args['affiliate_id'] ) ? $args['affiliate_id'] : affwp_get_affiliate_id();
 
 	// get format, username or id
 	$format = isset( $args['format'] ) ? $args['format'] : affwp_get_referral_format();
@@ -988,7 +988,7 @@ function affwp_get_affiliate_referral_url( $args = array() ) {
 	} else {
 		$referral_url = $non_pretty_urls;
 	}
-
+	
 	return $referral_url;
 
 }

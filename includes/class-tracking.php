@@ -220,7 +220,7 @@ class Affiliate_WP_Tracking {
 		} else if( ! $is_valid ) {
 
 			if( $this->debug ) {
-				$this->log( 'Invalid Affiliate ID during track_visit()' );
+				$this->log( 'Invalid affiliate ID during track_visit()' );
 			}
 
 			die( '-2' );

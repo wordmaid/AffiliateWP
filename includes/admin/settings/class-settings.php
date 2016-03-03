@@ -303,7 +303,7 @@ class Affiliate_WP_Settings {
 					),
 					'license_key' => array(
 						'name' => __( 'License Key', 'affiliate-wp' ),
-						'desc' => sprintf( __( 'Please enter your license key. An active license key is needed for automatic plugin updates and <a href="%s" target="_blank">support</a>.', 'affiliate-wp' ), 'http://affiliatewp.com/support/' ),
+						'desc' => sprintf( __( 'Please enter your license key. An active license key is needed for automatic plugin updates and <a href="%s" target="_blank">support</a>.', 'affiliate-wp' ), 'https://affiliatewp.com/support/' ),
 						'type' => 'license',
 						'sanitize_callback' => 'sanitize_text_field'
 					),
@@ -341,9 +341,11 @@ class Affiliate_WP_Settings {
 						'name' => __( 'Default Referral Format', 'affiliate-wp' ),
 						'desc' => sprintf( __( 'Show referral URLs to affiliates with either their affiliate ID or Username appended.<br/> For example: <strong>%s or %s</strong>.', 'affiliate-wp' ), esc_url( add_query_arg( affiliate_wp()->tracking->get_referral_var(), '1', home_url( '/' ) ) ), esc_url( add_query_arg( affiliate_wp()->tracking->get_referral_var(), $username, home_url( '/' ) ) ) ),
 						'type' => 'select',
-						'options' => array(
-							'id'       => __( 'ID', 'affiliate-wp' ),
-							'username' => __( 'Username', 'affiliate-wp' ),
+						'options' => apply_filters( 'affwp_settings_referral_format',
+							array(
+								'id'       => __( 'ID', 'affiliate-wp' ),
+								'username' => __( 'Username', 'affiliate-wp' ),
+							)
 						),
 						'std' => 'id'
 					),
@@ -965,7 +967,7 @@ class Affiliate_WP_Settings {
 		);
 
 		// Call the custom API.
-		$response = wp_remote_post( 'http://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
+		$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
 
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) )
@@ -1007,7 +1009,7 @@ class Affiliate_WP_Settings {
 		);
 
 		// Call the custom API.
-		$response = wp_remote_post( 'http://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
+		$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
 
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) )
@@ -1043,11 +1045,16 @@ class Affiliate_WP_Settings {
 			);
 
 			// Call the custom API.
-			$response = wp_remote_post( 'http://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
+			$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 
 			// make sure the response came back okay
-			if ( is_wp_error( $response ) )
+			if ( is_wp_error( $response ) ) {
+
+				// Connection failed, try again in three hours
+				set_transient( 'affwp_license_check', $response, 10800 );
+
 				return false;
+			}
 
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 

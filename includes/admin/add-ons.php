@@ -76,7 +76,7 @@ function affwp_add_ons_get_feed( $tab = 'pro' ) {
 	$cache = get_transient( 'affiliatewp_add_ons_feed_' . $tab );
 
 	if ( false === $cache ) {
-		$url = 'https://affiliatewp.com/?feed=addons';
+		$url = 'https://affiliatewp.com/?feed=feed-add-ons';
 
 		if ( 'pro' !== $tab ) {
 			$url = add_query_arg( array( 'display' => $tab ), $url );

@@ -13,6 +13,10 @@ build:
 - 'clean'
 - 'copy'
 - 'compress'
+# CSS minification
+style:
+- 'cssmin'
 # Default task
 default:
 - 'makepot'
+

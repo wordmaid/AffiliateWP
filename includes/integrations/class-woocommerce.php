@@ -116,7 +116,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					$product_total += $product['line_tax'];
 				}
 
-				if ( $product_total <= 0 ) {
+				if ( $product_total <= 0 && 'flat' !== affwp_get_affiliate_rate_type( $affiliate_id ) ) {
 					continue;
 				}
 
@@ -125,7 +125,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			}
 
 			if ( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
-				
+
 				if( $this->debug ) {
 					$this->log( 'Referral not created due to 0.00 amount.' );
 				}

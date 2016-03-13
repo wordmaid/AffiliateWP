@@ -14,6 +14,54 @@ class Affiliate_WP_Register {
 		add_action( 'affwp_affiliate_register', array( $this, 'process_registration' ) );
 		add_action( 'user_register', array( $this, 'auto_register_user_as_affiliate' ) );
 
+		add_action( 'user_new_form', array( $this, 'add_user_as_affiliate' ) );
+		add_action( 'user_register', array( $this, 'process_add_user_as_affiliate' ) );
+	}
+
+	/**
+	 * Adds a "Add As Affiliate" checkbox to the WordPress "Add New User" screen
+	 *
+	 * @since 1.8
+	 *
+	 * On multisite this will only work when "Skip Confirmation Email" is enabled
+	 */
+	function add_user_as_affiliate( $context ) {
+
+		if ( $context != 'add-new-user' ) {
+			return;
+		}
+
+		?>
+
+		<table class="form-table">
+			<tr>
+				<th scope="row"><label for="adduser-create-affiliate"><?php _e( 'Add as Affiliate',  'affiliate-wp' ); ?></label></th>
+				<td><label for="adduser-create-affiliate"><input type="checkbox" name="affwp_create_affiliate" id="adduser-create-affiliate" value="1" /> <?php _e( 'Add the user as an affiliate.', 'affiliate-wp' ); ?></label>
+				</td>
+			</tr>
+		</table>
+
+		<?php
+	}
+
+	/**
+	 * Adds a "Add As Affiliate" checkbox to the WordPress "Add New User" screen
+	 *
+	 * @since 1.8
+	 *
+	 * Only works when "Skip Confirmation Email" is enabled
+	 *
+	 */
+	function process_add_user_as_affiliate( $user_id = 0 ) {
+
+		$add_affiliate = isset( $_POST['affwp_create_affiliate'] ) ? $_POST['affwp_create_affiliate'] : '';
+
+		if ( ! $add_affiliate ) {
+			return;
+		}
+
+		affwp_add_affiliate( array( 'user_id' => $user_id ) );
+
 	}
 
 	/**

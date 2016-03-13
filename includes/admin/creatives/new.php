@@ -56,7 +56,7 @@
 				</th>
 
 				<td>
-					<input type="text" name="text" id="text" class="regular-text" />
+					<input type="text" name="text" id="text" class="regular-text" maxlength="255" />
 					<p class="description"><?php _e( 'Text for this creative.', 'affiliate-wp' ); ?></p>
 				</td>
 

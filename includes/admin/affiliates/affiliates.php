@@ -221,6 +221,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 		$columns = array(
 			'cb'           => '<input type="checkbox" />',
 			'name'         => __( 'Name', 'affiliate-wp' ),
+			'username'     => __( 'Username', 'affiliate-wp' ),
 			'affiliate_id' => __( 'Affiliate ID', 'affiliate-wp' ),
 			'earnings'     => __( 'Earnings', 'affiliate-wp' ),
 			'rate'     	   => __( 'Rate', 'affiliate-wp' ),
@@ -244,6 +245,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 	public function get_sortable_columns() {
 		return array(
 			'name'         => array( 'name', false ),
+			'username'     => array( 'username', false ),
 			'affiliate_id' => array( 'affiliate_id', false ),
 			'earnings'     => array( 'earnings', false ),
 			'rate'         => array( 'rate', false ),
@@ -281,7 +283,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 	 *
 	 * @access public
 	 * @since 1.0
-	 * @param array $affiliate Contains all the data of the discount code
+	 * @param array $affiliate Contains all the data of the affiliate
 	 * @return string Data shown in the Name column
 	 */
 	function column_name( $affiliate ) {
@@ -296,6 +298,30 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 		}
 
 		return apply_filters( 'affwp_affiliate_table_name', $value, $affiliate );
+	}
+
+	/**
+	 * Render the Username Column
+	 *
+	 * @access public
+	 * @since 1.8
+	 * @param array $affiliate Contains all the data of the affiliate
+	 * @return string Data shown in the Username column
+	 */
+	function column_username( $affiliate ) {
+
+		$row_actions = array();
+		$user_info = get_userdata( $affiliate->user_id );
+		$username  = $user_info->user_login;
+
+		if ( $username ) {
+			$value = $username;
+		} else {
+			$value = __( '(user deleted)', 'affiliate-wp' );
+		}
+
+		return apply_filters( 'affwp_affiliate_table_username', $value, $affiliate );
+
 	}
 
 	/**

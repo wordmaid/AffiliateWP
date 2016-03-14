@@ -22,7 +22,7 @@ add_action( 'affwp_pre_search_users', 'affwp_optimize_member_user_query' );
  */
 function affwp_optimize_member_prevent_affiliate_redirect( $return, $vars ) {
 
-	if ( doing_action( 'affwp_user_login' ) ) {
+	if ( doing_action( 'affwp_user_login' ) || doing_action( 'affwp_affiliate_register' ) ) {
 		$return = false;
 	}
 

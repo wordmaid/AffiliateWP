@@ -77,7 +77,7 @@ class Affiliate_WP_Shortcodes {
 			'affiliate_login'
 		);
 
-		$redirect = isset( $atts['redirect'] ) ? $atts['redirect'] : '';
+		$redirect = ! empty( $atts['redirect'] ) ? $atts['redirect'] : '';
 
 		// redirect added to shortcode
 		if ( $redirect ) {
@@ -125,7 +125,7 @@ class Affiliate_WP_Shortcodes {
 			'affiliate_registration'
 		);
 
-		$redirect = isset( $atts['redirect'] ) ? $atts['redirect'] : '';
+		$redirect = ! empty( $atts['redirect'] ) ? $atts['redirect'] : '';
 
 		if ( ! affiliate_wp()->settings->get( 'allow_affiliate_registration' ) ) {
 			return;
@@ -155,7 +155,7 @@ class Affiliate_WP_Shortcodes {
 			// redirect to the affiliate area
 			$redirect = affiliate_wp()->login->get_login_url();
 		}
-		
+
 		return affiliate_wp()->register->register_form( $redirect );
 
 	}

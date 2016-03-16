@@ -391,13 +391,27 @@ class Affiliate_WP_Register {
 	 * @return void
 	 */
 	public function add_as_affiliate( $context ) {
+
+		if ( affiliate_wp()->settings->get( 'auto_register' ) ) {
+			return;
+		}
+
 		?>
 		<table id="affwp-create-affiliate" class="form-table" style="margin-top:0;">
 			<tr>
 				<th scope="row"><label for="create-affiliate-<?php echo $context; ?>"><?php _e( 'Add as Affiliate',  'affiliate-wp' ); ?></label></th>
-				<td><label for="create-affiliate-<?php echo $context; ?>"><input type="checkbox" id="create-affiliate-<?php echo $context; ?>" name="affwp_create_affiliate" value="1" /> <?php _e( 'Add the user as an affiliate.', 'affiliate-wp' ); ?></label>
+				<td>
+					<label for="create-affiliate-<?php echo $context; ?>"><input type="checkbox" id="create-affiliate-<?php echo $context; ?>" name="affwp_create_affiliate" value="1" /> <?php _e( 'Add the user as an affiliate.', 'affiliate-wp' ); ?></label>
 				</td>
 			</tr>
+			<?php if ( ! affiliate_wp()->emails->is_email_disabled() ) : ?>
+			<tr>
+				<th scope="row"><label for="disable-affiliate-email-<?php echo $context; ?>"><?php _e( 'Disable Affiliate Email',  'affiliate-wp' ); ?></label></th>
+				<td>
+					<label for="disable-affiliate-email-<?php echo $context; ?>"><input type="checkbox" id="disable-affiliate-email-<?php echo $context; ?>" name="disable_affiliate_email" value="1" /> <?php _e( 'Disable the application accepted email sent to the affiliate.', 'affiliate-wp' ); ?></label>
+				</td>
+			</tr>
+			<?php endif; ?>
 		</table>
 		<?php
 	}
@@ -411,6 +425,10 @@ class Affiliate_WP_Register {
 	 */
 	public function process_add_as_affiliate( $user_id = 0 ) {
 
+		if ( affiliate_wp()->settings->get( 'auto_register' ) ) {
+			return;
+		}
+
 		$add_affiliate     = isset( $_POST['affwp_create_affiliate'] ) ? $_POST['affwp_create_affiliate'] : '';
 		$skip_confirmation = isset( $_POST['noconfirmation'] ) ? $_POST['noconfirmation'] : '';
 
@@ -418,6 +436,10 @@ class Affiliate_WP_Register {
 			return;
 		} elseif ( ! $add_affiliate ) {
 			return;
+		}
+
+		if ( $add_affiliate && isset( $_POST['disable_affiliate_email'] ) ) {
+			add_filter( 'affwp_notify_on_approval', '__return_false' );
 		}
 
 		// add the affiliate
@@ -432,6 +454,10 @@ class Affiliate_WP_Register {
 	 * @return void
 	 */
 	function scripts() {
+
+		if ( affiliate_wp()->settings->get( 'auto_register' ) ) {
+			return;
+		}
 
 		global $pagenow;
 

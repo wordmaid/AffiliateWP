@@ -56,7 +56,7 @@ add_filter( 'wishlistmember_logout_redirect_override', 'affwp_wishlist_member_re
 /**
  * Disables the mandrill_nl2br filter while sending AffiliateWP emails
  *
- * @since 1.8
+ * @since 1.7.17
  * @return void
  */
 function affwp_disable_mandrill_nl2br() {

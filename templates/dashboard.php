@@ -52,7 +52,7 @@ $affiliates_page_id = affwp_get_affiliate_area_page_id();
 				<a href="<?php echo esc_url( affwp_get_affiliate_area_page_url( 'creatives' ) ); ?>"><?php _e( 'Creatives', 'affiliate-wp' ); ?></a>
 			</li>
 			<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'settings' ? ' active' : ''; ?>">
-				<a href="<?php echo esc_url( affwp_get_affiliate_area_page_url( 'settings' ) ) ); ?>"><?php _e( 'Settings', 'affiliate-wp' ); ?></a>
+				<a href="<?php echo esc_url( affwp_get_affiliate_area_page_url( 'settings' ) ); ?>"><?php _e( 'Settings', 'affiliate-wp' ); ?></a>
 			</li>
 			<?php do_action( 'affwp_affiliate_dashboard_tabs', affwp_get_affiliate_id(), $active_tab ); ?>
 		</ul>

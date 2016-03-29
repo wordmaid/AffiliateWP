@@ -1,7 +1,7 @@
 <?php
 $active_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'urls';
 
-$affiliates_page_id = affwp_get_affiliates_page_id();
+$affiliates_page_id = affwp_get_affiliate_area_page_id();
 ?>
 
 <div id="affwp-affiliate-dashboard">
@@ -34,25 +34,25 @@ $affiliates_page_id = affwp_get_affiliates_page_id();
 
 		<ul id="affwp-affiliate-dashboard-tabs">
 			<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'urls' ? ' active' : ''; ?>">
-				<a href="<?php echo esc_url( affwp_get_affiliates_page_url( 'urls' ) ); ?>"><?php _e( 'Affiliate URLs', 'affiliate-wp' ); ?></a>
+				<a href="<?php echo esc_url( affwp_get_affiliate_area_page_url( 'urls' ) ); ?>"><?php _e( 'Affiliate URLs', 'affiliate-wp' ); ?></a>
 			</li>
 			<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'stats' ? ' active' : ''; ?>">
-				<a href="<?php echo esc_url( affwp_get_affiliates_page_url( 'stats' ) ); ?>"><?php _e( 'Statistics', 'affiliate-wp' ); ?></a>
+				<a href="<?php echo esc_url( affwp_get_affiliate_area_page_url( 'stats' ) ); ?>"><?php _e( 'Statistics', 'affiliate-wp' ); ?></a>
 			</li>
 			<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'graphs' ? ' active' : ''; ?>">
-				<a href="<?php echo esc_url( affwp_get_affiliates_page_url( 'graphs' ) ); ?>"><?php _e( 'Graphs', 'affiliate-wp' ); ?></a>
+				<a href="<?php echo esc_url( affwp_get_affiliate_area_page_url( 'graphs' ) ); ?>"><?php _e( 'Graphs', 'affiliate-wp' ); ?></a>
 			</li>
 			<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'referrals' ? ' active' : ''; ?>">
-				<a href="<?php echo esc_url( affwp_get_affiliates_page_url( 'referrals' ) ); ?>"><?php _e( 'Referrals', 'affiliate-wp' ); ?></a>
+				<a href="<?php echo esc_url( affwp_get_affiliate_area_page_url( 'referrals' ) ); ?>"><?php _e( 'Referrals', 'affiliate-wp' ); ?></a>
 			</li>
 			<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'visits' ? ' active' : ''; ?>">
-				<a href="<?php echo esc_url( affwp_get_affiliates_page_url( 'visits' ) ); ?>"><?php _e( 'Visits', 'affiliate-wp' ); ?></a>
+				<a href="<?php echo esc_url( affwp_get_affiliate_area_page_url( 'visits' ) ); ?>"><?php _e( 'Visits', 'affiliate-wp' ); ?></a>
 			</li>
 			<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'creatives' ? ' active' : ''; ?>">
-				<a href="<?php echo esc_url( affwp_get_affiliates_page_url( 'creatives' ) ); ?>"><?php _e( 'Creatives', 'affiliate-wp' ); ?></a>
+				<a href="<?php echo esc_url( affwp_get_affiliate_area_page_url( 'creatives' ) ); ?>"><?php _e( 'Creatives', 'affiliate-wp' ); ?></a>
 			</li>
 			<li class="affwp-affiliate-dashboard-tab<?php echo $active_tab == 'settings' ? ' active' : ''; ?>">
-				<a href="<?php echo esc_url( affwp_get_affiliates_page_url( 'settings' ) ) ); ?>"><?php _e( 'Settings', 'affiliate-wp' ); ?></a>
+				<a href="<?php echo esc_url( affwp_get_affiliate_area_page_url( 'settings' ) ) ); ?>"><?php _e( 'Settings', 'affiliate-wp' ); ?></a>
 			</li>
 			<?php do_action( 'affwp_affiliate_dashboard_tabs', affwp_get_affiliate_id(), $active_tab ); ?>
 		</ul>

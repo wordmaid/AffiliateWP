@@ -215,63 +215,63 @@ class Affiliate_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_get_affiliates_page_id()
+	 * @covers affwp_get_affiliate_area_page_id()
 	 */
-	function test_get_affiliates_page_id_should_match_setting() {
+	function test_get_affiliate_area_page_id_should_match_setting() {
 		$page_id_from_settings = affiliate_wp()->settings->get( 'affiliates_page' );
-		$this->assertSame( $page_id_from_settings, affwp_get_affiliates_page_id() );
+		$this->assertSame( $page_id_from_settings, affwp_get_affiliate_area_page_id() );
 	}
 
 	/**
-	 * @covers affwp_get_affiliates_page_id()
+	 * @covers affwp_get_affiliate_area_page_id()
 	 */
-	function test_get_affiliates_page_id_filtered_different_should_not_match_setting() {
+	function test_get_affiliate_area_page_id_filtered_different_should_not_match_setting() {
 		$page_id_from_settings = affiliate_wp()->settings->get( 'affiliates_page' );
 
-		add_filter( 'affwp_affiliates_page_id', function() {
+		add_filter( 'affwp_affiliate_area_page_id', function() {
 			return rand( 1, 100 );
 		} );
 
-		$page_id_from_helper = affwp_get_affiliates_page_id();
+		$page_id_from_helper = affwp_get_affiliate_area_page_id();
 
 		$this->assertNotSame( $page_id_from_settings, $page_id_from_helper );
 	}
 
 	/**
-	 * @covers affwp_get_affiliates_page_url()
+	 * @covers affwp_get_affiliate_area_page_url()
 	 */
-	function test_get_affiliates_page_url_should_match_settings() {
-		$affiliates_page_id = affwp_get_affiliates_page_id();
+	function test_get_affiliate_area_page_url_should_match_settings() {
+		$affiliates_page_id = affwp_get_affiliate_area_page_id();
 
-		$this->assertSame( get_permalink( $affiliates_page_id ), affwp_get_affiliates_page_url() );
+		$this->assertSame( get_permalink( $affiliates_page_id ), affwp_get_affiliate_area_page_url() );
 	}
 
 	/**
-	 * @covers affwp_get_affiliates_page_url()
+	 * @covers affwp_get_affiliate_area_page_url()
 	 */
-	function test_get_affiliates_page_url_with_valid_tab_should_return_tab_url() {
-		$affiliates_page_id = affwp_get_affiliates_page_id();
+	function test_get_affiliate_area_page_url_with_valid_tab_should_return_tab_url() {
+		$affiliates_page_id = affwp_get_affiliate_area_page_id();
 
 		$tab_url = add_query_arg( 'tab', 'stats', get_permalink( $affiliates_page_id ) );
 
-		$this->assertSame( $tab_url, affwp_get_affiliates_page_url( 'stats' ) );
+		$this->assertSame( $tab_url, affwp_get_affiliate_area_page_url( 'stats' ) );
 	}
 
 	/**
-	 * @covers affwp_get_affiliates_page_url()
+	 * @covers affwp_get_affiliate_area_page_url()
 	 */
-	function test_get_affiliates_page_url_with_invalid_tab_should_return_page_url() {
-		$affiliates_page_id = affwp_get_affiliates_page_id();
+	function test_get_affiliate_area_page_url_with_invalid_tab_should_return_page_url() {
+		$affiliates_page_id = affwp_get_affiliate_area_page_id();
 
-		$this->assertSame( affwp_get_affiliates_page_url(), affwp_get_affiliates_page_url( 'foo' ) );
+		$this->assertSame( affwp_get_affiliate_area_page_url(), affwp_get_affiliate_area_page_url( 'foo' ) );
 	}
 
 	/**
-	 * @covers affwp_get_affiliates_page_url()
+	 * @covers affwp_get_affiliate_area_page_url()
 	 */
-	function test_get_affiliates_page_url_with_empty_tab_should_return_page_url() {
-		$affiliates_page_id = affwp_get_affiliates_page_id();
+	function test_get_affiliate_area_page_url_with_empty_tab_should_return_page_url() {
+		$affiliates_page_id = affwp_get_affiliate_area_page_id();
 
-		$this->assertSame( affwp_get_affiliates_page_url(), affwp_get_affiliates_page_url( '' ) );
+		$this->assertSame( affwp_get_affiliate_area_page_url(), affwp_get_affiliate_area_page_url( '' ) );
 	}
 }

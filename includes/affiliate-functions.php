@@ -1016,3 +1016,55 @@ function affwp_get_affiliate_base_url() {
 	return apply_filters( 'affwp_affiliate_referral_url_base', $base_url );
 
 }
+
+/**
+ * Retrieves the page ID for the Affiliate Area page.
+ *
+ * @since 1.8
+ *
+ * @return int Affiliate Area page ID.
+ */
+function affwp_get_affiliate_area_page_id() {
+	$affiliate_page_id = affiliate_wp()->settings->get( 'affiliates_page' );
+
+	/**
+	 * Filter the Affiliate Area page ID.
+	 *
+	 * @since 1.8
+	 *
+	 * @param int $affiliate_page_id Affiliate Area page ID.
+	 */
+	return apply_filters( 'affwp_affiliate_area_page_id', $affiliate_page_id );
+}
+
+/**
+ * Retrieves the Affiliates Area page URL.
+ *
+ * @since 1.8
+ *
+ * @param string $tab Optional. Tab ID. Default empty.
+ * @return string If $tab is specified and valid, the URL for the given tab within the Affiliate Area page.
+ *                Otherwise the Affiliate Area page URL.
+ */
+function affwp_get_affiliate_area_page_url( $tab = '' ) {
+	$affiliate_area_page_id = affwp_get_affiliate_area_page_id();
+
+	$affiliate_area_page_url = get_permalink( $affiliate_area_page_id );
+
+	if ( ! empty( $tab )
+		&& in_array( $tab, array( 'urls', 'stats', 'graphs', 'referrals', 'visits', 'creatives', 'settings' ) )
+	) {
+		$affiliate_area_page_url = add_query_arg( 'tab', $tab, $affiliate_area_page_url );
+	}
+
+	/**
+	 * Filter the Affilate Area page URL.
+	 *
+	 * @since 1.8
+	 *
+	 * @param string $affiliate_area_page_url Page URL.
+	 * @param int    $affiliate_area_page_id  Page ID.
+	 * @param string $tab                     Page tab (if specified).
+	 */
+	return apply_filters( 'affwp_affiliate_area_page_url', $affiliate_area_page_url, $affiliate_area_page_id, $tab );
+}

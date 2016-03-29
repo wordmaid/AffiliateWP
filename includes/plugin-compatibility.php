@@ -52,3 +52,14 @@ function affwp_wishlist_member_redirects( $return ) {
 }
 add_filter( 'wishlistmember_login_redirect_override', 'affwp_wishlist_member_redirects' );
 add_filter( 'wishlistmember_logout_redirect_override', 'affwp_wishlist_member_redirects' );
+
+/**
+ * Disables the mandrill_nl2br filter while sending AffiliateWP emails
+ *
+ * @since 1.8
+ * @return void
+ */
+function affwp_disable_mandrill_nl2br() {
+	add_filter( 'mandrill_nl2br', '__return_false' );
+}
+add_action( 'affwp_email_send_before', 'affwp_disable_mandrill_nl2br');

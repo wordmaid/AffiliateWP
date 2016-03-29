@@ -1049,12 +1049,12 @@ function affwp_get_affiliate_area_page_id() {
 function affwp_get_affiliate_area_page_url( $tab = '' ) {
 	$affiliate_area_page_id = affwp_get_affiliate_area_page_id();
 
+	$affiliate_area_page_url = get_permalink( $affiliate_area_page_id );
+
 	if ( ! empty( $tab )
 		&& in_array( $tab, array( 'urls', 'stats', 'graphs', 'referrals', 'visits', 'creatives', 'settings' ) )
 	) {
-		$affiliate_area_page_url = add_query_arg( 'tab', $tab, get_permalink( $affiliate_area_page_id ) );
-	} else {
-		$affiliate_area_page_url = get_permalink( $affiliate_area_page_id );
+		$affiliate_area_page_url = add_query_arg( 'tab', $tab, $affiliate_area_page_url );
 	}
 
 	/**

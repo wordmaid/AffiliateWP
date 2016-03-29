@@ -73,6 +73,11 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 			// Customers cannot refer themselves
 			if ( $this->is_affiliate_email( $this->order->billing_email, $affiliate_id ) ) {
+
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
+
 				return false;
 			}
 
@@ -111,7 +116,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					$product_total += $product['line_tax'];
 				}
 
-				if ( $product_total <= 0 ) {
+				if ( $product_total <= 0 && 'flat' !== affwp_get_affiliate_rate_type( $affiliate_id ) ) {
 					continue;
 				}
 
@@ -120,6 +125,11 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			}
 
 			if ( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
+
+				if( $this->debug ) {
+					$this->log( 'Referral not created due to 0.00 amount.' );
+				}
+
 				return false; // Ignore a zero amount referral
 			}
 
@@ -140,6 +150,10 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					'context'      => $this->context
 				) );
 
+				if( $this->debug ) {
+					$this->log( sprintf( 'WooCommerce Referral #%d updated successfully.', $existing->referral_id ) );
+				}
+
 			} else {
 
 				// Create a new referral
@@ -156,10 +170,20 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 				if ( $referral_id ) {
 
+					if( $this->debug ) {
+						$this->log( sprintf( 'Referral #%d created successfully.', $referral_id ) );
+					}
+
 					$amount = affwp_currency_filter( affwp_format_amount( $amount ) );
 					$name   = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
 
 					$this->order->add_order_note( sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral_id, $amount, $name ) );
+
+				} else {
+
+					if( $this->debug ) {
+						$this->log( 'Referral failed to be created.' );
+					}
 
 				}
 			}
@@ -409,6 +433,8 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			'cbvalue'     => 1
 		) );
 
+		wp_nonce_field( 'affwp_woo_product_nonce', 'affwp_woo_product_nonce' );
+
 	}
 
 	/**
@@ -426,6 +452,10 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		// Don't save revisions and autosaves
 		if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+			return $post_id;
+		}
+
+		if( empty( $_POST['affwp_woo_product_nonce'] ) || ! wp_verify_nonce( $_POST['affwp_woo_product_nonce'], 'affwp_woo_product_nonce' ) ) {
 			return $post_id;
 		}
 

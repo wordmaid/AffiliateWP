@@ -385,7 +385,7 @@ function affwp_get_referral_format_value( $format = '', $affiliate_id = 0 ) {
 
 	}
 
-	return $value;
+	return apply_filters( 'affwp_get_referral_format_value', $value, $format, $affiliate_id );
 }
 
 /**

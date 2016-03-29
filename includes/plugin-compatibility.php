@@ -14,6 +14,24 @@ function affwp_optimize_member_user_query( $search_term = '' ) {
 add_action( 'affwp_pre_search_users', 'affwp_optimize_member_user_query' );
 
 /**
+ *  Prevents OptimizeMember from redirecting affiliates to the
+ *  "Members Home Page/Login Welcome Page" when they log in
+ *
+ *  @since 1.7.16
+ *  @return boolean
+ */
+function affwp_optimize_member_prevent_affiliate_redirect( $return, $vars ) {
+
+	if ( doing_action( 'affwp_user_login' ) || doing_action( 'affwp_affiliate_register' ) ) {
+		$return = false;
+	}
+
+	return $return;
+
+}
+add_filter( 'ws_plugin__optimizemember_login_redirect', 'affwp_optimize_member_prevent_affiliate_redirect', 10, 2 );
+
+/**
  *  Fixes affiliate redirects when "Allow WishList Member To Handle Login Redirect"
  *  and "Allow WishList Member To Handle Logout Redirect" are enabled in WishList Member
  *

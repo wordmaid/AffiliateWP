@@ -218,8 +218,20 @@ class Affiliate_WP_Admin_Notices {
 			wp_die( __( 'Security check failed', 'affiliate-wp' ), __( 'Error', 'affiliate-wp' ), array( 'response' => 403 ) );
 		}
 
-		if( isset( $_GET['affwp_notice'] ) ) {
-			update_user_meta( get_current_user_id(), '_affwp_' . $_GET['affwp_notice'] . '_dismissed', 1 );
+		if ( isset( $_GET['affwp_notice'] ) ) {
+
+			$notice = sanitize_key( $_GET['affwp_notice'] );
+
+			switch( $notice ) {
+				case 'no_integrations':
+					update_user_meta( get_current_user_id(), "_affwp_{$notice}_dismissed", 1 );
+					break;
+				case 'expired_license':
+				case 'invalid_license':
+					set_transient( 'affwp_license_notice', true, 2 * WEEK_IN_SECONDS );
+					break;
+			}
+
 			wp_redirect( remove_query_arg( array( 'affwp_action', 'affwp_notice' ) ) );
 			exit;
 		}

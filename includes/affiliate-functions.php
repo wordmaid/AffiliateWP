@@ -861,10 +861,11 @@ function affwp_update_affiliate( $data = array() ) {
 	 *
 	 * @since 1.8
 	 *
-	 * @param array $args         Array of affiliate data to be updated for the given affiliate.
-	 * @param int   $affiliate_id Affiliate ID.
+	 * @param array    $args      Prepared affiliate data.
+	 * @param array    $data      Raw affiliate data.
+	 * @param stdClass $affiliate Affiliate object.
 	 */
-	do_action( 'affwp_update_affiliate', $args, $affiliate_id );
+	do_action( 'affwp_update_affiliate', $args, $data, $affiliate );
 
 	if ( affiliate_wp()->affiliates->update( $affiliate_id, $args, '', 'affiliate' ) ) {
 

@@ -62,10 +62,17 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	}
 
 	/**
-	 * Add a referral
+	 * Adds a referral.
 	 *
 	 * @access  public
 	 * @since   1.0
+	 *
+	 * @param array $data {
+	 *     Optional. Referral data. Default empty array.
+	 *
+	 *     @type string $status Referral status. Default 'pending'.
+	 *     @type int    $amount Referral amount. Defualt 0.
+	 * }
 	*/
 	public function add( $data = array() ) {
 

@@ -70,6 +70,7 @@ class Affiliate_WP_Settings {
 	 * Sets an option (in memory).
 	 *
 	 * @since 1.8
+	 * @access public
 	 *
 	 * @param string $key   The option key to set.
 	 * @param mixed  $value The value to assign to the key.

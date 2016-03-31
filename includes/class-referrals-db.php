@@ -73,6 +73,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *     @type string $status Referral status. Default 'pending'.
 	 *     @type int    $amount Referral amount. Defualt 0.
 	 * }
+	 * @return int|false Referral ID if successfully added, false otherwise.
 	*/
 	public function add( $data = array() ) {
 
@@ -99,10 +100,15 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		$add  = $this->insert( $args, 'referral' );
 
-		if( $add ) {
+		if ( $add ) {
 
-			wp_cache_flush();
-
+			/**
+			 * Fires once a new referral has successfully been inserted into the database.
+			 *
+			 * @since 1.6
+			 *
+			 * @param int $add Referral ID.
+			 */
 			do_action( 'affwp_insert_referral', $add );
 
 			return $add;

@@ -139,7 +139,7 @@ function affwp_format_amount( $amount, $decimals = true ) {
 	$decimal_sep   = affiliate_wp()->settings->get( 'decimal_separator', '.' );
 
 	// Format the amount
-	if ( $decimal_sep == ',' && false !== ( $found = strpos( $amount, $decimal_sep ) ) ) {
+	if ( $decimal_sep == ',' && false !== ( $sep_found = strpos( $amount, $decimal_sep ) ) ) {
 		$whole = substr( $amount, 0, $sep_found );
 		$part = substr( $amount, $sep_found + 1, ( strlen( $amount ) - 1 ) );
 		$amount = $whole . '.' . $part;

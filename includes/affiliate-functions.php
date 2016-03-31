@@ -861,13 +861,25 @@ function affwp_update_affiliate( $data = array() ) {
 	 *
 	 * @since 1.8
 	 *
+	 * @param stdClass $affiliate Affiliate object.
 	 * @param array    $args      Prepared affiliate data.
 	 * @param array    $data      Raw affiliate data.
-	 * @param stdClass $affiliate Affiliate object.
 	 */
-	do_action( 'affwp_update_affiliate', $args, $data, $affiliate );
+	do_action( 'affwp_update_affiliate', $affiliate, $args, $data );
 
-	if ( affiliate_wp()->affiliates->update( $affiliate_id, $args, '', 'affiliate' ) ) {
+	$updated = affiliate_wp()->affiliates->update( $affiliate_id, $args, '', 'affiliate' );
+
+	/**
+	 * Fires immediately after an affiliate has been updated.
+	 *
+	 * @since 1.8
+	 *
+	 * @param stdClass $affiliate Updated affiliate object.
+	 * @param bool     $updated   Whether the update was successful.
+	 */
+	do_action( 'affwp_updated_affiliate', affwp_get_affiliate( $affiliate ), $updated );
+
+	if ( $updated ) {
 
 		// update affiliate's account email
 		if( wp_update_user( array( 'ID' => $user_id, 'user_email' => $args['account_email'] ) ) ) {

@@ -147,7 +147,7 @@ function affwp_format_amount( $amount, $decimals = true ) {
 
 	// Strip , from the amount (if set as the thousands separator)
 	if ( $thousands_sep == ',' && false !== ( $found = strpos( $amount, $thousands_sep ) ) ) {
-		$amount = str_replace( ',', '', $amount );
+		$amount = floatval( str_replace( ',', '', $amount ) );
 	}
 
 	if ( empty( $amount ) ) {

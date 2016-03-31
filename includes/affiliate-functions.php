@@ -856,6 +856,16 @@ function affwp_update_affiliate( $data = array() ) {
 	$args['rate_type']     = ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '';
 	$args['user_id']       = $user_id;
 
+	/**
+	 * Fires immediately before data for the current affiliate is updated.
+	 *
+	 * @since 1.8
+	 *
+	 * @param array $args         Array of affiliate data to be updated for the given affiliate.
+	 * @param int   $affiliate_id Affiliate ID.
+	 */
+	do_action( 'affwp_update_affiliate', $args, $affiliate_id );
+
 	if ( affiliate_wp()->affiliates->update( $affiliate_id, $args, '', 'affiliate' ) ) {
 
 		// update affiliate's account email

@@ -23,9 +23,7 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 			return $formatted;
 		}, 10, 2 );
 
-		$value = floatval( "1,999.99" );
-
-		$amount = affwp_format_amount( $value, true );
+		$amount = affwp_format_amount( floatval( "1,999.99" ), true );
 
 		$this->assertSame( 'double', gettype( $this->amount ) );
 	}

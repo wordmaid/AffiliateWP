@@ -89,6 +89,18 @@ abstract class Affiliate_WP_DB {
 		return $wpdb->insert_id;
 	}
 
+	/**
+	 * Updates a given row in the database.
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @param int    $row_id Row ID.
+	 * @param array  $data   Optional. Affiliate data to update. Default empty array.
+	 * @param string $where  Optional. Primary key (column name) to limit for in a WHERE clause.
+	 *                       Default is the value of $primary_key, defined at the subclass level.
+	 * @param string $type   Optional. Type of data being updated. Default empty.
+	 * @return bool False if the record failed to update, otherwise true.
+	 */
 	public function update( $row_id, $data = array(), $where = '', $type = '' ) {
 		global $wpdb;
 

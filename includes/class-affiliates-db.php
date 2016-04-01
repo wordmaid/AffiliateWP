@@ -306,8 +306,20 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	/**
 	 * Add a new affiliate
 	 *
-	 * @access  public
-	 * @since   1.0
+	 * @since 1.0
+	 * @access public
+	 *
+	 * @param array $args {
+	 *     Optional. Array of arguments for adding a new affiliate. Default empty array.
+	 *
+	 *     @type string $status          Affiliate status. Default 'active'.
+	 *     @type string $date_registered Date the affiliate was registered. Default is the current time.
+	 *     @type int    $earnings        Affiliate earnings. Default 0.
+	 *     @type int    $referrals       Number of affiliate referrals.
+	 *     @type int    $visits          Number of visits.
+	 *     @type int    $user_id         User ID used to correspond to the affiliate.
+	 * }
+	 * @return int|false Affiliate ID if successfully added, otherwise false.
 	*/
 	public function add( $data = array() ) {
 

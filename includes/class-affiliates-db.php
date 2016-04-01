@@ -72,6 +72,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 *     @type string $orderby Field to order the results by. Default 'affiliate_id'.
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
+	 * @return array Array of affiliate objects (if found).
 	 */
 	public function get_affiliates( $args = array(), $count = false ) {
 		global $wpdb;

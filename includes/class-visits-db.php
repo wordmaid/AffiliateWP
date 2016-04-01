@@ -221,7 +221,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 
 			}
 
-			wp_cache_set( $cache_key, $results, 'visits', 3600 );
+			wp_cache_set( $cache_key, $results, 'visits', HOUR_IN_SECONDS );
 
 		}
 

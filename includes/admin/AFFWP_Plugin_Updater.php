@@ -146,7 +146,7 @@ class AFFWP_Plugin_Updater {
 
 				$version_info = $this->api_request( 'plugin_latest_version', array( 'slug' => $this->slug ) );
 
-				set_transient( $cache_key, $version_info, 3600 );
+				set_transient( $cache_key, $version_info, HOUR_IN_SECONDS );
 			}
 
 			if( ! is_object( $version_info ) ) {
@@ -364,7 +364,7 @@ class AFFWP_Plugin_Updater {
 				$version_info = false;
 			}
 
-			set_transient( $cache_key, $version_info, 3600 );
+			set_transient( $cache_key, $version_info, HOUR_IN_SECONDS );
 
 		}
 

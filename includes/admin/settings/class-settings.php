@@ -72,11 +72,36 @@ class Affiliate_WP_Settings {
 	 * @since 1.8
 	 * @access public
 	 *
-	 * @param string $key   The option key to set.
-	 * @param mixed  $value The value to assign to the key.
+	 * @param array $settings An array of `key => value` setting pairs to set.
+	 * @param bool  $save     Optional. Whether to trigger saving the option or options. Default false.
+	 * @return bool If `$save` is not false, whether the options were saved successfully. True otherwise.
 	 */
-	public function set( $key, $value ) {
-		$this->options[ $key ] = $value;
+	public function set( $settings, $save = false ) {
+		foreach ( $settings as $option => $value ) {
+			$this->options[ $option ] = $value;
+		}
+
+		if ( false !== $save ) {
+			return $this->save();
+		}
+
+		return true;
+	}
+
+	/**
+	 * Saves option values queued in memory.
+	 *
+	 * @since 1.8
+	 * @access protected
+	 *
+	 * @see Affiliate_WP_Settings::set()
+	 *
+	 * @return bool False if the options were not updated (saved) successfully, true otherwise.
+	 */
+	protected function save() {
+		$options = $this->get_all();
+
+		return update_option( 'affwp_settings', $options );
 	}
 
 	/**
@@ -1029,11 +1054,9 @@ class Affiliate_WP_Settings {
 		// decode the license data
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-		$options = $this->get_all();
-
-		$options['license_status'] = $license_data->license;
-
-		update_option( 'affwp_settings', $options );
+		affiliate_wp()->settings->set( array(
+			'license_status' => $license_data->license
+		), $save = true );
 
 		delete_transient( 'affwp_license_check' );
 
@@ -1068,11 +1091,9 @@ class Affiliate_WP_Settings {
 		if ( is_wp_error( $response ) )
 			return false;
 
-		$options = $this->get_all();
-
-		$options['license_status'] = 0;
-
-		update_option( 'affwp_settings', $options );
+		affiliate_wp()->settings->set( array(
+			'license_status' => 0
+		), $save = true );
 
 		delete_transient( 'affwp_license_check' );
 
@@ -1111,11 +1132,9 @@ class Affiliate_WP_Settings {
 
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-			$options = $this->get_all();
-
-			$options['license_status'] = $license_data->license;
-
-			update_option( 'affwp_settings', $options );
+			affiliate_wp()->settings->set( array(
+				'license_status' => $license_data->license
+			), $save = true );
 
 			set_transient( 'affwp_license_check', $license_data->license, DAY_IN_SECONDS );
 

@@ -16,7 +16,9 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_format_amount()
 	 */
 	public function test_affwp_format_amount_floatval_remains_floatval_with_comma_thousands_seperator() {
-		affiliate_wp()->settings->set( 'thousands_separator', ',' );
+		affiliate_wp()->settings->set( array(
+			'thousands_separator' => ','
+		) );
 
 		add_filter( 'affwp_format_amount', function( $formatted, $amount ) {
 			$this->amount = $amount;

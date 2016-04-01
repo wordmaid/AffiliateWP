@@ -139,7 +139,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 				} else {
 
 					$args['search'] = esc_sql( $args['search'] );
-					$users = $wpdb->get_col( "SELECT ID FROM {$wpdb->users} WHERE display_name OR user_login LIKE '%{$args['search']}%'" );
+					$users = $wpdb->get_col( "SELECT ID FROM {$wpdb->users} WHERE display_name LIKE '%{$args['search']}%' OR user_login LIKE '%{$args['search']}%'" );
 					$users = ! empty( $users ) ? implode( ',', $users ) : 0;
 					$search = "`user_id` IN( {$users} )";
 

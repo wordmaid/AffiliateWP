@@ -72,11 +72,41 @@ class Affiliate_WP_Settings {
 	 * @since 1.8
 	 * @access public
 	 *
-	 * @param string $key   The option key to set.
-	 * @param mixed  $value The value to assign to the key.
+	 * @param string|array $key   The option key to set, or an array of `key => value` option pairs to set.
+	 * @param mixed        $value The value to assign to the key. Only used if `$key` is a string.
+	 * @param bool         $save  Optional. Whether to trigger saving the option or options. Default false.
+	 * @return bool If `$save` is not false, whether the options were saved successfully. True otherwise.
 	 */
-	public function set( $key, $value ) {
-		$this->options[ $key ] = $value;
+	public function set( $key, $value, $save = false ) {
+		if ( is_array( $key ) ) {
+			foreach ( $key as $option => $option_value ) {
+				$this->options[ $option ] = $option_value;
+			}
+		} else {
+			$this->options[ $key ] = $value;
+		}
+
+		if ( false !== $save ) {
+			return $this->save();
+		}
+
+		return true;
+	}
+
+	/**
+	 * Saves option values queued in memory.
+	 *
+	 * @since 1.8
+	 * @access protected
+	 *
+	 * @see Affiliate_WP_Settings::set()
+	 *
+	 * @return bool False if the options were not updated (saved) successfully, true otherwise.
+	 */
+	protected function save() {
+		$options = $this->get_all();
+
+		return update_option( 'affwp_settings', $options );
 	}
 
 	/**

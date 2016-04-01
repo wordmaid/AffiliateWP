@@ -57,10 +57,21 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	/**
 	 * Retrieve affiliates from the database
 	 *
-	 * @access  public
-	 * @since   1.0
-	 * @param   array $args
-	 * @param   bool  $count  Return only the total number of results found (optional)
+	 * @since 1.0
+	 * @access public
+	 *
+	 * @param array $args {
+	 *     Optional. Arguments for querying affiliates. Default empty array.
+	 *
+	 *     @type int    $number  Number of affiliates to query for. Default 20.
+	 *     @type int    $offset  Number of affiliates to offset the query for. Default 0.
+	 *     @type int    $user_id User ID that corresponds to the affiliate user.
+	 *     @type string $status  Affiliate status. Default empty.
+	 *     @type string $order   How to order returned affiliate results. Accepts 'ASC' or 'DESC'.
+	 *                           Default 'DESC'.
+	 *     @type string $orderby Field to order the results by. Default 'affiliate_id'.
+	 * }
+	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 */
 	public function get_affiliates( $args = array(), $count = false ) {
 		global $wpdb;

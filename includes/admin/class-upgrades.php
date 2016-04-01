@@ -194,8 +194,8 @@ class Affiliate_WP_Upgrades {
 			$settings['referral_rate'] = floatval( $rate );
 		}
 
-		update_option( 'affwp_settings', $settings );
-
+		// Update settings.
+		affiliate_wp()->settings->set( $settings, null, $save = true );
 	}
 
 	/**
@@ -330,7 +330,8 @@ class Affiliate_WP_Upgrades {
 			unset( $settings['rejected_subject'] );
 		}
 
-		update_option( 'affwp_settings', $settings );
+		// Update settings.
+		affiliate_wp()->settings->set( $settings, null, $save = true );
 
 		$this->upgraded = true;
 

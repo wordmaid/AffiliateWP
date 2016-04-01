@@ -84,7 +84,7 @@ class Affiliate_DB_Tests extends WP_UnitTestCase {
 		) );
 
 		// Add affiliates.
-		foreach ( array( $user, $user2 ) as $id ) {
+		foreach ( array( $user, $user2, $user3 ) as $id ) {
 			affiliate_wp()->affiliates->add( array(
 				'user_id' => $id
 			) );

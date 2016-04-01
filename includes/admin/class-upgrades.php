@@ -195,7 +195,7 @@ class Affiliate_WP_Upgrades {
 		}
 
 		// Update settings.
-		affiliate_wp()->settings->set( $settings, null, $save = true );
+		affiliate_wp()->settings->set( $settings, $save = true );
 	}
 
 	/**
@@ -331,7 +331,7 @@ class Affiliate_WP_Upgrades {
 		}
 
 		// Update settings.
-		affiliate_wp()->settings->set( $settings, null, $save = true );
+		affiliate_wp()->settings->set( $settings, $save = true );
 
 		$this->upgraded = true;
 

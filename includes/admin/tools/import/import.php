@@ -33,7 +33,7 @@ function affwp_process_settings_import() {
 	$settings = affwp_object_to_array( json_decode( file_get_contents( $import_file ) ) );
 
 	// Update settings.
-	affiliate_wp()->settings->set( $settings, null, $save = true );
+	affiliate_wp()->settings->set( $settings, $save = true );
 
 	wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-tools&tab=export_import&affwp_notice=settings-imported' ) ); exit;
 

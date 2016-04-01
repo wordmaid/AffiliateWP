@@ -36,7 +36,7 @@ function affiliate_wp_install() {
 		);
 
 		// Update settings.
-		affiliate_wp()->settings->set( 'affiliates_page', $affiliate_area, $save = true );
+		affiliate_wp()->settings->set( array( 'affiliates_page' => $affiliate_area ), $save = true );
 	}
 
 	// 3 equals unchecked

@@ -1,6 +1,8 @@
 <?php
 /**
  * Tests for includes/misc-functions.php
+ *
+ * @group functions
  */
 class Misc_Functions_Tests extends WP_UnitTestCase {
 

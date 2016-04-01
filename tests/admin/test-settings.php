@@ -29,7 +29,9 @@ class Afilliate_Settings_Tests extends WP_UnitTestCase {
 	 */
 	public function test_set_method_should_update_options_property_in_memory_only() {
 		$affiliates_area = rand( 1, 200 );
-		$this->settings->set( array( 'affiliates_page' => $affiliates_area ) );
+		$this->settings->set( array(
+			'affiliates_page' => $affiliates_area
+		) );
 
 		$options = $this->settings->get_all();
 		$actual  = get_option( 'affwp_settings', array() );

@@ -1054,7 +1054,9 @@ class Affiliate_WP_Settings {
 		// decode the license data
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-		affiliate_wp()->settings->set( array( 'license_status' => $license_data->license ), $save = true );
+		affiliate_wp()->settings->set( array(
+			'license_status' => $license_data->license
+		), $save = true );
 
 		delete_transient( 'affwp_license_check' );
 
@@ -1089,7 +1091,9 @@ class Affiliate_WP_Settings {
 		if ( is_wp_error( $response ) )
 			return false;
 
-		affiliate_wp()->settings->set( array( 'license_status' => 0 ), $save = true );
+		affiliate_wp()->settings->set( array(
+			'license_status' => 0
+		), $save = true );
 
 		delete_transient( 'affwp_license_check' );
 
@@ -1128,7 +1132,9 @@ class Affiliate_WP_Settings {
 
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-			affiliate_wp()->settings->set( array( 'license_status' => $license_data->license ), $save = true );
+			affiliate_wp()->settings->set( array(
+				'license_status' => $license_data->license
+			), $save = true );
 
 			set_transient( 'affwp_license_check', $license_data->license, DAY_IN_SECONDS );
 

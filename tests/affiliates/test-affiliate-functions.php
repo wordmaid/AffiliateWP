@@ -336,7 +336,10 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		// ENHANCE!
 		affwp_increase_affiliate_visit_count( $this->_affiliate_id );
 
-		$this->assertEquals( ++$current, affwp_get_affiliate_visit_count( $this->_affiliate_id ) );
+		$new_count = affwp_get_affiliate_visit_count( $this->_affiliate_id );
+
+		$this->assertNotEquals( $current, $new_count );
+		$this->assertEquals( ++$current, $new_count );
 	}
 
 	/**

@@ -121,6 +121,20 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_is_active_affiliate()
+	 */
+	public function test_is_active_affiliate_with_invalid_user_should_return_false() {
+		$this->assertFalse( affwp_is_active_affiliate() );
+	}
+
+	/**
+	 * @covers affwp_is_active_affiliate()
+	 */
+	public function test_is_active_affiliate_with_valid_user_should_return_true() {
+		$this->assertTrue( affwp_is_active_affiliate( $this->_affiliate_id ) );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_user_id()
 	 */
 	function test_get_affiliate_user_id() {

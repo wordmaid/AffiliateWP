@@ -414,19 +414,16 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 
 	/**
 	 * @covers affwp_get_affiliate_area_page_url()
+	 * @group drew
 	 */
 	function test_get_affiliate_area_page_url_with_invalid_tab_should_return_page_url() {
-		$affiliates_page_id = affwp_get_affiliate_area_page_id();
-
-		$this->assertSame( affwp_get_affiliate_area_page_url(), affwp_get_affiliate_area_page_url( 'foo' ) );
+		$this->assertSame( affwp_get_affiliate_area_page_url(), affwp_get_affiliate_area_page_url( rand_str( 1, 10 ) ) );
 	}
 
 	/**
 	 * @covers affwp_get_affiliate_area_page_url()
 	 */
 	function test_get_affiliate_area_page_url_with_empty_tab_should_return_page_url() {
-		$affiliates_page_id = affwp_get_affiliate_area_page_id();
-
 		$this->assertSame( affwp_get_affiliate_area_page_url(), affwp_get_affiliate_area_page_url( '' ) );
 	}
 }

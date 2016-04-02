@@ -321,9 +321,9 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 
 	/**
 	 * @covers affwp_get_affiliate_rate()
+	 * @todo Separate tests for the other parameters
 	 */
-	function test_get_affiliate_rate() {
-
+	public function test_get_affiliate_rate() {
 		$this->assertEquals( '0.2', affwp_get_affiliate_rate( $this->_affiliate_id ) );
 		$this->assertEquals( '20%', affwp_get_affiliate_rate( $this->_affiliate_id, true ) );
 

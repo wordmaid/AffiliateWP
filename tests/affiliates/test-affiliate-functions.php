@@ -77,8 +77,14 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_get_affiliate_id()
 	 */
-	function test_get_affiliate_id() {
+	public function test_get_affiliate_id_with_invalid_user_should_return_false() {
 		$this->assertFalse( affwp_get_affiliate_id() );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_id()
+	 */
+	public function test_get_affiliate_id_with_real_user_should_return_a_real_affiliate_id() {
 		$this->assertEquals( $this->_affiliate_id, affwp_get_affiliate_id( $this->_user_id ) );
 	}
 

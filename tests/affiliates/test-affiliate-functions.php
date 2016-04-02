@@ -105,6 +105,22 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_get_affiliate_username()
+	 */
+	public function test_get_affiliate_username_with_invalid_user_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_username() );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_username()
+	 */
+	public function test_get_affiliate_username_with_valid_user_should_return_username() {
+		$user = get_user_by( 'id', $this->_user_id );
+
+		$this->assertEquals( $user->data->user_login, affwp_get_affiliate_username( $this->_affiliate_id ) );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_user_id()
 	 */
 	function test_get_affiliate_user_id() {

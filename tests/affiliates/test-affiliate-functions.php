@@ -1,11 +1,11 @@
 <?php
-
 /**
  * Tests for Affiliate functions in affiliate-functions.php.
  *
  * @group affiliates
+ * @group functions
  */
-class Affiliate_Tests extends WP_UnitTestCase {
+class Affiliate_Functions_Tests extends WP_UnitTestCase {
 
 	/**
 	 * User ID.

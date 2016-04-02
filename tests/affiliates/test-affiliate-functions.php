@@ -159,7 +159,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	function test_add_affiliate() {
 
 		$args = array(
-			'user_id'  => 1
+			'user_id'  => $this->_user_id
 		);
 
 		$affiliate_id = affiliate_wp()->affiliates->add( $args );

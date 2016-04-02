@@ -102,7 +102,9 @@ function affwp_is_active_affiliate( $affiliate_id = 0 ) {
  * Retrieves an affiliate's user ID
  *
  * @since 1.0
- * @return bool
+ *
+ * @param int|stdClass $affiliate Affiliate ID or object.
+ * @return int|false Affiliate user ID, otherwise false.
  */
 function affwp_get_affiliate_user_id( $affiliate ) {
 
@@ -116,7 +118,9 @@ function affwp_get_affiliate_user_id( $affiliate ) {
  * Retrieves the affiliate object
  *
  * @since 1.0
- * @return object
+ *
+ * @param int|stdClass $affiliate Affiliate ID or object.
+ * @return stdClass|false Affiliate object if found, otherwise false.
  */
 function affwp_get_affiliate( $affiliate ) {
 

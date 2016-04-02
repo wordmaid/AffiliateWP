@@ -324,20 +324,39 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_visit_count()
 	 */
 	function test_get_affiliate_visit_count() {
-
 		$this->assertEquals( 0, affwp_get_affiliate_visit_count( $this->_affiliate_id ) );
-
 	}
 
 	/**
-	 * @covers affwp_increase_affiliate_visit_count(), affwp_decrease_affiliate_visit_count()
+	 * @covers affwp_increase_affiliate_visit_count()
 	 */
-	function test_adjust_affiliate_visit_count() {
+	public function test_increase_affiliate_visit_count_should_increase_count() {
+		$current = affwp_get_affiliate_visit_count( $this->_affiliate_id );
 
-		$this->assertEquals( 1, affwp_increase_affiliate_visit_count( $this->_affiliate_id ) );
-		$this->assertEquals( 2, affwp_increase_affiliate_visit_count( $this->_affiliate_id ) );
-		$this->assertEquals( 1, affwp_decrease_affiliate_visit_count( $this->_affiliate_id ) );
-		$this->assertFalse( affwp_decrease_affiliate_visit_count( $this->_affiliate_id2 ) );
+		// ENHANCE!
+		affwp_increase_affiliate_visit_count( $this->_affiliate_id );
+
+		$this->assertEquals( ++$current, affwp_get_affiliate_visit_count( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_decrease_affiliate_visit_count()
+	 */
+	public function test_decrease_affiliate_visit_count_should_decrease_count() {
+		$current = affwp_get_affiliate_visit_count( $this->_affiliate_id );
+
+		// Increase temporarily.
+		affwp_increase_affiliate_visit_count( $this->_affiliate_id );
+
+		// Decrease. Should be back to the current count.
+		affwp_decrease_affiliate_earnings( $current, affwp_get_affiliate_visit_count( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_decrease_affiliate_visit_count()
+	 */
+	public function test_decrease_affiliate_visit_count_for_no_visits_should_return_false() {
+		$this->assertFalse( affwp_decrease_affiliate_visit_count(), $this->_affiliate_id2 );
 	}
 
 	/**

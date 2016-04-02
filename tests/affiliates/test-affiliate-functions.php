@@ -287,17 +287,63 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_increase_affiliate_earnings(), affwp_decrease_affiliate_earnings()
+	 * @covers affwp_increase_affiliate_earnings()
 	 */
-	function test_adjust_affiliate_earnings() {
+	public function test_increase_affiliate_earnings_should_increase_earnings() {
+		$current = affwp_get_affiliate_earnings( $this->_affiliate_id );
 
-		$this->assertEquals( 10, affwp_increase_affiliate_earnings( $this->_affiliate_id, '10' ) );
-		$this->assertFalse( affwp_increase_affiliate_earnings( 0, '10' ) );
+		// Increase.
+		affwp_increase_affiliate_earnings( $this->_affiliate_id, '10' );
+		$this->assertEquals( $current + 10, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
+	}
 
-		$this->assertEquals( 8, affwp_decrease_affiliate_earnings( $this->_affiliate_id, 2 ) );
-		$this->assertFalse( affwp_decrease_affiliate_earnings( 0, '10' ) );
+	/**
+	 * @covers affwp_increase_affiliate_earnings()
+	 */
+	public function test_increase_affiliate_earnings_multiple_times_should_increase_earnings_multiple_times() {
+		$current = affwp_get_affiliate_earnings( $this->_affiliate_id );
 
-		$this->assertEquals( '12.2', affwp_increase_affiliate_earnings( $this->_affiliate_id, '4.2' ) );
+		affwp_increase_affiliate_earnings( $this->_affiliate_id, '10' );
+
+		$this->assertEquals( $current + 10, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
+
+		affwp_increase_affiliate_earnings( $this->_affiliate_id, '5.2' );
+
+		$this->assertEquals( $current + 10 + 5.2, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_decrease_affiliate_earnings()
+	 */
+	public function test_decrease_affiliate_earnings_should_decrease_earnings() {
+		$current = affwp_get_affiliate_earnings( $this->_affiliate_id );
+
+		// Increase temporarily.
+		affwp_increase_affiliate_earnings( $this->_affiliate_id, '10' );
+
+		// Decrease.
+		affwp_decrease_affiliate_earnings( $this->_affiliate_id, '10' );
+
+		$this->assertEquals( $current, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_decrease_affiliate_earnings()
+	 */
+	public function test_decrease_affiliate_earnings_multiple_times_should_decrease_earnings_multiple_times() {
+		$current = affwp_get_affiliate_earnings( $this->_affiliate_id );
+
+		// Increase temporarily.
+		affwp_increase_affiliate_earnings( $this->_affiliate_id, '30' );
+
+		// Decrease.
+		affwp_decrease_affiliate_earnings( $this->_affiliate_id, '5' );
+
+		$this->assertEquals( ( $current + 30 ) - 5, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
+
+		affwp_decrease_affiliate_earnings( $this->_affiliate_id, '8.5' );
+
+		$this->assertEquals( ( ( $current + 30 ) - 5 ) - 8.5, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
 	}
 
 	/**

@@ -137,8 +137,31 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_get_affiliate_user_id()
 	 */
-	function test_get_affiliate_user_id() {
+	public function test_get_affiliate_user_id_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_user_id( 0 ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_user_id()
+	 */
+	public function test_get_affiliate_user_id_with_valid_affiliate_id_should_return_valid_user_id() {
 		$this->assertEquals( $this->_user_id, affwp_get_affiliate_user_id( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_user_id()
+	 */
+	public function test_get_affiliate_user_id_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_user_id( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_user_id()
+	 */
+	public function test_get_affiliate_user_id_with_valid_affiliate_object_should_return_valid_user_id() {
+		$affiliate = affwp_get_affiliate( $this->_affiliate_id );
+
+		$this->assertEquals( $this->_user_id, affwp_get_affiliate_user_id( $affiliate ) );
 	}
 
 	/**

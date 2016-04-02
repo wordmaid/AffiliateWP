@@ -77,16 +77,25 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_get_affiliate()
 	 */
-	function test_get_affiliate() {
-
+	public function test_get_affiliate_should_accept_an_affiliate_id() {
 		$affiliate = affwp_get_affiliate( $this->_affiliate_id );
-
 		$this->assertEquals( $this->_affiliate_id, $affiliate->affiliate_id );
+	}
 
+	/**
+	 * @covers affwp_get_affiliate()
+	 */
+	public function test_get_affiliate_should_accept_an_affiliate_object() {
+		$affiliate = affwp_get_affiliate( $this->_affiliate_id );
 		$affiliate = affwp_get_affiliate( $affiliate );
 
 		$this->assertEquals( $this->_affiliate_id, $affiliate->affiliate_id );
+	}
 
+	/**
+	 * @covers affwp_get_affiliate()
+	 */
+	public function test_get_affiliate_passed_non_id_or_non_object_should_return_false() {
 		$this->assertFalse( affwp_get_affiliate( null ) );
 	}
 

@@ -131,10 +131,21 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 	}
 
 	/**
-	 * Add a new creative
+	 * Adds a new creative.
 	 *
-	 * @access  public
-	 * @since   1.2
+	 * @since 1.2
+	 * @access public
+	 *
+	 * @see Affiliate_WP_DB::insert()
+	 *
+	 * @param array $data {
+	 *     Optional. Arguments for adding a new creative. Default empty array.
+	 *
+	 *     @type string $status Status for the new creative. Default 'active'.
+	 *     @type string $date   Creation date for the new creative. Default is the current date and time.
+	 *     @type string $url    URL for the new creative. Default empty.
+	 *     @type string $image  Image URL for the new creative. Default empty.
+	 * }
 	*/
 	public function add( $data = array() ) {
 

@@ -411,7 +411,7 @@ class Affiliate_WP_Welcome {
 			return array();
 		}
 
-		set_transient( 'affwp_contributors', $contributors, 3600 );
+		set_transient( 'affwp_contributors', $contributors, HOUR_IN_SECONDS );
 
 		return $contributors;
 	}

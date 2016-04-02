@@ -55,7 +55,7 @@ function affiliate_wp_install() {
 	}
 
 	// Add the transient to redirect
-	set_transient( '_affwp_activation_redirect', true, 30 );
+	set_transient( '_affwp_activation_redirect', true, MINUTE_IN_SECONDS / 2 );
 
 }
 register_activation_hook( AFFILIATEWP_PLUGIN_FILE, 'affiliate_wp_install' );

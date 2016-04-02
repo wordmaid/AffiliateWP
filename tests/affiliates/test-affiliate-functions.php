@@ -60,6 +60,10 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		affwp_set_affiliate_status( 'active' );
 	}
 
+	//
+	// Tests
+	//
+
 	/**
 	 * @covers affwp_is_affiliate()
 	 */

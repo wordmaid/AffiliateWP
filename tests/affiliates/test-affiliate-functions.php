@@ -13,7 +13,15 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @access protected
 	 * @var int
 	 */
-	protected $_user_id = 1;
+	protected $_user_id = 0;
+
+	/**
+	 * User ID 2.
+	 *
+	 * @access protected
+	 * @var int
+	 */
+	protected $_user_id2 = 0;
 
 	/**
 	 * First affiliate test ID.
@@ -45,12 +53,16 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	function setUp() {
 		parent::setUp();
 
-		$args = array(
-			'user_id' => 1
-		);
+		$this->_user_id  = $this->factory->user->create();
+		$this->_user_id2 = $this->factory->user->create();
 
-		$this->_affiliate_id = affiliate_wp()->affiliates->add( $args );
-		$this->_affiliate    = affiliate_wp()->affiliates->get( $this->_affiliate_id );
+		$this->_affiliate_id = affiliate_wp()->affiliates->add( array(
+			'user_id' => $this->_user_id
+		) );
+
+		$this->_affiliate_id2 = affiliate_wp()->affiliates->add( array(
+			'user_id' => $this->_user_id2
+		) );
 	}
 
 	/**

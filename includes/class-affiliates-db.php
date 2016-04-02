@@ -234,7 +234,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 			}
 
-			wp_cache_set( $cache_key, $results, 'affiliates', 3600 );
+			wp_cache_set( $cache_key, $results, 'affiliates', HOUR_IN_SECONDS );
 
 		}
 
@@ -267,7 +267,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 		if( false === $name ) {
 			$name = $wpdb->get_var( $wpdb->prepare( "SELECT u.display_name FROM {$wpdb->users} u INNER JOIN {$this->table_name} a ON u.ID = a.user_id WHERE a.affiliate_id = %d;", $affiliate_id ) );
-			wp_cache_set( $cache_key, $name, 'affiliates', 3600 );
+			wp_cache_set( $cache_key, $name, 'affiliates', HOUR_IN_SECONDS );
 		}
 
 		return $name;

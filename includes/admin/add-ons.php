@@ -88,7 +88,7 @@ function affwp_add_ons_get_feed( $tab = 'pro' ) {
 
 			if ( isset( $feed['body'] ) && strlen( $feed['body'] ) > 0 ) {
 				$cache = wp_remote_retrieve_body( $feed );
-				set_transient( 'affiliatewp_add_ons_feed_' . $tab, $cache, 3600 );
+				set_transient( 'affiliatewp_add_ons_feed_' . $tab, $cache, HOUR_IN_SECONDS );
 			}
 
 		} else {

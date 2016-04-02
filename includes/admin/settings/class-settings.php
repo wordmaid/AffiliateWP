@@ -1125,7 +1125,7 @@ class Affiliate_WP_Settings {
 			if ( is_wp_error( $response ) ) {
 
 				// Connection failed, try again in three hours
-				set_transient( 'affwp_license_check', $response, 10800 );
+				set_transient( 'affwp_license_check', $response, 3 * HOUR_IN_SECONDS );
 
 				return false;
 			}

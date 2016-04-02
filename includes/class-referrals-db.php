@@ -421,7 +421,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			}
 
-			wp_cache_set( $cache_key, $results, 'referrals', 3600 );
+			wp_cache_set( $cache_key, $results, 'referrals', HOUR_IN_SECONDS );
 
 		}
 

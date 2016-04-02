@@ -263,17 +263,31 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_get_affiliate_status()
 	 */
-	function test_get_affiliate_status() {
-
-		$this->assertEquals( 'active', affwp_get_affiliate_status( $this->_affiliate_id ) );
-
+	public function test_get_affiliate_status_passed_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_status( 1 ) );
 	}
 
 	/**
 	 * @covers affwp_get_affiliate_status()
 	 */
-	public function test_get_affiliate_status_default_should_be_active() {
+	public function test_get_affiliate_status_passed_valid_affiliate_id_should_return_status() {
 		$this->assertEquals( 'active', affwp_get_affiliate_status( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_status()
+	 */
+	public function test_get_affiliate_status_passed_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_status( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_status()
+	 */
+	public function test_get_affiliate_status_passed_valid_affiliate_object_should_return_status() {
+		$affiliate = affwp_get_affiliate( $this->_affiliate_id );
+
+		$this->assertEquals( 'active', affwp_get_affiliate_status( $affiliate ) );
 	}
 
 	/**

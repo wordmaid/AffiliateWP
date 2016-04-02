@@ -321,31 +321,13 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 
 	/**
 	 * @covers affwp_increase_affiliate_referral_count()
-	 */
-	public function test_increase_affiliate_referral_count_should_increase_count() {
-		$current = affwp_get_affiliate_referral_count();
-		$inc     = rand( 1, 20 );
-
-		// Increase.
-		affwp_increase_affiliate_referral_count( $this->_affiliate_id, $inc );
-
-		$this->assertEquals( $current + $inc, affwp_get_affiliate_referral_count( $this->_affiliate_id ) );
-	}
-
-	/**
 	 * @covers affwp_decrease_affiliate_referral_count()
 	 */
-	public function test_decrease_affiliate_referral_count_should_decrease_count() {
-		$current = affwp_get_affiliate_referral_count( $this->_affiliate_id );
-		$inc     = rand( 1, 15 );
-
-		// Increase temporarily.
-		affwp_increase_affiliate_referral_count( $this->_affiliate_id, 20 );
-
-		// Decrease.
-		affwp_decrease_affiliate_referral_count( $this->_affiliate_id, $inc );
-
-		$this->assertEquals( ( $current + 20 ) - $inc, affwp_get_affiliate_referral_count( $this->_affiliate_id ) );
+	public function test_adjust_affiliate_referral_count() {
+		$this->assertEquals( 1, affwp_increase_affiliate_referral_count( $this->_affiliate_id ) );
+		$this->assertEquals( 2, affwp_increase_affiliate_referral_count( $this->_affiliate_id ) );
+		$this->assertEquals( 1, affwp_decrease_affiliate_referral_count( $this->_affiliate_id ) );
+		$this->assertFalse( affwp_decrease_affiliate_referral_count( $this->_affiliate_id2 ) );
 	}
 
 	/**

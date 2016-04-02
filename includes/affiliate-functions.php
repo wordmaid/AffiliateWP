@@ -794,6 +794,22 @@ function affwp_get_affiliate_campaigns( $affiliate ) {
  * Adds a new affiliate to the database
  *
  * @since 1.0
+ *
+ * @see Affiliate_WP_DB_Affiliates::add()
+ *
+ * @param array $data {
+ *     Optional. Array of arguments for adding a new affiliate. Default empty array.
+ *
+ *     @type string $status          Affiliate status. Default 'active'.
+ *     @type string $date_registered Date the affiliate was registered. Default is the current time.
+ *     @type string $rate            Affiliate-specific referral rate.
+ *     @type string $rate_type       Rate type. Accepts 'percentage' or 'flat'.
+ *     @type string $payment_email   Affiliate payment email.
+ *     @type int    $earnings        Affiliate earnings. Default 0.
+ *     @type int    $referrals       Number of affiliate referrals.
+ *     @type int    $visits          Number of visits.
+ *     @type int    $user_id         User ID used to correspond to the affiliate.
+ * }
  * @return bool
  */
 function affwp_add_affiliate( $data = array() ) {

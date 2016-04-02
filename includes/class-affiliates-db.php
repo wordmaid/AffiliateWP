@@ -315,6 +315,9 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 *
 	 *     @type string $status          Affiliate status. Default 'active'.
 	 *     @type string $date_registered Date the affiliate was registered. Default is the current time.
+	 *     @type string $rate            Affiliate-specific referral rate.
+	 *     @type string $rate_type       Rate type. Accepts 'percentage' or 'flat'.
+	 *     @type string $payment_email   Affiliate payment email.
 	 *     @type int    $earnings        Affiliate earnings. Default 0.
 	 *     @type int    $referrals       Number of affiliate referrals.
 	 *     @type int    $visits          Number of visits.

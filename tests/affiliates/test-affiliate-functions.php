@@ -326,6 +326,26 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	public function test_get_affiliate_rate() {
 		$this->assertEquals( '0.2', affwp_get_affiliate_rate( $this->_affiliate_id ) );
 		$this->assertEquals( '20%', affwp_get_affiliate_rate( $this->_affiliate_id, true ) );
+	}
+
+	/**
+	 * @covers affwp_affiliate_has_custom_rate()
+	 */
+	public function test_affiliate_has_custom_rate_passed_an_invalid_affiliate_id_should_always_return_false() {
+
+	}
+
+	/**
+	 * @covers affwp_affiliate_has_custom_rate()
+	 */
+	public function test_affiliate_has_custom_rate_passed_a_valid_affiliate_id_with_custom_rate_should_return_true() {
+
+	}
+
+	/**
+	 * @covers affwp_affiliate_has_custom_rate()
+	 */
+	public function test_affiliate_has_custom_rate_passed_a_valid_affiliate_id_without_custom_rate_should_return_false() {
 
 	}
 

@@ -46,6 +46,13 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Tear down.
+	 */
+	public function tearDown() {
+		affwp_set_affiliate_status( 'active' );
+	}
+
+	/**
 	 * @covers affwp_is_affiliate()
 	 */
 	function test_is_affiliate() {
@@ -145,27 +152,43 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_get_affiliate_status()
+	 */
+	public function test_get_affiliate_status_default_should_be_active() {
+		$this->assertEquals( 'active', affwp_get_affiliate_status( $this->_affiliate_id ) );
+	}
+
+	/**
 	 * @covers affwp_set_affiliate_status()
 	 */
-	function test_set_affiliate_status() {
+	public function test_set_affiliate_inactive_status() {
+		$new_status = 'inactive';
 
-		$this->assertEquals( 'active', affwp_get_affiliate_status( $this->_affiliate_id ) );
+		affwp_set_affiliate_status( $this->_affiliate_id, $new_status );
 
-		$this->assertTrue( affwp_set_affiliate_status( $this->_affiliate_id, 'inactive' ) );
+		$this->assertEquals( $new_status, affwp_get_affiliate_status( $this->_affiliate_id ) );
+	}
 
-		$this->assertEquals( 'inactive', affwp_get_affiliate_status( $this->_affiliate_id ) );
+	/**
+	 * @covers affwp_set_affiliate_status()
+	 */
+	public function test_set_affiliate_pending_status() {
+		$new_status = 'pending';
 
-		$this->assertTrue( affwp_set_affiliate_status( $this->_affiliate_id, 'pending' ) );
+		affwp_set_affiliate_status( $this->_affiliate_id, $new_status );
 
-		$this->assertEquals( 'pending', affwp_get_affiliate_status( $this->_affiliate_id ) );
+		$this->assertEquals( $new_status, affwp_get_affiliate_status( $this->_affiliate_id ) );
+	}
 
-		$this->assertTrue( affwp_set_affiliate_status( $this->_affiliate_id, 'rejected' ) );
+	/**
+	 * @covers affwp_set_affiliate_status()
+	 */
+	public function test_set_affiliate_rejected_status() {
+		$new_status = 'rejected';
 
-		$this->assertEquals( 'rejected', affwp_get_affiliate_status( $this->_affiliate_id ) );
+		affwp_set_affiliate_status( $this->_affiliate_id, $new_status );
 
-		$this->assertTrue( affwp_set_affiliate_status( $this->_affiliate_id, 'active' ) );
-
-		$this->assertEquals( 'active', affwp_get_affiliate_status( $this->_affiliate_id ) );
+		$this->assertEquals( $new_status, affwp_get_affiliate_status( $this->_affiliate_id ) );
 	}
 
 	/**

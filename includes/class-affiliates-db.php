@@ -57,10 +57,22 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	/**
 	 * Retrieve affiliates from the database
 	 *
-	 * @access  public
-	 * @since   1.0
-	 * @param   array $args
-	 * @param   bool  $count  Return only the total number of results found (optional)
+	 * @since 1.0
+	 * @access public
+	 *
+	 * @param array $args {
+	 *     Optional. Arguments for querying affiliates. Default empty array.
+	 *
+	 *     @type int    $number  Number of affiliates to query for. Default 20.
+	 *     @type int    $offset  Number of affiliates to offset the query for. Default 0.
+	 *     @type int    $user_id User ID that corresponds to the affiliate user.
+	 *     @type string $status  Affiliate status. Default empty.
+	 *     @type string $order   How to order returned affiliate results. Accepts 'ASC' or 'DESC'.
+	 *                           Default 'DESC'.
+	 *     @type string $orderby Field to order the results by. Default 'affiliate_id'.
+	 * }
+	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
+	 * @return array Array of affiliate objects (if found).
 	 */
 	public function get_affiliates( $args = array(), $count = false ) {
 		global $wpdb;
@@ -128,7 +140,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 				} else {
 
 					$args['search'] = esc_sql( $args['search'] );
-					$users = $wpdb->get_col( "SELECT ID FROM {$wpdb->users} WHERE display_name LIKE '%{$args['search']}%'" );
+					$users = $wpdb->get_col( "SELECT ID FROM {$wpdb->users} WHERE display_name LIKE '%{$args['search']}%' OR user_login LIKE '%{$args['search']}%'" );
 					$users = ! empty( $users ) ? implode( ',', $users ) : 0;
 					$search = "`user_id` IN( {$users} )";
 
@@ -295,8 +307,20 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	/**
 	 * Add a new affiliate
 	 *
-	 * @access  public
-	 * @since   1.0
+	 * @since 1.0
+	 * @access public
+	 *
+	 * @param array $args {
+	 *     Optional. Array of arguments for adding a new affiliate. Default empty array.
+	 *
+	 *     @type string $status          Affiliate status. Default 'active'.
+	 *     @type string $date_registered Date the affiliate was registered. Default is the current time.
+	 *     @type int    $earnings        Affiliate earnings. Default 0.
+	 *     @type int    $referrals       Number of affiliate referrals.
+	 *     @type int    $visits          Number of visits.
+	 *     @type int    $user_id         User ID used to correspond to the affiliate.
+	 * }
+	 * @return int|false Affiliate ID if successfully added, otherwise false.
 	*/
 	public function add( $data = array() ) {
 

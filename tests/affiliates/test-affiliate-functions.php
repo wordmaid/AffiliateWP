@@ -63,8 +63,15 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_is_affiliate()
 	 */
-	function test_is_affiliate() {
+	public function test_is_affiliate_with_0_user_id_should_return_false() {
 		$this->assertFalse( affwp_is_affiliate() );
+	}
+
+	/**
+	 * @covers affwp_is_affiliate()
+	 */
+	public function test_is_affiliate_with_real_user_should_return_true() {
+		$this->assertTrue( affwp_is_affiliate( 1 ) );
 	}
 
 	/**

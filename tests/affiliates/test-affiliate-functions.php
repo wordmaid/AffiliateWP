@@ -32,6 +32,14 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	protected $_affiliate_id2 = 0;
 
 	/**
+	 * Affiliate test object.
+	 *
+	 * @access protected
+	 * @var stdClass
+	 */
+	protected $_affiliate;
+
+	/**
 	 * Set up.
 	 */
 	function setUp() {
@@ -42,7 +50,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		);
 
 		$this->_affiliate_id = affiliate_wp()->affiliates->add( $args );
-
+		$this->_affiliate    = affiliate_wp()->affiliates->get( $this->_affiliate_id );
 	}
 
 	/**
@@ -86,8 +94,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate()
 	 */
 	public function test_get_affiliate_should_accept_an_affiliate_object() {
-		$affiliate = affwp_get_affiliate( $this->_affiliate_id );
-		$affiliate = affwp_get_affiliate( $affiliate );
+		$affiliate = affwp_get_affiliate( $this->_affiliate );
 
 		$this->assertEquals( $this->_affiliate_id, $affiliate->affiliate_id );
 	}

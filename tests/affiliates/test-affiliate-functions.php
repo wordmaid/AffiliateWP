@@ -48,21 +48,32 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	protected $_affiliate;
 
 	/**
+	 * Affiliate test object 2.
+	 *
+	 * @access protected
+	 * @var stdClass
+	 */
+	protected $_affiliate2;
+
+	/**
 	 * Set up.
 	 */
 	function setUp() {
 		parent::setUp();
 
+		// First user/affiliate.
 		$this->_user_id  = $this->factory->user->create();
-		$this->_user_id2 = $this->factory->user->create();
-
 		$this->_affiliate_id = affiliate_wp()->affiliates->add( array(
 			'user_id' => $this->_user_id
 		) );
+		$this->_affiliate = affwp_get_affiliate( $this->_affiliate_id );
 
+		// Second user/affiliate.
+		$this->_user_id2 = $this->factory->user->create();
 		$this->_affiliate_id2 = affiliate_wp()->affiliates->add( array(
 			'user_id' => $this->_user_id2
 		) );
+		$this->_affiliate2 = affwp_get_affiliate( $this->_affiliate_id2 );
 	}
 
 	/**

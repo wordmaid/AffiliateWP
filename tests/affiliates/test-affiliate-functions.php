@@ -754,6 +754,85 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_get_affiliate_payment_email()
+	 */
+	public function test_get_affiliate_payment_email_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_payment_email( 1 ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_payment_email()
+	 */
+	public function test_get_affiliate_payment_email_with_valid_affiliate_id_should_return_email() {
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'payment_email' => $this->rand_email
+		) );
+
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_payment_email( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_payment_email()
+	 */
+	public function test_get_affiliate_payment_email_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_payment_email( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_payment_email()
+	 */
+	public function test_get_affiliate_payment_email_with_valid_affiliate_object_should_return_email() {
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'payment_email' => $this->rand_email
+		) );
+
+		$affiliate = affwp_get_affiliate( $this->_affiliate_id );
+
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_payment_email( $affiliate ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_payment_email()
+	 */
+	public function test_get_affiliate_payment_email_with_empty_email_should_return_account_email() {
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'payment_email' => '',
+			'account_email' => $this->rand_email
+		) );
+
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_payment_email( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_payment_email()
+	 */
+	public function test_get_affiliate_payment_email_with_invalid_email_should_return_account_email() {
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'payment_email' => rand_str( 5 ),
+			'account_email' => $this->rand_email
+		) );
+
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_payment_email( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_payment_email()
+	 */
+	public function test_get_affiliate_payment_emaik_with_both_invalid_emails_should_return_false() {
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'payment_email' => rand_str( 5 ),
+			'account_email' => rand_str( 5 )
+		) );
+
+		$this->assertFalse( affwp_get_affiliate_payment_email( $this->_affiliate_id ) );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_area_page_url()
 	 */
 	function test_get_affiliate_area_page_url_should_match_settings() {

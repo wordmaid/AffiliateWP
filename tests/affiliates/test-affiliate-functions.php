@@ -718,6 +718,32 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_get_affiliate_email()
+	 */
+	public function test_get_affiliate_email_with_empty_email_should_return_false() {
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'account_email' => ''
+		) );
+
+		$this->assertFalse( affwp_get_affiliate_email( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_email()
+	 */
+	public function test_get_affiliate_email_with_empty_email_and_default_not_false_should_return_default() {
+		$default = 'foo@baz.dev';
+
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'account_email' => ''
+		) );
+
+		$this->assertSame( $default, affwp_get_affiliate_email( $this->_affiliate_id, $default ) );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_area_page_url()
 	 */
 	function test_get_affiliate_area_page_url_should_match_settings() {

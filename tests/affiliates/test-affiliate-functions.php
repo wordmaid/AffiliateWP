@@ -56,6 +56,14 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	protected $_affiliate_object_2;
 
 	/**
+	 * Random string.
+	 *
+	 * @access protected
+	 * @var string
+	 */
+	protected $rand_str = '';
+
+	/**
 	 * Set up.
 	 */
 	function setUp() {
@@ -74,6 +82,8 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 			'user_id' => $this->_user_id2
 		) );
 		$this->_affiliate_object_2 = affwp_get_affiliate( $this->_affiliate_id2 );
+
+		$this->rand_str = rand_str( 5, 10 );
 	}
 
 	/**

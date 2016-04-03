@@ -256,7 +256,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$args = array(
 			'affiliate_id'   => $this->_affiliate_id,
 			'rate'           => '20',
-			'account_email'  => 'testaccount@test.com'
+			'account_email'  => $this->rand_email
 		);
 
 		$updated = affwp_update_affiliate( $args );
@@ -436,12 +436,12 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 
 		$args = array(
 			'affiliate_id'  => $this->_affiliate_id,
-			'account_email' => 'affiliate@test.com'
+			'account_email' => $this->rand_email
 		);
 
 		affwp_update_affiliate( $args );
 
-		$this->assertEquals( 'affiliate@test.com', affwp_get_affiliate_email( $this->_affiliate_id ) );
+		$this->assertEquals( $this->rand_email, affwp_get_affiliate_email( $this->_affiliate_id ) );
 	}
 
 	/**
@@ -451,12 +451,12 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 
 		$args = array(
 			'affiliate_id'  => $this->_affiliate_id,
-			'payment_email' => 'affiliate-payment@test.com'
+			'payment_email' => $this->rand_email
 		);
 
 		affwp_update_affiliate( $args );
 
-		$this->assertEquals( 'affiliate-payment@test.com', affwp_get_affiliate_payment_email( $this->_affiliate_id ) );
+		$this->assertEquals( $this->rand_email, affwp_get_affiliate_payment_email( $this->_affiliate_id ) );
 	}
 
 	/**
@@ -652,14 +652,12 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_email()
 	 */
 	public function test_get_affiliate_email_with_valid_affiliate_id_should_return_email() {
-		$email = 'test@foo.dev';
-
 		affwp_update_affiliate( array(
 			'affiliate_id'  => $this->_affiliate_id,
-			'account_email' => $email
+			'account_email' => $this->rand_email
 		) );
 
-		$this->assertSame( $email, affwp_get_affiliate_email( $this->_affiliate_id ) );
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_email( $this->_affiliate_id ) );
 	}
 
 	/**
@@ -673,32 +671,26 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_email()
 	 */
 	public function test_get_affiliate_email_with_valid_affiliate_object_should_return_email() {
-		$email = 'test@bar.dev';
-
 		affwp_update_affiliate( array(
 			'affiliate_id'  => $this->_affiliate_id,
-			'account_email' => $email
+			'account_email' => $this->rand_email
 		) );
 
-		$this->assertSame( $email, affwp_get_affiliate_email( $this->_affiliate_object ) );
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_email( $this->_affiliate_object ) );
 	}
 
 	/**
 	 * @covers affwp_get_affiliate_email()
 	 */
 	public function test_get_affiliate_email_with_invalid_affiliate_id_and_default_not_false_should_return_default() {
-		$default = 'foo@bar.dev';
-
-		$this->assertSame( $default, affwp_get_affiliate_email( 1, $default ) );
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_email( 1, $this->rand_email ) );
 	}
 
 	/**
 	 * @covers affwp_get_affiliate_email()
 	 */
 	public function test_get_affiliate_email_with_invalid_affiliate_object_and_default_not_false_should_return_default() {
-		$default = 'bar@foo.dev';
-
-		$this->assertSame( $default, affwp_get_affiliate_email( new stdClass(), $default ) );
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_email( new stdClass(), $this->rand_email ) );
 	}
 
 	/**
@@ -717,14 +709,12 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_email()
 	 */
 	public function test_get_affiliate_email_with_invalid_email_and_default_not_false_should_return_default() {
-		$default = 'bar@baz.dev';
-
 		affwp_update_affiliate( array(
 			'affiliate_id'  => $this->_affiliate_id,
 			'account_email' => $this->rand_str
 		) );
 
-		$this->assertSame( $default, affwp_get_affiliate_email( $this->_affiliate_id, $default ) );
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_email( $this->_affiliate_id, $this->rand_email ) );
 	}
 
 	/**
@@ -743,14 +733,12 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_email()
 	 */
 	public function test_get_affiliate_email_with_empty_email_and_default_not_false_should_return_default() {
-		$default = 'foo@baz.dev';
-
 		affwp_update_affiliate( array(
 			'affiliate_id'  => $this->_affiliate_id,
 			'account_email' => ''
 		) );
 
-		$this->assertSame( $default, affwp_get_affiliate_email( $this->_affiliate_id, $default ) );
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_email( $this->_affiliate_id, $this->rand_email ) );
 	}
 
 	/**

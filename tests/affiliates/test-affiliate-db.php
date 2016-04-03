@@ -3,7 +3,6 @@
  * Tests for Affiliate_WP_DB_Affiliates class
  *
  * @covers Affiliate_WP_DB_Affiliates
- * @group drew
  */
 class Affiliate_DB_Tests extends WP_UnitTestCase {
 

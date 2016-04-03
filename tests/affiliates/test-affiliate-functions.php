@@ -332,30 +332,33 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_affiliate_has_custom_rate()
 	 */
 	public function test_affiliate_has_custom_rate_passed_an_invalid_affiliate_id_should_always_return_false() {
-
+		$this->assertFalse( affwp_affiliate_has_custom_rate( rand( 3000, 5000 ) ) );
 	}
 
 	/**
 	 * @covers affwp_affiliate_has_custom_rate()
 	 */
 	public function test_affiliate_has_custom_rate_passed_a_valid_affiliate_id_with_custom_rate_should_return_true() {
+		$affiliate = affwp_update_affiliate( array(
+			'affiliate_id' => $this->_affiliate_id,
+			'rate'         => '0.1'
+		) );
 
+		$this->assertTrue( affwp_affiliate_has_custom_rate( $this->_affiliate_id ) );
 	}
 
 	/**
 	 * @covers affwp_affiliate_has_custom_rate()
 	 */
 	public function test_affiliate_has_custom_rate_passed_a_valid_affiliate_id_without_custom_rate_should_return_false() {
-
+		$this->assertFalse( affwp_affiliate_has_custom_rate( $this->_affiliate_id ) );
 	}
 
 	/**
 	 * @covers affwp_get_affiliate_rate_type()
 	 */
 	function test_get_affiliate_rate_type() {
-
 		$this->assertEquals( 'percentage', affwp_get_affiliate_rate_type( $this->_affiliate_id ) );
-
 	}
 
 	/**

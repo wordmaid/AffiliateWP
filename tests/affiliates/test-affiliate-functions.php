@@ -599,6 +599,9 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$page_id_from_helper = affwp_get_affiliate_area_page_id();
 
 		$this->assertNotSame( $page_id_from_settings, $page_id_from_helper );
+
+		// Clean up to prevent polluting other tests.
+		remove_all_filters( 'affwp_affiliate_area_page_id' );
 	}
 
 	/**

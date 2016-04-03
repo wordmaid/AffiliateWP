@@ -632,6 +632,92 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_get_affiliate_email()
+	 */
+	public function test_get_affiliate_email_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_email( 1 ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_email()
+	 */
+	public function test_get_affiliate_email_with_valid_affiliate_id_should_return_email() {
+		$email = 'test@foo.dev';
+
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'account_email' => $email
+		) );
+
+		$this->assertSame( $email, affwp_get_affiliate_email( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_email()
+	 */
+	public function test_get_affiliate_email_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_email( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_email()
+	 */
+	public function test_get_affiliate_email_with_valid_affiliate_object_should_return_email() {
+		$email = 'test@bar.dev';
+
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'account_email' => $email
+		) );
+
+		$this->assertSame( $email, affwp_get_affiliate_email( $this->_affiliate_object ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_email()
+	 */
+	public function test_get_affiliate_email_with_invalid_affiliate_id_and_default_not_false_should_return_default() {
+		$default = 'foo@bar.dev';
+
+		$this->assertSame( $default, affwp_get_affiliate_email( 1, $default ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_email()
+	 */
+	public function test_get_affiliate_email_with_invalid_affiliate_object_and_default_not_false_should_return_default() {
+		$default = 'bar@foo.dev';
+
+		$this->assertSame( $default, affwp_get_affiliate_email( new stdClass(), $default ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_email()
+	 */
+	public function test_get_affiliate_email_with_invalid_email_should_return_false() {
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'account_email' => $this->rand_str
+		) );
+
+		$this->assertFalse( affwp_get_affiliate_email( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_email()
+	 */
+	public function test_get_affiliate_email_with_invalid_email_and_default_not_false_should_return_default() {
+		$default = 'bar@baz.dev';
+
+		affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'account_email' => $this->rand_str
+		) );
+
+		$this->assertSame( $default, affwp_get_affiliate_email( $this->_affiliate_id, $default ) );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_area_page_url()
 	 */
 	function test_get_affiliate_area_page_url_should_match_settings() {

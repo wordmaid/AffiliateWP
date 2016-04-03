@@ -821,6 +821,54 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_get_affiliate_login()
+	 */
+	public function test_get_affiliate_login_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_login( 1 ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_login()
+	 */
+	public function test_get_affiliate_login_with_valid_affiliate_id_should_return_login() {
+		$user_id = affwp_get_affiliate_user_id( $this->_affiliate_id );
+		$user    = get_userdata( $user_id );
+
+		$this->assertSame( $user->data->user_login, affwp_get_affiliate_login( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_login()
+	 */
+	public function test_get_affiliate_login_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_login( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_login()
+	 */
+	public function test_get_affiliate_login_with_valid_affiliate_object_should_return_login() {
+		$user_id = affwp_get_affiliate_user_id( $this->_affiliate_id );
+		$user    = get_userdata( $user_id );
+
+		$this->assertSame( $user->data->user_login, affwp_get_affiliate_login( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_login()
+	 */
+	public function test_get_affiliate_login_with_invalid_affiliate_id_and_default_not_false_should_return_default() {
+		$this->assertSame( $this->rand_str, affwp_get_affiliate_login( 1, $this->rand_str ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_login()
+	 */
+	public function test_get_affiliate_login_with_invalid_affiliate_object_and_default_not_false_should_return_default() {
+		$this->assertSame( $this->rand_str, affwp_get_affiliate_login( new stdClass(), $this->rand_str ) );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_area_page_url()
 	 */
 	function test_get_affiliate_area_page_url_should_match_settings() {

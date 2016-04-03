@@ -83,7 +83,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		) );
 		$this->_affiliate_object_2 = affwp_get_affiliate( $this->_affiliate_id2 );
 
-		$this->rand_str = rand_str( 5, 10 );
+		$this->rand_str = rand_str( 5 );
 	}
 
 	/**

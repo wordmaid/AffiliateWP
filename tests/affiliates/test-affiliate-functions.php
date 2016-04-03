@@ -64,6 +64,14 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	protected $rand_str = '';
 
 	/**
+	 * Random valid email string.
+	 *
+	 * @access protected
+	 * @var string
+	 */
+	protected $rand_email = '';
+
+	/**
 	 * Set up.
 	 */
 	function setUp() {
@@ -84,6 +92,8 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$this->_affiliate_object_2 = affwp_get_affiliate( $this->_affiliate_id2 );
 
 		$this->rand_str = rand_str( 5 );
+
+		$this->rand_email = $this->generate_email();
 	}
 
 	/**
@@ -775,5 +785,18 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 */
 	function test_get_affiliate_area_page_url_with_empty_tab_should_return_page_url() {
 		$this->assertSame( affwp_get_affiliate_area_page_url(), affwp_get_affiliate_area_page_url( '' ) );
+	}
+
+	/**
+	 * Utility method to generate an email address.
+	 *
+	 * @since 1.8
+	 */
+	public function generate_email() {
+		$first_part = rand_str( 5 );
+		$domain     = rand_str( 5 );
+		$tld        = rand_str( 3 );
+
+		return "{$first_part}@{$domain}.{$tld}";
 	}
 }

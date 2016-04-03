@@ -367,14 +367,14 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_get_affiliate_rate_type()
 	 */
-	public function test_get_affiliate_rate_type_default_should_be_percentage() {
+	public function test_get_affiliate_rate_type_default_should_be_percentage_type() {
 		$this->assertSame( 'percentage', affwp_get_affiliate_rate_type( $this->_affiliate_id ) );
 	}
 
 	/**
 	 * @covers affwp_get_affiliate_rate_type()
 	 */
-	public function test_get_affiliate_rate_type_filtered_should_not_match_default_percentage() {
+	public function test_get_affiliate_rate_type_filtered_should_not_match_default_percentage_type() {
 		add_filter( 'affwp_get_affiliate_rate_type', function() {
 			return 'flat';
 		} );

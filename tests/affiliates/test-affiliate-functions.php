@@ -332,7 +332,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_affiliate_has_custom_rate()
 	 */
 	public function test_affiliate_has_custom_rate_passed_an_invalid_affiliate_id_should_always_return_false() {
-		$this->assertFalse( affwp_affiliate_has_custom_rate( rand( 3000, 5000 ) ) );
+		$this->assertFalse( affwp_affiliate_has_custom_rate() );
 	}
 
 	/**

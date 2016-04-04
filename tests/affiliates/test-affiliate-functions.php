@@ -479,32 +479,6 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_increase_affiliate_earnings()
-	 */
-	public function test_increase_affiliate_earnings_should_increase_earnings() {
-		$current = affwp_get_affiliate_earnings( $this->_affiliate_id );
-
-		// Increase.
-		affwp_increase_affiliate_earnings( $this->_affiliate_id, '10' );
-		$this->assertEquals( $current + 10, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
-	}
-
-	/**
-	 * @covers affwp_decrease_affiliate_earnings()
-	 */
-	public function test_decrease_affiliate_earnings_should_decrease_earnings() {
-		$current = affwp_get_affiliate_earnings( $this->_affiliate_id );
-
-		// Increase temporarily.
-		affwp_increase_affiliate_earnings( $this->_affiliate_id, '10' );
-
-		// Decrease.
-		affwp_decrease_affiliate_earnings( $this->_affiliate_id, '10' );
-
-		$this->assertEquals( $current, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
-	}
-
-	/**
 	 * @covers affwp_get_affiliate_referral_count()
 	 */
 	function test_get_affiliate_referral_count() {
@@ -1047,6 +1021,32 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		) );
 
 		$this->assertSame( '&#36;150', affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id, $formatted = true ) );
+	}
+
+	/**
+	 * @covers affwp_increase_affiliate_earnings()
+	 */
+	public function test_increase_affiliate_earnings_should_increase_earnings() {
+		$current = affwp_get_affiliate_earnings( $this->_affiliate_id );
+
+		// Increase.
+		affwp_increase_affiliate_earnings( $this->_affiliate_id, '10' );
+		$this->assertEquals( $current + 10, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_decrease_affiliate_earnings()
+	 */
+	public function test_decrease_affiliate_earnings_should_decrease_earnings() {
+		$current = affwp_get_affiliate_earnings( $this->_affiliate_id );
+
+		// Increase temporarily.
+		affwp_increase_affiliate_earnings( $this->_affiliate_id, '10' );
+
+		// Decrease.
+		affwp_decrease_affiliate_earnings( $this->_affiliate_id, '10' );
+
+		$this->assertEquals( $current, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
 	}
 
 	/**

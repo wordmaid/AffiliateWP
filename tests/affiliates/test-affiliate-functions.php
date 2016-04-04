@@ -361,7 +361,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 */
 	public function test_get_affiliate_rate_type_custom_rate_type_should_not_match_default_percentage_type() {
 		add_filter( 'affwp_get_affiliate_rate_types', function( $types ) {
-			$types[ 'foobar' ] = '';
+			$types['foobar'] = '';
 			return $types;
 		} );
 
@@ -371,7 +371,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 			'rate'         => 'whatever'
 		) );
 
-		$this->assertSame( $this->rand_str, affwp_get_affiliate_rate_type( $this->_affiliate_id ) );
+		$this->assertSame( 'foobar', affwp_get_affiliate_rate_type( $this->_affiliate_id ) );
 		$this->assertNotSame( 'percentage', affwp_get_affiliate_rate_type( $this->_affiliate_id ) );
 
 		// Clean up to prevent polluting other tests.

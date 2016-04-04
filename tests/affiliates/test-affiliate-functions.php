@@ -996,6 +996,60 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_get_affiliate_unpaid_earnings()
+	 */
+	public function test_get_affiliate_unpaid_earnings_with_invalid_affiliate_id_should_return_zero() {
+		$this->assertEquals( 0, affwp_get_affiliate_unpaid_earnings( null ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_unpaid_earnings()
+	 */
+	public function test_get_affiliate_unpaid_earnings_with_valid_affiliate_id_should_return_unpaid_earnings() {
+		$this->add_many_referrals( 3, array(
+			'affiliate_id' => $this->_affiliate_id,
+			'amount'       => '1000',
+			'status'       => 'unpaid'
+		) );
+
+		$this->assertSame( 3000.0, affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_unpaid_earnings()
+	 */
+	public function test_get_affiliate_unpaid_earnings_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_unpaid_earnings( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_unpaid_earnings()
+	 */
+	public function test_get_affiliate_unpaid_earnings_with_valid_affiliate_object_should_return_unpaid_earnings() {
+		$this->add_many_referrals( 2, array(
+			'affiliate_id' => $this->_affiliate_id,
+			'amount'       => '2000',
+			'status'       => 'unpaid'
+		) );
+
+		$affiliate = affwp_get_affiliate( $this->_affiliate_id );
+		$this->assertSame( 4000.0, affwp_get_affiliate_unpaid_earnings( $affiliate ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_unpaid_earnings()
+	 */
+	public function test_get_affiliate_unpaid_earnings_formatted_true_should_return_formatted_unpaid_earnings() {
+		$this->add_many_referrals( 3, array(
+			'affiliate_id' => $this->_affiliate_id,
+			'amount'       => '50',
+			'status'       => 'unpaid'
+		) );
+
+		$this->assertSame( '&#36;150', affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id, $formatted = true ) );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_area_page_url()
 	 */
 	function test_get_affiliate_area_page_url_should_match_settings() {
@@ -1040,5 +1094,21 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$tld        = rand_str( 3 );
 
 		return "{$first_part}@{$domain}.{$tld}";
+	}
+
+	/**
+	 * Utility method to add multiple referrals at once.
+	 *
+	 * @since 1.8
+	 *
+	 * @param int|stdClass $affiliate Affiliate ID or object.
+	 * @param int          $number    Optional. Number of referrals to create. Default 1.
+	 * @param array        $args      Optional. Arguments for adding referrals. See affwp_add_referral().
+	 *                                Default empty array.
+	 */
+	public function add_many_referrals( $number = 1, $args = array() ) {
+		for ( $i = 1; $i <= $number; $i++ ) {
+			affwp_add_referral( $args );
+		}
 	}
 }

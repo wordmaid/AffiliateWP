@@ -1230,4 +1230,5 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 			affwp_add_referral( $args );
 		}
 	}
+
 }

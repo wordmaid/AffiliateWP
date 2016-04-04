@@ -1102,6 +1102,13 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_decrease_affiliate_visit_count()
 	 */
+	public function test_decrease_affiliate_visit_count_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_decrease_affiliate_visit_count() );
+	}
+
+	/**
+	 * @covers affwp_decrease_affiliate_visit_count()
+	 */
 	public function test_decrease_affiliate_visit_count_should_decrease_count() {
 		$current = affwp_get_affiliate_visit_count( $this->_affiliate_id );
 

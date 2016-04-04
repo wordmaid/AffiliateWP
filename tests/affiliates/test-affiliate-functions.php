@@ -1221,7 +1221,6 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 *
 	 * @since 1.8
 	 *
-	 * @param int|stdClass $affiliate Affiliate ID or object.
 	 * @param int          $number    Optional. Number of referrals to create. Default 1.
 	 * @param array        $args      Optional. Arguments for adding referrals. See affwp_add_referral().
 	 *                                Default empty array.

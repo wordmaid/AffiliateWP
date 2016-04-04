@@ -1111,6 +1111,13 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_get_affiliate_campaigns()
 	 */
+	public function test_get_affiliate_campaigns_with_valid_affiliate_id_should_return_campaigns() {
+
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_campaigns()
+	 */
 	public function test_get_affiliate_campaigns_with_invalid_affiliate_object_should_return_false() {
 		$this->assertFalse( affwp_get_affiliate_campaigns( new stdClass() ) );
 	}

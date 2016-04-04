@@ -869,6 +869,84 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_delete_affiliate()
+	 */
+	public function test_delete_affiliate_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_delete_affiliate( null ) );
+	}
+
+	/**
+	 * @covers affwp_delete_affiliate()
+	 */
+	public function test_delete_affiliate_with_valid_affiliate_id_should_return_true() {
+		$this->assertTrue( affwp_delete_affiliate( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_delete_affiliate()
+	 */
+	public function test_delete_affiliate_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_delete_affiliate( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_delete_affiliate()
+	 */
+	public function test_delete_affiliate_with_valid_affiliate_object_should_return_true() {
+		$this->assertTrue( affwp_delete_affiliate( $this->_affiliate_object ) );
+	}
+
+	/**
+	 * @covers affwp_delete_affiliate()
+	 */
+	public function test_delete_affiliate_with_delete_data_true_should_delete_referrals() {
+		affwp_increase_affiliate_referral_count( $this->_affiliate_id );
+		affwp_increase_affiliate_referral_count( $this->_affiliate_id );
+
+		$this->assertEquals( 2, affwp_get_affiliate_referral_count( $this->_affiliate_id ) );
+
+		affwp_delete_affiliate( $this->_affiliate_id, $delete_data = true );
+
+		$referrals = affiliate_wp()->referrals->get_referrals( array(
+			'affiliate_id' => $this->_affiliate_id,
+			'number'       => -1
+		) );
+
+		$this->assertEmpty( $referrals );
+	}
+
+	/**
+	 * @covers affwp_delete_affiliate()
+	 */
+	public function test_delete_affiliate_with_delete_data_true_should_delete_visits() {
+		affwp_increase_affiliate_visit_count( $this->_affiliate_id );
+		affwp_increase_affiliate_visit_count( $this->_affiliate_id );
+
+		$this->assertEquals( 2, affwp_get_affiliate_visit_count( $this->_affiliate_id ) );
+
+		affwp_delete_affiliate( $this->_affiliate_id, $delete_data = true );
+
+		$visits = affiliate_wp()->visits->get_visits( array(
+			'affiliate_id' => $this->_affiliate_id,
+			'number'       => -1
+		) );
+
+		$this->assertEmpty( $visits );
+	}
+
+	/**
+	 * @covers affwp_delete_affiliate()
+	 */
+	public function test_delete_affiliate_with_delete_data_true_should_delete_meta() {
+		$user_id = affwp_get_affiliate_user_id( $this->_affiliate_id );
+
+		affwp_delete_affiliate( $this->_affiliate_id );
+
+		$this->assertEmpty( get_user_meta( $user_id, 'affwp_referral_notifications' ) );
+		$this->assertEmpty( get_user_meta( $user_id, 'affwp_promotion_method' ) );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_area_page_url()
 	 */
 	function test_get_affiliate_area_page_url_should_match_settings() {

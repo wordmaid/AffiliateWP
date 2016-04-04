@@ -1137,12 +1137,23 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_conversion_rate()
 	 * @todo Add test for rounding
 	 */
-	function test_get_affiliate_conversion_rate() {
+	public function test_get_affiliate_conversion_rate() {
 		$this->assertEquals( '0%', affwp_get_affiliate_conversion_rate( $this->_affiliate_id ) );
 	}
 
+	/**
+	 * @covers affwp_get_affiliate_campaigns()
+	 */
+	public function test_get_affiliate_campaigns_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_campaigns( null ) );
+	}
 
-
+	/**
+	 * @covers affwp_get_affiliate_campaigns()
+	 */
+	public function test_get_affiliate_campaigns_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_campaigns( new stdClass() ) );
+	}
 
 	/**
 	 * @covers affwp_get_affiliate_area_page_url()

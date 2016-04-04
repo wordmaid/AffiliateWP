@@ -453,12 +453,11 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$page_id_from_settings = affiliate_wp()->settings->get( 'affiliates_page' );
 
 		add_filter( 'affwp_affiliate_area_page_id', function() {
-			return rand( 1, 100 );
+			return 100000;
 		} );
 
 		$page_id_from_helper = affwp_get_affiliate_area_page_id();
 
-		$this->markTestIncomplete( 'Fails occasionally. My guess is pollution from another test.' );
 		$this->assertNotSame( $page_id_from_settings, $page_id_from_helper );
 
 		// Clean up to prevent polluting other tests.

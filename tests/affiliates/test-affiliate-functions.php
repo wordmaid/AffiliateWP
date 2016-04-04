@@ -361,13 +361,13 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 */
 	public function test_get_affiliate_rate_type_custom_rate_type_should_not_match_default_percentage_type() {
 		add_filter( 'affwp_get_affiliate_rate_types', function( $types ) {
-			$types[ $this->rand_str ] = '';
+			$types[ 'foobar' ] = '';
 			return $types;
 		} );
 
 		affwp_update_affiliate( array(
 			'affiliate_id' => $this->_affiliate_id,
-			'rate_type'    => $this->rand_str,
+			'rate_type'    => 'foobar',
 			'rate'         => 'whatever'
 		) );
 

@@ -226,46 +226,6 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers Affiliate_WP_DB_Affiliates::add()
-	 */
-	function test_add_affiliate() {
-
-		$args = array(
-			'user_id'  => $this->_user_id
-		);
-
-		$affiliate_id = affiliate_wp()->affiliates->add( $args );
-
-		$this->assertFalse( $affiliate_id );
-
-		$args = array(
-			'user_id'  => 2
-		);
-
-		$this->_affiliate_id2 = affiliate_wp()->affiliates->add( $args );
-
-		$this->assertGreaterThan( 0, $this->_affiliate_id2 );
-
-	}
-
-	/**
-	 * @covers affwp_update_affiliate()
-	 */
-	function test_update_affiliate() {
-
-		$args = array(
-			'affiliate_id'   => $this->_affiliate_id,
-			'rate'           => '20',
-			'account_email'  => $this->rand_email
-		);
-
-		$updated = affwp_update_affiliate( $args );
-
-		$this->assertTrue( $updated );
-
-	}
-
-	/**
 	 * @covers affwp_delete_affiliate()
 	 */
 	function test_delete_affiliate() {
@@ -1153,6 +1113,53 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 */
 	public function test_get_affiliate_campaigns_with_invalid_affiliate_object_should_return_false() {
 		$this->assertFalse( affwp_get_affiliate_campaigns( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_campaigns()
+	 */
+	public function test_get_affiliate_campaigns_with_valid_affiliate_object_should_return_campaigns() {
+
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::add()
+	 */
+	function test_add_affiliate() {
+
+		$args = array(
+			'user_id'  => $this->_user_id
+		);
+
+		$affiliate_id = affiliate_wp()->affiliates->add( $args );
+
+		$this->assertFalse( $affiliate_id );
+
+		$args = array(
+			'user_id'  => 2
+		);
+
+		$this->_affiliate_id2 = affiliate_wp()->affiliates->add( $args );
+
+		$this->assertGreaterThan( 0, $this->_affiliate_id2 );
+
+	}
+
+	/**
+	 * @covers affwp_update_affiliate()
+	 */
+	function test_update_affiliate() {
+
+		$args = array(
+			'affiliate_id'   => $this->_affiliate_id,
+			'rate'           => '20',
+			'account_email'  => $this->rand_email
+		);
+
+		$updated = affwp_update_affiliate( $args );
+
+		$this->assertTrue( $updated );
+
 	}
 
 	/**

@@ -1059,6 +1059,20 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_get_affiliate_visit_count()
 	 */
+	public function test_get_affiliate_visit_count_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_visit_count() );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_visit_count()
+	 */
+	public function test_get_affiliate_visit_count_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_visit_count( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_visit_count()
+	 */
 	function test_get_affiliate_visit_count() {
 		$this->assertEquals( 0, affwp_get_affiliate_visit_count( $this->_affiliate_id ) );
 	}

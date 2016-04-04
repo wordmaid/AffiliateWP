@@ -1053,7 +1053,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_visit_count()
 	 */
 	public function test_get_affiliate_visit_count_with_invalid_affiliate_id_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_visit_count() );
+		$this->assertFalse( affwp_get_affiliate_visit_count( null ) );
 	}
 
 	/**

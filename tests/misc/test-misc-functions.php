@@ -32,7 +32,7 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 			'thousands_separator' => ','
 		) );
 
-		add_filter( 'affwp_format_amount', function( $formatted, $amount ) use ( $this ) {
+		add_filter( 'affwp_format_amount', function( $formatted, $amount ) use ( &$this ) {
 			$this->amount = $amount;
 			return $formatted;
 		}, 10, 2 );

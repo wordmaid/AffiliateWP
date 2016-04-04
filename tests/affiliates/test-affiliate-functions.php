@@ -1026,6 +1026,20 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_increase_affiliate_earnings()
 	 */
+	public function test_increase_affiliate_earnings_with_empty_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_increase_affiliate_earnings() );
+	}
+
+	/**
+	 * @covers affwp_increase_affiliate_earnings()
+	 */
+	public function test_increase_affiliate_earnings_with_empty_affiliate_id_and_amount_should_return_false() {
+
+	}
+
+	/**
+	 * @covers affwp_increase_affiliate_earnings()
+	 */
 	public function test_increase_affiliate_earnings_should_increase_earnings() {
 		$current = affwp_get_affiliate_earnings( $this->_affiliate_id );
 

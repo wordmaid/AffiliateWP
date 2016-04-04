@@ -947,6 +947,55 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_get_affiliate_earnings()
+	 */
+	public function test_get_affiliate_earnings_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_earnings( null ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_earnings()
+	 */
+	public function test_get_affiliate_earnings_with_valid_affiliate_id_should_return_earnings() {
+		$amount = '1000';
+		affwp_increase_affiliate_earnings( $this->_affiliate_id, $amount );
+
+		$this->assertEquals( $amount, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_earnings()
+	 */
+	public function test_get_affiliate_earnings_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_earnings( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_earnings()
+	 */
+	public function test_get_affiliate_earnings_with_valid_affiliate_object_should_return_earnings() {
+		$amount = '1000';
+		affwp_increase_affiliate_earnings( $this->_affiliate_id, $amount );
+
+		$this->assertEquals( $amount, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_earnings()
+	 */
+	public function test_get_affiliate_earnings_empty_earnings_should_return_zero() {
+		$this->assertEquals( 0, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_earnings()
+	 */
+	public function test_get_affiliate_earnings_formatted_true_should_return_formatted_earnings() {
+		affwp_increase_affiliate_earnings( $this->_affiliate_id, '1000' );
+		$this->assertEquals( '&#36;1000', affwp_get_affiliate_earnings( $this->_affiliate_id, $formatted = true ) );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_area_page_url()
 	 */
 	function test_get_affiliate_area_page_url_should_match_settings() {

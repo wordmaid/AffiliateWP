@@ -28,6 +28,7 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_format_amount()
 	 */
 	public function test_format_amount_floatval_remains_floatval_with_comma_thousands_seperator() {
+		$this->markTestSkipped( 'Lexical variable errors.' );
 		affiliate_wp()->settings->set( array(
 			'thousands_separator' => ','
 		) );

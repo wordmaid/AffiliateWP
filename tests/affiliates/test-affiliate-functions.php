@@ -1192,7 +1192,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_area_page_url()
 	 */
 	function test_get_affiliate_area_page_url_with_invalid_tab_should_return_page_url() {
-		$this->assertSame( affwp_get_affiliate_area_page_url(), affwp_get_affiliate_area_page_url( rand_str( 1, 10 ) ) );
+		$this->assertSame( affwp_get_affiliate_area_page_url(), affwp_get_affiliate_area_page_url( rand_str( 10 ) ) );
 	}
 
 	/**

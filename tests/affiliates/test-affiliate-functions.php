@@ -481,11 +481,11 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 */
 	public function test_get_affiliate_rate_types_filtered_should_differ_from_defaults() {
 		add_filter( 'affwp_get_affiliate_rate_types', function( $types ) {
-			$types[ $this->rand_str ] = '';
+			$types[ 'foobar' ] = '';
 			return $types;
 		} );
 
-		$this->assertArrayHasKey( $this->rand_str, affwp_get_affiliate_rate_types() );
+		$this->assertArrayHasKey( 'foobar', affwp_get_affiliate_rate_types() );
 
 		// Clean up to prevent polluting other tests.
 		remove_all_filters( 'affwp_get_affiliate_rate_types' );

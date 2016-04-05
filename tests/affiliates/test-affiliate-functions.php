@@ -1274,11 +1274,18 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_base_url()
 	 */
 	public function test_get_affiliate_base_url_with_non_empty_default_setting_should_return_the_default() {
+		$original = affiliate_wp()->settings->get( 'default_referral_url' );
+
 		affiliate_wp()->settings->set( array(
 			'default_referral_url' => 'https://affiliatewp.com'
 		) );
 
 		$this->assertSame( 'https://affiliatewp.com', affwp_get_affiliate_base_url() );
+
+		// Clean up.
+		affiliate_wp()->settings->set( array(
+			'default_referral_url' => $original
+		) );
 	}
 
 	/**
@@ -1303,6 +1310,8 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_base_url()
 	 */
 	public function test_get_affiliate_base_url_with_GET_url_value_and_non_empty_default_should_return_the_default() {
+		$original = affiliate_wp()->settings->get( 'default_referral_url' );
+
 		$_GET['url'] = 'https://edd.com';
 
 		affiliate_wp()->settings->set( array(
@@ -1311,6 +1320,11 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 
 		$this->assertNotSame( 'https://edd.com', affwp_get_affiliate_base_url() );
 		$this->assertSame( 'https://affiliatewp.com', affwp_get_affiliate_base_url() );
+
+		// Clean up.
+		affiliate_wp()->settings->set( array(
+			'default_referral_url' => $original
+		) );
 	}
 
 	/**

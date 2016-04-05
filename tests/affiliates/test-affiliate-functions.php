@@ -1256,6 +1256,70 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_get_affiliate_referral_url()
+	 */
+	public function test_get_affiliate_referral_url_with_no_arguments_should_return_trailingslashed_home_url() {
+		$this->assertSame( home_url( '/' ), affwp_get_affiliate_referral_url() );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_referral_url()
+	 */
+	public function test_get_affiliate_referral_() {
+
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_base_url()
+	 */
+	public function test_get_affiliate_base_url_no_default_setting_should_return_trailingslashed_home_url() {
+		$this->assertSame( home_url( '/' ), affwp_get_affiliate_base_url() );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_base_url()
+	 */
+	public function test_get_affiliate_base_url_with_non_empty_default_setting_should_return_the_default() {
+		affiliate_wp()->settings->set( array(
+			'default_referral_url' => 'https://affiliatewp.com'
+		) );
+
+		$this->assertSame( 'https://affiliatewp.com', affwp_get_affiliate_base_url() );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_base_url()
+	 */
+	public function test_get_affiliate_base_url_with_empty_GET_url_and_no_default_should_return_trailingslashed_home_url() {
+		$_GET['url'] = '';
+
+		$this->assertSame( home_url( '/' ), affwp_get_affiliate_base_url() );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_base_url()
+	 */
+	public function test_get_affiliate_base_url_with_GET_url_and_no_default_should_return_its_value() {
+		$_GET['url'] = 'https://affiliatewp.com';
+
+		$this->assertSame( 'https://affiliatewp.com', affwp_get_affiliate_base_url() );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_base_url()
+	 */
+	public function test_get_affiliate_base_url_with_GET_url_value_and_non_empty_default_should_return_the_default() {
+		$_GET['url'] = 'https://edd.com';
+
+		affiliate_wp()->settings->set( array(
+			'default_referral_url' => 'https://affiliatewp.com'
+		) );
+
+		$this->assertNotSame( 'https://edd.com', affwp_get_affiliate_base_url() );
+		$this->assertSame( 'https://affiliatewp.com', affwp_get_affiliate_base_url() );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_area_page_url()
 	 */
 	function test_get_affiliate_area_page_url_should_match_settings() {

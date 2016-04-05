@@ -1257,16 +1257,10 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 
 	/**
 	 * @covers affwp_get_affiliate_referral_url()
+	 * @todo Add separate tests for parameter combinations
 	 */
 	public function test_get_affiliate_referral_url_with_no_arguments_should_return_trailingslashed_home_url() {
 		$this->assertSame( home_url( '/' ), affwp_get_affiliate_referral_url() );
-	}
-
-	/**
-	 * @covers affwp_get_affiliate_referral_url()
-	 */
-	public function test_get_affiliate_referral_() {
-
 	}
 
 	/**

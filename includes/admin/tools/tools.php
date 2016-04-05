@@ -31,7 +31,7 @@ require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-export-
  */
 function affwp_tools_admin() {
 
-	$active_tab = isset( $_GET[ 'tab' ] ) && array_key_exists( $_GET['tab'], affwp_get_tools_tabs() ) ? $_GET[ 'tab' ] : 'export_import';
+	$active_tab = affwp_get_current_tools_tab();
 
 	ob_start();
 	?>
@@ -81,6 +81,30 @@ function affwp_get_tools_tabs() {
 	}
 
 	return apply_filters( 'affwp_tools_tabs', $tabs );
+}
+
+/**
+ * Retrieves the current Tools tab.
+ *
+ * @since 1.8
+ *
+ * @return string Current Tools tab if present in the URL, 'export_import' otherwise.
+ */
+function affwp_get_current_tools_tab() {
+	if ( isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], affwp_get_tools_tabs() ) ) {
+		$active_tab = sanitize_text_field( $_GET['tab'] );
+	} else {
+		$active_tab = 'export_import';
+	}
+
+	/**
+	 * Filter the current Tools tab.
+	 *
+	 * @since 1.8
+	 *
+	 * @param string $active_tab Current Tools tab ID.
+	 */
+	return apply_filters( 'affwp_current_tools_tab', $active_tab );
 }
 
 /**

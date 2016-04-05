@@ -27,7 +27,7 @@ class Afilliate_Settings_Tests extends WP_UnitTestCase {
 	 * @covers Affiliate_WP_Settings::set()
 	 */
 	public function test_set_method_should_update_options_property_in_memory_only() {
-		$affiliates_area = rand( 1, 200 );
+		$affiliates_area = 100000;
 		$this->settings->set( array(
 			'affiliates_page' => $affiliates_area
 		) );

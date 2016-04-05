@@ -38,9 +38,11 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 
 			$this->step_forward( $step, 'affiliates' );
 
-		}
+		} else {
 
-		$this->finish();
+			$this->finish();
+
+		}
 
 	}
 
@@ -58,10 +60,11 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 
 		$redirect = add_query_arg(
 			array(
-				'page' => 'affiliate-wp-migrate',
-				'type' => 'users',
-				'part' => $part,
-				'step' => $step
+				'page'  => 'affiliate-wp-migrate',
+				'type'  => 'users',
+				'part'  => $part,
+				'step'  => $step,
+				'roles' => implode( ',', array_map( 'sanitize_text_field', $this->roles ) )
 			),
 			admin_url( 'index.php' )
 		);
@@ -85,31 +88,25 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 			return false;
 		}
 
-		$users = new WP_User_Query(
-			array(
-				'number'     => 100,
-				'offset'     => ( $step - 1 ) * 100,
-				'orderby'    => 'ID',
-				'order'      => 'ASC',
-				'meta_query' => array(
-					array(
-						'key'     => 'wp_capabilities',
-						'value'   => sprintf( '"(%s)"', implode( '|', $this->roles ) ),
-						'compare' => 'REGEXP'
-					)
-				)
-			)
+		$args = array(
+			'number'     => 100,
+			'offset'     => ( $step - 1 ) * 100,
+			'orderby'    => 'ID',
+			'order'      => 'ASC',
+			'role__in'   => $this->roles
 		);
 
-		if ( empty( $users->results ) ) {
+		$users = get_users( $args );
+
+		if ( empty( $users ) ) {
 			return false;
 		}
 
 		$inserted = array();
 
-		foreach ( $users->results as $user ) {
+		foreach ( $users as $user ) {
 
-			$affiliate_exists = affiliate_wp()->affiliates->get_by( 'user_id', $user->ID );
+			$affiliate_exists = affiliate_wp()->affiliates->get_by( 'user_id', $user->data->ID );
 
 			if ( $affiliate_exists ) {
 				continue;
@@ -117,9 +114,9 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 
 			$args = array(
 				'status'          => 'active',
-				'user_id'         => $user->ID,
-				'payment_email'	  => $user->user_email,
-				'date_registered' => $user->user_registered
+				'user_id'         => $user->data->ID,
+				'payment_email'	  => $user->data->user_email,
+				'date_registered' => $user->data->user_registered
 			);
 
 			$inserted[] = affiliate_wp()->affiliates->insert( $args, 'affiliate' );

@@ -102,7 +102,9 @@ function affwp_is_active_affiliate( $affiliate_id = 0 ) {
  * Retrieves an affiliate's user ID
  *
  * @since 1.0
- * @return bool
+ *
+ * @param int|stdClass $affiliate Affiliate ID or object.
+ * @return int|false Affiliate user ID, otherwise false.
  */
 function affwp_get_affiliate_user_id( $affiliate ) {
 
@@ -116,7 +118,9 @@ function affwp_get_affiliate_user_id( $affiliate ) {
  * Retrieves the affiliate object
  *
  * @since 1.0
- * @return object
+ *
+ * @param int|stdClass $affiliate Affiliate ID or object.
+ * @return stdClass|false Affiliate object if found, otherwise false.
  */
 function affwp_get_affiliate( $affiliate ) {
 
@@ -790,6 +794,22 @@ function affwp_get_affiliate_campaigns( $affiliate ) {
  * Adds a new affiliate to the database
  *
  * @since 1.0
+ *
+ * @see Affiliate_WP_DB_Affiliates::add()
+ *
+ * @param array $data {
+ *     Optional. Array of arguments for adding a new affiliate. Default empty array.
+ *
+ *     @type string $status          Affiliate status. Default 'active'.
+ *     @type string $date_registered Date the affiliate was registered. Default is the current time.
+ *     @type string $rate            Affiliate-specific referral rate.
+ *     @type string $rate_type       Rate type. Accepts 'percentage' or 'flat'.
+ *     @type string $payment_email   Affiliate payment email.
+ *     @type int    $earnings        Affiliate earnings. Default 0.
+ *     @type int    $referrals       Number of affiliate referrals.
+ *     @type int    $visits          Number of visits.
+ *     @type int    $user_id         User ID used to correspond to the affiliate.
+ * }
  * @return bool
  */
 function affwp_add_affiliate( $data = array() ) {
@@ -940,12 +960,25 @@ function affwp_update_profile_settings( $data = array() ) {
 }
 
 /**
- * Builds an affiliate's referral URL
+ * Builds an affiliate's referral URL.
+ *
  * Used by creatives, referral URL generator and [affiliate_referral_url] shortcode
  *
- * @since  1.6
- * @return string
- * @param  $args array of arguments. $base_url, $format, $pretty
+ * @since 1.6
+ *
+ * @param array $args {
+ *     Optional. Array of arguments for building an affiliate referral URL. Default empty array.
+ *
+ *     @type int          $affiliate_id Affiliate ID. Default is the current user's affiliate ID.
+ *     @type string|false $pretty       Whether to build a pretty referral URL. Accepts 'yes' or 'no'. False
+ *                                      disables pretty URLs. Default empty, see affwp_is_pretty_referral_urls().
+ *     @type string       $format       Referral format. Accepts 'id' or 'username'. Default empty,
+ *                                      see affwp_get_referral_format().
+ *     @type string       $base_url     Base URL to use for building a referral URL. If specified, should contain
+ *                                      'query' and 'fragment' query vars. 'scheme', 'host', and 'path' query vars
+ *                                      can also be passed as part of the base URL. Default empty.
+ * }
+ * @return string Trailing-slashed value of home_url() when `$args` is empty, built referral URL otherwise.
  */
 function affwp_get_affiliate_referral_url( $args = array() ) {
 
@@ -1077,7 +1110,7 @@ function affwp_get_affiliate_area_page_url( $tab = '' ) {
 	if ( ! empty( $tab )
 		&& in_array( $tab, array( 'urls', 'stats', 'graphs', 'referrals', 'visits', 'creatives', 'settings' ) )
 	) {
-		$affiliate_area_page_url = add_query_arg( 'tab', $tab, $affiliate_area_page_url );
+		$affiliate_area_page_url = add_query_arg( array( 'tab' => $tab ), $affiliate_area_page_url );
 	}
 
 	/**

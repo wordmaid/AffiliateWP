@@ -116,7 +116,7 @@ function affwp_sanitize_amount( $amount ) {
 		$amount = str_replace( $thousands_sep, '', $amount );
 	}
 
-	$decimals = apply_filters( 'affwp_sanitize_amount_decimals', 2, $amount );
+	$decimals = apply_filters( 'affwp_sanitize_amount_decimals', affwp_get_decimal_count(), $amount );
 	$amount   = number_format( floatval( $amount ), absint( $decimals ), '.', '' );
 
 	return apply_filters( 'affwp_sanitize_amount', $amount );
@@ -139,7 +139,7 @@ function affwp_format_amount( $amount, $decimals = true ) {
 	$decimal_sep   = affiliate_wp()->settings->get( 'decimal_separator', '.' );
 
 	// Format the amount
-	if ( $decimal_sep == ',' && false !== ( $found = strpos( $amount, $decimal_sep ) ) ) {
+	if ( $decimal_sep == ',' && false !== ( $sep_found = strpos( $amount, $decimal_sep ) ) ) {
 		$whole = substr( $amount, 0, $sep_found );
 		$part = substr( $amount, $sep_found + 1, ( strlen( $amount ) - 1 ) );
 		$amount = $whole . '.' . $part;
@@ -147,19 +147,33 @@ function affwp_format_amount( $amount, $decimals = true ) {
 
 	// Strip , from the amount (if set as the thousands separator)
 	if ( $thousands_sep == ',' && false !== ( $found = strpos( $amount, $thousands_sep ) ) ) {
-		$amount = str_replace( ',', '', $amount );
+		$amount = floatval( str_replace( ',', '', $amount ) );
 	}
 
 	if ( empty( $amount ) ) {
 		$amount = 0;
 	}
 
-	$decimals  = apply_filters( 'affwp_format_amount_decimals', $decimals ? 2 : 0, $amount );
+	if( $decimals ) {
+		$decimals = apply_filters( 'affwp_format_amount_decimals', affwp_get_decimal_count(), $amount );
+	} else {
+		$decimals = 0;
+	}
+
 	$formatted = number_format( $amount, $decimals, $decimal_sep, $thousands_sep );
 
 	return apply_filters( 'affwp_format_amount', $formatted, $amount, $decimals, $decimal_sep, $thousands_sep );
 }
 
+/**
+ * Retrieves the number of decimals to round to
+ *
+ * @since 1.8
+ * @return int Number of decimal places
+ */
+function affwp_get_decimal_count() {
+	return apply_filters( 'affwp_decimal_count', 2 );
+}
 
 /**
  * Formats the currency display
@@ -279,9 +293,7 @@ function affwp_currency_decimal_filter( $decimals = 2 ) {
 
 	return $decimals;
 }
-add_filter( 'affwp_sanitize_amount_decimals', 'affwp_currency_decimal_filter' );
-add_filter( 'affwp_format_amount_decimals', 'affwp_currency_decimal_filter' );
-
+add_filter( 'affwp_decimal_count', 'affwp_currency_decimal_filter' );
 
 /**
  * Convert an object to an associative array.
@@ -373,7 +385,7 @@ function affwp_get_referral_format_value( $format = '', $affiliate_id = 0 ) {
 
 	}
 
-	return $value;
+	return apply_filters( 'affwp_get_referral_format_value', $value, $format, $affiliate_id );
 }
 
 /**

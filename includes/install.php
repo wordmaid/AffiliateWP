@@ -35,10 +35,10 @@ function affiliate_wp_install() {
 			)
 		);
 
-		$options = $affiliate_wp_install->settings->get_all();
-		$options['affiliates_page'] = $affiliate_area;
-		update_option( 'affwp_settings', $options );
-
+		// Update settings.
+		affiliate_wp()->settings->set( array(
+			'affiliates_page' => $affiliate_area
+		), $save = true );
 	}
 
 	// 3 equals unchecked
@@ -55,7 +55,7 @@ function affiliate_wp_install() {
 	}
 
 	// Add the transient to redirect
-	set_transient( '_affwp_activation_redirect', true, 30 );
+	set_transient( '_affwp_activation_redirect', true, MINUTE_IN_SECONDS / 2 );
 
 }
 register_activation_hook( AFFILIATEWP_PLUGIN_FILE, 'affiliate_wp_install' );

@@ -21,6 +21,8 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 
 	public function add_pending_referral( $order ) {
 
+		global $wpdb;
+
 		$coupon_affiliate_id = false;
 
 		// Check if an affiliate coupon was used
@@ -43,12 +45,24 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 
 			if ( $user instanceof WP_User && $this->is_affiliate_email( $user->user_email, $affiliate_id ) ) {
 
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
+
 				return; // Customers cannot refer themselves
 			}
 
 			$referral_total = $this->calculate_referral_amount( $order->subtotal, $order->id, '', $affiliate_id );
 
-			$referral_id = $this->insert_pending_referral( $referral_total, $order->id, $order->membership_name, '', array( 'affiliate_id' => $affiliate_id ) );
+			if ( isset( $order->membership_name ) ) {
+				// paid membership level
+				$membership_name = $order->membership_name;
+			} else {
+				// free membership
+				$membership_name = $wpdb->get_var( $wpdb->prepare( "SELECT name FROM $wpdb->pmpro_membership_levels WHERE id = %d LIMIT 1", $order->membership_id ) );
+			}
+
+			$referral_id = $this->insert_pending_referral( $referral_total, $order->id, $membership_name, '', array( 'affiliate_id' => $affiliate_id ) );
 
 			if ( 'success' === strtolower( $order->status ) ) {
 

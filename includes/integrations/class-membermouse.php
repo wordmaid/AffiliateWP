@@ -20,10 +20,20 @@ class Affiliate_WP_Membermouse extends Affiliate_WP_Base {
 			$membership = new MM_MembershipLevel( $member_data['membership_level'] );
 
 			if( ! $membership->isFree() ) {
+				
+				if( $this->debug ) {
+					$this->log( 'Referral not created because membership is free.' );
+				}
+
 				return;
 			}
 
 			if ( $this->is_affiliate_email( $member_data['email'] ) ) {
+				
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
+
 				return; // Customers cannot refer themselves
 			}
 

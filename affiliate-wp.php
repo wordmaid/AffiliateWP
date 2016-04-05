@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: AffiliateWP
- * Plugin URI: http://affiliatewp.com
+ * Plugin URI: https://affiliatewp.com
  * Description: Affiliate Plugin for WordPress
  * Author: Pippin Williamson and Andrew Munro
- * Author URI: http://affiliatewp.com
- * Version: 1.7.14
+ * Author URI: https://affiliatewp.com
+ * Version: 1.7.16
  * Text Domain: affiliate-wp
  * Domain Path: languages
  *
@@ -24,7 +24,7 @@
  * @package AffiliateWP
  * @category Core
  * @author Pippin Williamson
- * @version 1.7.14
+ * @version 1.7.16
  */
 
 // Exit if accessed directly
@@ -51,7 +51,7 @@ final class Affiliate_WP {
 	 *
 	 * @since 1.0
 	 */
-	private $version = '1.7.14';
+	private $version = '1.7.16';
 
 	/**
 	 * The affiliates DB instance variable.
@@ -313,7 +313,8 @@ final class Affiliate_WP {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-welcome.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/plugins.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-migrate.php';
-
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/add-ons.php';
+			
 		}
 
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-shortcodes.php';
@@ -325,6 +326,7 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-visits-graph.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-integrations.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-login.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-referrals-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-register.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-templates.php';
@@ -390,7 +392,7 @@ final class Affiliate_WP {
 		$license_key = $this->settings->get( 'license_key' );
 
 		// setup the updater
-		$affwp_updater = new AFFWP_Plugin_Updater( 'http://affiliatewp.com', __FILE__, array(
+		$affwp_updater = new AFFWP_Plugin_Updater( 'https://affiliatewp.com', __FILE__, array(
 				'version' 	=> AFFILIATEWP_VERSION,
 				'license' 	=> $license_key,
 				'item_name' => 'AffiliateWP',

@@ -75,6 +75,11 @@ class Affiliate_WP_S2Member extends Affiliate_WP_Base {
 			$hash        = md5( $auth_key . home_url() . get_bloginfo( 'admin_email' ) . $secret_auth );
 
 			if( empty( $_REQUEST['secret'] ) || ! hash_equals( $hash, $_REQUEST['secret'] ) ) {
+
+				if( $this->debug ) {
+					$this->log( 's2Member hash invalid.' );
+				}
+
 				return;
 			}
 
@@ -122,6 +127,11 @@ class Affiliate_WP_S2Member extends Affiliate_WP_Base {
 			$hash        = md5( $auth_key . home_url() . get_bloginfo( 'admin_email' ) . $secret_auth );
 
 			if( empty( $_REQUEST['secret'] ) || ! hash_equals( $hash, $_REQUEST['secret'] ) ) {
+			
+				if( $this->debug ) {
+					$this->log( 's2Member hash invalid.' );
+				}
+
 				return;
 			}
 
@@ -155,6 +165,10 @@ class Affiliate_WP_S2Member extends Affiliate_WP_Base {
 			$customer_email = $user->user_email;
 
 			if ( $this->is_affiliate_email( $customer_email ) ) {
+
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
 
 				return; // Customers cannot refer themselves
 

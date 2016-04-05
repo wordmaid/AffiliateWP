@@ -1,9 +1,9 @@
 <?php
 
 //set_site_transient( 'update_plugins', null );
-	
+
 class AffWP_AddOn_Updater {
-	
+
 	private $api_url    = '';
 	private $api_data   = array();
 	private $addon_id   = '';
@@ -23,7 +23,7 @@ class AffWP_AddOn_Updater {
 	 * @return void
 	 */
 	function __construct( $_addon_id, $_plugin_file, $_version ) {
-		$this->api_url    = 'http://affiliatewp.com';
+		$this->api_url    = 'https://affiliatewp.com';
 		$this->addon_id  = $_addon_id;
 		$this->name       = plugin_basename( $_plugin_file );
 		$this->slug       = basename( $_plugin_file, '.php');
@@ -148,7 +148,7 @@ class AffWP_AddOn_Updater {
 
 				$version_info = $this->api_request( 'plugin_latest_version', array( 'slug' => $this->slug ) );
 
-				set_transient( $cache_key, $version_info, 3600 );
+				set_transient( $cache_key, $version_info, HOUR_IN_SECONDS );
 			}
 
 

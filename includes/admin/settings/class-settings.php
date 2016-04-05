@@ -22,6 +22,7 @@ class Affiliate_WP_Settings {
 		add_filter( 'affwp_settings_emails', array( $this, 'email_approval_settings' ) );
 		add_filter( 'affwp_settings_sanitize', array( $this, 'sanitize_referral_variable' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_text', array( $this, 'sanitize_text_fields' ), 10, 2 );
+		add_filter( 'affwp_settings_sanitize_url', array( $this, 'sanitize_url_fields' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_checkbox', array( $this, 'sanitize_cb_fields' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_number', array( $this, 'sanitize_number_fields' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_rich_editor', array( $this, 'sanitize_rich_editor_fields' ), 10, 2 );
@@ -63,6 +64,44 @@ class Affiliate_WP_Settings {
 
 		return $value;
 
+	}
+
+	/**
+	 * Sets an option (in memory).
+	 *
+	 * @since 1.8
+	 * @access public
+	 *
+	 * @param array $settings An array of `key => value` setting pairs to set.
+	 * @param bool  $save     Optional. Whether to trigger saving the option or options. Default false.
+	 * @return bool If `$save` is not false, whether the options were saved successfully. True otherwise.
+	 */
+	public function set( $settings, $save = false ) {
+		foreach ( $settings as $option => $value ) {
+			$this->options[ $option ] = $value;
+		}
+
+		if ( false !== $save ) {
+			return $this->save();
+		}
+
+		return true;
+	}
+
+	/**
+	 * Saves option values queued in memory.
+	 *
+	 * @since 1.8
+	 * @access protected
+	 *
+	 * @see Affiliate_WP_Settings::set()
+	 *
+	 * @return bool False if the options were not updated (saved) successfully, true otherwise.
+	 */
+	protected function save() {
+		$options = $this->get_all();
+
+		return update_option( 'affwp_settings', $options );
 	}
 
 	/**
@@ -251,6 +290,16 @@ class Affiliate_WP_Settings {
 	}
 
 	/**
+	 * Sanitize URL fields
+	 *
+	 * @since 1.7.15
+	 * @return string
+	*/
+	public function sanitize_url_fields( $value = '', $key = '' ) {
+		return sanitize_text_field( $value );
+	}
+
+	/**
 	 * Sanitize checkbox fields
 	 *
 	 * @since 1.7
@@ -303,7 +352,7 @@ class Affiliate_WP_Settings {
 					),
 					'license_key' => array(
 						'name' => __( 'License Key', 'affiliate-wp' ),
-						'desc' => sprintf( __( 'Please enter your license key. An active license key is needed for automatic plugin updates and <a href="%s" target="_blank">support</a>.', 'affiliate-wp' ), 'http://affiliatewp.com/support/' ),
+						'desc' => sprintf( __( 'Please enter your license key. An active license key is needed for automatic plugin updates and <a href="%s" target="_blank">support</a>.', 'affiliate-wp' ), 'https://affiliatewp.com/support/' ),
 						'type' => 'license',
 						'sanitize_callback' => 'sanitize_text_field'
 					),
@@ -341,9 +390,11 @@ class Affiliate_WP_Settings {
 						'name' => __( 'Default Referral Format', 'affiliate-wp' ),
 						'desc' => sprintf( __( 'Show referral URLs to affiliates with either their affiliate ID or Username appended.<br/> For example: <strong>%s or %s</strong>.', 'affiliate-wp' ), esc_url( add_query_arg( affiliate_wp()->tracking->get_referral_var(), '1', home_url( '/' ) ) ), esc_url( add_query_arg( affiliate_wp()->tracking->get_referral_var(), $username, home_url( '/' ) ) ) ),
 						'type' => 'select',
-						'options' => array(
-							'id'       => __( 'ID', 'affiliate-wp' ),
-							'username' => __( 'Username', 'affiliate-wp' ),
+						'options' => apply_filters( 'affwp_settings_referral_format',
+							array(
+								'id'       => __( 'ID', 'affiliate-wp' ),
+								'username' => __( 'Username', 'affiliate-wp' ),
+							)
 						),
 						'std' => 'id'
 					),
@@ -527,6 +578,11 @@ class Affiliate_WP_Settings {
 						'desc' => __( 'Automatically register new users as affiliates?', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
+					'default_referral_url' => array(
+						'name' => __( 'Default Referral URL', 'affiliate-wp' ),
+						'desc' => __( 'The default referral URL shown in the affiliate area. Also changes the URL shown in the referral URL generator and {referral_url} email tag.', 'affiliate-wp' ),
+						'type' => 'url'
+					),
 					'recaptcha_enabled' => array(
 						'name' => __( 'Enable reCAPTCHA', 'affiliate-wp' ),
 						'desc' => __( 'Would you like to prevent bots from registering affiliate accounts using Google reCAPTCHA?', 'affiliate-wp' ),
@@ -555,6 +611,11 @@ class Affiliate_WP_Settings {
 					'ignore_zero_referrals' => array(
 						'name' => __( 'Ignore Zero Referrals?', 'affiliate-wp' ),
 						'desc' => __( 'Check this box if you would like AffiliateWP to completely ignore referrals for a zero total amount. This can be useful for multi-price products that start at zero, or if a discount was used, which resulted in a zero amount. Please note: if this setting is enabled and a visit results in a zero referral, then the visit would be considered not converted.', 'affiliate-wp' ),
+						'type' => 'checkbox'
+					),
+					'debug_mode' => array(
+						'name' => __( 'Enable Debug Mode?', 'affiliate-wp' ),
+						'desc' => __( 'Check this box to enable debug mode. This will turn on error logging for the referral process to help identify problems.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'uninstall_on_delete' => array(
@@ -717,6 +778,30 @@ class Affiliate_WP_Settings {
 
 		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
 		$html = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+		$html .= '<p class="description">'  . $args['desc'] . '</p>';
+
+		echo $html;
+	}
+
+	/**
+	 * URL Callback
+	 *
+	 * Renders URL fields.
+	 *
+	 * @since 1.7.15
+	 * @param array $args Arguments passed by the setting
+	 * @global $this->options Array of all the AffiliateWP Options
+	 * @return void
+	 */
+	function url_callback( $args ) {
+
+		if ( isset( $this->options[ $args['id'] ] ) )
+			$value = $this->options[ $args['id'] ];
+		else
+			$value = isset( $args['std'] ) ? $args['std'] : '';
+
+		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
+		$html = '<input type="url" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
 		$html .= '<p class="description">'  . $args['desc'] . '</p>';
 
 		echo $html;
@@ -960,7 +1045,7 @@ class Affiliate_WP_Settings {
 		);
 
 		// Call the custom API.
-		$response = wp_remote_post( 'http://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
+		$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
 
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) )
@@ -969,11 +1054,9 @@ class Affiliate_WP_Settings {
 		// decode the license data
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-		$options = $this->get_all();
-
-		$options['license_status'] = $license_data->license;
-
-		update_option( 'affwp_settings', $options );
+		affiliate_wp()->settings->set( array(
+			'license_status' => $license_data->license
+		), $save = true );
 
 		delete_transient( 'affwp_license_check' );
 
@@ -1002,17 +1085,15 @@ class Affiliate_WP_Settings {
 		);
 
 		// Call the custom API.
-		$response = wp_remote_post( 'http://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
+		$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
 
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) )
 			return false;
 
-		$options = $this->get_all();
-
-		$options['license_status'] = 0;
-
-		update_option( 'affwp_settings', $options );
+		affiliate_wp()->settings->set( array(
+			'license_status' => 0
+		), $save = true );
 
 		delete_transient( 'affwp_license_check' );
 
@@ -1038,19 +1119,22 @@ class Affiliate_WP_Settings {
 			);
 
 			// Call the custom API.
-			$response = wp_remote_post( 'http://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
+			$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 
 			// make sure the response came back okay
-			if ( is_wp_error( $response ) )
+			if ( is_wp_error( $response ) ) {
+
+				// Connection failed, try again in three hours
+				set_transient( 'affwp_license_check', $response, 3 * HOUR_IN_SECONDS );
+
 				return false;
+			}
 
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-			$options = $this->get_all();
-
-			$options['license_status'] = $license_data->license;
-
-			update_option( 'affwp_settings', $options );
+			affiliate_wp()->settings->set( array(
+				'license_status' => $license_data->license
+			), $save = true );
 
 			set_transient( 'affwp_license_check', $license_data->license, DAY_IN_SECONDS );
 

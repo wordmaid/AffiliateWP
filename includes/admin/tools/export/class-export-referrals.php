@@ -29,7 +29,7 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 	public $export_type = 'referrals';
 
 	/**
-	 * ate
+	 * Date
 	 * @var array
 	 * @since 1.0
 	 */

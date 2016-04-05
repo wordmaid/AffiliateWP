@@ -1188,7 +1188,72 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$this->assertTrue( $updated );
 	}
 
+	/**
+	 * @covers affwp_update_profile_settings()
+	 */
+	public function test_update_profile_settings_with_no_logged_in_user_should_return_false() {
+		$this->assertFalse( affwp_update_profile_settings() );
+	}
 
+	/**
+	 * @covers affwp_update_profile_settings()
+	 */
+	public function test_update_profile_settings_with_empty_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_update_profile_settings() );
+	}
+
+	/**
+	 * @covers affwp_update_profile_settings()
+	 */
+	public function test_update_profile_settings_with_non_matching_affiliate_id_and_missing_manage_affiliates_cap_should_return_false() {
+		$user_id = affwp_get_affiliate_user_id( $this->_affiliate_id );
+		wp_set_current_user( $user_id );
+
+		$this->assertFalse( affwp_update_profile_settings( array(
+			'affiliate_id' => $this->_affiliate_id2
+		) ) );
+	}
+
+	/**
+	 * @covers affwp_update_profile_settings()
+	 */
+	public function test_update_profile_settings_with_manage_affiliates_cap_and_referral_notifications_meta_should_update_meta() {
+		// Admins have 'manage_affiliates' cap.
+		$user_id = $this->factory->user->create( array(
+			'role' => 'administrator'
+		) );
+		$affiliate_id = affwp_add_affiliate( array(
+			'user_id' => $user_id
+		) );
+		wp_set_current_user( $user_id );
+
+		affwp_update_profile_settings( array(
+			'affiliate_id'           => $affiliate_id,
+			'referral_notifications' => true
+		) );
+
+		$this->assertEquals( 1, get_user_meta( $user_id, 'affwp_referral_notifications', true ) );
+	}
+
+	/**
+	 * @covers affwp_update_profile_settings()
+	 */
+	public function test_update_profile_settings_with_manage_affiliates_cap_and_empty_referral_notifications_meta_should_delete_meta() {
+		// Admins have 'manage_affiliates' cap.
+		$user_id = $this->factory->user->create( array(
+			'role' => 'administrator'
+		) );
+		$affiliate_id = affwp_add_affiliate( array(
+			'user_id' => $user_id
+		) );
+		wp_set_current_user( $user_id );
+
+		affwp_update_profile_settings( array(
+			'affiliate_id' => $affiliate_id,
+		) );
+
+		$this->assertEmpty( get_user_meta( $user_id, 'affwp_referral_notifications', true ) );
+	}
 
 	/**
 	 * @covers affwp_get_affiliate_area_page_url()

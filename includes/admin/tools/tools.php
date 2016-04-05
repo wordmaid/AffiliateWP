@@ -160,8 +160,7 @@ add_action( 'affwp_tools_tab_recount', 'affwp_recount_tab' );
  */
 function affwp_migration_tab() {
 	global $wp_version;
-	$wp_version = '4.2';
-	$tool_is_compatible = ! version_compare( $wp_version, '4.3', '<=' );
+	$tool_is_compatible = version_compare( $wp_version, '4.4', '>=' );
 
 	$user_counts = count_users();
 

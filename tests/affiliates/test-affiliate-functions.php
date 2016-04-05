@@ -1129,26 +1129,43 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers Affiliate_WP_DB_Affiliates::add()
+	 * @covers affwp_add_affiliate()
 	 */
-	function test_add_affiliate() {
+	public function test_add_affiliate_with_empty_status_should_inherit_active_status() {
+		$affiliate_id = affwp_add_affiliate( array(
+			'user_id' => $this->factory->user->create()
+		) );
 
-		$args = array(
-			'user_id'  => $this->_user_id
-		);
+		$this->assertSame( 'active', affwp_get_affiliate_status( $affiliate_id ) );
+	}
 
-		$affiliate_id = affiliate_wp()->affiliates->add( $args );
+	/**
+	 * @covers affwp_add_affiliate()
+	 */
+	public function test_add_affiliate_with_require_approval_setting_true_should_inherit_pending_status() {
+		affiliate_wp()->settings->set( array (
+			'require_approval' => true
+		) );
 
-		$this->assertFalse( $affiliate_id );
+		$affiliate = affwp_add_affiliate( array(
+			'user_id' => $this->factory->user->create()
+		) );
 
-		$args = array(
-			'user_id'  => 2
-		);
+		$this->assertSame( 'pending', affwp_get_affiliate_status( $affiliate ) );
+	}
 
-		$this->_affiliate_id2 = affiliate_wp()->affiliates->add( $args );
+	/**
+	 * @covers affwp_add_affiliate()
+	 */
+	public function test_add_affiliate_with_invalid_user_id_should_return_false() {
+		$this->assertFalse( affwp_add_affiliate( rand( 100, 300 ) ) );
+	}
 
-		$this->assertGreaterThan( 0, $this->_affiliate_id2 );
-
+	/**
+	 * @covers affwp_add_affiliate()
+	 */
+	public function test_add_affiliate_for_user_already_an_affiliate_should_return_false() {
+		$this->assertFalse( affwp_add_affiliate( $this->_user_id ) );
 	}
 
 	/**
@@ -1167,6 +1184,8 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$this->assertTrue( $updated );
 
 	}
+
+
 
 	/**
 	 * @covers affwp_get_affiliate_area_page_url()

@@ -960,12 +960,25 @@ function affwp_update_profile_settings( $data = array() ) {
 }
 
 /**
- * Builds an affiliate's referral URL
+ * Builds an affiliate's referral URL.
+ *
  * Used by creatives, referral URL generator and [affiliate_referral_url] shortcode
  *
- * @since  1.6
- * @return string
- * @param  $args array of arguments. $base_url, $format, $pretty
+ * @since 1.6
+ *
+ * @param array $args {
+ *     Optional. Array of arguments for building an affiliate referral URL. Default empty array.
+ *
+ *     @type int          $affiliate_id Affiliate ID. Default is the current user's affiliate ID.
+ *     @type string|false $pretty       Whether to build a pretty referral URL. Accepts 'yes' or 'no'. False
+ *                                      disables pretty URLs. Default empty, see affwp_is_pretty_referral_urls().
+ *     @type string       $format       Referral format. Accepts 'id' or 'username'. Default empty,
+ *                                      see affwp_get_referral_format().
+ *     @type string       $base_url     Base URL to use for building a referral URL. If specified, should contain
+ *                                      'query' and 'fragment' query vars. 'scheme', 'host', and 'path' query vars
+ *                                      can also be passed as part of the base URL. Default empty.
+ * }
+ * @return string Trailing-slashed value of home_url() when `$args` is empty, built referral URL otherwise.
  */
 function affwp_get_affiliate_referral_url( $args = array() ) {
 

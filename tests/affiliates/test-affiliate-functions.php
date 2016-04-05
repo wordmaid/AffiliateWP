@@ -1169,6 +1169,13 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @gcovers affwp_update_affiliate()
+	 */
+	public function test_update_affiliate_with_empty_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_update_affiliate() );
+	}
+
+	/**
 	 * @covers affwp_update_affiliate()
 	 */
 	function test_update_affiliate() {

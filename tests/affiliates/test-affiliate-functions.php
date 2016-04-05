@@ -1179,17 +1179,13 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_update_affiliate()
 	 */
 	function test_update_affiliate() {
-
-		$args = array(
-			'affiliate_id'   => $this->_affiliate_id,
-			'rate'           => '20',
-			'account_email'  => $this->rand_email
-		);
-
-		$updated = affwp_update_affiliate( $args );
+		$updated = affwp_update_affiliate( array(
+			'affiliate_id'  => $this->_affiliate_id,
+			'rate'          => '20',
+			'account_email' => $this->rand_email
+		) );
 
 		$this->assertTrue( $updated );
-
 	}
 
 

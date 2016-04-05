@@ -184,25 +184,33 @@ function affwp_migration_tab() {
 			<div class="postbox">
 				<h3><span><?php _e( 'User Accounts', 'affiliate-wp' ); ?></span></h3>
 				<div class="inside">
-					<p><?php _e( 'Use this tool to create affiliate accounts for each of your existing WordPress user accounts that belong to the selected roles below.', 'affiliate-wp' ); ?></p>
-					<p><?php _e( '<strong>NOTE:</strong> Users that already have affiliate accounts will be skipped. Duplicate accounts will not be created.', 'affiliate-wp' ); ?></p>
-					<form method="get" id="affiliate-wp-migrate-user-accounts">
-						<h4><span><?php _e( 'Select User Roles', 'affiliate-wp' ); ?></span></h4>
-						<?php foreach ( $roles as $role => $data ) : ?>
-							<?php $has_users = ! empty( $data['count'] ); ?>
-							<label>
-								<input type="checkbox" name="roles[]" value="<?php echo esc_attr( $role ); ?>" <?php checked( $has_users ); disabled( ! $has_users ) ?>>
-								<span class="<?php echo ( ! $has_users ) ? 'muted' : ''; ?>"><?php echo esc_html( $data['label'] ); ?> (<?php echo absint( $data['count'] ); ?>)</span>
-							</label>
-							<br>
-						<?php endforeach; ?>
-						<input type="hidden" name="type" value="users"/>
-						<input type="hidden" name="part" value="affiliates"/>
-						<input type="hidden" name="page" value="affiliate-wp-migrate"/>
-						<p>
-							<input type="submit" value="<?php _e( 'Create Affiliate Accounts for Users', 'affiliate-wp' ); ?>" class="button" />
-						</p>
-					</form>
+					<?php if ( $tool_is_compatible ) : ?>
+						<p><?php _e( 'Use this tool to create affiliate accounts for each of your existing WordPress user accounts that belong to the selected roles below.', 'affiliate-wp' ); ?></p>
+						<p><?php _e( '<strong>NOTE:</strong> Users that already have affiliate accounts will be skipped. Duplicate accounts will not be created.', 'affiliate-wp' ); ?></p>
+						<form method="get" id="affiliate-wp-migrate-user-accounts">
+							<h4><span><?php _e( 'Select User Roles', 'affiliate-wp' ); ?></span></h4>
+							<?php foreach ( $roles as $role => $data ) : ?>
+								<?php $has_users = ! empty( $data['count'] ); ?>
+								<label>
+									<input type="checkbox" name="roles[]" value="<?php echo esc_attr( $role ); ?>" <?php checked( $has_users ); disabled( ! $has_users ) ?>>
+									<span class="<?php echo ( ! $has_users ) ? 'muted' : ''; ?>"><?php echo esc_html( $data['label'] ); ?> (<?php echo absint( $data['count'] ); ?>)</span>
+								</label>
+								<br>
+							<?php endforeach; ?>
+							<input type="hidden" name="type" value="users"/>
+							<input type="hidden" name="part" value="affiliates"/>
+							<input type="hidden" name="page" value="affiliate-wp-migrate"/>
+							<p>
+								<input type="submit" value="<?php _e( 'Create Affiliate Accounts for Users', 'affiliate-wp' ); ?>" class="button" />
+							</p>
+						</form>
+					<?php else : ?>
+						<?php if ( current_user_can( 'update_core' ) ) : ?>
+							<p><?php printf( __( '<strong>NOTE:</strong> WordPress 4.4 or newer is required to use the User Accounts migration tool. <a href="%s" aria-label="Update WordPress now">Update WordPress now</a>.', 'affiliate-wp' ), network_admin_url( 'update-core' ) ); ?></p>
+						<?php else : ?>
+							<p><?php _e( '<strong>NOTE:</strong> WordPress 4.4 or newer is required to use the User Accounts migration tool.', 'affiliate-wp' ); ?></p>
+						<?php endif; // 'update_core' ?>
+					<?php endif; // $tool_is_compatible ?>
 				</div><!-- .inside -->
 			</div><!-- .postbox -->
 

@@ -36,7 +36,7 @@ function affiliate_wp_install() {
 		);
 
 		// Update settings.
-		affiliate_wp()->settings->set( array(
+		$affiliate_wp_install->settings->set( array(
 			'affiliates_page' => $affiliate_area
 		), $save = true );
 	}

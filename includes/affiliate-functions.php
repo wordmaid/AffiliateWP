@@ -187,13 +187,18 @@ function affwp_set_affiliate_status( $affiliate, $status = '' ) {
 /**
  * Retrieves the affiliate's status and returns a translatable string
  *
- * @since 1.8
- * @param  $status_label A translatable, filterable label indicating affiliate status
- * @return string
+ * @since  1.8
+ * @param  $affiliate
+ * @return string $status_label A translatable, filterable label indicating affiliate status
  */
 function affwp_get_affiliate_status_label( $affiliate ) {
 
 	$affiliate    = affwp_get_affiliate( $affiliate );
+
+	if ( ! $affiliate ) {
+		return;
+	}
+
 	$status       = '';
 	$status_label = '';
 
@@ -217,7 +222,7 @@ function affwp_get_affiliate_status_label( $affiliate ) {
 			break;
 	}
 
-	apply_filters( 'affwp_get_affiliate_status_label', $status_label, $status );
+	$status_label = apply_filters( 'affwp_get_affiliate_status_label' );
 
 	return $status_label;
 }

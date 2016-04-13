@@ -188,7 +188,7 @@ function affwp_set_affiliate_status( $affiliate, $status = '' ) {
  * Retrieves the affiliate's status and returns a translatable string
  *
  * @since  1.8
- * @param  $affiliate
+ * @param  $affiliate int|object Affiliate ID or object
  * @return string $status_label A translatable, filterable label indicating affiliate status
  */
 function affwp_get_affiliate_status_label( $affiliate ) {

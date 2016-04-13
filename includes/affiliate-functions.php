@@ -222,9 +222,7 @@ function affwp_get_affiliate_status_label( $affiliate ) {
 			break;
 	}
 
-	$status_label = apply_filters( 'affwp_get_affiliate_status_label' );
-
-	return $status_label;
+	return apply_filters( 'affwp_get_affiliate_status_label', $status_label );
 }
 
 /**

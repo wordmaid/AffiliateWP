@@ -185,6 +185,44 @@ function affwp_set_affiliate_status( $affiliate, $status = '' ) {
 }
 
 /**
+ * Retrieves the affiliate's status and returns a translatable string
+ *
+ * @since 1.8
+ * @param  $status_label A translatable, filterable label indicating affiliate status
+ * @return string
+ */
+function affwp_get_affiliate_status_label( $affiliate ) {
+
+	$affiliate    = affwp_get_affiliate( $affiliate );
+	$status       = '';
+	$status_label = '';
+
+	// Get current affiliate status
+	$status       = $affiliate->status;
+
+	// Return translatable string
+	switch( $status ) {
+
+		case 'active':
+			$status_label = __( 'Active','affiliate-wp' );
+			break;
+		case 'inactive':
+			$status_label = __( 'Inactive','affiliate-wp' );
+			break;
+		case 'pending':
+			$status_label = __( 'Pending','affiliate-wp' );
+			break;
+		case 'rejected':
+			$status_label = __( 'Rejected','affiliate-wp' );
+			break;
+	}
+
+	apply_filters( 'affwp_get_affiliate_status_label', $status_label, $status );
+
+	return $status_label;
+}
+
+/**
  * Retrieves the referral rate for an affiliate
  *
  * @since  1.0

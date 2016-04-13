@@ -93,9 +93,9 @@ class Affiliate_WP_Migrate_Affiliates_Pro extends Affiliate_WP_Migrate_Base {
 					'status'          => $affiliate->status,
 					'date_registered' => $affiliate->from_date,
 					'user_id'         => $user_id,
-					'payment_email'	  => $affiliate->email,
-					'rate'            => $rate,
-					'earnings'        => $earnings,
+					'payment_email'	  => ! empty( $affiliate->email ) ? $affiliate->email : '',
+					'rate'            => ! empty( $rate ) ? $rate : '',
+					'earnings'        => ! empty( $earnings ) ? $earnings : '',
 					'referrals'       => $referrals,
 					'visits'          => $visits
 				);

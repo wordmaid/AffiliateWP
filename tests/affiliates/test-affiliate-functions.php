@@ -300,6 +300,30 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_get_affiliate_status_label()
+	 */
+	function test_get_affiliate_status_label() {
+
+		$this->assertEquals( 'Active', affwp_get_affiliate_status_label( $this->_affiliate_id ) );
+
+		$this->assertTrue( affwp_set_affiliate_status( $this->_affiliate_id, 'inactive' ) );
+
+		$this->assertEquals( 'Inactive', affwp_get_affiliate_status_label( $this->_affiliate_id ) );
+
+		$this->assertTrue( affwp_set_affiliate_status( $this->_affiliate_id, 'pending' ) );
+
+		$this->assertEquals( 'Pending', affwp_get_affiliate_status_label( $this->_affiliate_id ) );
+
+		$this->assertTrue( affwp_set_affiliate_status( $this->_affiliate_id, 'rejected' ) );
+
+		$this->assertEquals( 'Rejected', affwp_get_affiliate_status_label( $this->_affiliate_id ) );
+
+		$this->assertTrue( affwp_set_affiliate_status( $this->_affiliate_id, 'active' ) );
+
+		$this->assertEquals( 'Active', affwp_get_affiliate_status_label( $this->_affiliate_id ) );
+	}
+
+	/**
 	 * @covers affwp_get_affiliate_rate()
 	 * @todo Separate tests for the other parameters
 	 */

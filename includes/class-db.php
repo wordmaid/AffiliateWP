@@ -84,7 +84,7 @@ abstract class Affiliate_WP_DB {
 	public function get_by( $column, $row_id ) {
 		global $wpdb;
 
-		if ( array_key_exists( $column, $this->get_columns() ) || empty( $row_id ) ) {
+		if ( ! array_key_exists( $column, $this->get_columns() ) || empty( $row_id ) ) {
 			return false;
 		}
 
@@ -103,7 +103,7 @@ abstract class Affiliate_WP_DB {
 	public function get_column( $column, $row_id ) {
 		global $wpdb;
 
-		if ( array_key_exists( $column, $this->get_columns() ) || empty( $row_id ) ) {
+		if ( ! array_key_exists( $column, $this->get_columns() ) || empty( $row_id ) ) {
 			return false;
 		}
 

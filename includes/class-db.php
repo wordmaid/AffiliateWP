@@ -2,10 +2,28 @@
 
 abstract class Affiliate_WP_DB {
 
+	/**
+	 * Database table name.
+	 *
+	 * @access public
+	 * @var string
+	 */
 	public $table_name;
 
+	/**
+	 * Database version.
+	 *
+	 * @access public
+	 * @var string
+	 */
 	public $version;
 
+	/**
+	 * Primary key (unique field) for the database table.
+	 *
+	 * @since public
+	 * @var string
+	 */
 	public $primary_key;
 
 	public function __construct() {}

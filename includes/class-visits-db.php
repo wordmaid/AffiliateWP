@@ -73,7 +73,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		if( ! empty( $args['affiliate_id'] ) ) {
 
 			if( is_array( $args['affiliate_id'] ) ) {
-				$affiliate_ids = implode( ',', $args['affiliate_id'] );
+				$affiliate_ids = implode( ',', array_map( 'intval', $args['affiliate_id'] ) );
 			} else {
 				$affiliate_ids = intval( $args['affiliate_id'] );
 			}
@@ -86,7 +86,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		if( ! empty( $args['referral_id'] ) ) {
 
 			if( is_array( $args['referral_id'] ) ) {
-				$referral_ids = implode( ',', $args['referral_id'] );
+				$referral_ids = implode( ',', array_map( 'intval', $args['referral_id'] ) );
 			} else {
 				$referral_ids = intval( $args['referral_id'] );
 			}
@@ -105,9 +105,9 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 			}
 
 			if( is_array( $args['campaign'] ) ) {
-				$where .= " `campaign` IN(" . implode( ',', $args['campaign'] ) . ") ";
+				$where .= " `campaign` IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
 			} else {
-				$where .= " `campaign` = '" . $args['campaign'] . "' ";
+				$where .= " `campaign` = '" . esc_sql( $args['campaign'] ) . "' ";
 			}
 
 		}
@@ -130,32 +130,24 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 
 				if( ! empty( $args['date']['start'] ) ) {
 
-					$start = date( 'Y-m-d H:i:s', strtotime( $args['date']['start'] ) );
+					$start = esc_sql( date( 'Y-m-d H:i:s', strtotime( $args['date']['start'] ) ) );
 
 					if( ! empty( $where ) ) {
-
 						$where .= " AND `date` >= '{$start}'";
-
 					} else {
-
 						$where .= " WHERE `date` >= '{$start}'";
-
 					}
 
 				}
 
 				if( ! empty( $args['date']['end'] ) ) {
 
-					$end = date( 'Y-m-d H:i:s', strtotime( $args['date']['end'] ) );
+					$end = esc_sql( date( 'Y-m-d H:i:s', strtotime( $args['date']['end'] ) ) );
 
 					if( ! empty( $where ) ) {
-
 						$where .= " AND `date` <= '{$end}'";
-
 					} else {
-
 						$where .= " WHERE `date` <= '{$end}'";
-
 					}
 
 				}
@@ -187,17 +179,25 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 			}
 
 			if ( filter_var( $args['search'], FILTER_VALIDATE_IP ) ) {
-
-				$where .= " `ip` LIKE '%%" . $args['search'] . "%%' ";
-
+				$where .= " `ip` LIKE '%%" . esc_sql( $args['search'] ) . "%%' ";
 			} else {
+				$search_value = esc_sql( $args['search'] );
 
-				$where .= " ( `referrer` LIKE '%%" . $args['search'] . "%%' OR `url` LIKE '%%" . $args['search'] . "%%' ) ";
-
+				$where .= " ( `referrer` LIKE '%%" . $search_value . "%%' OR `url` LIKE '%%" . $search_value . "%%' ) ";
 			}
 		}
 
-		$args['orderby'] = ! array_key_exists( $args['orderby'], $this->get_columns() ) ? $this->primary_key : $args['orderby'];
+		if ( 'DESC' === strtoupper( $args['order'] ) ) {
+			$order = 'DESC';
+		} else {
+			$order = 'ASC';
+		}
+
+		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
+
+		// Overload args values for the benefit of the cache.
+		$args['orderby'] = $orderby;
+		$args['order']   = $order;
 
 		$cache_key = ( true === $count ) ? md5( 'affwp_visits_count' . serialize( $args ) ) : md5( 'affwp_visits_' . serialize( $args ) );
 
@@ -213,7 +213,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 
 				$results = $wpdb->get_results(
 					$wpdb->prepare(
-						"SELECT * FROM {$this->table_name} {$where} ORDER BY {$args['orderby']} {$args['order']} LIMIT %d, %d;",
+						"SELECT * FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
 						absint( $args['offset'] ),
 						absint( $args['number'] )
 					)
@@ -230,7 +230,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 	}
 
 	/**
-	 * Return the number of results found for a given query
+	 * Returns the number of results found for a given query
 	 *
 	 * @param  array  $args
 	 * @return int
@@ -239,6 +239,14 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		return $this->get_visits( $args, true );
 	}
 
+	/**
+	 * Adds a visit to the database.
+	 *
+	 * @access public
+	 *
+	 * @param array $data Optional. Arguments for adding a new visit. Default empty array.
+	 * @return int ID of the added visit.
+	 */
 	public function add( $data = array() ) {
 
 		if( ! empty( $data['url'] ) ) {
@@ -260,6 +268,13 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		return $visit_id;
 	}
 
+	/**
+	 * Creates the visits database table.
+	 *
+	 * @access public
+	 *
+	 * @see dbDelta()
+	 */
 	public function create_table() {
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 

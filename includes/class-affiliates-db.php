@@ -74,7 +74,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 			'orderby' => 'affiliate_id'
 		);
 
-		$args  = wp_parse_args( $args, $defaults );
+		$args = wp_parse_args( $args, $defaults );
 
 		if( ! empty( $args['date_registered'] ) ) {
 			$args['date'] = $args['date_registered'];
@@ -90,8 +90,8 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		// affiliates for specific users
 		if ( ! empty( $args['user_id'] ) ) {
 
-			if( is_array( $args['user_id'] ) ) {
-				$user_ids = implode( ',', $args['user_id'] );
+			if ( is_array( $args['user_id'] ) ) {
+				$user_ids = implode( ',', array_map( 'intval', $args['user_id'] ) );
 			} else {
 				$user_ids = intval( $args['user_id'] );
 			}
@@ -101,42 +101,39 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		}
 
 		if ( ! empty( $args['status'] ) ) {
+			$status = esc_sql( $args['status'] );
 
-			if( ! empty( $where ) ) {
-				$where .= "AND `status` = '" . $args['status'] . "' ";
+			if ( ! empty( $where ) ) {
+				$where .= "AND `status` = '" . $status . "' ";
 			} else {
-				$where .= "WHERE `status` = '" . $args['status'] . "' ";
+				$where .= "WHERE `status` = '" . $status . "' ";
 			}
 		}
 
 		if ( ! empty( $args['search'] ) ) {
+			$search_value = $args['search'];
 
-			if( is_numeric( $args['search'] ) ) {
-
-				$affiliate_ids = esc_sql( $args['search'] );
-				$search = "`affiliate_id` IN( {$affiliate_ids} )";
-
-			} elseif( is_string( $args['search'] ) ) {
+			if ( is_numeric( $search_value ) ) {
+				$search = "`affiliate_id` IN( {$search_value} )";
+			} elseif ( is_string( $search_value ) ) {
 
 				// Searching by an affiliate's name or email
-				if( is_email( $args['search'] ) ) {
+				if ( is_email( $search_value ) ) {
 
-					$user    = get_user_by( 'email', $args['search'] );
-					$user_id = $user ? $user->ID : 0;
-					$search  = "`user_id` = '" . $user_id . "' OR `payment_email` = '" . esc_sql ( $args['search'] ) . "' ";
+					$user    = get_user_by( 'email', $search_value );
+					$user_id = $user ? absint( $user->ID ) : 0;
+					$search  = "`user_id` = '" . $user_id . "' OR `payment_email` = '" . esc_sql( $search_value ) . "' ";
 
 				} else {
 
-					$args['search'] = esc_sql( $args['search'] );
-					$users = $wpdb->get_col( "SELECT ID FROM {$wpdb->users} WHERE display_name LIKE '%{$args['search']}%'" );
-					$users = ! empty( $users ) ? implode( ',', $users ) : 0;
+					$users = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->users} WHERE display_name LIKE '%s'", "%{$search_value}%" ) );
+					$users = ! empty( $users ) ? implode( ',', array_map( 'intval', $users ) ) : 0;
 					$search = "`user_id` IN( {$users} )";
 
 				}
-
 			}
 
-			if( ! empty( $search ) ) {
+			if ( ! empty( $search ) ) {
 
 				if( ! empty( $where ) ) {
 					$search = "AND " . $search;
@@ -184,19 +181,30 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 		}
 
-		if( 'date' == $args['orderby'] ) {
-			$args['orderby'] = 'date_registered';
+		if ( 'DESC' === strtoupper( $args['order'] ) ) {
+			$order = 'DESC';
+		} else {
+			$order = 'ASC';
 		}
 
-		if( 'name' == $args['orderby'] ) {
-			$args['orderby'] = 'display_name';
+		if ( 'date' == $args['orderby'] ) {
+			$orderby = 'date_registered';
+		} elseif ( 'name' == $args['orderby'] ) {
+			$orderby = 'display_name';
+		} else {
+			$orderby = $args['orderby'];
 		}
 
-		$args['orderby'] = ! array_key_exists( $args['orderby'], $this->get_columns() ) ? $this->primary_key : $args['orderby'];
+		$orderby = array_key_exists( $orderby, $this->get_columns() ) ? $orderby : $this->primary_key;
 
+		// Non-column orderby exception.
 		if ( 'earnings' === $args['orderby'] ) {
-			$args['orderby'] = 'earnings+0';
+			$orderby = 'earnings+0';
 		}
+
+		// Overload args values for the benefit of the cache.
+		$args['orderby'] = $orderby;
+		$args['order']   = $order;
 
 		$cache_key = ( true === $count ) ? md5( 'affwp_affiliates_count' . serialize( $args ) ) : md5( 'affwp_affiliates_' . serialize( $args ) );
 
@@ -214,7 +222,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 					$results = $wpdb->get_results(
 						$wpdb->prepare(
-							"SELECT * FROM {$this->table_name} a INNER JOIN {$wpdb->users} u ON a.user_id = u.ID {$where} ORDER BY {$args['orderby']} {$args['order']} LIMIT %d, %d;",
+							"SELECT * FROM {$this->table_name} a INNER JOIN {$wpdb->users} u ON a.user_id = u.ID {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
 							absint( $args['offset'] ),
 							absint( $args['number'] )
 						)
@@ -224,7 +232,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 					$results = $wpdb->get_results(
 						$wpdb->prepare(
-							"SELECT * FROM {$this->table_name} {$where} ORDER BY {$args['orderby']} {$args['order']} LIMIT %d, %d;",
+							"SELECT * FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
 							absint( $args['offset'] ),
 							absint( $args['number'] )
 						)

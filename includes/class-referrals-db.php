@@ -163,24 +163,28 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	}
 
 	/**
-	 * Retrieve a referral by a specific field. Optionally let's you retreive via field that also has a specific context
+	 * Retrieves a referral by a specific field.
 	 *
 	 * @access  public
 	 * @since   1.0
+	 *
+	 * @param string $column  Column name. See get_columns().
+	 * @param string $context Optional. Context for which to retrieve a referral. Default empty.
+	 * @return object|null Database query result object or null on failure.
 	*/
 	public function get_by( $column, $row_id, $context = '' ) {
 		global $wpdb;
 
 		$and = '';
 		if( ! empty( $context ) ) {
-			$and = " AND context = '$context'";
+			$and = " AND context = '" . esc_sql( $context ) . "'";
 		}
 
-		return $wpdb->get_row( "SELECT * FROM $this->table_name WHERE $column = '$row_id'$and LIMIT 1;" );
+		return $wpdb->get_row( $wpdb->prepare(  "SELECT * FROM $this->table_name WHERE $column = '%s'$and LIMIT 1;", $row_id ) );
 	}
 
 	/**
-	 * Retrieve referrals from the database
+	 * Retrieves referrals from the database.
 	 *
 	 * @access  public
 	 * @since   1.0
@@ -213,11 +217,11 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		$where    = '';
 
-		// specific referrals
+		// Specific referrals
 		if( ! empty( $args['referral_id'] ) ) {
 
 			if( is_array( $args['referral_id'] ) ) {
-				$referral_ids = implode( ',', $args['referral_id'] );
+				$referral_ids = implode( ',', array_map( 'intval', $args['referral_id'] ) );
 			} else {
 				$referral_ids = intval( $args['referral_id'] );
 			}
@@ -226,11 +230,11 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		}
 
-		// referrals for specific affiliates
+		// Referrals for specific affiliates
 		if( ! empty( $args['affiliate_id'] ) ) {
 
 			if( is_array( $args['affiliate_id'] ) ) {
-				$affiliate_ids = implode( ',', $args['affiliate_id'] );
+				$affiliate_ids = implode( ',', array_map( 'intval', $args['affiliate_id'] ) );
 			} else {
 				$affiliate_ids = intval( $args['affiliate_id'] );
 			}
@@ -248,9 +252,9 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			}
 
 			if( is_array( $args['status'] ) ) {
-				$where .= " `status` IN('" . implode( "','", $args['status'] ) . "') ";
+				$where .= " `status` IN('" . implode( "','", array_map( 'esc_sql', $args['status'] ) ) . "') ";
 			} else {
-				$where .= " `status` = '" . $args['status'] . "' ";
+				$where .= " `status` = '" . esc_sql( $args['status'] ) . "' ";
 			}
 
 		}
@@ -267,38 +271,30 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 						$format = 'Y-m-d 00:00:00';
 					}
 
-					$start = date( $format, strtotime( $args['date']['start'] ) );
+					$start = esc_sql( date( $format, strtotime( $args['date']['start'] ) ) );
 
-					if( ! empty( $where ) ) {
-
+					if ( ! empty( $where ) ) {
 						$where .= " AND `date` >= '{$start}'";
-
 					} else {
-
 						$where .= " WHERE `date` >= '{$start}'";
-
 					}
 
 				}
 
-				if( ! empty( $args['date']['end'] ) ) {
+				if ( ! empty( $args['date']['end'] ) ) {
 
-					if( false !== strpos( $args['date']['end'], ':' ) ) {
+					if ( false !== strpos( $args['date']['end'], ':' ) ) {
 						$format = 'Y-m-d H:i:s';
 					} else {
 						$format = 'Y-m-d 23:59:59';
 					}
 
-					$end = date( $format, strtotime( $args['date']['end'] ) );
+					$end = esc_sql( date( $format, strtotime( $args['date']['end'] ) ) );
 
 					if( ! empty( $where ) ) {
-
 						$where .= " AND `date` <= '{$end}'";
-
 					} else {
-
 						$where .= " WHERE `date` <= '{$end}'";
-
 					}
 
 				}
@@ -329,12 +325,14 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			}
 
 			if( is_array( $args['reference'] ) ) {
-				$where .= " `reference` IN(" . implode( ',', $args['reference'] ) . ") ";
+				$where .= " `reference` IN(" . implode( ',', array_map( 'esc_sql', $args['reference'] ) ) . ") ";
 			} else {
+				$reference = esc_sql( $args['reference'] );
+
 				if( ! empty( $args['search'] ) ) {
-					$where .= " `reference` LIKE '%%" . $args['reference'] . "%%' ";
+					$where .= " `reference` LIKE '%%" . $reference . "%%' ";
 				} else {
-					$where .= " `reference` = '" . $args['reference'] . "' ";
+					$where .= " `reference` = '" . $reference . "' ";
 				}
 			}
 
@@ -349,12 +347,14 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			}
 
 			if( is_array( $args['context'] ) ) {
-				$where .= " `context` IN(" . implode( ',', $args['context'] ) . ") ";
+				$where .= " `context` IN(" . implode( ',', array_map( 'esc_sql', $args['context'] ) ) . ") ";
 			} else {
 				if( ! empty( $args['search'] ) ) {
-					$where .= " `context` LIKE '%%" . $args['context'] . "%%' ";
+					$context = esc_sql( $args['context'] );
+
+					$where .= " `context` LIKE '%%" . $context . "%%' ";
 				} else {
-					$where .= " `context` = '" . $args['context'] . "' ";
+					$where .= " `context` = '" . $context . "' ";
 				}
 			}
 
@@ -369,22 +369,36 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			}
 
 			if( is_array( $args['campaign'] ) ) {
-				$where .= " `campaign` IN(" . implode( ',', $args['campaign'] ) . ") ";
+				$where .= " `campaign` IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
 			} else {
-				if( ! empty( $args['search'] ) ) {
-					$where .= " `campaign` LIKE '%%" . $args['campaign'] . "%%' ";
+				$campaign = esc_sql( $args['campaign'] );
+
+				if ( ! empty( $args['search'] ) ) {
+					$where .= " `campaign` LIKE '%%" . $campaign . "%%' ";
 				} else {
-					$where .= " `campaign` = '" . $args['campaign'] . "' ";
+					$where .= " `campaign` = '" . $campaign . "' ";
 				}
 			}
 
 		}
 
-		$args['orderby'] = ! array_key_exists( $args['orderby'], $this->get_columns() ) ? $this->primary_key : $args['orderby'];
+		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
 
+		// Non-column orderby exception;
 		if ( 'amount' === $args['orderby'] ) {
-			$args['orderby'] = 'amount+0';
+			$orderby = 'amount+0';
 		}
+
+		// There can be only two orders.
+		if ( 'DESC' === strtoupper( $args['order'] ) ) {
+			$order = 'DESC';
+		} else {
+			$order = 'ASC';
+		}
+
+		// Overload args values for the benefit of the cache.
+		$args['orderby'] = $orderby;
+		$args['order']   = $order;
 
 		$cache_key = ( true === $count ) ? md5( 'affwp_referrals_count' . serialize( $args ) ) : md5( 'affwp_referrals_' . serialize( $args ) );
 
@@ -400,7 +414,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 				$results = $wpdb->get_results(
 					$wpdb->prepare(
-						"SELECT * FROM {$this->table_name} {$where} ORDER BY {$args['orderby']} {$args['order']} LIMIT %d, %d;",
+						"SELECT * FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
 						absint( $args['offset'] ),
 						absint( $args['number'] )
 					)
@@ -576,7 +590,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			return false;
 		}
 
-		$referral_ids = implode( ',', $referral_ids );
+		$referral_ids = implode( ',', array_map( 'intval', $referral_ids ) );
 
 		// Not working yet
 		$update = $wpdb->query( $wpdb->prepare( "UPDATE $this->table_name SET status = '%s' WHERE $this->primary_key IN(%s)", $status, $referral_ids ) );

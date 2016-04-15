@@ -122,7 +122,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 					$user    = get_user_by( 'email', $search_value );
 					$user_id = $user ? absint( $user->ID ) : 0;
-					$search  = "`user_id` = '" . $user_id . "' OR `payment_email` = '" . $search_value . "' ";
+					$search  = "`user_id` = '" . $user_id . "' OR `payment_email` = '" . esc_sql( $search_value ) . "' ";
 
 				} else {
 
@@ -133,7 +133,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 				}
 			}
 
-			if( ! empty( $search ) ) {
+			if ( ! empty( $search ) ) {
 
 				if( ! empty( $where ) ) {
 					$search = "AND " . $search;

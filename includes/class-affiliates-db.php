@@ -115,7 +115,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 			if ( is_numeric( $search_value ) ) {
 				$search = "`affiliate_id` IN( {$search_value} )";
-			} elseif ( is_string( $args['search'] ) ) {
+			} elseif ( is_string( $search_value ) ) {
 
 				// Searching by an affiliate's name or email
 				if ( is_email( $search_value ) ) {

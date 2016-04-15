@@ -202,6 +202,10 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 			$orderby = 'earnings+0';
 		}
 
+		// Overload args values for the benefit of the cache.
+		$args['orderby'] = $orderby;
+		$args['order']   = $order;
+
 		$cache_key = ( true === $count ) ? md5( 'affwp_affiliates_count' . serialize( $args ) ) : md5( 'affwp_affiliates_' . serialize( $args ) );
 
 		$results = wp_cache_get( $cache_key, 'affiliates' );

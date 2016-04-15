@@ -97,6 +97,10 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 
 		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
 
+		// Overload args values for the benefit of the cache.
+		$args['orderby'] = $orderby;
+		$args['order']   = $order;
+
 		$cache_key = ( true === $count ) ? md5( 'affwp_creatives_count' . serialize( $args ) ) : md5( 'affwp_creatives_' . serialize( $args ) );
 
 		$results = wp_cache_get( $cache_key, 'creatives' );

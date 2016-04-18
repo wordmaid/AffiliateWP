@@ -250,7 +250,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 	/**
 	 * Add coupon edit hooks depending on version of Exchange active.
 	 *
-	 * The 'genera' tab did not become active until version 1.33
+	 * The 'General' tab did not become active until version 1.33
 	 *
 	 * @access public
 	 * @since 1.8

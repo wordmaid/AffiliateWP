@@ -19,7 +19,7 @@ function affwp_reports_screen_options() {
 	add_screen_option(
 		'per_page',
 		array(
-			'label'   => __( 'Referrals per page', 'affiliate-wp' ),
+			'label'   => __( 'Items per page', 'affiliate-wp' ),
 			'option'  => 'affwp_reports_modules_visibility',
 			'default' => 30,
 		)

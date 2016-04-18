@@ -314,7 +314,8 @@ final class Affiliate_WP {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/plugins.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-migrate.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/add-ons.php';
-			
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/user-profile.php';
+
 		}
 
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-shortcodes.php';

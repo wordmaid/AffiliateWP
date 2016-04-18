@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/screen-options.php';
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/reports-functions.php';
-require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-reports-metabox.php';
+include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-reports-metabox.php';
 
 function affwp_reports_admin() {
 
@@ -163,7 +163,13 @@ function affwp_reports_tab_overview() {
 										<?php echo __( 'References', 'affiliate-wp' ); ?>
 									</h3>
 
-								<?php echo affwp_get_referrals_by_reference(); ?>
+									<?php echo affwp_get_referrals_by_reference(); ?>
+
+									<hr />
+									<h3>
+										<?php echo __( 'Creatives', 'affiliate-wp' ); ?>
+									</h3>
+									<?php echo affwp_get_referrals_by_creatives(); ?>
 						</div>
 					</div>
 				</div>

@@ -16,6 +16,11 @@ include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/screen-options.php
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/reports-functions.php';
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-reports-metabox.php';
 
+// Load WP_List_Table if not loaded
+if ( ! class_exists( 'WP_List_Table' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+}
+
 function affwp_reports_admin() {
 
 	$active_tab = isset( $_GET[ 'tab' ] ) && array_key_exists( $_GET['tab'], affwp_get_reports_tabs() ) ? $_GET[ 'tab' ] : 'overview';

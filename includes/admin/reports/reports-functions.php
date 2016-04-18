@@ -10,12 +10,13 @@
 */
 
 /**
- * Displays referrals ordereed by the highest-performing context (either specified by an AffiliateWP integration, or by a custom-set context)
+ * Displays referrals ordereed by the highest-performing context
+ * (either specified by an AffiliateWP integration, or by a custom-set context)
  *
  * @since 1.8
  * @return string The referral context which has the greatest number of accepted referrals
  */
-function affwp_get_reference_with_highest_referral_rate() {
+function affwp_get_referrals_by_reference() {
 
 	// Placeholder
 
@@ -24,10 +25,12 @@ function affwp_get_reference_with_highest_referral_rate() {
 }
 
 /**
- * Get the creative which have generated the highest quantity of referrals within a specified date range.
+ * Get the creative which have generated the highest quantity of referrals,
+ * within a specified date range.
  *
  * @since 1.8
- * @return array List of creatives which have generated the highest quantity of referrals within a specified date range
+ * @return array List of creatives which have generated the highest quantity
+ * of referrals within a specified date range
  */
 function affwp_get_creatives_performance() {
 

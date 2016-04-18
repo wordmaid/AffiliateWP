@@ -86,119 +86,94 @@ function affwp_reports_tab_overview() {
 
 ?>
 	<h1 class="wide-fat">Overview</h1>
-	<table id="affwp_reports_overview" class="affwp_table">
+	<div id="dashboard-widgets" class="metabox-holder reports-metabox-holder">
+		<div id="postbox-container-1" class="postbox-container">
+			<div id="normal-sortables" class="meta-box-sortables ui-sortable">
+				<div class="postbox">
+					<button type="button" class="handlediv button-link" aria-expanded="true">
+						<span class="screen-reader-text">
+							Toggle panel: Affiliates At a Glance
+						</span>
+						<span class="toggle-indicator" aria-hidden="false"></span>
+					</button>
+					<h2 class="hndle ui-sortable-handle">
+						<span>
+							Affiliates at a Glance
+						</span>
+					</h2>
+					<div class="inside">
+						<div class="main">
+							<ul>
+								<li>
+									<h2>
+									<?php echo $affwp_reports_earnings_today . __(' earned today.', 'affiliate-wp' ); ?>
 
-		<thead>
+									</h2>
+								</li>
+								<li>
+									<h2>
+									<?php echo __('You\'ve paid out a total of ', 'affiliate-wp' ) . affiliate_wp()->referrals->paid_earnings( '' ) . __(' all-time.', 'affiliate-wp' ); ?>
+									</h2>
+								</li>
+								<li>
+									<h2>
+										<?php echo __('You have a total of ', 'affiliate-wp' ) . affiliate_wp()->referrals->unpaid_earnings( '' ) . __(' pending payment.', 'affiliate-wp' ); ?>
+									</h2>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="postbox-container-2" class="postbox-container">
+			<div id="side-sortables" class="meta-box-sortables ui-sortable">
+				<div class="postbox">
+					<button type="button" class="handlediv button-link" aria-expanded="true"><span class="screen-reader-text">Toggle panel: Top Performers</span><span class="toggle-indicator" aria-hidden="false"></span></button>
+					<h2 class="hndle ui-sortable-handle"><span>Top Performers</span></h2>
+					<div class="inside">
+						<div class="main">
+							<?php
 
-			<tr>
+								/**
+								 * An inline call to shortcode_exists is used below, and makes me
+								 * cringe.
+								 * If this data will be included, some better options may be:
+								 * 1. Adding some manner of the leaderboard functionality into core.
+								 * 2. Adding a general-purpose add-on exists-checker method, which
+								 * can be referenced here, using the slug of the add-on
+								 * as a parameter, eg:
+								 *
+								 * affwp_addon_exists( 'affiliatewp_leaderboard' )
+								 *
+								 */
 
-				<th><h1><?php _e( 'Right Now', 'affiliate-wp' ); ?></h1></th>
-				<th><h1><?php _e( 'Highest Earners', 'affiliate-wp' ); ?></h1></th>
-				<th><h1><?php _e( 'Best-sellers', 'affiliate-wp' ); ?></h1></th>
+								if ( class_exists( 'AffiliateWP_Leaderboard' ) && shortcode_exists( 'affiliate_leaderboard' ) ) { ?>
 
-			</tr>
+									<h3>
+										<?php echo __( 'Affiliates', 'affiliate-wp' ); ?>
+									</h3>
+									<?php
+										echo do_shortcode( '[affiliate_leaderboard referrals="yes" earnings="yes" visits="yes"]' );
+									} else {
+										echo __('To show this information, you\'ll need to install the', 'affiliate-wp' ) . '<a href="https://wordpress.org/plugins/affiliatewp-leaderboard/" target="_blank">AffiliateWP Leaderboard add-on.</a>';
+									}
+									?>
+									<hr />
+									<h3>
+										<?php echo __( 'References', 'affiliate-wp' ); ?>
+									</h3>
 
-		</thead>
-
-		<tbody>
-
-			<tr>
-				<td>
-					<ul>
-						<li>
-							<h2>
-							<?php echo $affwp_reports_earnings_today . __(' earned today.', 'affiliate-wp' ); ?>
-
-							</h2>
-						</li>
-						<li>
-							<h2>
-							<?php echo __('You\'ve paid out a total of ', 'affiliate-wp' ) . affiliate_wp()->referrals->paid_earnings( '' ) . __(' all-time.', 'affiliate-wp' ); ?>
-							</h2>
-						</li>
-						<li>
-							<h2>
-								<?php echo __('You have a total of ', 'affiliate-wp' ) . affiliate_wp()->referrals->unpaid_earnings( '' ) . __(' pending payment.', 'affiliate-wp' ); ?>
-							</h2>
-						</li>
-					</ul>
-				</td>
-				<td class="affwp-reports-leaderboard-overview">
-					<?php if ( class_exists( 'AffiliateWP_Leaderboard' ) ) {
-
-						echo do_shortcode( '[affiliate_leaderboard referrals="yes" earnings="yes" visits="yes"]' );
-					} else {
-						echo __('To show this information, you\'ll need to install the', 'affiliate-wp' ) . '<a href="https://wordpress.org/plugins/affiliatewp-leaderboard/">AffiliateWP Leaderboard add-on.</a>';
-					}
-				?>
-				</td>
-				<td>
-					<?php echo affwp_get_reference_with_highest_referral_rate(); ?>
-				</td>
-			</tr>
-
-		</tbody>
-
-	</table>
-
-	<table id="affwp_unpaid_earnings" class="affwp_table">
-
-		<thead>
-
-			<tr>
-
-				<th><?php _e( 'Unpaid Earnings', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Unpaid Earnings This Month', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Unpaid Earnings Today', 'affiliate-wp' ); ?></th>
-
-			</tr>
-
-		</thead>
-
-		<tbody>
-
-			<tr>
-				<td><?php echo affiliate_wp()->referrals->unpaid_earnings(); ?></td>
-				<td><?php echo affiliate_wp()->referrals->unpaid_earnings( 'month' ); ?></td>
-				<td><?php echo affiliate_wp()->referrals->unpaid_earnings( 'today' ); ?></td>
-			</tr>
-
-		</tbody>
-
-	</table>
-
-	<table id="affwp_unpaid_counts" class="affwp_table">
-
-		<thead>
-
-			<tr>
-
-				<th><?php _e( 'Unpaid Referrals', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Unpaid Referrals This Month', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Unpaid Referrals Today', 'affiliate-wp' ); ?></th>
-
-			</tr>
-
-		</thead>
-
-		<tbody>
-
-			<tr>
-				<td><?php echo affiliate_wp()->referrals->unpaid_count(); ?></td>
-				<td><?php echo affiliate_wp()->referrals->unpaid_count( 'month' ); ?></td>
-				<td><?php echo affiliate_wp()->referrals->unpaid_count( 'today' ); ?></td>
-			</tr>
-
-		</tbody>
-
-	</table>
-
+								<?php echo affwp_get_referrals_by_reference(); ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<?php
-	$graph = new Affiliate_WP_Referrals_Graph;
-	$graph->set( 'x_mode', 'time' );
-	$graph->display();
-
 }
+
 add_action( 'affwp_reports_tab_overview', 'affwp_reports_tab_overview' );
 
 /**

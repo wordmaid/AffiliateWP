@@ -33,10 +33,10 @@ class Affiliate_WP_Reports_Exporter {
 	<div id="affwp-dashboard-widgets-wrap">
 		<div class="metabox-holder">
 			<div class="postbox">
-					<h3><span><?php _e( 'Export Reports', 'affiliate-wp' ); ?></span></h3>
+					<h3><span><?php _e( 'Export a Report', 'affiliate-wp' ); ?></span></h3>
 					<div class="inside">
-						<p><?php _e( 'Export a report to a PDF, Excel, or CSV file.', 'affiliate-wp' ); ?></p>
-						<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-tools&tab=export_import' ); ?>">
+						<p><?php _e( 'Export a report to a CSV file.', 'affiliate-wp' ); ?></p>
+						<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab=exporter' ); ?>">
 							<p>
 								<span class="affwp-ajax-search-wrap">
 									<input type="text" name="user_name" id="user_name" class="affwp-user-search" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
@@ -53,11 +53,11 @@ class Affiliate_WP_Reports_Exporter {
 									<option value="rejected"><?php _e( 'Rejected', 'affiliate-wp' ); ?></option>
 								</select>
 								<div id="affwp_user_search_results"></div>
-								<div class="description"><?php _e( 'To search for an affiliate, enter the affiliate\'s login name, first name, or last name. Leave blank to export referrals for all affiliates.', 'affiliate-wp' ); ?></div>
+								<div class="description"><?php _e( 'To search for an affiliate, enter the affiliate\'s login name, first name, or last name. Leave blank to export a report for all affiliates.', 'affiliate-wp' ); ?></div>
 							</p>
 							<p>
-								<input type="hidden" name="affwp_action" value="export_referrals" />
-								<?php wp_nonce_field( 'affwp_export_referrals_nonce', 'affwp_export_referrals_nonce' ); ?>
+								<input type="hidden" name="affwp_action" value="export_report" />
+								<?php wp_nonce_field( 'affwp_export_report_nonce', 'affwp_export_report_nonce' ); ?>
 								<?php submit_button( __( 'Export Report', 'affiliate-wp' ), 'primary', 'submit', false ); ?>
 							</p>
 						</form>
@@ -69,29 +69,11 @@ class Affiliate_WP_Reports_Exporter {
 	}
 
 	/**
-	 * Build the PDF export file
-	 *
-	 * @since 1.8
-	 */
-	public function build_pdf() {
-
-	}
-
-	/**
 	 * Build the CSV export file
 	 *
 	 * @since 1.8
 	 */
 	public function build_csv() {
-
-	}
-
-	/**
-	 * Build the Excel export file
-	 *
-	 * @since 1.8
-	 */
-	public function build_xls() {
 
 	}
 }

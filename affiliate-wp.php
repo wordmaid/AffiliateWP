@@ -314,7 +314,7 @@ final class Affiliate_WP {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/plugins.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-migrate.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/add-ons.php';
-			
+
 		}
 
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-shortcodes.php';
@@ -323,6 +323,7 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/emails/actions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-graph.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-referrals-graph.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-reports-overview-graph.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-visits-graph.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-integrations.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-login.php';

@@ -18,7 +18,7 @@
  */
 function affwp_get_referrals_by_reference() {
 
-	$references = 'Some cool products here.';
+	$references = 'This method will return referrals by the best-performing reference.';
 	return $references;
 }
 
@@ -36,4 +36,7 @@ function affwp_get_referrals_by_creatives() {
 	// via url parameter, for example:
 	// example.com?ref=10&c=2 where the integer 2 in thise case refers to the ID of the
 	// creative which was used.
+
+	$by_creatives = '';
+	return $by_creatives;
 }

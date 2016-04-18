@@ -65,6 +65,13 @@ table.affwp_table td a {
 	max-height: 200px;
 	overflow-y: scroll;
 }
+#side-sortables #affwp_user_search_results {
+	position: relative;
+}
+#side-sortables #affwp_user_search_results p,
+#side-sortables #affwp_user_search_results ul {
+	width: 220px;
+}
 #affwp-dashboard-widgets-wrap .postbox h3 {
 	cursor: default;
     font-weight: 600;

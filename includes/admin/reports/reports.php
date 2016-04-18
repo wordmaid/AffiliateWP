@@ -85,7 +85,6 @@ function affwp_reports_tab_overview() {
 	$affwp_reports_earnings_today = affiliate_wp()->referrals->paid_earnings( 'today' );
 
 ?>
-	<h1 class="wide-fat">Overview</h1>
 	<div id="dashboard-widgets" class="metabox-holder reports-metabox-holder">
 		<div id="postbox-container-1" class="postbox-container">
 			<div id="normal-sortables" class="meta-box-sortables ui-sortable">

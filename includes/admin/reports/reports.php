@@ -187,6 +187,22 @@ function affwp_reports_tab_overview() {
 add_action( 'affwp_reports_tab_overview', 'affwp_reports_tab_overview' );
 
 /**
+ * Display the reports tab
+ * Contains WP_List_Table view of general affiliate data
+ *
+ * @since 1.8
+ * @return void
+ */
+function affwp_reports_tab_detail() {
+
+	$reports_table = new AffWP_Reports_Table();
+	$reports_table->prepare_items();
+	$reports_table->views();
+	$reports_table->display();
+}
+add_action('affwp_reports_tab_detail','affwp_reports_tab_detail' );
+
+/**
  * Display the referrals reports tab
  *
  * @since 1.1

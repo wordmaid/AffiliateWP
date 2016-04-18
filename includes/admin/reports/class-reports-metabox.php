@@ -1,6 +1,7 @@
 <?php
 /**
- * Reports Admin Metaboxes
+ * Reports Admin Metabox Base class
+ * Provides a base structure for reports content metaboxes
  *
  * @package     AffiliateWP
  * @subpackage  Admin/Reports
@@ -12,6 +13,6 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Affiliate_WP_Reports_Metabox {
+class Affiliate_WP_Reports_Metabox_Base {
 
 }

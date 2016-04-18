@@ -535,7 +535,7 @@ class AffWP_Reports_Table extends WP_List_Table {
 			'actions'      => __( 'Actions', 'affiliate-wp' ),
 		);
 
-		return apply_filters( 'affwp_affiliate_table_columns', $columns );
+		return apply_filters( 'affwp_reports_table_columns', $columns );
 	}
 
 	/**
@@ -578,7 +578,7 @@ class AffWP_Reports_Table extends WP_List_Table {
 				break;
 		}
 
-		return apply_filters( 'affwp_affiliate_table_' . $column_name, $value );
+		return apply_filters( 'affwp_reports_table_' . $column_name, $value );
 	}
 
 	/**
@@ -600,7 +600,7 @@ class AffWP_Reports_Table extends WP_List_Table {
 			$value = __( '(user deleted)', 'affiliate-wp' );
 		}
 
-		return apply_filters( 'affwp_affiliate_table_name', $value, $affiliate );
+		return apply_filters( 'affwp_reports_table_name', $value, $affiliate );
 	}
 
 	/**
@@ -623,7 +623,7 @@ class AffWP_Reports_Table extends WP_List_Table {
 			$value = __( '(user deleted)', 'affiliate-wp' );
 		}
 
-		return apply_filters( 'affwp_affiliate_table_username', $value, $affiliate );
+		return apply_filters( 'affwp_reports_table_username', $value, $affiliate );
 
 	}
 
@@ -649,7 +649,7 @@ class AffWP_Reports_Table extends WP_List_Table {
 	 */
 	function column_earnings( $affiliate ) {
 		$value = affwp_currency_filter( affwp_format_amount( affwp_get_affiliate_earnings( $affiliate->affiliate_id ) ) );
-		return apply_filters( 'affwp_affiliate_table_earnings', $value, $affiliate );
+		return apply_filters( 'affwp_reports_table_earnings', $value, $affiliate );
 	}
 
 	/**
@@ -662,7 +662,7 @@ class AffWP_Reports_Table extends WP_List_Table {
 	 */
 	function column_rate( $affiliate ) {
 		$value = affwp_get_affiliate_rate( $affiliate->affiliate_id, true );
-		return apply_filters( 'affwp_affiliate_table_rate', $value, $affiliate );
+		return apply_filters( 'affwp_reports_table_rate', $value, $affiliate );
 	}
 
 
@@ -678,7 +678,7 @@ class AffWP_Reports_Table extends WP_List_Table {
 		$unpaid_count = affiliate_wp()->referrals->unpaid_count( '', $affiliate->affiliate_id );
 
 		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $affiliate->affiliate_id . '&status=unpaid' ) . '">' . $unpaid_count . '</a>';
-		return apply_filters( 'affwp_affiliate_table_unpaid', $value, $affiliate );
+		return apply_filters( 'affwp_reports_table_unpaid', $value, $affiliate );
 	}
 
 
@@ -692,7 +692,7 @@ class AffWP_Reports_Table extends WP_List_Table {
 	 */
 	function column_referrals( $affiliate ) {
 		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $affiliate->affiliate_id . '&status=paid' ) . '">' . $affiliate->referrals . '</a>';
-		return apply_filters( 'affwp_affiliate_table_referrals', $value, $affiliate );
+		return apply_filters( 'affwp_reports_table_referrals', $value, $affiliate );
 	}
 
 	/**
@@ -705,7 +705,7 @@ class AffWP_Reports_Table extends WP_List_Table {
 	 */
 	function column_visits( $affiliate ) {
 		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-visits&affiliate=' . $affiliate->affiliate_id ) . '">' . affwp_get_affiliate_visit_count( $affiliate->affiliate_id ) . '</a>';
-		return apply_filters( 'affwp_affiliate_table_visits', $value, $affiliate );
+		return apply_filters( 'affwp_reports_table_visits', $value, $affiliate );
 	}
 
 	/**

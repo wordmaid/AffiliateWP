@@ -138,7 +138,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 				} else {
 
-					$users = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->users} WHERE display_name LIKE '%s'", "%{$search_value}%" ) );
+					$users = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->users} WHERE display_name LIKE '%s' OR user_login LIKE '%s'", "%{$search_value}%", "%{$search_value}%" ) );
 					$users = ! empty( $users ) ? implode( ',', array_map( 'intval', $users ) ) : 0;
 					$search = "`user_id` IN( {$users} )";
 

@@ -211,9 +211,10 @@ class Affiliate_WP_Admin_Notices {
 	 * Dismiss admin notices when Dismiss links are clicked
 	 *
 	 * @since 1.7.5
+	 * @access public
 	 * @return void
 	 */
-	function dismiss_notices() {
+	public function dismiss_notices() {
 		if( ! isset( $_GET['affwp_dismiss_notice_nonce'] ) || ! wp_verify_nonce( $_GET['affwp_dismiss_notice_nonce'], 'affwp_dismiss_notice') ) {
 			wp_die( __( 'Security check failed', 'affiliate-wp' ), __( 'Error', 'affiliate-wp' ), array( 'response' => 403 ) );
 		}
@@ -229,6 +230,16 @@ class Affiliate_WP_Admin_Notices {
 				case 'expired_license':
 				case 'invalid_license':
 					set_transient( 'affwp_license_notice', true, 2 * WEEK_IN_SECONDS );
+					break;
+				default:
+					/**
+					 * Fires once a notice has been flagged for dismissal.
+					 *
+					 * @since 1.8
+					 *
+					 * @param string $notice Notice value via $_GET['affwp_notice'].
+					 */
+					do_action( 'dismiss_notices', $notice );
 					break;
 			}
 

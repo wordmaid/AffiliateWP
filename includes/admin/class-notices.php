@@ -231,6 +231,16 @@ class Affiliate_WP_Admin_Notices {
 				case 'invalid_license':
 					set_transient( 'affwp_license_notice', true, 2 * WEEK_IN_SECONDS );
 					break;
+				default:
+					/**
+					 * Fires once a notice has been flagged for dismissal.
+					 *
+					 * @since 1.8
+					 *
+					 * @param string $notice Notice value via $_GET['affwp_notice'].
+					 */
+					do_action( 'dismiss_notices', $notice );
+					break;
 			}
 
 			wp_redirect( remove_query_arg( array( 'affwp_action', 'affwp_notice' ) ) );

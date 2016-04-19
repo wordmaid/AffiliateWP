@@ -32,7 +32,7 @@ function affwp_get_referrals_by_reference() {
  */
 function affwp_get_referrals_by_creatives() {
 
-	// A sub-method must first be crated which optionally tracks creatives
+	// A sub-method must first be created which optionally tracks creatives
 	// via url parameter, for example:
 	// example.com?ref=10&c=2 where the integer 2 in thise case refers to the ID of the
 	// creative which was used.

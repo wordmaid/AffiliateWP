@@ -69,7 +69,6 @@ function affwp_get_reports_tabs() {
 	$tabs['affiliates']    = __( 'Affiliates', 'affiliate-wp' );
 	$tabs['referrals']     = __( 'Referrals', 'affiliate-wp' );
 	$tabs['visits']        = __( 'Visits', 'affiliate-wp' );
-	$tabs['registrations'] = __( 'Affiliate Registrations', 'affiliate-wp' );
 	$tabs['exporter']      = __( 'Exporter', 'affiliate-wp' );
 
 	return apply_filters( 'affwp_reports_tabs', $tabs );
@@ -103,24 +102,86 @@ function affwp_reports_tab_overview() {
 					</h2>
 					<div class="inside">
 						<div class="main">
-							<ul>
-								<li>
-									<h2>
-									<?php echo $affwp_reports_earnings_today . __(' earned today.', 'affiliate-wp' ); ?>
+							<h2>
+								<?php echo $affwp_reports_earnings_today . __(' earned today.', 'affiliate-wp' ); ?>
+							</h2>
+							<table class="affwp_table">
 
-									</h2>
-								</li>
-								<li>
-									<h2>
-									<?php echo __('You\'ve paid out a total of ', 'affiliate-wp' ) . affiliate_wp()->referrals->paid_earnings( '' ) . __(' all-time.', 'affiliate-wp' ); ?>
-									</h2>
-								</li>
-								<li>
-									<h2>
-										<?php echo __('You have a total of ', 'affiliate-wp' ) . affiliate_wp()->referrals->unpaid_earnings( '' ) . __(' pending payment.', 'affiliate-wp' ); ?>
-									</h2>
-								</li>
-							</ul>
+								<thead>
+
+									<tr>
+
+										<th><?php _e( 'Paid Earnings', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Paid Earnings This Month', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Paid Earnings Today', 'affiliate-wp' ); ?></th>
+
+									</tr>
+
+								</thead>
+
+								<tbody>
+
+									<tr>
+										<td><?php echo affiliate_wp()->referrals->paid_earnings(); ?></td>
+										<td><?php echo affiliate_wp()->referrals->paid_earnings( 'month' ); ?></td>
+										<td><?php echo affiliate_wp()->referrals->paid_earnings( 'today' ); ?></td>
+									</tr>
+
+								</tbody>
+
+							</table>
+
+							<table class="affwp_table">
+
+								<thead>
+
+									<tr>
+
+										<th><?php _e( 'Unpaid Referrals', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Unpaid Referrals This Month', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Unpaid Referrals Today', 'affiliate-wp' ); ?></th>
+
+									</tr>
+
+								</thead>
+
+								<tbody>
+
+									<tr>
+										<td><?php echo affiliate_wp()->referrals->unpaid_count(); ?></td>
+										<td><?php echo affiliate_wp()->referrals->unpaid_count( 'month' ); ?></td>
+										<td><?php echo affiliate_wp()->referrals->unpaid_count( 'today' ); ?></td>
+									</tr>
+
+								</tbody>
+
+							</table>
+							<table class="affwp_table">
+
+								<thead>
+
+									<tr>
+
+										<th><?php _e( 'Unpaid Earnings', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Unpaid Earnings This Month', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Unpaid Earnings Today', 'affiliate-wp' ); ?></th>
+
+									</tr>
+
+								</thead>
+
+								<tbody>
+
+									<tr>
+										<td><?php echo affiliate_wp()->referrals->unpaid_earnings(); ?></td>
+										<td><?php echo affiliate_wp()->referrals->unpaid_earnings( 'month' ); ?></td>
+										<td><?php echo affiliate_wp()->referrals->unpaid_earnings( 'today' ); ?></td>
+									</tr>
+
+								</tbody>
+
+							</table>
+
 						</div>
 					</div>
 				</div>
@@ -129,8 +190,8 @@ function affwp_reports_tab_overview() {
 		<div id="postbox-container-2" class="postbox-container">
 			<div id="side-sortables" class="meta-box-sortables ui-sortable">
 				<div class="postbox">
-					<button type="button" class="handlediv button-link" aria-expanded="true"><span class="screen-reader-text">Toggle panel: Affiliates</span><span class="toggle-indicator" aria-hidden="false"></span></button>
-					<h2 class="hndle ui-sortable-handle"><span>Affiliates</span></h2>
+					<button type="button" class="handlediv button-link" aria-expanded="true"><span class="screen-reader-text">Toggle panel: Top Affiliates</span><span class="toggle-indicator" aria-hidden="false"></span></button>
+					<h2 class="hndle ui-sortable-handle"><span>Top Affiliates</span></h2>
 					<div class="inside">
 						<div class="main">
 							<?php
@@ -159,18 +220,23 @@ function affwp_reports_tab_overview() {
 										echo __('To show this information, you\'ll need to install the', 'affiliate-wp' ) . '<a href="https://wordpress.org/plugins/affiliatewp-leaderboard/" target="_blank">AffiliateWP Leaderboard add-on.</a>';
 									}
 									?>
-									<hr />
-									<h3>
-										<?php echo __( 'References', 'affiliate-wp' ); ?>
-									</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="postbox-container-2" class="postbox-container">
+			<div id="side-sortables" class="meta-box-sortables ui-sortable">
+				<div class="postbox">
+					<button type="button" class="handlediv button-link" aria-expanded="true"><span class="screen-reader-text">Toggle panel: Top Performers</span><span class="toggle-indicator" aria-hidden="false"></span></button>
+					<h2 class="hndle ui-sortable-handle"><span>Top Performers</span></h2>
+					<div class="inside">
+						<div class="main">
+							<h3>
+								<?php echo __( 'References', 'affiliate-wp' ); ?>
+							</h3>
 
-									<?php echo affwp_get_referrals_by_reference(); ?>
-
-									<hr />
-									<h3>
-										<?php echo __( 'Creatives', 'affiliate-wp' ); ?>
-									</h3>
-									<?php echo affwp_get_referrals_by_creatives(); ?>
+							<?php echo affwp_get_referrals_by_reference(); ?>
 						</div>
 					</div>
 				</div>

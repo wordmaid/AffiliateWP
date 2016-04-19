@@ -194,32 +194,44 @@ function affwp_reports_tab_overview() {
 					<h2 class="hndle ui-sortable-handle"><span>Top Affiliates</span></h2>
 					<div class="inside">
 						<div class="main">
-							<?php
+							<?php $highest_earner = affiliate_wp()->affiliates->get_affiliates( apply_filters( 'affwp_overview_most_valuable_affiliates', array( 'number' => 1, 'orderby' => 'earnings', 'order' => 'DESC' ) ) ); ?>
+							<h2>
+								<?php echo  $highest_earner . __( ' is your highest-earning affiliate.', 'affiliate-wp' ); ?>
+							</h2>
+							<hr />
+							<?php echo __( 'Top five affiliates:', 'affiliate-wp' ); ?>
+							<?php $affiliates = affiliate_wp()->affiliates->get_affiliates( apply_filters( 'affwp_overview_most_valuable_affiliates', array( 'number' => 5, 'orderby' => 'earnings', 'order' => 'DESC' ) ) ); ?>
+							<table class="affwp_table">
 
-								/**
-								 * An inline call to shortcode_exists is used below, and makes me
-								 * cringe.
-								 * If this data will be included, some better options may be:
-								 * 1. Adding some manner of the leaderboard functionality into core.
-								 * 2. Adding a general-purpose add-on exists-checker method, which
-								 * can be referenced here, using the slug of the add-on
-								 * as a parameter, eg:
-								 *
-								 * affwp_addon_exists( 'affiliatewp_leaderboard' )
-								 *
-								 */
+								<thead>
 
-								if ( class_exists( 'AffiliateWP_Leaderboard' ) && shortcode_exists( 'affiliate_leaderboard' ) ) { ?>
+									<tr>
+										<th><?php _e( 'Affiliate', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Earnings', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Referrals', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Visits', 'affiliate-wp' ); ?></th>
+									</tr>
 
-									<h3>
-										<?php echo __( 'Affiliates', 'affiliate-wp' ); ?>
-									</h3>
-									<?php
-										echo do_shortcode( '[affiliate_leaderboard referrals="yes" earnings="yes" visits="yes"]' );
-									} else {
-										echo __('To show this information, you\'ll need to install the', 'affiliate-wp' ) . '<a href="https://wordpress.org/plugins/affiliatewp-leaderboard/" target="_blank">AffiliateWP Leaderboard add-on.</a>';
-									}
-									?>
+								</thead>
+
+								<tbody>
+								<?php if( $affiliates ) : ?>
+									<?php foreach( $affiliates as $affiliate  ) : ?>
+										<tr>
+											<td><?php echo affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id ); ?></td>
+											<td><?php echo affwp_currency_filter( $affiliate->earnings ); ?></td>
+											<td><?php echo absint( $affiliate->referrals ); ?></td>
+											<td><?php echo absint( $affiliate->visits ); ?></td>
+										</tr>
+									<?php endforeach; ?>
+								<?php else : ?>
+									<tr>
+										<td colspan="4"><?php _e( 'No registered affiliates', 'affiliate-wp' ); ?></td>
+									</tr>
+								<?php endif; ?>
+								</tbody>
+
+							</table>
 						</div>
 					</div>
 				</div>

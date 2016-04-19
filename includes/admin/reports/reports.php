@@ -92,13 +92,13 @@ function affwp_reports_tab_overview() {
 				<div class="postbox">
 					<button type="button" class="handlediv button-link" aria-expanded="true">
 						<span class="screen-reader-text">
-							Toggle panel: Affiliates At a Glance
+							Toggle panel: Referrals and Earnings
 						</span>
 						<span class="toggle-indicator" aria-hidden="false"></span>
 					</button>
 					<h2 class="hndle ui-sortable-handle">
 						<span>
-							Affiliates at a Glance
+							Referrals and Earnings
 						</span>
 					</h2>
 					<div class="inside">
@@ -129,8 +129,8 @@ function affwp_reports_tab_overview() {
 		<div id="postbox-container-2" class="postbox-container">
 			<div id="side-sortables" class="meta-box-sortables ui-sortable">
 				<div class="postbox">
-					<button type="button" class="handlediv button-link" aria-expanded="true"><span class="screen-reader-text">Toggle panel: Top Performers</span><span class="toggle-indicator" aria-hidden="false"></span></button>
-					<h2 class="hndle ui-sortable-handle"><span>Top Performers</span></h2>
+					<button type="button" class="handlediv button-link" aria-expanded="true"><span class="screen-reader-text">Toggle panel: Affiliates</span><span class="toggle-indicator" aria-hidden="false"></span></button>
+					<h2 class="hndle ui-sortable-handle"><span>Affiliates</span></h2>
 					<div class="inside">
 						<div class="main">
 							<?php

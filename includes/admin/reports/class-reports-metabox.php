@@ -13,6 +13,31 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Affiliate_WP_Reports_Metabox_Base {
+abstract class Affiliate_WP_Reports_Metabox_Base {
+
+	/**
+	 * Constructor
+	 *
+	 * @access  public
+	 * @since   1.8
+	 */
+	public function __construct() {
+
+		$this->init();
+
+	}
+
+	/**
+	 * Gets things started
+	 *
+	 * @access  public
+	 * @since   1.8
+	 * @return  void
+	 */
+	public function init() {
+
+	}
+
+
 
 }

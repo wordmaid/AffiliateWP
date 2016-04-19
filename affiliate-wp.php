@@ -239,11 +239,12 @@ final class Affiliate_WP {
 	/**
 	 * Show a warning to sites running PHP < 5.3
 	 *
+	 * @static
 	 * @access private
 	 * @since 1.0
 	 * @return void
 	 */
-	public function below_php_version_notice() {
+	public static function below_php_version_notice() {
 		echo '<div class="error"><p>' . __( 'Your version of PHP is below the minimum version of PHP required by AffiliateWP. Please contact your host and request that your version be upgraded to 5.3 or later.', 'affiliate-wp' ) . '</p></div>';
 	}
 

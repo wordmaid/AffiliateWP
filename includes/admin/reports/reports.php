@@ -194,7 +194,7 @@ function affwp_reports_tab_overview() {
 					<h2 class="hndle ui-sortable-handle"><span>Top Affiliates</span></h2>
 					<div class="inside">
 						<div class="main">
-							<?php $highest_earner = affiliate_wp()->affiliates->get_affiliates( apply_filters( 'affwp_overview_most_valuable_affiliates', array( 'number' => 1, 'orderby' => 'earnings', 'order' => 'DESC' ) ) ); ?>
+							<?php $highest_earner = 'Joey Joe Joe'; ?>
 							<h2>
 								<?php echo  $highest_earner . __( ' is your highest-earning affiliate.', 'affiliate-wp' ); ?>
 							</h2>

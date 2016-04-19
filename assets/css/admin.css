@@ -131,7 +131,9 @@ table.affwp_table td a {
 	font-size: 13px;
 	line-height: 2.1em;
 }
-
+#affwp-referrals-filter-form select.affwp-referrals-campaign {
+	float: none;
+}
 .affwp-status.pending i,
 .affwp-status.unpaid i,
 .affwp-status.paid i,

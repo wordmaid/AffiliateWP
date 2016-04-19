@@ -446,6 +446,20 @@ class AffWP_Referrals_Table extends WP_List_Table {
 
 			echo "<input type='text' class='affwp-datepicker' autocomplete='off' name='filter_from' placeholder='" . __( 'From - mm/dd/yyyy', 'affiliate-wp' ) . "' value='" . $from . "'/>";
 			echo "<input type='text' class='affwp-datepicker' autocomplete='off' name='filter_to' placeholder='" . __( 'To - mm/dd/yyyy', 'affiliate-wp' ) . "' value='" . $to . "'/>&nbsp;";
+			
+			$affiliate_id = ! empty( $_REQUEST['affiliate_id'] ) ? absint( $_REQUEST['affiliate_id'] ) : 0;
+			$campaigns    = affiliate_wp()->campaigns->get_campaigns( $affiliate_id );
+			if( $campaigns ) {
+				echo "<select class='affwp-referrals-campaign' name='campaign'>";
+					echo "<option>" . __( 'Campaign', 'affiliate-wp' ) . "</option>";
+					foreach( $campaigns as $campaign ) {
+						if( empty( $campaign->campaign ) ) {
+							continue;
+						}
+						echo "<option value='" . esc_attr( $campaign->campaign ) . "'>" . esc_html( $campaign->campaign . "(" . $campaign->referrals . ")" ) . "</option>";
+					}
+				echo "</select>";
+			}
 
 			do_action( 'affwp_referral_filters' );
 

@@ -66,7 +66,7 @@ function affwp_get_reports_tabs() {
 
 	$tabs                  = array();
 	$tabs['overview']      = __( 'Overview', 'affiliate-wp' );
-	$tabs['detail']        = __( 'Detail', 'affiliate-wp' );
+	$tabs['affiliates']    = __( 'Affiliates', 'affiliate-wp' );
 	$tabs['referrals']     = __( 'Referrals', 'affiliate-wp' );
 	$tabs['visits']        = __( 'Visits', 'affiliate-wp' );
 	$tabs['registrations'] = __( 'Affiliate Registrations', 'affiliate-wp' );
@@ -193,14 +193,14 @@ add_action( 'affwp_reports_tab_overview', 'affwp_reports_tab_overview' );
  * @since 1.8
  * @return void
  */
-function affwp_reports_tab_detail() {
+function affwp_reports_tab_affiliates() {
 
 	$reports_table = new AffWP_Reports_Table();
 	$reports_table->prepare_items();
 	$reports_table->views();
 	$reports_table->display();
 }
-add_action('affwp_reports_tab_detail','affwp_reports_tab_detail' );
+add_action('affwp_reports_tab_affiliates','affwp_reports_tab_affiliates' );
 
 /**
  * Display the referrals reports tab

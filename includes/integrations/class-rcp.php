@@ -219,22 +219,37 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 	*/
 	public function store_discount_affiliate( $args, $discount_id = 0 ) {
 
-		if( empty( $_POST['user_id'] ) && empty( $_POST['user_name'] ) ) {
+		if ( empty( $_POST['user_id'] ) && empty( $_POST['user_name'] ) ) {
 			return;
 		}
 
-		if( empty( $_POST['user_id'] ) ) {
+		// Get the user ID. Always retrieve the user ID from the posted user_name field
+		if ( ! empty( $_POST['user_name'] ) ) {
+
+			// get user
 			$user = get_user_by( 'login', $_POST['user_name'] );
-			if( $user ) {
-				$user_id = $user->ID;
+
+			// If user exists
+			if ( $user ) {
+				// Make sure they are a valid affiliate
+				if ( affwp_is_affiliate( $user->ID ) ) {
+					$user_id = absint( $user->ID );
+				}
+
+			} else {
+				// No user ID
+				$user_id = '';
 			}
+
 		} else {
-			$user_id = absint( $_POST['user_id'] );
+			// No user ID
+			$user_id = '';
 		}
 
 		$affiliate_id = affwp_get_affiliate_id( $user_id );
 
 		update_user_meta( $user_id, 'affwp_discount_rcp_' . $discount_id, $affiliate_id );
+
 	}
 
 	/**

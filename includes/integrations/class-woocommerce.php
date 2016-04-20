@@ -229,15 +229,21 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Mark referral as complete when payment is completed
+	 * Marks a referral as complete when payment is completed.
 	 *
-	 * @access  public
-	 * @since   1.0
-	*/
+	 * @since 1.0
+	 * @since 1.8 Orders that are COD and 'wc-processing' status are now skipped from "completion".
+	 * @access public
+	 */
 	public function mark_referral_complete( $order_id = 0 ) {
+		// If the WC status is 'wc-processing' and a COD order, leave as 'pending'.
+		if ( current_action( 'woocommerce_order_status_processing' )
+		     && 'cod' === get_post_meta( $order_id, '_payment_method', true )
+		) {
+			return;
+		}
 
 		$this->complete_referral( $order_id );
-
 	}
 
 	/**

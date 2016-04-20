@@ -239,7 +239,7 @@ class Affiliate_WP_Admin_Notices {
 					 *
 					 * @param string $notice Notice value via $_GET['affwp_notice'].
 					 */
-					do_action( 'dismiss_notices', $notice );
+					do_action( 'affwp_dismiss_notices', $notice );
 					break;
 			}
 

@@ -28,7 +28,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 * @access public
 	 *
 	 * @param int|object|AFFWP_Affiliate $affiliate Affiliate ID or object.
-	 * @return AFFWP_Affiliate|false Affiliate object, otherwise false.
+	 * @return AFFWP_Affiliate|null Affiliate object, null otherwise.
 	 */
 	public function get_affiliate( $affiliate ) {
 		if ( $affiliate instanceof AFFWP_Affiliate ) {
@@ -44,7 +44,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		}
 
 		if ( ! $_affiliate ) {
-			return false;
+			return null;
 		}
 
 		return $_affiliate;

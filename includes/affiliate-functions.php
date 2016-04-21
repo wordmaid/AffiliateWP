@@ -137,7 +137,7 @@ function affwp_get_affiliate( $affiliate ) {
 
 	if( false === $affiliate ) {
 
-		$affiliate = affiliate_wp()->affiliates->get( $affiliate_id );
+		$affiliate = affiliate_wp()->affiliates->get_affiliate( $affiliate_id );
 
 	}
 

@@ -287,6 +287,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 						)
 					);
 
+					$results = array_map( 'affwp_get_affiliate', $results );
 				} else {
 
 					$results = $wpdb->get_results(
@@ -297,6 +298,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 						)
 					);
 
+					$results = array_map( 'affwp_get_affiliate', $results );
 				}
 
 			}

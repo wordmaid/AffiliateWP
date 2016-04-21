@@ -322,9 +322,8 @@ function affwp_get_affiliate_rate_type( $affiliate_id = 0 ) {
 	$type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
 
 	$affiliate_rate_type = affiliate_wp()->affiliates->get_column( 'rate_type', $affiliate_id );
-	$affiliate_rate      = affiliate_wp()->affiliates->get_column( 'rate', $affiliate_id );
 
-	if ( ! empty( $affiliate_rate_type ) && ! empty( $affiliate_rate ) ) {
+	if ( ! empty( $affiliate_rate_type ) ) {
 
 		$type = $affiliate_rate_type;
 

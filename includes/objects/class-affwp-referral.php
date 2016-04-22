@@ -130,28 +130,16 @@ final class AffWP_Referral extends AffWP_Object {
 	public static $cache_token = 'affwp_referrals';
 
 	/**
-	 * Referrals cache group.
+	 * Object type.
+	 *
+	 * Used as the cache group and for accessing object DB classes in the parent.
 	 *
 	 * @since 1.9
 	 * @access public
 	 * @static
 	 * @var string
 	 */
-	public static $cache_group = 'referrals';
-
-	/**
-	 * Retrieves a referral based on a referral ID.
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @static
-	 *
-	 * @param int $referral_id Referral ID.
-	 * @return AffWP_Referral|null Affiliate object or null if it doesn't exist,
-	 */
-	public static function get( $referral_id ) {
-		return affiliate_wp()->referrals->get( $referral_id );
-	}
+	public static $object_type = 'referrals';
 
 	/**
 	 * Sanitizes a referral object field.

@@ -85,28 +85,16 @@ final class AffWP_Creative extends AffWP_Object {
 	public static $cache_token = 'affwp_creatives';
 
 	/**
-	 * Creatives cache group.
+	 * Object type.
+	 *
+	 * Used as the cache group and for accessing object DB classes in the parent.
 	 *
 	 * @since 1.9
 	 * @access public
 	 * @static
 	 * @var string
 	 */
-	public static $cache_group = 'creatives';
-
-	/**
-	 * Retrieves an affiliate based on an affiliate ID.
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @static
-	 *
-	 * @param int $creative_id Creative ID.
-	 * @return AffWP_Creative|null Creative object or null if it doesn't exist,
-	 */
-	public static function get( $creative_id ) {
-		return affiliate_wp()->creatives->get( $creative_id );
-	}
+	public static $object_type = 'creatives';
 
 	/**
 	 * Sanitizes a creative object field.

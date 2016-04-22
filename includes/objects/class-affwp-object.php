@@ -30,10 +30,12 @@ abstract class AffWP_Object {
 
 		$cache_key = md5( $subClass::$cache_token . '_' . $object_id );
 
-		$_object = wp_cache_get( $cache_key, $subClass::$cache_group );
+		$_object = wp_cache_get( $cache_key, $subClass::$object_type );
 
 		if ( false === $_object ) {
-			$_object = static::get( $object_id );
+			$object_type = $subClass::$object_type;
+
+			$_object = affiliate_wp()->$object_type->get( $object_id );
 
 			if ( ! $_object ) {
 				return false;
@@ -41,27 +43,12 @@ abstract class AffWP_Object {
 
 			$_object = self::fill_vars( $_object );
 
-			wp_cache_add( $cache_key, $subClass::$cache_group );
+			wp_cache_add( $cache_key, $subClass::$object_type );
 		} elseif ( empty( $_object->filled ) ) {
 			$_object = self::fill_vars( $_object );
 		}
 		return new $subClass( $_object );
 	}
-
-	/**
-	 * Retrieves an object based on ID.
-	 *
-	 * Sub-classes must override this method.
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @abstract
-	 * @static
-	 *
-	 * @param int $object_id Object ID.
-	 * @return object|null Object corresponding to the given ID. Null if it doesn't exist,
-	 */
-	abstract public static function get( $object_id );
 
 	/**
 	 * Object constructor.

@@ -85,28 +85,16 @@ final class AffWP_Visit extends AffWP_Object {
 	public static $cache_token = 'affwp_visits';
 
 	/**
-	 * Visits cache group.
+	 * Object type.
+	 *
+	 * Used as the cache group and for accessing object DB classes in the parent.
 	 *
 	 * @since 1.9
 	 * @access public
 	 * @static
 	 * @var string
 	 */
-	public static $cache_group = 'visits';
-
-	/**
-	 * Retrieves a visit based on a visit ID.
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @static
-	 *
-	 * @param int $visit_id Visit ID.
-	 * @return AffWP_Visit|null Affiliate object or null if it doesn't exist,
-	 */
-	public static function get( $visit_id ) {
-		return affiliate_wp()->visits->get( $visit_id );
-	}
+	public static $object_type = 'visits';
 
 	/**
 	 * Sanitizes a visit object field.

@@ -286,9 +286,11 @@ final class Affiliate_WP {
 	 */
 	private function includes() {
 
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-object.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-affiliate.php';
+
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/actions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/settings/class-settings.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-affiliate.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affiliates-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-capabilities.php';

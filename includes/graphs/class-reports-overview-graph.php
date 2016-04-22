@@ -18,7 +18,7 @@ class Affiliate_WP_Reports_Overview_Graph extends Affiliate_WP_Graph {
 		// Generate unique ID
 		$this->id   = md5( rand() );
 
-		// Setup default options;
+		// Setup default options
 		$this->options = array(
 			'y_mode'          => null,
 			'y_decimals'      => 0,
@@ -41,9 +41,9 @@ class Affiliate_WP_Reports_Overview_Graph extends Affiliate_WP_Graph {
 	}
 
 	/**
-	 * Retrieve referral data
-	 *
-	 * @since 1.0
+	 * Retrieve overview data
+	 * Gets a combination of referrals, registrations, and visits
+	 * @since 1.8
 	 */
 	public function get_data() {
 
@@ -63,6 +63,7 @@ class Affiliate_WP_Reports_Overview_Graph extends Affiliate_WP_Graph {
 
 		//echo '<pre>'; print_r( $date ); echo '</pre>'; exit;
 
+		// Get referral graph data
 		$referrals = affiliate_wp()->referrals->get_referrals( array(
 			'orderby'      => 'date',
 			'order'        => 'ASC',
@@ -112,6 +113,7 @@ class Affiliate_WP_Reports_Overview_Graph extends Affiliate_WP_Graph {
 			}
 		}
 
+		// Get affiliate registration data
 		$affiliates = affiliate_wp()->affiliates->get_affiliates( array(
 			'orderby'  => 'date_registered',
 			'order'    => 'ASC',
@@ -158,12 +160,14 @@ class Affiliate_WP_Reports_Overview_Graph extends Affiliate_WP_Graph {
 
 		}
 
+
+
 		$data = array(
 			__( 'Unpaid Referral Earnings', 'affiliate-wp' )   => $unpaid,
 			__( 'Pending Referral Earnings', 'affiliate-wp' )  => $pending,
 			__( 'Rejected Referral Earnings', 'affiliate-wp' ) => $rejected,
 			__( 'Paid Referral Earnings', 'affiliate-wp' )     => $paid,
-			__( 'Affiliate Registrations', 'affiliate-wp' )    => $affiliate_data
+			__( 'Affiliate Registrations', 'affiliate-wp' )    => $affiliate_data,
 		);
 
 		return $data;

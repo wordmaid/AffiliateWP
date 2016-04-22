@@ -12,7 +12,7 @@ abstract class AffWP_Object {
 	protected $filled = null;
 
 	/**
-	 * Retrieves the AffWP_Affiliate instance.
+	 * Retrieves the object instance.
 	 *
 	 * @since 1.9
 	 * @access public

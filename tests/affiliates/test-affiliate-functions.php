@@ -183,7 +183,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_user_id()
 	 */
 	public function test_get_affiliate_user_id_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_user_id( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_user_id( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -215,14 +215,14 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate()
 	 */
 	public function test_get_affiliate_passed_invalid_id_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate( null ) );
+		$this->assertFalse( affwp_get_affiliate() );
 	}
 
 	/**
 	 * @covers affwp_get_affiliate()
 	 */
 	public function test_get_affiliate_passed_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate( null ) );
+		$this->assertFalse( affwp_get_affiliate() );
 	}
 
 	/**
@@ -256,7 +256,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_status()
 	 */
 	public function test_get_affiliate_status_passed_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_status( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_status( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -537,7 +537,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_email()
 	 */
 	public function test_get_affiliate_email_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_email( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_email( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -563,7 +563,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_email()
 	 */
 	public function test_get_affiliate_email_with_invalid_affiliate_object_and_default_not_false_should_return_default() {
-		$this->assertSame( $this->rand_email, affwp_get_affiliate_email( affwp_get_affiliate( null ), $this->rand_email ) );
+		$this->assertSame( $this->rand_email, affwp_get_affiliate_email( affwp_get_affiliate(), $this->rand_email ) );
 	}
 
 	/**
@@ -637,7 +637,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_payment_email()
 	 */
 	public function test_get_affiliate_payment_email_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_payment_email( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_payment_email( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -714,7 +714,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_login()
 	 */
 	public function test_get_affiliate_login_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_login( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_login( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -738,7 +738,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_login()
 	 */
 	public function test_get_affiliate_login_with_invalid_affiliate_object_and_default_not_false_should_return_default() {
-		$this->assertSame( $this->rand_str, affwp_get_affiliate_login( affwp_get_affiliate( null ), $this->rand_str ) );
+		$this->assertSame( $this->rand_str, affwp_get_affiliate_login( affwp_get_affiliate(), $this->rand_str ) );
 	}
 
 	/**
@@ -759,7 +759,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_delete_affiliate()
 	 */
 	public function test_delete_affiliate_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_delete_affiliate( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_delete_affiliate( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -840,7 +840,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_earnings()
 	 */
 	public function test_get_affiliate_earnings_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_earnings( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_earnings( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -892,7 +892,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_unpaid_earnings()
 	 */
 	public function test_get_affiliate_unpaid_earnings_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_unpaid_earnings( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_unpaid_earnings( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -980,7 +980,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_referral_count()
 	 */
 	public function test_get_affiliate_referral_count_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_referral_count( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_referral_count( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -1043,7 +1043,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_visit_count()
 	 */
 	public function test_get_affiliate_visit_count_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_visit_count( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_visit_count( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -1113,7 +1113,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_conversion_rate()
 	 */
 	public function test_get_affiliate_conversion_rate_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_conversion_rate( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_conversion_rate( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -1142,7 +1142,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate_campaigns()
 	 */
 	public function test_get_affiliate_campaigns_with_invalid_affiliate_object_should_return_false() {
-		$this->assertFalse( affwp_get_affiliate_campaigns( affwp_get_affiliate( null ) ) );
+		$this->assertFalse( affwp_get_affiliate_campaigns( affwp_get_affiliate() ) );
 	}
 
 	/**

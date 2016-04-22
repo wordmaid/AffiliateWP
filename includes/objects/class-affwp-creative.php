@@ -92,7 +92,7 @@ final class AffWP_Creative extends AffWP_Object {
 	 * @static
 	 * @var string
 	 */
-	public static $cache_group = 'creative';
+	public static $cache_group = 'creatives';
 
 	/**
 	 * Retrieves an affiliate based on an affiliate ID.

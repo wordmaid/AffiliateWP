@@ -137,7 +137,7 @@ final class AffWP_Referral extends AffWP_Object {
 	 * @static
 	 * @var string
 	 */
-	public static $cache_group = 'creative';
+	public static $cache_group = 'referrals';
 
 	/**
 	 * Retrieves a referral based on a referral ID.

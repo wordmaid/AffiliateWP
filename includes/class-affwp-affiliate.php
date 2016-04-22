@@ -163,7 +163,7 @@ final class AFFWP_Affiliate {
 			}
 
 			foreach ( array_keys( get_object_vars( $affiliate ) ) as $field ) {
-				$affiliate->$field = self::sanitize_field( $field, $affiliate->$field, $affiliate->affiliate_id );
+				$affiliate->$field = self::sanitize_field( $field, $affiliate->$field );
 				$affiliate->filled = true;
 			}
 		} elseif ( is_array( $affiliate ) ) {
@@ -172,7 +172,7 @@ final class AFFWP_Affiliate {
 			}
 
 			foreach ( array_keys( $affiliate ) as $field ) {
-				$affiliate[ $field ] = self::sanitize_field( $field, $affiliate[ $field ], $affiliate['affiliate_id'] );
+				$affiliate[ $field ] = self::sanitize_field( $field, $affiliate[ $field ] );
 				$affiliate['filled'] = true;
 			}
 		}
@@ -188,10 +188,9 @@ final class AFFWP_Affiliate {
 	 *
 	 * @param string $field        Object field.
 	 * @param mixed  $value        Field value.
-	 * @param int    $affiliate_id Affiliate ID.
 	 * @return mixed Sanitized field value.
 	 */
-	private static function sanitize_field( $field, $value, $affiliate_id ) {
+	private static function sanitize_field( $field, $value ) {
 		if ( in_array( $field, array( 'affiliate_id', 'user_id', 'referrals', 'visits' ) ) ) {
 			$value = (int) $value;
 		}

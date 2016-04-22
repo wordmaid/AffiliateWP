@@ -28,8 +28,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 * @access public
 	 *
 	 * @param int|object|AffWP_Affiliate $affiliate Affiliate ID or object.
-	 * 
-*@return AffWP_Affiliate|null Affiliate object, null otherwise.
+	 * @return AffWP_Affiliate|null Affiliate object, null otherwise.
 	 */
 	public function get_affiliate( $affiliate ) {
 		if ( $affiliate instanceof AffWP_Affiliate ) {

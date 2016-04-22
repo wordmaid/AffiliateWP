@@ -43,7 +43,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * Affiliate test object.
 	 *
 	 * @access protected
-	 * @var stdClass
+	 * @var AFFWP_Affiliate
 	 */
 	protected $_affiliate_object;
 
@@ -51,7 +51,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * Affiliate test object 2.
 	 *
 	 * @access protected
-	 * @var stdClass
+	 * @var AFFWP_Affiliate
 	 */
 	protected $_affiliate_object_2;
 

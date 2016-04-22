@@ -18,6 +18,8 @@
  */
 function affwp_get_referrals_by_reference() {
 
+	// if ( affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context ) ) {
+
 	$references = 'This method will return referrals by the best-performing reference.';
 	return $references;
 }

@@ -33,7 +33,7 @@ class Affiliate_WP_Reports_Exporter {
 	<div id="affwp-dashboard-widgets-wrap">
 		<div class="metabox-holder">
 			<div class="postbox">
-					<h3><span><?php _e( 'Export a Report', 'affiliate-wp' ); ?></span></h3>
+					<h3><span><?php _e( 'Export this Report', 'affiliate-wp' ); ?></span></h3>
 					<div class="inside">
 						<p><?php _e( 'Export a report to a CSV file.', 'affiliate-wp' ); ?></p>
 						<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab=exporter' ); ?>">
@@ -53,7 +53,6 @@ class Affiliate_WP_Reports_Exporter {
 									<option value="rejected"><?php _e( 'Rejected', 'affiliate-wp' ); ?></option>
 								</select>
 								<div id="affwp_user_search_results"></div>
-								<div class="description"><?php _e( 'To search for an affiliate, enter the affiliate\'s login name, first name, or last name. Leave blank to export a report for all affiliates.', 'affiliate-wp' ); ?></div>
 							</p>
 							<p>
 								<input type="hidden" name="affwp_action" value="export_report" />

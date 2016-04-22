@@ -1,6 +1,6 @@
 <?php
 
-final class AFFWP_Affiliate {
+final class AffWP_Affiliate {
 
 	/**
 	 * Affiliate ID.
@@ -98,15 +98,14 @@ final class AFFWP_Affiliate {
 	public $filled = null;
 
 	/**
-	 * Retrieves the AFFWP_Affiliate instance.
+	 * Retrieves the AffWP_Affiliate instance.
 	 *
 	 * @since 1.9
 	 * @access public
 	 * @static
 	 *
 	 * @param int Affiliate ID.
-	 *
-	 * @return AFFWP_Affiliate|false AFFWP_Affiliate instance or false.
+	 * @return AffWP_Affiliate|false AffWP_Affiliate instance or false.
 	 */
 	public static function get_instance( $affiliate_id ) {
 		if ( ! (int) $affiliate_id ) {
@@ -129,16 +128,16 @@ final class AFFWP_Affiliate {
 		} elseif ( empty( $_affiliate->filled ) ) {
 			$_affiliate = self::fill_vars( $_affiliate );
 		}
-		return new AFFWP_Affiliate( $_affiliate );
+		return new AffWP_Affiliate( $_affiliate );
 	}
 
 	/**
-	 * AFFWP_Affiliate constructor.
+	 * AffWP_Affiliate constructor.
 	 *
 	 * @since 1.9
 	 * @access public
 	 *
-	 * @param AFFWP_Affiliate $affiliate Affiliate object.
+	 * @param AffWP_Affiliate $affiliate Affiliate object.
 	 */
 	public function __construct( $affiliate ) {
 		foreach ( get_object_vars( $affiliate ) as $key => $value ) {
@@ -153,11 +152,11 @@ final class AFFWP_Affiliate {
 	 * @access private
 	 * @static
 	 *
-	 * @param AFFWP_Affiliate|array $affiliate Affiliate object or array of affiliate data.
-	 * @return AFFWP_Affiliate|array Affiliate object or data array with filled members.
+	 * @param AffWP_Affiliate|array $affiliate Affiliate object or array of affiliate data.
+	 * @return AffWP_Affiliate|array Affiliate object or data array with filled members.
 	 */
 	private static function fill_vars( $affiliate ) {
-		if ( ( $affiliate instanceof AFFWP_Affiliate ) || is_object( $affiliate ) ) {
+		if ( ( $affiliate instanceof AffWP_Affiliate ) || is_object( $affiliate ) ) {
 			if ( isset( $affiliate->filled ) ) {
 				return $affiliate;
 			}

@@ -43,7 +43,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * Affiliate test object.
 	 *
 	 * @access protected
-	 * @var AFFWP_Affiliate
+	 * @var AffWP_Affiliate
 	 */
 	protected $_affiliate_object;
 
@@ -51,7 +51,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * Affiliate test object 2.
 	 *
 	 * @access protected
-	 * @var AFFWP_Affiliate
+	 * @var AffWP_Affiliate
 	 */
 	protected $_affiliate_object_2;
 
@@ -207,7 +207,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$affiliate = affiliate_wp()->affiliates->get_affiliate( $this->_affiliate_id );
 		$affiliate = affwp_get_affiliate( $affiliate );
 
-		$this->assertInstanceOf( 'AFFWP_Affiliate', $affiliate );
+		$this->assertInstanceOf( 'AffWP_Affiliate', $affiliate );
 		$this->assertEquals( $this->_affiliate_id, $affiliate->affiliate_id );
 	}
 

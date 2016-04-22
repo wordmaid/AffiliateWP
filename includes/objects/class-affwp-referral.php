@@ -1,12 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Drew
- * Date: 4/22/16
- * Time: 9:48 AM
- */
-class AffWP_Referral extends AffWP_Object {
+final class AffWP_Referral extends AffWP_Object {
 
 	/**
 	 * Referral ID.

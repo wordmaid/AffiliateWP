@@ -102,6 +102,14 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 */
 	public static $cache_token = 'affwp_affiliates';
 
+	/**
+	 * Affiliates cache group.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @static
+	 * @var string
+	 */
 	public static $cache_group = 'affiliates';
 
 	/**

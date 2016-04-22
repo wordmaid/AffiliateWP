@@ -229,4 +229,10 @@ jQuery( document ).ready( function( $ ) {
 
 	} );
 
+	// Temporary measure to simulate native WP meta boxes
+	$( '.reports-metabox-holder .button-link' ).on( 'click', function( e ) {
+		e.preventDefault();
+		$( this ).siblings( '.postbox .inside' ).toggle();
+	} );
+
 } );

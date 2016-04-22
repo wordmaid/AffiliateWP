@@ -25,6 +25,16 @@ function affwp_reports_screen_options() {
 		)
 	);
 
+	add_screen_option(
+		'layout_columns',
+		array( 'max' => 2,
+			'default' => 2,
+			'option'  => 'layout_columns'
+		)
+	);
+
+   wp_enqueue_script( 'postbox' );
+
 	do_action( 'affwp_reports_screen_options', $screen );
 
 }

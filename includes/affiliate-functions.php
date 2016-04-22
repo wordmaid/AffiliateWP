@@ -921,11 +921,11 @@ function affwp_update_affiliate( $data = array() ) {
 	 *
 	 * @since 1.8
 	 *
-	 * @param stdClass $affiliate Affiliate object.
-	 * @param array    $args      Prepared affiliate data.
-	 * @param array    $data      Raw affiliate data.
+	 * @param AffWP_Affiliate $affiliate Affiliate object.
+	 * @param array           $args      Prepared affiliate data.
+	 * @param array           $data      Raw affiliate data.
 	 */
-	do_action( 'affwp_update_affiliate', $affiliate, $args, $data );
+	do_action( 'affwp_pre_update_affiliate', $affiliate, $args, $data );
 
 	$updated = affiliate_wp()->affiliates->update( $affiliate_id, $args, '', 'affiliate' );
 

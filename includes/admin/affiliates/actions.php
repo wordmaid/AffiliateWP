@@ -95,6 +95,10 @@ add_action( 'affwp_delete_affiliates', 'affwp_process_affiliate_deletion' );
  */
 function affwp_process_update_affiliate( $data ) {
 
+	if ( is_object( $data ) ) {
+		$data = get_object_vars( $data );
+	}
+
 	if ( empty( $data['affiliate_id'] ) ) {
 		return false;
 	}

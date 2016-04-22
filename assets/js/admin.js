@@ -229,9 +229,4 @@ jQuery( document ).ready( function( $ ) {
 
 	} );
 
-	$( '.reports-metabox-holder .button-link' ).on( 'click', function( e ) {
-		e.preventDefault();
-		$( this ).siblings( '.postbox .inside' ).toggle();
-	} );
-
 } );

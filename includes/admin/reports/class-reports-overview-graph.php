@@ -1,11 +1,15 @@
 <?php
-
+/**
+ * Graph displaying the following data on the Affiliates -> Reports page
+ * @package     AffiliateWP
+ * @subpackage  Admin/Reports
+ */
 class Affiliate_WP_Reports_Overview_Graph extends Affiliate_WP_Graph {
 
 	/**
 	 * Get things started
 	 *
-	 * @since 1.0
+	 * @since 1.8
 	 */
 	public function __construct( $_data = array() ) {
 

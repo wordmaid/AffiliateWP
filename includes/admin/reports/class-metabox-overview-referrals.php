@@ -21,7 +21,7 @@ class AffWP_Reports_Overview extends AffWP_Metabox_Base {
      */
     public function init() {
         add_action( 'add_meta_box',     array( $this, 'add_meta_box' ) );
-        add_action( 'affwp_meta_boxes', array( $this, 'add_meta_box' ) );
+        add_action( 'affwp_reports_meta_boxes', array( $this, 'add_meta_box' ) );
         $this->meta_box_name = __( 'Referrals and Earnings', 'affiliate-wp' );
     }
 

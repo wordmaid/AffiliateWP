@@ -20,7 +20,7 @@ function affwp_reports_screen_options() {
 		'per_page',
 		array(
 			'label'   => __( 'Items per page', 'affiliate-wp' ),
-			'option'  => 'affwp_reports_modules_visibility',
+			'option'  => 'affwp_reports_items_per_page',
 			'default' => 30,
 		)
 	);
@@ -51,7 +51,7 @@ add_action( 'load-affiliates_page_affiliate-wp-reports', 'affwp_reports_screen_o
  */
 function affwp_reports_set_screen_option( $status, $option, $value ) {
 
-	if ( 'affwp_reports_modules_visibility' === $option ) {
+	if ( 'affwp_reports_items_per_page' === $option ) {
 		return $value;
 	}
 

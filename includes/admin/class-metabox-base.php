@@ -85,15 +85,13 @@ abstract class AffWP_Metabox_Base {
 
     /**
      * The position in which the meta box will be loaded
-     * There are no contexts of 'side' or 'advanced' in this case.
-     * However, this variable is defined for potential use in
-     * new AffiliateWP interfaces.
+     * Either 'normal' side'.
      *
-     * @access  private
+     * @access  public
      * @var     $context
      * @since   1.8
      */
-    private $context = 'normal';
+    public $context = 'normal';
 
     /**
      * Constructor

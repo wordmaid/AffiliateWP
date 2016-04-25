@@ -21,6 +21,16 @@ class AffWP_Metabox_Top_Performers extends AffWP_Metabox_Base {
     public $meta_box_name = 'Top Performers';
 
     /**
+     * The position in which the meta box will be loaded
+     * Either 'normal' side'.
+     *
+     * @access  public
+     * @var     $context
+     * @since   1.8
+     */
+    public $context = 'side';
+
+    /**
      * Displays the an overview of earnings in 3 different tables
      *
      * @return mixed content An overview of referrals and earnings

@@ -90,13 +90,19 @@ function affwp_reports_tab_overview() {
 ?>
 
     <div id="dashboard-widgets" class="metabox-holder reports-metabox-holder">
-                <div id="postbox-container-1" class="postbox-container">
-                        <?php   // Reports meta boxes
-                                do_action( 'affwp_reports_meta_boxes' );
-                                do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'normal', null );
-                        ?>
-                    </div>
-                </div>
+        <div id="postbox-container-1" class="postbox-container">
+            <?php   // Reports meta boxes
+                    do_action( 'affwp_reports_meta_boxes' );
+                    do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'normal', null );
+            ?>
+        </div>
+        <div id="postbox-container-2" class="postbox-container">
+            <?php   // Reports meta boxes
+                    do_action( 'affwp_reports_meta_boxes' );
+                    do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'side', null );
+            ?>
+        </div>
+    </div>
 
     <div id="dashboard-widgets" class="metabox-holder reports-metabox-holder">
 
@@ -121,18 +127,13 @@ add_action( 'affwp_reports_tab_overview', 'affwp_reports_tab_overview' );
  */
 function affwp_reports_tab_affiliates() {
 
-    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-reports-list-table.php';
+    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports-list-table.php';
 
     // Output exporter class
     affwp_reports_exporter();
 
-    // Output list table
-    $reports_table = new AffWP_Reports_List_Table();
-    $reports_table->prepare_items();
-    $reports_table->views();
-    $reports_table->display();
 }
-add_action('affwp_reports_tab_affiliates','affwp_reports_tab_affiliates' );
+add_action('affwp_reports_tab_affiliates', 'affwp_reports_tab_affiliates' );
 
 /**
  * Display the referrals reports tab
@@ -273,16 +274,38 @@ function affwp_reports_tab_visits() {
 add_action( 'affwp_reports_tab_visits', 'affwp_reports_tab_visits' );
 
 /**
- * Display the affiliate reports exporter
+ * Report Export form
  *
- * @since 1.8
- * @return void
- */
+ * Renders the following:
+ *     Reports export filters
+ *     Reports affiliate list table
+ *
+ * @access      private
+ * @since       1.8
+ * @return      void
+*/
 function affwp_reports_exporter() {
 
-    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports.php';
+    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports-list-table.php';
+    $reports_table = new AffWP_Export_Reports_List_Table();
+    $reports_table->prepare_items();
+    ?>
+    <div class="wrap">
+        <h1><?php echo __( 'View and Export Reports','affiliate-wp' ); ?></h1>
+        <?php do_action( 'affwp_reports_export_page_top' ); ?>
+        <form id="affwp-reports-filter" method="post" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&status=active&tab=affiliates' ); ?>">
+        <?php
 
-    $exporter = new Affiliate_WP_Reports_Export;
+            // Output list table
+            $reports_table->views();
+            $reports_table->advanced_filters();
+            $reports_table->display();
+
+        ?>
+        </form>
+        <?php do_action( 'affwp_reports_export_page_bottom' ); ?>
+    </div>
+<?php
 
 }
 

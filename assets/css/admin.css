@@ -218,6 +218,15 @@ table.affwp_table td a {
 	float: right;
 }
 
+/* Reports leaderboard meta box */
+
+.affwp-reports-table tbody tr:nth-child(1) td {
+	background: rgba(225, 245, 196, .5);
+}
+.affwp-reports-leaderboard-table tbody tr:nth-child(1) .leader {
+	font-size: 2em;
+}
+
 /* WooCommerce Admin Tweaks */
 .affwp-woo-coupon-field .affwp-ajax-search-wrap {
 	position: relative;

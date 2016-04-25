@@ -255,8 +255,8 @@ abstract class Affiliate_WP_DB {
 	 * @since 1.9
 	 * @access protected
 	 *
-	 * @param object|in $instance Instance or object ID.
-	 * @param string    $class    Object class name.
+	 * @param object|int $instance Instance or object ID.
+	 * @param string     $class    Object class name.
 	 * @return object|null Object instance, null otherwise.
 	 */
 	protected function get_core_object( $instance, $object_class ) {

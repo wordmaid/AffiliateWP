@@ -85,7 +85,13 @@ abstract class AffWP_Metabox_Base {
 
     /**
      * The position in which the meta box will be loaded
-     * Either 'normal' side'.
+     * Options are: 'normal', side', or 'advanced'
+     *
+     * 'normal'   will load in the left column
+     * 'side'     will load in the center column
+     * 'advanced' will load in the right column
+     *
+     * All columns will collapse as needed on smaller screens.
      *
      * @access  public
      * @var     $context

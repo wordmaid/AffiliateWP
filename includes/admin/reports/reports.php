@@ -92,8 +92,8 @@ function affwp_reports_tab_overview() {
     <div id="dashboard-widgets" class="metabox-holder reports-metabox-holder">
                 <div id="postbox-container-1" class="postbox-container">
                         <?php   // Reports meta boxes
-                                do_action( 'affwp_meta_boxes' );
-                                do_meta_boxes( '', 'normal', null );
+                                do_action( 'affwp_reports_meta_boxes' );
+                                do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'normal', null );
                         ?>
                     </div>
                 </div>
@@ -280,10 +280,10 @@ add_action( 'affwp_reports_tab_visits', 'affwp_reports_tab_visits' );
  */
 function affwp_reports_exporter() {
 
-    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-reports-exporter.php';
+    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports.php';
 
-    $exporter = new Affiliate_WP_Reports_Exporter;
-    $exporter->display();
+    $exporter = new Affiliate_WP_Reports_Export;
+
 }
 
 

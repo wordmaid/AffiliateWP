@@ -13,12 +13,17 @@ class AffWP_Reports_Overview extends AffWP_Metabox_Base {
     public $meta_box_id = 'overview-referrals-earnings';
 
     /**
-    * The name of the meta box. Must be unique.
-    *
-    * @access  public
-    * @since   1.8
-    */
-    public $meta_box_name = 'Referrals and Earnings';
+     * Initialize
+     *
+     * @access  public
+     * @return  void
+     * @since   1.8
+     */
+    public function init() {
+        add_action( 'add_meta_box',     array( $this, 'add_meta_box' ) );
+        add_action( 'affwp_meta_boxes', array( $this, 'add_meta_box' ) );
+        $this->meta_box_name = __( 'Referrals and Earnings', 'affiliate-wp' );
+    }
 
     /**
      * Displays the an overview of earnings in 3 different tables

@@ -2,7 +2,8 @@
 /**
  * Export Class
  *
- * This is the base class for all export methods. Each data export type (referrals, affiliates, visits) extends this class.
+ * This is the referrals export class.
+ * Each data export type (referrals, affiliates, visits, reports) extends the Affiliate_WP_Export class.
  *
  * @package     AffiliateWP
  * @subpackage  Admin/Export

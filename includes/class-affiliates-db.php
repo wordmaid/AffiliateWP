@@ -27,27 +27,13 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 * @since 1.9
 	 * @access public
 	 *
+	 * @see Affiliate_WP_DB::get_core_object()
+	 *
 	 * @param int|object|AffWP_Affiliate $affiliate Affiliate ID or object.
 	 * @return AffWP_Affiliate|null Affiliate object, null otherwise.
 	 */
 	public function get_affiliate( $affiliate ) {
-		if ( $affiliate instanceof AffWP_Affiliate ) {
-			$_affiliate = $affiliate;
-		} elseif ( is_object( $affiliate ) && isset( $affiliate->affiliate_id ) ) {
-			if ( isset( $affiliate->affiliate_id ) ) {
-				$_affiliate = new AffWP_Affiliate( $affiliate );
-			} else {
-				$_affiliate = AffWP_Affiliate::get_instance( $affiliate );
-			}
-		} else {
-			$_affiliate = AffWP_Affiliate::get_instance( $affiliate );
-		}
-
-		if ( ! $_affiliate ) {
-			return null;
-		}
-
-		return $_affiliate;
+		return $this->get_core_object( $affiliate, 'AffWP_Affiliate' );
 	}
 
 	/**

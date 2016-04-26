@@ -27,7 +27,7 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
      * @var string
      * @since 1.8
      */
-    public $export_type = 'reports';
+    public $export_type = 'affiliates';
 
     /**
      * Date
@@ -51,6 +51,18 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
     public $affiliate = null;
 
     /**
+     * The tab
+     * @return string The name of the AffiliateWP reports tab where this exporter should show.
+     * Options are:
+     * affiliates
+     * referrals
+     * visits
+     * campaigns
+     * @since 1.8
+     */
+    public $tab = 'affiliates';
+
+    /**
      * Displays the exporter interface
      *
      * @access public
@@ -59,30 +71,12 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
      */
     public function display() { ?>
 
+        <form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab=' . $this->tab ); ?>">
 
-        <form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-tools&tab=export_import' ); ?>">
             <p>
-                <span class="affwp-ajax-search-wrap">
-                    <input type="text" name="user_name" id="user_name" class="affwp-user-search" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
-                    <input type="hidden" name="user_id" id="user_id" value=""/>
-                    <img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
-                </span>
-                <input type="text" class="affwp-datepicker" autocomplete="off" name="reg_start_date" placeholder="<?php _e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
-                <input type="text" class="affwp-datepicker" autocomplete="off" name="reg_end_date" placeholder="<?php _e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
-                <select name="status" id="status">
-                    <option value="0"><?php _e( 'All Statuses', 'affiliate-wp' ); ?></option>
-                    <option value="paid"><?php _e( 'Paid', 'affiliate-wp' ); ?></option>
-                    <option value="unpaid"><?php _e( 'Unpaid', 'affiliate-wp' ); ?></option>
-                    <option value="pending"><?php _e( 'Pending', 'affiliate-wp' ); ?></option>
-                    <option value="rejected"><?php _e( 'Rejected', 'affiliate-wp' ); ?></option>
-                </select>
-                <div id="affwp_user_search_results"></div>
-                <div class="description"><?php _e( 'To search for an affiliate, enter the affiliate\'s login name, first name, or last name. Leave blank to export referrals for all affiliates.', 'affiliate-wp' ); ?></div>
-            </p>
-            <p>
-                <input type="hidden" name="affwp_action" value="export_referrals" />
-                <?php wp_nonce_field( 'affwp_export_referrals_nonce', 'affwp_export_referrals_nonce' ); ?>
-                <?php submit_button( __( 'Export', 'affiliate-wp' ), 'primary', 'submit', false ); ?>
+                <input type="hidden" name="affwp_action" value="export_report_affiliates" />
+                <?php wp_nonce_field( 'affwp_export_report_affiliates_nonce', 'affwp_export_report_affiliates_nonce' ); ?>
+                <?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'submit', false ); ?>
             </p>
         </form>
     <?php

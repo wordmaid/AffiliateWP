@@ -112,6 +112,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
             <?php endif; ?>
             <?php do_action( 'affwp_reports_advanced_filters_row' ); ?>
             <?php $this->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-reports' ); ?>
+            <?php $this->export(); ?>
         </div>
 
 <?php
@@ -168,7 +169,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
 
         require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports.php';
         $reports_export = new Affiliate_WP_Reports_Export();
-        // $reports_export->process();
+        $reports_export->display();
 
     }
 

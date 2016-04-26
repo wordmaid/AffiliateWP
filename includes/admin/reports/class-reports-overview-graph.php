@@ -164,14 +164,31 @@ class Affiliate_WP_Reports_Overview_Graph extends Affiliate_WP_Graph {
 
 		}
 
+		// Get campaign data
+		$campaigns = affwp_get_all_campaigns();
 
+		if( $campaigns ) {
+
+			// Loop through each campaign
+			foreach( $campaigns as $campaign ) {
+
+				$campaign_visits          = $campaign->visits;
+				$campaign_date            = $campaign->date;
+				$campaign_referrals       = $campaign->referrals;
+				$campaign_conversion_rate = affwp_format_amount( $campaign->conversion_rate );
+			}
+		}
 
 		$data = array(
-			__( 'Unpaid Referral Earnings', 'affiliate-wp' )   => $unpaid,
-			__( 'Pending Referral Earnings', 'affiliate-wp' )  => $pending,
+			__( 'Unpaid Referral Earnings',   'affiliate-wp' ) => $unpaid,
+			__( 'Pending Referral Earnings',  'affiliate-wp' ) => $pending,
 			__( 'Rejected Referral Earnings', 'affiliate-wp' ) => $rejected,
-			__( 'Paid Referral Earnings', 'affiliate-wp' )     => $paid,
-			__( 'Affiliate Registrations', 'affiliate-wp' )    => $affiliate_data,
+			__( 'Paid Referral Earnings',     'affiliate-wp' ) => $paid,
+			__( 'Affiliate Registrations',    'affiliate-wp' ) => $affiliate_data,
+			__( 'Campaign Visits',            'affiliate-wp' ) => $campaign_visits,
+			__( 'Campaign Unique Visits',     'affiliate-wp' ) => $campaign_date,
+			__( 'Campaign Referrals',         'affiliate-wp' ) => $campaign_referrals,
+			__( 'Campaign Conversion Rate',   'affiliate-wp' ) => $campaign_conversion_rate
 		);
 
 		return $data;

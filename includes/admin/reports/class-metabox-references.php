@@ -18,7 +18,7 @@ class AffWP_Metabox_Top_Performers extends AffWP_Metabox_Base {
     * @access  public
     * @since   1.8
     */
-    public $meta_box_name = 'Top Performers';
+    public $meta_box_name;
 
     /**
      * The position in which the meta box will be loaded
@@ -28,7 +28,20 @@ class AffWP_Metabox_Top_Performers extends AffWP_Metabox_Base {
      * @var     $context
      * @since   1.8
      */
-    public $context = 'side';
+    public $context = 'advanced';
+
+    /**
+     * Initialize
+     *
+     * @access  public
+     * @return  void
+     * @since   1.8
+     */
+    public function init() {
+        add_action( 'add_meta_box',     array( $this, 'add_meta_box' ) );
+        add_action( 'affwp_reports_meta_boxes', array( $this, 'add_meta_box' ) );
+        $this->meta_box_name = __( 'Top Performing References', 'affiliate-wp' );
+    }
 
     /**
      * Displays the an overview of earnings in 3 different tables
@@ -37,10 +50,10 @@ class AffWP_Metabox_Top_Performers extends AffWP_Metabox_Base {
      * @since  1.8
      */
     public function content() {
-        ?>
+?>
 
         <h3>
-            <?php echo __( 'References', 'affiliate-wp' ); ?>
+            <?php echo __( 'These are the most recently-used references on the site.', 'affiliate-wp' ); ?>
         </h3>
 
         <?php echo affwp_get_referrals_by_reference(); ?>

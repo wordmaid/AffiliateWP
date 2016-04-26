@@ -18,7 +18,7 @@ include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/reports-functions.
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-metabox-overview-referrals.php';
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-metabox-affiliate-leaderboard.php';
-include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-metabox-top-performers.php';
+include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-metabox-references.php';
 
 function affwp_reports_admin() {
 
@@ -70,11 +70,12 @@ function affwp_reports_admin() {
  */
 function affwp_get_reports_tabs() {
 
-    $tabs                  = array();
-    $tabs['overview']      = __( 'Overview', 'affiliate-wp' );
-    $tabs['affiliates']    = __( 'Affiliates', 'affiliate-wp' );
-    $tabs['referrals']     = __( 'Referrals', 'affiliate-wp' );
-    $tabs['visits']        = __( 'Visits', 'affiliate-wp' );
+    $tabs               = array();
+    $tabs['overview']   = __( 'Overview', 'affiliate-wp' );
+    $tabs['affiliates'] = __( 'Affiliates', 'affiliate-wp' );
+    $tabs['referrals']  = __( 'Referrals', 'affiliate-wp' );
+    $tabs['visits']     = __( 'Visits', 'affiliate-wp' );
+    $tabs['campaigns']  = __( 'Campaigns', 'affiliate-wp' );
 
     return apply_filters( 'affwp_reports_tabs', $tabs );
 }
@@ -100,6 +101,12 @@ function affwp_reports_tab_overview() {
             <?php   // Reports meta boxes
                     do_action( 'affwp_reports_meta_boxes' );
                     do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'side', null );
+            ?>
+        </div>
+        <div id="postbox-container-3" class="postbox-container">
+            <?php   // Reports meta boxes
+                    do_action( 'affwp_reports_meta_boxes' );
+                    do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'advanced', null );
             ?>
         </div>
     </div>
@@ -274,6 +281,51 @@ function affwp_reports_tab_visits() {
 add_action( 'affwp_reports_tab_visits', 'affwp_reports_tab_visits' );
 
 /**
+ * Display the campaigns reports tab
+ *
+ * @since 1.8
+ * @return void
+ */
+function affwp_reports_tab_campaigns() {
+
+    $graph = new Affiliate_WP_Campaigns_Graph;
+    $graph->set( 'x_mode',   'time' );
+    $graph->set( 'currency', false  );
+
+?>
+    <table id="affwp_total_earnings" class="affwp_table">
+
+        <thead>
+
+            <tr>
+
+                <th><?php _e( 'Campaigns', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Successful Conversions', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Conversion Rate', 'affiliate-wp' ); ?></th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td>%</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+<?php
+    $graph->display();
+
+}
+add_action( 'affwp_reports_tab_campaigns', 'affwp_reports_tab_campaigns' );
+
+
+/**
  * Report Export form
  *
  * Renders the following:
@@ -291,9 +343,9 @@ function affwp_reports_exporter() {
     $reports_table->prepare_items();
     ?>
     <div class="wrap">
-        <h1><?php echo __( 'View and Export Reports','affiliate-wp' ); ?></h1>
+        <h1><?php echo __( 'Affiliate Reports','affiliate-wp' ); ?></h1>
         <?php do_action( 'affwp_reports_export_page_top' ); ?>
-        <form id="affwp-reports-filter" method="post" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&status=active&tab=affiliates' ); ?>">
+        <form id="affwp-reports-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab=affiliates' ); ?>">
         <?php
 
             // Output list table
@@ -308,7 +360,6 @@ function affwp_reports_exporter() {
 <?php
 
 }
-
 
 
 

@@ -18,7 +18,7 @@ class AffWP_Metabox_Affiliate_Leaderboard extends AffWP_Metabox_Base {
     * @access  public
     * @since   1.8
     */
-    public $meta_box_name = 'Top Affiliates';
+    public $meta_box_name;
 
     /**
      * The position in which the meta box will be loaded
@@ -31,6 +31,19 @@ class AffWP_Metabox_Affiliate_Leaderboard extends AffWP_Metabox_Base {
     public $context = 'side';
 
     /**
+     * Initialize
+     *
+     * @access  public
+     * @return  void
+     * @since   1.8
+     */
+    public function init() {
+        add_action( 'add_meta_box',     array( $this, 'add_meta_box' ) );
+        add_action( 'affwp_reports_meta_boxes', array( $this, 'add_meta_box' ) );
+        $this->meta_box_name = __( 'Top Affiliates', 'affiliate-wp' );
+    }
+
+    /**
      * Displays the an overview of earnings in 3 different tables
      *
      * @return mixed content An overview of referrals and earnings
@@ -38,16 +51,13 @@ class AffWP_Metabox_Affiliate_Leaderboard extends AffWP_Metabox_Base {
      */
     public function content() {
 
-        $earnings_today = affiliate_wp()->referrals->paid_earnings( 'today' );
-    ?>
-        <?php $highest_earner = 'Joey Joe Joe'; ?>
-        <h2>
-            <?php echo  $highest_earner . __( ' is your highest-earning affiliate.', 'affiliate-wp' ); ?>
-        </h2>
-        <hr />
-        <?php echo __( 'Top five affiliates:', 'affiliate-wp' ); ?>
-        <?php $affiliates = affiliate_wp()->affiliates->get_affiliates( apply_filters( 'affwp_overview_most_valuable_affiliates', array( 'number' => 5, 'orderby' => 'earnings', 'order' => 'DESC' ) ) ); ?>
-        <table class="affwp_table">
+        $affiliates = affiliate_wp()->affiliates->get_affiliates( apply_filters( 'affwp_overview_most_valuable_affiliates', array( 'number' => 5, 'orderby' => 'earnings', 'order' => 'DESC' ) ) );
+
+        ?>
+        <h3>
+            <?php echo __( 'The top-earning affiliates.', 'affiliate-wp' ); ?>
+        </h3>
+        <table class="affwp_table affwp-reports-table">
 
             <thead>
 
@@ -64,7 +74,7 @@ class AffWP_Metabox_Affiliate_Leaderboard extends AffWP_Metabox_Base {
             <?php if( $affiliates ) : ?>
                 <?php foreach( $affiliates as $affiliate  ) : ?>
                     <tr>
-                        <td><?php echo affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id ); ?></td>
+                        <td class="leader"><?php echo affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id ); ?></td>
                         <td><?php echo affwp_currency_filter( $affiliate->earnings ); ?></td>
                         <td><?php echo absint( $affiliate->referrals ); ?></td>
                         <td><?php echo absint( $affiliate->visits ); ?></td>

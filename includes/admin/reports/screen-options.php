@@ -27,8 +27,8 @@ function affwp_reports_screen_options() {
 
 	add_screen_option(
 		'layout_columns',
-		array( 'max' => 2,
-			'default' => 2,
+		array( 'max' => 3,
+			'default' => 3,
 			'option'  => 'layout_columns'
 		)
 	);

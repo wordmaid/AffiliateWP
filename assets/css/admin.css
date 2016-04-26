@@ -214,6 +214,11 @@ table.affwp_table td a {
 	line-height: 2.1em;
 }
 
+/* The Apply button in the reports advanced filters form */
+#affwp-report-filters .button-secondary {
+	float: right;
+}
+
 .affwp-reports-export-submit {
 	float: right;
 }

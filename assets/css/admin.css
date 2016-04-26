@@ -218,6 +218,14 @@ table.affwp_table td a {
 	float: right;
 }
 
+#affwp-report-earnings-filters {
+	clear: both;
+}
+
+table.affwp-report-filters-table td {
+	border: 0;
+}
+
 /* Reports leaderboard meta box */
 
 .affwp-reports-table tbody tr:nth-child(1) td {

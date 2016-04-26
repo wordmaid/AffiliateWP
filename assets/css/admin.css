@@ -214,7 +214,7 @@ table.affwp_table td a {
 	line-height: 2.1em;
 }
 
-#affwp-export-submit {
+.affwp-reports-export-submit {
 	float: right;
 }
 

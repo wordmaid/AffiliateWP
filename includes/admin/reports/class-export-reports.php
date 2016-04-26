@@ -64,7 +64,7 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
             <p>
                 <input type="hidden" name="affwp_action" value="export_report_affiliates" />
                 <?php wp_nonce_field( 'affwp_export_report_affiliates_nonce', 'affwp_export_report_affiliates_nonce' ); ?>
-                <?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'submit', false ); ?>
+                <?php submit_button( __( 'Export CSV', 'affiliate-wp' ), 'primary', 'submit', false ); ?>
             </p>
         </form>
     <?php

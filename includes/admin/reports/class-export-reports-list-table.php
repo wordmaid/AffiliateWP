@@ -112,7 +112,6 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
             <?php endif; ?>
             <?php do_action( 'affwp_reports_advanced_filters_row' ); ?>
             <?php $this->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-reports' ); ?>
-            <?php $this->export(); ?>
         </div>
 
 <?php
@@ -150,27 +149,6 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
             <?php submit_button( $text, 'button', false, false, array( 'ID' => 'search-submit' ) ); ?>
         </p>
     <?php
-    }
-
-    /**
-     * Renders export button, and sends data to exporter class.
-     *
-     * This method prepares the list table data (via $this->prepare_items() )
-     * and sends this data to the Affiliate_WP_Reports_Export class
-     * when an export is requested via the Export button.
-     *
-     * TODO: use WP_List_Table::extra_tablenav
-     *
-     * @access public
-     * @since 1.8
-     * @return array Data to be exported
-     */
-    public function export( $text, $input_id ) {
-
-        require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports.php';
-        $reports_export = new Affiliate_WP_Reports_Export();
-        $reports_export->display();
-
     }
 
     /**

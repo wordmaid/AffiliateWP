@@ -51,18 +51,6 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
     public $affiliate = null;
 
     /**
-     * The tab
-     * @return string The name of the AffiliateWP reports tab where this exporter should show.
-     * Options are:
-     * affiliates
-     * referrals
-     * visits
-     * campaigns
-     * @since 1.8
-     */
-    public $tab = 'affiliates';
-
-    /**
      * Displays the exporter interface
      *
      * @access public
@@ -71,7 +59,7 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
      */
     public function display() { ?>
 
-        <form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab=' . $this->tab ); ?>">
+        <form method="post" enctype="multipart/form-data" class="affwp-reports-export-submit" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab=' . $this->tab ); ?>">
 
             <p>
                 <input type="hidden" name="affwp_action" value="export_report_affiliates" />
@@ -84,6 +72,8 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
 
     /**
      * Set the CSV columns
+     * This method must retrieve data from the current instance
+     * of the AffWP_Export_Reports_List_Table class.
      *
      * @access public
      * @since 1.8
@@ -108,6 +98,8 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
 
     /**
      * Get the data being exported
+     * This method must retrieve data from the current instance
+     * of the AffWP_Export_Reports_List_Table class.
      *
      * @access public
      * @since 1.8

@@ -341,10 +341,14 @@ function affwp_reports_exporter() {
     require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports-list-table.php';
     $reports_table = new AffWP_Export_Reports_List_Table();
     $reports_table->prepare_items();
+
+    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports.php';
+    $exporter      = new Affiliate_WP_Reports_Export();
+    $exporter->display();
     ?>
     <div class="wrap">
         <h1><?php echo __( 'Affiliate Reports','affiliate-wp' ); ?></h1>
-        <?php do_action( 'affwp_reports_export_page_top' ); ?>
+        <?php do_action( 'affwp_reports_export_affiliates_page_top' ); ?>
         <form id="affwp-reports-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab=affiliates' ); ?>">
         <?php
 
@@ -352,10 +356,9 @@ function affwp_reports_exporter() {
             $reports_table->views();
             $reports_table->advanced_filters();
             $reports_table->display();
-
         ?>
         </form>
-        <?php do_action( 'affwp_reports_export_page_bottom' ); ?>
+        <?php do_action( 'affwp_reports_export_affiliates_page_bottom' ); ?>
     </div>
 <?php
 

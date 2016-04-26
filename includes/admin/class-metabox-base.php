@@ -81,7 +81,16 @@ abstract class AffWP_Metabox_Base {
      * @var     $affwp_screen The screen ID of the page on which to display this meta box.
      * @since   1.8
      */
-    private $affwp_screen = array( 'affiliates_page_affiliate-wp-reports' );
+    private $affwp_screen = array( 'toplevel_page_affiliate-wp',
+                                   'affiliates_page_affiliate-wp-affiliates',
+                                   'affiliates_page_affiliate-wp-referrals',
+                                   'affiliates_page_affiliate-wp-visits',
+                                   'affiliates_page_affiliate-wp-creatives',
+                                   'affiliates_page_affiliate-wp-reports',
+                                   'affiliates_page_affiliate-wp-tools',
+                                   'affiliates_page_affiliate-wp-settings',
+                                   'affiliates_page_affiliate-wp-add-ons'
+                                   );
 
     /**
      * The position in which the meta box will be loaded

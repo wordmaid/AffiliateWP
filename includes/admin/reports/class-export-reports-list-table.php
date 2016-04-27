@@ -131,7 +131,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
                             <label for="reg-start-date"><?php _e( 'Start date', 'affiliate-wp' ); ?></label>
                             <input type="text" id="reg-start-date" name="reg-start-date" class="affwp-datepicker" value="<?php echo $reg_start_date; ?>" placeholder="mm/dd/yyyy"/>
                             <label for="reg-end-date"><?php _e( 'End date', 'affiliate-wp' ); ?></label>
-                            <input type="text" id="end-date" name="reg-end-date" class="affwp-datepicker" value="<?php echo $reg_end_date; ?>" placeholder="mm/dd/yyyy"/>
+                            <input type="text" id="reg-end-date" name="reg-end-date" class="affwp-datepicker" value="<?php echo $reg_end_date; ?>" placeholder="mm/dd/yyyy"/>
                         </span>
                     </td>
                     <td>

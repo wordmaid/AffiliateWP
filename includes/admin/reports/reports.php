@@ -344,7 +344,9 @@ function affwp_reports_exporter() {
 
     require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-export-reports.php';
     $exporter      = new Affiliate_WP_Reports_Export();
+    $exporter->get_data( $reports_table->affiliate_data() );
     $exporter->display();
+
     ?>
     <div class="wrap">
         <h1><?php echo __( 'Affiliate Reports','affiliate-wp' ); ?></h1>

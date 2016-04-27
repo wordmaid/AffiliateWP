@@ -30,6 +30,13 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
     public $export_type = 'affiliates';
 
     /**
+     * Our export type. Used for export-type specific filters/actions
+     * @var string
+     * @since 1.8
+     */
+    public $tab = 'affiliates';
+
+    /**
      * Date
      * @var array
      * @since 1.8
@@ -80,18 +87,18 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
      * @return array $cols All the columns
      */
     public function csv_cols() {
+
         $cols = array(
-            'affiliate_id'  => __( 'Affiliate ID', 'affiliate-wp' ),
-            'email'         => __( 'Email', 'affiliate-wp' ),
-            'payment_email' => __( 'Payment Email', 'affiliate-wp' ),
-            'amount'        => __( 'Amount', 'affiliate-wp' ),
-            'currency'      => __( 'Currency', 'affiliate-wp' ),
-            'description'   => __( 'Description', 'affiliate-wp' ),
-            'campaign'      => __( 'Campaign', 'affiliate-wp' ),
-            'reference'     => __( 'Reference', 'affiliate-wp' ),
-            'context'       => __( 'Context', 'affiliate-wp' ),
-            'status'        => __( 'Status', 'affiliate-wp' ),
-            'date'          => __( 'Date', 'affiliate-wp' )
+            'name'            => __( 'Name', 'affiliate-wp' ),
+            'username'        => __( 'Username', 'affiliate-wp' ),
+            'affiliate_id'    => __( 'Affiliate ID', 'affiliate-wp' ),
+            'earnings'        => __( 'Earnings', 'affiliate-wp' ),
+            'rate'            => __( 'Rate', 'affiliate-wp' ),
+            'unpaid'          => __( 'Unpaid Referrals', 'affiliate-wp' ),
+            'referrals'       => __( 'Paid Referrals', 'affiliate-wp' ),
+            'visits'          => __( 'Visits', 'affiliate-wp' ),
+            'status'          => __( 'Status', 'affiliate-wp' ),
+            'date_registered' => __( 'Registered', 'affiliate-wp' )
         );
         return $cols;
     }
@@ -105,44 +112,7 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
      * @since 1.8
      * @return array $data Data for Export
      */
-    public function get_data() {
-
-        $args = array(
-            'status'       => $this->status,
-            'date'         => ! empty( $this->date ) ? $this->date : '',
-            'affiliate_id' => $this->affiliate,
-            'number'       => -1
-        );
-
-        $data         = array();
-        $affiliates   = array();
-        $referral_ids = array();
-        $referrals    = affiliate_wp()->referrals->get_referrals( $args );
-
-        if( $referrals ) {
-
-            foreach( $referrals as $referral ) {
-
-                $data[] = array(
-                    'affiliate_id'  => $referral->affiliate_id,
-                    'email'         => affwp_get_affiliate_email( $referral->affiliate_id ),
-                    'payment_email' => affwp_get_affiliate_payment_email( $referral->affiliate_id ),
-                    'amount'        => $referral->amount,
-                    'currency'      => $referral->currency,
-                    'description'   => $referral->description,
-                    'campaign'      => $referral->campaign,
-                    'reference'     => $referral->reference,
-                    'context'       => $referral->context,
-                    'status'        => $referral->status,
-                    'date'          => $referral->date,
-                );
-
-            }
-
-        }
-
-        $data = apply_filters( 'affwp_export_get_data', $data );
-        $data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
+    public function get_data( $data ) {
 
         return $data;
     }

@@ -24,6 +24,14 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
     public $per_page = 30;
 
     /**
+     * Base url of this page
+     *
+     * @var string
+     * @since 1.8
+     */
+    public $base_url;
+
+    /**
      * Total number of affiliates found
      *
      * @var int
@@ -80,12 +88,13 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
         ) );
 
         $this->get_affiliate_counts();
+        $this->base_url = admin_url( 'admin.php?page=affiliate-wp-reports&tab=affiliates' );
     }
+
 
     /**
      * Render advanced filters for the list table
      *
-     * TODO: use WP_List_Table::extra_tablenav
      *
      * @since 1.8
      * @uses AffWP_Reports_Table::get_affiliate_counts()
@@ -99,16 +108,11 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
 ?>
         <div id="affwp-report-filters">
         <table class="affwp_table affwp-report-filters-table">
-
-            <thead>
-                <th><?php echo __( 'By referrals', 'affiliate-wp' ); ?></th>
-                <th><?php echo __( 'By earnings', 'affiliate-wp' ); ?></th>
-            </thead>
             <tbody>
                 <tr id="affwp-report-date-filters">
                     <td>
                         <span>
-                        <h4><?php echo __( 'Referrals between', 'affiliate-wp' ); ?></h4>
+                        <h4><?php echo __( 'Had referrals between', 'affiliate-wp' ); ?></h4>
                             <label for="start-date"><?php _e( 'Start date', 'affiliate-wp' ); ?></label>
                             <input type="text" id="start-date" name="start-date" class="affwp-datepicker" value="<?php echo $start_date; ?>" placeholder="mm/dd/yyyy"/>
                             <label for="end-date"><?php _e( 'End date', 'affiliate-wp' ); ?></label>
@@ -138,7 +142,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
                         <span>
                             <h4><?php echo __( 'During this timeframe', 'affiliate-wp' ); ?></h4>
                             <label for="earnings-start-date"><?php _e( 'Start date', 'affiliate-wp' ); ?></label>
-                            <input type="text" id="start-date" name="start-date" class="affwp-datepicker" value="<?php echo $earnings_start_date; ?>" placeholder="mm/dd/yyyy"/>
+                            <input type="text" id="earnings-start-date" name="earnings-start-date" class="affwp-datepicker" value="<?php echo $earnings_start_date; ?>" placeholder="mm/dd/yyyy"/>
                             <label for="earnings-end-date"><?php _e( 'End date', 'affiliate-wp' ); ?></label>
                             <input type="text" id="earnings-end-date" name="earnings-end-date" class="affwp-datepicker" value="<?php echo $earnings_end_date; ?>" placeholder="mm/dd/yyyy"/>
                         </span>
@@ -151,7 +155,12 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
             <?php if( ! empty( $status ) ) : ?>
                 <input type="hidden" name="status" value="<?php echo esc_attr( $status ); ?>"/>
             <?php endif; ?>
-            <?php if( ! empty( $start_date ) || ! empty( $end_date ) ) : ?>
+            <?php if( ! empty( $start_date )          ||
+                      ! empty( $end_date )            ||
+                      ! empty( $reg_start_date )      ||
+                      ! empty( $reg_end_date )        ||
+                      ! empty( $earnings_start_date ) ||
+                      ! empty( $earnings_end_date ) ): ?>
                 <a href="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab=affiliates' ); ?>" class="button-secondary"><?php _e( 'Clear Filter', 'affiliate-wp' ); ?></a>
             <?php endif; ?>
             <?php if( ! empty( $earnings ) ) : ?>
@@ -185,12 +194,6 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
             echo '<input type="hidden" name="orderby" value="' . esc_attr( $_REQUEST['orderby'] ) . '" />';
         if ( ! empty( $_REQUEST['order'] ) )
             echo '<input type="hidden" name="order" value="' . esc_attr( $_REQUEST['order'] ) . '" />';
-        if ( ! empty( $_REQUEST['start_date'] ) )
-            echo '<input type="hidden" name="order" value="' . esc_attr( $_REQUEST['start-date'] ) . '" />';
-        if ( ! empty( $_REQUEST['end_date'] ) )
-            echo '<input type="hidden" name="order" value="' . esc_attr( $_REQUEST['end-date'] ) . '" />';
-        if ( ! empty( $_REQUEST['earnings'] ) )
-            echo '<input type="hidden" name="order" value="' . esc_attr( $_REQUEST['end-date'] ) . '" />';
         ?>
         <p class="search-box">
             <label class="screen-reader-text" for="<?php echo $input_id ?>"><?php echo $text; ?>:</label>
@@ -444,6 +447,10 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
      */
     public function get_affiliate_counts() {
 
+        global $wp_query;
+
+        $args = array();
+
         $search               = isset( $_GET['s'] )           ? sanitize_text_field( $_GET['s'] )          : null;
 
         $this->active_count   = affiliate_wp()->affiliates->count( array( 'status' => 'active', 'search' => $search ) );
@@ -451,6 +458,14 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
         $this->pending_count  = affiliate_wp()->affiliates->count( array( 'status' => 'pending', 'search' => $search ) );
         $this->rejected_count = affiliate_wp()->affiliates->count( array( 'status' => 'rejected', 'search' => $search ) );
         $this->total_count    = $this->active_count + $this->inactive_count + $this->pending_count + $this->rejected_count;
+
+        if ( ! empty( $_GET['start-date'] ) ) {
+            $args['start-date'] = urldecode( $_GET['start-date'] );
+        }
+
+        if ( ! empty( $_GET['end-date'] ) ) {
+            $args['end-date'] = urldecode( $_GET['end-date'] );
+        }
     }
 
     /**
@@ -462,24 +477,34 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
      */
     public function affiliate_data() {
 
-        $search     = isset( $_GET['s'] )           ? sanitize_text_field( $_GET['s'] ) : null;
-        $page       = isset( $_GET['paged'] )       ? absint( $_GET['paged'] ) : 1;
-        $status     = isset( $_GET['status'] )      ? $_GET['status']          : '';
-        $order      = isset( $_GET['order'] )       ? $_GET['order']           : 'DESC';
-        $orderby    = isset( $_GET['orderby'] )     ? $_GET['orderby']         : 'affiliate_id';
-        $start_date = isset( $_GET['start-date'] )  ? sanitize_text_field( $_GET['start-date'] ) : null;
-        $end_date   = isset( $_GET['end-date'] )    ? sanitize_text_field( $_GET['end-date'] )   : $start_date;
+        $search              = isset( $_GET['s'] )              ? sanitize_text_field( $_GET['s'] ) : null;
+        $page                = isset( $_GET['paged'] )          ? absint( $_GET['paged'] ) : 1;
+        $status              = isset( $_GET['status'] )         ? $_GET['status']          : '';
+        $order               = isset( $_GET['order'] )          ? $_GET['order']           : 'DESC';
+        $orderby             = isset( $_GET['orderby'] )        ? $_GET['orderby']         : 'affiliate_id';
+        $start_date          = isset( $_GET['start-date'] )     ? sanitize_text_field( $_GET['start-date'] ) : null;
+        $end_date            = isset( $_GET['end-date'] )       ? sanitize_text_field( $_GET['end-date'] )   : $start_date;
+        $reg_start_date      = isset( $_GET['reg-start-date'] ) ? sanitize_text_field( $_GET['reg-start-date'] ) : null;
+        $reg_end_date        = isset( $_GET['reg-end-date'] )   ? sanitize_text_field( $_GET['reg-end-date'] )   : $reg_start_date;
+        $earnings_start_date = isset( $_GET['earnings-start-date'] ) ? sanitize_text_field( $_GET['earnings-start-date'] ) : null;
+        $earnings_end_date   = isset( $_GET['earnings-end-date'] )   ? sanitize_text_field( $_GET['earnings-end-date'] )   : $earnings_start_date;
 
-        $per_page   = $this->get_items_per_page( 'affwp_reports_items_per_page', $this->per_page );
+        $per_page            = $this->get_items_per_page( 'affwp_reports_items_per_page', $this->per_page );
 
-        $affiliates          = affiliate_wp()->affiliates->get_affiliates( array(
-            'number'         => $per_page,
-            'offset'         => $per_page * ( $page - 1 ),
-            'status'         => $status,
-            'search'         => $search,
-            'orderby'        => sanitize_text_field( $orderby ),
-            'order'          => sanitize_text_field( $order ),
-            'date_registered' => $start_date
+        $affiliates           = affiliate_wp()->affiliates->get_affiliates( array(
+            'number'              => $per_page,
+            'offset'              => $per_page * ( $page - 1 ),
+            'status'              => $status,
+            'search'              => $search,
+            'orderby'             => sanitize_text_field( $orderby ),
+            'order'               => sanitize_text_field( $order ),
+            'start_date'          => $start_date,
+            'end_date'            => $end_date,
+            'reg_start_date'      => $reg_start_date,
+            'reg_end_date'        => $reg_end_date,
+            'earnings_start_date' => $earnings_start_date,
+            'earnings_end_date'   => $earnings_end_date
+
         ) );
         return $affiliates;
     }

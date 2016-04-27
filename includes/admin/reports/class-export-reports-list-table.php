@@ -94,21 +94,21 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
     public function advanced_filters() {
         $start_date = isset( $_GET['start-date'] )  ? sanitize_text_field( $_GET['start-date'] ) : null;
         $end_date   = isset( $_GET['end-date'] )    ? sanitize_text_field( $_GET['end-date'] )   : null;
-        $status     = isset( $_GET['status'] )      ? $_GET['status'] : '';
-        $earnings   = isset( $_GET['status'] )      ? $_GET['earnings'] : '';
+        $status     = isset( $_GET['status'] )      ? sanitize_text_field( $_GET['status'] )     : null;
+        $earnings   = isset( $_GET['status'] )      ? sanitize_text_field( $_GET['earnings'] )   : null;
 ?>
         <div id="affwp-report-filters">
         <table class="affwp_table affwp-report-filters-table">
 
             <thead>
-                <th>By referrals</th>
-                <th>By earnings</th>
+                <th><?php echo __( 'By referrals', 'affiliate-wp' ); ?></th>
+                <th><?php echo __( 'By earnings', 'affiliate-wp' ); ?></th>
             </thead>
             <tbody>
                 <tr id="affwp-report-date-filters">
                     <td>
                         <span>
-                        <h4>Referrals between</h4>
+                        <h4><?php echo __( 'Referrals between', 'affiliate-wp' ); ?></h4>
                             <label for="start-date"><?php _e( 'Start date', 'affiliate-wp' ); ?></label>
                             <input type="text" id="start-date" name="start-date" class="affwp-datepicker" value="<?php echo $start_date; ?>" placeholder="mm/dd/yyyy"/>
                             <label for="end-date"><?php _e( 'End date', 'affiliate-wp' ); ?></label>
@@ -117,7 +117,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
                     </td>
                     <td>
                         <span id="affwp-report-earnings-filters" class="clearfix">
-                        <h4>Earned more than</h4>
+                        <h4><?php echo __( 'Earned more than', 'affiliate-wp' ); ?></h4>
                             <label for="earnings"><?php _e( 'Earned more than', 'affiliate-wp' ); ?></label>
                             <input type="text" id="earnings" name="earnings" class="" value="<?php echo $earnings; ?>" placeholder="enter an amount"/>
                         </span>
@@ -127,7 +127,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
                 <tr>
                     <td>
                         <span>
-                            <h4>Registered between</h4>
+                            <h4><?php echo __( 'Registered between', 'affiliate-wp' ); ?></h4>
                             <label for="reg-start-date"><?php _e( 'Start date', 'affiliate-wp' ); ?></label>
                             <input type="text" id="reg-start-date" name="reg-start-date" class="affwp-datepicker" value="<?php echo $reg_start_date; ?>" placeholder="mm/dd/yyyy"/>
                             <label for="reg-end-date"><?php _e( 'End date', 'affiliate-wp' ); ?></label>
@@ -136,7 +136,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
                     </td>
                     <td>
                         <span>
-                            <h4>During this timeframe</h4>
+                            <h4><?php echo __( 'During this timeframe', 'affiliate-wp' ); ?></h4>
                             <label for="earnings-start-date"><?php _e( 'Start date', 'affiliate-wp' ); ?></label>
                             <input type="text" id="start-date" name="start-date" class="affwp-datepicker" value="<?php echo $earnings_start_date; ?>" placeholder="mm/dd/yyyy"/>
                             <label for="earnings-end-date"><?php _e( 'End date', 'affiliate-wp' ); ?></label>

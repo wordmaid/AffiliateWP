@@ -26,7 +26,7 @@ class AffWP_Reports_Overview extends AffWP_Metabox_Base {
     }
 
     /**
-     * Displays the an overview of earnings in 3 different tables
+     * Displays an overview of earnings in 3 different tables
      *
      * @return mixed content An overview of referrals and earnings
      * @since  1.8

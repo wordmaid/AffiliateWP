@@ -326,16 +326,10 @@ add_action( 'affwp_reports_tab_campaigns', 'affwp_reports_tab_campaigns' );
 
 
 /**
- * Report Export form
  *
- * Renders the following:
- *     Reports export filters
- *     Reports affiliate list table
+ * To be replaced with a unified call to the AffWP_Data_Filters class.
  *
- * @access      private
- * @since       1.8
- * @return      void
-*/
+ */
 function affwp_reports_exporter() {
 
     require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports-list-table.php';
@@ -344,7 +338,6 @@ function affwp_reports_exporter() {
 
     require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-export-reports.php';
     $exporter      = new Affiliate_WP_Reports_Export();
-    $exporter->get_data( $reports_table->affiliate_data() );
     $exporter->display();
 
     ?>

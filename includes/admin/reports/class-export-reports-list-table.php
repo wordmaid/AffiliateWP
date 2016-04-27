@@ -101,10 +101,14 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
      * @see WP_List_Table::__construct()
      */
     public function advanced_filters() {
-        $start_date = isset( $_GET['start-date'] )  ? sanitize_text_field( $_GET['start-date'] ) : null;
-        $end_date   = isset( $_GET['end-date'] )    ? sanitize_text_field( $_GET['end-date'] )   : null;
-        $status     = isset( $_GET['status'] )      ? sanitize_text_field( $_GET['status'] )     : null;
-        $earnings   = isset( $_GET['status'] )      ? sanitize_text_field( $_GET['earnings'] )   : null;
+        $status              = isset( $_GET['status'] )              ? sanitize_text_field( $_GET['status'] )     : null;
+        $earnings            = isset( $_GET['status'] )              ? sanitize_text_field( $_GET['earnings'] )   : null;
+        $start_date          = isset( $_GET['start-date'] )          ? sanitize_text_field( $_GET['start-date'] ) : null;
+        $end_date            = isset( $_GET['end-date'] )            ? sanitize_text_field( $_GET['end-date'] )   : null;
+        $reg_start_date      = isset( $_GET['reg-start-date'] )      ? sanitize_text_field( $_GET['reg-start-date'] ) : null;
+        $reg_end_date        = isset( $_GET['reg-end-date'] )        ? sanitize_text_field( $_GET['reg-end-date'] )   : null;
+        $earnings_start_date = isset( $_GET['earnings-start-date'] ) ? sanitize_text_field( $_GET['earnings-start-date'] ) : null;
+        $earnings_end_date   = isset( $_GET['earnings-end-date'] )   ? sanitize_text_field( $_GET['earnings-end-date'] )   : null;
 ?>
         <div id="affwp-report-filters">
         <table class="affwp_table affwp-report-filters-table">
@@ -466,6 +470,22 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
         if ( ! empty( $_GET['end-date'] ) ) {
             $args['end-date'] = urldecode( $_GET['end-date'] );
         }
+
+        if ( ! empty( $_GET['reg-start-date'] ) ) {
+            $args['reg-start-date'] = urldecode( $_GET['reg-start-date'] );
+        }
+
+        if ( ! empty( $_GET['reg-end-date'] ) ) {
+            $args['reg-end-date'] = urldecode( $_GET['reg-end-date'] );
+        }
+
+        if ( ! empty( $_GET['earnings-start-date'] ) ) {
+            $args['earnings-start-date'] = urldecode( $_GET['earnings-start-date'] );
+        }
+
+        if ( ! empty( $_GET['end-date'] ) ) {
+            $args['earnings-end-date'] = urldecode( $_GET['earnings-end-date'] );
+        }
     }
 
     /**
@@ -491,7 +511,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
 
         $per_page            = $this->get_items_per_page( 'affwp_reports_items_per_page', $this->per_page );
 
-        $affiliates           = affiliate_wp()->affiliates->get_affiliates( array(
+        $affiliates          = affiliate_wp()->affiliates->get_affiliates( array(
             'number'              => $per_page,
             'offset'              => $per_page * ( $page - 1 ),
             'status'              => $status,

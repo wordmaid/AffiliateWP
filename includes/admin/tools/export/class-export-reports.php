@@ -112,7 +112,7 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
      * @since 1.8
      * @return array $data Data for Export
      */
-    public function get_data( $data ) {
+    public function get_list_table_data( $data ) {
 
         return $data;
     }

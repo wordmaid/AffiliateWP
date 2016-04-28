@@ -435,7 +435,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
     /**
      * Message to be displayed when there are no items
      *
-     * @since 1.7.2
+     * @since  1.7.2
      * @access public
      */
     function no_items() {
@@ -443,17 +443,42 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
     }
 
     /**
+     * Returns boolean indicating whether
+     * an affiliate was registered between two datetime ranges given.
+     * The affiliate id, start date, and end date must be specified.
+     *
+     * @since   1.8
+     * @access  public
+     * @param   $reg_start_date  The beginning datetime to search against
+     * @param   $reg_end_date    The ending datetime to search against
+     * @return  boolean          Indicates whether an affiliate was registered during this period.
+     */
+    function was_affiliate_registered_between( $start = '', $end = '' ) {
+
+        $user_query = '';
+
+        $args = array(
+            'date_registered' => $registered,
+            'orderby'         => 'user_registered',
+            'date_query'      => array(
+                array( 'before'    => $end,
+                       'after'     => $start,
+                       'inclusive' => true,
+                )
+            )
+        );
+
+        $user_query = new WP_User_Query( $args );
+    }
+
+    /**
      * Retrieve the discount code counts
      *
      * @access public
-     * @since 1.8
+     * @since  1.8
      * @return void
      */
     public function get_affiliate_counts() {
-
-        global $wp_query;
-
-        $args = array();
 
         $search               = isset( $_GET['s'] )           ? sanitize_text_field( $_GET['s'] )          : null;
 
@@ -462,30 +487,6 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
         $this->pending_count  = affiliate_wp()->affiliates->count( array( 'status' => 'pending', 'search' => $search ) );
         $this->rejected_count = affiliate_wp()->affiliates->count( array( 'status' => 'rejected', 'search' => $search ) );
         $this->total_count    = $this->active_count + $this->inactive_count + $this->pending_count + $this->rejected_count;
-
-        if ( ! empty( $_GET['start-date'] ) ) {
-            $args['start-date'] = urldecode( $_GET['start-date'] );
-        }
-
-        if ( ! empty( $_GET['end-date'] ) ) {
-            $args['end-date'] = urldecode( $_GET['end-date'] );
-        }
-
-        if ( ! empty( $_GET['reg-start-date'] ) ) {
-            $args['reg-start-date'] = urldecode( $_GET['reg-start-date'] );
-        }
-
-        if ( ! empty( $_GET['reg-end-date'] ) ) {
-            $args['reg-end-date'] = urldecode( $_GET['reg-end-date'] );
-        }
-
-        if ( ! empty( $_GET['earnings-start-date'] ) ) {
-            $args['earnings-start-date'] = urldecode( $_GET['earnings-start-date'] );
-        }
-
-        if ( ! empty( $_GET['end-date'] ) ) {
-            $args['earnings-end-date'] = urldecode( $_GET['earnings-end-date'] );
-        }
     }
 
     /**
@@ -505,7 +506,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
         $start_date          = isset( $_GET['start-date'] )     ? sanitize_text_field( $_GET['start-date'] ) : null;
         $end_date            = isset( $_GET['end-date'] )       ? sanitize_text_field( $_GET['end-date'] )   : $start_date;
         $reg_start_date      = isset( $_GET['reg-start-date'] ) ? sanitize_text_field( $_GET['reg-start-date'] ) : null;
-        $reg_end_date        = isset( $_GET['reg-end-date'] )   ? sanitize_text_field( $_GET['reg-end-date'] )   : $reg_start_date;
+        $reg_end_date        = isset( $_GET['reg-end-date'] )   ? sanitize_text_field( $_GET['reg-end-date'] )   : null;
         $earnings_start_date = isset( $_GET['earnings-start-date'] ) ? sanitize_text_field( $_GET['earnings-start-date'] ) : null;
         $earnings_end_date   = isset( $_GET['earnings-end-date'] )   ? sanitize_text_field( $_GET['earnings-end-date'] )   : $earnings_start_date;
 
@@ -520,8 +521,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
             'order'               => sanitize_text_field( $order ),
             'start_date'          => $start_date,
             'end_date'            => $end_date,
-            'reg_start_date'      => $reg_start_date,
-            'reg_end_date'        => $reg_end_date,
+            'date_registered'     => $this->was_affiliate_registered_between( $reg_start_date, $reg_end_date ),
             'earnings_start_date' => $earnings_start_date,
             'earnings_end_date'   => $earnings_end_date
 

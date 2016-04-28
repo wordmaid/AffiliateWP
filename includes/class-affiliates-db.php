@@ -73,7 +73,8 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 * Retrieve affiliates from the database
 	 *
 	 * @since 1.0
-	 * @since 1.8 The `$affiliate_id` argument was added.
+	 * @since 1.8 The `$affiliate_id` argument was added. `$orderby` now accepts referral statuses.
+	 *            and 'username'.
 	 * @access public
 	 *
 	 * @param array $args {
@@ -86,7 +87,9 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 *     @type string    $status       Affiliate status. Default empty.
 	 *     @type string    $order        How to order returned affiliate results. Accepts 'ASC' or 'DESC'.
 	 *                                   Default 'DESC'.
-	 *     @type string    $orderby      Field to order the results by. Default 'affiliate_id'.
+	 *     @type string    $orderby      Affiliates table column to order results by. Also accepts 'paid',
+	 *                                   'unpaid', 'rejected', or 'pending' referral statuses, 'name'
+	 *                                   (user display_name), or 'username' (user user_login). Default 'affiliate_id'.
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 * @return array Array of affiliate objects (if found).
@@ -232,19 +235,49 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 			$order = 'ASC';
 		}
 
-		if ( 'date' == $args['orderby'] ) {
-			$orderby = 'date_registered';
-		} elseif ( 'name' == $args['orderby'] ) {
-			$orderby = 'display_name';
-		} else {
-			$orderby = $args['orderby'];
-		}
+		$join = '';
 
-		$orderby = array_key_exists( $orderby, $this->get_columns() ) ? $orderby : $this->primary_key;
+		// Orderby.
+		switch( $args['orderby'] ) {
+			case 'date':
+				// Registered date.
+				$orderby = 'date_registered';
+				break;
 
-		// Non-column orderby exception.
-		if ( 'earnings' === $args['orderby'] ) {
-			$orderby = 'earnings+0';
+			case 'name':
+				// User display_name.
+				$orderby = 'u.display_name';
+				$join = "a INNER JOIN {$wpdb->users} u ON a.user_id = u.ID";
+				break;
+
+			case 'username':
+				// Username.
+				$orderby = 'u.user_login';
+				$join = "a INNER JOIN {$wpdb->users} u ON a.user_id = u.ID";
+				break;
+
+			case 'earnings':
+				// Earnings.
+				$orderby = 'earnings+0';
+				break;
+
+			case 'paid':
+			case 'unpaid':
+			case 'rejected':
+			case 'pending':
+				// If ordering by a referral status, do a sub-query to order by count.
+				$status    = esc_sql( $args['orderby'] );
+				$referrals = affiliate_wp()->referrals->table_name;
+
+				$orderby  = "( SELECT COUNT(*) FROM {$referrals}";
+				$orderby .= " WHERE ( {$this->table_name}.affiliate_id = {$referrals}.affiliate_id";
+				$orderby .= " AND {$referrals}.status = '{$status}' ) )";
+				break;
+
+			default:
+				// Check against the columns whitelist. If no match, default to $primary_key.
+				$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
+				break;
 		}
 
 		// Overload args values for the benefit of the cache.
@@ -263,29 +296,13 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 			} else {
 
-				if ( 'display_name' === $args['orderby'] ) {
-
-					$results = $wpdb->get_results(
-						$wpdb->prepare(
-							"SELECT * FROM {$this->table_name} a INNER JOIN {$wpdb->users} u ON a.user_id = u.ID {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
-							absint( $args['offset'] ),
-							absint( $args['number'] )
-						)
-					);
-
-					$results = array_map( 'affwp_get_affiliate', $results );
-				} else {
-
-					$results = $wpdb->get_results(
-						$wpdb->prepare(
-							"SELECT * FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
-							absint( $args['offset'] ),
-							absint( $args['number'] )
-						)
-					);
-
-					$results = array_map( 'affwp_get_affiliate', $results );
-				}
+				$results = $wpdb->get_results(
+					$wpdb->prepare(
+						"SELECT * FROM {$this->table_name} {$join} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
+						absint( $args['offset'] ),
+						absint( $args['number'] )
+					)
+				);
 
 			}
 

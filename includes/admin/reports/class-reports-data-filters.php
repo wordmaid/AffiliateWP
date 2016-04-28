@@ -24,16 +24,18 @@ class AffWP_Reports_Data_Filters extends AffWP_Data_Filters {
 
 
     /**
-     * [$reports_table description]
+     * The reports list table to use.
      *
-     * @var [type]
+     * @var   $reports_table
+     * @since 1.8
      */
     public $reports_table;
 
     /**
-     * [$exporter description]
+     * The exporter to use.
      *
-     * @var [type]
+     * @var $exporter
+     * @since 1.8
      */
     public $exporter;
 
@@ -43,24 +45,51 @@ class AffWP_Reports_Data_Filters extends AffWP_Data_Filters {
         $this->exporter      = new Affiliate_WP_Reports_Export();
     }
 
-    public function prepare_items() {
+    /**
+     * Prepare list table items
+     *
+     * @since  1.8
+     *
+     * @return mixed The list table data to display
+     */
+    public function data_prepare_items() {
         $this->reports_table->prepare_items();
         $this->exporter->get_list_table_data( $this->reports_table->affiliate_date() );
     }
 
-    public function views() {
+    /**
+     * The views method of the list table.
+     *
+     * @since  1.8
+     *
+     * @return mixed List table views
+     */
+    public function data_views() {
         $this->reports_table->views();
     }
 
-    public function advanced_filters() {
+    /**
+     * Display the advanced filters for the list table
+     *
+     * @since  1.8
+     *
+     * @return Advanced filters method from the list table.
+     */
+    public function data_advanced_filters() {
         $this->reports_table->advanced_filters();
     }
 
-    public function display() {
-
-            // Display exporter
-            $this->exporter->display();
-            // Output list table
-            $this->reports_table->display();
+    /**
+     * Display the exporter button and the list table
+     *
+     * @since  1.8
+     *
+     * @return Exporter and list table display methods.
+     */
+    public function data_display() {
+        // Display exporter
+        $this->exporter->display();
+        // Output list table
+        $this->reports_table->display();
     }
 }

@@ -244,10 +244,10 @@ function affwp_reports_tab_affiliates() {
     require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-reports-data-filters.php';
     $reports_data_filters = new AffWP_Reports_Data_Filters;
 
-    $reports_data_filters->prepare_items();
-    $reports_data_filters->advanced_filters();
-    $reports_data_filters->views();
-    $reports_data_filters->display();
+    $reports_data_filters->data_prepare_items();
+    $reports_data_filters->data_advanced_filters();
+    $reports_data_filters->data_views();
+    $reports_data_filters->data_display();
 
 }
 add_action('affwp_reports_tab_affiliates', 'affwp_reports_tab_affiliates' );

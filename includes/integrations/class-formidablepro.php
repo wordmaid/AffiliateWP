@@ -159,19 +159,21 @@ class Affiliate_WP_Formidable_Pro extends Affiliate_WP_Base {
 	 * @param int $form_id
 	 */
 	public function add_pending_referral( $entry_id, $form_id ) {
-
 		global $frm_entry_meta, $frm_form;
 
 		if ( $this->was_referred() ) {
 
 			$form            = $frm_form->getOne( $form_id );
-			$description     = $frm_entry_meta->get_entry_meta( $entry_id, $form->options['affiliatewp']['referral_description_field'] );
-			$purchase_amount = floatval( $frm_entry_meta->get_entry_meta( $entry_id, $form->options['affiliatewp']['purchase_amount_field'] ) );
+			$description     = $frm_entry_meta->get_entry_meta_by_field( $entry_id, $form->options['affiliatewp']['referral_description_field'] );
+			$purchase_amount = floatval( $frm_entry_meta->get_entry_meta_by_field( $entry_id, $form->options['affiliatewp']['purchase_amount_field'] ) );
 
 			$referral_total = $this->calculate_referral_amount( $purchase_amount, $entry_id );
 
 			$this->insert_pending_referral( $referral_total, $entry_id, $description );
 
+			if ( empty( $referral_total ) ) {
+				$this->mark_referral_complete( $entry_id, $form_id );
+			}
 		}
 
 	}

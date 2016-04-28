@@ -295,9 +295,15 @@ abstract class Affiliate_WP_Base {
 	/**
 	 * Retrieves the rate and type for a specific product
 	 *
-	 * @access  public
-	 * @since   1.2
-	 * @return  array
+	 * @since 1.2
+	 * @access public
+	 *
+	 * @param string $base_amount      Optional. Base amount to calculate the referral amount from.
+	 *                                 Default empty.
+	 * @param string|int $reference    Optional. Referral reference (usually the order ID). Default empty.
+	 * @param int        $product_id   Optional. Product ID. Default 0.
+	 * @param int        $affiliate_id Optional. Affiliate ID.
+	 * @return string Referral amount.
 	 */
 	public function calculate_referral_amount( $base_amount = '', $reference = '', $product_id = 0, $affiliate_id = 0 ) {
 
@@ -329,8 +335,18 @@ abstract class Affiliate_WP_Base {
 
 		$rate = get_post_meta( $product_id, '_affwp_' . $this->context . '_product_rate', true );
 
+		/**
+		 * Filters the integration product rate.
+		 *
+		 * @since 1.2
+		 *
+		 * @param float  $rate         Product-level referral rate.
+		 * @param int    $product_id   Product ID.
+		 * @param array  $args         Arguments for retrieving the product rate.
+		 * @param int    $affiliate_id Affilaite ID.
+		 * @param string $context      Order context.
+		 */
 		return apply_filters( 'affwp_get_product_rate', $rate, $product_id, $args, $affiliate_id, $this->context );
-
 	}
 
 	/**

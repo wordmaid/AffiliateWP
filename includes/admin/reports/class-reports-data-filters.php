@@ -54,7 +54,7 @@ class AffWP_Reports_Data_Filters extends AffWP_Data_Filters {
      */
     public function data_prepare_items() {
         $this->reports_table->prepare_items();
-        $this->exporter->get_list_table_data( $this->reports_table->affiliate_date() );
+        $this->exporter->get_list_table_data( $this->reports_table->affiliate_data() );
     }
 
     /**

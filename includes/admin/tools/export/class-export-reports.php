@@ -112,9 +112,37 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
      * @since 1.8
      * @return array $data Data for Export
      */
-    public function get_list_table_data( $data ) {
+    public function get_list_table_data( $affiliates ) {
 
-        return $data;
+        return $affiliates;
+    }
+
+    /**
+     * Output the CSV rows
+     *
+     * @access public
+     * @since 1.8
+     * @return void
+     */
+    public function csv_rows_out() {
+        $data = $this->get_list_table_data( $affiliates );
+
+        $cols = $this->get_csv_cols();
+
+        // Output each row
+        foreach ( $data as $row ) {
+            $i = 1;
+            foreach ( $row as $col_id => $column ) {
+                // Make sure the column is valid
+                if ( array_key_exists( $col_id, $cols ) ) {
+                    echo '"' . $column . '"';
+                    echo $i == count( $cols ) + 1 ? '' : ',';
+                }
+
+                $i++;
+            }
+            echo "\r\n";
+        }
     }
 
 }

@@ -231,18 +231,23 @@ function affwp_reports_tab_overview() {
 add_action( 'affwp_reports_tab_overview', 'affwp_reports_tab_overview' );
 
 /**
- * Display the reports tab
- * Contains WP_List_Table view of general affiliate data
+ * Display the affiliate reports tab
+ * Contains WP_List_Table view of general affiliate data,
+ * as well as the exporter.
+ * Both are generated from the AffWP_Reports_Data_Filters instance.
  *
  * @since 1.8
  * @return void
  */
 function affwp_reports_tab_affiliates() {
 
-    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports-list-table.php';
+    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-reports-data-filters.php';
+    $reports_data_filters = new AffWP_Reports_Data_Filters;
 
-    // Output exporter class
-    affwp_reports_exporter();
+    $reports_data_filters->prepare_items();
+    $reports_data_filters->advanced_filters();
+    $reports_data_filters->views();
+    $reports_data_filters->display();
 
 }
 add_action('affwp_reports_tab_affiliates', 'affwp_reports_tab_affiliates' );
@@ -428,41 +433,6 @@ function affwp_reports_tab_campaigns() {
 
 }
 add_action( 'affwp_reports_tab_campaigns', 'affwp_reports_tab_campaigns' );
-
-
-/**
- *
- * To be replaced with a unified call to the AffWP_Data_Filters class.
- *
- */
-function affwp_reports_exporter() {
-
-    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-export-reports-list-table.php';
-    $reports_table = new AffWP_Export_Reports_List_Table();
-    $reports_table->prepare_items();
-
-    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-export-reports.php';
-    $exporter      = new Affiliate_WP_Reports_Export();
-    $exporter->display();
-
-    ?>
-    <div class="wrap">
-        <h1><?php echo __( 'Affiliate Reports','affiliate-wp' ); ?></h1>
-        <?php do_action( 'affwp_reports_export_affiliates_page_top' ); ?>
-        <form id="affwp-report-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab=affiliates' ); ?>">
-        <?php
-
-            // Output list table
-            $reports_table->views();
-            $reports_table->advanced_filters();
-            $reports_table->display();
-        ?>
-        </form>
-        <?php do_action( 'affwp_reports_export_affiliates_page_bottom' ); ?>
-    </div>
-<?php
-
-}
 
 
 

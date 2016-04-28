@@ -13,7 +13,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
     require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
-class AffWP_Export_Reports_List_Table extends WP_List_Table {
+class AffWP_Affiliate_Reports_List_Table extends WP_List_Table {
 
     /**
      * Default number of items to show per page
@@ -171,7 +171,7 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
                 <input type="hidden" name="status" value="<?php echo esc_attr( $earnings ); ?>"/>
             <?php endif; ?>
             <?php do_action( 'affwp_reports_advanced_filters_row' ); ?>
-            <?php //$this->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-reports' ); ?>
+            <?php // $this->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-reports' ); ?>
         </div>
 
 <?php
@@ -453,12 +453,12 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
      * @param   $reg_end_date    The ending datetime to search against
      * @return  boolean          Indicates whether an affiliate was registered during this period.
      */
-    function was_affiliate_registered_between( $start = '', $end = '' ) {
+    function was_affiliate_registered_between( $start, $end ) {
 
         $user_query = '';
 
         $args = array(
-            'date_registered' => $registered,
+            'date_registered' => 'user_registered',
             'orderby'         => 'user_registered',
             'date_query'      => array(
                 array( 'before'    => $end,
@@ -469,6 +469,8 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
         );
 
         $user_query = new WP_User_Query( $args );
+
+        return apply_filters( 'affwp_was_affiliate_registered_between', $user_query );
     }
 
     /**
@@ -503,25 +505,33 @@ class AffWP_Export_Reports_List_Table extends WP_List_Table {
         $status              = isset( $_GET['status'] )         ? $_GET['status']          : '';
         $order               = isset( $_GET['order'] )          ? $_GET['order']           : 'DESC';
         $orderby             = isset( $_GET['orderby'] )        ? $_GET['orderby']         : 'affiliate_id';
-        $start_date          = isset( $_GET['start-date'] )     ? sanitize_text_field( $_GET['start-date'] ) : null;
-        $end_date            = isset( $_GET['end-date'] )       ? sanitize_text_field( $_GET['end-date'] )   : $start_date;
-        $reg_start_date      = isset( $_GET['reg-start-date'] ) ? sanitize_text_field( $_GET['reg-start-date'] ) : null;
-        $reg_end_date        = isset( $_GET['reg-end-date'] )   ? sanitize_text_field( $_GET['reg-end-date'] )   : null;
-        $earnings_start_date = isset( $_GET['earnings-start-date'] ) ? sanitize_text_field( $_GET['earnings-start-date'] ) : null;
-        $earnings_end_date   = isset( $_GET['earnings-end-date'] )   ? sanitize_text_field( $_GET['earnings-end-date'] )   : $earnings_start_date;
+
+        $start_date          = isset( $_GET['start-date'] )     ? sanitize_text_field( $_GET['start-date'] ) : '';
+        $end_date            = isset( $_GET['end-date'] )       ? sanitize_text_field( $_GET['end-date'] )   : '';
+
+        $reg_start_date      = isset( $_GET['reg-start-date'] ) ? sanitize_text_field( $_GET['reg-start-date'] ) : '';
+        $reg_end_date        = isset( $_GET['reg-end-date'] )   ? sanitize_text_field( $_GET['reg-end-date'] )   : '';
+
+        $earnings_start_date = isset( $_GET['earnings-start-date'] ) ? sanitize_text_field( $_GET['earnings-start-date'] ) : '';
+        $earnings_end_date   = isset( $_GET['earnings-end-date'] )   ? sanitize_text_field( $_GET['earnings-end-date'] )   : '';
 
         $per_page            = $this->get_items_per_page( 'affwp_reports_items_per_page', $this->per_page );
 
         $affiliates          = affiliate_wp()->affiliates->get_affiliates( array(
-            'number'              => $per_page,
-            'offset'              => $per_page * ( $page - 1 ),
-            'status'              => $status,
-            'search'              => $search,
-            'orderby'             => sanitize_text_field( $orderby ),
-            'order'               => sanitize_text_field( $order ),
-            'start_date'          => $start_date,
-            'end_date'            => $end_date,
-            'date_registered'     => $this->was_affiliate_registered_between( $reg_start_date, $reg_end_date ),
+            'number'               => $per_page,
+            'offset'               => $per_page * ( $page - 1 ),
+            'status'               => $status,
+            'search'               => $search,
+            'orderby'              => sanitize_text_field( $orderby ),
+            'order'                => sanitize_text_field( $order ),
+            'start_date'           => $start_date,
+            'end_date'             => $end_date,
+            'date_query'           => array(
+                array( 'before'    => $reg_end_date,
+                       'after'     => $reg_start_date,
+                       'inclusive' => true,
+                )
+            ),
             'earnings_start_date' => $earnings_start_date,
             'earnings_end_date'   => $earnings_end_date
 

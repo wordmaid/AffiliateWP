@@ -112,7 +112,7 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
      * @since 1.8
      * @return array $data Data for Export
      */
-    public function get_list_table_data( $affiliates ) {
+    public function get_list_table_data() {
 
         return $affiliates;
     }
@@ -125,7 +125,7 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
      * @return void
      */
     public function csv_rows_out() {
-        $data = $this->get_list_table_data( $affiliates );
+        $data = $this->get_list_table_data();
 
         $cols = $this->get_csv_cols();
 

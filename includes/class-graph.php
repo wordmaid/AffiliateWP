@@ -291,16 +291,16 @@ class Affiliate_WP_Graph {
 					} );
 					}
 
-					addArrow( "&#x25C0;", 25, 60, {
+					addArrow( "&#x25C0;", 5, 20, {
 						left: -100
 					} );
-					addArrow( "&#x25B6;", 55, 60, {
+					addArrow( "&#x25B6;", 35, 20, {
 						left: 100
 					} );
-					addArrow( "&#x25B2;", 40, 45, {
+					addArrow( "&#x25B2;", 20, 5, {
 						top: -100
 					} );
-					addArrow( "&#x25BC;", 40, 75, {
+					addArrow( "&#x25BC;", 20, 35, {
 						top: 100
 					} );
 

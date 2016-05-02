@@ -683,6 +683,8 @@ class AffWP_Affiliates_Table extends WP_List_Table {
      *
      * @return boolean Returns true if the specified affiliate has valid data within the specified filter.
      * @uses   affwp_get_affiliate_earnings
+     * @uses   affwp_get_affiliate_id
+     * @uses   affwp_currency_filter
      */
     public function get_affiliate_earnings_match() {
 

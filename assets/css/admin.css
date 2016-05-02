@@ -214,19 +214,42 @@ table.affwp_table td a {
 	line-height: 2.1em;
 }
 
-/* The Apply button in the reports advanced filters form */
+/*
+ * Tightens spacing in reports table search filters tables
+ */
+table.affwp-report-filters-table {
+	margin-bottom: 0;
+}
+
+/*
+ * Remove borders in reports tables
+ */
+table.affwp-report-filters-table td {
+	border: 0;
+}
+
+/*
+ * Float right for:
+ * 1. Reports 'Export CSV' button
+ * 2. Advanced filters inputs
+ * 3. 'Apply' button in the reports advanced filters form
+ */
+.button.export-submit,
+.affwp-report-filters-table tr td:nth-child(1),
 #affwp-report-filters .button-secondary {
 	float: right;
 }
 
-.affwp-reports-export-submit {
-	float: right;
-}
-
+/*
+ * tr and td clearings for earnings search filter
+ */
 #affwp-report-earnings-filters {
 	clear: both;
 }
 
+/*
+ * Directional buttons for affwp graph navigation
+ */
 .affwp-graph .affwp-graph-nav-button {
 	position: absolute;
 	background: transparent;
@@ -238,10 +261,6 @@ table.affwp_table td a {
 	padding: 3px;
 	border-radius: 3px;
 	cursor: pointer;
-}
-
-table.affwp-report-filters-table td {
-	border: 0;
 }
 
 /* Reports leaderboard meta box */

@@ -58,7 +58,7 @@ function affwp_affiliates_admin() {
                 <a href="<?php echo esc_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'add_affiliate' ) ) ); ?>" class="add-new-h2"><?php _e( 'Add New', 'affiliate-wp' ); ?></a>
             </h2>
             <?php do_action( 'affwp_affiliates_page_top' ); ?>
-            <form method="post" enctype="multipart/form-data" class="affwp-reports-export-submit" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-affiliates'); ?>">
+            <form method="post" enctype="multipart/form-data" class="affwp-export-submit" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-affiliates'); ?>">
 
                 <p>
                     <input type="hidden" name="affwp_action" value="export_affiliates" />
@@ -228,8 +228,8 @@ class AffWP_Affiliates_Table extends WP_List_Table {
                         </td>
                         <td id="affwp-report-earnings-filters">
                             <span>
-                                <label for="search_operators"><?php _e( 'Earned', 'affiliate-wp' ); ?></label>
-                                <select form="affwp-affiliates-filter" name="search_operators" id="search_operators">
+                                <label for="operator"><?php _e( 'Earned', 'affiliate-wp' ); ?></label>
+                                <select form="affwp-affiliates-filter" name="operator" id="operator">
                                     <?php $options = affwp_search_filter_operators();
 
                                     foreach ( $options as $option ) :
@@ -267,9 +267,10 @@ class AffWP_Affiliates_Table extends WP_List_Table {
                                           ! empty( $end )            ||
                                           ! empty( $ref_start )      ||
                                           ! empty( $ref_end )        ||
+                                          ! empty( $earnings )       ||
                                           ! empty( $earnings_start ) ||
                                           ! empty( $earnings_end ) ): ?>
-                                    <a href="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab=affiliates' ); ?>" class="button-secondary"><?php _e( 'Clear Filter', 'affiliate-wp' ); ?></a>
+                                    <a href="<?php echo admin_url( 'admin.php?page=affiliate-wp-affiliates' ); ?>" class="button-secondary"><?php _e( 'Clear Filter', 'affiliate-wp' ); ?></a>
                                 <?php endif; ?>
                                 <input type="submit" class="button-secondary" value="<?php _e( 'Apply', 'affiliate-wp' ); ?>"/>
                             </span>
@@ -675,11 +676,63 @@ class AffWP_Affiliates_Table extends WP_List_Table {
     }
 
     /**
+     * Retrieve earnings for an affiliate by operator filters
+     *
+     * @access public
+     * @since  1.8
+     *
+     * @return boolean Returns true if the specified affiliate has data within the specified filter.
+     * @uses   affwp_get_affiliate_earnings
+     */
+    public function get_affiliate_earnings_match( $affiliate ) {
+
+        $earnings = isset( $_GET['earnings'] ) ? affwp_currency_filter( sanitize_text_field( $_GET['earnings'] ) ): null;
+        $operator = isset( $_GET['operator'] ) ? sanitize_text_field( $_GET['operator'] ): null;
+
+        if ( null == $earnings || null == $operator ):
+            return false;
+
+        $affiliate = affwp_get_affiliate_id;
+
+        $operator = urlencode( $operator );
+
+        $affiliate_earnings = affwp_currency_filter( affwp_get_affiliate_earnings( $affiliate_id ) );
+
+        // Switch defaults to checking by greater than or equal
+        switch( $operator ) {
+            case '=':
+                $affiliate_earnings  == $earnings ? return true : return false;
+                break;
+            case '!=':
+                $affiliate_earnings !== $earnings ? return true : return false;
+                break;
+            case '<':
+                $affiliate_earnings   < $earnings ? return true : return false;
+                break;
+            case '>':
+                $affiliate_earnings   > $earnings ? return true : return false;
+                break;
+            case '<=':
+                $affiliate_earnings  <= $earnings ? return true : return false;
+                break;
+            case '>=':
+                $affiliate_earnings  >= $earnings ? return true : return false;
+                break;
+
+            // No match for the affiliate
+            default:
+                return false;
+
+        return $affiliate;
+        }
+    }
+
+    /**
      * Retrieve all the data for all the Affiliates
      *
      * @access public
      * @since 1.0
-     * @return array $affiliate_data Array of all the data for the Affiliates
+     * @return array $affiliate_data Array of all the data for the Affiliates.
      */
     public function affiliate_data() {
 
@@ -707,9 +760,9 @@ class AffWP_Affiliates_Table extends WP_List_Table {
             'search'         => $search,
             'orderby'        => sanitize_text_field( $orderby ),
             'order'          => sanitize_text_field( $order ),
-            'date'           => array( 'start'                        => $start, 'end' => $end ),
-            'ref_range'      => array($ref_start, $ref_end),
-            'earnings_range' => array($earnings_start, $earnings_end)
+            'date'           => array( 'start' => $start, 'end' => $end ),
+            'earnings'       => array($ref_start, $ref_end),
+            'ref_range'      => array($ref_start, $ref_end)
         ) );
 
         return $affiliates;

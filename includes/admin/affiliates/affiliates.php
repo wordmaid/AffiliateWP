@@ -693,8 +693,9 @@ class AffWP_Affiliates_Table extends WP_List_Table {
         $earnings  = isset( $_GET['earnings'] ) ? affwp_currency_filter( sanitize_text_field( $_GET['earnings'] ) ): null;
         $operator  = isset( $_GET['operator'] ) ? sanitize_text_field( $_GET['operator'] ): null;
 
-        if ( null == $earnings || null == $operator ):
+        if ( null == $earnings || null == $operator ) {
             return;
+        }
 
         $affiliate = affwp_get_affiliate_id();
 

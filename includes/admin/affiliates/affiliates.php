@@ -49,18 +49,30 @@ function affwp_affiliates_admin() {
 
         $affiliates_table = new AffWP_Affiliates_Table();
         $affiliates_table->prepare_items();
+
+        require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-export-affiliates.php';
+        $exporter = new Affiliate_WP_Affiliate_Export;
 ?>
         <div class="wrap">
             <h2><?php _e( 'Affiliates', 'affiliate-wp' ); ?>
                 <a href="<?php echo esc_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'add_affiliate' ) ) ); ?>" class="add-new-h2"><?php _e( 'Add New', 'affiliate-wp' ); ?></a>
             </h2>
             <?php do_action( 'affwp_affiliates_page_top' ); ?>
-            <form id="affwp-affiliates-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp' ); ?>">
-                <?php $affiliates_table->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-affiliates' ); ?>
+            <form method="post" enctype="multipart/form-data" class="affwp-reports-export-submit" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-affiliates'); ?>">
+
+                <p>
+                    <input type="hidden" name="affwp_action" value="export_affiliates" />
+                    <?php wp_nonce_field( 'affwp_export_affiliates_nonce', 'affwp_export_affiliates_nonce' ); ?>
+                    <?php submit_button( __( 'Export CSV', 'affiliate-wp' ), 'primary export-submit', 'submit', false ); ?>
+                </p>
+            </form>
+            <form id="affwp-affiliates-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-affiliates' ); ?>">
+                <?php // $affiliates_table->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-affiliates' ); ?>
 
                 <input type="hidden" name="page" value="affiliate-wp-affiliates" />
 
                 <?php $affiliates_table->views() ?>
+                <?php $affiliates_table->advanced_filters() ?>
                 <?php $affiliates_table->display() ?>
             </form>
             <?php do_action( 'affwp_affiliates_page_bottom' ); ?>
@@ -195,8 +207,8 @@ class AffWP_Affiliates_Table extends WP_List_Table {
     public function advanced_filters() {
         $status         = isset( $_GET['status'] )         ? sanitize_text_field( $_GET['status'] )     : null;
         $earnings       = isset( $_GET['earnings'] )       ? sanitize_text_field( $_GET['earnings'] )   : null;
-        $start          = isset( $_GET['start'] )          ? sanitize_text_field( $_GET['start'] )      : null;
-        $end            = isset( $_GET['end'] )            ? sanitize_text_field( $_GET['end'] )        : null;
+        $start          = isset( $_GET['start'] )          ? sanitize_text_field( $_GET['start'] )      : 'one month ago';
+        $end            = isset( $_GET['end'] )            ? sanitize_text_field( $_GET['end'] )        : 'now';
         $ref_start      = isset( $_GET['ref_start'] )      ? sanitize_text_field( $_GET['ref_start'] )  : null;
         $ref_end        = isset( $_GET['ref_end'] )        ? sanitize_text_field( $_GET['ref_end'] )    : null;
         $earnings_start = isset( $_GET['earnings_start'] ) ? sanitize_text_field( $_GET['earnings_start'] ) : null;
@@ -217,7 +229,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
                         <td id="affwp-report-earnings-filters">
                             <span>
                                 <label for="search_operators"><?php _e( 'Earned', 'affiliate-wp' ); ?></label>
-                                <select form="affwp-reports-filter" name="search_operators" id="search_operators">
+                                <select form="affwp-affiliates-filter" name="search_operators" id="search_operators">
                                     <?php $options = affwp_search_filter_operators();
 
                                     foreach ( $options as $option ) :
@@ -228,7 +240,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
                             </span>
                         </td>
                         <td width="20%">
-                            <?php $this->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-reports' ); ?>
+                            <?php $this->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-affiliates' ); ?>
                         </td>
 
                     </tr>
@@ -536,8 +548,8 @@ class AffWP_Affiliates_Table extends WP_List_Table {
      * Render the actions column
      *
      * @access public
-     * @since 1.0
-     * @param array $affiliate Contains all the data for the actions column
+     * @since  1.0
+     * @param  array $affiliate Contains all the data for the actions column
      * @return string action links
      */
     function column_actions( $affiliate ) {

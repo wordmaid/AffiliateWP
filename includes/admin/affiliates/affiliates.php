@@ -684,15 +684,17 @@ class AffWP_Affiliates_Table extends WP_List_Table {
      * @return boolean Returns true if the specified affiliate has valid data within the specified filter.
      * @uses   affwp_get_affiliate_earnings
      */
-    public function get_affiliate_earnings_match( $affiliate ) {
+    public function get_affiliate_earnings_match() {
 
-        $earnings = isset( $_GET['earnings'] ) ? affwp_currency_filter( sanitize_text_field( $_GET['earnings'] ) ): null;
-        $operator = isset( $_GET['operator'] ) ? sanitize_text_field( $_GET['operator'] ): null;
+        $affiliate = '';
+        $match     = null;
+        $earnings  = isset( $_GET['earnings'] ) ? affwp_currency_filter( sanitize_text_field( $_GET['earnings'] ) ): null;
+        $operator  = isset( $_GET['operator'] ) ? sanitize_text_field( $_GET['operator'] ): null;
 
         if ( null == $earnings || null == $operator ):
             return;
 
-        $affiliate = affwp_get_affiliate_id;
+        $affiliate = affwp_get_affiliate_id();
 
         $operator = urlencode( $operator );
 
@@ -701,28 +703,30 @@ class AffWP_Affiliates_Table extends WP_List_Table {
         // Switch defaults to checking by greater than or equal
         switch( $operator ) {
             case '=':
-                $affiliate_earnings  == $earnings ? return true : return false;
+                $match = ( $affiliate_earnings  == $earnings ? return true : return false );
                 break;
             case '!=':
-                $affiliate_earnings !== $earnings ? return true : return false;
+                $match = ( $affiliate_earnings !== $earnings ? return true : return false );
                 break;
             case '<':
-                $affiliate_earnings   < $earnings ? return true : return false;
+                $match = ( $affiliate_earnings   < $earnings ? return true : return false );
                 break;
             case '>':
-                $affiliate_earnings   > $earnings ? return true : return false;
+                $match = ( $affiliate_earnings   > $earnings ? return true : return false );
                 break;
             case '<=':
-                $affiliate_earnings  <= $earnings ? return true : return false;
+                $match = ( $affiliate_earnings  <= $earnings ? return true : return false );
                 break;
             case '>=':
-                $affiliate_earnings  >= $earnings ? return true : return false;
+                $match = ( $affiliate_earnings  >= $earnings ? return true : return false );
                 break;
 
             // No match for the affiliate
             default:
-                return false;
+                $match = null;
         }
+
+        return $match;
     }
 
     /**
@@ -743,8 +747,8 @@ class AffWP_Affiliates_Table extends WP_List_Table {
         $start          = isset( $_GET['start'] )          ? sanitize_text_field( $_GET['start'] )     : 'one month ago';
         $end            = isset( $_GET['end'] )            ? sanitize_text_field( $_GET['end'] )       : 'now';
 
-        $ref_start      = isset( $_GET['ref_start'] )      ? sanitize_text_field( $_GET['ref_start'] ) : '';
-        $ref_end        = isset( $_GET['ref_end'] )        ? sanitize_text_field( $_GET['ref_end'] )   : '';
+        $ref_start      = isset( $_GET['ref_start'] )      ? sanitize_text_field( $_GET['ref_start'] ) : null;
+        $ref_end        = isset( $_GET['ref_end'] )        ? sanitize_text_field( $_GET['ref_end'] )   : null;
 
         $earnings_start = isset( $_GET['earnings_start'] ) ? sanitize_text_field( $_GET['earnings_start'] ) : null;
         $earnings_end   = isset( $_GET['earnings_end'] )   ? sanitize_text_field( $_GET['earnings_end'] )   : null;
@@ -759,8 +763,8 @@ class AffWP_Affiliates_Table extends WP_List_Table {
             'orderby'        => sanitize_text_field( $orderby ),
             'order'          => sanitize_text_field( $order ),
             'date'           => array( 'start' => $start, 'end' => $end ),
-            'earnings'       => array($ref_start, $ref_end),
-            'ref_range'      => array($ref_start, $ref_end)
+            'earnings'       => array( 'start' => $earnings_start, 'end' => $earnings_end ),
+            'referrals'      => array( 'start' => $ref_start, 'end' => $ref_end )
         ) );
 
         return $affiliates;

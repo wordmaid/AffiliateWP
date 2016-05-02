@@ -706,22 +706,22 @@ class AffWP_Affiliates_Table extends WP_List_Table {
         // Switch defaults to checking by greater than or equal
         switch( $operator ) {
             case '=':
-                $match = ( $affiliate_earnings  == $earnings ? return true : return false );
+                $match = $affiliate_earnings == $earnings  ? true : false;
                 break;
             case '!=':
-                $match = ( $affiliate_earnings !== $earnings ? return true : return false );
+                $match = $affiliate_earnings !== $earnings ? true : false;
                 break;
             case '<':
-                $match = ( $affiliate_earnings   < $earnings ? return true : return false );
+                $match = $affiliate_earnings < $earnings   ? true : false;
                 break;
             case '>':
-                $match = ( $affiliate_earnings   > $earnings ? return true : return false );
+                $match = $affiliate_earnings > $earnings   ? true : false;
                 break;
             case '<=':
-                $match = ( $affiliate_earnings  <= $earnings ? return true : return false );
+                $match = $affiliate_earnings <= $earnings  ? true : false;
                 break;
             case '>=':
-                $match = ( $affiliate_earnings  >= $earnings ? return true : return false );
+                $match = $affiliate_earnings >= $earnings  ? true : false;
                 break;
 
             // No match for the affiliate

@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @since 1.8
  */
-class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
+class Affiliate_WP_Report_Export extends Affiliate_WP_Export {
 
     /**
      * Our export type. Used for export-type specific filters/actions
@@ -71,7 +71,7 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
             <p>
                 <input type="hidden" name="affwp_action" value="export_report_affiliates" />
                 <?php wp_nonce_field( 'affwp_export_report_affiliates_nonce', 'affwp_export_report_affiliates_nonce' ); ?>
-                <?php submit_button( __( 'Export CSV', 'affiliate-wp' ), 'primary', 'submit', false ); ?>
+                <?php submit_button( __( 'Export CSV', 'affiliate-wp' ), 'primary export-submit', 'submit', false ); ?>
             </p>
         </form>
     <?php
@@ -105,44 +105,66 @@ class Affiliate_WP_Reports_Export extends Affiliate_WP_Export {
 
     /**
      * Get the data being exported
-     * This method must retrieve data from the current instance
-     * of the AffWP_Export_Reports_List_Table class.
      *
      * @access public
      * @since 1.8
      * @return array $data Data for Export
      */
-    public function get_list_table_data() {
+    public function get_data() {
 
-        return $affiliates;
-    }
+        $this->status = isset( $_GET['status'] ) ? sanitize_text_field( $_GET['status'] )     : null;
 
-    /**
-     * Output the CSV rows
-     *
-     * @access public
-     * @since 1.8
-     * @return void
-     */
-    public function csv_rows_out() {
-        $data = $this->get_list_table_data();
+        $reg_start = isset( $_GET['reg_start'] ) ? sanitize_text_field( $_GET['reg_start'] )     : null;
+        $reg_end = isset( $_GET['reg_end'] ) ? sanitize_text_field( $_GET['reg_end'] )     : null;
 
-        $cols = $this->get_csv_cols();
+        $args = array(
+            'status' => $this->status,
+            'number' => -1,
+            'date_query' => array(
+                array( 'after'     => $reg_start,
+                       'before'    => $reg_end,
+                       'inclusive' => true,
+                )
+            )
+        );
 
-        // Output each row
-        foreach ( $data as $row ) {
-            $i = 1;
-            foreach ( $row as $col_id => $column ) {
-                // Make sure the column is valid
-                if ( array_key_exists( $col_id, $cols ) ) {
-                    echo '"' . $column . '"';
-                    echo $i == count( $cols ) + 1 ? '' : ',';
-                }
+        $data       = array();
+        $affiliates = affiliate_wp()->affiliates->get_affiliates( $args );
 
-                $i++;
+        if( $affiliates ) {
+
+            foreach( $affiliates as $affiliate ) {
+
+                $data[] = array(
+                    'affiliate_id'    => $affiliate->affiliate_id,
+                    'email'           => affwp_get_affiliate_email( $affiliate->affiliate_id ),
+                    'payment_email'   => affwp_get_affiliate_payment_email( $affiliate->affiliate_id ),
+                    'username'        => affwp_get_affiliate_login( $affiliate->affiliate_id ),
+                    'rate'            => affwp_get_affiliate_rate( $affiliate->affiliate_id ),
+                    'rate_type'       => affwp_get_affiliate_rate_type( $affiliate->affiliate_id ),
+                    'earnings'        => $affiliate->earnings,
+                    'referrals'       => $affiliate->referrals,
+                    'visits'          => $affiliate->visits,
+                    'status'          => $affiliate->status,
+                    'date_registered' => $affiliate->date_registered,
+                    'date_query'      => array(
+                        array( 'after'     => $reg_start,
+                               'before'    => $reg_end,
+                               'inclusive' => true,
+                        )
+                    )
+                );
+
             }
-            echo "\r\n";
+
         }
+
+        $data = apply_filters( 'affwp_export_get_data', $data );
+        $data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
+
+        return $data;
     }
+
+
 
 }

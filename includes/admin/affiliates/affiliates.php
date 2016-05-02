@@ -681,7 +681,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
      * @access public
      * @since  1.8
      *
-     * @return boolean Returns true if the specified affiliate has data within the specified filter.
+     * @return boolean Returns true if the specified affiliate has valid data within the specified filter.
      * @uses   affwp_get_affiliate_earnings
      */
     public function get_affiliate_earnings_match( $affiliate ) {
@@ -690,7 +690,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
         $operator = isset( $_GET['operator'] ) ? sanitize_text_field( $_GET['operator'] ): null;
 
         if ( null == $earnings || null == $operator ):
-            return false;
+            return;
 
         $affiliate = affwp_get_affiliate_id;
 
@@ -722,8 +722,6 @@ class AffWP_Affiliates_Table extends WP_List_Table {
             // No match for the affiliate
             default:
                 return false;
-
-        return $affiliate;
         }
     }
 

@@ -69,7 +69,7 @@ function affwp_get_referrals_by_reference() {
 }
 
 /**
- * Get the creative which have generated the highest quantity of referrals,
+ * Get the creatives which generated the highest quantity of referrals,
  * within a specified date range.
  *
  * @since 1.8
@@ -78,11 +78,35 @@ function affwp_get_referrals_by_reference() {
  */
 function affwp_get_referrals_by_creatives() {
 
-	// A sub-method must first be created which optionally tracks creatives
-	// via url parameter, for example:
-	// example.com?ref=10&c=2 where the integer 2 in thise case refers to the ID of the
-	// creative which was used.
+    // A sub-method must first be created which optionally tracks creatives
+    // via url parameter, for example:
+    // example.com?ref=10&c=2 where the integer 2 in thise case refers to the ID of the
+    // creative which was used.
 
-	$by_creatives = '';
-	return $by_creatives;
+    $by_creatives = '';
+
+    return $by_creatives;
+}
+
+/**
+ * Defines an array of operators to use as data filters for
+ * referral earnings in search filter contexts.
+ *
+ * @since  1.8
+ *
+ * @return array An array of operators, used as arguments to filter affiliates and referrals by earnings amounts
+ */
+function affwp_search_filter_operators() {
+
+    $operators = array();
+    $operators = array(
+        'equal'                 => '=',
+        'not_equal'             => '!=',
+        'less_than'             => '<',
+        'greater_than'          => '>',
+        'less_than_equal_to'    => '<=',
+        'greater_than_equal_to' => '>=',
+    );
+
+    return apply_filters( 'affwp_search_filter_operators', $operators );
 }

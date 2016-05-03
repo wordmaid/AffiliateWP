@@ -550,3 +550,13 @@ function affwp_make_url_human_readable( $url ) {
 
 	return $human_readable;
 }
+
+/**
+ * Show a tab in the Affiliate Area
+ *
+ * @since  1.8
+ * @return boolean
+ */
+function affwp_affiliate_area_show_tab( $tab = '' ) {
+	return apply_filters( 'affwp_affiliate_area_show_tab', true, $tab );
+}

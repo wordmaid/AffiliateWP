@@ -33,9 +33,7 @@ function affwp_visits_admin() {
 			<?php $visits_table->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-affiliates' ); ?>
 			<span class="affwp-ajax-search-wrap">
 				<input type="text" name="user_name" id="user_name" class="affwp-user-search" data-affwp-status="any" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
-				<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 			</span>
-			<div id="affwp_user_search_results"></div>
 			<input type="hidden" name="user_id" id="user_id" value=""/>
 			<input type="hidden" name="page" value="affiliate-wp-visits" />
 			<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_from" placeholder="<?php esc_attr_e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $from ); ?>"/>

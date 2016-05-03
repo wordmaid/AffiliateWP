@@ -25,6 +25,21 @@ class Affiliate_WP_Affiliate_Meta_DB extends Affiliate_WP_DB {
 	}
 
 	/**
+	 * Get table columns and data types
+	 *
+	 * @access  public
+	 * @since   1.7.18
+	*/
+	public function get_columns() {
+		return array(
+			'meta_id'      => '%d',
+			'affiliate_id' => '%d',
+			'meta_key'     => '%s',
+			'meta_value'   => '%s',
+		);
+	}
+
+	/**
 	 * Register the table with $wpdb so the metadata api can find it
 	 *
 	 * @access  public

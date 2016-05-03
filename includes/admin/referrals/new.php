@@ -19,9 +19,8 @@
 				<td>
 					<span class="affwp-ajax-search-wrap">
 						<input type="text" name="user_name" id="user_name" class="affwp-user-search" data-affwp-status="active" autocomplete="off" />
-						<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
+						<input type="hidden" name="user_id" id="user_id" value="" />
 					</span>
-					<div id="affwp_user_search_results"></div>
 					<p class="description"><?php _e( 'Enter the name of the affiliate or enter a partial name or email to perform a search.', 'affiliate-wp' ); ?></p>
 				</td>
 
@@ -102,7 +101,6 @@
 		<?php do_action( 'affwp_new_referral_bottom' ); ?>
 
 		<?php echo wp_nonce_field( 'affwp_add_referral_nonce', 'affwp_add_referral_nonce' ); ?>
-		<input type="hidden" name="user_id" id="user_id" value="" />
 		<input type="hidden" name="affwp_action" value="add_referral" />
 
 		<?php submit_button( __( 'Add Referral', 'affiliate-wp' ) ); ?>

@@ -16,12 +16,52 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	protected $_user_id = 0;
 
 	/**
+	 * User first name.
+	 *
+	 * @access protected
+	 * @var    string
+	 */
+	protected $_user_first_name = 'Alf';
+
+	/**
+	 * User last name.
+	 *
+	 * @access protected
+	 * @var    string
+	 */
+	protected $_user_last_name = 'Alferson';
+
+	/**
 	 * User ID 2.
 	 *
 	 * @access protected
 	 * @var int
 	 */
 	protected $_user_id2 = 0;
+
+	/**
+	 * User first name for test affiliate 2
+	 *
+	 * @access protected
+	 * @var    string
+	 */
+	protected $_user_first_name2 = 'Alf';
+
+	/**
+	 * User ID 3.
+	 *
+	 * @access protected
+	 * @var int
+	 */
+	protected $_user_id3 = 0;
+
+	/**
+	 * User last name for test affiliate 3
+	 *
+	 * @access protected
+	 * @var    string
+	 */
+	protected $_user_last_name3 = 'Alferson';
 
 	/**
 	 * First affiliate test ID.
@@ -40,6 +80,14 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	protected $_affiliate_id2 = 0;
 
 	/**
+	 * Second affiliate test ID.
+	 *
+	 * @access protected
+	 * @var int
+	 */
+	protected $_affiliate_id3 = 0;
+
+	/**
 	 * Affiliate test object.
 	 *
 	 * @access protected
@@ -54,6 +102,14 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @var stdClass
 	 */
 	protected $_affiliate_object_2;
+
+	/**
+	 * Affiliate test object 3.
+	 *
+	 * @access protected
+	 * @var stdClass
+	 */
+	protected $_affiliate_object_3;
 
 	/**
 	 * Random string.
@@ -78,18 +134,38 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		parent::setUp();
 
 		// First user/affiliate.
-		$this->_user_id          = $this->factory->user->create();
-		$this->_affiliate_id     = affiliate_wp()->affiliates->add( array(
-			'user_id' => $this->_user_id
+		$this->_user_id          = $this->factory->user->create(
+			array(
+			'first_name' => $this->_user_first_name,
+			'last_name'  => $this->_user_last_name
+				)
+			);
+		$this->_affiliate_id      = affiliate_wp()->affiliates->add( array(
+			'user_id'    => $this->_user_id
 		) );
-		$this->_affiliate_object = affwp_get_affiliate( $this->_affiliate_id );
+		$this->_affiliate_object  = affwp_get_affiliate( $this->_affiliate_id );
 
 		// Second user/affiliate.
-		$this->_user_id2           = $this->factory->user->create();
+		$this->_user_id2           = $this->factory->user->create(
+			array(
+			'first_name' => $this->_user_first_name2
+				)
+			);
 		$this->_affiliate_id2      = affiliate_wp()->affiliates->add( array(
-			'user_id' => $this->_user_id2
+			'user_id'    => $this->_user_id2
 		) );
 		$this->_affiliate_object_2 = affwp_get_affiliate( $this->_affiliate_id2 );
+
+		// Third user/affiliate.
+		$this->_user_id3           = $this->factory->user->create(
+			array(
+			'last_name'  => $this->_user_last_name3
+				)
+			);
+		$this->_affiliate_id3      = affiliate_wp()->affiliates->add( array(
+			'user_id'    => $this->_user_id3
+		) );
+		$this->_affiliate_object_3 = affwp_get_affiliate( $this->_affiliate_id3 );
 
 		$this->rand_str = rand_str( 5 );
 
@@ -149,6 +225,44 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$user = get_user_by( 'id', $this->_user_id );
 
 		$this->assertEquals( $user->data->user_login, affwp_get_affiliate_username( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_name()
+	 */
+	public function test_affwp_get_affiliate_name_should_equal_empty_string() {
+		$this->assertEquals( '', affwp_get_affiliate_name() );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_name()
+	 */
+	public function test_affwp_get_affiliate_name_should_default_to_empty_string() {
+		$this->assertEmpty( affwp_get_affiliate_name() );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_name()
+	 */
+	public function test_affwp_get_affiliate_name_should_return_first_name_last_name() {
+		$affiliate_id = $this->_affiliate_id;
+		$this->assertEquals( $this->_user_first_name . ' ' . $this->_user_last_name, affwp_get_affiliate_name( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_name()
+	 */
+	public function test_affwp_get_affiliate_name_should_return_first_name() {
+		$affiliate_id = $this->_affiliate_id2;
+		$this->assertEquals( $this->_user_first_name2, affwp_get_affiliate_name( $this->_affiliate_id2 ) );
+	}
+
+	/**
+	 * @covers affwp_get_affiliate_name()
+	 */
+	public function test_affwp_get_affiliate_name_should_return_last_name() {
+		$affiliate_id = $this->_affiliate_id3;
+		$this->assertEquals( $this->_user_last_name3, affwp_get_affiliate_name( $this->_affiliate_id3 ) );
 	}
 
 	/**

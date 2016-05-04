@@ -264,9 +264,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 				<span class="affwp-memberpress-coupon-input-wrap">
 					<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 					<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" />
-					<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 				</span>
-				<span id="affwp_user_search_results"></span>
 			</span>
 		</p>
 		<?php

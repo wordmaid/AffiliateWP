@@ -78,6 +78,59 @@ function affwp_get_affiliate_username( $affiliate_id = 0 ) {
 }
 
 /**
+ * Retrieves the affiliate first name and/or last name, if set.
+ *
+ * If only one name (first_name or last_name) is provided, this function will return
+ * only that name.
+ *
+ * @since  1.8
+ *
+ * @uses affwp_get_affiliate_id
+ * @uses affwp_get_affiliate
+ *
+ * @param  $affiliate_id int Optional. Affiliate ID. Default is the ID of the current affiliate.
+ * @return string The affiliate user's first and/or last name  if set. An empty string if the affiliate ID
+ *                is invalid or neither first nor last name are set.
+ */
+function affwp_get_affiliate_name( $affiliate_id = 0 ) {
+
+	if ( empty( $affiliate_id ) ) {
+		$affiliate_id = affwp_get_affiliate_id();
+	}
+
+	$affiliate  = affwp_get_affiliate( $affiliate_id );
+
+	// Return empty if no affiliate.
+	if ( empty( $affiliate ) ) {
+		return '';
+	}
+
+	$user_info    = get_userdata( $affiliate->user_id );
+	$first_name   = esc_html( $user_info->first_name );
+	$last_name    = esc_html( $user_info->last_name );
+
+	// Check if both names are set first.
+	if ( ! empty( $first_name ) && ! empty( $last_name ) ) {
+		return $first_name . ' ' . $last_name;
+	}
+
+	// If neither are set, return an empty string.
+	if ( empty( $first_name ) && empty( $last_name ) ) {
+		return '';
+	}
+
+	// First name only
+	if ( ! empty( $first_name ) && empty( $last_name ) ) {
+		return $first_name;
+	}
+
+	// Last name only
+	if ( empty( $first_name ) && ! empty( $last_name ) ) {
+		return $last_name;
+	}
+}
+
+/**
  * Determines whether or not the affiliate is active
  *
  * If no affiliate ID is given, it will check the currently logged in affiliate

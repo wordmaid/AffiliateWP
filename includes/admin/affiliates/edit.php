@@ -8,6 +8,7 @@ $default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
 $default_rate = affwp_abs_number_round( $default_rate );
 $email        = ! empty( $affiliate->payment_email ) ? $affiliate->payment_email : '';
 $reason       = affwp_get_affiliate_meta( $affiliate->affiliate_id, '_rejection_reason', true );
+
 ?>
 <div class="wrap">
 
@@ -18,6 +19,24 @@ $reason       = affwp_get_affiliate_meta( $affiliate->affiliate_id, '_rejection_
 		<?php do_action( 'affwp_edit_affiliate_top', $affiliate ); ?>
 
 		<table class="form-table">
+
+			<tr class="form-row form-required">
+
+				<th scope="row">
+					<label for="affiliate_first_last"><?php _e( 'Affiliate Name', 'affiliate-wp' ); ?></label>
+				</th>
+
+				<td>
+					<input class="regular-text" type="text" name="affiliate_first_last" id="affiliate_first_last" value="<?php echo esc_attr( affwp_get_affiliate_name( $affiliate->affiliate_id ) ); ?>" disabled="1" />
+					<p class="description">
+						<?php echo wp_sprintf( __( 'The affiliate\'s first and/or last name. Will be empty if no name is specified. This can be changed on the <a href="%1$s" alt="%2$s">user edit screen</a>.', 'affiliate-wp' ),
+							esc_url( get_edit_user_link( $affiliate->user_id ) ),
+							esc_attr__( 'A link to the user edit screen for this user.', 'affiliate-wp' )
+						); ?>
+					</p>
+				</td>
+
+			</tr>
 
 			<tr class="form-row form-required">
 
@@ -54,6 +73,19 @@ $reason       = affwp_get_affiliate_meta( $affiliate->affiliate_id, '_rejection_
 				<td>
 					<input class="regular-text" type="text" name="user_login" id="user_login" value="<?php echo esc_attr( $user_info->user_login ); ?>" disabled="1" />
 					<p class="description"><?php _e( 'The affiliate\'s username. This cannot be changed.', 'affiliate-wp' ); ?></p>
+				</td>
+
+			</tr>
+
+			<tr class="form-row form-required">
+
+				<th scope="row">
+					<label for="date_registered"><?php _e( 'Registration Date', 'affiliate-wp' ); ?></label>
+				</th>
+
+				<td>
+					<input class="medium-text" type="text" name="date_registered" id="date_registered" value="<?php echo esc_attr( date_i18n( get_option( 'date_format' ), strtotime( $affiliate->date_registered ) ) ); ?>" disabled="1" />
+					<p class="description"><?php _e( 'The affiliate\'s registration date. This cannot be changed.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>

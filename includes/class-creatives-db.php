@@ -123,7 +123,7 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 
 			}
 
-			wp_cache_set( $cache_key, $results, 'creatives', 3600 );
+			wp_cache_set( $cache_key, $results, 'creatives', HOUR_IN_SECONDS );
 
 		}
 

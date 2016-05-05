@@ -5,7 +5,7 @@
  * Description: Affiliate Plugin for WordPress
  * Author: Pippin Williamson and Andrew Munro
  * Author URI: https://affiliatewp.com
- * Version: 1.7.18
+ * Version: 1.8
  * Text Domain: affiliate-wp
  * Domain Path: languages
  *
@@ -24,7 +24,7 @@
  * @package AffiliateWP
  * @category Core
  * @author Pippin Williamson
- * @version 1.7.18
+ * @version 1.8
  */
 
 // Exit if accessed directly
@@ -51,7 +51,7 @@ final class Affiliate_WP {
 	 *
 	 * @since 1.0
 	 */
-	private $version = '1.7.18';
+	private $version = '1.8';
 
 	/**
 	 * The affiliates DB instance variable.
@@ -239,11 +239,12 @@ final class Affiliate_WP {
 	/**
 	 * Show a warning to sites running PHP < 5.3
 	 *
+	 * @static
 	 * @access private
 	 * @since 1.0
 	 * @return void
 	 */
-	public function below_php_version_notice() {
+	public static function below_php_version_notice() {
 		echo '<div class="error"><p>' . __( 'Your version of PHP is below the minimum version of PHP required by AffiliateWP. Please contact your host and request that your version be upgraded to 5.3 or later.', 'affiliate-wp' ) . '</p></div>';
 	}
 
@@ -314,7 +315,8 @@ final class Affiliate_WP {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/plugins.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-migrate.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/add-ons.php';
-			
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/user-profile.php';
+
 		}
 
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-shortcodes.php';

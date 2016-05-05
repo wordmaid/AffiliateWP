@@ -25,7 +25,7 @@ function affwp_affiliates_dashboard() {
 					<div class="postbox">
 						<h3><?php _e( 'Totals', 'affiliate-wp' ); ?></h3>
 						<div class="inside">
-							
+
 							<table class="affwp_table">
 
 								<thead>
@@ -122,10 +122,10 @@ function affwp_affiliates_dashboard() {
 
 								<tbody>
 									<?php if( $affiliates ) : ?>
-										<?php foreach( $affiliates as $affiliate  ) : ?>	
+										<?php foreach( $affiliates as $affiliate  ) : ?>
 											<tr>
 												<td><?php echo affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id ); ?></td>
-												<td><?php echo $affiliate->status; ?></td>
+												<td><?php echo affwp_get_affiliate_status_label( $affiliate ); ?></td>
 												<td>
 													<?php
 													if( 'pending' == $affiliate->status ) {
@@ -147,14 +147,14 @@ function affwp_affiliates_dashboard() {
 								</tbody>
 
 							</table>
-		
+
 						</div>
 					</div>
 					<?php do_action( 'affwp_overview_left_bottom' ); ?>
 				</div>
 				<div id="postbox-container-2" class="postbox-container">
 					<?php do_action( 'affwp_overview_right_top' ); ?>
-					
+
 					<div class="postbox">
 						<h3><?php _e( 'Most Valuable Affiliates', 'affiliate-wp' ); ?></h3>
 						<div class="inside">
@@ -174,7 +174,7 @@ function affwp_affiliates_dashboard() {
 
 								<tbody>
 								<?php if( $affiliates ) : ?>
-									<?php foreach( $affiliates as $affiliate  ) : ?>	
+									<?php foreach( $affiliates as $affiliate  ) : ?>
 										<tr>
 											<td><?php echo affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id ); ?></td>
 											<td><?php echo affwp_currency_filter( $affiliate->earnings ); ?></td>
@@ -211,7 +211,7 @@ function affwp_affiliates_dashboard() {
 
 								<tbody>
 								<?php if( $referrals ) : ?>
-									<?php foreach( $referrals as $referral  ) : ?>	
+									<?php foreach( $referrals as $referral  ) : ?>
 										<tr>
 											<td><?php echo affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id ); ?></td>
 											<td><?php echo affwp_currency_filter( $referral->amount ); ?></td>
@@ -246,7 +246,7 @@ function affwp_affiliates_dashboard() {
 
 								<tbody>
 									<?php if( $visits ) : ?>
-										<?php foreach( $visits as $visit ) : ?>	
+										<?php foreach( $visits as $visit ) : ?>
 											<tr>
 												<td><?php echo affiliate_wp()->affiliates->get_affiliate_name( $visit->affiliate_id ); ?></td>
 												<td><a href="<?php echo esc_url( $visit->url ); ?>"><?php echo esc_html( $visit->url ); ?></a></td>

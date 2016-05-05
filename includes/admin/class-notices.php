@@ -16,7 +16,7 @@ class Affiliate_WP_Admin_Notices {
 		if( empty( $integrations ) && ! get_user_meta( get_current_user_id(), '_affwp_no_integrations_dismissed', true ) ) {
 			echo '<div class="error">';
 				echo '<p>' . sprintf( __( 'There are currently no AffiliateWP <a href="%s">integrations</a> enabled. If you are using AffiliateWP without any integrations, you may disregard this message.', 'affiliate-wp' ), admin_url( 'admin.php?page=affiliate-wp-settings&tab=integrations' ) ) . '</p>';
-				echo '<p><a href="' . wp_nonce_url( add_query_arg( array( 'affwp_action' => 'dismiss_notices', 'affwp_notice' => 'no_integrations' ) ), 'affwp_dismiss_notice', 'affwp_dismiss_notice_nonce' ) . '">' . __( 'Dismiss Notice', 'affiliate-wp' ) . '</a></p>';
+				echo '<p><a href="' . wp_nonce_url( add_query_arg( array( 'affwp_action' => 'dismiss_notices', 'affwp_notice' => 'no_integrations' ) ), 'affwp_dismiss_notice', 'affwp_dismiss_notice_nonce' ) . '">' . _x( 'Dismiss Notice', 'Integrations', 'affiliate-wp' ) . '</a></p>';
 			echo '</div>';
 		}
 
@@ -179,12 +179,28 @@ class Affiliate_WP_Admin_Notices {
 
 		$license = affiliate_wp()->settings->check_license();
 
-		if( ! is_wp_error( $license ) ) {
+		if ( ! is_wp_error( $license ) && false === get_transient( 'affwp_license_notice' ) ) {
+
+			// Base query args.
+			$notice_query_args = array(
+				'affwp_action' => 'dismiss_notices'
+			);
 
 			if ( 'expired' === $license ) {
-				echo '<div class="error info"><p>' . __( 'Your license key for AffiliateWP has expired. Please renew your license to re-enable automatic updates.', 'affiliate-wp' ) . '</p></div>';
+				$notice_query_args['affwp_notice'] = 'expired_license';
+
+				echo '<div class="error info">';
+					echo '<p>' . __( 'Your license key for AffiliateWP has expired. Please renew your license to re-enable automatic updates.', 'affiliate-wp' ) . '</p>';
+					echo '<p><a href="' . wp_nonce_url( add_query_arg( $notice_query_args ), 'affwp_dismiss_notice', 'affwp_dismiss_notice_nonce' ) . '">' . _x( 'Dismiss Notice', 'License', 'affiliate-wp' ) . '</a></p>';
+				echo '</div>';
+
 			} elseif ( 'valid' !== $license ) {
-				echo '<div class="notice notice-info"><p>' . sprintf( __( 'Please <a href="%s">enter and activate</a> your license key for AffiliateWP to enable automatic updates.', 'affiliate-wp' ), admin_url( 'admin.php?page=affiliate-wp-settings' ) ) . '</p></div>';
+				$notice_query_args['affwp_notice'] = 'invalid_license';
+
+				echo '<div class="notice notice-info">';
+					echo '<p>' . sprintf( __( 'Please <a href="%s">enter and activate</a> your license key for AffiliateWP to enable automatic updates.', 'affiliate-wp' ), admin_url( 'admin.php?page=affiliate-wp-settings' ) ) . '</p>';
+					echo '<p><a href="' . wp_nonce_url( add_query_arg( $notice_query_args ), 'affwp_dismiss_notice', 'affwp_dismiss_notice_nonce' ) . '">' . _x( 'Dismiss Notice', 'License', 'affiliate-wp' ) . '</a></p>';
+				echo '</div>';
 			}
 
 		}
@@ -195,15 +211,38 @@ class Affiliate_WP_Admin_Notices {
 	 * Dismiss admin notices when Dismiss links are clicked
 	 *
 	 * @since 1.7.5
+	 * @access public
 	 * @return void
 	 */
-	function dismiss_notices() {
+	public function dismiss_notices() {
 		if( ! isset( $_GET['affwp_dismiss_notice_nonce'] ) || ! wp_verify_nonce( $_GET['affwp_dismiss_notice_nonce'], 'affwp_dismiss_notice') ) {
 			wp_die( __( 'Security check failed', 'affiliate-wp' ), __( 'Error', 'affiliate-wp' ), array( 'response' => 403 ) );
 		}
 
-		if( isset( $_GET['affwp_notice'] ) ) {
-			update_user_meta( get_current_user_id(), '_affwp_' . $_GET['affwp_notice'] . '_dismissed', 1 );
+		if ( isset( $_GET['affwp_notice'] ) ) {
+
+			$notice = sanitize_key( $_GET['affwp_notice'] );
+
+			switch( $notice ) {
+				case 'no_integrations':
+					update_user_meta( get_current_user_id(), "_affwp_{$notice}_dismissed", 1 );
+					break;
+				case 'expired_license':
+				case 'invalid_license':
+					set_transient( 'affwp_license_notice', true, 2 * WEEK_IN_SECONDS );
+					break;
+				default:
+					/**
+					 * Fires once a notice has been flagged for dismissal.
+					 *
+					 * @since 1.8
+					 *
+					 * @param string $notice Notice value via $_GET['affwp_notice'].
+					 */
+					do_action( 'affwp_dismiss_notices', $notice );
+					break;
+			}
+
 			wp_redirect( remove_query_arg( array( 'affwp_action', 'affwp_notice' ) ) );
 			exit;
 		}

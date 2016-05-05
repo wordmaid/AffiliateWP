@@ -1,7 +1,7 @@
 <?php
 
 class Affiliate_WP_RCP extends Affiliate_WP_Base {
-	
+
 	/**
 	 * Gets things started
 	 *
@@ -63,7 +63,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 				}
 
 				$amount = $this->calculate_referral_amount( $price, $key, absint( $_POST['rcp_level'] ) );
-				
+
 				if( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 				
 					if( $this->debug ) {
@@ -141,7 +141,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 	public function mark_referral_complete( $payment_id, $args, $amount ) {
 
 		$this->complete_referral( $args['subscription_key'] );
-	
+
 	}
 
 	/**
@@ -210,9 +210,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 						<span class="affwp-ajax-search-wrap">
 							<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 							<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" style="width: 300px;" />
-							<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 						</span>
-						<div id="affwp_user_search_results"></div>
 						<p class="description"><?php _e( 'If you would like to connect this discount to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></p>
 					</td>
 				</tr>
@@ -229,22 +227,37 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 	*/
 	public function store_discount_affiliate( $args, $discount_id = 0 ) {
 
-		if( empty( $_POST['user_id'] ) && empty( $_POST['user_name'] ) ) {
+		if ( empty( $_POST['user_id'] ) && empty( $_POST['user_name'] ) ) {
 			return;
 		}
 
-		if( empty( $_POST['user_id'] ) ) {
+		// Get the user ID. Always retrieve the user ID from the posted user_name field
+		if ( ! empty( $_POST['user_name'] ) ) {
+
+			// get user
 			$user = get_user_by( 'login', $_POST['user_name'] );
-			if( $user ) {
-				$user_id = $user->ID;
+
+			// If user exists
+			if ( $user ) {
+				// Make sure they are a valid affiliate
+				if ( affwp_is_affiliate( $user->ID ) ) {
+					$user_id = absint( $user->ID );
+				}
+
+			} else {
+				// No user ID
+				$user_id = '';
 			}
+
 		} else {
-			$user_id = absint( $_POST['user_id'] );
+			// No user ID
+			$user_id = '';
 		}
 
 		$affiliate_id = affwp_get_affiliate_id( $user_id );
 
 		update_user_meta( $user_id, 'affwp_discount_rcp_' . $discount_id, $affiliate_id );
+
 	}
 
 	/**
@@ -255,28 +268,61 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 	*/
 	public function update_discount_affiliate( $discount_id = 0, $args ) {
 
-		if( empty( $_POST['user_id'] ) ) {
+		global $wpdb;
+
+		// Bail early if not admin
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		// Get the existing user ID stored with the discount (if any)
+		$meta_key              = 'affwp_discount_rcp_' . $discount_id;
+		$existing_affiliate_id = absint( $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM wp_usermeta where meta_key = %s", $meta_key ) ) );
+		$existing_user_id      = affwp_get_affiliate_user_id( $existing_affiliate_id );
+
+		// Get the user ID. Always retrieve the user ID from the posted user_name field
+		if ( ! empty( $_POST['user_name'] ) ) {
+
+			// get user
 			$user = get_user_by( 'login', $_POST['user_name'] );
-			if( $user ) {
-				$user_id = $user->ID;
+
+			// If user exists
+			if ( $user ) {
+				// Make sure they are a valid affiliate
+				if ( affwp_is_affiliate( $user->ID ) ) {
+					$user_id = absint( $user->ID );
+				}
+
+			} else {
+				// If an invalid affiliate is entered, set it back to the existing user ID
+				$user_id = $existing_user_id;
 			}
+
 		} else {
-			$user_id = absint( $_POST['user_id'] );
+			// No user ID
+			$user_id = '';
 		}
 
-		if ( empty( $_POST['user_name'] ) ) {
-			delete_user_meta( $user_id, 'affwp_discount_rcp_' . $discount_id );
+		// No user ID
+		if ( empty( $user_id ) ) {
+			// Delete the current user meta if it exists
+			delete_user_meta( $existing_user_id, 'affwp_discount_rcp_' . $discount_id );
+			// We're done here
 			return;
 		}
 
-		if( empty( $_POST['user_id'] ) && empty( $_POST['user_name'] ) ) {
-			return;
+		// Get the affiliate ID from the user ID
+		$affiliate_id = absint( affwp_get_affiliate_id( $user_id ) );
+
+		// If an existing affiliate exists and a new affiliate is saved, delete the current meta key
+		if ( $existing_affiliate_id && $existing_affiliate_id !== $affiliate_id ) {
+			// delete existing meta key for the current affiliate
+			delete_user_meta( $existing_user_id, 'affwp_discount_rcp_' . $discount_id );
 		}
 
-		$affiliate_id = affwp_get_affiliate_id( $user_id );
-
+		// Update user meta with new affiliate
 		update_user_meta( $user_id, 'affwp_discount_rcp_' . $discount_id, $affiliate_id );
-		
+
 	}
 
 	/**
@@ -338,8 +384,8 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 			delete_option( 'affwp_rcp_level_rate_' . $level_id );
 
 		}
-		
+
 	}
-	
+
 }
 new Affiliate_WP_RCP;

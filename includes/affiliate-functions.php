@@ -78,6 +78,59 @@ function affwp_get_affiliate_username( $affiliate_id = 0 ) {
 }
 
 /**
+ * Retrieves the affiliate first name and/or last name, if set.
+ *
+ * If only one name (first_name or last_name) is provided, this function will return
+ * only that name.
+ *
+ * @since  1.8
+ *
+ * @uses affwp_get_affiliate_id
+ * @uses affwp_get_affiliate
+ *
+ * @param  $affiliate_id int Optional. Affiliate ID. Default is the ID of the current affiliate.
+ * @return string The affiliate user's first and/or last name  if set. An empty string if the affiliate ID
+ *                is invalid or neither first nor last name are set.
+ */
+function affwp_get_affiliate_name( $affiliate_id = 0 ) {
+
+	if ( empty( $affiliate_id ) ) {
+		$affiliate_id = affwp_get_affiliate_id();
+	}
+
+	$affiliate  = affwp_get_affiliate( $affiliate_id );
+
+	// Return empty if no affiliate.
+	if ( empty( $affiliate ) ) {
+		return '';
+	}
+
+	$user_info    = get_userdata( $affiliate->user_id );
+	$first_name   = esc_html( $user_info->first_name );
+	$last_name    = esc_html( $user_info->last_name );
+
+	// Check if both names are set first.
+	if ( ! empty( $first_name ) && ! empty( $last_name ) ) {
+		return $first_name . ' ' . $last_name;
+	}
+
+	// If neither are set, return an empty string.
+	if ( empty( $first_name ) && empty( $last_name ) ) {
+		return '';
+	}
+
+	// First name only
+	if ( ! empty( $first_name ) && empty( $last_name ) ) {
+		return $first_name;
+	}
+
+	// Last name only
+	if ( empty( $first_name ) && ! empty( $last_name ) ) {
+		return $last_name;
+	}
+}
+
+/**
  * Determines whether or not the affiliate is active
  *
  * If no affiliate ID is given, it will check the currently logged in affiliate
@@ -102,7 +155,9 @@ function affwp_is_active_affiliate( $affiliate_id = 0 ) {
  * Retrieves an affiliate's user ID
  *
  * @since 1.0
- * @return bool
+ *
+ * @param int|stdClass $affiliate Affiliate ID or object.
+ * @return int|false Affiliate user ID, otherwise false.
  */
 function affwp_get_affiliate_user_id( $affiliate ) {
 
@@ -116,7 +171,9 @@ function affwp_get_affiliate_user_id( $affiliate ) {
  * Retrieves the affiliate object
  *
  * @since 1.0
- * @return object
+ *
+ * @param int|stdClass $affiliate Affiliate ID or object.
+ * @return stdClass|false Affiliate object if found, otherwise false.
  */
 function affwp_get_affiliate( $affiliate ) {
 
@@ -178,6 +235,47 @@ function affwp_set_affiliate_status( $affiliate, $status = '' ) {
 		return true;
 	}
 
+}
+
+/**
+ * Retrieves the affiliate's status and returns a translatable string
+ *
+ * @since  1.8
+ * @param  $affiliate int|object Affiliate ID or object
+ * @return string $status_label A translatable, filterable label indicating affiliate status
+ */
+function affwp_get_affiliate_status_label( $affiliate ) {
+
+	$affiliate    = affwp_get_affiliate( $affiliate );
+
+	if ( ! $affiliate ) {
+		return;
+	}
+
+	$status       = '';
+	$status_label = '';
+
+	// Get current affiliate status
+	$status       = $affiliate->status;
+
+	// Return translatable string
+	switch( $status ) {
+
+		case 'active':
+			$status_label = __( 'Active','affiliate-wp' );
+			break;
+		case 'inactive':
+			$status_label = __( 'Inactive','affiliate-wp' );
+			break;
+		case 'pending':
+			$status_label = __( 'Pending','affiliate-wp' );
+			break;
+		case 'rejected':
+			$status_label = __( 'Rejected','affiliate-wp' );
+			break;
+	}
+
+	return apply_filters( 'affwp_get_affiliate_status_label', $status_label );
 }
 
 /**
@@ -277,9 +375,8 @@ function affwp_get_affiliate_rate_type( $affiliate_id = 0 ) {
 	$type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
 
 	$affiliate_rate_type = affiliate_wp()->affiliates->get_column( 'rate_type', $affiliate_id );
-	$affiliate_rate      = affiliate_wp()->affiliates->get_column( 'rate', $affiliate_id );
 
-	if ( ! empty( $affiliate_rate_type ) && ! empty( $affiliate_rate ) ) {
+	if ( ! empty( $affiliate_rate_type ) ) {
 
 		$type = $affiliate_rate_type;
 
@@ -790,6 +887,22 @@ function affwp_get_affiliate_campaigns( $affiliate ) {
  * Adds a new affiliate to the database
  *
  * @since 1.0
+ *
+ * @see Affiliate_WP_DB_Affiliates::add()
+ *
+ * @param array $data {
+ *     Optional. Array of arguments for adding a new affiliate. Default empty array.
+ *
+ *     @type string $status          Affiliate status. Default 'active'.
+ *     @type string $date_registered Date the affiliate was registered. Default is the current time.
+ *     @type string $rate            Affiliate-specific referral rate.
+ *     @type string $rate_type       Rate type. Accepts 'percentage' or 'flat'.
+ *     @type string $payment_email   Affiliate payment email.
+ *     @type int    $earnings        Affiliate earnings. Default 0.
+ *     @type int    $referrals       Number of affiliate referrals.
+ *     @type int    $visits          Number of visits.
+ *     @type int    $user_id         User ID used to correspond to the affiliate.
+ * }
  * @return bool
  */
 function affwp_add_affiliate( $data = array() ) {
@@ -856,7 +969,30 @@ function affwp_update_affiliate( $data = array() ) {
 	$args['rate_type']     = ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '';
 	$args['user_id']       = $user_id;
 
-	if ( affiliate_wp()->affiliates->update( $affiliate_id, $args, '', 'affiliate' ) ) {
+	/**
+	 * Fires immediately before data for the current affiliate is updated.
+	 *
+	 * @since 1.8
+	 *
+	 * @param stdClass $affiliate Affiliate object.
+	 * @param array    $args      Prepared affiliate data.
+	 * @param array    $data      Raw affiliate data.
+	 */
+	do_action( 'affwp_pre_update_affiliate', $affiliate, $args, $data );
+
+	$updated = affiliate_wp()->affiliates->update( $affiliate_id, $args, '', 'affiliate' );
+
+	/**
+	 * Fires immediately after an affiliate has been updated.
+	 *
+	 * @since 1.8
+	 *
+	 * @param stdClass $affiliate Updated affiliate object.
+	 * @param bool     $updated   Whether the update was successful.
+	 */
+	do_action( 'affwp_updated_affiliate', affwp_get_affiliate( $affiliate ), $updated );
+
+	if ( $updated ) {
 
 		// update affiliate's account email
 		if( wp_update_user( array( 'ID' => $user_id, 'user_email' => $args['account_email'] ) ) ) {
@@ -917,12 +1053,25 @@ function affwp_update_profile_settings( $data = array() ) {
 }
 
 /**
- * Builds an affiliate's referral URL
+ * Builds an affiliate's referral URL.
+ *
  * Used by creatives, referral URL generator and [affiliate_referral_url] shortcode
  *
- * @since  1.6
- * @return string
- * @param  $args array of arguments. $base_url, $format, $pretty
+ * @since 1.6
+ *
+ * @param array $args {
+ *     Optional. Array of arguments for building an affiliate referral URL. Default empty array.
+ *
+ *     @type int          $affiliate_id Affiliate ID. Default is the current user's affiliate ID.
+ *     @type string|false $pretty       Whether to build a pretty referral URL. Accepts 'yes' or 'no'. False
+ *                                      disables pretty URLs. Default empty, see affwp_is_pretty_referral_urls().
+ *     @type string       $format       Referral format. Accepts 'id' or 'username'. Default empty,
+ *                                      see affwp_get_referral_format().
+ *     @type string       $base_url     Base URL to use for building a referral URL. If specified, should contain
+ *                                      'query' and 'fragment' query vars. 'scheme', 'host', and 'path' query vars
+ *                                      can also be passed as part of the base URL. Default empty.
+ * }
+ * @return string Trailing-slashed value of home_url() when `$args` is empty, built referral URL otherwise.
  */
 function affwp_get_affiliate_referral_url( $args = array() ) {
 
@@ -1015,4 +1164,56 @@ function affwp_get_affiliate_base_url() {
 
 	return apply_filters( 'affwp_affiliate_referral_url_base', $base_url );
 
+}
+
+/**
+ * Retrieves the page ID for the Affiliate Area page.
+ *
+ * @since 1.8
+ *
+ * @return int Affiliate Area page ID.
+ */
+function affwp_get_affiliate_area_page_id() {
+	$affiliate_page_id = affiliate_wp()->settings->get( 'affiliates_page' );
+
+	/**
+	 * Filter the Affiliate Area page ID.
+	 *
+	 * @since 1.8
+	 *
+	 * @param int $affiliate_page_id Affiliate Area page ID.
+	 */
+	return apply_filters( 'affwp_affiliate_area_page_id', $affiliate_page_id );
+}
+
+/**
+ * Retrieves the Affiliates Area page URL.
+ *
+ * @since 1.8
+ *
+ * @param string $tab Optional. Tab ID. Default empty.
+ * @return string If $tab is specified and valid, the URL for the given tab within the Affiliate Area page.
+ *                Otherwise the Affiliate Area page URL.
+ */
+function affwp_get_affiliate_area_page_url( $tab = '' ) {
+	$affiliate_area_page_id = affwp_get_affiliate_area_page_id();
+
+	$affiliate_area_page_url = get_permalink( $affiliate_area_page_id );
+
+	if ( ! empty( $tab )
+		&& in_array( $tab, array( 'urls', 'stats', 'graphs', 'referrals', 'visits', 'creatives', 'settings' ) )
+	) {
+		$affiliate_area_page_url = add_query_arg( array( 'tab' => $tab ), $affiliate_area_page_url );
+	}
+
+	/**
+	 * Filter the Affilate Area page URL.
+	 *
+	 * @since 1.8
+	 *
+	 * @param string $affiliate_area_page_url Page URL.
+	 * @param int    $affiliate_area_page_id  Page ID.
+	 * @param string $tab                     Page tab (if specified).
+	 */
+	return apply_filters( 'affwp_affiliate_area_page_url', $affiliate_area_page_url, $affiliate_area_page_id, $tab );
 }

@@ -2,16 +2,16 @@
 # This file is distributed under the same license as the AffiliateWP package.
 msgid ""
 msgstr ""
-"Project-Id-Version: AffiliateWP 1.7.17\n"
+"Project-Id-Version: AffiliateWP 1.7.18\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-04-19 18:13:17+00:00\n"
+"POT-Creation-Date: 2016-05-05 14:12:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: AffiliateWP <support@affiliatewp.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
-"X-Generator: grunt-wp-i18n 0.5.4\n"
+"X-Generator: grunt-wp-i18n 0.5.3\n"
 "X-Poedit-KeywordsList: "
 "__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
 "attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
@@ -133,7 +133,6 @@ msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:54 includes/admin/class-menu.php:11
 #: includes/admin/class-menu.php:13 includes/admin/class-welcome.php:298
-#: includes/admin/reports/reports.php:69 includes/admin/reports/reports.php:154
 msgid "Affiliates"
 msgstr ""
 
@@ -151,45 +150,40 @@ msgstr ""
 #: includes/admin/affiliates/affiliates.php:203
 #: includes/admin/creatives/creatives.php:142
 #: includes/admin/referrals/referrals.php:206
-#: includes/admin/reports/reports.php:506 includes/admin/visits/visits.php:46
+#: includes/admin/visits/visits.php:44
 msgid "All"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:204
-#: includes/admin/affiliates/new.php:42
+#: includes/admin/affiliates/new.php:41
 #: includes/admin/creatives/creatives.php:143
 #: includes/admin/creatives/edit.php:99 includes/admin/creatives/new.php:89
-#: includes/admin/reports/reports.php:507 includes/admin/tools/tools.php:272
-#: includes/affiliate-functions.php:212
+#: includes/admin/tools/tools.php:270 includes/affiliate-functions.php:265
 msgid "Active"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:205
-#: includes/admin/affiliates/new.php:43
+#: includes/admin/affiliates/new.php:42
 #: includes/admin/creatives/creatives.php:144
 #: includes/admin/creatives/edit.php:100 includes/admin/creatives/new.php:90
-#: includes/admin/reports/reports.php:508 includes/affiliate-functions.php:215
+#: includes/affiliate-functions.php:268
 msgid "Inactive"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:206
-#: includes/admin/affiliates/new.php:44 includes/admin/referrals/edit.php:90
-#: includes/admin/referrals/new.php:92
+#: includes/admin/affiliates/new.php:43 includes/admin/referrals/edit.php:90
+#: includes/admin/referrals/new.php:91
 #: includes/admin/referrals/referrals.php:209
-#: includes/admin/reports/class-reports-exporter.php:52
-#: includes/admin/reports/reports.php:509 includes/admin/tools/tools.php:273
-#: includes/admin/tools/tools.php:303 includes/affiliate-functions.php:218
-#: includes/referral-functions.php:55
+#: includes/admin/tools/tools.php:271 includes/admin/tools/tools.php:300
+#: includes/affiliate-functions.php:271 includes/referral-functions.php:55
 msgid "Pending"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:207
-#: includes/admin/referrals/edit.php:91 includes/admin/referrals/new.php:93
+#: includes/admin/referrals/edit.php:91 includes/admin/referrals/new.php:92
 #: includes/admin/referrals/referrals.php:210
-#: includes/admin/reports/class-reports-exporter.php:53
-#: includes/admin/reports/reports.php:510 includes/admin/tools/tools.php:274
-#: includes/admin/tools/tools.php:304 includes/affiliate-functions.php:221
-#: includes/referral-functions.php:54
+#: includes/admin/tools/tools.php:272 includes/admin/tools/tools.php:301
+#: includes/affiliate-functions.php:274 includes/referral-functions.php:54
 msgid "Rejected"
 msgstr ""
 
@@ -197,14 +191,12 @@ msgstr ""
 #: includes/admin/affiliates/review.php:22
 #: includes/admin/creatives/creatives.php:159
 #: includes/admin/creatives/edit.php:17 includes/admin/creatives/new.php:16
-#: includes/admin/reports/reports.php:526
 msgid "Name"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:224
-#: includes/admin/affiliates/edit.php:51
+#: includes/admin/affiliates/edit.php:70
 #: includes/admin/affiliates/review.php:34
-#: includes/admin/reports/reports.php:527
 #: includes/admin/settings/class-settings.php:396
 #: includes/admin/tools/export/class-export-affiliates.php:50
 #: templates/login.php:15 templates/login.php:16 templates/register.php:48
@@ -213,8 +205,7 @@ msgid "Username"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:225
-#: includes/admin/affiliates/edit.php:25 includes/admin/referrals/edit.php:18
-#: includes/admin/reports/reports.php:528
+#: includes/admin/affiliates/edit.php:44 includes/admin/referrals/edit.php:18
 #: includes/admin/tools/export/class-export-affiliates.php:47
 #: includes/admin/tools/export/class-export-referrals.php:61
 msgid "Affiliate ID"
@@ -223,38 +214,34 @@ msgstr ""
 #: includes/admin/affiliates/affiliates.php:226
 #: includes/admin/affiliates/view.php:11
 #: includes/admin/overview/overview.php:168
-#: includes/admin/reports/reports.php:529
 #: includes/admin/tools/export/class-export-affiliates.php:53
 msgid "Earnings"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:227
-#: includes/admin/reports/reports.php:530
 #: includes/admin/tools/export/class-export-affiliates.php:51
 msgid "Rate"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:228
 #: includes/admin/overview/overview.php:61
-#: includes/admin/reports/reports.php:271
-#: includes/admin/reports/reports.php:531 templates/dashboard-tab-stats.php:8
+#: includes/admin/reports/reports.php:138 templates/dashboard-tab-stats.php:8
 msgid "Unpaid Referrals"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:229
-#: includes/admin/reports/reports.php:532 templates/dashboard-tab-stats.php:9
+#: templates/dashboard-tab-stats.php:9
 msgid "Paid Referrals"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:230
 #: includes/admin/class-menu.php:15 includes/admin/class-welcome.php:308
 #: includes/admin/overview/overview.php:170
-#: includes/admin/reports/reports.php:71 includes/admin/reports/reports.php:318
-#: includes/admin/reports/reports.php:533
+#: includes/admin/reports/reports.php:66 includes/admin/reports/reports.php:185
 #: includes/admin/tools/export/class-export-affiliates.php:55
-#: includes/admin/tools/tools.php:133 includes/admin/visits/visits.php:30
+#: includes/admin/tools/tools.php:132 includes/admin/visits/visits.php:30
 #: templates/dashboard-tab-stats.php:10 templates/dashboard-tab-stats.php:57
-#: templates/dashboard.php:49
+#: templates/dashboard.php:60
 msgid "Visits"
 msgstr ""
 
@@ -262,9 +249,8 @@ msgstr ""
 #: includes/admin/creatives/creatives.php:162
 #: includes/admin/creatives/edit.php:94 includes/admin/creatives/new.php:84
 #: includes/admin/overview/overview.php:117
-#: includes/admin/referrals/edit.php:83 includes/admin/referrals/new.php:85
+#: includes/admin/referrals/edit.php:83 includes/admin/referrals/new.php:84
 #: includes/admin/referrals/referrals.php:232
-#: includes/admin/reports/reports.php:534
 #: includes/admin/tools/export/class-export-affiliates.php:56
 #: includes/admin/tools/export/class-export-referrals.php:70
 #: templates/dashboard-tab-referrals.php:26
@@ -275,41 +261,34 @@ msgstr ""
 #: includes/admin/creatives/creatives.php:163
 #: includes/admin/overview/overview.php:118
 #: includes/admin/referrals/referrals.php:231
-#: includes/admin/reports/reports.php:535
 msgid "Actions"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:297
 #: includes/admin/affiliates/affiliates.php:320
-#: includes/admin/reports/reports.php:600
-#: includes/admin/reports/reports.php:623
 msgid "(user deleted)"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:418
-#: includes/admin/class-menu.php:17 includes/admin/reports/reports.php:721
-#: includes/admin/user-profile.php:44
+#: includes/admin/class-menu.php:17 includes/admin/user-profile.php:44
 msgid "Reports"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:419
 #: includes/admin/creatives/creatives.php:236
 #: includes/admin/referrals/referrals.php:387
-#: includes/admin/reports/reports.php:722 includes/admin/user-profile.php:46
+#: includes/admin/user-profile.php:46
 msgid "Edit"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:422
 #: includes/admin/affiliates/affiliates.php:462
 #: includes/admin/creatives/creatives.php:239
-#: includes/admin/reports/reports.php:725
-#: includes/admin/reports/reports.php:765
 msgid "Deactivate"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:424
 #: includes/admin/overview/overview.php:133
-#: includes/admin/reports/reports.php:727
 msgid "Review"
 msgstr ""
 
@@ -317,8 +296,6 @@ msgstr ""
 #: includes/admin/affiliates/affiliates.php:459
 #: includes/admin/referrals/referrals.php:375
 #: includes/admin/referrals/referrals.php:467
-#: includes/admin/reports/reports.php:728
-#: includes/admin/reports/reports.php:762
 msgid "Accept"
 msgstr ""
 
@@ -326,16 +303,12 @@ msgstr ""
 #: includes/admin/affiliates/affiliates.php:460
 #: includes/admin/referrals/referrals.php:381
 #: includes/admin/referrals/referrals.php:468
-#: includes/admin/reports/reports.php:729
-#: includes/admin/reports/reports.php:763
 msgid "Reject"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:428
 #: includes/admin/affiliates/affiliates.php:461
 #: includes/admin/creatives/creatives.php:241
-#: includes/admin/reports/reports.php:731
-#: includes/admin/reports/reports.php:764
 msgid "Activate"
 msgstr ""
 
@@ -344,110 +317,138 @@ msgstr ""
 #: includes/admin/creatives/creatives.php:244
 #: includes/admin/referrals/referrals.php:388
 #: includes/admin/referrals/referrals.php:471
-#: includes/admin/reports/reports.php:734
-#: includes/admin/reports/reports.php:766
 msgid "Delete"
 msgstr ""
 
 #: includes/admin/affiliates/affiliates.php:447
-#: includes/admin/reports/reports.php:750
 msgid "No affiliates found."
 msgstr ""
 
-#: includes/admin/affiliates/delete.php:14
-#: includes/admin/affiliates/delete.php:49
+#: includes/admin/affiliates/delete.php:30
 msgid "Delete Affiliates"
 msgstr ""
 
-#: includes/admin/affiliates/delete.php:20
-msgid "You have specified these affiliates for deletion:"
+#: includes/admin/affiliates/delete.php:36
+msgid "You have specified the following affiliate for deletion:"
+msgid_plural "You have specified the following affiliates for deletion:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/affiliates/delete.php:55
+msgid "Deleting this affiliate will also delete their referral and visit data."
+msgid_plural "Deleting these affiliates will also delete their referral and visit data."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/affiliates/delete.php:67
+msgid "(The current user will not be deleted)"
 msgstr ""
 
-#: includes/admin/affiliates/delete.php:33
-msgid "Deleting these affiliates will also delete their referral and visit data."
+#: includes/admin/affiliates/delete.php:91
+msgid "Confirm Deletion"
 msgstr ""
 
-#: includes/admin/affiliates/delete.php:39
-msgid "Delete affiliate's user accounts as well?"
-msgstr ""
-
-#: includes/admin/affiliates/edit.php:14
+#: includes/admin/affiliates/edit.php:15
 msgid "Edit Affiliate"
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:30
+#: includes/admin/affiliates/edit.php:26
+msgid "Affiliate Name"
+msgstr ""
+
+#: includes/admin/affiliates/edit.php:32
+msgid ""
+"The affiliate's first and/or last name. Will be empty if no name is "
+"specified. This can be changed on the <a href=\"%1$s\" alt=\"%2$s\">user "
+"edit screen</a>."
+msgstr ""
+
+#: includes/admin/affiliates/edit.php:34
+msgid "A link to the user edit screen for this user."
+msgstr ""
+
+#: includes/admin/affiliates/edit.php:49
 msgid "The affiliate's ID. This cannot be changed."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:38
+#: includes/admin/affiliates/edit.php:57
 msgid "User ID"
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:43
+#: includes/admin/affiliates/edit.php:62
 msgid "The affiliate's user ID. This cannot be changed."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:56
+#: includes/admin/affiliates/edit.php:75
 msgid "The affiliate's username. This cannot be changed."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:64 includes/admin/affiliates/new.php:54
+#: includes/admin/affiliates/edit.php:83
+msgid "Registration Date"
+msgstr ""
+
+#: includes/admin/affiliates/edit.php:88
+msgid "The affiliate's registration date. This cannot be changed."
+msgstr ""
+
+#: includes/admin/affiliates/edit.php:96 includes/admin/affiliates/new.php:53
 #: includes/admin/settings/class-settings.php:412
 msgid "Referral Rate Type"
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:69 includes/admin/affiliates/new.php:59
+#: includes/admin/affiliates/edit.php:101 includes/admin/affiliates/new.php:58
 msgid "Site Default"
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:74 includes/admin/affiliates/new.php:64
+#: includes/admin/affiliates/edit.php:106 includes/admin/affiliates/new.php:63
 msgid "The affiliate's referral rate type."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:82 includes/admin/affiliates/new.php:72
+#: includes/admin/affiliates/edit.php:114 includes/admin/affiliates/new.php:71
 #: includes/admin/settings/class-settings.php:418
-#: includes/integrations/class-edd.php:603
+#: includes/integrations/class-edd.php:601
 #: includes/integrations/class-memberpress.php:160
+#: includes/integrations/class-pmp.php:361
 #: includes/integrations/class-zippycourses.php:76
 #: includes/integrations/extras/class-exchange-feature.php:31
 msgid "Referral Rate"
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:87 includes/admin/affiliates/new.php:77
+#: includes/admin/affiliates/edit.php:119 includes/admin/affiliates/new.php:76
 msgid ""
 "The affiliate's referral rate, such as 20 for 20%. If left blank, the site "
 "default will be used."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:95 templates/register.php:53
+#: includes/admin/affiliates/edit.php:127 templates/register.php:53
 msgid "Account Email"
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:100
+#: includes/admin/affiliates/edit.php:132
 msgid ""
 "The affiliate's account email. Updating this will change the email address "
 "shown on the user's profile page."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:108 includes/admin/affiliates/new.php:85
+#: includes/admin/affiliates/edit.php:140 includes/admin/affiliates/new.php:84
 #: includes/admin/tools/export/class-export-affiliates.php:49
 #: includes/admin/tools/export/class-export-referrals.php:63
 #: templates/register.php:61
 msgid "Payment Email"
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:113 includes/admin/affiliates/new.php:90
+#: includes/admin/affiliates/edit.php:145 includes/admin/affiliates/new.php:89
 msgid ""
 "Affiliate's payment email for systems such as PayPal, Moneybookers, or "
 "others. Leave blank to use the affiliate's user email."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:122
+#: includes/admin/affiliates/edit.php:154
 #: includes/admin/affiliates/review.php:86
 msgid "Rejection Reason"
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:140
+#: includes/admin/affiliates/edit.php:172
 msgid "Update Affiliate"
 msgstr ""
 
@@ -466,29 +467,29 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: includes/admin/affiliates/new.php:29
+#: includes/admin/affiliates/new.php:28
 msgid ""
 "Begin typing the name of the affiliate to perform a search for their "
 "associated user account."
 msgstr ""
 
-#: includes/admin/affiliates/new.php:37
+#: includes/admin/affiliates/new.php:36
 msgid "Affiliate Status"
 msgstr ""
 
-#: includes/admin/affiliates/new.php:46
+#: includes/admin/affiliates/new.php:45
 msgid "The status assigned to the affiliate's account."
 msgstr ""
 
-#: includes/admin/affiliates/new.php:98
+#: includes/admin/affiliates/new.php:97
 msgid "Welcome Email"
 msgstr ""
 
-#: includes/admin/affiliates/new.php:104
+#: includes/admin/affiliates/new.php:103
 msgid "Send welcome email after registering affiliate?"
 msgstr ""
 
-#: includes/admin/affiliates/new.php:119
+#: includes/admin/affiliates/new.php:117
 msgid "Add Affiliate"
 msgstr ""
 
@@ -557,10 +558,6 @@ msgstr ""
 msgid "Total visits"
 msgstr ""
 
-#: includes/admin/ajax-actions.php:79
-msgid "No users found"
-msgstr ""
-
 #: includes/admin/class-addon-updater.php:186
 msgid ""
 "There is a new version of %1$s available. <a target=\"_blank\" "
@@ -576,7 +573,6 @@ msgstr ""
 
 #: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:19
 #: includes/admin/referrals/contextual-help.php:37
-#: includes/admin/reports/reports.php:68
 #: includes/admin/visits/contextual-help.php:37
 msgid "Overview"
 msgstr ""
@@ -584,16 +580,15 @@ msgstr ""
 #: includes/admin/class-menu.php:14 includes/admin/class-welcome.php:303
 #: includes/admin/overview/overview.php:169
 #: includes/admin/referrals/referrals.php:35
-#: includes/admin/reports/reports.php:70
+#: includes/admin/reports/reports.php:65
 #: includes/admin/tools/export/class-export-affiliates.php:54
-#: includes/admin/tools/tools.php:132 templates/dashboard-tab-referrals.php:3
-#: templates/dashboard.php:46
+#: includes/admin/tools/tools.php:131 templates/dashboard-tab-referrals.php:3
+#: templates/dashboard.php:54
 msgid "Referrals"
 msgstr ""
 
 #: includes/admin/class-menu.php:16 includes/admin/creatives/creatives.php:42
-#: includes/admin/reports/reports.php:171
-#: templates/dashboard-tab-creatives.php:3 templates/dashboard.php:52
+#: templates/dashboard-tab-creatives.php:3 templates/dashboard.php:66
 msgid "Creatives"
 msgstr ""
 
@@ -601,7 +596,7 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: includes/admin/class-menu.php:19 templates/dashboard.php:55
+#: includes/admin/class-menu.php:19 templates/dashboard.php:72
 msgid "Settings"
 msgstr ""
 
@@ -1075,7 +1070,7 @@ msgstr ""
 #: includes/admin/creatives/creatives.php:160
 #: includes/admin/creatives/edit.php:43 includes/admin/creatives/new.php:42
 #: includes/admin/overview/overview.php:241
-#: templates/dashboard-tab-visits.php:21
+#: templates/dashboard-tab-visits.php:25
 msgid "URL"
 msgstr ""
 
@@ -1106,7 +1101,7 @@ msgstr ""
 
 #: includes/admin/creatives/edit.php:30 includes/admin/creatives/new.php:29
 #: includes/admin/overview/overview.php:207
-#: includes/admin/referrals/edit.php:44 includes/admin/referrals/new.php:46
+#: includes/admin/referrals/edit.php:44 includes/admin/referrals/new.php:45
 #: includes/admin/referrals/referrals.php:229
 #: includes/admin/tools/export/class-export-referrals.php:66
 #: templates/dashboard-tab-referrals.php:25
@@ -1178,43 +1173,43 @@ msgid "Totals"
 msgstr ""
 
 #: includes/admin/overview/overview.php:35
-#: includes/admin/reports/reports.php:219 includes/admin/tools/tools.php:131
+#: includes/admin/reports/reports.php:86 includes/admin/tools/tools.php:130
 #: templates/dashboard-tab-stats.php:34
 msgid "Paid Earnings"
 msgstr ""
 
 #: includes/admin/overview/overview.php:36
-#: includes/admin/reports/reports.php:220
+#: includes/admin/reports/reports.php:87
 msgid "Paid Earnings This Month"
 msgstr ""
 
 #: includes/admin/overview/overview.php:37
-#: includes/admin/reports/reports.php:221
+#: includes/admin/reports/reports.php:88
 msgid "Paid Earnings Today"
 msgstr ""
 
 #: includes/admin/overview/overview.php:62
-#: includes/admin/reports/reports.php:272
+#: includes/admin/reports/reports.php:139
 msgid "Unpaid Referrals This Month"
 msgstr ""
 
 #: includes/admin/overview/overview.php:63
-#: includes/admin/reports/reports.php:273
+#: includes/admin/reports/reports.php:140
 msgid "Unpaid Referrals Today"
 msgstr ""
 
 #: includes/admin/overview/overview.php:86
-#: includes/admin/reports/reports.php:245 templates/dashboard-tab-stats.php:33
+#: includes/admin/reports/reports.php:112 templates/dashboard-tab-stats.php:33
 msgid "Unpaid Earnings"
 msgstr ""
 
 #: includes/admin/overview/overview.php:87
-#: includes/admin/reports/reports.php:246
+#: includes/admin/reports/reports.php:113
 msgid "Unpaid Earnings This Month"
 msgstr ""
 
 #: includes/admin/overview/overview.php:88
-#: includes/admin/reports/reports.php:247
+#: includes/admin/reports/reports.php:114
 msgid "Unpaid Earnings Today"
 msgstr ""
 
@@ -1227,7 +1222,7 @@ msgstr ""
 #: includes/admin/overview/overview.php:205
 #: includes/admin/overview/overview.php:240 includes/admin/referrals/new.php:16
 #: includes/admin/referrals/referrals.php:227
-#: includes/admin/visits/visits.php:145
+#: includes/admin/visits/visits.php:143
 #: includes/integrations/class-memberpress.php:240
 msgid "Affiliate"
 msgstr ""
@@ -1253,7 +1248,7 @@ msgid "Recent Referrals"
 msgstr ""
 
 #: includes/admin/overview/overview.php:206
-#: includes/admin/referrals/edit.php:31 includes/admin/referrals/new.php:33
+#: includes/admin/referrals/edit.php:31 includes/admin/referrals/new.php:32
 #: includes/admin/referrals/referrals.php:226
 #: includes/admin/tools/export/class-export-referrals-payout.php:41
 #: includes/admin/tools/export/class-export-referrals.php:64
@@ -1269,9 +1264,9 @@ msgstr ""
 msgid "Recent Referral Visits"
 msgstr ""
 
-#: includes/admin/overview/overview.php:242 includes/admin/visits/visits.php:47
-#: includes/admin/visits/visits.php:148 templates/dashboard-tab-stats.php:59
-#: templates/dashboard-tab-visits.php:23
+#: includes/admin/overview/overview.php:242 includes/admin/visits/visits.php:45
+#: includes/admin/visits/visits.php:146 templates/dashboard-tab-stats.php:59
+#: templates/dashboard-tab-visits.php:27
 msgid "Converted"
 msgstr ""
 
@@ -1395,52 +1390,50 @@ msgstr ""
 msgid "The affiliate's ID this referral belongs to. This value cannot be changed."
 msgstr ""
 
-#: includes/admin/referrals/edit.php:36 includes/admin/referrals/new.php:38
+#: includes/admin/referrals/edit.php:36 includes/admin/referrals/new.php:37
 msgid "The amount of the referral, such as 15."
 msgstr ""
 
-#: includes/admin/referrals/edit.php:49 includes/admin/referrals/new.php:51
+#: includes/admin/referrals/edit.php:49 includes/admin/referrals/new.php:50
 msgid "Enter a description for this referral."
 msgstr ""
 
-#: includes/admin/referrals/edit.php:57 includes/admin/referrals/new.php:59
+#: includes/admin/referrals/edit.php:57 includes/admin/referrals/new.php:58
 #: includes/admin/referrals/referrals.php:228
 #: includes/admin/tools/export/class-export-referrals.php:68
 msgid "Reference"
 msgstr ""
 
-#: includes/admin/referrals/edit.php:62 includes/admin/referrals/new.php:64
+#: includes/admin/referrals/edit.php:62 includes/admin/referrals/new.php:63
 msgid ""
 "Enter a reference for this referral (optional). Usually this would be the "
 "transaction ID of the associated purchase."
 msgstr ""
 
-#: includes/admin/referrals/edit.php:70 includes/admin/referrals/new.php:72
+#: includes/admin/referrals/edit.php:70 includes/admin/referrals/new.php:71
 #: includes/admin/tools/export/class-export-referrals.php:69
 msgid "Context"
 msgstr ""
 
-#: includes/admin/referrals/edit.php:75 includes/admin/referrals/new.php:77
+#: includes/admin/referrals/edit.php:75 includes/admin/referrals/new.php:76
 msgid ""
 "Enter a context for this referral (optional). Usually this is used to help "
 "identify the payment system that was used for the transaction."
 msgstr ""
 
-#: includes/admin/referrals/edit.php:88 includes/admin/referrals/new.php:90
+#: includes/admin/referrals/edit.php:88 includes/admin/referrals/new.php:89
 #: includes/admin/referrals/referrals.php:208
-#: includes/admin/reports/class-reports-exporter.php:51
-#: includes/admin/tools/tools.php:302 includes/referral-functions.php:53
+#: includes/admin/tools/tools.php:299 includes/referral-functions.php:53
 msgid "Unpaid"
 msgstr ""
 
-#: includes/admin/referrals/edit.php:89 includes/admin/referrals/new.php:91
+#: includes/admin/referrals/edit.php:89 includes/admin/referrals/new.php:90
 #: includes/admin/referrals/referrals.php:207
-#: includes/admin/reports/class-reports-exporter.php:50
-#: includes/admin/tools/tools.php:301 includes/referral-functions.php:52
+#: includes/admin/tools/tools.php:298 includes/referral-functions.php:52
 msgid "Paid"
 msgstr ""
 
-#: includes/admin/referrals/edit.php:93 includes/admin/referrals/new.php:95
+#: includes/admin/referrals/edit.php:93 includes/admin/referrals/new.php:94
 msgid "Select the status of the referral."
 msgstr ""
 
@@ -1456,13 +1449,13 @@ msgstr ""
 msgid "Use this screen to manually create a new referral record for an affiliate."
 msgstr ""
 
-#: includes/admin/referrals/new.php:25
+#: includes/admin/referrals/new.php:24
 msgid ""
 "Enter the name of the affiliate or enter a partial name or email to perform "
 "a search."
 msgstr ""
 
-#: includes/admin/referrals/new.php:108
+#: includes/admin/referrals/new.php:106
 msgid "Add Referral"
 msgstr ""
 
@@ -1480,15 +1473,13 @@ msgstr ""
 
 #: includes/admin/referrals/referrals.php:48
 #: includes/admin/referrals/referrals.php:447
-#: includes/admin/reports/class-reports-exporter.php:46
-#: includes/admin/tools/tools.php:297 includes/admin/visits/visits.php:41
+#: includes/admin/tools/tools.php:294 includes/admin/visits/visits.php:39
 msgid "From - mm/dd/yyyy"
 msgstr ""
 
 #: includes/admin/referrals/referrals.php:49
 #: includes/admin/referrals/referrals.php:448
-#: includes/admin/reports/class-reports-exporter.php:47
-#: includes/admin/tools/tools.php:298 includes/admin/visits/visits.php:42
+#: includes/admin/tools/tools.php:295 includes/admin/visits/visits.php:40
 msgid "To - mm/dd/yyyy"
 msgstr ""
 
@@ -1510,7 +1501,7 @@ msgstr ""
 #: includes/admin/referrals/referrals.php:230
 #: includes/admin/tools/export/class-export-referrals.php:71
 #: includes/admin/tools/export/class-export.php:70
-#: includes/admin/visits/visits.php:149
+#: includes/admin/visits/visits.php:147
 #: templates/dashboard-tab-referrals.php:27
 msgid "Date"
 msgstr ""
@@ -1538,7 +1529,7 @@ msgid "Apply"
 msgstr ""
 
 #: includes/admin/referrals/referrals.php:452
-#: includes/admin/visits/visits.php:50 includes/class-graph.php:404
+#: includes/admin/visits/visits.php:48 includes/class-graph.php:404
 msgid "Filter"
 msgstr ""
 
@@ -1547,82 +1538,17 @@ msgid "Number of referrals per page:"
 msgstr ""
 
 #: includes/admin/reports/class-registrations-graph.php:68
-#: includes/admin/reports/reports.php:72
+#: includes/admin/reports/reports.php:67
 msgid "Affiliate Registrations"
 msgstr ""
 
-#: includes/admin/reports/class-reports-exporter.php:36
-msgid "Export a Report"
-msgstr ""
-
-#: includes/admin/reports/class-reports-exporter.php:38
-msgid "Export a report to a CSV file."
-msgstr ""
-
-#: includes/admin/reports/class-reports-exporter.php:42
-#: includes/admin/tools/tools.php:127 includes/admin/tools/tools.php:293
-#: includes/admin/visits/visits.php:35
-msgid "Affiliate name"
-msgstr ""
-
-#: includes/admin/reports/class-reports-exporter.php:49
-#: includes/admin/tools/tools.php:271 includes/admin/tools/tools.php:300
-msgid "All Statuses"
-msgstr ""
-
-#: includes/admin/reports/class-reports-exporter.php:56
-msgid ""
-"To search for an affiliate, enter the affiliate's login name, first name, "
-"or last name. Leave blank to export a report for all affiliates."
-msgstr ""
-
-#: includes/admin/reports/class-reports-exporter.php:61
-msgid "Export Report"
-msgstr ""
-
-#: includes/admin/reports/reports.php:73
-msgid "Exporter"
-msgstr ""
-
-#: includes/admin/reports/reports.php:109
-msgid " earned today."
-msgstr ""
-
-#: includes/admin/reports/reports.php:115
-msgid "You've paid out a total of "
-msgstr ""
-
-#: includes/admin/reports/reports.php:115
-msgid " all-time."
-msgstr ""
-
-#: includes/admin/reports/reports.php:120
-msgid "You have a total of "
-msgstr ""
-
-#: includes/admin/reports/reports.php:120
-msgid " pending payment."
-msgstr ""
-
-#: includes/admin/reports/reports.php:159
-msgid "To show this information, you'll need to install the"
-msgstr ""
-
-#: includes/admin/reports/reports.php:164
-msgid "References"
-msgstr ""
-
-#: includes/admin/reports/reports.php:319
+#: includes/admin/reports/reports.php:186
 msgid "Successful Conversions"
 msgstr ""
 
-#: includes/admin/reports/reports.php:320 templates/dashboard-tab-stats.php:11
+#: includes/admin/reports/reports.php:187 templates/dashboard-tab-stats.php:11
 #: templates/dashboard-tab-stats.php:60
 msgid "Conversion Rate"
-msgstr ""
-
-#: includes/admin/reports/screen-options.php:22
-msgid "Items per page"
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:349
@@ -2260,146 +2186,155 @@ msgstr ""
 msgid "Use this tool to recount affiliate statistics."
 msgstr ""
 
-#: includes/admin/tools/tools.php:136
+#: includes/admin/tools/tools.php:127 includes/admin/tools/tools.php:291
+#: includes/admin/visits/visits.php:35
+msgid "Affiliate name"
+msgstr ""
+
+#: includes/admin/tools/tools.php:134
 msgid ""
 "Enter the name of the affiliate or begin typing to perform a search based "
 "on the affiliate's name."
 msgstr ""
 
-#: includes/admin/tools/tools.php:141
+#: includes/admin/tools/tools.php:139
 msgid "Recount"
 msgstr ""
 
-#: includes/admin/tools/tools.php:179
+#: includes/admin/tools/tools.php:177
 msgid ""
 "These tools assist in migrating affiliate and referral data from existing "
 "platforms."
 msgstr ""
 
-#: includes/admin/tools/tools.php:184
+#: includes/admin/tools/tools.php:182
 msgid "User Accounts"
 msgstr ""
 
-#: includes/admin/tools/tools.php:187
+#: includes/admin/tools/tools.php:185
 msgid ""
 "Use this tool to create affiliate accounts for each of your existing "
 "WordPress user accounts that belong to the selected roles below."
 msgstr ""
 
-#: includes/admin/tools/tools.php:188
+#: includes/admin/tools/tools.php:186
 msgid ""
 "<strong>NOTE:</strong> Users that already have affiliate accounts will be "
 "skipped. Duplicate accounts will not be created."
 msgstr ""
 
-#: includes/admin/tools/tools.php:190
+#: includes/admin/tools/tools.php:188
 msgid "Select User Roles"
 msgstr ""
 
-#: includes/admin/tools/tools.php:203
+#: includes/admin/tools/tools.php:201
 msgid "Create Affiliate Accounts for Users"
 msgstr ""
 
-#: includes/admin/tools/tools.php:208
+#: includes/admin/tools/tools.php:206
 msgid ""
 "<strong>NOTE:</strong> WordPress 4.4 or newer is required to use the User "
 "Accounts migration tool. <a href=\"%s\" aria-label=\"Update WordPress "
 "now\">Update WordPress now</a>."
 msgstr ""
 
-#: includes/admin/tools/tools.php:210
+#: includes/admin/tools/tools.php:208
 msgid ""
 "<strong>NOTE:</strong> WordPress 4.4 or newer is required to use the User "
 "Accounts migration tool."
 msgstr ""
 
-#: includes/admin/tools/tools.php:219
+#: includes/admin/tools/tools.php:217
 msgid ""
 "Use this tool to migrate existing affiliate / referral data from Affiliates "
 "Pro to AffiliateWP."
 msgstr ""
 
-#: includes/admin/tools/tools.php:220
+#: includes/admin/tools/tools.php:218
 msgid ""
 "<strong>NOTE:</strong> this tool should only ever be used on a fresh "
 "install. If you have already collected affiliate or referral data, do not "
 "use this tool."
 msgstr ""
 
-#: includes/admin/tools/tools.php:226
+#: includes/admin/tools/tools.php:224
 msgid "Migrate Data from Affiliates Pro"
 msgstr ""
 
-#: includes/admin/tools/tools.php:235
+#: includes/admin/tools/tools.php:233
 msgid ""
 "Use this tool to migrate existing affiliate accounts from WP Affiliate to "
 "AffiliateWP."
 msgstr ""
 
-#: includes/admin/tools/tools.php:241
+#: includes/admin/tools/tools.php:239
 msgid "Migrate Data from WP Affiliate"
 msgstr ""
 
-#: includes/admin/tools/tools.php:265
+#: includes/admin/tools/tools.php:263
 msgid "Export Affiliates"
 msgstr ""
 
-#: includes/admin/tools/tools.php:267
+#: includes/admin/tools/tools.php:265
 msgid "Export affiliates to a CSV file."
 msgstr ""
 
-#: includes/admin/tools/tools.php:280 includes/admin/tools/tools.php:312
-#: includes/admin/tools/tools.php:326
+#: includes/admin/tools/tools.php:269 includes/admin/tools/tools.php:297
+msgid "All Statuses"
+msgstr ""
+
+#: includes/admin/tools/tools.php:278 includes/admin/tools/tools.php:308
+#: includes/admin/tools/tools.php:322
 msgid "Export"
 msgstr ""
 
-#: includes/admin/tools/tools.php:287
+#: includes/admin/tools/tools.php:285
 msgid "Export Referrals"
 msgstr ""
 
-#: includes/admin/tools/tools.php:289
+#: includes/admin/tools/tools.php:287
 msgid "Export referrals to a CSV file."
 msgstr ""
 
-#: includes/admin/tools/tools.php:307
+#: includes/admin/tools/tools.php:303
 msgid ""
 "To search for an affiliate, enter the affiliate's login name, first name, "
 "or last name. Leave blank to export referrals for all affiliates."
 msgstr ""
 
-#: includes/admin/tools/tools.php:319
+#: includes/admin/tools/tools.php:315
 msgid "Export Settings"
 msgstr ""
 
-#: includes/admin/tools/tools.php:321
+#: includes/admin/tools/tools.php:317
 msgid ""
 "Export the AffiliateWP settings for this site as a .json file. This allows "
 "you to easily import the configuration into another site."
 msgstr ""
 
-#: includes/admin/tools/tools.php:333
+#: includes/admin/tools/tools.php:329
 msgid "Import Settings"
 msgstr ""
 
-#: includes/admin/tools/tools.php:335
+#: includes/admin/tools/tools.php:331
 msgid ""
 "Import the AffiliateWP settings from a .json file. This file can be "
 "obtained by exporting the settings on another site using the form above."
 msgstr ""
 
-#: includes/admin/tools/tools.php:343
+#: includes/admin/tools/tools.php:339
 msgid "Import"
 msgstr ""
 
-#: includes/admin/tools/tools.php:367
+#: includes/admin/tools/tools.php:363
 msgid "Debug Log"
 msgstr ""
 
-#: includes/admin/tools/tools.php:370
+#: includes/admin/tools/tools.php:366
 msgid "Use this tool to help debug referral tracking."
 msgstr ""
 
-#: includes/admin/tools/tools.php:372
+#: includes/admin/tools/tools.php:368
 msgid "Clear Debug Log"
 msgstr ""
 
@@ -2489,43 +2424,43 @@ msgstr ""
 msgid "Number of visits per page:"
 msgstr ""
 
-#: includes/admin/visits/visits.php:44
+#: includes/admin/visits/visits.php:42
 msgid "Filter by status"
 msgstr ""
 
-#: includes/admin/visits/visits.php:48
+#: includes/admin/visits/visits.php:46
 msgid "Unconverted"
 msgstr ""
 
-#: includes/admin/visits/visits.php:143
+#: includes/admin/visits/visits.php:141
 msgid "Landing Page"
 msgstr ""
 
-#: includes/admin/visits/visits.php:144 templates/dashboard-tab-visits.php:22
+#: includes/admin/visits/visits.php:142 templates/dashboard-tab-visits.php:26
 msgid "Referring URL"
 msgstr ""
 
-#: includes/admin/visits/visits.php:146
+#: includes/admin/visits/visits.php:144
 msgid "Referral ID"
 msgstr ""
 
-#: includes/admin/visits/visits.php:147
+#: includes/admin/visits/visits.php:145
 msgid "IP"
 msgstr ""
 
-#: includes/admin/visits/visits.php:212 templates/dashboard-tab-visits.php:33
+#: includes/admin/visits/visits.php:210 templates/dashboard-tab-visits.php:41
 msgid "Direct traffic"
 msgstr ""
 
-#: includes/admin/visits/visits.php:237
+#: includes/admin/visits/visits.php:235
 msgid "No visits found."
 msgstr ""
 
-#: includes/affiliate-functions.php:351
+#: includes/affiliate-functions.php:403
 msgid "Percentage (%)"
 msgstr ""
 
-#: includes/affiliate-functions.php:352
+#: includes/affiliate-functions.php:404
 msgid "Flat %s"
 msgstr ""
 
@@ -2599,22 +2534,18 @@ msgid "Incorrect username or password"
 msgstr ""
 
 #: includes/class-referrals-graph.php:116
-#: includes/class-reports-overview-graph.php:116
 msgid "Unpaid Referral Earnings"
 msgstr ""
 
 #: includes/class-referrals-graph.php:117
-#: includes/class-reports-overview-graph.php:117
 msgid "Pending Referral Earnings"
 msgstr ""
 
 #: includes/class-referrals-graph.php:118
-#: includes/class-reports-overview-graph.php:118
 msgid "Rejected Referral Earnings"
 msgstr ""
 
 #: includes/class-referrals-graph.php:119
-#: includes/class-reports-overview-graph.php:119
 msgid "Paid Referral Earnings"
 msgstr ""
 
@@ -2809,64 +2740,64 @@ msgstr ""
 #: includes/integrations/class-edd.php:337
 #: includes/integrations/class-gravityforms.php:109
 #: includes/integrations/class-jigoshop.php:94
-#: includes/integrations/class-pmp.php:97
+#: includes/integrations/class-pmp.php:158
 #: includes/integrations/class-shopp.php:80
 #: includes/integrations/class-sproutinvoices.php:53
-#: includes/integrations/class-woocommerce.php:180
+#: includes/integrations/class-woocommerce.php:184
 #: includes/integrations/class-zippycourses.php:263
 msgid "Referral #%d for %s recorded for %s"
 msgstr ""
 
 #: includes/integrations/class-edd.php:454
-#: includes/integrations/class-pmp.php:196
+#: includes/integrations/class-pmp.php:257
 #: includes/integrations/class-rcp.php:207
-#: includes/integrations/class-woocommerce.php:305
+#: includes/integrations/class-woocommerce.php:315
 msgid "Affiliate Discount?"
 msgstr ""
 
-#: includes/integrations/class-edd.php:463
+#: includes/integrations/class-edd.php:461
 #: includes/integrations/class-jigoshop.php:173
 #: includes/integrations/class-memberpress.php:262
-#: includes/integrations/class-pmp.php:205
-#: includes/integrations/class-rcp.php:216
-#: includes/integrations/class-woocommerce.php:313
+#: includes/integrations/class-pmp.php:264
+#: includes/integrations/class-rcp.php:214
+#: includes/integrations/class-woocommerce.php:321
 msgid ""
 "If you would like to connect this discount to an affiliate, enter the name "
 "of the affiliate it belongs to."
 msgstr ""
 
-#: includes/integrations/class-edd.php:554
+#: includes/integrations/class-edd.php:552
 msgid "Adjust EDD Commissions"
 msgstr ""
 
-#: includes/integrations/class-edd.php:555
+#: includes/integrations/class-edd.php:553
 msgid ""
 "Should AffiliateWP adjust the commission amounts recorded for purchases "
 "that include affiliate referrals? This will subtract the referral amount "
 "from the base amount used to calculate the commission total."
 msgstr ""
 
-#: includes/integrations/class-edd.php:575
+#: includes/integrations/class-edd.php:573
 msgid "Disable Renewal Referrals"
 msgstr ""
 
-#: includes/integrations/class-edd.php:576
+#: includes/integrations/class-edd.php:574
 msgid ""
 "Should AffiliateWP prevent referral commissions from being recorded on "
 "renewal purchases with EDD Software Licensing?"
 msgstr ""
 
-#: includes/integrations/class-edd.php:597
+#: includes/integrations/class-edd.php:595
 #: includes/integrations/class-zippycourses.php:70
 msgid "Affiliate Rates:"
 msgstr ""
 
-#: includes/integrations/class-edd.php:610
+#: includes/integrations/class-edd.php:608
 #: includes/integrations/class-zippycourses.php:83
 msgid "Disable referrals on this %s"
 msgstr ""
 
-#: includes/integrations/class-edd.php:614
+#: includes/integrations/class-edd.php:612
 #: includes/integrations/class-memberpress.php:171
 #: includes/integrations/class-zippycourses.php:87
 msgid ""
@@ -2874,11 +2805,11 @@ msgid ""
 "blank to use the site default referral rate."
 msgstr ""
 
-#: includes/integrations/class-exchange.php:283
+#: includes/integrations/class-exchange.php:300
 msgid "Affiliate coupon?"
 msgstr ""
 
-#: includes/integrations/class-exchange.php:292
+#: includes/integrations/class-exchange.php:307
 msgid ""
 "If you would like to connect this coupon to an affiliate, enter the name of "
 "the affiliate it belongs to."
@@ -2901,11 +2832,11 @@ msgstr ""
 msgid "Purchase Amount"
 msgstr ""
 
-#: includes/integrations/class-formidablepro.php:198
+#: includes/integrations/class-formidablepro.php:200
 msgid "AffiliateWP: Referral #%d for %s recorded for %s"
 msgstr ""
 
-#: includes/integrations/class-formidablepro.php:223
+#: includes/integrations/class-formidablepro.php:225
 msgid "AffiliateWP: Referral #%d for %s for %s rejected"
 msgstr ""
 
@@ -2927,9 +2858,9 @@ msgid "Affiliate Data"
 msgstr ""
 
 #: includes/integrations/class-memberpress.php:138
-#: includes/integrations/class-rcp.php:292
-#: includes/integrations/class-rcp.php:314
-#: includes/integrations/class-woocommerce.php:425
+#: includes/integrations/class-rcp.php:338
+#: includes/integrations/class-rcp.php:360
+#: includes/integrations/class-woocommerce.php:433
 msgid "Affiliate Rate"
 msgstr ""
 
@@ -2945,32 +2876,48 @@ msgstr ""
 msgid "Enable affiliate referral creation for this form?"
 msgstr ""
 
-#: includes/integrations/class-rcp.php:296
-#: includes/integrations/class-rcp.php:318
+#: includes/integrations/class-pmp.php:356
+#: includes/integrations/class-zippycourses.php:55
+msgid "Affiliate Settings"
+msgstr ""
+
+#: includes/integrations/class-pmp.php:365
+msgid ""
+"The membership-level referral rate, such as 20 for 20%%. Affiliate-level "
+"referral rates will override this value. If left blank, the site default "
+"value of %s will be used."
+msgstr ""
+
+#: includes/integrations/class-pmp.php:370
+msgid "Disable Referrals"
+msgstr ""
+
+#: includes/integrations/class-pmp.php:372
+msgid "Check to disable per-membership referrals."
+msgstr ""
+
+#: includes/integrations/class-rcp.php:342
+#: includes/integrations/class-rcp.php:364
 msgid ""
 "This rate will be used to calculate affiliate earnings when members "
 "subscribe to this level. Leave blank to use the site default referral rate."
 msgstr ""
 
-#: includes/integrations/class-woocommerce.php:427
+#: includes/integrations/class-woocommerce.php:435
 #: includes/integrations/extras/class-exchange-feature.php:27
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
 "blank to use default affiliate rates."
 msgstr ""
 
-#: includes/integrations/class-woocommerce.php:431
+#: includes/integrations/class-woocommerce.php:439
 msgid "Disable referrals"
 msgstr ""
 
-#: includes/integrations/class-woocommerce.php:432
+#: includes/integrations/class-woocommerce.php:440
 msgid ""
 "This will prevent orders of this product from generating referral "
 "commissions for affiliates."
-msgstr ""
-
-#: includes/integrations/class-zippycourses.php:55
-msgid "Affiliate Settings"
 msgstr ""
 
 #: includes/integrations/extras/class-exchange-feature.php:39
@@ -3203,7 +3150,7 @@ msgstr ""
 msgid "Save Profile Settings"
 msgstr ""
 
-#: templates/dashboard-tab-stats.php:3 templates/dashboard.php:40
+#: templates/dashboard-tab-stats.php:3 templates/dashboard.php:42
 msgid "Statistics"
 msgstr ""
 
@@ -3269,31 +3216,42 @@ msgstr ""
 msgid "Referral URL Visits"
 msgstr ""
 
+#: templates/dashboard-tab-visits.php:6
+msgid ""
+"Column one lists the visit URL in relative format, column two lists the "
+"referrer, and column three indicates whether the visit converted into a "
+"referral."
+msgstr ""
+
 #: templates/dashboard-tab-visits.php:44
+msgid "Visit converted: %s"
+msgstr ""
+
+#: templates/dashboard-tab-visits.php:54
 msgid "You have not received any visits yet."
 msgstr ""
 
-#: templates/dashboard.php:11
+#: templates/dashboard.php:9
 msgid "Your affiliate account is pending approval"
 msgstr ""
 
-#: templates/dashboard.php:15
+#: templates/dashboard.php:13
 msgid "Your affiliate account is not active"
 msgstr ""
 
-#: templates/dashboard.php:19
+#: templates/dashboard.php:17
 msgid "Your affiliate account request has been rejected"
 msgstr ""
 
-#: templates/dashboard.php:29
+#: templates/dashboard.php:27
 msgid "Your affiliate profile has been updated"
 msgstr ""
 
-#: templates/dashboard.php:37
+#: templates/dashboard.php:36
 msgid "Affiliate URLs"
 msgstr ""
 
-#: templates/dashboard.php:43
+#: templates/dashboard.php:48
 msgid "Graphs"
 msgstr ""
 
@@ -3349,7 +3307,7 @@ msgstr ""
 msgid "Affiliate Plugin for WordPress"
 msgstr ""
 
-#: includes/admin/affiliates/delete.php:26
+#: includes/admin/affiliates/delete.php:47
 msgctxt "Affiliate ID, affiliate name"
 msgid "ID #%d: %s"
 msgstr ""

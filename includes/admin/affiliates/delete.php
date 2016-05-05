@@ -64,7 +64,7 @@ $deleting_only_self = ( 1 == $to_delete_count && $deleting_self ) ? true : false
 			<?php
 			// If the current user's affiliate account is flagged for deletion with the group, show a reassuring message.
 			if ( $deleting_self ) :
-				$self_delete_notice = ' <strong>' . __( '(The current user will not be deleted)', 'affilaite-wp' ) . '</strong>';
+				$self_delete_notice = ' <strong>' . __( '(The current user will not be deleted)', 'affiliate-wp' ) . '</strong>';
 			else :
 				$self_delete_notice = '';
 			endif;

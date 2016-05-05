@@ -24,6 +24,21 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	}
 
 	/**
+	 * Retrieves a referral object.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @see Affiliate_WP_DB::get_core_object()
+	 *
+	 * @param int|object|AffWP_Referral $referral Referral ID or object.
+	 * @return AffWP_Referral|null Referral object, null otherwise.
+	 */
+	public function get_referral( $referral ) {
+		return $this->get_core_object( $referral, 'AffWP_Referral' );
+	}
+
+	/**
 	 * Get columns and formats
 	 *
 	 * @access  public

@@ -249,4 +249,37 @@ abstract class Affiliate_WP_DB {
 		return true;
 	}
 
+	/**
+	 * Retrieves a core object instance based on the given type.
+	 *
+	 * @since 1.9
+	 * @access protected
+	 *
+	 * @param object|int $instance Instance or object ID.
+	 * @param string     $class    Object class name.
+	 * @return object|null Object instance, null otherwise.
+	 */
+	protected function get_core_object( $instance, $object_class ) {
+		if ( ! class_exists( $object_class ) ) {
+			return null;
+		}
+
+		if ( $instance instanceof $object_class ) {
+			$_object = $instance;
+		} elseif ( is_object( $instance ) && isset( $instance->{$this->primary_key} ) ) {
+			if ( isset( $object->{$this->primary_key} ) ) {
+				$_object = new $object_class( $instance );
+			} else {
+				$_object = $object_class::get_instance( $instance );
+			}
+		} else {
+			$_object = $object_class::get_instance( $instance );
+		}
+
+		if ( ! $_object ) {
+			return null;
+		}
+
+		return $_object;
+	}
 }

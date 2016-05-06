@@ -130,7 +130,7 @@ class Affiliate_WP_Register {
 		}
 
 		if ( ! empty( $_POST['affwp_honeypot'] ) ) {
-			$this->add_error( 'spam', __( 'Nice try honey bear, don\'t touch our honey', 'affiliate-wp' ) );
+			$this->add_error( 'spam', __( 'Nice try honey bear, don&#8217;t touch our honey', 'affiliate-wp' ) );
 		}
 
 		if ( affwp_is_affiliate() ) {

@@ -82,6 +82,10 @@ class Affiliate_WP_Register {
 				}
 			}
 
+			if ( strlen( $date['affwp_user_login'] ) > 60 ) {
+				$this->add_error( 'username_invalid_length', __( 'Invalid username. Must be between 1 and 60 characters.', 'affiliate-wp' ) );
+			}
+
 			if ( is_numeric( $data['affwp_user_login'] ) ) {
 				$this->add_error( 'username_invalid_numeric', __( 'Invalid username. Usernames must include at least one letter', 'affiliate-wp' ) );
 			}
@@ -198,7 +202,7 @@ class Affiliate_WP_Register {
 			),
 			'affwp_user_login' 	=> array(
 				'error_id'      => 'empty_username',
-				'error_message' => __( 'Invalid username', 'affiliate-wp' ),
+				'error_message' => __( 'Invalid username. Must be between 1 and 60 characters.', 'affiliate-wp' ),
 				'logged_out'    => true
 			),
 			'affwp_user_url' 	=> array(

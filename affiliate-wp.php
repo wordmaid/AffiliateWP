@@ -3,7 +3,7 @@
  * Plugin Name: AffiliateWP
  * Plugin URI: https://affiliatewp.com
  * Description: Affiliate Plugin for WordPress
- * Author: Pippin Williamson and Andrew Munro
+ * Author: AffiliateWP
  * Author URI: https://affiliatewp.com
  * Version: 1.8
  * Text Domain: affiliate-wp

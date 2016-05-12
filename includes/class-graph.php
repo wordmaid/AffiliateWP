@@ -152,7 +152,9 @@ class Affiliate_WP_Graph {
 		// Use minified libraries if SCRIPT_DEBUG is turned off
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_script( 'jquery-flot', AFFILIATEWP_PLUGIN_URL . 'assets/js/jquery.flot' . $suffix . '.js' );
-		
+
+		wp_enqueue_script( 'jquery-flot-navigate', AFFILIATEWP_PLUGIN_URL . 'assets/js/jquery.flot.navigate' . $suffix . '.js' );
+
 		if( $this->load_resize_script() ) {
 			wp_enqueue_script( 'jquery-flot-resize', AFFILIATEWP_PLUGIN_URL . 'assets/js/jquery.flot.resize' . $suffix . '.js' );
 		}
@@ -164,7 +166,7 @@ class Affiliate_WP_Graph {
 	 * @since 1.1
 	 */
 	public function load_resize_script() {
-			
+
 		$ret = true;
 
 		// The DMS theme is known to cause some issues with the resize script
@@ -194,7 +196,7 @@ class Affiliate_WP_Graph {
 		<script type="text/javascript">
 			var affwp_vars;
 			jQuery( document ).ready( function($) {
-				$.plot(
+				var plot = $.plot(
 					$("#affwp-graph-<?php echo $this->id; ?>"),
 					[
 						<?php foreach( $this->get_data() as $label => $data ) : ?>
@@ -212,7 +214,9 @@ class Affiliate_WP_Graph {
 								align: 'center'
 							},
 							lines: {
-								show: <?php echo $this->options['lines'] ? 'true' : 'false'; ?>
+								show: <?php echo $this->options['lines'] ? 'true' : 'false'; ?>,
+								fill: true,
+								fillcolor: 'rgba(204, 202, 202, 0.25)'
 							},
 							<?php if( $this->options[ 'multiple_y_axes' ] ) : ?>
 							yaxis: <?php echo $yaxis_count; ?>
@@ -233,6 +237,8 @@ class Affiliate_WP_Graph {
 							hoverable: true
 						},
 						xaxis: {
+							zoomRange: [ null,null ],
+							panRange:  [ null, null ],
 							mode: "<?php echo $this->options['x_mode']; ?>",
 							timeFormat: "<?php echo $this->options['x_mode'] == 'time' ? $this->options['time_format'] : ''; ?>",
 							tickSize: "<?php echo $this->options['x_mode'] == 'time' ? '' : 1; ?>",
@@ -241,6 +247,8 @@ class Affiliate_WP_Graph {
 							<?php endif; ?>
 						},
 						yaxis: {
+							zoomRange: [ null,null ],
+							panRange:  [ 0, 300 ],
 							position: 'right',
 							min: 0,
 							mode: "<?php echo $this->options['y_mode']; ?>",
@@ -248,11 +256,18 @@ class Affiliate_WP_Graph {
 							<?php if( $this->options['y_mode'] != 'time' ) : ?>
 							tickDecimals: <?php echo $this->options['y_decimals']; ?>
 							<?php endif; ?>
+						},
+						zoom: {
+							interactive: true
+						},
+						pan: {
+							interactive: true
 						}
 					}
 
 				);
 
+				// Renders a tooltip for each point.
 				function affwp_flot_tooltip(x, y, contents) {
 					$('<div id="affwp-flot-tooltip">' + contents + '</div>').css( {
 						position: 'absolute',
@@ -265,6 +280,29 @@ class Affiliate_WP_Graph {
 						opacity: 0.80
 					}).appendTo("body").fadeIn(200);
 				}
+
+				// Add directional arrows to graph for navigation
+				function addArrow( direction, left, top, offset ) {
+				$( "<div class='affwp-graph-nav-button'  style='left:" + left + "px;top:" + top + "px'>" + direction + "</div>" )
+					.appendTo( ".affwp-graph" )
+					.click( function( e ) {
+						e.preventDefault();
+						plot.pan( offset );
+					} );
+					}
+
+					addArrow( "&#x25C0;", 5, 20, {
+						left: -100
+					} );
+					addArrow( "&#x25B6;", 35, 20, {
+						left: 100
+					} );
+					addArrow( "&#x25B2;", 20, 5, {
+						top: -100
+					} );
+					addArrow( "&#x25BC;", 20, 35, {
+						top: 100
+					} );
 
 				var previousPoint = null;
 				$("#affwp-graph-<?php echo $this->id; ?>").bind("plothover", function (event, pos, item) {
@@ -360,9 +398,9 @@ class Affiliate_WP_Graph {
 					<?php $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'graphs'; ?>
 					<input type="hidden" name="page_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 				<?php endif; ?>
-				
+
 				<input type="hidden" name="tab" value="<?php echo esc_attr( $tab ); ?>"/>
-				
+
 				<?php if( isset( $_GET['affiliate_id'] ) ) : ?>
 				<input type="hidden" name="affiliate_id" value="<?php echo absint( $_GET['affiliate_id'] ); ?>"/>
 				<input type="hidden" name="action" value="view_affiliate"/>

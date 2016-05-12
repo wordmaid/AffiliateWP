@@ -1,55 +1,65 @@
 <?php
 /**
- * Affiiates Admin
+ * Reports Admin
  *
  * @package     AffiliateWP
- * @subpackage  Admin/Affiliates
- * @copyright   Copyright (c) 2014, Pippin Williamson
+ * @subpackage  Admin/Reports
+ * @copyright   Copyright (c) 2016, Pippin Williamson
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0
  */
 
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/screen-options.php';
+include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/reports-functions.php';
+
+// Meta box related classes
+//include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
+//include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-metabox-overview-referrals.php';
+//include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-metabox-affiliate-leaderboard.php';
+//include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-metabox-references.php';
+
 function affwp_reports_admin() {
 
-	$active_tab = isset( $_GET[ 'tab' ] ) && array_key_exists( $_GET['tab'], affwp_get_reports_tabs() ) ? $_GET[ 'tab' ] : 'referrals';
+    $active_tab = isset( $_GET[ 'tab' ] ) && array_key_exists( $_GET['tab'], affwp_get_reports_tabs() ) ? $_GET[ 'tab' ] : 'overview';
 
 ?>
-	<div class="wrap">
+    <div class="wrap">
+        <?php do_action( 'affwp_reports_page_top' ); ?>
 
-		<?php do_action( 'affwp_reports_page_top' ); ?>
+        <h2 class="nav-tab-wrapper">
+            <?php
+            foreach( affwp_get_reports_tabs() as $tab_id => $tab_name ) {
 
-		<h2 class="nav-tab-wrapper">
-			<?php
-			foreach( affwp_get_reports_tabs() as $tab_id => $tab_name ) {
+                $tab_url = add_query_arg( array(
+                    'settings-updated' => false,
+                    'tab'              => $tab_id,
+                    'affwp_notice'     => false
+                ) );
 
-				$tab_url = add_query_arg( array(
-					'settings-updated' => false,
-					'tab'              => $tab_id,
-					'affwp_notice'     => false
-				) );
+                $active = $active_tab == $tab_id ? ' nav-tab-active' : '';
 
-				$active = $active_tab == $tab_id ? ' nav-tab-active' : '';
+                echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
+                    echo esc_html( $tab_name );
+                echo '</a>';
+            }
+            ?>
+        </h2>
 
-				echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
-					echo esc_html( $tab_name );
-				echo '</a>';
-			}
-			?>
-		</h2>
+        <?php do_action( 'affwp_reports_page_middle' ); ?>
 
-		<?php do_action( 'affwp_reports_page_middle' ); ?>
+        <div id="tab_container">
 
-		<div id="tab_container">
-			<?php do_action( 'affwp_reports_tab_' . $active_tab ); ?>
-		</div><!-- #tab_container-->
+                <?php do_action( 'affwp_reports_tab_' . $active_tab ); ?>
 
-		<?php do_action( 'affwp_reports_page_bottom' ); ?>
+        </div><!-- #tab_container-->
 
-	</div>
+
+        <?php do_action( 'affwp_reports_page_bottom' ); ?>
+
+    </div>
 <?php
 }
 
@@ -61,13 +71,195 @@ function affwp_reports_admin() {
  */
 function affwp_get_reports_tabs() {
 
-	$tabs                  = array();
-	$tabs['referrals']     = __( 'Referrals', 'affiliate-wp' );
-	$tabs['visits']        = __( 'Visits', 'affiliate-wp' );
-	$tabs['registrations'] = __( 'Affiliate Registrations', 'affiliate-wp' );
+    $tabs               = array();
+    $tabs['overview']   = __( 'Overview', 'affiliate-wp' );
+    $tabs['affiliates'] = __( 'Affiliates', 'affiliate-wp' );
+    $tabs['referrals']  = __( 'Referrals', 'affiliate-wp' );
+    $tabs['visits']     = __( 'Visits', 'affiliate-wp' );
+    $tabs['campaigns']  = __( 'Campaigns', 'affiliate-wp' );
 
-	return apply_filters( 'affwp_reports_tabs', $tabs );
+    return apply_filters( 'affwp_reports_tabs', $tabs );
 }
+
+/**
+ * Display the overview reports tab
+ *
+ * @since 1.8
+ * @return void
+ */
+function affwp_reports_tab_overview() {
+
+?>
+
+    <div id="dashboard-widgets" class="metabox-holder reports-metabox-holder">
+        <div id="postbox-container-1" class="postbox-container">
+            <div class="postbox">
+                <div class="inside">
+                    <?php $earnings_today = affiliate_wp()->referrals->paid_earnings( 'today' ); ?>
+                    <h2>
+                        <?php echo $earnings_today . __(' earned today.', 'affiliate-wp' ); ?>
+                    </h2>
+                    <table class="affwp_table">
+                        <thead>
+                            <tr>
+                                <th><?php _e( 'Paid Earnings', 'affiliate-wp' ); ?></th>
+                                <th><?php _e( 'Paid Earnings This Month', 'affiliate-wp' ); ?></th>
+                                <th><?php _e( 'Paid Earnings Today', 'affiliate-wp' ); ?></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td><?php echo affiliate_wp()->referrals->paid_earnings(); ?></td>
+                                <td><?php echo affiliate_wp()->referrals->paid_earnings( 'month' ); ?></td>
+                                <td><?php echo affiliate_wp()->referrals->paid_earnings( 'today' ); ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="affwp_table">
+                        <thead>
+                            <tr>
+                                <th><?php _e( 'Unpaid Referrals', 'affiliate-wp' ); ?></th>
+                                <th><?php _e( 'Unpaid Referrals This Month', 'affiliate-wp' ); ?></th>
+                                <th><?php _e( 'Unpaid Referrals Today', 'affiliate-wp' ); ?></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td><?php echo affiliate_wp()->referrals->unpaid_count(); ?></td>
+                                <td><?php echo affiliate_wp()->referrals->unpaid_count( 'month' ); ?></td>
+                                <td><?php echo affiliate_wp()->referrals->unpaid_count( 'today' ); ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="affwp_table">
+                        <thead>
+                            <tr>
+                                <th><?php _e( 'Unpaid Earnings', 'affiliate-wp' ); ?></th>
+                                <th><?php _e( 'Unpaid Earnings This Month', 'affiliate-wp' ); ?></th>
+                                <th><?php _e( 'Unpaid Earnings Today', 'affiliate-wp' ); ?></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td><?php echo affiliate_wp()->referrals->unpaid_earnings(); ?></td>
+                                <td><?php echo affiliate_wp()->referrals->unpaid_earnings( 'month' ); ?></td>
+                                <td><?php echo affiliate_wp()->referrals->unpaid_earnings( 'today' ); ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="postbox-container-2" class="postbox-container">
+            <?php   // Reports meta boxes
+                    // do_action( 'affwp_reports_meta_boxes' );
+                    // do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'side', null );
+
+                    $affiliates = affiliate_wp()->affiliates->get_affiliates( apply_filters( 'affwp_overview_most_valuable_affiliates', array( 'number' => 5, 'orderby' => 'earnings', 'order' => 'DESC' ) ) );
+            ?>
+            <div class="postbox">
+                <div class="inside">
+                    <h3>
+                        <?php echo __( 'The top-earning affiliates.', 'affiliate-wp' ); ?>
+                    </h3>
+                    <table class="affwp_table affwp-reports-table">
+
+                        <thead>
+
+                            <tr>
+                                <th><?php _e( 'Affiliate', 'affiliate-wp' ); ?></th>
+                                <th><?php _e( 'Earnings', 'affiliate-wp' ); ?></th>
+                                <th><?php _e( 'Referrals', 'affiliate-wp' ); ?></th>
+                                <th><?php _e( 'Visits', 'affiliate-wp' ); ?></th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+                        <?php if( $affiliates ) : ?>
+                            <?php foreach( $affiliates as $affiliate  ) : ?>
+                                <tr>
+                                    <td class="leader"><?php echo affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id ); ?></td>
+                                    <td><?php echo affwp_currency_filter( $affiliate->earnings ); ?></td>
+                                    <td><?php echo absint( $affiliate->referrals ); ?></td>
+                                    <td><?php echo absint( $affiliate->visits ); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="4"><?php _e( 'No registered affiliates', 'affiliate-wp' ); ?></td>
+                            </tr>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="postbox-container-3" class="postbox-container">
+            <div class="postbox">
+                <div class="inside">
+                    <?php   // Reports meta boxes
+                            // do_action( 'affwp_reports_meta_boxes' );
+                            // do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'advanced', null ); ?>
+                    <h3>
+                        <?php echo __( 'These are the most recently-used references on the site.', 'affiliate-wp' ); ?>
+                    </h3>
+
+                    <?php echo affwp_get_referrals_by_reference(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard-widgets" class="metabox-holder reports-metabox-holder">
+
+
+
+    </div>
+    <?php
+    $graph = new Affiliate_WP_Reports_Overview_Graph;
+    $graph->set( 'x_mode', 'time' );
+    $graph->display();
+
+}
+
+add_action( 'affwp_reports_tab_overview', 'affwp_reports_tab_overview' );
+
+/**
+ * Display the affiliate reports tab
+ *
+ * @since 1.8
+ * @return void
+ */
+function affwp_reports_tab_affiliates() {
+
+    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-affiliate-reports-list-table.php';
+    $reports_table = new AffWP_Affiliate_Reports_List_Table;
+
+    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-export-report.php';
+    $exporter = new Affiliate_WP_Report_Export;
+
+    $reports_table->prepare_items(); ?>
+
+    <form id="affwp-reports-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-reports&tab-affiliates' ); ?>">
+        <input type="hidden" name="page" value="affiliate-wp-reports" />
+        <input type="hidden" name="tab" value="affiliates" />
+
+    <?php
+        $reports_table->views();
+        $exporter->display();
+        $reports_table->advanced_filters();
+        $reports_table->display();
+
+    } ?>
+    </form>
+<?php
+add_action('affwp_reports_tab_affiliates', 'affwp_reports_tab_affiliates' );
 
 /**
  * Display the referrals reports tab
@@ -77,88 +269,88 @@ function affwp_get_reports_tabs() {
  */
 function affwp_reports_tab_referrals() {
 ?>
-	<table id="affwp_total_earnings" class="affwp_table">
+    <table id="affwp_total_earnings" class="affwp_table">
 
-		<thead>
+        <thead>
 
-			<tr>
+            <tr>
 
-				<th><?php _e( 'Paid Earnings', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Paid Earnings This Month', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Paid Earnings Today', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Paid Earnings', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Paid Earnings This Month', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Paid Earnings Today', 'affiliate-wp' ); ?></th>
 
-			</tr>
+            </tr>
 
-		</thead>
+        </thead>
 
-		<tbody>
+        <tbody>
 
-			<tr>
-				<td><?php echo affiliate_wp()->referrals->paid_earnings(); ?></td>
-				<td><?php echo affiliate_wp()->referrals->paid_earnings( 'month' ); ?></td>
-				<td><?php echo affiliate_wp()->referrals->paid_earnings( 'today' ); ?></td>
-			</tr>
+            <tr>
+                <td><?php echo affiliate_wp()->referrals->paid_earnings(); ?></td>
+                <td><?php echo affiliate_wp()->referrals->paid_earnings( 'month' ); ?></td>
+                <td><?php echo affiliate_wp()->referrals->paid_earnings( 'today' ); ?></td>
+            </tr>
 
-		</tbody>
+        </tbody>
 
-	</table>
+    </table>
 
-	<table id="affwp_unpaid_earnings" class="affwp_table">
+    <table id="affwp_unpaid_earnings" class="affwp_table">
 
-		<thead>
+        <thead>
 
-			<tr>
+            <tr>
 
-				<th><?php _e( 'Unpaid Earnings', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Unpaid Earnings This Month', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Unpaid Earnings Today', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Unpaid Earnings', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Unpaid Earnings This Month', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Unpaid Earnings Today', 'affiliate-wp' ); ?></th>
 
-			</tr>
+            </tr>
 
-		</thead>
+        </thead>
 
-		<tbody>
+        <tbody>
 
-			<tr>
-				<td><?php echo affiliate_wp()->referrals->unpaid_earnings(); ?></td>
-				<td><?php echo affiliate_wp()->referrals->unpaid_earnings( 'month' ); ?></td>
-				<td><?php echo affiliate_wp()->referrals->unpaid_earnings( 'today' ); ?></td>
-			</tr>
+            <tr>
+                <td><?php echo affiliate_wp()->referrals->unpaid_earnings(); ?></td>
+                <td><?php echo affiliate_wp()->referrals->unpaid_earnings( 'month' ); ?></td>
+                <td><?php echo affiliate_wp()->referrals->unpaid_earnings( 'today' ); ?></td>
+            </tr>
 
-		</tbody>
+        </tbody>
 
-	</table>
+    </table>
 
-	<table id="affwp_unpaid_counts" class="affwp_table">
+    <table id="affwp_unpaid_counts" class="affwp_table">
 
-		<thead>
+        <thead>
 
-			<tr>
+            <tr>
 
-				<th><?php _e( 'Unpaid Referrals', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Unpaid Referrals This Month', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Unpaid Referrals Today', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Unpaid Referrals', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Unpaid Referrals This Month', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Unpaid Referrals Today', 'affiliate-wp' ); ?></th>
 
-			</tr>
+            </tr>
 
-		</thead>
+        </thead>
 
-		<tbody>
+        <tbody>
 
-			<tr>
-				<td><?php echo affiliate_wp()->referrals->unpaid_count(); ?></td>
-				<td><?php echo affiliate_wp()->referrals->unpaid_count( 'month' ); ?></td>
-				<td><?php echo affiliate_wp()->referrals->unpaid_count( 'today' ); ?></td>
-			</tr>
+            <tr>
+                <td><?php echo affiliate_wp()->referrals->unpaid_count(); ?></td>
+                <td><?php echo affiliate_wp()->referrals->unpaid_count( 'month' ); ?></td>
+                <td><?php echo affiliate_wp()->referrals->unpaid_count( 'today' ); ?></td>
+            </tr>
 
-		</tbody>
+        </tbody>
 
-	</table>
+    </table>
 
-	<?php
-	$graph = new Affiliate_WP_Referrals_Graph;
-	$graph->set( 'x_mode', 'time' );
-	$graph->display();
+    <?php
+    $graph = new Affiliate_WP_Referrals_Graph;
+    $graph->set( 'x_mode', 'time' );
+    $graph->display();
 
 }
 add_action( 'affwp_reports_tab_referrals', 'affwp_reports_tab_referrals' );
@@ -171,56 +363,88 @@ add_action( 'affwp_reports_tab_referrals', 'affwp_reports_tab_referrals' );
  */
 function affwp_reports_tab_visits() {
 
-	$graph = new Affiliate_WP_Visits_Graph;
-	$graph->set( 'x_mode',   'time' );
-	$graph->set( 'currency', false  );
+    $graph = new Affiliate_WP_Visits_Graph;
+    $graph->set( 'x_mode',   'time' );
+    $graph->set( 'currency', false  );
 
 ?>
-	<table id="affwp_total_earnings" class="affwp_table">
+    <table id="affwp_total_earnings" class="affwp_table">
 
-		<thead>
+        <thead>
 
-			<tr>
+            <tr>
 
-				<th><?php _e( 'Visits', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Successful Conversions', 'affiliate-wp' ); ?></th>
-				<th><?php _e( 'Conversion Rate', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Visits', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Successful Conversions', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Conversion Rate', 'affiliate-wp' ); ?></th>
 
-			</tr>
+            </tr>
 
-		</thead>
+        </thead>
 
-		<tbody>
+        <tbody>
 
-			<tr>
-				<td><?php echo absint( $graph->total ); ?></td>
-				<td><?php echo absint( $graph->converted ); ?></td>
-				<td><?php echo $graph->get_conversion_rate(); ?>%</td>
-			</tr>
+            <tr>
+                <td><?php echo absint( $graph->total ); ?></td>
+                <td><?php echo absint( $graph->converted ); ?></td>
+                <td><?php echo $graph->get_conversion_rate(); ?>%</td>
+            </tr>
 
-		</tbody>
+        </tbody>
 
-	</table>
+    </table>
 <?php
-	$graph->display();
+    $graph->display();
 
 }
 add_action( 'affwp_reports_tab_visits', 'affwp_reports_tab_visits' );
 
 /**
- * Display the affiliate registration reports tab
+ * Display the campaigns reports tab
  *
- * @since 1.1
+ * @since 1.8
  * @return void
  */
-function affwp_reports_tab_registrations() {
+function affwp_reports_tab_campaigns() {
 
-	require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-registrations-graph.php';
+    $graph = new Affiliate_WP_Campaigns_Graph;
+    $graph->set( 'x_mode',   'time' );
+    $graph->set( 'currency', false  );
 
-	$graph = new Affiliate_WP_Registrations_Graph;
-	$graph->set( 'x_mode',   'time' );
-	$graph->set( 'currency', false  );
-	$graph->display();
+?>
+    <table id="affwp_total_earnings" class="affwp_table">
+
+        <thead>
+
+            <tr>
+
+                <th><?php _e( 'Campaigns', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Successful Conversions', 'affiliate-wp' ); ?></th>
+                <th><?php _e( 'Conversion Rate', 'affiliate-wp' ); ?></th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td>%</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+<?php
+    $graph->display();
 
 }
-add_action( 'affwp_reports_tab_registrations', 'affwp_reports_tab_registrations' );
+add_action( 'affwp_reports_tab_campaigns', 'affwp_reports_tab_campaigns' );
+
+
+
+
+
+

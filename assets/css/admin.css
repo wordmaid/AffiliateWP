@@ -173,6 +173,90 @@ table.affwp_table td a {
 	color: #ef6c5e;
 }
 
+/* Reports page */
+
+#affwp-report-filters {
+	clear: both;
+	background: #f5f5f5;
+	background-image: -webkit-gradient(linear, left bottom, left top, from(#f5f5f5), to(#fafafa));
+	background-image: -webkit-linear-gradient(bottom, #f5f5f5, #fafafa);
+	background-image: -moz-linear-gradient(bottom, #f5f5f5, #fafafa);
+	background-image: -o-linear-gradient(bottom, #f5f5f5, #fafafa);
+	background-image: linear-gradient(to top, #f5f5f5, #fafafa);
+	border-color: #dfdfdf;
+	overflow: auto;
+	margin: 8px 0;
+	padding: 12px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
+	font-size: 13px;
+	line-height: 2.1em;
+}
+
+/*
+ * Tightens spacing in reports table search filters tables
+ */
+table.affwp-report-filters-table {
+	margin-bottom: 0;
+}
+
+/*
+ * Remove borders in reports tables
+ */
+table.affwp-report-filters-table td {
+	border: 0;
+}
+
+table.affwp-report-filters-table td:nth-of-type(1),
+table.affwp-report-filters-table td:nth-of-type(2) {
+	border-right: 1px solid rgba(0, 0, 0, .15 );
+}
+
+/*
+ * Float right for:
+ * 1. Reports 'Export CSV' button
+ * 2. Advanced filters inputs
+ * 3. 'Apply' button in the reports advanced filters form
+ */
+.button.export-submit,
+.affwp-report-filters-table tr td:nth-child(1),
+#affwp-report-filters .button-secondary {
+	float: right;
+}
+
+/*
+ * tr and td clearings for earnings search filter
+ */
+#affwp-report-earnings-filters {
+	clear: both;
+}
+
+/*
+ * Directional buttons for affwp graph navigation
+ */
+.affwp-graph .affwp-graph-nav-button {
+	position: absolute;
+	background: transparent;
+	color: black;
+	width: 12px;
+	height: 12px;
+	text-align: center;
+	line-height: 1;
+	padding: 3px;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+/* Reports leaderboard meta box */
+
+.affwp-reports-table tbody tr:nth-child(1) td {
+	background: rgba(225, 245, 196, .5);
+}
+.affwp-reports-leaderboard-table tbody tr:nth-child(1) .leader {
+	font-size: 2em;
+}
+
 /* WooCommerce Admin Tweaks */
 .affwp-woo-coupon-field .affwp-ajax-search-wrap {
 	position: relative;

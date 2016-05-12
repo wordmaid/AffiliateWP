@@ -3,6 +3,7 @@
  * Affiliates Export Class
  *
  * This class handles exporting affiliate data.
+ * Each data export type (referrals, affiliates, visits, reports) extends the Affiliate_WP_Export class.
  *
  * @package     AffiliateWP
  * @subpackage  Admin/Export

@@ -553,7 +553,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	 * @return string (Maybe) filtered pagination link.
 	 */
 	public function strip_referral_from_paged_urls( $link ) {
-		if ( ! is_shop() && ! is_paged() ) {
+		if ( ( ! is_shop() && ! is_paged() ) || is_product_category() ) {
 			return $link;
 		}
 

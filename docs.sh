@@ -97,7 +97,9 @@ affwp_docs_convert_to_markdown() {
 
 affwp_docs_delete_html() {
 	echo "Deleting html files..."
-	rm -rf docs/*.html ** echo "Done."
+	#rm -rf docs/*.html ** echo "Done."
+	find . -name "*.html" -type f -delete
+
 }
 
 # Upload docs to Helpscout.

@@ -58,6 +58,7 @@ function affwp_get_currencies() {
 		'GBP' => __( 'Pounds Sterling', 'affiliate-wp' ),
 		'RON' => __( 'Romanian Leu', 'affiliate-wp' ),
 		'RUB' => __( 'Russian Ruble', 'affiliate-wp' ),
+		'SAR' => __( 'Saudi Arabian Riyal', 'affiliate-wp' ),
 		'SGD' => __( 'Singapore Dollar', 'affiliate-wp' ),
 		'ZAR' => __( 'South African Rand', 'affiliate-wp' ),
 		'KRW' => __( 'South Korean Won', 'affiliate-wp' ),

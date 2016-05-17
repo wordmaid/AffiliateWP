@@ -547,13 +547,14 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	 * Strips pretty referral bits from pagination links on the Shop page.
 	 *
 	 * @since 1.8
+	 * @since 1.8.1 Skipped for product taxonomies and searches
 	 * @access public
 	 *
 	 * @param string $link Pagination link.
 	 * @return string (Maybe) filtered pagination link.
 	 */
 	public function strip_referral_from_paged_urls( $link ) {
-		if ( ( ! is_shop() && ! is_paged() ) || is_product_category() || is_product_tag() ) {
+		if ( ( ! is_shop() && ! is_paged() ) || is_product_taxonomy() || is_search() ) {
 			return $link;
 		}
 

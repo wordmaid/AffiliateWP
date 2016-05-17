@@ -4,7 +4,7 @@
 
 
 # AffiliateWP docs generator variables
-AFFWP_VERSION=$(grep " * Version: " affiliate-wp.php)
+AFFWP_VERSION="1.9"
 AFFWP_DOCS_VERSION="0.1"
 AFFWP_DOCS_BASE_URL="https://docs.affiliatewp.com/collection/developers"
 
@@ -64,7 +64,7 @@ affwp_docs_generate_html() {
 		echo "Creating /docs directory..."
 		mkdir docs && echo "Done."
 		echo "Generating docs...";
-		apigen --quiet
+		apigen generate --config apigen.neon --debug
 	fi
 }
 
@@ -97,8 +97,8 @@ affwp_docs_convert_to_markdown() {
 
 affwp_docs_delete_html() {
 	echo "Deleting html files..."
-	#rm -rf docs/*.html ** echo "Done."
-	find . -name "*.html" -type f -delete
+	# Remove html files
+	# find . -name "*.html" -type f -delete
 
 }
 
@@ -120,7 +120,7 @@ affwp_docs_helpscout() {
 # Please note that documentation should typically only
 # be re-generated for a release.
 affwp_docs_commit() {
-	echo "You'll need to commit yourself for now, as this feature is not complete."
+	echo " You'll need to commit yourself for now, as this feature is not complete."
 }
 
 # Primary AffiliateWP docs generator.
@@ -146,7 +146,7 @@ fi
 if type "figlet" > /dev/null; then
 	# break
 	printf "\n"
-	figlet -l -p -f big "AFFWP DOCS"
+	figlet -lpf cybermedium "AFFWP DOCS"
 	echo "(version" $AFFWP_DOCS_VERSION ")"
 else
 	echo "AFFWP Docs Generator (version" AFFWP_DOCS_VERSION ")"

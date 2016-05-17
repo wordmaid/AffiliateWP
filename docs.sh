@@ -64,7 +64,7 @@ affwp_docs_generate_html() {
 		echo "Creating /docs directory..."
 		mkdir docs && echo "Done."
 		echo "Generating docs...";
-		apigen generate -s includes -d docs --title "AffiliateWP - Developer Documentation" --base-url $AFFWP_DOCS_BASE_URL
+		apigen --quiet
 	fi
 }
 
@@ -132,7 +132,7 @@ affwp_docs() {
 	affwp_docs_delete_html &&
 	affwp_docs_helpscout &&
 	affwp_docs_commit &&
-	echo "Docs complete for AffiliateWP "  AFFWP_VERSION
+	echo "Docs complete for AffiliateWP "  $AFFWP_VERSION
 }
 
 # Check if figlet installed

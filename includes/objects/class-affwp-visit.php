@@ -94,7 +94,7 @@ final class AffWP_Visit extends AffWP_Object {
 	 * @static
 	 * @var string
 	 */
-	public static $object_type = 'visits';
+	public static $object_type = 'visit';
 
 	/**
 	 * Sanitizes a visit object field.

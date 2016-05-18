@@ -94,7 +94,7 @@ final class AffWP_Creative extends AffWP_Object {
 	 * @static
 	 * @var string
 	 */
-	public static $object_type = 'creatives';
+	public static $object_type = 'creative';
 
 	/**
 	 * Sanitizes a creative object field.

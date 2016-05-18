@@ -112,7 +112,7 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @static
 	 * @var string
 	 */
-	public static $object_type = 'affiliates';
+	public static $object_type = 'affiliate';
 
 	/**
 	 * Sanitizes an affiliate object field.

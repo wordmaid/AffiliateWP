@@ -139,7 +139,7 @@ final class AffWP_Referral extends AffWP_Object {
 	 * @static
 	 * @var string
 	 */
-	public static $object_type = 'referrals';
+	public static $object_type = 'referral';
 
 	/**
 	 * Sanitizes a referral object field.

@@ -55,7 +55,7 @@ affwp_docs_generate_html() {
 		chmod +x apigen.phar
 		mv apigen.phar /usr/local/bin/apigen
 		apigen_version=apigen --version
-		echo "Installed" apigen_version " successfully."
+		echo "Installed" $apigen_version " successfully."
 	fi
 
 	# Run if apigen is installed

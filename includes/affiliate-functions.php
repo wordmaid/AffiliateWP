@@ -1217,3 +1217,43 @@ function affwp_get_affiliate_area_page_url( $tab = '' ) {
 	 */
 	return apply_filters( 'affwp_affiliate_area_page_url', $affiliate_area_page_url, $affiliate_area_page_id, $tab );
 }
+
+/**
+ * Retrieves the active Affiliate Area tab slug.
+ *
+ * @since 1.8.1
+ *
+ * @return string Active tab if valid, empty string otherwise.
+ */
+function affwp_get_active_affiliate_area_tab() {
+	$active_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : '';
+
+	/**
+	 * Filters the Affiliate Area tabs list.
+	 *
+	 * @since 1.8.1
+	 *
+	 * @param array $tabs Array of tabs.
+	 */
+	$tabs = apply_filters( 'affwp_affiliate_area_tabs', array(
+		'urls', 'stats', 'graphs', 'referrals',
+		'visits', 'creatives', 'settings'
+	) );
+
+	// If the tab can't be shown, remove it from play.
+	foreach ( $tabs as $index => $tab ) {
+		if ( false === affwp_affiliate_area_show_tab( $tab ) ) {
+			unset( $tabs[ $index ] );
+		}
+	}
+
+	if ( in_array( $active_tab, $tabs ) ) {
+		$active_tab = $active_tab;
+	} elseif ( ! empty( $tabs ) ) {
+		$active_tab = reset( $tabs );
+	} else {
+		$active_tab = '';
+	}
+
+	return $active_tab;
+}

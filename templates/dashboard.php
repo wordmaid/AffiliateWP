@@ -1,6 +1,4 @@
-<?php
-$active_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'urls';
-?>
+<?php $active_tab = affwp_get_active_affiliate_area_tab(); ?>
 
 <div id="affwp-affiliate-dashboard">
 
@@ -75,9 +73,11 @@ $active_tab = ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'u
 			<?php do_action( 'affwp_affiliate_dashboard_tabs', affwp_get_affiliate_id(), $active_tab ); ?>
 		</ul>
 
-		<?php if ( affwp_affiliate_area_show_tab( $active_tab ) ) {
+		<?php
+		if ( ! empty( $active_tab ) && affwp_affiliate_area_show_tab( $active_tab ) ) :
 			affiliate_wp()->templates->get_template_part( 'dashboard-tab', $active_tab );
-		} ?>
+		endif;
+		?>
 
 		<?php do_action( 'affwp_affiliate_dashboard_bottom', affwp_get_affiliate_id() ); ?>
 

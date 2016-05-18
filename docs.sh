@@ -84,13 +84,8 @@ affwp_docs_convert_to_markdown() {
 	if type "pandoc" > /dev/null; then
 		# Convert to md
 		echo "Beginning markdown conversion"
-
 		# Loop through each .html file in the /docs directory
-		for i in docs/*
-		do
-			pandoc $i -f html -t markdown -s
-		done
-
+		for file in $(/docs/*.html); do pandoc -f html -t markdown "${file}" -o "${file%html}md"; done
 		echo "Markdown conversion complete."
 	fi
 }

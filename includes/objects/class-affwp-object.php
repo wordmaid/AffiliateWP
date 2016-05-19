@@ -26,15 +26,13 @@ abstract class AffWP_Object {
 			return false;
 		}
 
-		$subClass = get_called_class();
+		$subClass    = get_called_class();
+		$object_type = $subClass::$object_type;
+		$cache_key   = self::get_cache_key( $object_id );
 
-		$cache_key = md5( $subClass::$cache_token . '_' . $object_id );
-
-		$_object = wp_cache_get( $cache_key, $subClass::$object_type );
+		$_object = wp_cache_get( $cache_key, $object_type );
 
 		if ( false === $_object ) {
-			$object_type = $subClass::$object_type;
-
 			$_object = affiliate_wp()->$object_type->get( $object_id );
 
 			if ( ! $_object ) {
@@ -43,7 +41,7 @@ abstract class AffWP_Object {
 
 			$_object = self::fill_vars( $_object );
 
-			wp_cache_add( $cache_key, $subClass::$object_type );
+			wp_cache_add( $cache_key, $object_type );
 		} elseif ( empty( $_object->filled ) ) {
 			$_object = self::fill_vars( $_object );
 		}

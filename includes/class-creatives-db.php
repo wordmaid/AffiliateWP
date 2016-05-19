@@ -5,6 +5,9 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 	/**
 	 * Cache group for queries.
 	 *
+	 * @internal DO NOT change. This is used externally both as a cache group and shortcut
+	 *           for accessing db class instances via affiliate_wp()->{$cache_group}->*.
+	 *
 	 * @since 1.9
 	 * @access public
 	 * @var string

@@ -3,6 +3,15 @@
 class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 	/**
+	 * Cache group for queries.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public $cache_group = 'referrals';
+
+	/**
 	 * Get things started
 	 *
 	 * @access  public
@@ -430,7 +439,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		$cache_key = ( true === $count ) ? md5( 'affwp_referrals_count' . serialize( $args ) ) : md5( 'affwp_referrals_' . serialize( $args ) );
 
-		$results = wp_cache_get( $cache_key, 'referrals' );
+		$results = wp_cache_get( $cache_key, $this->cache_group );
 
 		if ( false === $results ) {
 
@@ -450,7 +459,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			}
 
-			wp_cache_set( $cache_key, $results, 'referrals', HOUR_IN_SECONDS );
+			wp_cache_set( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );
 
 		}
 

@@ -3,6 +3,15 @@
 class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 	/**
+	 * Cache group for queries.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public $cache_group = 'affiliates';
+
+	/**
 	 * Get things started
 	 *
 	 * @access  public
@@ -286,7 +295,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 		$cache_key = ( true === $count ) ? md5( 'affwp_affiliates_count' . serialize( $args ) ) : md5( 'affwp_affiliates_' . serialize( $args ) );
 
-		$results = wp_cache_get( $cache_key, 'affiliates' );
+		$results = wp_cache_get( $cache_key, $this->cache_group );
 
 		if ( false === $results ) {
 
@@ -306,7 +315,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 			}
 
-			wp_cache_set( $cache_key, $results, 'affiliates', HOUR_IN_SECONDS );
+			wp_cache_set( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );
 
 		}
 

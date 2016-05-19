@@ -178,13 +178,25 @@ abstract class Affiliate_WP_DB {
 		$data_keys = array_keys( $data );
 		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
 
-		$wpdb->insert( $this->table_name, $data, $column_formats );
+		$inserted = $wpdb->insert( $this->table_name, $data, $column_formats );
 
-		wp_cache_flush();
+		if ( ! $inserted ) {
+			return false;
+		}
 
-		do_action( 'affwp_post_insert_' . $type, $wpdb->insert_id, $data );
+		$object = $this->get_core_object( $wpdb->insert_id, $this->query_object_type );
 
-		return $wpdb->insert_id;
+		affwp_clean_item_cache( $object, $this->query_object_type );
+
+		/**
+		 * Fires immediately after an item has been created in the database.
+		 *
+		 * @param int   $object_id Object ID.
+		 * @param array $data      Array of object data.
+		 */
+		do_action( 'affwp_post_insert_' . $type, $object->ID, $data );
+
+		return $object->ID;
 	}
 
 	/**

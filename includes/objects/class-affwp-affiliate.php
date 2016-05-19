@@ -12,6 +12,15 @@ final class AffWP_Affiliate extends AffWP_Object {
 	public $affiliate_id = 0;
 
 	/**
+	 * Object ID (alias for affiliate_id).
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var int
+	 */
+	public $ID = 0;
+
+	/**
 	 * Affiliate user ID.
 	 *
 	 * @since 1.9
@@ -126,7 +135,7 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @return mixed Sanitized field value.
 	 */
 	public static function sanitize_field( $field, $value ) {
-		if ( in_array( $field, array( 'affiliate_id', 'user_id', 'referrals', 'visits' ) ) ) {
+		if ( in_array( $field, array( 'affiliate_id', 'user_id', 'referrals', 'visits', 'ID' ) ) ) {
 			$value = (int) $value;
 		}
 
@@ -148,4 +157,21 @@ final class AffWP_Affiliate extends AffWP_Object {
 
 		return parent::get_instance( $object_id );
 	}
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param AffWP_Affiliate $affiliate Affiliate object.
+	 */
+	public function __construct( $affiliate ) {
+		parent::__construct( $affiliate );
+
+		$primary_key = affiliate_wp()->affiliates->primary_key;
+
+		$this->ID = $this->{$primary_key};
+	}
+
 }

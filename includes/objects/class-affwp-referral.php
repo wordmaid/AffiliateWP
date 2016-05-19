@@ -12,6 +12,15 @@ final class AffWP_Referral extends AffWP_Object {
 	public $referral_id = 0;
 
 	/**
+	 * Object ID (alias for referral_id).
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var int
+	 */
+	public $ID = 0;
+
+	/**
 	 * Affiliate ID.
 	 *
 	 * @since 1.9
@@ -153,7 +162,7 @@ final class AffWP_Referral extends AffWP_Object {
 	 * @return mixed Sanitized field value.
 	 */
 	public static function sanitize_field( $field, $value ) {
-		if ( in_array( $field, array( 'referral_id', 'affiliate_id', 'visit_id' ) ) ) {
+		if ( in_array( $field, array( 'referral_id', 'affiliate_id', 'visit_id', 'ID' ) ) ) {
 			$value = (int) $value;
 		}
 		return $value;
@@ -174,4 +183,21 @@ final class AffWP_Referral extends AffWP_Object {
 
 		return parent::get_instance( $object_id );
 	}
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param AffWP_Referral $referral Referral object.
+	 */
+	public function __construct( $referral ) {
+		parent::__construct( $referral );
+
+		$primary_key = affiliate_wp()->referrals->primary_key;
+
+		$this->ID = $this->{$primary_key};
+	}
+
 }

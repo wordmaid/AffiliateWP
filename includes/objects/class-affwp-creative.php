@@ -12,6 +12,15 @@ final class AffWP_Creative extends AffWP_Object {
 	public $creative_id = 0;
 
 	/**
+	 * Object ID (alias for creative_id).
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var int
+	 */
+	public $ID = 0;
+
+	/**
 	 * Name of the creative.
 	 *
 	 * @since 1.9
@@ -108,7 +117,7 @@ final class AffWP_Creative extends AffWP_Object {
 	 * @return mixed Sanitized field value.
 	 */
 	public static function sanitize_field( $field, $value ) {
-		if ( 'creative_id' === $field ) {
+		if ( in_array( $field, array( 'creative_id', 'ID' ) ) ) {
 			$value = (int) $value;
 		}
 		return $value;
@@ -129,4 +138,21 @@ final class AffWP_Creative extends AffWP_Object {
 
 		return parent::get_instance( $object_id );
 	}
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param AffWP_Creative $creative Creative object.
+	 */
+	public function __construct( $creative ) {
+		parent::__construct( $creative );
+
+		$primary_key = affiliate_wp()->creatives->primary_key;
+
+		$this->ID = $this->{$primary_key};
+	}
+
 }

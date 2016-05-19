@@ -15,6 +15,15 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 	public $cache_group = 'creatives';
 
 	/**
+	 * Object type to query for.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public $query_object_type = 'AffWP_Creative';
+
+	/**
 	 * Get things started
 	 *
 	 * @access  public
@@ -44,8 +53,8 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 	 * @param int|object|AffWP_Creative $creative Creative ID or object.
 	 * @return AffWP_Creative|null Creative object, null otherwise.
 	 */
-	public function get_creative( $creative ) {
-		return $this->get_core_object( $creative, 'AffWP_Creative' );
+	public function get_object( $creative ) {
+		return $this->get_core_object( $creative, $this->query_object_type );
 	}
 
 	/**

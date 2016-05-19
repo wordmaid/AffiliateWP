@@ -14,6 +14,15 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 	 */
 	public $cache_group = 'visits';
 
+	/**
+	 * Object type to query for.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public $query_object_type = 'AffWP_Visit';
+
 	public function __construct() {
 		global $wpdb;
 
@@ -38,8 +47,8 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 	 * @param int|object|AffWP_Visit $visit Visit ID or object.
 	 * @return AffWP_Visit|null Visit object, null otherwise.
 	 */
-	public function get_visit( $visit ) {
-		return $this->get_core_object( $visit, 'AffWP_Visit' );
+	public function get_object( $visit ) {
+		return $this->get_core_object( $visit, $this->query_object_type );
 	}
 
 	public function get_columns() {

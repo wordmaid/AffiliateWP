@@ -15,6 +15,15 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	public $cache_group = 'affiliates';
 
 	/**
+	 * Object type to query for.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public $query_object_type = 'AffWP_Affiliate';
+
+	/**
 	 * Get things started
 	 *
 	 * @access  public
@@ -44,8 +53,8 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 * @param int|object|AffWP_Affiliate $affiliate Affiliate ID or object.
 	 * @return AffWP_Affiliate|null Affiliate object, null otherwise.
 	 */
-	public function get_affiliate( $affiliate ) {
-		return $this->get_core_object( $affiliate, 'AffWP_Affiliate' );
+	public function get_object( $affiliate ) {
+		return $this->get_core_object( $affiliate, $this->query_object_type );
 	}
 
 	/**

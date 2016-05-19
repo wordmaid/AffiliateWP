@@ -15,6 +15,15 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	public $cache_group = 'referrals';
 
 	/**
+	 * Object type to query for.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public $query_object_type = 'AffWP_Referral';
+
+	/**
 	 * Get things started
 	 *
 	 * @access  public
@@ -46,8 +55,8 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 * @param int|object|AffWP_Referral $referral Referral ID or object.
 	 * @return AffWP_Referral|null Referral object, null otherwise.
 	 */
-	public function get_referral( $referral ) {
-		return $this->get_core_object( $referral, 'AffWP_Referral' );
+	public function get_object( $referral ) {
+		return $this->get_core_object( $referral, $this->query_object_type );
 	}
 
 	/**

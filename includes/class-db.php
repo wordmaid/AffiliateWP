@@ -92,6 +92,20 @@ abstract class Affiliate_WP_DB {
 	}
 
 	/**
+	 * Retrieves an object from an ID.
+	 *
+	 * Sub-classes must override this method and supply context.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @abstract
+	 *
+	 * @param int $object_id Object ID.
+	 * @return mixed|false Object or false if no object could be retrieved.
+	 */
+	abstract public function get_object( $object_id );
+
+	/**
 	 * Retrieves a value based on column name and row ID.
 	 *
 	 * @access public
@@ -240,11 +254,13 @@ abstract class Affiliate_WP_DB {
 		if( empty( $row_id ) )
 			return false;
 
-		if ( false === $wpdb->query( $wpdb->prepare( "DELETE FROM $this->table_name WHERE $this->primary_key = %d", $row_id ) ) ) {
+		$object = $this->get_object( $row_id );
+
+		if ( false === $wpdb->query( $wpdb->prepare( "DELETE FROM $this->table_name WHERE $this->primary_key = %d", $object->ID ) ) ) {
 			return false;
 		}
 
-		wp_cache_flush();
+		affwp_clean_item_cache( $object );
 
 		return true;
 	}

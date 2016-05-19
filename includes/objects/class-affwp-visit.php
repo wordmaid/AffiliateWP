@@ -114,4 +114,17 @@ final class AffWP_Visit extends AffWP_Object {
 		return $value;
 	}
 
+	/**
+	 * Constructor.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param mixed $object Object to populate members for.
+	 */
+	public function __construct( $object ) {
+		parent::__construct( $object );
+
+		self::$object_group = affiliate_wp()->visits->cache_group;
+	}
 }

@@ -12,6 +12,18 @@ abstract class AffWP_Object {
 	protected $filled = null;
 
 	/**
+	 * Object group.
+	 *
+	 * Should be initialized in extending class constructors.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @static
+	 * @var string
+	 */
+	public static $object_group;
+
+	/**
 	 * Retrieves the object instance.
 	 *
 	 * @since 1.9

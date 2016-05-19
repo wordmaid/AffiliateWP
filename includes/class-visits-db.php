@@ -225,7 +225,14 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		$args['orderby'] = $orderby;
 		$args['order']   = $order;
 
-		$cache_key = ( true === $count ) ? md5( 'affwp_visits_count' . serialize( $args ) ) : md5( 'affwp_visits_' . serialize( $args ) );
+		$key = ( true === $count ) ? md5( 'affwp_visits_count' . serialize( $args ) ) : md5( 'affwp_visits_' . serialize( $args ) );
+
+		$last_changed = wp_cache_get( 'last_changed', $this->cache_group );
+		if ( ! $last_changed ) {
+			wp_cache_set( 'last_changed', microtime(), $this->cache_group );
+		}
+
+		$cache_key = "{$key}:{$last_changed}";
 
 		$results = wp_cache_get( $cache_key, $this->cache_group );
 
@@ -246,10 +253,9 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 				);
 
 			}
-
-			wp_cache_set( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );
-
 		}
+
+		wp_cache_add( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );
 
 		return $results;
 

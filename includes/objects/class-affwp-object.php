@@ -51,6 +51,22 @@ abstract class AffWP_Object {
 	}
 
 	/**
+	 * Retrieves the built cache key for the given single object.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @static
+	 *
+	 * @param int $object_id Object ID.
+	 * @return string Cache key for the object type and ID.
+	 */
+	public static function get_cache_key( $object_id ) {
+		$subClass = get_called_class();
+
+		return md5( $subClass::$cache_token . '_' . $object_id );
+	}
+
+	/**
 	 * Object constructor.
 	 *
 	 * @since 1.9

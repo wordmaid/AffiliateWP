@@ -108,6 +108,81 @@ abstract class AffWP_Object {
 	}
 
 	/**
+	 * Sets a property.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @see set()
+	 *
+	 * @param string $key   Property name.
+	 * @param mixed  $value Property value.
+	 */
+	public function __set( $key, $value ) {
+		$this->set( $key, $value );
+	}
+
+	/**
+	 * Sets an object property value and optionally save.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param string $key   Property name.
+	 * @param mixed  $value Property value.
+	 * @param bool   $save  Optional. Whether to save the new value in the database.
+	 * @return int|false The object ID on success, false otherwise.
+	 */
+	public function set( $key, $value, $save = false ) {
+		if ( ! __isset( $key ) ) {
+			return false;
+		}
+
+		$this->$key = static::sanitize_field( $key, $value );
+
+		if ( true === $save ) {
+			return $this->save();
+		} else {
+			return $this->ID;
+		}
+	}
+
+	/**
+	 * Saves an object with current property values.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @return int|false The object ID on success, false otherwise.
+	 */
+	public function save() {
+		$Sub_Class    = get_called_class();
+		$object_type  = $Sub_Class::$object_type;
+		$object_group = $Sub_Class::$object_group;
+
+		$updated = affiliate_wp()->{$object_group}->update( $this->ID, $this->to_array(), '', $object_type );
+
+		if ( $updated ) {
+			return $this->ID;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Converts the given object to an array.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param mixed $object Object.
+	 * @return array Array version of the given object.
+	 */
+	public function to_array() {
+		return get_object_vars( $this );
+	}
+
+	/**
 	 * Fills object members.
 	 *
 	 * @since 1.9

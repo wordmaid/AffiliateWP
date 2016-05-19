@@ -251,10 +251,10 @@ abstract class Affiliate_WP_DB {
 
 		// Row ID must be positive integer
 		$row_id = absint( $row_id );
-		if( empty( $row_id ) )
-			return false;
+		$object = $this->get_core_object( $row_id, $this->query_object_type );
 
-		$object = $this->get_object( $row_id );
+		if ( ! $object )
+			return false;
 
 		if ( false === $wpdb->query( $wpdb->prepare( "DELETE FROM $this->table_name WHERE $this->primary_key = %d", $object->ID ) ) ) {
 			return false;

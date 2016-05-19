@@ -578,7 +578,7 @@ function affwp_clean_item_cache( $object, $type ) {
 		return false;
 	}
 
-	$Object_Class       = get_class( $object );
+	$Object_Class      = get_class( $object );
 	$cache_key         = $Object_Class::get_cache_key( $object->ID );
 	$cache_group       = $Object_Class::$object_type;
 	$query_cache_group = $Object_Class::$object_group;

@@ -14,7 +14,7 @@ abstract class AffWP_Object {
 	/**
 	 * Object group.
 	 *
-	 * Should be initialized in extending class constructors.
+	 * Should be initialized in extending class versions of get_instance().
 	 *
 	 * @since 1.9
 	 * @access public

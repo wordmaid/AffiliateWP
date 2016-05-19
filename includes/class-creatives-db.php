@@ -200,11 +200,9 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 
 		$args = wp_parse_args( $data, $defaults );
 
-		$add  = $this->insert( $args, 'creative' );
+		$add = $this->insert( $args, 'creative' );
 
 		if ( $add ) {
-			wp_cache_flush();
-
 			do_action( 'affwp_insert_creative', $add );
 			return $add;
 		}

@@ -38,10 +38,10 @@ abstract class AffWP_Object {
 			return false;
 		}
 
-		$subClass     = get_called_class();
+		$Sub_Class    = get_called_class();
 		$cache_key    = self::get_cache_key( $object_id );
-		$cache_group  = $subClass::$object_type;
-		$object_group = $subClass::$object_group;
+		$cache_group  = $Sub_Class::$object_type;
+		$object_group = $Sub_Class::$object_group;
 
 		$_object = wp_cache_get( $cache_key, $cache_group );
 
@@ -58,7 +58,7 @@ abstract class AffWP_Object {
 		} elseif ( empty( $_object->filled ) ) {
 			$_object = self::fill_vars( $_object );
 		}
-		return new $subClass( $_object );
+		return new $Sub_Class( $_object );
 	}
 
 	/**
@@ -72,9 +72,9 @@ abstract class AffWP_Object {
 	 * @return string Cache key for the object type and ID.
 	 */
 	public static function get_cache_key( $object_id ) {
-		$subClass = get_called_class();
+		$Sub_Class = get_called_class();
 
-		return md5( $subClass::$cache_token . '_' . $object_id );
+		return md5( $Sub_Class::$cache_token . '_' . $object_id );
 	}
 
 	/**

@@ -216,8 +216,12 @@ abstract class Affiliate_WP_DB {
 
 		// Row ID must be positive integer
 		$row_id = absint( $row_id );
-		if( empty( $row_id ) )
+
+		$object = $this->get_core_object( $row_id, $this->query_object_type );
+
+		if ( ! $object ) {
 			return false;
+		}
 
 		if( empty( $where ) ) {
 			$where = $this->primary_key;
@@ -236,12 +240,17 @@ abstract class Affiliate_WP_DB {
 		$data_keys = array_keys( $data );
 		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
 
-		if ( false === $wpdb->update( $this->table_name, $data, array( $where => $row_id ), $column_formats ) ) {
+		if ( false === $wpdb->update( $this->table_name, $data, array( $where => $object->ID ), $column_formats ) ) {
 			return false;
 		}
 
-		wp_cache_flush();
+		affwp_clean_item_cache( $object );
 
+		/**
+		 * Fires immediately after an item has been successfully updated.
+		 *
+		 * @param array $data Array of item data.
+		 */
 		do_action( 'affwp_post_update_' . $type, $data );
 		
 		return true;

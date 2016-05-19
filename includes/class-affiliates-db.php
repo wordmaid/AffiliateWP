@@ -298,7 +298,12 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 		$cache_key = ( true === $count ) ? md5( 'affwp_affiliates_count' . serialize( $args ) ) : md5( 'affwp_affiliates_' . serialize( $args ) );
 
-		$results = wp_cache_get( $cache_key, $this->cache_group );
+		$last_changed = wp_cache_get( 'last_changed', $this->cache_group );
+		if ( ! $last_changed ) {
+			wp_cache_set( 'last_changed', microtime() );
+		}
+
+		$results = wp_cache_get( "{$cache_key}:{$last_changed}", $this->cache_group );
 
 		if ( false === $results ) {
 

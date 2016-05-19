@@ -3,6 +3,15 @@
 class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 
 	/**
+	 * Object type to query for.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public $query_object_type = null;
+
+	/**
 	 * Setup our table name, primary key, and version
 	 *
 	 * This is a read-only VIEW of the visits table

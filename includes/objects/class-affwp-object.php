@@ -132,7 +132,7 @@ abstract class AffWP_Object {
 	 * @return int|false The object ID on success, false otherwise.
 	 */
 	public function set( $key, $value, $save = false ) {
-		if ( ! __isset( $key ) ) {
+		if ( ! isset( $key ) ) {
 			return false;
 		}
 

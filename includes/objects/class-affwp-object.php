@@ -38,14 +38,15 @@ abstract class AffWP_Object {
 			return false;
 		}
 
-		$subClass    = get_called_class();
-		$object_type = $subClass::$object_type;
-		$cache_key   = self::get_cache_key( $object_id );
+		$subClass     = get_called_class();
+		$cache_key    = self::get_cache_key( $object_id );
+		$cache_group  = $subClass::$object_type;
+		$object_group = $subClass::$object_group;
 
-		$_object = wp_cache_get( $cache_key, $object_type );
+		$_object = wp_cache_get( $cache_key, $cache_group );
 
 		if ( false === $_object ) {
-			$_object = affiliate_wp()->$object_type->get( $object_id );
+			$_object = affiliate_wp()->$object_group->get( $object_id );
 
 			if ( ! $_object ) {
 				return false;
@@ -53,7 +54,7 @@ abstract class AffWP_Object {
 
 			$_object = self::fill_vars( $_object );
 
-			wp_cache_add( $cache_key, $object_type );
+			wp_cache_add( $cache_key, $cache_group );
 		} elseif ( empty( $_object->filled ) ) {
 			$_object = self::fill_vars( $_object );
 		}

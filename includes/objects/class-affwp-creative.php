@@ -115,16 +115,18 @@ final class AffWP_Creative extends AffWP_Object {
 	}
 
 	/**
-	 * Constructor.
+	 * Retrieves the object instance.
 	 *
 	 * @since 1.9
 	 * @access public
+	 * @static
 	 *
-	 * @param mixed $object Object to populate members for.
+	 * @param int $object Object ID.
+	 * @return object|false Object instance or false.
 	 */
-	public function __construct( $object ) {
-		parent::__construct( $object );
-
+	public static function get_instance( $object_id ) {
 		self::$object_group = affiliate_wp()->creatives->cache_group;
+
+		return parent::get_instance( $object_id );
 	}
 }

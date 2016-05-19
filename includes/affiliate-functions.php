@@ -190,7 +190,7 @@ function affwp_get_affiliate( $affiliate = null ) {
 	$affiliate = wp_cache_get( $cache_key, 'affiliates' );
 
 	if ( false === $affiliate ) {
-		$affiliate = affiliate_wp()->affiliates->get_affiliate( $affiliate_id );
+		$affiliate = affiliate_wp()->affiliates->get_object( $affiliate_id );
 	}
 
 	return $affiliate;

@@ -46,7 +46,7 @@ abstract class AffWP_Object {
 		$_object = wp_cache_get( $cache_key, $cache_group );
 
 		if ( false === $_object ) {
-			$_object = affiliate_wp()->$object_group->get( $object_id );
+			$_object = affiliate_wp()->{$object_group}->get( $object_id );
 
 			if ( ! $_object ) {
 				return false;

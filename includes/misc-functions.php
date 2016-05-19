@@ -578,10 +578,10 @@ function affwp_clean_item_cache( $object, $type ) {
 		return false;
 	}
 
-	$objectClass       = get_class( $object );
-	$cache_key         = $objectClass::get_cache_key( $object->ID );
-	$cache_group       = $objectClass::$object_type;
-	$query_cache_group = $objectClass::$object_group;
+	$Object_Class       = get_class( $object );
+	$cache_key         = $Object_Class::get_cache_key( $object->ID );
+	$cache_group       = $Object_Class::$object_type;
+	$query_cache_group = $Object_Class::$object_group;
 
 	// Individual object.
 	wp_cache_delete( $cache_key, $cache_group );

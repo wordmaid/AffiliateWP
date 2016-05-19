@@ -97,13 +97,11 @@ abstract class AffWP_Object {
 	 * @access public
 	 *
 	 * @param string $key Property to retrieve a value for.
-	 * @return mixed If `$key` is 'ID', uses the primary_key to get the row ID. Otherwise, the value of the key.
+	 * @return mixed Otherwise, the value of the property if set.
 	 */
 	public function __get( $key ) {
-		if ( 'ID' === $key ) {
-			return $this->{$this->primary_key};
-		} elseif ( isset( $this->$key ) ) {
-			return $this->$key;
+		if ( isset( $this->{$key} ) ) {
+			return $this->{$key};
 		}
 	}
 

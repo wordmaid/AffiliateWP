@@ -418,7 +418,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 		$statuses = affwp_get_affiliate_status_labels();
 
 		if ( ! empty( $statuses ) ) {
-			$value = sprintf( '<select id="affiliate-status" data-affiliate_id="%1$s">', $affiliate->affiliate_id );
+			$value = sprintf( '<select id="affiliate-status" data-affiliate="%1$s">', $affiliate->affiliate_id );
 
 			foreach ( $statuses as $status => $label ) {
 				$value .= sprintf( '<option value="%1$s" %2$s>%3$s</option>',

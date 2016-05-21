@@ -16,7 +16,7 @@ function affwp_get_creative( $creative ) {
 		return false;
 	}
 
-	return affiliate_wp()->creatives->get( $creative_id );
+	return affiliate_wp()->creatives->get_object( $creative_id );
 }
 
 /**

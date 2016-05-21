@@ -92,6 +92,20 @@ abstract class Affiliate_WP_DB {
 	}
 
 	/**
+	 * Retrieves an object from an ID.
+	 *
+	 * Sub-classes must override this method and supply context.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @abstract
+	 *
+	 * @param int $object_id Object ID.
+	 * @return mixed|false Object or false if no object could be retrieved.
+	 */
+	abstract public function get_object( $object_id );
+
+	/**
 	 * Retrieves a value based on column name and row ID.
 	 *
 	 * @access public
@@ -164,13 +178,25 @@ abstract class Affiliate_WP_DB {
 		$data_keys = array_keys( $data );
 		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
 
-		$wpdb->insert( $this->table_name, $data, $column_formats );
+		$inserted = $wpdb->insert( $this->table_name, $data, $column_formats );
 
-		wp_cache_flush();
+		if ( ! $inserted ) {
+			return false;
+		}
 
-		do_action( 'affwp_post_insert_' . $type, $wpdb->insert_id, $data );
+		$object = $this->get_core_object( $wpdb->insert_id, $this->query_object_type );
 
-		return $wpdb->insert_id;
+		affwp_clean_item_cache( $object, $this->query_object_type );
+
+		/**
+		 * Fires immediately after an item has been created in the database.
+		 *
+		 * @param int   $object_id Object ID.
+		 * @param array $data      Array of object data.
+		 */
+		do_action( 'affwp_post_insert_' . $type, $object->ID, $data );
+
+		return $object->ID;
 	}
 
 	/**
@@ -190,8 +216,12 @@ abstract class Affiliate_WP_DB {
 
 		// Row ID must be positive integer
 		$row_id = absint( $row_id );
-		if( empty( $row_id ) )
+
+		$object = $this->get_core_object( $row_id, $this->query_object_type );
+
+		if ( ! $object ) {
 			return false;
+		}
 
 		if( empty( $where ) ) {
 			$where = $this->primary_key;
@@ -210,12 +240,17 @@ abstract class Affiliate_WP_DB {
 		$data_keys = array_keys( $data );
 		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
 
-		if ( false === $wpdb->update( $this->table_name, $data, array( $where => $row_id ), $column_formats ) ) {
+		if ( false === $wpdb->update( $this->table_name, $data, array( $where => $object->ID ), $column_formats ) ) {
 			return false;
 		}
 
-		wp_cache_flush();
+		affwp_clean_item_cache( $object );
 
+		/**
+		 * Fires immediately after an item has been successfully updated.
+		 *
+		 * @param array $data Array of item data.
+		 */
 		do_action( 'affwp_post_update_' . $type, $data );
 		
 		return true;
@@ -237,16 +272,51 @@ abstract class Affiliate_WP_DB {
 
 		// Row ID must be positive integer
 		$row_id = absint( $row_id );
-		if( empty( $row_id ) )
+		$object = $this->get_core_object( $row_id, $this->query_object_type );
+
+		if ( ! $object )
 			return false;
 
-		if ( false === $wpdb->query( $wpdb->prepare( "DELETE FROM $this->table_name WHERE $this->primary_key = %d", $row_id ) ) ) {
+		if ( false === $wpdb->query( $wpdb->prepare( "DELETE FROM $this->table_name WHERE $this->primary_key = %d", $object->ID ) ) ) {
 			return false;
 		}
 
-		wp_cache_flush();
+		affwp_clean_item_cache( $object );
 
 		return true;
 	}
 
+	/**
+	 * Retrieves a core object instance based on the given type.
+	 *
+	 * @since 1.9
+	 * @access protected
+	 *
+	 * @param object|int $instance Instance or object ID.
+	 * @param string     $class    Object class name.
+	 * @return object|null Object instance, null otherwise.
+	 */
+	protected function get_core_object( $instance, $object_class ) {
+		if ( ! class_exists( $object_class ) ) {
+			return null;
+		}
+
+		if ( $instance instanceof $object_class ) {
+			$_object = $instance;
+		} elseif ( is_object( $instance ) && isset( $instance->{$this->primary_key} ) ) {
+			if ( isset( $object->{$this->primary_key} ) ) {
+				$_object = new $object_class( $instance );
+			} else {
+				$_object = $object_class::get_instance( $instance );
+			}
+		} else {
+			$_object = $object_class::get_instance( $instance );
+		}
+
+		if ( ! $_object ) {
+			return null;
+		}
+
+		return $_object;
+	}
 }

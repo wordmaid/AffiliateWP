@@ -171,11 +171,12 @@ function affwp_get_affiliate_user_id( $affiliate ) {
  * Retrieves the affiliate object
  *
  * @since 1.0
+ * @since 1.9 The `$affiliate` parameter was made optional.
  *
- * @param int|stdClass $affiliate Affiliate ID or object.
- * @return stdClass|false Affiliate object if found, otherwise false.
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default null.
+ * @return AffWP_Affiliate|false Affiliate object if found, otherwise false.
  */
-function affwp_get_affiliate( $affiliate ) {
+function affwp_get_affiliate( $affiliate = null ) {
 
 	if ( is_object( $affiliate ) && isset( $affiliate->affiliate_id ) ) {
 		$affiliate_id = $affiliate->affiliate_id;
@@ -188,10 +189,8 @@ function affwp_get_affiliate( $affiliate ) {
 	$cache_key = md5( 'affwp_get_affiliate' . $affiliate_id );
 	$affiliate = wp_cache_get( $cache_key, 'affiliates' );
 
-	if( false === $affiliate ) {
-
-		$affiliate = affiliate_wp()->affiliates->get( $affiliate_id );
-
+	if ( false === $affiliate ) {
+		$affiliate = affiliate_wp()->affiliates->get_object( $affiliate_id );
 	}
 
 	return $affiliate;
@@ -947,13 +946,14 @@ function affwp_add_affiliate( $data = array() ) {
 }
 
 /**
- * Updates an affiliate
+ * Updates an affiliate.
  *
  * @since 1.0
- * @return bool
+ *
+ * @param array Affiliate data array.
+ * @return bool True if the affiliate was updated, false otherwise.
  */
 function affwp_update_affiliate( $data = array() ) {
-
 	if ( empty( $data['affiliate_id'] ) ) {
 		return false;
 	}
@@ -993,18 +993,12 @@ function affwp_update_affiliate( $data = array() ) {
 	do_action( 'affwp_updated_affiliate', affwp_get_affiliate( $affiliate ), $updated );
 
 	if ( $updated ) {
-
-		// update affiliate's account email
-		if( wp_update_user( array( 'ID' => $user_id, 'user_email' => $args['account_email'] ) ) ) {
-
+		// Update affiliate's account email
+		if ( wp_update_user( array( 'ID' => $user_id, 'user_email' => $args['account_email'] ) ) ) {
 			return true;
-
 		}
-
 	}
-
 	return false;
-
 }
 
 /**

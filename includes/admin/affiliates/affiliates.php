@@ -406,6 +406,37 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 	}
 
 	/**
+	 * Renders the Status column.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param object $affiliate Affiliate object.
+	 * @return string Markup to render for the Status column.
+	 */
+	public function column_status( $affiliate ) {
+		$statuses = affwp_get_affiliate_status_labels();
+
+		if ( ! empty( $statuses ) ) {
+			$value = sprintf( '<select id="affiliate-status" data-affiliate_id="%1$s">', $affiliate->affiliate_id );
+
+			foreach ( $statuses as $status => $label ) {
+				$value .= sprintf( '<option value="%1$s" %2$s>%3$s</option>',
+					$status,
+					selected( $status, $affiliate->status, false ),
+					$label
+				);
+			}
+
+			$value .= '</select>';
+		} else {
+			$value = $affiliate->status;
+		}
+
+		return $value;
+	}
+
+	/**
 	 * Render the actions column
 	 *
 	 * @access public
@@ -418,14 +449,8 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 		$row_actions['reports'] = '<a href="' . esc_url( add_query_arg( array( 'affwp_notice' => false, 'affiliate_id' => $affiliate->affiliate_id, 'action' => 'view_affiliate' ) ) ) . '">' . __( 'Reports', 'affiliate-wp' ) . '</a>';
 		$row_actions['edit'] = '<a href="' . esc_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'edit_affiliate', 'affiliate_id' => $affiliate->affiliate_id ) ) ) . '">' . __( 'Edit', 'affiliate-wp' ) . '</a>';
 
-		if ( strtolower( $affiliate->status ) == 'active' ) {
-			$row_actions['deactivate'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'affiliate_deactivated', 'action' => 'deactivate', 'affiliate_id' => $affiliate->affiliate_id ) ), 'affiliate-nonce' ) . '">' . __( 'Deactivate', 'affiliate-wp' ) . '</a>';
-		} elseif( strtolower( $affiliate->status ) == 'pending' ) {
+		if ( strtolower( $affiliate->status ) == 'pending' ) {
 			$row_actions['review'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'review_affiliate', 'affiliate_id' => $affiliate->affiliate_id ) ), 'affiliate-nonce' ) . '">' . __( 'Review', 'affiliate-wp' ) . '</a>';
-			$row_actions['accept'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'affiliate_accepted', 'action' => 'accept', 'affiliate_id' => $affiliate->affiliate_id ) ), 'affiliate-nonce' ) . '">' . __( 'Accept', 'affiliate-wp' ) . '</a>';
-			$row_actions['reject'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'affiliate_rejected', 'action' => 'reject', 'affiliate_id' => $affiliate->affiliate_id ) ), 'affiliate-nonce' ) . '">' . __( 'Reject', 'affiliate-wp' ) . '</a>';
-		} else {
-			$row_actions['activate'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'affiliate_activated', 'action' => 'activate', 'affiliate_id' => $affiliate->affiliate_id ) ), 'affiliate-nonce' ) . '">' . __( 'Activate', 'affiliate-wp' ) . '</a>';
 		}
 
 		$row_actions['delete'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'action' => 'delete', 'affiliate_id' => $affiliate->affiliate_id, 'affwp_notice' => false ) ), 'affiliate-nonce' ) . '">' . __( 'Delete', 'affiliate-wp' ) . '</a>';

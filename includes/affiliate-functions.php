@@ -258,24 +258,48 @@ function affwp_get_affiliate_status_label( $affiliate ) {
 	// Get current affiliate status
 	$status       = $affiliate->status;
 
-	// Return translatable string
-	switch( $status ) {
+	$labels = affwp_get_affiliate_status_labels();
 
-		case 'active':
-			$status_label = __( 'Active','affiliate-wp' );
-			break;
-		case 'inactive':
-			$status_label = __( 'Inactive','affiliate-wp' );
-			break;
-		case 'pending':
-			$status_label = __( 'Pending','affiliate-wp' );
-			break;
-		case 'rejected':
-			$status_label = __( 'Rejected','affiliate-wp' );
-			break;
+	if ( array_key_exists( $status, $labels ) ) {
+		$status_label = $labels[ $status ];
 	}
 
-	return apply_filters( 'affwp_get_affiliate_status_label', $status_label );
+	/**
+	 * Filters the status label for a specific affiliate.
+	 *
+	 * @since 1.8
+	 * @since 1.9 The `$affiliate` argument was added
+	 *
+	 * @param string $status_label Status label (translated string).
+	 * @param object $affiliate    Affiliate object.
+	 */
+	return apply_filters( 'affwp_get_affiliate_status_label', $status_label, $affiliate );
+}
+
+/**
+ * Retrieves the list of affiliate status labels.
+ *
+ * @since 1.9
+ *
+ * @return array List of affiliate status labels.
+ */
+function affwp_get_affiliate_status_labels() {
+
+	$labels = array(
+		'active'   => __( 'Active', 'affiliate-wp' ),
+		'inactive' => __( 'Inactive', 'affiliate-wp' ),
+		'pending'  => __( 'Pending', 'affiliate-wp' ),
+		'rejected' => __( 'Rejected', 'affiliate-wp' )
+	);
+
+	/**
+	 * Filters the list of affiliate status labels.
+	 *
+	 * @since 1.9
+	 *
+	 * @param array $labels Status labels.
+	 */
+	return apply_filters( 'affwp_get_affiliate_status_labels', $labels );
 }
 
 /**

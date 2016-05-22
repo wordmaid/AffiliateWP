@@ -210,4 +210,23 @@ jQuery(document).ready(function($) {
 
 	});
 
+	// Status changer.
+	var affiliateStatus = $( '.affiliate-status' );
+
+	affiliateStatus.on( 'change', function( event ) {
+		var	$this = $( this ),
+			status = this.value;
+
+		wp.ajax.post( 'affwp_change_affiliate_status', {
+			nonce: $this.data( 'nonce' ),
+			affiliate: $this.data( 'affiliate' ),
+			status: status
+		} ).done( function( response ) {
+			if ( response.nonce ) {
+				$this.attr( 'data-nonce', response.nonce );
+			}
+		} ).fail( function( response ) {
+			// Do stuff.
+		} );
+	} );
 });

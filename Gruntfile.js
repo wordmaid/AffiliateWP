@@ -6,14 +6,4 @@ module.exports = function( grunt ) {
 			pkg: grunt.file.readJSON( 'package.json' )
 		}
 	} );
-
-	grunt.initConfig( {
-		exec: {
-			make_docs: {
-				cmd: './docs.sh'
-			}
-		}
-	} );
-
-	grunt.registerTask( 'docs', [ 'exec:make_docs' ] );
 };

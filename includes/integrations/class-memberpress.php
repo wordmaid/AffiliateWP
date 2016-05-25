@@ -32,7 +32,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Store a pending referraling when a one-time product is purchased
+	 * Store a pending referral when a one-time product is purchased
 	 *
 	 * @access  public
 	 * @since   1.5

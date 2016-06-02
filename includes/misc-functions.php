@@ -586,6 +586,9 @@ function affwp_clean_item_cache( $object ) {
 	// Individual object.
 	wp_cache_delete( $cache_key, $cache_group );
 
+	// Prime the item cache.
+	$Object_Class::get_instance( $object->ID );
+
 	// last_changed for queries.
 	wp_cache_set( 'last_changed', microtime(), $query_cache_group );
 }

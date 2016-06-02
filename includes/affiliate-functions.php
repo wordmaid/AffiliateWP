@@ -181,6 +181,10 @@ function affwp_get_affiliate_user_id( $affiliate ) {
  */
 function affwp_get_affiliate( $affiliate = null ) {
 
+	if ( empty( $affiliate ) ) {
+		$affiliate = affwp_get_affiliate_id();
+	}
+
 	if ( is_object( $affiliate ) && isset( $affiliate->affiliate_id ) ) {
 		$affiliate_id = $affiliate->affiliate_id;
 	} elseif ( is_numeric( $affiliate ) ) {

@@ -171,7 +171,8 @@ function affwp_get_affiliate_user_id( $affiliate ) {
  * Retrieves the affiliate object
  *
  * @since 1.0
- * @since 1.9 The `$affiliate` parameter was made optional.
+ * @since 1.9 The `$affiliate` parameter was made optional. Affiliates can also now
+ *            be retrieved by username.
  *
  * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default null.
  * @return AffWP_Affiliate|false Affiliate object if found, otherwise false.
@@ -182,6 +183,16 @@ function affwp_get_affiliate( $affiliate = null ) {
 		$affiliate_id = $affiliate->affiliate_id;
 	} elseif ( is_numeric( $affiliate ) ) {
 		$affiliate_id = absint( $affiliate );
+	} elseif ( is_string( $affiliate ) ) {
+		if ( $user = get_user_by( 'login', $affiliate ) ) {
+			if ( $affiliate = affiliate_wp()->affiliates->get_by( 'user_id', $user->ID ) ) {
+				$affiliate_id = $affiliate->affiliate_id;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	} else {
 		return false;
 	}

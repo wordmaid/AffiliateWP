@@ -55,14 +55,6 @@ function affwp_get_affiliate_id( $user_id = 0 ) {
  */
 function affwp_get_affiliate_username( $affiliate_id = 0 ) {
 
-	if ( ! is_user_logged_in() && empty( $affiliate_id ) ) {
-		return false;
-	}
-
-	if ( empty( $affiliate_id ) ) {
-		$affiliate_id = affwp_get_affiliate_id();
-	}
-
 	$affiliate = affwp_get_affiliate( $affiliate_id );
 
 	if ( $affiliate ) {
@@ -96,14 +88,7 @@ function affwp_get_affiliate_username( $affiliate_id = 0 ) {
  */
 function affwp_get_affiliate_name( $affiliate_id = 0 ) {
 
-	if ( empty( $affiliate_id ) ) {
-		$affiliate_id = affwp_get_affiliate_id();
-	}
-
-	$affiliate  = affwp_get_affiliate( $affiliate_id );
-
-	// Return empty if no affiliate.
-	if ( empty( $affiliate ) ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate_id ) ) {
 		return '';
 	}
 
@@ -138,15 +123,14 @@ function affwp_get_affiliate_name( $affiliate_id = 0 ) {
  * If no affiliate ID is given, it will check the currently logged in affiliate
  *
  * @since 1.6
- * @return int
+ * @since 1.9 The `$affiliate` parameter now accepts an Affiliate object.
+ *
+ * @param int|AffWP_Affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @return bool True if the affiliate has an 'active' status, false otherwise.
  */
-function affwp_is_active_affiliate( $affiliate_id = 0 ) {
+function affwp_is_active_affiliate( $affiliate = null ) {
 
-	if ( empty( $affiliate_id ) ) {
-		$affiliate_id = affwp_get_affiliate_id();
-	}
-
-	if ( 'active' == affwp_get_affiliate_status( $affiliate_id ) ) {
+	if ( 'active' == affwp_get_affiliate_status( $affiliate ) ) {
 		return true;
 	}
 
@@ -158,7 +142,7 @@ function affwp_is_active_affiliate( $affiliate_id = 0 ) {
  *
  * @since 1.0
  *
- * @param int|stdClass $affiliate Affiliate ID or object.
+ * @param AffWP_Affiliateint $affiliate Affiliate ID or object.
  * @return int|false Affiliate user ID, otherwise false.
  */
 function affwp_get_affiliate_user_id( $affiliate ) {
@@ -210,9 +194,12 @@ function affwp_get_affiliate( $affiliate = null ) {
  * Retrieves the affiliate's status
  *
  * @since 1.0
- * @return string
+ * @since 1.9 `$affiliate` was made optional.
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @return string|false Affiliate status, false otherwise.
  */
-function affwp_get_affiliate_status( $affiliate ) {
+function affwp_get_affiliate_status( $affiliate = null ) {
 
 	$affiliate = affwp_get_affiliate( $affiliate );
 
@@ -223,23 +210,22 @@ function affwp_get_affiliate_status( $affiliate ) {
  * Sets the status for an affiliate
  *
  * @since 1.0
- * @return bool
+ *
+ * @param int|AffWP_Affiliate $affiliate Affiliate ID or object.
+ * @param string              $status    Optional. New affiliate status. Default empty.
+ * @return bool True if the new status was set, false otherwise.
  */
 function affwp_set_affiliate_status( $affiliate, $status = '' ) {
 
-	if ( is_object( $affiliate ) && isset( $affiliate->affiliate_id ) ) {
-		$affiliate_id = $affiliate->affiliate_id;
-	} elseif ( is_numeric( $affiliate ) ) {
-		$affiliate_id = absint( $affiliate );
-	} else {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
-	$old_status = affiliate_wp()->affiliates->get_column( 'status', $affiliate_id );
+	$old_status = affiliate_wp()->affiliates->get_column( 'status', $affiliate->ID );
 
-	do_action( 'affwp_set_affiliate_status', $affiliate_id, $status, $old_status );
+	do_action( 'affwp_set_affiliate_status', $affiliate->ID, $status, $old_status );
 
-	if ( affiliate_wp()->affiliates->update( $affiliate_id, array( 'status' => $status ), '', 'affiliate' ) ) {
+	if ( affiliate_wp()->affiliates->update( $affiliate->ID, array( 'status' => $status ), '', 'affiliate' ) ) {
 
 		return true;
 	}
@@ -249,23 +235,23 @@ function affwp_set_affiliate_status( $affiliate, $status = '' ) {
 /**
  * Retrieves the affiliate's status and returns a translatable string
  *
- * @since  1.8
- * @param  $affiliate int|object Affiliate ID or object
+ * @since 1.8
+ * @since 1.9 `$affiliate` was made optional.
+ *
+ * @param  int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default current affiliate.
  * @return string $status_label A translatable, filterable label indicating affiliate status
  */
-function affwp_get_affiliate_status_label( $affiliate ) {
+function affwp_get_affiliate_status_label( $affiliate = null ) {
 
-	$affiliate    = affwp_get_affiliate( $affiliate );
-
-	if ( ! $affiliate ) {
-		return;
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		return '';
 	}
 
 	$status       = '';
 	$status_label = '';
 
 	// Get current affiliate status
-	$status       = $affiliate->status;
+	$status = $affiliate->status;
 
 	// Return translatable string
 	switch( $status ) {
@@ -284,19 +270,35 @@ function affwp_get_affiliate_status_label( $affiliate ) {
 			break;
 	}
 
-	return apply_filters( 'affwp_get_affiliate_status_label', $status_label );
+	/**
+	 * Filters the affiliate status label.
+	 *
+	 * @since 1.8
+	 * @since 1.9 The `$affiliate` parameter was added.
+	 *
+	 * @param string          $status_label Localized status label string.
+	 * @param AffWP_Affiliate $affiliate    Affiliate object.
+	 */
+	return apply_filters( 'affwp_get_affiliate_status_label', $status_label, $affiliate );
 }
 
 /**
- * Retrieves the referral rate for an affiliate
+ * Retrieves the referral rate for an affiliate.
  *
- * @since  1.0
- * @param  int     $affiliate_id  The ID of the affiliate we are getting a rate for
- * @param  bool    $formatted     Whether to return a formatted rate with %/currency
- * @param  string  $product_rate  A custom product rate that overrides site/affiliate settings
- * @return string
+ * @since 1.0
+ * @since 1.9 `$affiliate` now accepts an affiliate object.
+ *
+ * @param int|AffWP_Affiliate $affiliate    Optional. Affiliate ID or object. Default is the current affiliate.
+ * @param bool                $formatted    Optional. Whether to return a formatted rate with %/currency.
+ *                                          Default false.
+ * @param string              $product_rate Optional. A custom product rate that overrides site/affiliate settings.
+ *                                          Default empty.
+ * @param string              $reference    Optional. Reference. Default empty.
+ * @return string Affiliate rate, empty string otherwise.
  */
-function affwp_get_affiliate_rate( $affiliate_id = 0, $formatted = false, $product_rate = '', $reference = '' ) {
+function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_rate = '', $reference = '' ) {
+
+	$affiliate = affwp_get_affiliate( $affiliate );
 
 	// Global referral rate setting, fallback to 20
 	$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
@@ -307,26 +309,26 @@ function affwp_get_affiliate_rate( $affiliate_id = 0, $formatted = false, $produ
 	$product_rate = ( null !== $product_rate ) ? $product_rate : $default_rate;
 
 	// Get affiliate-specific referral rate
-	$affiliate_rate = affiliate_wp()->affiliates->get_column( 'rate', $affiliate_id );
+	$affiliate_rate = $affiliate->rate;
 
 	// Get rate in order of priority: Affiliate -> Product -> Global
 	$rate = affwp_abs_number_round( $affiliate_rate );
 	$rate = ( null !== $rate ) ? $rate : $product_rate;
 
-	// Get the referral rate type
-	$type = affwp_get_affiliate_rate_type( $affiliate_id );
+	// Get the referral rate type.
+	$type = affwp_get_affiliate_rate_type( $affiliate->ID );
 
 	// Format percentage rates
 	$rate = ( 'percentage' === $type ) ? $rate / 100 : $rate;
 
 	/**
-	 * Filter the affiliate rate
+	 * Filters the affiliate rate.
 	 *
 	 * @param  string  $rate
 	 * @param  int     $affiliate_id
 	 * @param  string  $type
 	 */
-	$rate = (string) apply_filters( 'affwp_get_affiliate_rate', $rate, $affiliate_id, $type, $reference );
+	$rate = (string) apply_filters( 'affwp_get_affiliate_rate', $rate, $affiliate->ID, $type, $reference );
 
 	// Return rate now if formatting is not required
 	if ( ! $formatted ) {
@@ -355,16 +357,30 @@ function affwp_get_affiliate_rate( $affiliate_id = 0, $formatted = false, $produ
 }
 
 /**
- * Determine if an affiliate has a custom rate
+ * Determines if an affiliate has a custom rate.
  *
  * @since 1.5
- * @return bool
+ * @since 1.9 `$affiliate` can now accept an affiliate object and was made optional.
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @return bool Whether the affiliate has a custom rate, false if the affiliate doesn't exist.
  */
-function affwp_affiliate_has_custom_rate( $affiliate_id = 0 ) {
+function affwp_affiliate_has_custom_rate( $affiliate = 0 ) {
 
-	$ret = (bool) affiliate_wp()->affiliates->get_column( 'rate', $affiliate_id );
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		/** This filter is documented in includes/affiliate-functions.php */
+		return apply_filters( 'affwp_affiliate_has_custom_rate', false, $affiliate );
+	}
 
-	return apply_filters( 'affwp_affiliate_has_custom_rate', $ret, $affiliate_id );
+	/**
+	 * Filters whether the affiliate has a custom rate.
+	 *
+	 * @since 1.5
+	 *
+	 * @param bool $rate         Whether the affiliate has a custom rate.
+	 * @param int  $affiliate_id Affiliate ID.
+	 */
+	return apply_filters( 'affwp_affiliate_has_custom_rate', (bool) $affiliate->rate, $affiliate->ID );
 }
 
 /**
@@ -372,7 +388,11 @@ function affwp_affiliate_has_custom_rate( $affiliate_id = 0 ) {
  *
  * Either "flat" or "percentage"
  *
+ * @todo Figure out the caching discrepancy in using affwp_get_affiliate() instead of direct db queries.
+ *
  * @since 1.1
+ *
+ * @param int $affiliate_id Optional. Affiliate ID. Default 0.
  * @return string
  */
 function affwp_get_affiliate_rate_type( $affiliate_id = 0 ) {
@@ -395,12 +415,22 @@ function affwp_get_affiliate_rate_type( $affiliate_id = 0 ) {
 		$type = 'percentage';
 	}
 
+	/**
+	 * Filters the affiliate rate type.
+	 *
+	 * @since 1.1
+	 *
+	 * @param string $type         Affiliate rate type. Default values will be 'percentage' or 'flat'.
+	 * @param int    $affiliate_id Affiliate ID.
+	 */
 	return apply_filters( 'affwp_get_affiliate_rate_type', $type, $affiliate_id );
 
 }
 
 /**
  * Retrieves an array of allowed affiliate rate types
+ *
+ * @todo Figure out the caching discrepancy in using affwp_get_affiliate() instead of direct db queries.
  *
  * @since 1.1
  * @return array
@@ -413,28 +443,33 @@ function affwp_get_affiliate_rate_types() {
 		'flat'       => sprintf( __( 'Flat %s', 'affiliate-wp' ), affwp_get_currency() )
 	);
 
+	/**
+	 * Filters the available rate types.
+	 *
+	 * @since 1.1
+	 *
+	 * @param array $types Array of key/value pairs of rate types.
+	 */
 	return apply_filters( 'affwp_get_affiliate_rate_types', $types );
 
 }
 
 /**
- * Retrieves the affiliate's email address
+ * Retrieves the affiliate's email address.
  *
- * @since  1.0
- * @param  object|int $affiliate
- * @param  mixed      $default (optional)
- * @return mixed
+ * @since 1.0
+ *
+ * @param int|AffWP_Affiliate $affiliate Affiliate ID or object.
+ * @param string|false        $default   Optional. Default email address. Default false.
+ * @return string|false Affiliate email, value of `$default`, or false.
  */
 function affwp_get_affiliate_email( $affiliate, $default = false ) {
 
-	$affiliate = is_numeric( $affiliate ) ? affwp_get_affiliate( $affiliate ) : $affiliate;
-
-	if ( empty( $affiliate->affiliate_id ) ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return $default;
 	}
 
-	$user_id = affwp_get_affiliate_user_id( $affiliate );
-	$user    = get_userdata( $user_id );
+	$user = get_userdata( $affiliate->user_id );
 
 	if ( empty( $user->user_email ) || ! is_email( $user->user_email ) ) {
 		return $default;
@@ -447,13 +482,14 @@ function affwp_get_affiliate_email( $affiliate, $default = false ) {
 /**
  * Retrieves the affiliate's payment email address
  *
- * @since  1.7
- * @param  object|int $affiliate
- * @return mixed
+ * @since 1.7
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @return string Affiliate payment email if set and valid, if not set, the user email.
  */
-function affwp_get_affiliate_payment_email( $affiliate ) {
+function affwp_get_affiliate_payment_email( $affiliate = 0 ) {
 
-	$affiliate = is_numeric( $affiliate ) ? affwp_get_affiliate( $affiliate ) : $affiliate;
+	$affiliate = affwp_get_affiliate( $affiliate );
 
 	if ( empty( $affiliate->payment_email ) || ! is_email( $affiliate->payment_email ) ) {
 		return affwp_get_affiliate_email( $affiliate );
@@ -464,54 +500,57 @@ function affwp_get_affiliate_payment_email( $affiliate ) {
 }
 
 /**
- * Retrieves the affiliate's user login (username)
+ * Retrieves the affiliate's user login (username).
  *
- * @since  1.6
- * @param  object|int $affiliate
- * @param  mixed      $default (optional)
- * @return mixed
+ * @since 1.6
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @param string|false        $default   Optional. Default username. Default false.
+ * @return string|false Affiliate login, value of `$default`, or false.
  */
 function affwp_get_affiliate_login( $affiliate, $default = false ) {
 
-	$affiliate = is_numeric( $affiliate ) ? affwp_get_affiliate( $affiliate ) : $affiliate;
-
-	if ( empty( $affiliate->affiliate_id ) ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return $default;
 	}
 
-	$user_id = affwp_get_affiliate_user_id( $affiliate );
-	$user    = get_userdata( $user_id );
+	$user = get_userdata( $affiliate->user_id );
 
 	if ( empty( $user->user_login ) ) {
 		return $default;
 	}
 
 	return $user->user_login;
-
 }
 
 /**
- * Deletes an affiliate
+ * Deletes an affiliate.
  *
  * @since 1.0
- * @param $delete_data bool
- * @return bool
+ *
+ * @param int|AffWP_Affiliate $affiliate   Affiliate ID or object.
+ * @param bool                $delete_data Whether to also delete referral and visit data. Default false.
+ * @return bool True if the affiliate (and optionally data) was deleted, false otherwise.
  */
 function affwp_delete_affiliate( $affiliate, $delete_data = false ) {
 
-	if ( is_object( $affiliate ) && isset( $affiliate->affiliate_id ) ) {
-		$affiliate_id = $affiliate->affiliate_id;
-	} elseif ( is_numeric( $affiliate ) ) {
-		$affiliate_id = absint( $affiliate );
-	} else {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
+	$affiliate_id = $affiliate->ID;
+
 	if( $delete_data ) {
 
-		$user_id   = affwp_get_affiliate_user_id( $affiliate_id );
-		$referrals = affiliate_wp()->referrals->get_referrals( array( 'affiliate_id' => $affiliate_id, 'number' => -1 ) );
-		$visits    = affiliate_wp()->visits->get_visits( array( 'affiliate_id' => $affiliate_id, 'number' => -1 ) );
+		$referrals = affiliate_wp()->referrals->get_referrals( array(
+			'affiliate_id' => $affiliate_id,
+			'number'       => -1
+		) );
+
+		$visits = affiliate_wp()->visits->get_visits( array(
+			'affiliate_id' => $affiliate_id,
+			'number'       => -1
+		) );
 
 		foreach( $referrals as $referral ) {
 			affiliate_wp()->referrals->delete( $referral->referral_id );
@@ -521,9 +560,8 @@ function affwp_delete_affiliate( $affiliate, $delete_data = false ) {
 			affiliate_wp()->visits->delete( $visit->visit_id );
 		}
 
-		delete_user_meta( $user_id, 'affwp_referral_notifications' );
-		delete_user_meta( $user_id, 'affwp_promotion_method' );
-
+		delete_user_meta( $affiliate->user_id, 'affwp_referral_notifications' );
+		delete_user_meta( $affiliate->user_id, 'affwp_promotion_method' );
 	}
 
 	$deleted = affiliate_wp()->affiliates->delete( $affiliate_id );
@@ -546,15 +584,11 @@ function affwp_delete_affiliate( $affiliate, $delete_data = false ) {
  */
 function affwp_get_affiliate_earnings( $affiliate, $formatted = false ) {
 
-	if ( is_object( $affiliate ) && isset( $affiliate->affiliate_id ) ) {
-		$affiliate_id = $affiliate->affiliate_id;
-	} elseif ( is_numeric( $affiliate ) ) {
-		$affiliate_id = absint( $affiliate );
-	} else {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
-	$earnings = affiliate_wp()->affiliates->get_column( 'earnings', $affiliate_id );
+	$earnings = affiliate_wp()->affiliates->get_column( 'earnings', $affiliate->ID );
 
 	if ( empty( $earnings ) ) {
 
@@ -579,19 +613,19 @@ function affwp_get_affiliate_earnings( $affiliate, $formatted = false ) {
  */
 function affwp_get_affiliate_unpaid_earnings( $affiliate, $formatted = false ) {
 
-	if ( is_object( $affiliate ) && isset( $affiliate->affiliate_id ) ) {
-		$affiliate_id = $affiliate->affiliate_id;
-	} elseif ( is_numeric( $affiliate ) ) {
-		$affiliate_id = absint( $affiliate );
-	} else {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
-	$referrals = affiliate_wp()->referrals->get_referrals( array( 'affiliate_id' => $affiliate_id, 'status' => 'unpaid', 'number' => -1 ) );
+	$referrals = affiliate_wp()->referrals->get_referrals( array(
+		'affiliate_id' => $affiliate->ID,
+		'status'       => 'unpaid',
+		'number'       => -1
+	) );
+
 	$earnings = 0;
 
 	if ( ! empty( $referrals ) ) {
-
 
 		foreach( $referrals as $referral ) {
 
@@ -610,14 +644,17 @@ function affwp_get_affiliate_unpaid_earnings( $affiliate, $formatted = false ) {
 }
 
 /**
- * Increases an affiliate's total paid earnings by the specified amount
+ * Increases an affiliate's total paid earnings by the specified amount.
  *
  * @since 1.0
- * @return float|bool
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @param string|float        $amount    Optional. Amount to increase the affiliate's earnings. Default empty.
+ * @return float|false The affiliate's updated earnings, false otherwise.
  */
-function affwp_increase_affiliate_earnings( $affiliate_id = 0, $amount = '' ) {
+function affwp_increase_affiliate_earnings( $affiliate = 0, $amount = '' ) {
 
-	if ( empty( $affiliate_id ) ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
@@ -625,10 +662,11 @@ function affwp_increase_affiliate_earnings( $affiliate_id = 0, $amount = '' ) {
 		return false;
 	}
 
-	$earnings = affwp_get_affiliate_earnings( $affiliate_id );
+	$earnings = affwp_get_affiliate_earnings( $affiliate->ID );
 	$earnings += $amount;
 	$earnings = round( $earnings, affwp_get_decimal_count() );
-	if ( affiliate_wp()->affiliates->update( $affiliate_id, array( 'earnings' => $earnings ), '', 'affiliate' ) ) {
+
+	if ( affiliate_wp()->affiliates->update( $affiliate->ID, array( 'earnings' => $earnings ), '', 'affiliate' ) ) {
 		$alltime = get_option( 'affwp_alltime_earnings' );
 		$alltime += $amount;
 		update_option( 'affwp_alltime_earnings', $alltime );
@@ -644,14 +682,17 @@ function affwp_increase_affiliate_earnings( $affiliate_id = 0, $amount = '' ) {
 }
 
 /**
- * Decreases an affiliate's total paid earnings by the specified amount
+ * Decreases an affiliate's total paid earnings by the specified amount.
  *
  * @since 1.0
- * @return float|bool
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @param string|float        $amount    Optional. Amount to decrease the affiliate's earnings. Default empty.
+ * @return float|false The affiliate's updated earnings, false otherwise.
  */
-function affwp_decrease_affiliate_earnings( $affiliate_id = 0, $amount = '' ) {
+function affwp_decrease_affiliate_earnings( $affiliate = 0, $amount = '' ) {
 
-	if ( empty( $affiliate_id ) ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
@@ -659,13 +700,15 @@ function affwp_decrease_affiliate_earnings( $affiliate_id = 0, $amount = '' ) {
 		return false;
 	}
 
-	$earnings = affwp_get_affiliate_earnings( $affiliate_id );
+	$earnings = affwp_get_affiliate_earnings( $affiliate->ID );
 	$earnings -= $amount;
 	$earnings = round( $earnings, affwp_get_decimal_count() );
+
 	if ( $earnings < 0 ) {
 		$earnings = 0;
 	}
-	if ( affiliate_wp()->affiliates->update( $affiliate_id, array( 'earnings' => $earnings ), '', 'affiliate' ) ) {
+
+	if ( affiliate_wp()->affiliates->update( $affiliate->ID, array( 'earnings' => $earnings ), '', 'affiliate' ) ) {
 
 		$alltime = get_option( 'affwp_alltime_earnings' );
 		$alltime -= $amount;
@@ -685,40 +728,42 @@ function affwp_decrease_affiliate_earnings( $affiliate_id = 0, $amount = '' ) {
 }
 
 /**
- * Retrieves the number of paid referrals for an affiliate
+ * Retrieves the number of paid referrals for an affiliate.
  *
  * @since 1.0
- * @return int
+ * @since 1.9 `$affiliate` was made optional.
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @return int|false The affiliate's referral count, false otherwise.
  */
-function affwp_get_affiliate_referral_count( $affiliate ) {
+function affwp_get_affiliate_referral_count( $affiliate = 0 ) {
 
-	if ( is_object( $affiliate ) && isset( $affiliate->affiliate_id ) ) {
-		$affiliate_id = $affiliate->affiliate_id;
-	} elseif ( is_numeric( $affiliate ) ) {
-		$affiliate_id = absint( $affiliate );
-	} else {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
-	return affiliate_wp()->affiliates->get_column( 'referrals', $affiliate_id );
+	return affiliate_wp()->affiliates->get_column( 'referrals', $affiliate->ID );
 }
 
 /**
- * Increases an affiliate's total paid referrals by 1
+ * Increases an affiliate's total paid referrals by 1.
  *
  * @since 1.0
- * @return float|bool
+ * @since 1.9 `$affiliate` can now accept an affiliate object
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @return float|false The updated referral count, otherwise false.
  */
-function affwp_increase_affiliate_referral_count( $affiliate_id = 0 ) {
+function affwp_increase_affiliate_referral_count( $affiliate = 0 ) {
 
-	if ( empty( $affiliate_id ) ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
-	$referrals = affwp_get_affiliate_referral_count( $affiliate_id );
+	$referrals = affwp_get_affiliate_referral_count( $affiliate->ID );
 	$referrals += 1;
 
-	if ( affiliate_wp()->affiliates->update( $affiliate_id, array( 'referrals' => $referrals ), '', 'affiliate' ) ) {
+	if ( affiliate_wp()->affiliates->update( $affiliate->ID, array( 'referrals' => $referrals ), '', 'affiliate' ) ) {
 
 		return $referrals;
 
@@ -731,23 +776,27 @@ function affwp_increase_affiliate_referral_count( $affiliate_id = 0 ) {
 }
 
 /**
- * Decreases an affiliate's total paid referrals by 1
+ * Decreases an affiliate's total paid referrals by 1.
  *
  * @since 1.0
- * @return float|bool
+ * @since 1.9 `$affiliate` can now accept an affiliate object
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @return float|false The updated referral count, otherwise false.
  */
-function affwp_decrease_affiliate_referral_count( $affiliate_id = 0 ) {
+function affwp_decrease_affiliate_referral_count( $affiliate = 0 ) {
 
-	if ( empty( $affiliate_id ) ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
-	$referrals = affwp_get_affiliate_referral_count( $affiliate_id );
+	$referrals = affwp_get_affiliate_referral_count( $affiliate->ID );
 	$referrals -= 1;
 	if ( $referrals < 0 ) {
 		$referrals = 0;
 	}
-	if ( affiliate_wp()->affiliates->update( $affiliate_id, array( 'referrals' => $referrals ), '', 'affiliate' ) ) {
+
+	if ( affiliate_wp()->affiliates->update( $affiliate->ID, array( 'referrals' => $referrals ), '', 'affiliate' ) ) {
 
 		return $referrals;
 
@@ -760,22 +809,20 @@ function affwp_decrease_affiliate_referral_count( $affiliate_id = 0 ) {
 }
 
 /**
- * Retrieves an affiliate's total visit count
+ * Retrieves an affiliate's total visit count.
  *
  * @since 1.0
- * @return int
+ *
+ * @param int|AffWP_Affiliate $affiliate Affiliate ID or object.
+ * @return int|false The new affiliate visit count, otherwise false.
  */
 function affwp_get_affiliate_visit_count( $affiliate ) {
 
-	if ( is_object( $affiliate ) && isset( $affiliate->affiliate_id ) ) {
-		$affiliate_id = $affiliate->affiliate_id;
-	} elseif ( is_numeric( $affiliate ) ) {
-		$affiliate_id = absint( $affiliate );
-	} else {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
-	$visits = affiliate_wp()->affiliates->get_column( 'visits', $affiliate_id );
+	$visits = affiliate_wp()->affiliates->get_column( 'visits', $affiliate->ID );
 
 	if ( $visits < 0 ) {
 		$visits = 0;
@@ -785,21 +832,24 @@ function affwp_get_affiliate_visit_count( $affiliate ) {
 }
 
 /**
- * Increases an affiliate's total visit count by 1
+ * Increases an affiliate's total visit count by 1.
  *
  * @since 1.0
- * @return int
+ * @since 1.9 `$affiliate` can now accept an affiliate object
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @return int|false The new affiliate visit count, otherwise false.
  */
-function affwp_increase_affiliate_visit_count( $affiliate_id = 0 ) {
+function affwp_increase_affiliate_visit_count( $affiliate = 0 ) {
 
-	if ( empty( $affiliate_id ) ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		return false;
 	}
 
-	$visits = affwp_get_affiliate_visit_count( $affiliate_id );
+	$visits = affwp_get_affiliate_visit_count( $affiliate->ID );
 	$visits += 1;
 
-	if ( affiliate_wp()->affiliates->update( $affiliate_id, array( 'visits' => $visits ), '', 'affiliate' ) ) {
+	if ( affiliate_wp()->affiliates->update( $affiliate->ID, array( 'visits' => $visits ), '', 'affiliate' ) ) {
 
 		return $visits;
 

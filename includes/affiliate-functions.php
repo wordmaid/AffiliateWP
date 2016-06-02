@@ -1173,6 +1173,8 @@ function affwp_get_affiliate_referral_url( $args = array() ) {
 		$affiliate = affwp_get_affiliate();
 	}
 
+	$affiliate_id = $affiliate ? $affiliate->ID : 0;
+
 	// get format, username or id
 	$format = isset( $args['format'] ) ? $args['format'] : affwp_get_referral_format();
 
@@ -1201,7 +1203,7 @@ function affwp_get_affiliate_referral_url( $args = array() ) {
 	}
 
 	// the format value, either affiliate's ID or username
-	$format_value = affwp_get_referral_format_value( $format, $affiliate->ID );
+	$format_value = affwp_get_referral_format_value( $format, $affiliate_id );
 
 	$url_parts = parse_url( $base_url );
 

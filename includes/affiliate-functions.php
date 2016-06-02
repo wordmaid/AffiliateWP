@@ -18,7 +18,9 @@ function affwp_is_affiliate( $user_id = 0 ) {
  * If no user ID is given, it will check the currently logged in user
  *
  * @since 1.0
- * @return int
+ *
+ * @param int $user_id Optional. User ID. Default is the ID of the current user.
+ * @return int|false Affiliate ID, or false if the current user isn't logged-in or `$user_id` is empty.
  */
 function affwp_get_affiliate_id( $user_id = 0 ) {
 

@@ -176,7 +176,9 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * Tear down.
 	 */
 	public function tearDown() {
-		affwp_set_affiliate_status( 'active' );
+		foreach ( array( $this->_affiliate_id, $this->_affiliate_id2, $this->_affiliate_id3 ) as $affiliate_id ) {
+			affwp_delete_affiliate( $affiliate_id );
+		}
 	}
 
 	//
@@ -1507,9 +1509,8 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	public function generate_email() {
 		$first_part = rand_str( 5 );
 		$domain     = rand_str( 5 );
-		$tld        = rand_str( 3 );
 
-		return "{$first_part}@{$domain}.{$tld}";
+		return "{$first_part}@{$domain}.dev";
 	}
 
 	/**

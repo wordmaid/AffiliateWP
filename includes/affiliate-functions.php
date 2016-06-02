@@ -203,14 +203,7 @@ function affwp_get_affiliate( $affiliate = null ) {
 		return false;
 	}
 
-	$cache_key = md5( 'affwp_get_affiliate' . $affiliate_id );
-	$affiliate = wp_cache_get( $cache_key, 'affiliates' );
-
-	if ( false === $affiliate ) {
-		$affiliate = affiliate_wp()->affiliates->get_object( $affiliate_id );
-	}
-
-	return $affiliate;
+	return affiliate_wp()->affiliates->get_object( $affiliate_id );
 }
 
 /**

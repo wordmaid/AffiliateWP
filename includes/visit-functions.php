@@ -21,10 +21,24 @@ function affwp_get_visit( $visit ) {
 	return affiliate_wp()->visits->get_object( $visit_id );
 }
 
-function affwp_count_visits( $affiliate_id = 0, $date = array() ) {
+/**
+ * Counts the number of visits logged for a given affiliate.
+ *
+ * @since
+ *
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @param array|string        $date      Optional. Array of date data with 'start' and 'end' key/value pairs,
+ *                                       or a timestamp. Default empty array.
+ * @return int|false Number of visits, otherwise 0|false.
+ */
+function affwp_count_visits( $affiliate = 0, $date = array() ) {
+
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		return 0;
+	}
 
 	$args = array(
-		'affiliate_id' => $affiliate_id,
+		'affiliate_id' => $affiliate->ID,
 	);
 
 	if( ! empty( $date ) ) {

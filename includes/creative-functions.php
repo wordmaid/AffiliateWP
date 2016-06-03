@@ -85,15 +85,11 @@ function affwp_update_creative( $data = array() ) {
  */
 function affwp_delete_creative( $creative ) {
 
-	if ( is_object( $creative ) && isset( $creative->creative_id ) ) {
-		$creative_id = $creative->creative_id;
-	} elseif ( is_numeric( $creative ) ) {
-		$creative_id = absint( $creative );
-	} else {
+	if ( ! $creative = affwp_get_creative( $creative ) ) {
 		return false;
 	}
 
-	return affiliate_wp()->creatives->delete( $creative_id );
+	return affiliate_wp()->creatives->delete( $creative->ID );
 }
 
 /**

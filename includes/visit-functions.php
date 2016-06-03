@@ -57,20 +57,22 @@ function affwp_count_visits( $affiliate = 0, $date = array() ) {
  */
 function affwp_delete_visit( $visit ) {
 
-	if( is_object( $visit ) && isset( $visit->visit_id ) ) {
-		$visit_id = $visit->visit_id;
-	} elseif( is_numeric( $visit ) ) {
-		$visit_id = absint( $visit );
-	} else {
+	if ( ! $visit = affwp_get_visit( $visit ) ) {
 		return false;
 	}
 
-	// Decrease the visit count
-	affwp_decrease_affiliate_visit_count( $visit_id );
+	if ( affiliate_wp()->visits->delete( $visit->ID ) ) {
+		// Decrease the visit count
+		affwp_decrease_affiliate_visit_count( $visit->ID );
 
-	if( affiliate_wp()->visits->delete( $visit_id ) ) {
-
-		do_action( 'affwp_delete_visit', $visit_id );
+		/**
+		 * Fires immediately after a visit has been deleted.
+		 *
+		 * @since 1.2
+		 *
+		 * @param int $visit_id Visit ID.
+		 */
+		do_action( 'affwp_delete_visit', $visit->ID );
 
 		return true;
 

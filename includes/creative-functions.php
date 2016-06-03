@@ -9,7 +9,7 @@
 function affwp_get_creative( $creative ) {
 
 	if ( is_object( $creative ) && isset( $creative->creative_id ) ) {
-		$creative_id = $creative->affiliate_id;
+		$creative_id = $creative->creative_id;
 	} elseif( is_numeric( $creative ) ) {
 		$creative_id = absint( $creative );
 	} else {

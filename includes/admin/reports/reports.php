@@ -16,7 +16,10 @@ include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/screen-options.php
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/reports-functions.php';
 
 // Reports Metaboxes
-include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/metaboxes/class-metabox-overview-referrals.php';
+
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
+
+include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/metaboxes/class-metabox-reports-referrals.php';
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/metaboxes/class-metabox-affiliate-leaderboard.php';
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/metaboxes/class-metabox-references.php';
 

@@ -110,6 +110,57 @@ class Visit_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers affwp_count_visits()
+	 */
+	public function test_count_visits_with_no_affiliate_should_return_zero() {
+		$this->assertSame( 0, affwp_count_visits( null ) );
+	}
+
+	/**
+	 * @covers affwp_count_visits()
+	 */
+	public function test_count_visits_with_an_invalid_affiliate_id_should_return_zero() {
+		$this->assertSame( 0, affwp_count_visits( 0 ) );
+	}
+
+	/**
+	 * @covers affwp_count_visits()
+	 */
+	public function test_count_visits_with_a_valid_affiliate_id_should_return_a_count() {
+		// One visit is created in setUp, add two more.
+		for ( $i = 1; $i <=2; $i ++ ) {
+			affiliate_wp()->visits->add( array(
+				'affiliate_id' => $this->_affiliate_id
+			) );
+		}
+
+		$this->assertSame( 3, affwp_count_visits( $this->_affiliate_id ) );
+	}
+
+	/**
+	 * @covers affwp_count_visits()
+	 */
+	public function test_count_visits_with_an_invalid_affiliate_object_should_return_zero() {
+		$this->assertSame( 0, affwp_count_visits( new stdClass() ) );
+	}
+
+	/**
+	 * @covers affwp_count_visits()
+	 */
+	public function test_count_visits_with_a_valid_affiliate_object_should_return_a_count() {
+		// One visit is created in setUp, add two more.
+		for ( $i = 1; $i <=2; $i ++ ) {
+			affiliate_wp()->visits->add( array(
+				'affiliate_id' => $this->_affiliate_id
+			) );
+		}
+
+		$visit = affwp_get_visit( $this->_visit_id );
+
+		$this->assertSame( 3, affwp_count_visits( $visit ) );
+	}
+
+	/**
 	 * @covers affwp_delete_visit()
 	 */
 	public function test_delete_visit_with_no_visit_should_return_false() {

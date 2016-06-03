@@ -53,21 +53,22 @@ function affwp_add_creative( $data = array() ) {
  */
 function affwp_update_creative( $data = array() ) {
 
-	if ( empty( $data['creative_id'] ) ) {
+	if ( empty( $data['creative_id'] )
+		|| ( ! $creative = affwp_get_creative( $data['creative_id'] ) )
+	) {
 		return false;
 	}
 
-	$args         = array();
-	$creative_id  = absint( $data['creative_id'] );
+	$args = array(
+		'name'        => ! empty( $data['name'] ) ? sanitize_text_field( $data['name'] ) : __( 'Creative', 'affiliate-wp' ),
+		'description' => ! empty( $data['description'] ) ? sanitize_text_field( $data['description'] ) : '',
+		'url'         => ! empty( $data['url'] ) ? esc_url_raw( $data['url'] ) : get_site_url(),
+		'text'        => ! empty( $data['text'] ) ? sanitize_text_field( $data['text'] ) : get_bloginfo( 'name' ),
+		'image'       => ! empty( $data['image'] ) ? sanitize_text_field( $data['image'] ) : '',
+		'status'      => ! empty( $data['status'] ) ? sanitize_text_field( $data['status'] ) : '',
+	);
 
-	$args['name']         = ! empty( $data['name'] ) ? sanitize_text_field( $data['name'] ) : __( 'Creative', 'affiliate-wp' );
-	$args['description']  = ! empty( $data['description'] ) ? sanitize_text_field( $data['description'] ) : '';
-	$args['url']          = ! empty( $data['url'] ) ? esc_url_raw( $data['url'] ) : get_site_url();
-	$args['text']         = ! empty( $data['text'] ) ? sanitize_text_field( $data['text'] ) : get_bloginfo( 'name' );
-	$args['image']        = ! empty( $data['image'] ) ? sanitize_text_field( $data['image'] ) : '';
-	$args['status']       = ! empty( $data['status'] ) ? sanitize_text_field( $data['status'] ) : '';
-
-	if ( affiliate_wp()->creatives->update( $creative_id, $args, '', 'creative' ) ) {
+	if ( affiliate_wp()->creatives->update( $creative->ID, $args, '', 'creative' ) ) {
 		return true;
 	}
 

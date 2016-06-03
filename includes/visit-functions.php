@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * Retrieves a visit object.
+ *
+ * @since 1.9
+ *
+ * @param int|AffWP_Visit $visit Visit ID or object.
+ * @return AffWP_Visit|false Visit object, otherwise false.
+ */
+function affwp_get_visit( $visit ) {
+
+	if ( is_object( $visit ) && isset( $visit->visit_id ) ) {
+		$visit_id = $visit->visit_id;
+	} elseif( is_numeric( $visit ) ) {
+		$visit_id = absint( $visit );
+	} else {
+		return false;
+	}
+
+	return affiliate_wp()->visits->get_object( $visit_id );
+}
+
 function affwp_count_visits( $affiliate_id = 0, $date = array() ) {
 
 	$args = array(

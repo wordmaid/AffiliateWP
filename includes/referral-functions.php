@@ -72,6 +72,10 @@ function affwp_set_referral_status( $referral, $new_status = '' ) {
 		return false;
 	}
 
+	if ( ! $referral ) {
+		return false;
+	}
+
 	$old_status = $referral->status;
 
 	if( $old_status == $new_status ) {

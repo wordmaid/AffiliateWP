@@ -310,6 +310,44 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 	}
 
 	/**
+	 * Updates a visit.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param int   $visit_id Visit ID.
+	 * @param array $data     Optional. Data array. Default empty array.
+	 * @return int|false The visit ID if successfully updated, false otherwise.
+	 */
+	public function update_visit( $visit_id, $data = array() ) {
+		if ( empty( $visit_id ) || ! $visit = $this->get( $visit_id ) ) {
+			return false;
+		}
+		if ( ! empty( $data['url'] ) ) {
+			$data['url'] = affwp_sanitize_visit_url( $data['url'] );
+		}
+		if ( ! empty( $data['campaign'] ) ) {
+			$data['campaign'] = substr( $data['campaign'], 0, 50 );
+		}
+		if ( ! empty( $data['affiliate_id'] ) ) {
+			// If the passed affiliate ID is invalid, ignore the new value.
+			if ( ! affwp_get_affiliate( $data['affiliate_id'] ) ) {
+				$data['affiliate_id'] = $visit->affiliate_id;
+			}
+		}
+		if ( $this->update( $visit_id, $data, '', 'visit' ) ) {
+			$updated_visit = affiliate_wp()->visits->get( $visit_id );
+			// Handle visit counts if the affiliate was changed.
+			if ( $updated_visit->affiliate_id !== $visit->affiliate_id ) {
+				affwp_decrease_affiliate_visit_count( $visit->affiliate_id );
+				affwp_increase_affiliate_visit_count( $updated_visit->affiliate_id );
+			}
+			return $visit_id;
+		}
+		return false;
+	}
+
+	/**
 	 * Creates the visits database table.
 	 *
 	 * @access public

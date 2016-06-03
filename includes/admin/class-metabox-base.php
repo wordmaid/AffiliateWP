@@ -7,7 +7,7 @@
  * @subpackage  Admin/Metaboxes
  * @copyright   Copyright (c) 2016, Pippin Williamson
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.8
+ * @since       1.9
  */
 
 // Exit if accessed directly
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
  * This class may be extended using the example below.
  *
  * @abstract
- * @since  1.8
+ * @since  1.9
  */
 abstract class AffWP_Metabox_Base {
 
@@ -58,7 +58,7 @@ abstract class AffWP_Metabox_Base {
      * @abstract
      * @access  public
      * @var     $meta_box_id The ID of the meta box
-     * @since   1.8
+     * @since   1.9
      */
     public $meta_box_id;
 
@@ -68,7 +68,7 @@ abstract class AffWP_Metabox_Base {
      * @abstract
      * @access  public
      * @var     $meta_box_name The name of the meta box
-     * @since   1.8
+     * @since   1.9
      */
     public $meta_box_name;
 
@@ -79,7 +79,7 @@ abstract class AffWP_Metabox_Base {
      *
      * @access  private
      * @var     $affwp_screen The screen ID of the page on which to display this meta box.
-     * @since   1.8
+     * @since   1.9
      */
     private $affwp_screen = array( 'toplevel_page_affiliate-wp',
                                    'affiliates_page_affiliate-wp-affiliates',
@@ -104,7 +104,7 @@ abstract class AffWP_Metabox_Base {
      *
      * @access  public
      * @var     $context
-     * @since   1.8
+     * @since   1.9
      */
     public $context = 'normal';
 
@@ -113,7 +113,7 @@ abstract class AffWP_Metabox_Base {
      *
      * @access  public
      * @return void
-     * @since   1.8
+     * @since   1.9
      */
     public function __construct() {
         $this->init();
@@ -124,7 +124,7 @@ abstract class AffWP_Metabox_Base {
      *
      * @access  public
      * @return  void
-     * @since   1.8
+     * @since   1.9
      */
     public function init() {
         add_action( 'add_meta_box',     array( $this, 'add_meta_box' ) );
@@ -137,7 +137,7 @@ abstract class AffWP_Metabox_Base {
      *
      * @return  A meta box which will display on the specified AffiliateWP Reports admin page.
      * @uses  add_meta_box
-     * @since   1.8
+     * @since   1.9
      */
     public function add_meta_box() {
         add_meta_box(
@@ -158,7 +158,7 @@ abstract class AffWP_Metabox_Base {
      * the filter would be: affwp_meta_box_my-meta-box-id.
      *
      * @return mixed string The content of the meta box
-     * @since  1.8
+     * @since  1.9
      */
     public function content() {
 

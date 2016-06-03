@@ -82,11 +82,12 @@ function affwp_delete_visit( $visit ) {
 }
 
 /**
- * Sanitize visit URLs
+ * Sanitizes visit a URL.
  *
  * @since 1.7.5
- * @param string $url The URL to sanitize
- * @return string $url The sanitized URL
+ *
+ * @param string $url The URL to sanitize.
+ * @return string $url The sanitized URL.
  */
 function affwp_sanitize_visit_url( $url ) {
 	$original_url = $url;

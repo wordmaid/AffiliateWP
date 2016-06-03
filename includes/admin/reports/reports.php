@@ -15,11 +15,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/screen-options.php';
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/reports-functions.php';
 
-// Meta box related classes
-include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
-include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-metabox-overview-referrals.php';
-include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-metabox-affiliate-leaderboard.php';
-include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-metabox-references.php';
+// Reports Metaboxes
+include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/metaboxes/class-metabox-overview-referrals.php';
+include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/metaboxes/class-metabox-affiliate-leaderboard.php';
+include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/metaboxes/class-metabox-references.php';
 
 function affwp_reports_admin() {
 

@@ -58,6 +58,7 @@ function affwp_get_currencies() {
 		'GBP' => __( 'Pounds Sterling', 'affiliate-wp' ),
 		'RON' => __( 'Romanian Leu', 'affiliate-wp' ),
 		'RUB' => __( 'Russian Ruble', 'affiliate-wp' ),
+		'SAR' => __( 'Saudi Arabian Riyal', 'affiliate-wp' ),
 		'SGD' => __( 'Singapore Dollar', 'affiliate-wp' ),
 		'ZAR' => __( 'South African Rand', 'affiliate-wp' ),
 		'KRW' => __( 'South Korean Won', 'affiliate-wp' ),
@@ -67,6 +68,7 @@ function affwp_get_currencies() {
 		'THB' => __( 'Thai Baht', 'affiliate-wp' ),
 		'TRY' => __( 'Turkish Lira', 'affiliate-wp' ),
 		'AED' => __( 'United Arab Emirates Dirham', 'affiliate-wp' ),
+		'UAH' => __( 'Ukrainian Hryvnia', 'affiliate-wp' ),
 		'VND' => __( 'Vietnamese Dong', 'affiliate-wp' ),
 	);
 
@@ -215,6 +217,9 @@ function affwp_currency_filter( $amount ) {
 			case 'RON' :
 				$formatted = 'lei' . $amount;
 				break;
+			case 'UAH' :
+				$formatted = '&#8372;' . $amount;
+				break;
 			case "JPY" :
 				$formatted = '&yen;' . $amount;
 				break;
@@ -247,6 +252,9 @@ function affwp_currency_filter( $amount ) {
 				break;
 			case 'RON' :
 				$formatted = $amount . 'lei';
+				break;
+			case 'UAH' :
+				$formatted = $amount . '&#8372;';
 				break;
 			case "JPY" :
 				$formatted = $amount . '&yen;';

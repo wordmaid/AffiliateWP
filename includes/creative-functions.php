@@ -93,26 +93,34 @@ function affwp_delete_creative( $creative ) {
 }
 
 /**
- * Sets the status for a creative
+ * Sets the status for a creative.
  *
  * @since 1.0
- * @return bool
+ *
+ * @param int|AffWP_Creative $creative Creative ID or object.
+ * @param string             $status   Optional. Status to give the creative. Default empty.
+ * @return bool True if the creative was updated with the new status, otherwise false.
  */
 function affwp_set_creative_status( $creative, $status = '' ) {
 
-	if ( is_object( $creative ) && isset( $creative->creative_id ) ) {
-		$creative_id = $creative->creative_id;
-	} elseif ( is_numeric( $creative ) ) {
-		$creative_id = absint( $creative );
-	} else {
+	if ( ! $creative = affwp_get_creative( $creative ) ) {
 		return false;
 	}
 
-	$old_status = affiliate_wp()->creatives->get_column( 'status', $creative_id );
+	$old_status = affiliate_wp()->creatives->get_column( 'status', $creative->ID );
 
-	do_action( 'affwp_set_creative_status', $creative_id, $status, $old_status );
+	/**
+	 * Fires immediately before the creative's status has been updated.
+	 *
+	 * @since 1.0
+	 *
+	 * @param int    $creative_id Creative ID.
+	 * @param string $status      New creative status.
+	 * @param string $old_status  Old creative status.
+	 */
+	do_action( 'affwp_set_creative_status', $creative->ID, $status, $old_status );
 
-	if ( affiliate_wp()->creatives->update( $creative_id, array( 'status' => $status ), '', 'creative' ) ) {
+	if ( affiliate_wp()->creatives->update( $creative->ID, array( 'status' => $status ), '', 'creative' ) ) {
 		return true;
 	}
 

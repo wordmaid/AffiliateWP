@@ -253,8 +253,8 @@ class Creative_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_set_creative_status()
 	 */
-	public function test_set_creative_status_with_invalid_creative_id_should_return_null() {
-		$this->assertNull( affwp_set_creative_status( 0 ) );
+	public function test_set_creative_status_with_invalid_creative_id_should_return_false() {
+		$this->assertFalse( affwp_set_creative_status( 0 ) );
 	}
 
 	/**

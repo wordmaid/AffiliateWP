@@ -78,7 +78,7 @@ class Referral_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_referral()
 	 */
 	public function test_get_referral_with_no_referral_should_return_false() {
-		$this->assertFalse( affwp_get_referral( null ) );
+		$this->assertFalse( affwp_get_referral() );
 	}
 
 	/**
@@ -123,7 +123,7 @@ class Referral_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_referral_status()
 	 */
 	public function test_get_referral_status_with_invalid_referral_object_should_return_false() {
-		$this->assertFalse( affwp_get_referral_status( new stdClass() ) );
+		$this->assertFalse( affwp_get_referral_status( affwp_get_referral() ) );
 	}
 
 	/**
@@ -160,7 +160,7 @@ class Referral_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_referral_status_label()
 	 */
 	public function test_get_referral_status_label_with_invalid_referral_object_should_return_false() {
-		$this->assertFalse( affwp_get_referral_status_label( new stdClass() ) );
+		$this->assertFalse( affwp_get_referral_status_label( affwp_get_referral() ) );
 	}
 
 	/**
@@ -197,7 +197,7 @@ class Referral_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_set_referral_status()
 	 */
 	public function test_set_referral_status_with_invalid_referral_object_should_return_false() {
-		$this->assertFalse( affwp_set_referral_status( new stdClass() ) );
+		$this->assertFalse( affwp_set_referral_status( affwp_get_referral() ) );
 	}
 
 	/**
@@ -375,7 +375,7 @@ class Referral_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_delete_referral()
 	 */
 	public function test_delete_referral_with_invalid_referral_object_should_return_false() {
-		$this->assertFalse( affwp_delete_referral( new stdClass() ) );
+		$this->assertFalse( affwp_delete_referral( affwp_get_referral() ) );
 	}
 
 	/**

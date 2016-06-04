@@ -76,7 +76,7 @@ class Visit_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_visit()
 	 */
 	public function test_get_visit_with_no_visit_should_return_false() {
-		$this->assertFalse( affwp_get_visit( null ) );
+		$this->assertFalse( affwp_get_visit() );
 	}
 
 	/**
@@ -113,7 +113,7 @@ class Visit_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_count_visits()
 	 */
 	public function test_count_visits_with_no_affiliate_should_return_zero() {
-		$this->assertSame( 0, affwp_count_visits( null ) );
+		$this->assertSame( 0, affwp_count_visits( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -141,7 +141,7 @@ class Visit_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_count_visits()
 	 */
 	public function test_count_visits_with_an_invalid_affiliate_object_should_return_zero() {
-		$this->assertSame( 0, affwp_count_visits( new stdClass() ) );
+		$this->assertSame( 0, affwp_count_visits( affwp_get_affiliate() ) );
 	}
 
 	/**
@@ -164,7 +164,7 @@ class Visit_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_delete_visit()
 	 */
 	public function test_delete_visit_with_no_visit_should_return_false() {
-		$this->assertFalse( affwp_delete_visit( null ) );
+		$this->assertFalse( affwp_delete_visit( affwp_get_visit() ) );
 	}
 
 	/**
@@ -185,7 +185,7 @@ class Visit_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_delete_visit()
 	 */
 	public function test_delete_visit_with_invalid_visit_object_should_return_false() {
-		$this->assertFalse( affwp_delete_visit( new stdClass() ) );
+		$this->assertFalse( affwp_delete_visit( affwp_get_visit() ) );
 	}
 
 	/**

@@ -486,18 +486,15 @@ function affwp_get_affiliate_email( $affiliate, $default = false ) {
  * @since 1.7
  *
  * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
- * @return string Affiliate payment email if set and valid, if not set, the user email.
+ * @return string|false Affiliate payment email if set and valid, if not set, the user email. Otherwise false.
  */
 function affwp_get_affiliate_payment_email( $affiliate = 0 ) {
 
-	$affiliate = affwp_get_affiliate( $affiliate );
-
-	if ( empty( $affiliate->payment_email ) || ! is_email( $affiliate->payment_email ) ) {
-		return affwp_get_affiliate_email( $affiliate );
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		return false;
 	}
 
 	return $affiliate->payment_email;
-
 }
 
 /**

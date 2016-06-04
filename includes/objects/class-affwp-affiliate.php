@@ -73,10 +73,10 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * Affiliate payment email.
 	 *
 	 * @since 1.9
-	 * @access public
+	 * @access protected
 	 * @var string
 	 */
-	public $payment_email;
+	protected $payment_email;
 
 	/**
 	 * Affiliate status.
@@ -213,6 +213,9 @@ final class AffWP_Affiliate extends AffWP_Object {
 			case 'rate_type':
 				$value = $this->get_rate_type();
 				break;
+			case 'payment_email':
+				$value = $this->get_payment_email();
+				break;
 			case 'has_custom_rate':
 				$value = $this->has_custom_rate();
 				break;
@@ -255,6 +258,26 @@ final class AffWP_Affiliate extends AffWP_Object {
 		}
 
 		return $this->rate;
+	}
+
+	/**
+	 * Retrieves the payment email.
+	 *
+	 * If not set or invalid, the affiliate's account email is used instead.
+	 *
+	 * @since 1.9
+	 * @access protected
+	 *
+	 * @return string Payment email.
+	 */
+	protected function get_payment_email() {
+		if ( empty( $this->payment_email ) || ! is_email( $this->payment_email ) ) {
+			$email = affwp_get_affiliate_email( $this->ID );
+		} else {
+			$email = $this->payment_email;
+		}
+
+		return $email;
 	}
 
 	/**

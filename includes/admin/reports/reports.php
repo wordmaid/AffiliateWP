@@ -12,13 +12,12 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/screen-options.php';
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/screen-options.php';
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
+
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/reports-functions.php';
 
 // Reports Metaboxes
-
-require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
-
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/metaboxes/class-metabox-reports-referrals.php';
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/metaboxes/class-metabox-affiliate-leaderboard.php';
 include      AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/metaboxes/class-metabox-references.php';
@@ -86,7 +85,7 @@ function affwp_get_reports_tabs() {
 /**
  * Display the overview reports tab
  *
- * @since 1.8
+ * @since 1.9
  * @return void
  */
 function affwp_reports_tab_overview() { ?>
@@ -125,7 +124,7 @@ add_action( 'affwp_reports_tab_overview', 'affwp_reports_tab_overview' );
 /**
  * Display the affiliate reports tab
  *
- * @since 1.8
+ * @since 1.9
  * @return void
  */
 function affwp_reports_tab_affiliates() {
@@ -294,7 +293,7 @@ add_action( 'affwp_reports_tab_visits', 'affwp_reports_tab_visits' );
 /**
  * Display the campaigns reports tab
  *
- * @since 1.8
+ * @since 1.9
  * @return void
  */
 function affwp_reports_tab_campaigns() {

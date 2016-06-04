@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Add screen options to the Reports page
  *
- * @since 1.8
+ * @since 1.9
  */
 function affwp_reports_screen_options() {
 
@@ -27,23 +27,23 @@ function affwp_reports_screen_options() {
 
 	add_screen_option(
 		'layout_columns',
-		array( 'max' => 3,
+		array( 'max'  => 3,
 			'default' => 3,
 			'option'  => 'layout_columns'
 		)
 	);
 
-   wp_enqueue_script( 'postbox' );
+	wp_enqueue_script( 'postbox' );
 
 	do_action( 'affwp_reports_screen_options', $screen );
-
 }
+
 add_action( 'load-affiliates_page_affiliate-wp-reports', 'affwp_reports_screen_options' );
 
 /**
- * Per page screen option value for the Reports page
+ * Per-page screen option value for this page.
  *
- * @since  1.8
+ * @since  1.9
  * @param  bool|int $status
  * @param  string   $option
  * @param  mixed    $value
@@ -56,6 +56,6 @@ function affwp_reports_set_screen_option( $status, $option, $value ) {
 	}
 
 	return $status;
-
 }
+
 add_filter( 'set-screen-option', 'affwp_reports_set_screen_option', 10, 3 );

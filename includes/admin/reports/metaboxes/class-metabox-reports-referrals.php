@@ -1,22 +1,22 @@
 <?php
 
 
-class AffWP_Reports_Overview extends AffWP_Metabox_Base {
+class AffWP_Metabox_Reports_Referrals extends AffWP_Metabox_Base {
 
     /**
     * The id of the meta box. Must be unique.
     *
     * @access  public
-    * @since   1.8
+    * @since   1.9
     */
-    public $meta_box_id = 'overview-referrals-earnings';
+    public $meta_box_id = 'reports-referrals-earnings';
 
     /**
      * Initialize
      *
      * @access  public
      * @return  void
-     * @since   1.8
+     * @since   1.9
      */
     public function init() {
         add_action( 'add_meta_box',     array( $this, 'add_meta_box' ) );
@@ -28,7 +28,7 @@ class AffWP_Reports_Overview extends AffWP_Metabox_Base {
      * Displays an overview of earnings in 3 different tables
      *
      * @return mixed content An overview of referrals and earnings
-     * @since  1.8
+     * @since  1.9
      */
     public function content() {
 
@@ -94,4 +94,4 @@ class AffWP_Reports_Overview extends AffWP_Metabox_Base {
     <?php }
 }
 
-new AffWP_Reports_Overview;
+new AffWP_Metabox_Reports_Referrals;

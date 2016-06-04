@@ -1,22 +1,22 @@
 <?php
 
 
-class AffWP_Metabox_Affiliate_Leaderboard extends AffWP_Metabox_Base {
+class AffWP_Metabox_Reports_Affiliate_Leaderboard extends AffWP_Metabox_Base {
 
 
     /**
     * The id of the meta box. Must be unique.
     *
     * @access  public
-    * @since   1.8
+    * @since   1.9
     */
-    public $meta_box_id = 'overview-affiliate-leaderboard';
+    public $meta_box_id = 'reports-affiliate-leaderboard';
 
     /**
     * The name of the meta box. Must be unique.
     *
     * @access  public
-    * @since   1.8
+    * @since   1.9
     */
     public $meta_box_name;
 
@@ -26,7 +26,7 @@ class AffWP_Metabox_Affiliate_Leaderboard extends AffWP_Metabox_Base {
      *
      * @access  public
      * @var     $context
-     * @since   1.8
+     * @since   1.9
      */
     public $context = 'side';
 
@@ -35,7 +35,7 @@ class AffWP_Metabox_Affiliate_Leaderboard extends AffWP_Metabox_Base {
      *
      * @access  public
      * @return  void
-     * @since   1.8
+     * @since   1.9
      */
     public function init() {
         add_action( 'add_meta_box',     array( $this, 'add_meta_box' ) );
@@ -47,7 +47,7 @@ class AffWP_Metabox_Affiliate_Leaderboard extends AffWP_Metabox_Base {
      * Displays an overview of earnings in 3 different tables
      *
      * @return mixed content An overview of referrals and earnings
-     * @since  1.8
+     * @since  1.9
      */
     public function content() {
 
@@ -92,4 +92,4 @@ class AffWP_Metabox_Affiliate_Leaderboard extends AffWP_Metabox_Base {
     <?php }
 }
 
-new AffWP_Metabox_Affiliate_Leaderboard;
+new AffWP_Metabox_Reports_Affiliate_Leaderboard;

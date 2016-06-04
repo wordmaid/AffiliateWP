@@ -230,17 +230,18 @@ abstract class AffWP_Object {
 	/**
 	 * Sanitizes a given object field's value.
 	 *
-	 * Sub-class must override this method.
+	 * Sub-class should override this method.
 	 *
 	 * @since 1.9
 	 * @access public
-	 * @abstract
 	 * @static
 	 *
 	 * @param string $field Object field.
 	 * @param mixed  $value Object field value.
 	 * @return mixed Sanitized value for the given field.
 	 */
-	abstract public static function sanitize_field( $field, $value );
+	public static function sanitize_field( $field, $value ) {
+		return $value;
+	}
 
 }

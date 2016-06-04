@@ -13,7 +13,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/screen-options.php';
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/overview/screen-options.php';
 
 // Overview Metaboxes
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';

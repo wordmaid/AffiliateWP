@@ -217,11 +217,4 @@ jQuery( document ).ready( function( $ ) {
 		postboxes.add_postbox_toggles( 'affiliate-wp' );
 	}
 
-	// Enable metabox toggle button functionality
-	$( '.affwp-dashboard-widgets-wrap .button-link' ).on( 'click', function() {
-
-		$( this ).closest( '.postbox' ).toggle();
-
-	} );
-
 } );

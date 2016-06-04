@@ -6,7 +6,7 @@
  * @param int|AffWP_Referral $referral Referral ID or object.
  * @return AffWP_Referral|false Referral object, otherwise false.
  */
-function affwp_get_referral( $referral ) {
+function affwp_get_referral( $referral = null ) {
 
 	if ( is_object( $referral ) && isset( $referral->referral_id ) ) {
 		$referral_id = $referral->referral_id;

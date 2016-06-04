@@ -82,8 +82,8 @@ class Visit_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_get_visit()
 	 */
-	public function test_get_visit_with_an_invalid_visit_id_should_return_null() {
-		$this->assertNull( affwp_get_visit( 0 ) );
+	public function test_get_visit_with_an_invalid_visit_id_should_return_false() {
+		$this->assertFalse( affwp_get_visit( 0 ) );
 	}
 
 	/**

@@ -351,7 +351,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		// Re-retrieve following deletion.
 		$affiliate = affwp_get_affiliate( $this->_affiliate_id2 );
 
-		$this->assertNull( $affiliate );
+		$this->assertFalse( $affiliate );
 	}
 
 	/**

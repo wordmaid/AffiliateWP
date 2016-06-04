@@ -4,9 +4,11 @@
  * Retrieves the creative object
  *
  * @since 1.1.4
- * @return object
+ *
+ * @param int|AffWP_Creative $creative Creative ID or object.
+ * @return AffWP_Creative|false Creative object, otherwise false.
  */
-function affwp_get_creative( $creative ) {
+function affwp_get_creative( $creative = null ) {
 
 	if ( is_object( $creative ) && isset( $creative->creative_id ) ) {
 		$creative_id = $creative->creative_id;

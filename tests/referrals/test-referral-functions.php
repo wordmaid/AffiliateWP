@@ -101,8 +101,8 @@ class Referral_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_get_referral()
 	 */
-	public function test_get_referral_with_invalid_referral_id_should_return_null() {
-		$this->assertNull( affwp_get_referral( 0 ) );
+	public function test_get_referral_with_invalid_referral_id_should_return_false() {
+		$this->assertFalse( affwp_get_referral( 0 ) );
 	}
 
 	/**

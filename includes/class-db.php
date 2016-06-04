@@ -294,11 +294,11 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @param object|int $instance Instance or object ID.
 	 * @param string     $class    Object class name.
-	 * @return object|null Object instance, null otherwise.
+	 * @return object|false Object instance, otherwise false.
 	 */
 	protected function get_core_object( $instance, $object_class ) {
 		if ( ! class_exists( $object_class ) ) {
-			return null;
+			return false;
 		}
 
 		if ( $instance instanceof $object_class ) {
@@ -314,7 +314,7 @@ abstract class Affiliate_WP_DB {
 		}
 
 		if ( ! $_object ) {
-			return null;
+			return false;
 		}
 
 		return $_object;

@@ -8,7 +8,7 @@
  * @param int|AffWP_Visit $visit Visit ID or object.
  * @return AffWP_Visit|false Visit object, otherwise false.
  */
-function affwp_get_visit( $visit ) {
+function affwp_get_visit( $visit = null ) {
 
 	if ( is_object( $visit ) && isset( $visit->visit_id ) ) {
 		$visit_id = $visit->visit_id;

@@ -53,6 +53,8 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @since 1.9
 	 * @access protected
 	 * @var string
+	 *
+	 * @see AffWP_Affiliate::get_rate()
 	 */
 	protected $rate;
 
@@ -62,6 +64,8 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @since 1.9
 	 * @access protected
 	 * @var string
+	 *
+	 * @see AffWP_Affiliate::get_rate_type()
 	 */
 	protected $rate_type;
 

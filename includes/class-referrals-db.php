@@ -159,16 +159,12 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *
 	 * @access  public
 	 * @since   1.5
+	 *
+	 * @param int|AffWP_Referral $referral Referral ID or object.
 	*/
-	public function update_referral( $referral_id = 0, $data = array() ) {
+	public function update_referral( $referral = 0, $data = array() ) {
 
-		if( empty( $referral_id ) ) {
-			return false;
-		}
-
-		$referral = $this->get( $referral_id );
-
-		if( ! $referral ) {
+		if ( ! $referral = affwp_get_referral( $referral ) ) {
 			return false;
 		}
 
@@ -186,7 +182,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			if( ! empty( $data['status'] ) && $referral->status !== $data['status'] ) {
 
-				affwp_set_referral_status( $referral, $data['status'] );
+				affwp_set_referral_status( $referral->ID, $data['status'] );
 
 			} elseif( 'paid' === $referral->status ) {
 

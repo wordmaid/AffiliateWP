@@ -207,6 +207,7 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 */
 	public function __get( $key ) {
 		switch ( $key ) {
+			// Derived properties.
 			case 'rate':
 				$value = $this->get_rate();
 				break;
@@ -216,9 +217,13 @@ final class AffWP_Affiliate extends AffWP_Object {
 			case 'payment_email':
 				$value = $this->get_payment_email();
 				break;
+
+			// Magic properties.
 			case 'has_custom_rate':
 				$value = $this->has_custom_rate();
 				break;
+
+			// Everything else.
 			default:
 				$value = parent::__get( $key );
 				break;
@@ -248,11 +253,11 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * Retrieves the affiliate rate.
 	 *
 	 * @since 1.9
-	 * @access protected
+	 * @access private
 	 *
 	 * @return int Rate. If empty, defaults to the global referral rate.
 	 */
-	protected function get_rate() {
+	private function get_rate() {
 		if ( empty( $this->rate ) ) {
 			return affiliate_wp()->settings->get( 'referral_rate', 20 );
 		}
@@ -266,11 +271,11 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * If not set or invalid, the affiliate's account email is used instead.
 	 *
 	 * @since 1.9
-	 * @access protected
+	 * @access private
 	 *
 	 * @return string Payment email.
 	 */
-	protected function get_payment_email() {
+	private function get_payment_email() {
 		if ( empty( $this->payment_email ) || ! is_email( $this->payment_email ) ) {
 			$email = affwp_get_affiliate_email( $this->ID );
 		} else {
@@ -284,11 +289,11 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * Determines if the current affiliate has a custom rate value.
 	 *
 	 * @since 1.9
-	 * @access protected
+	 * @access private
 	 *
 	 * @return bool True if the affiliate has a custom rate, otherwise false.
 	 */
-	protected function has_custom_rate() {
+	private function has_custom_rate() {
 		return empty( $this->rate ) ? false : true;
 	}
 }

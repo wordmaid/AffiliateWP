@@ -1,5 +1,21 @@
 <?php
+/**
+ * Objects: AffWP_Visit class
+ *
+ * @package AffiliateWP
+ * @category Core
+ *
+ * @since 1.9
+ */
 
+/**
+ * Implements a visit object.
+ *
+ * @since 1,9
+ *
+ * @see AffWP_Object
+ * @see affwp_get_visit()
+ */
 final class AffWP_Visit extends AffWP_Object {
 
 	/**

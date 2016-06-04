@@ -1,5 +1,21 @@
 <?php
+/**
+ * Objects: AffWP_Creative class
+ *
+ * @package AffiliateWP
+ * @category Core
+ *
+ * @since 1.9
+ */
 
+/**
+ * Implements a creative object.
+ *
+ * @since 1,9
+ *
+ * @see AffWP_Object
+ * @see affwp_get_creative()
+ */
 final class AffWP_Creative extends AffWP_Object {
 
 	/**

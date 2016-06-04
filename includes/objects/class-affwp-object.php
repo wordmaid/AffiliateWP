@@ -1,5 +1,19 @@
 <?php
+/**
+ * Objects: Base AffWP_Object class
+ *
+ * @package AffiliateWP
+ * @category Core
+ *
+ * @since 1.9
+ */
 
+/**
+ * Implements a base object to be extended by core objects.
+ *
+ * @since 1.9
+ * @abstract
+ */
 abstract class AffWP_Object {
 
 	/**

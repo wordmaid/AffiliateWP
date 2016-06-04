@@ -1,5 +1,21 @@
 <?php
+/**
+ * Objects: AffWP_Affiliate class
+ *
+ * @package AffiliateWP
+ * @category Core
+ *
+ * @since 1.9
+ */
 
+/**
+ * Implements an affiliate object.
+ *
+ * @since 1,9
+ *
+ * @see AffWP_Object
+ * @see affwp_get_affiliate()
+ */
 final class AffWP_Affiliate extends AffWP_Object {
 
 	/**

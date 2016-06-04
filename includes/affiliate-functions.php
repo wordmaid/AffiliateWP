@@ -221,7 +221,7 @@ function affwp_set_affiliate_status( $affiliate, $status = '' ) {
 		return false;
 	}
 
-	$old_status = affiliate_wp()->affiliates->get_column( 'status', $affiliate->ID );
+	$old_status = $affiliate->status;
 
 	do_action( 'affwp_set_affiliate_status', $affiliate->ID, $status, $old_status );
 
@@ -589,7 +589,7 @@ function affwp_get_affiliate_earnings( $affiliate, $formatted = false ) {
 		return false;
 	}
 
-	$earnings = affiliate_wp()->affiliates->get_column( 'earnings', $affiliate->ID );
+	$earnings = $affiliate->earnings;
 
 	if ( empty( $earnings ) ) {
 
@@ -746,7 +746,7 @@ function affwp_get_affiliate_referral_count( $affiliate = 0 ) {
 		return false;
 	}
 
-	return affiliate_wp()->affiliates->get_column( 'referrals', $affiliate->ID );
+	return $affiliate->referrals;
 }
 
 /**
@@ -826,7 +826,7 @@ function affwp_get_affiliate_visit_count( $affiliate = 0 ) {
 		return false;
 	}
 
-	$visits = affiliate_wp()->affiliates->get_column( 'visits', $affiliate->ID );
+	$visits = $affiliate->visits;
 
 	if ( $visits < 0 ) {
 		$visits = 0;

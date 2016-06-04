@@ -109,7 +109,7 @@ function affwp_set_creative_status( $creative, $status = '' ) {
 		return false;
 	}
 
-	$old_status = affiliate_wp()->creatives->get_column( 'status', $creative->ID );
+	$old_status = $creative->status;
 
 	/**
 	 * Fires immediately before the creative's status has been updated.

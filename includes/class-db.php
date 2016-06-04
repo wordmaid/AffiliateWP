@@ -303,8 +303,8 @@ abstract class Affiliate_WP_DB {
 
 		if ( $instance instanceof $object_class ) {
 			$_object = $instance;
-		} elseif ( is_object( $instance ) && isset( $instance->{$this->primary_key} ) ) {
-			if ( isset( $object->{$this->primary_key} ) ) {
+		} elseif ( is_object( $instance ) ) {
+			if ( isset( $instance->{$this->primary_key} ) ) {
 				$_object = new $object_class( $instance );
 			} else {
 				$_object = $object_class::get_instance( $instance );

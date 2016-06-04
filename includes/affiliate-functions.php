@@ -308,15 +308,13 @@ function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_
 	$product_rate = affwp_abs_number_round( $product_rate );
 	$product_rate = ( null !== $product_rate ) ? $product_rate : $default_rate;
 
-	// Get affiliate-specific referral rate
-	$affiliate_rate = $affiliate->rate;
-
 	// Get rate in order of priority: Affiliate -> Product -> Global
-	$rate = affwp_abs_number_round( $affiliate_rate );
+	$rate = affwp_abs_number_round( $affiliate->rate );
+
 	$rate = ( null !== $rate ) ? $rate : $product_rate;
 
 	// Get the referral rate type.
-	$type = affwp_get_affiliate_rate_type( $affiliate->ID );
+	$type = $affiliate->rate_type;
 
 	// Format percentage rates
 	$rate = ( 'percentage' === $type ) ? $rate / 100 : $rate;
@@ -380,7 +378,7 @@ function affwp_affiliate_has_custom_rate( $affiliate = 0 ) {
 	 * @param bool $rate         Whether the affiliate has a custom rate.
 	 * @param int  $affiliate_id Affiliate ID.
 	 */
-	return apply_filters( 'affwp_affiliate_has_custom_rate', (bool) $affiliate->rate, $affiliate->ID );
+	return apply_filters( 'affwp_affiliate_has_custom_rate', $affiliate->has_custom_rate, $affiliate->ID );
 }
 
 /**
@@ -392,23 +390,26 @@ function affwp_affiliate_has_custom_rate( $affiliate = 0 ) {
  *
  * @since 1.1
  *
- * @param int $affiliate_id Optional. Affiliate ID. Default 0.
+ * @param int|AffWP_Affiliate $affiliate Optional. Affiliate ID. Default is the current affiliate.
  * @return string
  */
-function affwp_get_affiliate_rate_type( $affiliate_id = 0 ) {
+function affwp_get_affiliate_rate_type( $affiliate = 0 ) {
+
+	// Default rate type.
+	$type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
+
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		/** This filter is documented in includes/affiliate-functions.php */
+		return apply_filters( 'affwp_get_affiliate_rate_type', $type, $affiliate );
+	}
 
 	// Allowed types
 	$types = affwp_get_affiliate_rate_types();
 
-	// default rate
-	$type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
+	$affiliate_rate_type = $affiliate->rate_type;
 
-	$affiliate_rate_type = affiliate_wp()->affiliates->get_column( 'rate_type', $affiliate_id );
-
-	if ( ! empty( $affiliate_rate_type ) ) {
-
+	if ( $affiliate_rate_type !== $type ) {
 		$type = $affiliate_rate_type;
-
 	}
 
 	if ( ! array_key_exists( $type, $types ) ) {
@@ -423,7 +424,7 @@ function affwp_get_affiliate_rate_type( $affiliate_id = 0 ) {
 	 * @param string $type         Affiliate rate type. Default values will be 'percentage' or 'flat'.
 	 * @param int    $affiliate_id Affiliate ID.
 	 */
-	return apply_filters( 'affwp_get_affiliate_rate_type', $type, $affiliate_id );
+	return apply_filters( 'affwp_get_affiliate_rate_type', $type, $affiliate->ID );
 
 }
 

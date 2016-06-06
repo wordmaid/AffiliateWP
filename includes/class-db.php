@@ -230,6 +230,7 @@ abstract class Affiliate_WP_DB {
 			return false;
 		}
 
+		// Update and prime the item cache, and invalidate related query caches.
 		affwp_clean_item_cache( $object );
 
 		/**

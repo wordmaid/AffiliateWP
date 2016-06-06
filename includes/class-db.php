@@ -172,6 +172,7 @@ abstract class Affiliate_WP_DB {
 
 		$object = $this->get_core_object( $wpdb->insert_id, $this->query_object_type );
 
+		// Prime the item cache, and invalidate related query caches.
 		affwp_clean_item_cache( $object );
 
 		/**
@@ -230,7 +231,7 @@ abstract class Affiliate_WP_DB {
 			return false;
 		}
 
-		// Update and prime the item cache, and invalidate related query caches.
+		// Invalidate and prime the item cache, and invalidate related query caches.
 		affwp_clean_item_cache( $object );
 
 		/**
@@ -268,6 +269,7 @@ abstract class Affiliate_WP_DB {
 			return false;
 		}
 
+		// Invalidate the item cachea along with related query caches.
 		affwp_clean_item_cache( $object );
 
 		return true;

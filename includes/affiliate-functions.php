@@ -401,22 +401,23 @@ function affwp_get_affiliate_rate_type( $affiliate = 0 ) {
 	// Default rate type.
 	$type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
 
-	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
-		/** This filter is documented in includes/affiliate-functions.php */
-		return apply_filters( 'affwp_get_affiliate_rate_type', $type, $affiliate );
-	}
+	$affiliate_id = 0;
 
-	// Allowed types
-	$types = affwp_get_affiliate_rate_types();
+	if ( $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		$affiliate_id = $affiliate->ID;
 
-	$affiliate_rate_type = $affiliate->rate_type;
+		// Allowed types
+		$types = affwp_get_affiliate_rate_types();
 
-	if ( $affiliate_rate_type !== $type ) {
-		$type = $affiliate_rate_type;
-	}
+		$affiliate_rate_type = $affiliate->rate_type;
 
-	if ( ! array_key_exists( $type, $types ) ) {
-		$type = 'percentage';
+		if ( $affiliate_rate_type !== $type ) {
+			$type = $affiliate_rate_type;
+		}
+
+		if ( ! array_key_exists( $type, $types ) ) {
+			$type = 'percentage';
+		}
 	}
 
 	/**
@@ -427,7 +428,7 @@ function affwp_get_affiliate_rate_type( $affiliate = 0 ) {
 	 * @param string $type         Affiliate rate type. Default values will be 'percentage' or 'flat'.
 	 * @param int    $affiliate_id Affiliate ID.
 	 */
-	return apply_filters( 'affwp_get_affiliate_rate_type', $type, $affiliate->ID );
+	return apply_filters( 'affwp_get_affiliate_rate_type', $type, $affiliate_id );
 
 }
 

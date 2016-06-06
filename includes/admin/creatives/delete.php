@@ -1,6 +1,6 @@
 <?php
 if ( ! empty( $_GET['creative_id'] ) && is_array( $_GET['creative_id'] ) ) {
-	$to_delete = array_map( 'affwp_get_creative', absint( $_GET['creative_id'] ) );
+	$to_delete = array_map( 'affwp_get_creative', $_GET['creative_id'] );
 } else {
 	$to_delete = ! empty( $_GET['creative_id'] ) ? array( affwp_get_creative( absint( $_GET['creative_id'] ) ) ) : array();
 }

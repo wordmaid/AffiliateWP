@@ -131,7 +131,7 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @static
 	 * @var string
 	 */
-	public static $cache_token = 'affwp_affiliate:';
+	public static $cache_token = 'affwp_affiliate';
 
 	/**
 	 * Object type.

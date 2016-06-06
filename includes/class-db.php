@@ -172,7 +172,7 @@ abstract class Affiliate_WP_DB {
 
 		$object = $this->get_core_object( $wpdb->insert_id, $this->query_object_type );
 
-		affwp_clean_item_cache( $object, $this->query_object_type );
+		affwp_clean_item_cache( $object );
 
 		/**
 		 * Fires immediately after an item has been created in the database.

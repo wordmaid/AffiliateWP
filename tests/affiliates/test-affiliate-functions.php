@@ -179,6 +179,8 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		foreach ( array( $this->_affiliate_id, $this->_affiliate_id2, $this->_affiliate_id3 ) as $affiliate_id ) {
 			affwp_delete_affiliate( $affiliate_id );
 		}
+
+		self::delete_user( $this->_user_id );
 	}
 
 	//

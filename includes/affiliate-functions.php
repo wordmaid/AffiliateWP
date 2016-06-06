@@ -365,9 +365,12 @@ function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_
  */
 function affwp_affiliate_has_custom_rate( $affiliate = 0 ) {
 
-	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
-		/** This filter is documented in includes/affiliate-functions.php */
-		return apply_filters( 'affwp_affiliate_has_custom_rate', false, $affiliate );
+	if ( $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		$custom_rate = $affiliate->has_custom_rate();
+		$affiliate_id = $affiliate->ID;
+	} else {
+		$custom_rate = false;
+		$affiliate_id = 0;
 	}
 
 	/**
@@ -375,10 +378,10 @@ function affwp_affiliate_has_custom_rate( $affiliate = 0 ) {
 	 *
 	 * @since 1.5
 	 *
-	 * @param bool $rate         Whether the affiliate has a custom rate.
+	 * @param bool $custom_rate  Whether the affiliate has a custom rate.
 	 * @param int  $affiliate_id Affiliate ID.
 	 */
-	return apply_filters( 'affwp_affiliate_has_custom_rate', $affiliate->has_custom_rate, $affiliate->ID );
+	return apply_filters( 'affwp_affiliate_has_custom_rate', $custom_rate, $affiliate_id );
 }
 
 /**

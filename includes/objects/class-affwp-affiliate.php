@@ -15,8 +15,6 @@
  *
  * @see AffWP_Object
  * @see affwp_get_affiliate()
- *
- * @property-read bool $has_custom_rate
  */
 final class AffWP_Affiliate extends AffWP_Object {
 
@@ -218,11 +216,6 @@ final class AffWP_Affiliate extends AffWP_Object {
 				$value = $this->get_payment_email();
 				break;
 
-			// Magic properties.
-			case 'has_custom_rate':
-				$value = $this->has_custom_rate();
-				break;
-
 			// Everything else.
 			default:
 				$value = parent::__get( $key );
@@ -287,13 +280,13 @@ final class AffWP_Affiliate extends AffWP_Object {
 
 	/**
 	 * Determines if the current affiliate has a custom rate value.
-	 *
+//	 *
 	 * @since 1.9
-	 * @access private
+	 * @access protected
 	 *
 	 * @return bool True if the affiliate has a custom rate, otherwise false.
 	 */
-	private function has_custom_rate() {
+	public function has_custom_rate() {
 		return empty( $this->rate ) ? false : true;
 	}
 }

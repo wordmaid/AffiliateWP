@@ -92,20 +92,6 @@ abstract class Affiliate_WP_DB {
 	}
 
 	/**
-	 * Retrieves an object from an ID.
-	 *
-	 * Sub-classes must override this method and supply context.
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @abstract
-	 *
-	 * @param int $object_id Object ID.
-	 * @return mixed|false Object or false if no object could be retrieved.
-	 */
-	abstract public function get_object( $object_id );
-
-	/**
 	 * Retrieves a value based on column name and row ID.
 	 *
 	 * @access public

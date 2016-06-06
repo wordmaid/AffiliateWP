@@ -49,18 +49,6 @@ class Affiliate_WP_Affiliate_Meta_DB extends Affiliate_WP_DB {
 	}
 
 	/**
-	 * Unused.
-	 *
-	 * @since 1.9
-	 * @access public
-	 *
-	 * @param int|object $object Unused.
-	 */
-	public function get_object( $object ) {
-		_doing_it_wrong( 'get_object', 'There is no object to retrieve.', '1.9' );
-	}
-
-	/**
 	 * Register the table with $wpdb so the metadata api can find it
 	 *
 	 * @access  public

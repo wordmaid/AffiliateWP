@@ -3,15 +3,6 @@
 class Affiliate_WP_Affiliate_Meta_DB extends Affiliate_WP_DB {
 
 	/**
-	 * Object type to query for.
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @var string
-	 */
-	public $query_object_type = null;
-
-	/**
 	 * Get things started
 	 *
 	 * @access  public

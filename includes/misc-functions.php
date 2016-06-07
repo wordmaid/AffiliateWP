@@ -25,6 +25,7 @@ function affwp_get_currencies() {
 	$currencies = array(
 		'USD' => __( 'US Dollars', 'affiliate-wp' ),
 		'EUR' => __( 'Euros', 'affiliate-wp' ),
+		'ARS' => __( 'Argentine Peso', 'affiliate-wp' ),
 		'AUD' => __( 'Australian Dollars', 'affiliate-wp' ),
 		'BDT' => __( 'Bangladeshi Taka', 'affiliate-wp' ),
 		'BRL' => __( 'Brazilian Real', 'affiliate-wp' ),

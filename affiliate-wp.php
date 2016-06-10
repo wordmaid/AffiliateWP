@@ -5,7 +5,7 @@
  * Description: Affiliate Plugin for WordPress
  * Author: AffiliateWP
  * Author URI: https://affiliatewp.com
- * Version: 1.8.1
+ * Version: 1.8.2
  * Text Domain: affiliate-wp
  * Domain Path: languages
  *
@@ -24,7 +24,7 @@
  * @package AffiliateWP
  * @category Core
  * @author Pippin Williamson
- * @version 1.8.1
+ * @version 1.8.2
  */
 
 // Exit if accessed directly
@@ -51,7 +51,7 @@ final class Affiliate_WP {
 	 *
 	 * @since 1.0
 	 */
-	private $version = '1.8.1';
+	private $version = '1.8.2';
 
 	/**
 	 * The affiliates DB instance variable.
@@ -308,7 +308,6 @@ final class Affiliate_WP {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/referrals/referrals.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/reports.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/visits/visits.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/tools.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-upgrades.php';
@@ -325,10 +324,8 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/emails/functions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/emails/actions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-graph.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/graphs/class-referrals-graph.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/graphs/class-reports-overview-graph.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/graphs/class-visits-graph.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/graphs/class-campaigns-graph.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-referrals-graph.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-visits-graph.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-integrations.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-login.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';

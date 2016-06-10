@@ -572,7 +572,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	function test_get_affiliate_unpaid_earnings() {
 
 		$this->assertEquals( 0, affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id ) );
-		$this->assertEquals( '&#36;0', affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id, true ) );
+		$this->assertEquals( '&#36;0.00', affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id, true ) );
 
 	}
 
@@ -979,7 +979,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 */
 	public function test_get_affiliate_earnings_formatted_true_should_return_formatted_earnings() {
 		affwp_increase_affiliate_earnings( $this->_affiliate_id, '1000' );
-		$this->assertEquals( '&#36;1000', affwp_get_affiliate_earnings( $this->_affiliate_id, $formatted = true ) );
+		$this->assertEquals( '&#36;1,000.00', affwp_get_affiliate_earnings( $this->_affiliate_id, $formatted = true ) );
 	}
 
 	/**
@@ -1033,7 +1033,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 			'status'       => 'unpaid'
 		) );
 
-		$this->assertSame( '&#36;150', affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id, $formatted = true ) );
+		$this->assertSame( '&#36;150.00', affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id, $formatted = true ) );
 	}
 
 	/**

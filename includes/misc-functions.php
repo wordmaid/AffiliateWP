@@ -25,6 +25,7 @@ function affwp_get_currencies() {
 	$currencies = array(
 		'USD' => __( 'US Dollars', 'affiliate-wp' ),
 		'EUR' => __( 'Euros', 'affiliate-wp' ),
+		'ARS' => __( 'Argentine Peso', 'affiliate-wp' ),
 		'AUD' => __( 'Australian Dollars', 'affiliate-wp' ),
 		'BDT' => __( 'Bangladeshi Taka', 'affiliate-wp' ),
 		'BRL' => __( 'Brazilian Real', 'affiliate-wp' ),
@@ -194,6 +195,8 @@ function affwp_currency_filter( $amount ) {
 	if( $negative ) {
 		$amount = substr( $amount, 1 ); // Remove proceeding "-" -
 	}
+
+	$amount = affwp_format_amount( $amount );
 
 	if ( $position == 'before' ):
 		switch ( $currency ):

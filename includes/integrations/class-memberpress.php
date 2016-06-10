@@ -59,7 +59,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 
 			// Customers cannot refer themselves
 			if ( ! empty( $user->user_email ) && $this->is_affiliate_email( $user->user_email ) ) {
-			
+
 				if( $this->debug ) {
 					$this->log( 'Referral not created because affiliate\'s own account was used.' );
 				}
@@ -348,8 +348,8 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 		$affiliate_id = get_post_meta( $coupon->ID, 'affwp_discount_affiliate', true );
 
 		if( $affiliate_id ) {
-			if( ! affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
-				continue;
+			if( affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
+				return;
 			}
 
 			return $affiliate_id;

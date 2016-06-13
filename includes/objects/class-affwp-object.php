@@ -68,7 +68,8 @@ abstract class AffWP_Object {
 
 			$_object = self::fill_vars( $_object );
 
-			wp_cache_add( $cache_key, $cache_group );
+			wp_cache_add( $cache_key, $_object, $cache_group );
+
 		} elseif ( empty( $_object->filled ) ) {
 			$_object = self::fill_vars( $_object );
 		}
@@ -88,7 +89,7 @@ abstract class AffWP_Object {
 	public static function get_cache_key( $object_id ) {
 		$Sub_Class = get_called_class();
 
-		return md5( $Sub_Class::$cache_token . '_' . $object_id );
+		return md5( $Sub_Class::$cache_token . ':' . $object_id );
 	}
 
 	/**
@@ -230,17 +231,18 @@ abstract class AffWP_Object {
 	/**
 	 * Sanitizes a given object field's value.
 	 *
-	 * Sub-class must override this method.
+	 * Sub-class should override this method.
 	 *
 	 * @since 1.9
 	 * @access public
-	 * @abstract
 	 * @static
 	 *
 	 * @param string $field Object field.
 	 * @param mixed  $value Object field value.
 	 * @return mixed Sanitized value for the given field.
 	 */
-	abstract public static function sanitize_field( $field, $value );
+	public static function sanitize_field( $field, $value ) {
+		return $value;
+	}
 
 }

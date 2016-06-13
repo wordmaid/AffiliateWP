@@ -190,4 +190,100 @@ final class AffWP_Affiliate extends AffWP_Object {
 		$this->ID = $this->{$primary_key};
 	}
 
+	/**
+	 * Gets values of non-public properties.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param string $key Property to retrieve a value for.
+	 * @return mixed Property value.
+	 */
+	public function __get( $key ) {
+		switch ( $key ) {
+			// Derived properties.
+			case 'rate':
+				$value = $this->get_rate();
+				break;
+			case 'rate_type':
+				$value = $this->get_rate_type();
+				break;
+			case 'payment_email':
+				$value = $this->get_payment_email();
+				break;
+
+			// Everything else.
+			default:
+				$value = parent::__get( $key );
+				break;
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Retrieves the affiliate rate type.
+	 *
+	 * @since 1.9
+	 * @access protected
+	 *
+	 * @return string Rate type. If empty, defaults to the global referral rate type.
+	 */
+	protected function get_rate_type() {
+
+		if ( empty( $this->rate_type ) ) {
+			return affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
+		}
+
+		return $this->rate_type;
+	}
+
+	/**
+	 * Retrieves the affiliate rate.
+	 *
+	 * @since 1.9
+	 * @access private
+	 *
+	 * @return int Rate. If empty, defaults to the global referral rate.
+	 */
+	private function get_rate() {
+		if ( empty( $this->rate ) ) {
+			return affiliate_wp()->settings->get( 'referral_rate', 20 );
+		}
+
+		return $this->rate;
+	}
+
+	/**
+	 * Retrieves the payment email.
+	 *
+	 * If not set or invalid, the affiliate's account email is used instead.
+	 *
+	 * @since 1.9
+	 * @access private
+	 *
+	 * @return string Payment email.
+	 */
+	private function get_payment_email() {
+		if ( empty( $this->payment_email ) || ! is_email( $this->payment_email ) ) {
+			$email = affwp_get_affiliate_email( $this->ID );
+		} else {
+			$email = $this->payment_email;
+		}
+
+		return $email;
+	}
+
+	/**
+	 * Determines if the current affiliate has a custom rate value.
+	 *
+	 * @since 1.9
+	 * @access protected
+	 *
+	 * @return bool True if the affiliate has a custom rate, otherwise false.
+	 */
+	public function has_custom_rate() {
+		return empty( $this->rate ) ? false : true;
+	}
+
 }

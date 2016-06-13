@@ -188,6 +188,7 @@ function affwp_get_affiliate( $affiliate = null ) {
 	}
 
 	return affiliate_wp()->affiliates->get_object( $affiliate_id );
+
 }
 
 /**

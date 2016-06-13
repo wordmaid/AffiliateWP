@@ -107,7 +107,7 @@ final class AffWP_Visit extends AffWP_Object {
 	 * @static
 	 * @var string
 	 */
-	public static $cache_token = 'affwp_visit';
+	public static $cache_token = 'affwp_visits';
 
 	/**
 	 * Object type.

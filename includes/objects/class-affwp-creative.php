@@ -107,7 +107,7 @@ final class AffWP_Creative extends AffWP_Object {
 	 * @static
 	 * @var string
 	 */
-	public static $cache_token = 'affwp_creative';
+	public static $cache_token = 'affwp_creatives';
 
 	/**
 	 * Object type.

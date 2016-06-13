@@ -128,6 +128,8 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @access public
 	 * @static
 	 * @var string
+	 *
+	 * @see AffWP_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_affiliates';
 

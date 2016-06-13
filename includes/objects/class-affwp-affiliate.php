@@ -52,7 +52,7 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @access public
 	 * @var string
 	 */
-	public $rate;
+	protected $rate;
 
 	/**
 	 * Affiliate rate type.
@@ -60,17 +60,19 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @since 1.9
 	 * @access public
 	 * @var string
+	 *
+	 * @see AffWP_Affiliate::get_rate()
 	 */
-	public $rate_type;
+	protected $rate_type;
 
 	/**
 	 * Affiliate payment email.
 	 *
 	 * @since 1.9
-	 * @access public
+	 * @access protected
 	 * @var string
 	 */
-	public $payment_email;
+	protected $payment_email;
 
 	/**
 	 * Affiliate status.

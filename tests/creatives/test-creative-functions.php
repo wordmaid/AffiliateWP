@@ -61,21 +61,21 @@ class Creative_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_creative()
 	 */
 	public function test_get_creative_with_no_creative_should_return_false() {
-		$this->assertFalse( affwp_get_creative( null ) );
+		$this->assertFalse( affwp_get_creative() );
 	}
 
 	/**
 	 * @covers affwp_get_creative()
 	 */
-	public function test_get_creative_with_invalid_creative_id_should_return_null() {
-		$this->assertNull( affwp_get_creative( 0 ) );
+	public function test_get_creative_with_invalid_creative_id_should_return_false() {
+		$this->assertFalse( affwp_get_creative( 0 ) );
 	}
 
 	/**
 	 * @covers affwp_get_creative()
 	 */
 	public function test_get_creative_with_valid_creative_id_should_return_creative() {
-		$this->assertInstanceOf( 'stdClass', affwp_get_creative( $this->_creative_id ) );
+		$this->assertInstanceOf( 'AffWP_Creative', affwp_get_creative( $this->_creative_id ) );
 	}
 
 	/**
@@ -91,7 +91,7 @@ class Creative_Functions_Tests extends WP_UnitTestCase {
 	public function test_get_creative_with_valid_creative_object_should_return_creative() {
 		$creative = affwp_get_creative( $this->_creative_id );
 
-		$this->assertInstanceOf( 'stdClass', affwp_get_creative( $creative ) );
+		$this->assertInstanceOf( 'AffWP_Creative', affwp_get_creative( $creative ) );
 	}
 
 	/**
@@ -210,7 +210,7 @@ class Creative_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_delete_creative()
 	 */
 	public function test_delete_creative_with_empty_creative_should_return_false() {
-		$this->assertFalse( affwp_delete_creative( null ) );
+		$this->assertFalse( affwp_delete_creative( affwp_get_creative() ) );
 	}
 
 	/**
@@ -231,7 +231,7 @@ class Creative_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_delete_creative()
 	 */
 	public function test_delete_creative_with_invalid_creative_object_should_return_false() {
-		$this->assertFalse( affwp_delete_creative( new stdClass() ) );
+		$this->assertFalse( affwp_delete_creative( affwp_get_creative() ) );
 	}
 
 	/**
@@ -247,14 +247,14 @@ class Creative_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_set_creative_status()
 	 */
 	public function test_set_creative_status_with_no_creative_id_should_return_false() {
-		$this->assertFalse( affwp_set_creative_status( null ) );
+		$this->assertFalse( affwp_set_creative_status( affwp_get_creative() ) );
 	}
 
 	/**
 	 * @covers affwp_set_creative_status()
 	 */
-	public function test_set_creative_status_with_invalid_creative_id_should_return_null() {
-		$this->assertNull( affwp_set_creative_status( 0 ) );
+	public function test_set_creative_status_with_invalid_creative_id_should_return_false() {
+		$this->assertFalse( affwp_set_creative_status( 0 ) );
 	}
 
 	/**
@@ -268,7 +268,7 @@ class Creative_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_set_creative_status()
 	 */
 	public function test_set_creative_status_with_invalid_creative_object_should_return_false() {
-		$this->assertFalse( affwp_set_creative_status( new stdClass() ) );
+		$this->assertFalse( affwp_set_creative_status( affwp_get_creative() ) );
 	}
 
 	/**

@@ -206,7 +206,7 @@ class Affiliate_WP_Admin_Notices {
 				'affwp_action' => 'dismiss_notices'
 			);
 
-			if ( 'expired' === $license ) {
+			if ( 'expired' === $license->license ) {
 				$notice_query_args['affwp_notice'] = 'expired_license';
 
 				echo '<div class="error info">';
@@ -214,7 +214,7 @@ class Affiliate_WP_Admin_Notices {
 					echo '<p><a href="' . wp_nonce_url( add_query_arg( $notice_query_args ), 'affwp_dismiss_notice', 'affwp_dismiss_notice_nonce' ) . '">' . _x( 'Dismiss Notice', 'License', 'affiliate-wp' ) . '</a></p>';
 				echo '</div>';
 
-			} elseif ( 'valid' !== $license ) {
+			} elseif ( 'valid' !== $license->license ) {
 				$notice_query_args['affwp_notice'] = 'invalid_license';
 
 				echo '<div class="notice notice-info">';

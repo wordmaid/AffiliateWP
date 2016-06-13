@@ -1105,10 +1105,10 @@ class Affiliate_WP_Settings {
 			return; // Don't fire when saving settings
 		}
 
-		$status = get_transient( 'affwp_license_check' );
+		$license = get_transient( 'affwp_license_check' );
 
 		// Run the license check a maximum of once per day
-		if( false === $status ) {
+		if( false === $license || ! is_object( $license ) ) {
 
 			// data to send in our API request
 			$api_params = array(
@@ -1130,24 +1130,40 @@ class Affiliate_WP_Settings {
 				return false;
 			}
 
-			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+			$license = json_decode( wp_remote_retrieve_body( $response ) );
 
 			affiliate_wp()->settings->set( array(
-				'license_status' => $license_data->license
+				'license_status' => $license->license
 			), $save = true );
 
-			set_transient( 'affwp_license_check', $license_data->license, DAY_IN_SECONDS );
-
-			$status = $license_data->license;
+			set_transient( 'affwp_license_check', $license, DAY_IN_SECONDS );
 
 		}
 
-		return $status;
+		return $license;
 
 	}
 
 	public function is_license_valid() {
-		return $this->check_license() == 'valid';
+		
+		$ret     = false;
+		$license = $this->check_license();
+		if( is_object( $license ) && $license->license == 'valid' ) {
+			$ret = true;
+		}
+
+		return $ret;
+	}
+
+	public function is_license_pro_or_ultimate() {
+
+		$ret     = false;
+		$license = $this->check_license();
+		if( is_object( $license ) && $license->license_limit < 1 && $license->license == 'valid' ) {
+			$ret = true;
+		}
+
+		return $ret;
 	}
 
 }

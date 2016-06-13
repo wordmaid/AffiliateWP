@@ -45,11 +45,13 @@ function affwp_add_ons_admin() {
 			?>
 
 		</h2>
+
 		<div id="tab_container">
 
 			<?php if ( 'pro' === $active_tab ) : ?>
 				<p><?php printf( __( 'Pro add-ons are only available with a Professional or Ultimate license. If you already have one of these licenses, simply <a href="%s">log in to your account</a> to download any of these add-ons.', 'affiliate-wp' ), 'https://affiliatewp.com/account/?utm_source=plugin-add-ons-page&utm_medium=plugin&utm_campaign=AffiliateWP%20Add-ons%20Page&utm_content=Account' ); ?></p>
 				<p><?php printf( __( 'If you have a Personal or Plus license, you can easily upgrade from your account page to <a href="%s">get access to all of these add-ons</a>!', 'affiliate-wp' ), 'https://affiliatewp.com/account/?utm_source=plugin-add-ons-page&utm_medium=plugin&utm_campaign=AffiliateWP%20Add-ons%20Page&utm_content=Account' ); ?></p>
+
 			<?php else : ?>
 				<p><?php _e( 'Our official free add-ons are available to all license holders!', 'affiliate-wp' ); ?></p>
 			<?php endif; ?>
@@ -76,6 +78,10 @@ function affwp_add_ons_admin() {
 						echo '</a>';
 						echo '<p>' . $add_on->info->excerpt . '</p>';
 						echo '<a href="' . esc_url( $url ) . '" class="button-secondary" target="_blank">' . __( 'Get this add-on', 'affiliate-wp' ) . '</a>';
+
+						if( ! affwp_has_pro_add_on_access() ) {
+							echo '<a href="#" class="alignright button-primary affwp-upgrade">' . __( 'Upgrade for access', 'affiliate-wp' ) . '</a>';
+						}
 
 					echo '</div>';
 
@@ -134,7 +140,6 @@ function affwp_add_ons_get_feed( $tab = 'pro' ) {
 			$body    = wp_remote_retrieve_body( $feed );
 			$body    = json_decode( $body );
 			$add_ons = array_map( 'affwp_sanitize_json_add_on_feed_item', $body->products );
-			//echo '<pre>'; print_r( $add_ons ); echo '</pre>';
 
 			set_transient( 'affiliatewp_add_ons_feed_' . $tab, $add_ons, DAY_IN_SECONDS );
 
@@ -158,4 +163,8 @@ function affwp_sanitize_json_add_on_feed_item( $add_on ) {
 	}
 
 	return $add_on;
+}
+
+function affwp_has_pro_add_on_access() {
+	return affiliate_wp()->settings->is_license_pro_or_ultimate();
 }

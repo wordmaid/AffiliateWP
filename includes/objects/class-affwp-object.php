@@ -69,6 +69,7 @@ abstract class AffWP_Object {
 			$_object = self::fill_vars( $_object );
 
 			wp_cache_add( $cache_key, $_object, $cache_group );
+
 		} elseif ( empty( $_object->filled ) ) {
 			$_object = self::fill_vars( $_object );
 		}

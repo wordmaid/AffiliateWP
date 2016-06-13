@@ -53,8 +53,38 @@ function affwp_add_ons_admin() {
 			<?php else : ?>
 				<p><?php _e( 'Our official free add-ons are available to all license holders!', 'affiliate-wp' ); ?></p>
 			<?php endif; ?>
+			<?php
 
-			<?php echo affwp_add_ons_get_feed( $active_tab ); ?>
+			$add_ons = affwp_add_ons_get_feed( $active_tab );
+
+			if( empty( $add_ons['error'] ) ) {
+
+				foreach( $add_ons as $add_on ) {
+
+					echo '<div class="affwp-add-on">';
+
+						$url = add_query_arg( array(
+							'utm_source'   => 'plugin-addons-page',
+							'utm_medium'   => 'plugin',
+							'utm_campaign' => 'AffWPAddonsPage',
+							'utm_content'  => $add_on->info->title
+						), $add_on->info->link );
+
+						echo '<h3 class="affwp-add-on-title">' . $add_on->info->title . '</h3>';
+						echo '<a href="' . esc_url( $url ) . '" target="_blank">';
+							echo '<img class="wp-post-image" src="' . esc_url( $add_on->info->thumbnail ) . '"/>';
+						echo '</a>';
+						echo '<p>' . $add_on->info->excerpt . '</p>';
+						echo '<a href="' . esc_url( $url ) . '" class="button-secondary" target="_blank">' . __( 'Get this add-on', 'affiliate-wp' ) . '</a>';
+
+					echo '</div>';
+
+				}
+
+			} else {
+				echo '<p>' . $response['error'] . '</p>';
+			}
+			?>
 			<div class="affwp-add-ons-footer">
 				<a href="https://affiliatewp.com/addons/?utm_source=plugin-add-ons-page&utm_medium=plugin&utm_campaign=AffiliateWP%20Add-ons%20Page&utm_content=All%20Add-ons" class="button-primary" title="<?php _e( 'Browse all add-ons', 'affiliate-wp' ); ?>" target="_blank"><?php _e( 'Browse all add-ons', 'affiliate-wp' ); ?></a>
 			</div>
@@ -73,10 +103,25 @@ function affwp_add_ons_admin() {
  */
 function affwp_add_ons_get_feed( $tab = 'pro' ) {
 
-	$cache = get_transient( 'affiliatewp_add_ons_feed_' . $tab );
+	$add_ons = get_transient( 'affiliatewp_json_add_ons_feed_' . $tab );
 
-	if ( false === $cache ) {
-		$url = 'https://affiliatewp.com/?feed=feed-add-ons';
+	if ( false === $add_ons ) {
+
+		switch( $tab ) {
+
+			case 'pro' :
+
+				$category = 'pro-add-ons';
+				break;
+
+			case 'official-free' :
+
+				$category = 'official-free';
+				break;
+		}
+
+
+		$url = 'https://affiliatewp.com/edd-api/v2/products/?category=' . $category;
 
 		if ( 'pro' !== $tab ) {
 			$url = add_query_arg( array( 'display' => $tab ), $url );
@@ -86,17 +131,31 @@ function affwp_add_ons_get_feed( $tab = 'pro' ) {
 
 		if ( ! is_wp_error( $feed ) ) {
 
-			if ( isset( $feed['body'] ) && strlen( $feed['body'] ) > 0 ) {
-				$cache = wp_remote_retrieve_body( $feed );
-				set_transient( 'affiliatewp_add_ons_feed_' . $tab, $cache, HOUR_IN_SECONDS );
-			}
+			$body    = wp_remote_retrieve_body( $feed );
+			$body    = json_decode( $body );
+			$add_ons = array_map( 'affwp_sanitize_json_add_on_feed_item', $body->products );
+			//echo '<pre>'; print_r( $add_ons ); echo '</pre>';
+
+			set_transient( 'affiliatewp_add_ons_feed_' . $tab, $add_ons, DAY_IN_SECONDS );
 
 		} else {
-			$cache = '<div class="error"><p>' . __( 'There was an error retrieving the add-ons list from the server. Please try again later.', 'affiliate-wp' ) . '</div>';
+			$add_ons = array(
+				'error' => __( 'There was an error retrieving the add-ons list from the server. Please try again later.', 'affiliate-wp' )
+			);
 		}
 
 	}
 
-	return $cache;
+	return $add_ons;
 
+}
+
+function affwp_sanitize_json_add_on_feed_item( $add_on ) {
+
+	// Remove post content field
+	if( isset( $add_on->info->content ) ) {
+		unset( $add_on->info->content );
+	}
+
+	return $add_on;
 }

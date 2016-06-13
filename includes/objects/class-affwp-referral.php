@@ -152,7 +152,7 @@ final class AffWP_Referral extends AffWP_Object {
 	 * @static
 	 * @var string
 	 */
-	public static $cache_token = 'affwp_referrals';
+	public static $cache_token = 'affwp_referral';
 
 	/**
 	 * Object type.

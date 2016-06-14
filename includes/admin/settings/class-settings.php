@@ -91,17 +91,26 @@ class Affiliate_WP_Settings {
 	/**
 	 * Saves option values queued in memory.
 	 *
+	 * Note: If posting separately from the main settings submission process, this method should
+	 * be called directly for direct saving to prevent memory pollution. Otherwise, this method
+	 * is only accessible via the optional `$save` parameter in the set() method.
+	 *
 	 * @since 1.8
+	 * @since 1.8.3 Added the `$options` parameter to facilitate direct saving.
 	 * @access protected
 	 *
 	 * @see Affiliate_WP_Settings::set()
 	 *
+	 * @param array $options Optional. Options to save/overwrite directly. Default empty array.
 	 * @return bool False if the options were not updated (saved) successfully, true otherwise.
 	 */
-	protected function save() {
-		$options = $this->get_all();
+	protected function save( $options = array() ) {
+		$all_options = $this->get_all();
 
-		return update_option( 'affwp_settings', $options );
+		if ( ! empty( $options ) ) {
+			$all_options = array_merge( $all_options, $options );
+		}
+		return update_option( 'affwp_settings', $all_options );
 	}
 
 	/**
@@ -1054,9 +1063,7 @@ class Affiliate_WP_Settings {
 		// decode the license data
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-		affiliate_wp()->settings->set( array(
-			'license_status' => $license_data->license
-		), $save = true );
+		$this->save( array( 'license_status' => $license_data->license ) );
 
 		delete_transient( 'affwp_license_check' );
 
@@ -1091,9 +1098,7 @@ class Affiliate_WP_Settings {
 		if ( is_wp_error( $response ) )
 			return false;
 
-		affiliate_wp()->settings->set( array(
-			'license_status' => 0
-		), $save = true );
+		$this->save( array( 'license_status' => 0 ) );
 
 		delete_transient( 'affwp_license_check' );
 
@@ -1132,9 +1137,7 @@ class Affiliate_WP_Settings {
 
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-			affiliate_wp()->settings->set( array(
-				'license_status' => $license_data->license
-			), $save = true );
+			$this->save( array( 'license_status' => $license_data->license ) );
 
 			set_transient( 'affwp_license_check', $license_data->license, DAY_IN_SECONDS );
 

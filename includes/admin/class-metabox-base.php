@@ -25,7 +25,8 @@ if (!defined('ABSPATH')) {
 abstract class AffWP_Metabox_Base {
 
     /**
-     * An AffiliateWP meta box can be added to AffiliateWP by any 3rd-party source, by extending this class.
+     * An AffiliateWP meta box can be added to AffiliateWP by any
+     * 3rd-party source, by extending this class.
      *
      * Example:
      *
@@ -35,9 +36,10 @@ abstract class AffWP_Metabox_Base {
      *
      *    public $meta_box_name = 'My Integration AffWP Metabox';
      *
-     *    // Optional; defaults to primary AffiliateWP Reports Overview page
-     *    // (screen id: affiliates_page_affiliate-wp-reports)
-     *    public $affwp_screen  = 'affiliates_page_affiliate-wp-reports' || array( multiple screens );
+     *    Optional; defaults to primary AffiliateWP Reports Overview page
+     *    (screen id: affiliates_page_affiliate-wp-reports)
+     *    public $affwp_screen  = 'affiliates_page_affiliate-wp-reports'
+     *    public $affwp_screen  = array( define multiple screens in an array );
      *
      *    public function content() {
      *        $this->my_meta_box_content();

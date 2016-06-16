@@ -31,19 +31,20 @@ abstract class AffWP_Metabox_Base {
      *
      * class My_Integration_AffWP_Metabox extends AffWP_Metabox_Base {
      *
-     *    public $meta_box_id = 'my_integration_affwp_metabox';
+     *    public $meta_box_id   = 'my_integration_affwp_metabox';
      *
      *    public $meta_box_name = 'My Integration AffWP Metabox';
      *
      *    // Optional; defaults to primary AffiliateWP Reports Overview page
      *    // (screen id: affiliates_page_affiliate-wp-reports)
-     *    public $affwp_screen = 'affiliates_page_affiliate-wp-reports' || array( multiple screens );
+     *    public $affwp_screen  = 'affiliates_page_affiliate-wp-reports' || array( multiple screens );
      *
-     *    public content = $this->my_meta_box_content();
+     *    public function content() {
+     *        $this->my_meta_box_content();
+     *    }
      *
      *    public function my_meta_box_content() {
-     *
-     *     echo 'Here is some super content I'd like to share with AffiliateWP users!;
+     *        echo 'Here is some super content I'd like to share with AffiliateWP users!;
      *    }
      *
      * }
@@ -91,14 +92,13 @@ abstract class AffWP_Metabox_Base {
                                    'affiliates_page_affiliate-wp-settings',
                                    'affiliates_page_affiliate-wp-add-ons'
                                    );
-
     /**
      * The position in which the meta box will be loaded
      * Options are: 'normal', side', or 'advanced'
      *
-     * 'normal'   will load in the left column
-     * 'side'     will load in the center column
-     * 'advanced' will load in the right column
+     * 'primary'   will load in the left column
+     * 'secondary' will load in the center column
+     * 'tertiary'  will load in the right column
      *
      * All columns will collapse as needed on smaller screens.
      *
@@ -106,7 +106,7 @@ abstract class AffWP_Metabox_Base {
      * @var     $context
      * @since   1.9
      */
-    public $context = 'normal';
+    public $context = 'primary';
 
     /**
      * Constructor
@@ -161,7 +161,6 @@ abstract class AffWP_Metabox_Base {
      * @since  1.9
      */
     public function content() {
-
         echo apply_filters( 'affwp_meta_box_' . $this->meta_box_id, $this->content );
     }
 }

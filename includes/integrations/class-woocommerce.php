@@ -49,8 +49,6 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		// Shop page.
 		add_action( 'pre_get_posts', array( $this, 'force_shop_page_for_referrals' ), 5 );
-		add_filter( 'paginate_links', array( $this, 'strip_referral_from_paged_urls' ), 100 );
-
 	}
 
 	/**
@@ -548,35 +546,15 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	 *
 	 * @since 1.8
 	 * @since 1.8.1 Skipped for product taxonomies and searches
-	 * @since 1.8.3 Restructured to remove any kind of referral values
+	 * @deprecated 1.8.3
+	 * @see Affiliate_WP_Tracking::strip_referral_from_paged_urls()
 	 * @access public
 	 *
 	 * @param string $link Pagination link.
 	 * @return string (Maybe) filtered pagination link.
 	 */
 	public function strip_referral_from_paged_urls( $link ) {
-		if ( ( ! is_shop() && ! is_paged() ) ) {
-			return $link;
-		}
-
-		// Only mess with $link if there's pagination.
-		preg_match( '/page\/\d\//', $link, $matches );
-
-		if ( ! empty( $matches[0] ) ) {
-			$referral_var = affiliate_wp()->tracking->get_referral_var();
-
-			// Remove a non-pretty referral ID.
-			$link = remove_query_arg( $referral_var, $link );
-
-			// Remove a pretty referral ID or username.
-			preg_match( "/$referral_var\/(\w+)\//", $link, $pretty_matches );
-
-			if ( ! empty( $pretty_matches[0] ) ) {
-				$link = str_replace( $pretty_matches[0], '', $link );
-			}
-		}
-
-		return $link;
+		return affiliate_wp()->tracking->strip_referral_from_paged_urls( $link );
 	}
 
 }

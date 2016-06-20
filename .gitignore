@@ -24,3 +24,5 @@ $RECYCLE.BIN/
 .metadata
 /node_modules/
 /build/
+composer.lock
+vendor

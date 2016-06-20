@@ -558,12 +558,18 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			return $link;
 		}
 
-		$pagination = preg_match( '/page\/\d\//', $link, $matches );
+		// Only mess with $link if there's pagination.
+		preg_match( '/page\/\d\//', $link, $matches );
 
 		if ( ! empty( $matches[0] ) ) {
-			$base = get_permalink( wc_get_page_id( 'shop' ) );
-			if ( $base ) {
-				$link = esc_url( trailingslashit( $base ) . $matches[0] );
+			// Remove a non-pretty referral ID.
+			$link = remove_query_arg( affiliate_wp()->tracking->get_referral_var(), $link );
+
+			// Remove a pretty referral ID or username.
+			preg_match( "/$referral_var\/(\w+)\//", $link, $pretty_matches );
+
+			if ( ! empty( $pretty_matches[0] ) ) {
+				$link = str_replace( $pretty_matches[0], '', $link );
 			}
 		}
 

@@ -760,7 +760,7 @@ class Affiliate_WP_Tracking {
 		}
 
 		// Only mess with $link if there's pagination.
-		preg_match( '/page\/\d\//', $link, $matches );
+		preg_match( '/page\/\d\/?/', $link, $matches );
 
 		if ( ! empty( $matches[0] ) ) {
 			$referral_var = $this->get_referral_var();

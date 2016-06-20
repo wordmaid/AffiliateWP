@@ -563,8 +563,10 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 		preg_match( '/page\/\d\//', $link, $matches );
 
 		if ( ! empty( $matches[0] ) ) {
+			$referral_var = affiliate_wp()->tracking->get_referral_var();
+
 			// Remove a non-pretty referral ID.
-			$link = remove_query_arg( affiliate_wp()->tracking->get_referral_var(), $link );
+			$link = remove_query_arg( $referral_var, $link );
 
 			// Remove a pretty referral ID or username.
 			preg_match( "/$referral_var\/(\w+)\//", $link, $pretty_matches );

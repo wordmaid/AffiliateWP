@@ -12,7 +12,7 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 	*/
 	public function init() {
 
-		$this->context = 'marketpress';
+		$this->context      = 'marketpress';
 		$this->is_version_3 = $this->get_mp_version() == '2.0' ? false : true;
 
 		if( $this->is_version_3 ){
@@ -34,6 +34,7 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 	 * @access  public
 	 */
 	public function get_mp_version() {
+
 		$mp_version = false;
 
 		if ( defined( 'MP_VERSION' ) ) {
@@ -43,8 +44,8 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 		}
 
 		// Strip out any beta or RC components from version... get base version
-		$mp_version    = preg_replace( '/\.\D.*/', '', $mp_version );
-		$mp_version = version_compare( $mp_version, '3.0' ) > - 1 ? '3.0' : '2.0';
+		$mp_version = preg_replace( '/\.\D.*/', '', $mp_version );
+		$mp_version = version_compare( $mp_version, '3.0', '>=' ) ? '3.0' : '2.0';
 
 		return $mp_version;
 	}
@@ -59,26 +60,31 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 
 		if ( $this->was_referred() ) {
 			$order_post = $order;
-			$order_id    = $order->ID;
+			$order_id   = $order->ID;
 
-			if($this->is_version_3){
-				$amount      = $order->get_meta( 'mp_order_total' );
-				$items       = $order->get_meta( 'mp_cart_info' );
-				$tax_total = $order->get_meta( 'mp_tax_total', 0 );
+			if( $this->is_version_3 ) {
+				$amount         = $order->get_meta( 'mp_order_total' );
+				$items          = $order->get_meta( 'mp_cart_info' );
+				$tax_total      = $order->get_meta( 'mp_tax_total', 0 );
 				$shipping_total = $order->get_meta( 'mp_shipping_total', 0 );
-				$order_post = get_post( $order->ID );
+				$order_post     = get_post( $order->ID );
 			} else {
-				$amount      = $order->mp_order_total;
-				$items       = $order->mp_cart_info;
-				$tax_total = $order->mp_tax_total;
+				$amount         = $order->mp_order_total;
+				$items          = $order->mp_cart_info;
+				$tax_total      = $order->mp_tax_total;
 				$shipping_total = $order->mp_shipping_total;
 			}
 
 			if( 0 == $order_post->post_author ) {
-				if($this->is_version_3){
+
+				if( $this->is_version_3 ) {
+
 					$customer_email = $order->get_meta( 'mp_shipping_info->email', '' );
+
 				} else {
+
 					$customer_email = $order->mp_shipping_info[ 'email' ];
+
 				}
 
 			} else {

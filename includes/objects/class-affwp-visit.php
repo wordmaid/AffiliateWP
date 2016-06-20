@@ -1,6 +1,6 @@
 <?php
 /**
- * Objects: AffWP_Visit class
+ * Objects: Visit
  *
  * @package AffiliateWP
  * @category Core
@@ -8,15 +8,17 @@
  * @since 1.9
  */
 
+namespace AffWP;
+
 /**
  * Implements a visit object.
  *
  * @since 1,9
  *
- * @see AffWP_Object
+ * @see AffWP\Object
  * @see affwp_get_visit()
  */
-final class AffWP_Visit extends AffWP_Object {
+final class Visit extends Object {
 
 	/**
 	 * Visit ID.
@@ -107,7 +109,7 @@ final class AffWP_Visit extends AffWP_Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP_Object::get_cache_key()
+	 * @see AffWP\Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_visits';
 
@@ -163,7 +165,7 @@ final class AffWP_Visit extends AffWP_Object {
 	 * @since 1.9
 	 * @access public
 	 *
-	 * @param AffWP_Visit $visit Visit object.
+	 * @param Visit $visit Visit object.
 	 */
 	public function __construct( $visit ) {
 		parent::__construct( $visit );

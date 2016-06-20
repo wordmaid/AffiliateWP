@@ -1,6 +1,6 @@
 <?php
 /**
- * Objects: AffWP_Creative class
+ * Objects: Creative
  *
  * @package AffiliateWP
  * @category Core
@@ -8,15 +8,17 @@
  * @since 1.9
  */
 
+namespace AffWP;
+
 /**
  * Implements a creative object.
  *
  * @since 1,9
  *
- * @see AffWP_Object
+ * @see AffWP\Object
  * @see affwp_get_creative()
  */
-final class AffWP_Creative extends AffWP_Object {
+final class Creative extends Object {
 
 	/**
 	 * Creative ID.
@@ -107,7 +109,7 @@ final class AffWP_Creative extends AffWP_Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP_Object::get_cache_key()
+	 * @see AffWP\Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_creatives';
 
@@ -163,7 +165,7 @@ final class AffWP_Creative extends AffWP_Object {
 	 * @since 1.9
 	 * @access public
 	 *
-	 * @param AffWP_Creative $creative Creative object.
+	 * @param Creative $creative Creative object.
 	 */
 	public function __construct( $creative ) {
 		parent::__construct( $creative );

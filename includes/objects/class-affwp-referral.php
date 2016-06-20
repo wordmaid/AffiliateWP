@@ -1,6 +1,6 @@
 <?php
 /**
- * Objects: AffWP_Referral class
+ * Objects: Referral
  *
  * @package AffiliateWP
  * @category Core
@@ -8,15 +8,17 @@
  * @since 1.9
  */
 
+namespace AffWP;
+
 /**
  * Implements a referral object.
  *
  * @since 1,9
  *
- * @see AffWP_Object
+ * @see AffWP\Object
  * @see affwp_get_referral()
  */
-final class AffWP_Referral extends AffWP_Object {
+final class Referral extends Object {
 
 	/**
 	 * Referral ID.
@@ -152,7 +154,7 @@ final class AffWP_Referral extends AffWP_Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP_Object::get_cache_key()
+	 * @see AffWP\Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_referrals';
 
@@ -208,7 +210,7 @@ final class AffWP_Referral extends AffWP_Object {
 	 * @since 1.9
 	 * @access public
 	 *
-	 * @param AffWP_Referral $referral Referral object.
+	 * @param Referral $referral Referral object.
 	 */
 	public function __construct( $referral ) {
 		parent::__construct( $referral );

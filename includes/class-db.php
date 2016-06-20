@@ -160,9 +160,6 @@ abstract class Affiliate_WP_DB {
 		// White list columns
 		$data = array_intersect_key( $data, $column_formats );
 
-		// Unslash data.
-		$data = wp_unslash( $data );
-
 		// Reorder $column_formats to match the order of columns given in $data
 		$data_keys = array_keys( $data );
 		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
@@ -225,9 +222,6 @@ abstract class Affiliate_WP_DB {
 
 		// White list columns
 		$data = array_intersect_key( $data, $column_formats );
-
-		// Unslash data.
-		$data = wp_unslash( $data );
 
 		// Reorder $column_formats to match the order of columns given in $data
 		$data_keys = array_keys( $data );

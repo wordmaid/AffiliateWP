@@ -1,4 +1,6 @@
 <?php
+use AffWP\Affiliate as Affiliate;
+
 /**
  * Tests for Affiliate functions in affiliate-functions.php.
  *
@@ -91,7 +93,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * Affiliate test object.
 	 *
 	 * @access protected
-	 * @var AffWP_Affiliate
+	 * @var Affiliate
 	 */
 	protected $_affiliate_object;
 
@@ -99,7 +101,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * Affiliate test object 2.
 	 *
 	 * @access protected
-	 * @var AffWP_Affiliate
+	 * @var Affiliate
 	 */
 	protected $_affiliate_object_2;
 
@@ -315,6 +317,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate()
 	 */
 	public function test_get_affiliate_should_accept_an_affiliate_id() {
+		$this->assertInstanceOf( 'AffWP\Affiliate', affwp_get_affiliate( $this->_affiliate_id ) );
 		$this->assertEquals( $this->_affiliate_id, $this->_affiliate_object->affiliate_id );
 	}
 
@@ -325,7 +328,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$affiliate = affiliate_wp()->affiliates->get_object( $this->_affiliate_id );
 		$affiliate = affwp_get_affiliate( $affiliate );
 
-		$this->assertInstanceOf( 'AffWP_Affiliate', $affiliate );
+		$this->assertInstanceOf( 'AffWP\Affiliate', $affiliate );
 		$this->assertEquals( $this->_affiliate_id, $affiliate->affiliate_id );
 	}
 
@@ -576,7 +579,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	function test_get_affiliate_unpaid_earnings() {
 
 		$this->assertEquals( 0, affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id ) );
-		$this->assertEquals( '&#36;0.00', affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id, true ) );
+		$this->assertEquals( '&#36;0', affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id, true ) );
 
 	}
 
@@ -983,7 +986,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 */
 	public function test_get_affiliate_earnings_formatted_true_should_return_formatted_earnings() {
 		affwp_increase_affiliate_earnings( $this->_affiliate_id, '1000' );
-		$this->assertEquals( '&#36;1,000.00', affwp_get_affiliate_earnings( $this->_affiliate_id, $formatted = true ) );
+		$this->assertEquals( '&#36;1000', affwp_get_affiliate_earnings( $this->_affiliate_id, $formatted = true ) );
 	}
 
 	/**
@@ -1037,7 +1040,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 			'status'       => 'unpaid'
 		) );
 
-		$this->assertSame( '&#36;150.00', affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id, $formatted = true ) );
+		$this->assertSame( '&#36;150', affwp_get_affiliate_unpaid_earnings( $this->_affiliate_id, $formatted = true ) );
 	}
 
 	/**

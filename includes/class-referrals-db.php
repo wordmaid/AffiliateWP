@@ -21,7 +21,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 * @access public
 	 * @var string
 	 */
-	public $query_object_type = 'AffWP_Referral';
+	public $query_object_type = 'AffWP\Referral';
 
 	/**
 	 * Get things started
@@ -52,8 +52,8 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *
 	 * @see Affiliate_WP_DB::get_core_object()
 	 *
-	 * @param int|object|AffWP_Referral $referral Referral ID or object.
-	 * @return AffWP_Referral|null Referral object, null otherwise.
+	 * @param int|object|AffWP\Referral $referral Referral ID or object.
+	 * @return AffWP\Referral|null Referral object, null otherwise.
 	 */
 	public function get_object( $referral ) {
 		return $this->get_core_object( $referral, $this->query_object_type );
@@ -155,12 +155,12 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	}
 
 	/**
-	 * Update a referral
+	 * Update a referral.
 	 *
 	 * @access  public
 	 * @since   1.5
 	 *
-	 * @param int|AffWP_Referral $referral Referral ID or object.
+	 * @param int|AffWP\Referral $referral Referral ID or object.
 	*/
 	public function update_referral( $referral = 0, $data = array() ) {
 
@@ -473,6 +473,11 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 				);
 
 			}
+		}
+
+		// Convert to AffWP\Referral objects.
+		if ( is_array( $results ) ) {
+			$results = array_map( 'affwp_get_referral', $results );
 		}
 
 		wp_cache_add( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );

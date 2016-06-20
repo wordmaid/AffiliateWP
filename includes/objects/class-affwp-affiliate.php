@@ -1,6 +1,6 @@
 <?php
 /**
- * Objects: AffWP_Affiliate class
+ * Objects: Affiliate
  *
  * @package AffiliateWP
  * @category Core
@@ -8,15 +8,17 @@
  * @since 1.9
  */
 
+namespace AffWP;
+
 /**
  * Implements an affiliate object.
  *
  * @since 1,9
  *
- * @see AffWP_Object
+ * @see AffWP\Object
  * @see affwp_get_affiliate()
  */
-final class AffWP_Affiliate extends AffWP_Object {
+final class Affiliate extends Object {
 
 	/**
 	 * Affiliate ID.
@@ -52,7 +54,7 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @access protected
 	 * @var string
 	 *
-	 * @see AffWP_Affiliate::get_rate()
+	 * @see Affiliate::get_rate()
 	 */
 	protected $rate;
 
@@ -63,7 +65,7 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @access protected
 	 * @var string
 	 *
-	 * @see AffWP_Affiliate::get_rate_type()
+	 * @see Affiliate::get_rate_type()
 	 */
 	protected $rate_type;
 
@@ -129,7 +131,7 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP_Object::get_cache_key()
+	 * @see AffWP\Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_affiliates';
 
@@ -186,7 +188,7 @@ final class AffWP_Affiliate extends AffWP_Object {
 	 * @since 1.9
 	 * @access public
 	 *
-	 * @param AffWP_Affiliate $affiliate Affiliate object.
+	 * @param Affiliate $affiliate Affiliate object.
 	 */
 	public function __construct( $affiliate ) {
 		parent::__construct( $affiliate );

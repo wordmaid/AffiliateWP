@@ -1,4 +1,6 @@
 <?php
+use AffWP\Affiliate as Affiliate;
+
 /**
  * Tests for Affiliate functions in affiliate-functions.php.
  *
@@ -91,7 +93,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * Affiliate test object.
 	 *
 	 * @access protected
-	 * @var AffWP_Affiliate
+	 * @var Affiliate
 	 */
 	protected $_affiliate_object;
 
@@ -99,7 +101,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * Affiliate test object 2.
 	 *
 	 * @access protected
-	 * @var AffWP_Affiliate
+	 * @var Affiliate
 	 */
 	protected $_affiliate_object_2;
 
@@ -315,6 +317,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_get_affiliate()
 	 */
 	public function test_get_affiliate_should_accept_an_affiliate_id() {
+		$this->assertInstanceOf( 'AffWP\Affiliate', affwp_get_affiliate( $this->_affiliate_id ) );
 		$this->assertEquals( $this->_affiliate_id, $this->_affiliate_object->affiliate_id );
 	}
 
@@ -325,7 +328,7 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		$affiliate = affiliate_wp()->affiliates->get_object( $this->_affiliate_id );
 		$affiliate = affwp_get_affiliate( $affiliate );
 
-		$this->assertInstanceOf( 'AffWP_Affiliate', $affiliate );
+		$this->assertInstanceOf( 'AffWP\Affiliate', $affiliate );
 		$this->assertEquals( $this->_affiliate_id, $affiliate->affiliate_id );
 	}
 

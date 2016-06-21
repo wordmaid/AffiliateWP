@@ -755,10 +755,6 @@ class Affiliate_WP_Tracking {
 	 * @return string (Maybe) filtered pagination link.
 	 */
 	public function strip_referral_from_paged_urls( $link ) {
-		if ( ! is_paged() ) {
-			return $link;
-		}
-
 		// Only mess with $link if there's pagination.
 		preg_match( '/page\/\d\/?/', $link, $matches );
 

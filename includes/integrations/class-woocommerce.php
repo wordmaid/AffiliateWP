@@ -95,6 +95,10 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 			$cart_shipping = $this->order->get_total_shipping();
 
+			if ( ! affiliate_wp()->settings->get( 'exclude_tax' ) ) {
+				$cart_shipping += $this->order->get_shipping_tax();
+			}
+
 			$items = $this->order->get_items();
 
 			// Calculate the referral amount based on product prices

@@ -1,5 +1,5 @@
-10### affwp_get_pages
+### affwp_get_pages
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### Object
+### Object
 
 ----
 
-- Since: 1-92
+- Since: 1.*

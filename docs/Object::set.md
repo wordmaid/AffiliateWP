@@ -1,5 +1,5 @@
-10### Object::set
+### Object::set
 
 ----
 
-- Since: 1-92
+- Since: 1.*

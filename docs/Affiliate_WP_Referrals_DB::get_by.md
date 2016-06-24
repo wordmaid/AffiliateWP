@@ -1,5 +1,5 @@
-10### Affiliate_WP_Referrals_DB::get_by
+### Affiliate_WP_Referrals_DB::get_by
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### AffWP_Affiliates_Table::column_default
+### AffWP_Affiliates_Table::column_default
 
 ----
 
-- Since: 1-02
+- Since: 1.*

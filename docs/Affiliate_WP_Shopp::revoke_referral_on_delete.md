@@ -1,5 +1,5 @@
-10### Affiliate_WP_Shopp::revoke_referral_on_delete
+### Affiliate_WP_Shopp::revoke_referral_on_delete
 
 ----
 
-- Source file: integrations_class-shopp-php2
+- Source file: integrations_class-shopp.php

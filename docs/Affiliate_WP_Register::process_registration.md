@@ -1,5 +1,5 @@
-10### Affiliate_WP_Register::process_registration
+### Affiliate_WP_Register::process_registration
 
 ----
 
-- Since: 1-02
+- Since: 1.*

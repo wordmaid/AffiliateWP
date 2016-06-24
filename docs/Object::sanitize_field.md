@@ -1,5 +1,5 @@
-10### Object::sanitize_field
+### Object::sanitize_field
 
 ----
 
-- Since: 1-92
+- Since: 1.*

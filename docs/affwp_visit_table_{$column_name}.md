@@ -1,4 +1,4 @@
-10### affwp_visit_table_{$column_name}
+### affwp_visit_table_{$column_name}
 
 ----
 

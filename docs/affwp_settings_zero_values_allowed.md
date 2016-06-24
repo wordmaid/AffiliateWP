@@ -1,5 +1,5 @@
-10### affwp_settings_zero_values_allowed
+### affwp_settings_zero_values_allowed
 
 ----
 
-- Since: 1-72
+- Since: 1.*

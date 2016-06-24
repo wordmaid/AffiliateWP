@@ -1,4 +1,4 @@
-10### affwp_referral_table_amount
+### affwp_referral_table_amount
 
 ----
 

@@ -1,5 +1,5 @@
-10### affwp_sanitize_visit_url
+### affwp_sanitize_visit_url
 
 ----
 
-- Since: 1-7-52
+- Since: 1.*

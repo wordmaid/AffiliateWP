@@ -1,4 +1,4 @@
-10### affwp_referrals_page_buttons
+### affwp_referrals_page_buttons
 
 ----
 

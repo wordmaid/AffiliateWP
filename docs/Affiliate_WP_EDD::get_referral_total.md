@@ -1,5 +1,5 @@
-10### Affiliate_WP_EDD::get_referral_total
+### Affiliate_WP_EDD::get_referral_total
 
 ----
 
-- Since: 1-3-12
+- Since: 1.*

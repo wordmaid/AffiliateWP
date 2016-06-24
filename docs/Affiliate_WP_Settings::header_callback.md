@@ -1,5 +1,5 @@
-10### Affiliate_WP_Settings::header_callback
+### Affiliate_WP_Settings::header_callback
 
 ----
 
-- Since: 1-02
+- Since: 1.*

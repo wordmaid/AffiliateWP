@@ -1,5 +1,5 @@
-10### Affiliate_WP_Migrate_Users::do_users
+### Affiliate_WP_Migrate_Users::do_users
 
 ----
 
-- Since: 1-32
+- Since: 1.*

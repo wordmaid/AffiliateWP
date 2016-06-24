@@ -1,4 +1,4 @@
-10### affwp_referral_table_status
+### affwp_referral_table_status
 
 ----
 

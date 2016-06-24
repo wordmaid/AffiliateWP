@@ -1,5 +1,5 @@
-10### affwp_process_affiliate_moderation
+### affwp_process_affiliate_moderation
 
 ----
 
-- Since: 1-72
+- Since: 1.*

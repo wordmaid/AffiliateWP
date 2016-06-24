@@ -1,5 +1,5 @@
-10### Affiliate_WP_EDD::commission_settings
+### Affiliate_WP_EDD::commission_settings
 
 ----
 
-- Since: 1-22
+- Since: 1.*

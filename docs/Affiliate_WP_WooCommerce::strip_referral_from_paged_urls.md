@@ -1,5 +1,5 @@
-10### Affiliate_WP_WooCommerce::strip_referral_from_paged_urls
+### Affiliate_WP_WooCommerce::strip_referral_from_paged_urls
 
 ----
 
-- Since: 1-82
+- Since: 1.*

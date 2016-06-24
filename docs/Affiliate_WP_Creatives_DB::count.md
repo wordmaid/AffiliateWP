@@ -1,5 +1,5 @@
-10### Affiliate_WP_Creatives_DB::count
+### Affiliate_WP_Creatives_DB::count
 
 ----
 
-- Source file: class-creatives-db-php2
+- Source file: class-creatives-db.php

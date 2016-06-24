@@ -1,5 +1,5 @@
-10### affwp_theme_template_dir_name
+### affwp_theme_template_dir_name
 
 ----
 
-- Source file: class-templates-php2
+- Source file: class-templates.php

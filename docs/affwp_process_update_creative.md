@@ -1,5 +1,5 @@
-10### affwp_process_update_creative
+### affwp_process_update_creative
 
 ----
 
-- Since: 1-22
+- Since: 1.*

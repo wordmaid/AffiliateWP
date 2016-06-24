@@ -1,5 +1,5 @@
-10### affwp_admin_styles
+### affwp_admin_styles
 
 ----
 
-- Namespace: global2
+- Namespace: global

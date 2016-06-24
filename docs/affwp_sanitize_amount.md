@@ -1,5 +1,5 @@
-10### affwp_sanitize_amount
+### affwp_sanitize_amount
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

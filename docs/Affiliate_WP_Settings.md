@@ -1,5 +1,5 @@
-10### Affiliate_WP_Settings
+### Affiliate_WP_Settings
 
 ----
 
-- Source file: admin_settings_class-settings-php2
+- Source file: admin_settings_class-settings.php

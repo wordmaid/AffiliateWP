@@ -1,5 +1,5 @@
-10### Affiliate::get_rate_type
+### Affiliate::get_rate_type
 
 ----
 
-- Since: 1-92
+- Since: 1.*

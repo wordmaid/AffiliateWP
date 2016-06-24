@@ -1,5 +1,5 @@
-10### affwp_get_affiliate_rate_type
+### affwp_get_affiliate_rate_type
 
 ----
 
-- Since: 1-12
+- Since: 1.*

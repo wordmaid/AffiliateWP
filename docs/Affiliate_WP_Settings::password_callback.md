@@ -1,5 +1,5 @@
-10### Affiliate_WP_Settings::password_callback
+### Affiliate_WP_Settings::password_callback
 
 ----
 
-- Since: 1-32
+- Since: 1.*

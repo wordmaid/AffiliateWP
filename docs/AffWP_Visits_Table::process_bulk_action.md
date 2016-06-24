@@ -1,5 +1,5 @@
-10### AffWP_Visits_Table::process_bulk_action
+### AffWP_Visits_Table::process_bulk_action
 
 ----
 
-- Since: 1-02
+- Since: 1.*

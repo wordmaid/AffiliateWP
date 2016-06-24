@@ -1,4 +1,4 @@
-10### affwp_visit_table_affiliate
+### affwp_visit_table_affiliate
 
 ----
 

@@ -1,5 +1,5 @@
-10### affwp_email_tags
+### affwp_email_tags
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

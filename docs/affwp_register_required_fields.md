@@ -1,5 +1,5 @@
-10### affwp_register_required_fields
+### affwp_register_required_fields
 
 ----
 
-- Source file: class-register-php2
+- Source file: class-register.php

@@ -1,4 +1,4 @@
-10### affwp_referral_table_columns
+### affwp_referral_table_columns
 
 ----
 

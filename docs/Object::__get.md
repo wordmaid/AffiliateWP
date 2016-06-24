@@ -1,5 +1,5 @@
-10### Object::__get
+### Object::__get
 
 ----
 
-- Since: 1-92
+- Since: 1.*

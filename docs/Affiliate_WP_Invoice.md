@@ -1,5 +1,5 @@
-10### Affiliate_WP_Invoice
+### Affiliate_WP_Invoice
 
 ----
 
-- Namespace: global2
+- Namespace: global

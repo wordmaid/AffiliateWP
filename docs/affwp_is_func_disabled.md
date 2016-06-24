@@ -1,5 +1,5 @@
-10### affwp_is_func_disabled
+### affwp_is_func_disabled
 
 ----
 
-- Since: 1-02
+- Since: 1.*

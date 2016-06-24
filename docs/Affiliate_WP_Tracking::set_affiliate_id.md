@@ -1,5 +1,5 @@
-10### Affiliate_WP_Tracking::set_affiliate_id
+### Affiliate_WP_Tracking::set_affiliate_id
 
 ----
 
-- Since: 1-02
+- Since: 1.*

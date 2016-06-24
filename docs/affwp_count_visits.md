@@ -1,5 +1,5 @@
-10### affwp_count_visits
+### affwp_count_visits
 
 ----
 
-- Namespace: global2
+- Namespace: global

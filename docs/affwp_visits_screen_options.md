@@ -1,5 +1,5 @@
-10### affwp_visits_screen_options
+### affwp_visits_screen_options
 
 ----
 
-- Source file: admin_visits_screen-options-php2
+- Source file: admin_visits_screen-options.php

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Registrations_Graph::get_data
+### Affiliate_WP_Registrations_Graph::get_data
 
 ----
 
-- Since: 1-12
+- Since: 1.*

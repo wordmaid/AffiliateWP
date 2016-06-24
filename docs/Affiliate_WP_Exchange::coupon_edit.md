@@ -1,5 +1,5 @@
-10### Affiliate_WP_Exchange::coupon_edit
+### Affiliate_WP_Exchange::coupon_edit
 
 ----
 
-- Since: 1-32
+- Since: 1.*

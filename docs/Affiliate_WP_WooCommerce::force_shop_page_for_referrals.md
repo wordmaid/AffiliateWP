@@ -1,5 +1,5 @@
-10### Affiliate_WP_WooCommerce::force_shop_page_for_referrals
+### Affiliate_WP_WooCommerce::force_shop_page_for_referrals
 
 ----
 
-- Since: 1-82
+- Since: 1.*

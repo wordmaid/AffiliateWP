@@ -1,5 +1,5 @@
-10### affwp_optimize_member_prevent_affiliate_redirect
+### affwp_optimize_member_prevent_affiliate_redirect
 
 ----
 
-- Namespace: global2
+- Namespace: global

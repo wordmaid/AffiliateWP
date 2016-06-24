@@ -1,4 +1,4 @@
-10### affwp_tools_tab_{$active_tab}
+### affwp_tools_tab_{$active_tab}
 
 ----
 

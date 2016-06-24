@@ -1,5 +1,5 @@
-10### Affiliate_WP_MarketPress::init
+### Affiliate_WP_MarketPress::init
 
 ----
 
-- Since: 1-62
+- Since: 1.*

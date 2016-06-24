@@ -1,5 +1,5 @@
-10### Affiliate_WP_DB::get_column_defaults
+### Affiliate_WP_DB::get_column_defaults
 
 ----
 
-- Source file: class-db-php2
+- Source file: class-db.php

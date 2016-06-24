@@ -1,5 +1,5 @@
-10### Affiliate_WP_Shortcodes::affiliate_area
+### Affiliate_WP_Shortcodes::affiliate_area
 
 ----
 
-- Source file: class-shortcodes-php2
+- Source file: class-shortcodes.php

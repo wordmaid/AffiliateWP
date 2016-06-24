@@ -1,5 +1,5 @@
-10### affwp_format_amount_decimals
+### affwp_format_amount_decimals
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Recount::__construct
+### Affiliate_WP_Recount::__construct
 
 ----
 
-- Since: 1-02
+- Since: 1.*

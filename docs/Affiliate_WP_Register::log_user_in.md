@@ -1,5 +1,5 @@
-10### Affiliate_WP_Register::log_user_in
+### Affiliate_WP_Register::log_user_in
 
 ----
 
-- Since: 1-02
+- Since: 1.*

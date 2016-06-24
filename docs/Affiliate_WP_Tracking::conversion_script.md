@@ -1,5 +1,5 @@
-10### Affiliate_WP_Tracking::conversion_script
+### Affiliate_WP_Tracking::conversion_script
 
 ----
 
-- Since: 1-02
+- Since: 1.*

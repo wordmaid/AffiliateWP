@@ -1,5 +1,5 @@
-10### affwp_decrease_affiliate_visit_count
+### affwp_decrease_affiliate_visit_count
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Migrate_Affiliates_Pro::finish
+### Affiliate_WP_Migrate_Affiliates_Pro::finish
 
 ----
 
-- Source file: admin_tools_class-migrate-affiliates-pro-php2
+- Source file: admin_tools_class-migrate-affiliates-pro.php

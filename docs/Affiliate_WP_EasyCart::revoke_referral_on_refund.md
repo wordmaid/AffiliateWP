@@ -1,5 +1,5 @@
-10### Affiliate_WP_EasyCart::revoke_referral_on_refund
+### Affiliate_WP_EasyCart::revoke_referral_on_refund
 
 ----
 
-- Since: 1-62
+- Since: 1.*

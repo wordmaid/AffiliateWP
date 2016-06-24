@@ -1,5 +1,5 @@
-10### Affiliate_WP_Logging
+### Affiliate_WP_Logging
 
 ----
 
-- Source file: class-logging-php2
+- Source file: class-logging.php

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Gravity_Forms::save_settings
+### Affiliate_WP_Gravity_Forms::save_settings
 
 ----
 
-- Since: 1-72
+- Since: 1.*

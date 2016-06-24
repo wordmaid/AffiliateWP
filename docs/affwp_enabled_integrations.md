@@ -1,5 +1,5 @@
-10### affwp_enabled_integrations
+### affwp_enabled_integrations
 
 ----
 
-- Source file: class-integrations-php2
+- Source file: class-integrations.php

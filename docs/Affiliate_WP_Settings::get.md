@@ -1,5 +1,5 @@
-10### Affiliate_WP_Settings::get
+### Affiliate_WP_Settings::get
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Register::scripts
+### Affiliate_WP_Register::scripts
 
 ----
 
-- Since: 1-82
+- Since: 1.*

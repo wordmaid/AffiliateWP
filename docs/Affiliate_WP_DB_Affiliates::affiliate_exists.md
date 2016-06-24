@@ -1,5 +1,5 @@
-10### Affiliate_WP_DB_Affiliates::affiliate_exists
+### Affiliate_WP_DB_Affiliates::affiliate_exists
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### affwp_after_graph
+### affwp_after_graph
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

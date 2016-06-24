@@ -1,5 +1,5 @@
-10### Affiliate_WP_Formidable_Pro::get_array_values
+### Affiliate_WP_Formidable_Pro::get_array_values
 
 ----
 
-- Since: 1-62
+- Since: 1.*

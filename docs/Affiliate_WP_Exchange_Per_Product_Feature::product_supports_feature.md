@@ -1,5 +1,5 @@
-10### Affiliate_WP_Exchange_Per_Product_Feature::product_supports_feature
+### Affiliate_WP_Exchange_Per_Product_Feature::product_supports_feature
 
 ----
 
-- Since: 1-52
+- Since: 1.*

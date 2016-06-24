@@ -1,5 +1,5 @@
-10### Affiliate_WP_ZippyCourses::insert_transaction_metadata
+### Affiliate_WP_ZippyCourses::insert_transaction_metadata
 
 ----
 
-- Since: 1-7-92
+- Since: 1.*

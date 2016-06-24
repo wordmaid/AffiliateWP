@@ -1,5 +1,5 @@
-10### AffWP_Creatives_Table::get_columns
+### AffWP_Creatives_Table::get_columns
 
 ----
 
-- Since: 1-22
+- Since: 1.*

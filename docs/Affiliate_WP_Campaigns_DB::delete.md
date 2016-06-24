@@ -1,5 +1,5 @@
-10### Affiliate_WP_Campaigns_DB::delete
+### Affiliate_WP_Campaigns_DB::delete
 
 ----
 
-- Since: 1-72
+- Since: 1.*

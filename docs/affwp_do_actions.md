@@ -1,5 +1,5 @@
-10### affwp_do_actions
+### affwp_do_actions
 
 ----
 
-- Since: 1-02
+- Since: 1.*

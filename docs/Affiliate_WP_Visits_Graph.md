@@ -1,5 +1,5 @@
-10### Affiliate_WP_Visits_Graph
+### Affiliate_WP_Visits_Graph
 
 ----
 
-- Namespace: global2
+- Source file: class-visits-graph.php

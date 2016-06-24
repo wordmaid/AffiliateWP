@@ -1,4 +1,4 @@
-10### affwp_referrals_do_bulk_action_{$this->current_action()}
+### affwp_referrals_do_bulk_action_{$this->current_action()}
 
 ----
 

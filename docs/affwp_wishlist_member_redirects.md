@@ -1,5 +1,5 @@
-10### affwp_wishlist_member_redirects
+### affwp_wishlist_member_redirects
 
 ----
 
-- Namespace: global2
+- Namespace: global

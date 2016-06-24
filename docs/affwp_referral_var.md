@@ -1,5 +1,5 @@
-10### affwp_referral_var
+### affwp_referral_var
 
 ----
 
-- Source file: class-tracking-php2
+- Source file: class-tracking.php

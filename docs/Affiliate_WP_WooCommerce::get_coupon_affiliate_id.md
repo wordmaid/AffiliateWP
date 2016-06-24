@@ -1,5 +1,5 @@
-10### Affiliate_WP_WooCommerce::get_coupon_affiliate_id
+### Affiliate_WP_WooCommerce::get_coupon_affiliate_id
 
 ----
 
-- Since: 1-12
+- Since: 1.*

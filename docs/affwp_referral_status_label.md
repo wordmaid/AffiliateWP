@@ -1,5 +1,5 @@
-10### affwp_referral_status_label
+### affwp_referral_status_label
 
 ----
 
-- Since: 1-62
+- Since: 1.*

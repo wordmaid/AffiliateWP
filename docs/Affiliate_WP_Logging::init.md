@@ -1,5 +1,5 @@
-10### Affiliate_WP_Logging::init
+### Affiliate_WP_Logging::init
 
 ----
 
-- Since: 1-7-152
+- Since: 1.*

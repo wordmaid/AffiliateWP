@@ -1,5 +1,5 @@
-10### Affiliate_WP_Capabilities
+### Affiliate_WP_Capabilities
 
 ----
 
-- Since: 1-02
+- Since: 1.*

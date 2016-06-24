@@ -1,5 +1,5 @@
-10### AffWP_Creatives_Table::get_creative_counts
+### AffWP_Creatives_Table::get_creative_counts
 
 ----
 
-- Since: 1-22
+- Since: 1.*

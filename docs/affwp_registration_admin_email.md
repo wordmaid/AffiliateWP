@@ -1,4 +1,4 @@
-10### affwp_registration_admin_email
+### affwp_registration_admin_email
 
 ----
 

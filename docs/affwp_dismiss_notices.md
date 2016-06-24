@@ -1,5 +1,5 @@
-10### affwp_dismiss_notices
+### affwp_dismiss_notices
 
 ----
 
-- Since: 1-82
+- Since: 1.*

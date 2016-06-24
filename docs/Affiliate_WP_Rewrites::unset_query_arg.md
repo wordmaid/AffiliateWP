@@ -1,5 +1,5 @@
-10### Affiliate_WP_Rewrites::unset_query_arg
+### Affiliate_WP_Rewrites::unset_query_arg
 
 ----
 
-- Since: 1-3-12
+- Since: 1.*

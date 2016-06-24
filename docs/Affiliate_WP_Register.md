@@ -1,5 +1,5 @@
-10### Affiliate_WP_Register
+### Affiliate_WP_Register
 
 ----
 
-- Source file: class-register-php2
+- Source file: class-register.php

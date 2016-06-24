@@ -1,5 +1,5 @@
-10### affwp_review_affiliate_top
+### affwp_review_affiliate_top
 
 ----
 
-- Source file: admin_affiliates_review-php2
+- Source file: admin_affiliates_review.php

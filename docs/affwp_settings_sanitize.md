@@ -1,5 +1,5 @@
-10### affwp_settings_sanitize
+### affwp_settings_sanitize
 
 ----
 
-- Source file: admin_settings_class-settings-php2
+- Source file: admin_settings_class-settings.php

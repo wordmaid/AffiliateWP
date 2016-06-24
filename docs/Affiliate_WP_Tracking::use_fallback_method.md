@@ -1,5 +1,5 @@
-10### Affiliate_WP_Tracking::use_fallback_method
+### Affiliate_WP_Tracking::use_fallback_method
 
 ----
 
-- Since: 1-02
+- Since: 1.*

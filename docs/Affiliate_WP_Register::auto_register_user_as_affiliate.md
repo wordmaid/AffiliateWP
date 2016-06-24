@@ -1,5 +1,5 @@
-10### Affiliate_WP_Register::auto_register_user_as_affiliate
+### Affiliate_WP_Register::auto_register_user_as_affiliate
 
 ----
 
-- Since: 1-12
+- Since: 1.*

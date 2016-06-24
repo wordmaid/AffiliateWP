@@ -1,5 +1,5 @@
-10### Affiliate_WP_Login::print_errors
+### Affiliate_WP_Login::print_errors
 
 ----
 
-- Since: 1-02
+- Since: 1.*

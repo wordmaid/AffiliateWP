@@ -1,5 +1,5 @@
-10### Visit::get_instance
+### Visit::get_instance
 
 ----
 
-- Since: 1-92
+- Since: 1.*

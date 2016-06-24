@@ -1,5 +1,5 @@
-10### affwp_recaptcha_enabled
+### affwp_recaptcha_enabled
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

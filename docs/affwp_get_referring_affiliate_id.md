@@ -1,5 +1,5 @@
-10### affwp_get_referring_affiliate_id
+### affwp_get_referring_affiliate_id
 
 ----
 
-- Source file: integrations_class-base-php2
+- Source file: integrations_class-base.php

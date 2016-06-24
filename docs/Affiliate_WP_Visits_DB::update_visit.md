@@ -1,5 +1,5 @@
-10### Affiliate_WP_Visits_DB::update_visit
+### Affiliate_WP_Visits_DB::update_visit
 
 ----
 
-- Since: 1-92
+- Since: 1.*

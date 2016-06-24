@@ -1,5 +1,5 @@
-10### Affiliate_WP_EDD::track_discount_referral
+### Affiliate_WP_EDD::track_discount_referral
 
 ----
 
-- Since: 1-12
+- Since: 1.*

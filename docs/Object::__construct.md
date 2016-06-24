@@ -1,5 +1,5 @@
-10### Object::__construct
+### Object::__construct
 
 ----
 
-- Since: 1-92
+- Since: 1.*

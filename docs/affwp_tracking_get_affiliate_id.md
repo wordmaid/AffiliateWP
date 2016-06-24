@@ -1,5 +1,5 @@
-10### affwp_tracking_get_affiliate_id
+### affwp_tracking_get_affiliate_id
 
 ----
 
-- Source file: class-tracking-php2
+- Source file: class-tracking.php

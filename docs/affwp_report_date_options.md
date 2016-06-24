@@ -1,5 +1,5 @@
-10### affwp_report_date_options
+### affwp_report_date_options
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

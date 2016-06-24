@@ -1,4 +1,4 @@
-10### affwp_referral_affiliate_column
+### affwp_referral_affiliate_column
 
 ----
 

@@ -1,5 +1,5 @@
-10### affwp_integration_create_referral
+### affwp_integration_create_referral
 
 ----
 
-- Source file: integrations_class-base-php2
+- Source file: integrations_class-base.php

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Import
+### Affiliate_WP_Import
 
 ----
 
-- Source file: admin_tools_import_class-import-php2
+- Source file: admin_tools_import_class-import.php

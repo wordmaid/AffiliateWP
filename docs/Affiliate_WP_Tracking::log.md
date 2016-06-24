@@ -1,5 +1,5 @@
-10### Affiliate_WP_Tracking::log
+### Affiliate_WP_Tracking::log
 
 ----
 
-- Since: 1-82
+- Since: 1.*

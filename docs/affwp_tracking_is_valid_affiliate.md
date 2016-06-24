@@ -1,5 +1,5 @@
-10### affwp_tracking_is_valid_affiliate
+### affwp_tracking_is_valid_affiliate
 
 ----
 
-- Source file: class-tracking-php2
+- Source file: class-tracking.php

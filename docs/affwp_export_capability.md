@@ -1,4 +1,4 @@
-10### affwp_export_capability
+### affwp_export_capability
 
 ----
 

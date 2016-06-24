@@ -1,5 +1,5 @@
-10### Object::save
+### Object::save
 
 ----
 
-- Since: 1-92
+- Since: 1.*

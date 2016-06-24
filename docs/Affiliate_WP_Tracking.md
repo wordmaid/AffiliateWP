@@ -1,5 +1,5 @@
-10### Affiliate_WP_Tracking
+### Affiliate_WP_Tracking
 
 ----
 
-- Source file: class-tracking-php2
+- Source file: class-tracking.php

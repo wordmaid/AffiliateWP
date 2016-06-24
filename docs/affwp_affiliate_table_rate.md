@@ -1,4 +1,4 @@
-10### affwp_affiliate_table_rate
+### affwp_affiliate_table_rate
 
 ----
 

@@ -1,5 +1,5 @@
-10### affwp_is_recaptcha_enabled
+### affwp_is_recaptcha_enabled
 
 ----
 
-- Since: 1-72
+- Since: 1.*

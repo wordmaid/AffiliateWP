@@ -1,5 +1,5 @@
-10### Affiliate_WP_Affiliate_Meta_DB::delete_meta
+### Affiliate_WP_Affiliate_Meta_DB::delete_meta
 
 ----
 
-- Since: 1-62
+- Since: 1.*

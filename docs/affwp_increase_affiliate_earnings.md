@@ -1,5 +1,5 @@
-10### affwp_increase_affiliate_earnings
+### affwp_increase_affiliate_earnings
 
 ----
 
-- Since: 1-02
+- Since: 1.*

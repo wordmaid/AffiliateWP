@@ -1,5 +1,5 @@
-10### affwp_increase_affiliate_referral_count
+### affwp_increase_affiliate_referral_count
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### get_template_part_{$slug}
+### get_template_part_{$slug}
 
 ----
 
-- Source file: class-templates-php2
+- Source file: class-templates.php

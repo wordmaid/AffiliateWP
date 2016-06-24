@@ -1,4 +1,4 @@
-10### affwp_notify_on_approval
+### affwp_notify_on_approval
 
 ----
 

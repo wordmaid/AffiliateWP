@@ -1,5 +1,5 @@
-10### AffWP_Visits_Table::column_converted
+### AffWP_Visits_Table::column_converted
 
 ----
 
-- Since: 1-02
+- Since: 1.*

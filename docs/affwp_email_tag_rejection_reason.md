@@ -1,4 +1,4 @@
-10### affwp_email_tag_rejection_reason
+### affwp_email_tag_rejection_reason
 
 ----
 

@@ -1,5 +1,5 @@
-10### affwp_process_affiliates_export
+### affwp_process_affiliates_export
 
 ----
 
-- Since: 1-02
+- Since: 1.*

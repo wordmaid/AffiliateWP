@@ -1,5 +1,5 @@
-10### Creative::__construct
+### Creative::__construct
 
 ----
 
-- Since: 1-92
+- Since: 1.*

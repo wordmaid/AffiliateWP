@@ -1,5 +1,5 @@
-10### AFFWP_Plugin_Updater::api_request
+### AFFWP_Plugin_Updater::api_request
 
 ----
 
-- Source file: admin_affwp_plugin_updater-php2
+- Source file: admin_affwp_plugin_updater.php

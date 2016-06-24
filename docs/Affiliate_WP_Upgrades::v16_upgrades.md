@@ -1,5 +1,5 @@
-10### Affiliate_WP_Upgrades::v16_upgrades
+### Affiliate_WP_Upgrades::v16_upgrades
 
 ----
 
-- Since: 1-62
+- Since: 1.*

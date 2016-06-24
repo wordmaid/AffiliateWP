@@ -1,4 +1,4 @@
-10### affwp_visits_admin
+### affwp_visits_admin
 
 ----
 

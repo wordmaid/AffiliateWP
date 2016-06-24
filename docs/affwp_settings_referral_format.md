@@ -1,5 +1,5 @@
-10### affwp_settings_referral_format
+### affwp_settings_referral_format
 
 ----
 
-- Source file: admin_settings_class-settings-php2
+- Source file: admin_settings_class-settings.php

@@ -1,5 +1,5 @@
-10### Affiliate_WP_WPEC::reference_link
+### Affiliate_WP_WPEC::reference_link
 
 ----
 
-- Source file: integrations_class-wpec-php2
+- Source file: integrations_class-wpec.php

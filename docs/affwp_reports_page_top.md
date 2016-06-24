@@ -1,5 +1,5 @@
-10### affwp_reports_page_top
+### affwp_reports_page_top
 
 ----
 
-- Package: adminreports2
+- Package: adminaffiliates2

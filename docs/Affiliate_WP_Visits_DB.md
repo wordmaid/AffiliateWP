@@ -1,5 +1,5 @@
-10### Affiliate_WP_Visits_DB
+### Affiliate_WP_Visits_DB
 
 ----
 
-- Source file: class-visits-db-php2
+- Source file: class-visits-db.php

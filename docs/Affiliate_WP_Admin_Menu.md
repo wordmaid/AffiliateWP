@@ -1,5 +1,5 @@
-10### Affiliate_WP_Admin_Menu
+### Affiliate_WP_Admin_Menu
 
 ----
 
-- Source file: admin_class-menu-php2
+- Source file: admin_class-menu.php

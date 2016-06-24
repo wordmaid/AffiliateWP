@@ -1,5 +1,5 @@
-10### affwp_plugin_action_links
+### affwp_plugin_action_links
 
 ----
 
-- Since: 1-02
+- Since: 1.*

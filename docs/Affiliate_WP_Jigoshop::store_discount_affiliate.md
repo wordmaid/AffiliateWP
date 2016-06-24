@@ -1,5 +1,5 @@
-10### Affiliate_WP_Jigoshop::store_discount_affiliate
+### Affiliate_WP_Jigoshop::store_discount_affiliate
 
 ----
 
-- Source file: integrations_class-jigoshop-php2
+- Source file: integrations_class-jigoshop.php

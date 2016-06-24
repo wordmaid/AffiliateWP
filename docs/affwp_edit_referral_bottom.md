@@ -1,5 +1,5 @@
-10### affwp_edit_referral_bottom
+### affwp_edit_referral_bottom
 
 ----
 
-- Source file: admin_referrals_edit-php2
+- Source file: admin_referrals_edit.php

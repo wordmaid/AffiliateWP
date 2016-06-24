@@ -1,4 +1,4 @@
-10### affwp_affiliate_row_actions
+### affwp_affiliate_row_actions
 
 ----
 

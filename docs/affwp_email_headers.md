@@ -1,5 +1,5 @@
-10### affwp_email_headers
+### affwp_email_headers
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

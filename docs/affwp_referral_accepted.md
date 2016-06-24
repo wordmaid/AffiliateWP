@@ -1,5 +1,5 @@
-10### affwp_referral_accepted
+### affwp_referral_accepted
 
 ----
 
-- Source file: referral-functions-php2
+- Source file: referral-functions.php

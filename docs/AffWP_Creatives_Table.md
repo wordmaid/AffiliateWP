@@ -1,5 +1,5 @@
-10### AffWP_Creatives_Table
+### AffWP_Creatives_Table
 
 ----
 
-- Since: 1-22
+- Since: 1.*

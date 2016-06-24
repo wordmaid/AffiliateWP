@@ -1,4 +1,4 @@
-10### affwp_email_tag_amount
+### affwp_email_tag_amount
 
 ----
 

@@ -1,4 +1,4 @@
-10### affwp_email_tag_referral_url
+### affwp_email_tag_referral_url
 
 ----
 

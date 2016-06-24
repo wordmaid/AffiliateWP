@@ -1,5 +1,5 @@
-10### affwp_register_user
+### affwp_register_user
 
 ----
 
-- Source file: class-register-php2
+- Source file: class-register.php

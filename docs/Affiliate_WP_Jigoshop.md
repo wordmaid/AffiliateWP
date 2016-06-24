@@ -1,5 +1,5 @@
-10### Affiliate_WP_Jigoshop
+### Affiliate_WP_Jigoshop
 
 ----
 
-- Namespace: global2
+- Namespace: global

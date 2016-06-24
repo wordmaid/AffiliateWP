@@ -1,4 +1,4 @@
-10### affwp_affiliates_admin
+### affwp_affiliates_admin
 
 ----
 

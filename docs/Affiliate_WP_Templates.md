@@ -1,5 +1,5 @@
-10### Affiliate_WP_Templates
+### Affiliate_WP_Templates
 
 ----
 
-- Source file: class-templates-php2
+- Source file: class-templates.php

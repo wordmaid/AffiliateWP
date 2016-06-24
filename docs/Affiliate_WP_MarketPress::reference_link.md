@@ -1,5 +1,5 @@
-10### Affiliate_WP_MarketPress::reference_link
+### Affiliate_WP_MarketPress::reference_link
 
 ----
 
-- Since: 1-62
+- Since: 1.*

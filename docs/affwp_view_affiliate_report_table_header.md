@@ -1,5 +1,5 @@
-10### affwp_view_affiliate_report_table_header
+### affwp_view_affiliate_report_table_header
 
 ----
 
-- Source file: admin_affiliates_view-php2
+- Source file: admin_affiliates_view.php

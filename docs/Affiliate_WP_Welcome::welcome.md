@@ -1,5 +1,5 @@
-10### Affiliate_WP_Welcome::welcome
+### Affiliate_WP_Welcome::welcome
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Integrations
+### Affiliate_WP_Integrations
 
 ----
 
-- Source file: class-integrations-php2
+- Source file: class-integrations.php

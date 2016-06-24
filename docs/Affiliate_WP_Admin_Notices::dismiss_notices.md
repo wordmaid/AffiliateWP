@@ -1,5 +1,5 @@
-10### Affiliate_WP_Admin_Notices::dismiss_notices
+### Affiliate_WP_Admin_Notices::dismiss_notices
 
 ----
 
-- Since: 1-7-52
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### Affiliate_WP_S2Member::init
+### Affiliate_WP_S2Member::init
 
 ----
 
-- Since: 1-72
+- Since: 1.*

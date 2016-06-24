@@ -1,5 +1,5 @@
-10### Affiliate::get_instance
+### Affiliate::get_instance
 
 ----
 
-- Since: 1-92
+- Since: 1.*

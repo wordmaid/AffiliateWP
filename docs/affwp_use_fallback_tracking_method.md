@@ -1,5 +1,5 @@
-10### affwp_use_fallback_tracking_method
+### affwp_use_fallback_tracking_method
 
 ----
 
-- Source file: class-tracking-php2
+- Source file: class-tracking.php

@@ -1,4 +1,4 @@
-10### affwp_referrals_admin
+### affwp_referrals_admin
 
 ----
 

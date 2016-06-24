@@ -1,5 +1,5 @@
-10### Affiliate_WP_Membermouse::init
+### Affiliate_WP_Membermouse::init
 
 ----
 
-- Source file: integrations_class-membermouse-php2
+- Source file: integrations_class-membermouse.php

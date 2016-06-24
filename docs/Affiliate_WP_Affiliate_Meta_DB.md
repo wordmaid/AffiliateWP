@@ -1,5 +1,5 @@
-10### Affiliate_WP_Affiliate_Meta_DB
+### Affiliate_WP_Affiliate_Meta_DB
 
 ----
 
-- Source file: class-affiliate-meta-db-php2
+- Source file: class-affiliate-meta-db.php

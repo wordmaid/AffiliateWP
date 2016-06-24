@@ -1,5 +1,5 @@
-10### Affiliate_WP_Ninja_Forms::get_submitted_email
+### Affiliate_WP_Ninja_Forms::get_submitted_email
 
 ----
 
-- Since: 1-62
+- Since: 1.*

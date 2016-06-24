@@ -1,5 +1,5 @@
-10### Affiliate_WP_Referral_Export
+### Affiliate_WP_Referral_Export
 
 ----
 
-- Since: 1-02
+- Since: 1.*

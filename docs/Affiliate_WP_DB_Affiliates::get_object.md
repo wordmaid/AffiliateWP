@@ -1,5 +1,5 @@
-10### Affiliate_WP_DB_Affiliates::get_object
+### Affiliate_WP_DB_Affiliates::get_object
 
 ----
 
-- Since: 1-92
+- Since: 1.*

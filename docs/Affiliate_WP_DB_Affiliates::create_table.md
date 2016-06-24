@@ -1,5 +1,5 @@
-10### Affiliate_WP_DB_Affiliates::create_table
+### Affiliate_WP_DB_Affiliates::create_table
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Welcome::credits_screen
+### Affiliate_WP_Welcome::credits_screen
 
 ----
 
-- Since: 1-02
+- Since: 1.*

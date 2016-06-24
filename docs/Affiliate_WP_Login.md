@@ -1,5 +1,5 @@
-10### Affiliate_WP_Login
+### Affiliate_WP_Login
 
 ----
 
-- Source file: class-login-php2
+- Source file: class-login.php

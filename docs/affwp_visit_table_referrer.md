@@ -1,4 +1,4 @@
-10### affwp_visit_table_referrer
+### affwp_visit_table_referrer
 
 ----
 

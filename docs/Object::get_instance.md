@@ -1,5 +1,5 @@
-10### Object::get_instance
+### Object::get_instance
 
 ----
 
-- Since: 1-92
+- Since: 1.*

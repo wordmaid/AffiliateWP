@@ -1,5 +1,5 @@
-10### Affiliate_WP_Tracking::get_expiration_time
+### Affiliate_WP_Tracking::get_expiration_time
 
 ----
 
-- Since: 1-02
+- Since: 1.*

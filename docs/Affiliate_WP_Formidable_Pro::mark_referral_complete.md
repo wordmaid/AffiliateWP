@@ -1,5 +1,5 @@
-10### Affiliate_WP_Formidable_Pro::mark_referral_complete
+### Affiliate_WP_Formidable_Pro::mark_referral_complete
 
 ----
 
-- Since: 1-62
+- Since: 1.*

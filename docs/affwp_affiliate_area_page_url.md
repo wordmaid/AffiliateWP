@@ -1,5 +1,5 @@
-10### affwp_affiliate_area_page_url
+### affwp_affiliate_area_page_url
 
 ----
 
-- Since: 1-82
+- Since: 1.*

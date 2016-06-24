@@ -1,5 +1,5 @@
-10### AFFWP_Plugin_Updater::http_request_args
+### AFFWP_Plugin_Updater::http_request_args
 
 ----
 
-- Source file: admin_affwp_plugin_updater-php2
+- Source file: admin_affwp_plugin_updater.php

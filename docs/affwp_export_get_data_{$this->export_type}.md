@@ -1,4 +1,4 @@
-10### affwp_export_get_data_{$this->export_type}
+### affwp_export_get_data_{$this->export_type}
 
 ----
 

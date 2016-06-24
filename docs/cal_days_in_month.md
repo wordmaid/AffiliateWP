@@ -1,5 +1,5 @@
-10### cal_days_in_month
+### cal_days_in_month
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

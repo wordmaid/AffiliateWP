@@ -1,5 +1,5 @@
-10### Affiliate_WP_ZippyCourses
+### Affiliate_WP_ZippyCourses
 
 ----
 
-- Namespace: global2
+- Namespace: global

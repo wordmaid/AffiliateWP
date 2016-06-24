@@ -1,5 +1,5 @@
-10### Affiliate_WP_Export::csv_cols_out
+### Affiliate_WP_Export::csv_cols_out
 
 ----
 
-- Since: 1-02
+- Since: 1.*

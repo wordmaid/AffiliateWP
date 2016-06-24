@@ -1,5 +1,5 @@
-10### affwp_is_active_affiliate
+### affwp_is_active_affiliate
 
 ----
 
-- Since: 1-62
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Tracking::ajax_get_affiliate_id_from_login
+### Affiliate_WP_Tracking::ajax_get_affiliate_id_from_login
 
 ----
 
-- Since: 1-32
+- Since: 1.*

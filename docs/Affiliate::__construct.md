@@ -1,5 +1,5 @@
-10### Affiliate::__construct
+### Affiliate::__construct
 
 ----
 
-- Since: 1-92
+- Since: 1.*

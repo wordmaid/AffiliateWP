@@ -1,5 +1,5 @@
-10### Affiliate_WP_RCP::init
+### Affiliate_WP_RCP::init
 
 ----
 
-- Since: 1-02
+- Since: 1.*

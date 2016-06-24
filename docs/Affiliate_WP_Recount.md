@@ -1,5 +1,5 @@
-10### Affiliate_WP_Recount
+### Affiliate_WP_Recount
 
 ----
 
-- Source file: admin_tools_class-recount-php2
+- Source file: admin_tools_class-recount.php

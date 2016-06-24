@@ -1,5 +1,5 @@
-10### affwp_tools_admin
+### affwp_tools_admin
 
 ----
 
-- Since: 1-02
+- Since: 1.*

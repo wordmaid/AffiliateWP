@@ -1,4 +1,4 @@
-10### affwp_affiliate_table_username
+### affwp_affiliate_table_username
 
 ----
 

@@ -1,5 +1,5 @@
-10### affwp_get_product_rate
+### affwp_get_product_rate
 
 ----
 
-- Source file: integrations_class-rcp-php2
+- Source file: integrations_class-rcp.php

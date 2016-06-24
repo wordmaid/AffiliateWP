@@ -1,5 +1,5 @@
-10### Affiliate_WP_EDD::discount_edit
+### Affiliate_WP_EDD::discount_edit
 
 ----
 
-- Since: 1-12
+- Since: 1.*

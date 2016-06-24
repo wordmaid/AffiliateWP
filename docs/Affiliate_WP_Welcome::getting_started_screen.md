@@ -1,5 +1,5 @@
-10### Affiliate_WP_Welcome::getting_started_screen
+### Affiliate_WP_Welcome::getting_started_screen
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### AffWP_Referrals_Table::get_bulk_actions
+### AffWP_Referrals_Table::get_bulk_actions
 
 ----
 
-- Since: 1-02
+- Since: 1.*

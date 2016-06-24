@@ -1,4 +1,4 @@
-10### affwp_email_tag_login_url
+### affwp_email_tag_login_url
 
 ----
 

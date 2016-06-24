@@ -1,5 +1,5 @@
-10### Affiliate_WP_Registrations_Graph
+### Affiliate_WP_Registrations_Graph
 
 ----
 
-- Namespace: global2
+- Source file: admin_reports_class-registrations-graph.php

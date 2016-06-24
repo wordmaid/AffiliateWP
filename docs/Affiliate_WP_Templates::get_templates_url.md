@@ -1,5 +1,5 @@
-10### Affiliate_WP_Templates::get_templates_url
+### Affiliate_WP_Templates::get_templates_url
 
 ----
 
-- Since: 1-02
+- Since: 1.*

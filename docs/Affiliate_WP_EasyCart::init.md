@@ -1,5 +1,5 @@
-10### Affiliate_WP_EasyCart::init
+### Affiliate_WP_EasyCart::init
 
 ----
 
-- Since: 1-62
+- Since: 1.*

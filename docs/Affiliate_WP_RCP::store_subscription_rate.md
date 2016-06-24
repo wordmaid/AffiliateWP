@@ -1,5 +1,5 @@
-10### Affiliate_WP_RCP::store_subscription_rate
+### Affiliate_WP_RCP::store_subscription_rate
 
 ----
 
-- Since: 1-72
+- Since: 1.*

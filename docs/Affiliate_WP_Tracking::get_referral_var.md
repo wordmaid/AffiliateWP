@@ -1,5 +1,5 @@
-10### Affiliate_WP_Tracking::get_referral_var
+### Affiliate_WP_Tracking::get_referral_var
 
 ----
 
-- Since: 1-02
+- Since: 1.*

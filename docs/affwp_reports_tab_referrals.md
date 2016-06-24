@@ -1,5 +1,5 @@
-10### affwp_reports_tab_referrals
+### affwp_reports_tab_referrals
 
 ----
 
-- Since: 1-12
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### affwp_generate_referral_payout_file
+### affwp_generate_referral_payout_file
 
 ----
 
-- Since: 1-02
+- Since: 1.*

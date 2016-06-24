@@ -1,5 +1,5 @@
-10### affwp_email_send_after
+### affwp_email_send_after
 
 ----
 
-- Since: 1-62
+- Since: 1.*

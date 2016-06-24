@@ -1,5 +1,5 @@
-10### Affiliate_WP_Creatives_DB::get_column_defaults
+### Affiliate_WP_Creatives_DB::get_column_defaults
 
 ----
 
-- Since: 1-22
+- Since: 1.*

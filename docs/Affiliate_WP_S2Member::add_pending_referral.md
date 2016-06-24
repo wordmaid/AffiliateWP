@@ -1,5 +1,5 @@
-10### Affiliate_WP_S2Member::add_pending_referral
+### Affiliate_WP_S2Member::add_pending_referral
 
 ----
 
-- Since: 1-72
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### affwp_get_currencies
+### affwp_get_currencies
 
 ----
 
-- Since: 1-02
+- Since: 1.*

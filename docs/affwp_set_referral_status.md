@@ -1,5 +1,5 @@
-10### affwp_set_referral_status
+### affwp_set_referral_status
 
 ----
 
-- Source file: referral-functions-php2
+- Source file: referral-functions.php

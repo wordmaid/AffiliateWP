@@ -1,5 +1,5 @@
-10### Object::get_cache_key
+### Object::get_cache_key
 
 ----
 
-- Since: 1-92
+- Since: 1.*

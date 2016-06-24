@@ -1,5 +1,5 @@
-10### Affiliate_WP_Settings::email_approval_settings
+### Affiliate_WP_Settings::email_approval_settings
 
 ----
 
-- Since: 1-6-12
+- Since: 1.*

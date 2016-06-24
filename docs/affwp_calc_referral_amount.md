@@ -1,5 +1,5 @@
-10### affwp_calc_referral_amount
+### affwp_calc_referral_amount
 
 ----
 
-- Source file: referral-functions-php2
+- Source file: referral-functions.php

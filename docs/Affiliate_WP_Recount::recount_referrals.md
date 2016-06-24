@@ -1,5 +1,5 @@
-10### Affiliate_WP_Recount::recount_referrals
+### Affiliate_WP_Recount::recount_referrals
 
 ----
 
-- Since: 1-02
+- Since: 1.*

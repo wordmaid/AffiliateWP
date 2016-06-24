@@ -1,5 +1,5 @@
-10### Referral::__construct
+### Referral::__construct
 
 ----
 
-- Since: 1-92
+- Since: 1.*

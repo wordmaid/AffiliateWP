@@ -1,5 +1,5 @@
-10### Affiliate_WP_Capabilities::add_caps
+### Affiliate_WP_Capabilities::add_caps
 
 ----
 
-- Since: 1-02
+- Since: 1.*

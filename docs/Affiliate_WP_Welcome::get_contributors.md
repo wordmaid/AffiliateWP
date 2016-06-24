@@ -1,5 +1,5 @@
-10### Affiliate_WP_Welcome::get_contributors
+### Affiliate_WP_Welcome::get_contributors
 
 ----
 
-- Since: 1-02
+- Since: 1.*

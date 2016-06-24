@@ -1,5 +1,5 @@
-10### affwp_post_update_{$type}
+### affwp_post_update_{$type}
 
 ----
 
-- Source file: class-db-php2
+- Source file: class-db.php

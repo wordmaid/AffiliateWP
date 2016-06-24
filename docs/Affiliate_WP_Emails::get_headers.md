@@ -1,5 +1,5 @@
-10### Affiliate_WP_Emails::get_headers
+### Affiliate_WP_Emails::get_headers
 
 ----
 
-- Since: 1-62
+- Since: 1.*

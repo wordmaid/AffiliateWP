@@ -1,5 +1,5 @@
-10### Affiliate_WP_SellMedia
+### Affiliate_WP_SellMedia
 
 ----
 
-- Namespace: global2
+- Namespace: global

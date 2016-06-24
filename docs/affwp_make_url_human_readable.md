@@ -1,5 +1,5 @@
-10### affwp_make_url_human_readable
+### affwp_make_url_human_readable
 
 ----
 
-- Since: 1-82
+- Since: 1.*

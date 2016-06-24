@@ -1,4 +1,4 @@
-10### affwp_affiliate_table_unpaid
+### affwp_affiliate_table_unpaid
 
 ----
 

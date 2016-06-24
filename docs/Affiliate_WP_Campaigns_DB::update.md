@@ -1,5 +1,5 @@
-10### Affiliate_WP_Campaigns_DB::update
+### Affiliate_WP_Campaigns_DB::update
 
 ----
 
-- Since: 1-72
+- Since: 1.*

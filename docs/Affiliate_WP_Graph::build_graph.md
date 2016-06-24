@@ -1,5 +1,5 @@
-10### Affiliate_WP_Graph::build_graph
+### Affiliate_WP_Graph::build_graph
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### affwp_optimize_member_user_query
+### affwp_optimize_member_user_query
 
 ----
 
-- Namespace: global2
+- Namespace: global

@@ -1,5 +1,5 @@
-10### affwp_get_decimal_count
+### affwp_get_decimal_count
 
 ----
 
-- Since: 1-82
+- Since: 1.*

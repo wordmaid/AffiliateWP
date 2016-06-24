@@ -1,5 +1,5 @@
-10### Affiliate_WP_Migrate_Base::process
+### Affiliate_WP_Migrate_Base::process
 
 ----
 
-- Source file: admin_tools_class-migrate-base-php2
+- Source file: admin_tools_class-migrate-base.php

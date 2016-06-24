@@ -1,5 +1,5 @@
-10### affwp_abs_number_round
+### affwp_abs_number_round
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

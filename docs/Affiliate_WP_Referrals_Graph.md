@@ -1,5 +1,5 @@
-10### Affiliate_WP_Referrals_Graph
+### Affiliate_WP_Referrals_Graph
 
 ----
 
-- Namespace: global2
+- Source file: class-referrals-graph.php

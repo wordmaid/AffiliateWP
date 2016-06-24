@@ -1,5 +1,5 @@
-10### affwp_process_delete_referral
+### affwp_process_delete_referral
 
 ----
 
-- Since: 1-72
+- Since: 1.*

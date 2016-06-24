@@ -1,5 +1,5 @@
-10### Referral::sanitize_field
+### Referral::sanitize_field
 
 ----
 
-- Since: 1-92
+- Since: 1.*

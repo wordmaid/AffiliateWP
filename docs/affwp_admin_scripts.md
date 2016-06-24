@@ -1,5 +1,5 @@
-10### affwp_admin_scripts
+### affwp_admin_scripts
 
 ----
 
-- Namespace: global2
+- Namespace: global

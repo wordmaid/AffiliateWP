@@ -1,5 +1,5 @@
-10### affwp_login_url
+### affwp_login_url
 
 ----
 
-- Source file: class-login-php2
+- Source file: class-login.php

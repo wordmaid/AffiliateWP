@@ -1,5 +1,5 @@
-10### Affiliate_WP_Upgrades::v17_upgrade_referral_rates
+### Affiliate_WP_Upgrades::v17_upgrade_referral_rates
 
 ----
 
-- Since: 1-72
+- Since: 1.*

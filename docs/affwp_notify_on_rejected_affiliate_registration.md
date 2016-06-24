@@ -1,4 +1,4 @@
-10### affwp_notify_on_rejected_affiliate_registration
+### affwp_notify_on_rejected_affiliate_registration
 
 ----
 

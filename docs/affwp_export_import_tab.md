@@ -1,5 +1,5 @@
-10### affwp_export_import_tab
+### affwp_export_import_tab
 
 ----
 
-- Since: 1-02
+- Since: 1.*

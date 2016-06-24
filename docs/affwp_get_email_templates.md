@@ -1,5 +1,5 @@
-10### affwp_get_email_templates
+### affwp_get_email_templates
 
 ----
 
-- Since: 1-62
+- Since: 1.*

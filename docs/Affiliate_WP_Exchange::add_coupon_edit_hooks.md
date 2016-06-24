@@ -1,5 +1,5 @@
-10### Affiliate_WP_Exchange::add_coupon_edit_hooks
+### Affiliate_WP_Exchange::add_coupon_edit_hooks
 
 ----
 
-- Since: 1-82
+- Since: 1.*

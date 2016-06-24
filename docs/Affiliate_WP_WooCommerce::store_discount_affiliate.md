@@ -1,5 +1,5 @@
-10### Affiliate_WP_WooCommerce::store_discount_affiliate
+### Affiliate_WP_WooCommerce::store_discount_affiliate
 
 ----
 
-- Since: 1-12
+- Since: 1.*

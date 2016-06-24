@@ -1,5 +1,5 @@
-10### affwp_insert_creative
+### affwp_insert_creative
 
 ----
 
-- Source file: class-creatives-db-php2
+- Source file: class-creatives-db.php

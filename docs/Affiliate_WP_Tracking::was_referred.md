@@ -1,5 +1,5 @@
-10### Affiliate_WP_Tracking::was_referred
+### Affiliate_WP_Tracking::was_referred
 
 ----
 
-- Since: 1-02
+- Since: 1.*

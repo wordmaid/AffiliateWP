@@ -1,5 +1,5 @@
-10### affwp_post_flush_rewrites
+### affwp_post_flush_rewrites
 
 ----
 
-- Source file: class-rewrites-php2
+- Source file: class-rewrites.php

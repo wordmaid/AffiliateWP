@@ -1,5 +1,5 @@
-10### affwp_currencies
+### affwp_currencies
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

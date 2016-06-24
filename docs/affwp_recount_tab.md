@@ -1,5 +1,5 @@
-10### affwp_recount_tab
+### affwp_recount_tab
 
 ----
 
-- Since: 1-02
+- Since: 1.*

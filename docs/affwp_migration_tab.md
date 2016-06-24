@@ -1,5 +1,5 @@
-10### affwp_migration_tab
+### affwp_migration_tab
 
 ----
 
-- Since: 1-02
+- Since: 1.*

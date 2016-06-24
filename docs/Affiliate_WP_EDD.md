@@ -1,5 +1,5 @@
-10### Affiliate_WP_EDD
+### Affiliate_WP_EDD
 
 ----
 
-- Namespace: global2
+- Namespace: global

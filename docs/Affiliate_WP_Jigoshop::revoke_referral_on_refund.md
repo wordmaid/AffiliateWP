@@ -1,5 +1,5 @@
-10### Affiliate_WP_Jigoshop::revoke_referral_on_refund
+### Affiliate_WP_Jigoshop::revoke_referral_on_refund
 
 ----
 
-- Source file: integrations_class-jigoshop-php2
+- Source file: integrations_class-jigoshop.php

@@ -1,5 +1,5 @@
-10### affwp_edit_affiliate_bottom
+### affwp_edit_affiliate_bottom
 
 ----
 
-- Source file: admin_affiliates_edit-php2
+- Source file: admin_affiliates_edit.php

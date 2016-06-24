@@ -1,5 +1,5 @@
-10### affwp_migrate_admin
+### affwp_migrate_admin
 
 ----
 
-- Since: 1-02
+- Since: 1.*

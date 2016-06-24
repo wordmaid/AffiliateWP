@@ -1,5 +1,5 @@
-10### affwp_disable_all_emails
+### affwp_disable_all_emails
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

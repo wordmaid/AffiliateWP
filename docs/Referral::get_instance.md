@@ -1,5 +1,5 @@
-10### Referral::get_instance
+### Referral::get_instance
 
 ----
 
-- Since: 1-92
+- Since: 1.*

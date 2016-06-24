@@ -1,5 +1,5 @@
-10### affwp_get_edd_cart_details
+### affwp_get_edd_cart_details
 
 ----
 
-- Source file: integrations_class-edd-php2
+- Source file: integrations_class-edd.php

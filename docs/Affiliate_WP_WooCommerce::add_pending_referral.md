@@ -1,5 +1,5 @@
-10### Affiliate_WP_WooCommerce::add_pending_referral
+### Affiliate_WP_WooCommerce::add_pending_referral
 
 ----
 
-- Since: 1-02
+- Since: 1.*

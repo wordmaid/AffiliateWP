@@ -1,5 +1,5 @@
-10### affwp_get_ip
+### affwp_get_ip
 
 ----
 
-- Source file: class-tracking-php2
+- Source file: class-tracking.php

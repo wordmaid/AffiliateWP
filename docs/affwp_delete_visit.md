@@ -1,5 +1,5 @@
-10### affwp_delete_visit
+### affwp_delete_visit
 
 ----
 
-- Since: 1-22
+- Since: 1.*

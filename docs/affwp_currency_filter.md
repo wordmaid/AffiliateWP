@@ -1,5 +1,5 @@
-10### affwp_currency_filter
+### affwp_currency_filter
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Membermouse
+### Affiliate_WP_Membermouse
 
 ----
 
-- Namespace: global2
+- Namespace: global

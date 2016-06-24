@@ -1,5 +1,5 @@
-10### Affiliate::get_payment_email
+### Affiliate::get_payment_email
 
 ----
 
-- Since: 1-92
+- Since: 1.*

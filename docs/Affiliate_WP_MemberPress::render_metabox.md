@@ -1,5 +1,5 @@
-10### Affiliate_WP_MemberPress::render_metabox
+### Affiliate_WP_MemberPress::render_metabox
 
 ----
 
-- Since: 1-72
+- Since: 1.*

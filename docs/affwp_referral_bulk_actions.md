@@ -1,4 +1,4 @@
-10### affwp_referral_bulk_actions
+### affwp_referral_bulk_actions
 
 ----
 

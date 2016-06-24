@@ -1,5 +1,5 @@
-10### AffWP_AddOn_Updater
+### AffWP_AddOn_Updater
 
 ----
 
-- Source file: admin_class-addon-updater-php2
+- Source file: admin_class-addon-updater.php

@@ -1,5 +1,5 @@
-10### Affiliate_WP_Campaigns_DB
+### Affiliate_WP_Campaigns_DB
 
 ----
 
-- Source file: class-campaigns-db-php2
+- Source file: class-campaigns-db.php

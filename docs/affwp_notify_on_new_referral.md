@@ -1,4 +1,4 @@
-10### affwp_notify_on_new_referral
+### affwp_notify_on_new_referral
 
 ----
 

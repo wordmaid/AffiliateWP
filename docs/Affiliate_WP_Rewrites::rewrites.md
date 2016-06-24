@@ -1,5 +1,5 @@
-10### Affiliate_WP_Rewrites::rewrites
+### Affiliate_WP_Rewrites::rewrites
 
 ----
 
-- Since: 1-32
+- Since: 1.*

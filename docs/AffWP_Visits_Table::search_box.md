@@ -1,5 +1,5 @@
-10### AffWP_Visits_Table::search_box
+### AffWP_Visits_Table::search_box
 
 ----
 
-- Since: 1-02
+- Since: 1.*

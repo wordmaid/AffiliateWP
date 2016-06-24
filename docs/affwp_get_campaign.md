@@ -1,5 +1,5 @@
-10### affwp_get_campaign
+### affwp_get_campaign
 
 ----
 
-- Source file: class-tracking-php2
+- Source file: class-tracking.php

@@ -1,5 +1,5 @@
-10### affwp_auto_register_user
+### affwp_auto_register_user
 
 ----
 
-- Since: 1-72
+- Since: 1.*

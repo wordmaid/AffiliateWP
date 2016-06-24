@@ -1,5 +1,5 @@
-10### wp_login
+### wp_login
 
 ----
 
-- Source file: class-register-php2
+- Source file: class-register.php

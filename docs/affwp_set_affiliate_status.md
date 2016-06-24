@@ -1,5 +1,5 @@
-10### affwp_set_affiliate_status
+### affwp_set_affiliate_status
 
 ----
 
-- Source file: affiliate-functions-php2
+- Source file: affiliate-functions.php

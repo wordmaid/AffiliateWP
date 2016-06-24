@@ -1,5 +1,5 @@
-10### Visit::__construct
+### Visit::__construct
 
 ----
 
-- Since: 1-92
+- Since: 1.*

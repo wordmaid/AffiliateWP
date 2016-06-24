@@ -1,5 +1,5 @@
-10### Affiliate_WP_Creatives
+### Affiliate_WP_Creatives
 
 ----
 
-- Since: 1-22
+- Since: 1.*

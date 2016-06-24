@@ -1,4 +1,4 @@
-10### affwp_affiliates_page_bottom
+### affwp_affiliates_page_bottom
 
 ----
 

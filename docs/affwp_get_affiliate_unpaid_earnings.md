@@ -1,5 +1,5 @@
-10### affwp_get_affiliate_unpaid_earnings
+### affwp_get_affiliate_unpaid_earnings
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -1,5 +1,5 @@
-10### Affiliate_WP_PMP::reference_link
+### Affiliate_WP_PMP::reference_link
 
 ----
 
-- Source file: integrations_class-pmp-php2
+- Source file: integrations_class-pmp.php

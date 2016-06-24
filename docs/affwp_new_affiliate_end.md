@@ -1,5 +1,5 @@
-10### affwp_new_affiliate_end
+### affwp_new_affiliate_end
 
 ----
 
-- Source file: admin_affiliates_new-php2
+- Source file: admin_affiliates_new.php

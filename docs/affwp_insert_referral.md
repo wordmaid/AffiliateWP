@@ -1,5 +1,5 @@
-10### affwp_insert_referral
+### affwp_insert_referral
 
 ----
 
-- Since: 1-62
+- Since: 1.*

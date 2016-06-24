@@ -1,5 +1,5 @@
-10### AffWP_Affiliates_Table::get_bulk_actions
+### AffWP_Affiliates_Table::get_bulk_actions
 
 ----
 
-- Since: 1-02
+- Since: 1.*

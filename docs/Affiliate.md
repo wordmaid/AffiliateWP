@@ -1,5 +1,5 @@
-10### Affiliate
+### Affiliate
 
 ----
 
-- Since: 192
+- Since: 1.*

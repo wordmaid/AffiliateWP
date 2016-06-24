@@ -1,4 +1,4 @@
-10### affwp_application_accepted_email
+### affwp_application_accepted_email
 
 ----
 

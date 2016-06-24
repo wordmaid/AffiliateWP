@@ -1,5 +1,5 @@
-10### Affiliate_WP_Referrals_DB::update_referral
+### Affiliate_WP_Referrals_DB::update_referral
 
 ----
 
-- Since: 1-52
+- Since: 1.*

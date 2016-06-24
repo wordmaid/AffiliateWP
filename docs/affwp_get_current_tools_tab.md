@@ -1,5 +1,5 @@
-10### affwp_get_current_tools_tab
+### affwp_get_current_tools_tab
 
 ----
 
-- Since: 1-82
+- Since: 1.*

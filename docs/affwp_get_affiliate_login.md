@@ -1,5 +1,5 @@
-10### affwp_get_affiliate_login
+### affwp_get_affiliate_login
 
 ----
 
-- Since: 1-62
+- Since: 1.*

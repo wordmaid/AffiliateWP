@@ -1,5 +1,5 @@
-10### affwp_get_report_dates
+### affwp_get_report_dates
 
 ----
 
-- Since: 1-02
+- Since: 1.*

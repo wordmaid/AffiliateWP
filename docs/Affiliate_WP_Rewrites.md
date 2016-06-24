@@ -1,5 +1,5 @@
-10### Affiliate_WP_Rewrites
+### Affiliate_WP_Rewrites
 
 ----
 
-- Source file: class-rewrites-php2
+- Source file: class-rewrites.php

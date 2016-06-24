@@ -1,5 +1,5 @@
-10### affwp_get_woocommerce_order
+### affwp_get_woocommerce_order
 
 ----
 
-- Source file: integrations_class-woocommerce-php2
+- Source file: integrations_class-woocommerce.php

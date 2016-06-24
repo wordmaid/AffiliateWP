@@ -1,5 +1,5 @@
-10### affwp_load_flot_resize
+### affwp_load_flot_resize
 
 ----
 
-- Package: affiliatewp2
+- Package: affiliatewp

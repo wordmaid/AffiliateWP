@@ -1,5 +1,5 @@
-10### Affiliate_WP_Upgrades
+### Affiliate_WP_Upgrades
 
 ----
 
-- Source file: admin_class-upgrades-php2
+- Source file: admin_class-upgrades.php

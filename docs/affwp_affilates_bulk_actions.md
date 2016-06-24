@@ -1,4 +1,4 @@
-10### affwp_affilates_bulk_actions
+### affwp_affilates_bulk_actions
 
 ----
 

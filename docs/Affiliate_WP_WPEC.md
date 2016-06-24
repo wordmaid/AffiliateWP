@@ -1,5 +1,5 @@
-10### Affiliate_WP_WPEC
+### Affiliate_WP_WPEC
 
 ----
 
-- Namespace: global2
+- Namespace: global

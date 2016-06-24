@@ -1,5 +1,5 @@
-10### Affiliate_WP_DB::insert
+### Affiliate_WP_DB::insert
 
 ----
 
-- Source file: class-db-php2
+- Source file: class-db.php

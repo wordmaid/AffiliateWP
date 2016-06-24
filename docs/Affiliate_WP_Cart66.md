@@ -1,5 +1,5 @@
-10### Affiliate_WP_Cart66
+### Affiliate_WP_Cart66
 
 ----
 
-- Namespace: global2
+- Namespace: global

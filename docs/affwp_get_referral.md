@@ -1,5 +1,5 @@
-10### affwp_get_referral
+### affwp_get_referral
 
 ----
 
-- Namespace: global2
+- Namespace: global

@@ -1,5 +1,5 @@
-10### affwp_add_ons_admin
+### affwp_add_ons_admin
 
 ----
 
-- Source file: admin_add-ons-php2
+- Source file: admin_add-ons.php

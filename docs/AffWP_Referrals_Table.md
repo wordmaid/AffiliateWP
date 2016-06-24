@@ -1,5 +1,5 @@
-10### AffWP_Referrals_Table
+### AffWP_Referrals_Table
 
 ----
 
-- Since: 1-02
+- Since: 1.*

@@ -62,6 +62,13 @@ class Affiliate_WP_Settings {
 
 		}
 
+		// Handle network-wide debug mode constant.
+		if ( 'debug_mode' === $key ) {
+			if ( defined( 'AFFILIATE_WP_DEBUG' ) && AFFILIATE_WP_DEBUG ) {
+				$value = true;
+			}
+		}
+
 		return $value;
 
 	}
@@ -161,16 +168,17 @@ class Affiliate_WP_Settings {
 					'affwp_settings_' . $tab,
 					'affwp_settings_' . $tab,
 					array(
-						'id'      => $key,
-						'desc'    => ! empty( $option['desc'] ) ? $option['desc'] : '',
-						'name'    => isset( $option['name'] ) ? $option['name'] : null,
-						'section' => $tab,
-						'size'    => isset( $option['size'] ) ? $option['size'] : null,
-						'max'     => isset( $option['max'] ) ? $option['max'] : null,
-						'min'     => isset( $option['min'] ) ? $option['min'] : null,
-						'step'    => isset( $option['step'] ) ? $option['step'] : null,
-						'options' => isset( $option['options'] ) ? $option['options'] : '',
-						'std'     => isset( $option['std'] ) ? $option['std'] : '',
+						'id'       => $key,
+						'desc'     => ! empty( $option['desc'] ) ? $option['desc'] : '',
+						'name'     => isset( $option['name'] ) ? $option['name'] : null,
+						'section'  => $tab,
+						'size'     => isset( $option['size'] ) ? $option['size'] : null,
+						'max'      => isset( $option['max'] ) ? $option['max'] : null,
+						'min'      => isset( $option['min'] ) ? $option['min'] : null,
+						'step'     => isset( $option['step'] ) ? $option['step'] : null,
+						'options'  => isset( $option['options'] ) ? $option['options'] : '',
+						'std'      => isset( $option['std'] ) ? $option['std'] : '',
+						'disabled' => isset( $option['disabled'] ) ? $option['disabled'] : '',
 					)
 				);
 			}
@@ -349,6 +357,22 @@ class Affiliate_WP_Settings {
 		// get currently logged in username
 		$user_info = get_userdata( get_current_user_id() );
 		$username  = $user_info ? esc_html( $user_info->user_login ) : '';
+
+		// Handle debug_mode description.
+		if ( defined( 'AFFILIATE_WP_DEBUG' ) && true === AFFILIATE_WP_DEBUG ) {
+			$this->options['debug_mode'] = 1;
+
+			// Globally enabled.
+			add_filter( 'affwp_settings_misc', function( $misc_settings ) {
+				$misc_settings['debug_mode']['disabled'] = true;
+
+				return $misc_settings;
+			} );
+
+			$debug_mode_desc = __( 'Debug mode is globally enabled via <code>AFFILIATE_WP_DEBUG</code> set in <code>wp-config.php</code>. This setting cannot be modified from this screen.', 'affiliate-wp' );
+		} else {
+			$debug_mode_desc = __( 'Check this box to enable debug mode. This will turn on error logging for the referral process to help identify problems.', 'affiliate-wp' );
+		}
 
 		$settings = array(
 			/** General Settings */
@@ -624,7 +648,7 @@ class Affiliate_WP_Settings {
 					),
 					'debug_mode' => array(
 						'name' => __( 'Enable Debug Mode?', 'affiliate-wp' ),
-						'desc' => __( 'Check this box to enable debug mode. This will turn on error logging for the referral process to help identify problems.', 'affiliate-wp' ),
+						'desc' => $debug_mode_desc,
 						'type' => 'checkbox'
 					),
 					'uninstall_on_delete' => array(
@@ -708,9 +732,11 @@ class Affiliate_WP_Settings {
 	 */
 	function checkbox_callback( $args ) {
 
-		$checked = isset($this->options[$args['id']]) ? checked(1, $this->options[$args['id']], false) : '';
+		$checked  = isset( $this->options[ $args['id'] ] ) ? checked( 1, $this->options[ $args['id'] ], false) : '';
+		$disabled = $this->is_setting_disabled( $args ) ? disabled( $args['disabled'], true, false ) : '';
+
 		$html = '<label for="affwp_settings[' . $args['id'] . ']">';
-		$html .= '<input type="checkbox" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>&nbsp;';
+		$html .= '<input type="checkbox" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="1" ' . $checked . ' ' . $disabled . '/>&nbsp;';
 		$html .= $args['desc'];
 		$html .= '</label>';
 
@@ -1026,6 +1052,21 @@ class Affiliate_WP_Settings {
 		echo $html;
 	}
 
+	/**
+	 * Determines whether a setting is disabled.
+	 *
+	 * @since 1.8.5
+	 * @access public
+	 *
+	 * @param array $args Setting arguments.
+	 * @return bool True or false if the setting is disabled, otherwise false.
+	 */
+	public function is_setting_disabled( $args ) {
+		if ( isset( $args['disabled'] ) ) {
+			return $args['disabled'];
+		}
+		return false;
+	}
 
 	public function activate_license() {
 

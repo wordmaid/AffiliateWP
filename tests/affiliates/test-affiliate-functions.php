@@ -1046,15 +1046,8 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_increase_affiliate_earnings()
 	 */
-	public function test_increase_affiliate_earnings_with_empty_affiliate_id_should_return_false() {
-		$this->assertFalse( affwp_increase_affiliate_earnings() );
-	}
-
-	/**
-	 * @covers affwp_increase_affiliate_earnings()
-	 */
-	public function test_increase_affiliate_earnings_with_empty_affiliate_id_and_amount_should_return_false() {
-
+	public function test_increase_affiliate_earnings_with_empty_amount_should_return_false() {
+		$this->assertFalse( affwp_increase_affiliate_earnings( $this->_affiliate_id ) );
 	}
 
 	/**
@@ -1066,13 +1059,6 @@ class Affiliate_Functions_Tests extends WP_UnitTestCase {
 		// Increase.
 		affwp_increase_affiliate_earnings( $this->_affiliate_id, '10' );
 		$this->assertEquals( $current + 10, affwp_get_affiliate_earnings( $this->_affiliate_id ) );
-	}
-
-	/**
-	 * @covers affwp_decrease_affiliate_earnings()
-	 */
-	public function test_decrease_affiliate_earnings_with_empty_affiliate_id_should_return_false() {
-		$this->assertFalse( affwp_decrease_affiliate_earnings() );
 	}
 
 	/**

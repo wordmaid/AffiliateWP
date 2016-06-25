@@ -1055,7 +1055,7 @@ class Affiliate_WP_Settings {
 	/**
 	 * Determines whether a setting is disabled.
 	 *
-	 * @since 1.8.5
+	 * @since 1.8.3
 	 * @access public
 	 *
 	 * @param array $args Setting arguments.

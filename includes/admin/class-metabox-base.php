@@ -46,12 +46,12 @@ abstract class AffWP_Metabox_Base {
      *    }
      *
      *    public function my_meta_box_content() {
-     *        echo 'Here is some super content I'd like to share with AffiliateWP users!;
+     *        echo 'Here is some content I'd like to share with AffiliateWP users!;
      *    }
      *
      * }
      *
-     * new My_Integration_AffWP_Metabox;
+     * new My_Integration_AffWP_Metabox;)
      *
      **/
 
@@ -77,7 +77,9 @@ abstract class AffWP_Metabox_Base {
 
     /**
      * The AffiliateWP screen on which to show the meta box.
-     * Defaults to affiliates_page_affiliate-wp-reports, the AffiliateWP Reports Overview tab page.
+     * Defaults to affiliates_page_affiliate-wp-reports,
+     * the AffiliateWP Reports Overview tab page.
+     *
      * The uri of this page is: admin.php?page=affiliate-wp-reports.
      *
      * @access  private
@@ -95,14 +97,16 @@ abstract class AffWP_Metabox_Base {
                                    'affiliates_page_affiliate-wp-add-ons'
                                    );
     /**
-     * The position in which the meta box will be loaded
-     * Options are: 'normal', side', or 'advanced'
+     * The position in which the meta box will be loaded.
+     * AffiliateWP uses custom metabox contexts.
+     * These contexts are listed below.
      *
      * 'primary'   will load in the left column
      * 'secondary' will load in the center column
      * 'tertiary'  will load in the right column
      *
-     * All columns will collapse as needed on smaller screens.
+     * All columns will collapse as needed on smaller screens,
+     * as WordPress core meta boxes are in use.
      *
      * @access  public
      * @var     $context

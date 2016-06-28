@@ -88,26 +88,27 @@ function affwp_get_reports_tabs() {
  * @since 1.9
  * @return void
  */
-function affwp_reports_tab_overview() { ?>
+function affwp_reports_tab_overview() {
+
+	do_action( 'affwp_reports_meta_boxes' ); ?>
 
     <div id="dashboard-widgets" class="metabox-holder reports-metabox-holder">
         <div id="postbox-container-1" class="postbox-container">
-            <?php // Reports meta boxes
-				do_action( 'affwp_reports_meta_boxes' );
-                do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'normal', null );
+            <?php // Reports meta boxes, primary
+                do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'primary', null );
 			?>
         </div>
         <div id="postbox-container-2" class="postbox-container">
-            <?php // Reports meta boxes
+            <?php // Reports meta boxes, secondary
                 do_action( 'affwp_reports_meta_boxes' );
-                do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'side', null );
+                do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'secondary', null );
             ?>
 
         </div>
         <div id="postbox-container-3" class="postbox-container">
-            <?php // Reports meta boxes
+            <?php // Reports meta boxes, tertiary
                 do_action( 'affwp_reports_meta_boxes' );
-                do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'advanced', null );
+                do_meta_boxes( 'affiliates_page_affiliate-wp-reports', 'tertiary', null );
             ?>
         </div>
     </div>

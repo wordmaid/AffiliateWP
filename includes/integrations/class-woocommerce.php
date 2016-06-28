@@ -109,7 +109,6 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				}
 
 				// The order discount has to be divided across the items
-
 				$product_total = $product['line_total'];
 				$shipping      = 0;
 

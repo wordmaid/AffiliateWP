@@ -11,6 +11,16 @@ class AffWP_Metabox_Overview_Registrations extends AffWP_Metabox_Base {
     public $meta_box_id = 'overview-registrations';
 
     /**
+     * The position in which the meta box will be loaded
+     * Either 'normal', 'side', or 'advanced'.
+     *
+     * @access  public
+     * @var     $context
+     * @since   1.9
+     */
+    public $context = 'primary';
+
+    /**
      * Initialize
      *
      * @access  public
@@ -18,8 +28,8 @@ class AffWP_Metabox_Overview_Registrations extends AffWP_Metabox_Base {
      * @since   1.9
      */
     public function init() {
-        add_action( 'add_meta_box',     array( $this, 'add_meta_box' ) );
-        add_action( 'affwp_overview_left', array( $this, 'add_meta_box' ) );
+        add_action( 'add_meta_box',              array( $this, 'add_meta_box' ) );
+        add_action( 'affwp_overview_meta_boxes', array( $this, 'add_meta_box' ) );
         $this->meta_box_name = __( 'Latest Affiliate Registrations', 'affiliate-wp' );
     }
 

@@ -26,7 +26,7 @@ class AffWP_Metabox_Overview_Recent_Referrals extends AffWP_Metabox_Base {
 	 * @var     $context
 	 * @since   1.9
 	 */
-	public $context = 'side';
+	public $context = 'secondary';
 
 	/**
 	 * Initialize
@@ -36,8 +36,8 @@ class AffWP_Metabox_Overview_Recent_Referrals extends AffWP_Metabox_Base {
 	 * @since   1.9
 	 */
 	public function init() {
-		add_action( 'add_meta_box',         array( $this, 'add_meta_box' ) );
-		add_action( 'affwp_overview_center', array( $this, 'add_meta_box' ) );
+		add_action( 'add_meta_box',              array( $this, 'add_meta_box' ) );
+		add_action( 'affwp_overview_meta_boxes', array( $this, 'add_meta_box' ) );
 
 		$this->meta_box_name = __( 'Recent Referrals', 'affiliate-wp' );
 	}

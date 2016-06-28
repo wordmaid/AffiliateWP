@@ -29,24 +29,21 @@ function affwp_affiliates_dashboard() { ?>
 
 		<h2><?php _e( 'Overview', 'affiliate-wp' ); ?></h2>
 
-		<?php do_action( 'affwp_overview_top' ); ?>
+		<?php do_action( 'affwp_overview_meta_boxes' ); ?>
 
 		<div id="affwp-dashboard-widgets-wrap">
 			<div id="dashboard-widgets" class="metabox-holder">
 
 				<div id="postbox-container-1" class="postbox-container">
-					<?php do_action( 'affwp_overview_left' ); ?>
-					<?php do_meta_boxes( 'toplevel_page_affiliate-wp', 'normal',   null ); ?>
+					<?php do_meta_boxes( 'toplevel_page_affiliate-wp', 'primary', null ); ?>
 				</div>
 
 				<div id="postbox-container-2" class="postbox-container">
-					<?php do_action( 'affwp_overview_center' ); ?>
-					<?php do_meta_boxes( 'toplevel_page_affiliate-wp', 'side',     null ); ?>
+					<?php do_meta_boxes( 'toplevel_page_affiliate-wp', 'secondary', null ); ?>
 				</div>
 
 				<div id="postbox-container-3" class="postbox-container">
-					<?php do_action( 'affwp_overview_right' ); ?>
-					<?php do_meta_boxes( 'toplevel_page_affiliate-wp', 'advanced', null ); ?>
+					<?php do_meta_boxes( 'toplevel_page_affiliate-wp', 'tertiary', null ); ?>
 				</div>
 
 			</div>

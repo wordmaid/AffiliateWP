@@ -203,24 +203,28 @@ class Affiliate_WP_Tracking {
 
 		if ( ! empty( $affiliate_id ) && $is_valid ) {
 
-			// Store the visit in the DB
-			$visit_id = affiliate_wp()->visits->add( array(
-				'affiliate_id' => $affiliate_id,
-				'ip'           => $this->get_ip(),
-				'url'          => sanitize_text_field( $_POST['url'] ),
-				'campaign'     => ! empty( $_POST['campaign'] ) ? sanitize_text_field( $_POST['campaign'] ) : '',
-				'referrer'     => sanitize_text_field( $_POST['referrer'] )
-			) );
+			if( ! affwp_is_url_banned( sanitize_text_field( $_POST['referrer'] ) ) ) {
+				// Store the visit in the DB
+				$visit_id = affiliate_wp()->visits->add( array(
+					'affiliate_id' => $affiliate_id,
+					'ip'           => $this->get_ip(),
+					'url'          => sanitize_text_field( $_POST['url'] ),
+					'campaign'     => ! empty( $_POST['campaign'] ) ? sanitize_text_field( $_POST['campaign'] ) : '',
+					'referrer'     => sanitize_text_field( $_POST['referrer'] )
+				) );
 
-			if( $this->debug ) {
-				$this->log( sprintf( 'Visit #%d recorded for affiliate #%d in track_visit()', $visit_id, $affiliate_id ) );
+				if( $this->debug ) {
+					$this->log( sprintf( 'Visit #%d recorded for affiliate #%d in track_visit()', $visit_id, $affiliate_id ) );
+				}
+
+				echo $visit_id; exit;
+			} else {
+				die( '-2' );
 			}
 
-			echo $visit_id; exit;
+		} elseif ( ! $is_valid ) {
 
-		} else if( ! $is_valid ) {
-
-			if( $this->debug ) {
+			if ( $this->debug ) {
 				$this->log( 'Invalid affiliate ID during track_visit()' );
 			}
 
@@ -362,19 +366,21 @@ class Affiliate_WP_Tracking {
 		$visit_id     = $this->get_visit_id();
 
 		if( $is_valid && ! $visit_id ) {
+			if( ( ! empty( $_SERVER['HTTP_REFERER'] ) && ! affwp_is_url_banned( sanitize_text_field( $_POST['referrer'] ) ) ) || empty( $_SERVER['HTTP_REFERER'] ) ) {
 
-			$this->set_affiliate_id( $affiliate_id );
+				$this->set_affiliate_id( $affiliate_id );
 
-			// Store the visit in the DB
-			$visit_id = affiliate_wp()->visits->add( array(
-				'affiliate_id' => $affiliate_id,
-				'ip'           => $this->get_ip(),
-				'url'          => $this->get_current_page_url(),
-				'campaign'     => $this->get_campaign(),
-				'referrer'     => ! empty( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
-			) );
+				// Store the visit in the DB
+				$visit_id = affiliate_wp()->visits->add( array(
+					'affiliate_id' => $affiliate_id,
+					'ip'           => $this->get_ip(),
+					'url'          => $this->get_current_page_url(),
+					'campaign'     => $this->get_campaign(),
+					'referrer'     => ! empty( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
+				) );
 
-			$this->set_visit_id( $visit_id );
+				$this->set_visit_id( $visit_id );
+			}
 
 		} elseif( ! $is_valid ) {
 

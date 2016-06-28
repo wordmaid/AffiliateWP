@@ -241,3 +241,46 @@ function affwp_count_referrals( $affiliate_id = 0, $status = array(), $date = ar
 	return affiliate_wp()->referrals->count( $args );
 
 }
+
+/**
+ * Retrieve an array of banned URLs
+ *
+ * @since 1.7.5
+ * @return array The array of banned URLs
+ */
+function affwp_get_banned_urls() {
+	$urls = affiliate_wp()->settings->get( 'referral_url_blacklist', array() );
+	$urls = array_map( 'trim', explode( "\n", $urls ) );
+	$urls = array_unique( $urls );
+	$urls = array_map( 'sanitize_text_field', $urls );
+
+	return apply_filters( 'affwp_get_banned_urls', $urls );
+}
+
+/**
+ * Determines if a URL is banned
+ *
+ * @since 1.7.5
+ * @return bool True if banned, false otherwise
+ */
+function affwp_is_url_banned( $url = '' ) {
+	if( empty( $url ) ) {
+		$ret = false;
+	}
+
+	$banned_urls = affwp_get_banned_urls();
+
+	if( ! is_array( $banned_urls ) || empty( $banned_urls ) ) {
+		$ret = false;
+	}
+
+	foreach( $banned_urls as $banned_url ) {
+		$ret = ( stristr( trim( $url ), $banned_url ) ? true : false );
+
+		if( true === $ret ) {
+			break;
+		}
+	}
+
+	return apply_filters( 'affwp_is_url_banned', $ret, $url );
+}

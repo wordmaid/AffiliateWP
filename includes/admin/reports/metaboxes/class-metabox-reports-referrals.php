@@ -12,6 +12,16 @@ class AffWP_Metabox_Reports_Referrals extends AffWP_Metabox_Base {
     public $meta_box_id = 'reports-referrals-earnings';
 
     /**
+     * The position in which the meta box will be loaded
+     * Either 'normal' side'.
+     *
+     * @access  public
+     * @var     $context
+     * @since   1.9
+     */
+    public $context = 'primary';
+
+    /**
      * Initialize
      *
      * @access  public

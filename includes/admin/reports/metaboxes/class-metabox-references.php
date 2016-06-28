@@ -28,7 +28,7 @@ class AffWP_Metabox_Reports_Top_Performers extends AffWP_Metabox_Base {
      * @var     $context
      * @since   1.9
      */
-    public $context = 'advanced';
+    public $context = 'tertiary';
 
     /**
      * Initialize

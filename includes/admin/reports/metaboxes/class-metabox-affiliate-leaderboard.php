@@ -28,7 +28,7 @@ class AffWP_Metabox_Reports_Affiliate_Leaderboard extends AffWP_Metabox_Base {
      * @var     $context
      * @since   1.9
      */
-    public $context = 'side';
+    public $context = 'secondary';
 
     /**
      * Initialize

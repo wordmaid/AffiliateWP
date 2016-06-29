@@ -80,15 +80,26 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 		$where = '';
 
 		if ( ! empty( $args['status'] ) ) {
+			$status = esc_sql( $args['status'] );
 
-			if( ! empty( $where ) ) {
-				$where .= "AND `status` = '" . $args['status'] . "' ";
+			if ( ! empty( $where ) ) {
+				$where .= "AND `status` = '" . $status . "' ";
 			} else {
-				$where .= "WHERE `status` = '" . $args['status'] . "' ";
+				$where .= "WHERE `status` = '" . $status . "' ";
 			}
 		}
 
-		$args['orderby'] = ! array_key_exists( $args['orderby'], $this->get_columns() ) ? $this->primary_key : $args['orderby'];
+		if ( 'ASC' === strtoupper( $args['order'] ) ) {
+			$order = 'ASC';
+		} else {
+			$order = 'DESC';
+		}
+
+		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
+
+		// Overload args values for the benefit of the cache.
+		$args['orderby'] = $orderby;
+		$args['order']   = $order;
 
 		$cache_key = ( true === $count ) ? md5( 'affwp_creatives_count' . serialize( $args ) ) : md5( 'affwp_creatives_' . serialize( $args ) );
 
@@ -104,7 +115,7 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 
 				$results = $wpdb->get_results(
 					$wpdb->prepare(
-						"SELECT * FROM {$this->table_name} {$where} ORDER BY {$args['orderby']} {$args['order']} LIMIT %d, %d;",
+						"SELECT * FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
 						absint( $args['offset'] ),
 						absint( $args['number'] )
 					)
@@ -112,7 +123,7 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 
 			}
 
-			wp_cache_set( $cache_key, $results, 'creatives', 3600 );
+			wp_cache_set( $cache_key, $results, 'creatives', HOUR_IN_SECONDS );
 
 		}
 

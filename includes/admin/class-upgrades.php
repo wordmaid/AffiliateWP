@@ -47,7 +47,12 @@ class Affiliate_WP_Upgrades {
 
 		if ( version_compare( $version, '1.7.14', '<' ) ) {
 			$this->v1714_upgrades();
-		}	
+		}
+
+		// Inconsistency between current and saved version.
+		if ( version_compare( $version, AFFILIATEWP_VERSION, '<>' ) ) {
+			$this->upgraded = true;
+		}
 
 		// If upgrades have occurred
 		if ( $this->upgraded ) {
@@ -194,8 +199,8 @@ class Affiliate_WP_Upgrades {
 			$settings['referral_rate'] = floatval( $rate );
 		}
 
-		update_option( 'affwp_settings', $settings );
-
+		// Update settings.
+		affiliate_wp()->settings->set( $settings, $save = true );
 	}
 
 	/**
@@ -330,7 +335,8 @@ class Affiliate_WP_Upgrades {
 			unset( $settings['rejected_subject'] );
 		}
 
-		update_option( 'affwp_settings', $settings );
+		// Update settings.
+		affiliate_wp()->settings->set( $settings, $save = true );
 
 		$this->upgraded = true;
 

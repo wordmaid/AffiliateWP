@@ -26,7 +26,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 		add_action( 'wp_trash_post', array( $this, 'revoke_referral_on_delete' ), 10 );
 
 		// coupon code tracking actions and filters
-		add_action( 'it_exchange_basics_coupon_coupon_edit_screen_end_fields', array( $this, 'coupon_edit' ) );
+		add_action( 'it_libraries_loaded', array( $this, 'add_coupon_edit_hooks' ) );
 		add_action( 'it_exchange_basic_coupons_saved_coupon', array( $this, 'store_coupon_affiliate' ), 10, 2 );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
@@ -77,10 +77,20 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 					$affiliate_id = get_post_meta( $coupon['id'], 'affwp_coupon_affiliate', true );
 
 					if ( ! $affiliate_id ) {
+
+						if( $this->debug ) {
+							$this->log( 'Referral not created because of missing affiliate ID.' );
+						}
+
 						continue;
 					}
 
 					if ( ! affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
+						
+						if( $this->debug ) {
+							$this->log( 'Referral not created because affiliate is invalid.' );
+						}
+
 						continue;
 					}
 
@@ -96,6 +106,10 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 			$email                = isset( $guest_checkout_email ) ? $guest_checkout_email : $this->transaction->shipping_address['email'];
 
 			if ( $this->is_affiliate_email( $email, $affiliate_id ) ) {
+
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
 
 				return; // Customers cannot refer themselves
 			}
@@ -248,6 +262,23 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 	}
 
 	/**
+	 * Add coupon edit hooks depending on version of Exchange active.
+	 *
+	 * The 'General' tab did not become active until version 1.33
+	 *
+	 * @access public
+	 * @since 1.8
+	 */
+	public function add_coupon_edit_hooks() {
+
+		if ( version_compare( $GLOBALS['it_exchange']['version'], '1.33.0', '>' ) ) {
+			add_action( 'it_exchange_basic_coupons_coupon_edit_tab_general', array( $this, 'coupon_edit' ) );
+		} else {
+			add_action( 'it_exchange_basics_coupon_coupon_edit_screen_end_fields', array( $this, 'coupon_edit' ) );
+		}
+	}
+
+	/**
 	 * Shows the affiliate drop down on the coupon edit / add screens
 	 *
 	 * @access  public
@@ -272,9 +303,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 				<span class="affwp-ajax-search-wrap">
 					<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 					<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" />
-					<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 				</span>
-				<div id="affwp_user_search_results"></div>
 				<p class="description"><?php _e( 'If you would like to connect this coupon to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></p>
 			</td>
 		</div>

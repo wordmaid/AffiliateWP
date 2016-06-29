@@ -31,7 +31,7 @@ require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-export-
  */
 function affwp_tools_admin() {
 
-	$active_tab = isset( $_GET[ 'tab' ] ) && array_key_exists( $_GET['tab'], affwp_get_tools_tabs() ) ? $_GET[ 'tab' ] : 'export_import';
+	$active_tab = affwp_get_current_tools_tab();
 
 	ob_start();
 	?>
@@ -76,7 +76,35 @@ function affwp_get_tools_tabs() {
 	$tabs['recount']       = __( 'Recount Stats', 'affiliate-wp' );
 	$tabs['migration']     = __( 'Migration Assistant', 'affiliate-wp' );
 
+	if( affiliate_wp()->settings->get( 'debug_mode', false ) ) {	
+		$tabs['debug']     = __( 'Debug Assistant', 'affiliate-wp' );
+	}
+
 	return apply_filters( 'affwp_tools_tabs', $tabs );
+}
+
+/**
+ * Retrieves the current Tools tab.
+ *
+ * @since 1.8
+ *
+ * @return string Current Tools tab if present in the URL, 'export_import' otherwise.
+ */
+function affwp_get_current_tools_tab() {
+	if ( isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], affwp_get_tools_tabs() ) ) {
+		$active_tab = sanitize_text_field( $_GET['tab'] );
+	} else {
+		$active_tab = 'export_import';
+	}
+
+	/**
+	 * Filter the current Tools tab.
+	 *
+	 * @since 1.8
+	 *
+	 * @param string $active_tab Current Tools tab ID.
+	 */
+	return apply_filters( 'affwp_current_tools_tab', $active_tab );
 }
 
 /**
@@ -97,14 +125,12 @@ function affwp_recount_tab() {
 						<p>
 							<span class="affwp-ajax-search-wrap">
 								<input type="text" name="user_name" id="user_name" class="affwp-user-search" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>"/>
-								<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 							</span>
 							<select name="recount_type">
 								<option value="earnings"><?php _e( 'Paid Earnings', 'affiliate-wp' ); ?></option>
 								<option value="referrals"><?php _e( 'Referrals', 'affiliate-wp' ); ?></option>
 								<option value="visits"><?php _e( 'Visits', 'affiliate-wp' ); ?></option>
 							</select>
-							<div id="affwp_user_search_results"></div>
 							<div class="description"><?php _e( 'Enter the name of the affiliate or begin typing to perform a search based on the affiliate\'s name.', 'affiliate-wp' ); ?></div>
 						</p>
 						<p>
@@ -124,10 +150,16 @@ add_action( 'affwp_tools_tab_recount', 'affwp_recount_tab' );
 /**
  * Migration assistant tab
  *
- * @since       1.0
- * @return      void
+ * @since 1.0
+ *
+ * @global string $wp_version WordPress version
+ *
+ * @return void
  */
 function affwp_migration_tab() {
+	global $wp_version;
+	$tool_is_compatible = version_compare( $wp_version, '4.4', '>=' );
+
 	$user_counts = count_users();
 
 	$_roles = new WP_Roles();
@@ -149,25 +181,33 @@ function affwp_migration_tab() {
 			<div class="postbox">
 				<h3><span><?php _e( 'User Accounts', 'affiliate-wp' ); ?></span></h3>
 				<div class="inside">
-					<p><?php _e( 'Use this tool to create affiliate accounts for each of your existing WordPress user accounts that belong to the selected roles below.', 'affiliate-wp' ); ?></p>
-					<p><?php _e( '<strong>NOTE:</strong> Users that already have affiliate accounts will be skipped. Duplicate accounts will not be created.', 'affiliate-wp' ); ?></p>
-					<form method="get" id="affiliate-wp-migrate-user-accounts">
-						<h4><span><?php _e( 'Select User Roles', 'affiliate-wp' ); ?></span></h4>
-						<?php foreach ( $roles as $role => $data ) : ?>
-							<?php $has_users = ! empty( $data['count'] ); ?>
-							<label>
-								<input type="checkbox" name="roles[]" value="<?php echo esc_attr( $role ); ?>" <?php checked( $has_users ); disabled( ! $has_users ) ?>>
-								<span class="<?php echo ( ! $has_users ) ? 'muted' : ''; ?>"><?php echo esc_html( $data['label'] ); ?> (<?php echo absint( $data['count'] ); ?>)</span>
-							</label>
-							<br>
-						<?php endforeach; ?>
-						<input type="hidden" name="type" value="users"/>
-						<input type="hidden" name="part" value="affiliates"/>
-						<input type="hidden" name="page" value="affiliate-wp-migrate"/>
-						<p>
-							<input type="submit" value="<?php _e( 'Create Affiliate Accounts for Users', 'affiliate-wp' ); ?>" class="button" />
-						</p>
-					</form>
+					<?php if ( $tool_is_compatible ) : ?>
+						<p><?php _e( 'Use this tool to create affiliate accounts for each of your existing WordPress user accounts that belong to the selected roles below.', 'affiliate-wp' ); ?></p>
+						<p><?php _e( '<strong>NOTE:</strong> Users that already have affiliate accounts will be skipped. Duplicate accounts will not be created.', 'affiliate-wp' ); ?></p>
+						<form method="get" id="affiliate-wp-migrate-user-accounts">
+							<h4><span><?php _e( 'Select User Roles', 'affiliate-wp' ); ?></span></h4>
+							<?php foreach ( $roles as $role => $data ) : ?>
+								<?php $has_users = ! empty( $data['count'] ); ?>
+								<label>
+									<input type="checkbox" name="roles[]" value="<?php echo esc_attr( $role ); ?>" <?php checked( $has_users ); disabled( ! $has_users ) ?>>
+									<span class="<?php echo ( ! $has_users ) ? 'muted' : ''; ?>"><?php echo esc_html( $data['label'] ); ?> (<?php echo absint( $data['count'] ); ?>)</span>
+								</label>
+								<br>
+							<?php endforeach; ?>
+							<input type="hidden" name="type" value="users"/>
+							<input type="hidden" name="part" value="affiliates"/>
+							<input type="hidden" name="page" value="affiliate-wp-migrate"/>
+							<p>
+								<input type="submit" value="<?php _e( 'Create Affiliate Accounts for Users', 'affiliate-wp' ); ?>" class="button" />
+							</p>
+						</form>
+					<?php else : ?>
+						<?php if ( current_user_can( 'update_core' ) ) : ?>
+							<p><?php printf( __( '<strong>NOTE:</strong> WordPress 4.4 or newer is required to use the User Accounts migration tool. <a href="%s" aria-label="Update WordPress now">Update WordPress now</a>.', 'affiliate-wp' ), network_admin_url( 'update-core' ) ); ?></p>
+						<?php else : ?>
+							<p><?php _e( '<strong>NOTE:</strong> WordPress 4.4 or newer is required to use the User Accounts migration tool.', 'affiliate-wp' ); ?></p>
+						<?php endif; // 'update_core' ?>
+					<?php endif; // $tool_is_compatible ?>
 				</div><!-- .inside -->
 			</div><!-- .postbox -->
 
@@ -250,7 +290,6 @@ function affwp_export_import_tab() {
 							<span class="affwp-ajax-search-wrap">
 								<input type="text" name="user_name" id="user_name" class="affwp-user-search" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
 								<input type="hidden" name="user_id" id="user_id" value=""/>
-								<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 							</span>
 							<input type="text" class="affwp-datepicker" autocomplete="off" name="start_date" placeholder="<?php _e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
 							<input type="text" class="affwp-datepicker" autocomplete="off" name="end_date" placeholder="<?php _e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
@@ -261,7 +300,6 @@ function affwp_export_import_tab() {
 								<option value="pending"><?php _e( 'Pending', 'affiliate-wp' ); ?></option>
 								<option value="rejected"><?php _e( 'Rejected', 'affiliate-wp' ); ?></option>
 							</select>
-							<div id="affwp_user_search_results"></div>
 							<div class="description"><?php _e( 'To search for an affiliate, enter the affiliate\'s login name, first name, or last name. Leave blank to export referrals for all affiliates.', 'affiliate-wp' ); ?></div>
 						</p>
 						<p>
@@ -308,3 +346,58 @@ function affwp_export_import_tab() {
 <?php
 }
 add_action( 'affwp_tools_tab_export_import', 'affwp_export_import_tab' );
+
+/**
+ * Debug Tab
+ *
+ * @since       1.7.15
+ * @return      void
+ */
+function affwp_debug_tab() {
+
+	$logs = new Affiliate_WP_Logging;
+?>
+	<div id="affwp-dashboard-widgets-wrap">
+		<div class="metabox-holder">
+			<div class="postbox">
+				<h3><span><?php _e( 'Debug Log', 'affiliate-wp' ); ?></span></h3>
+				<div class="inside">
+					<form id="affwp-debug-log" method="post">
+						<p><?php _e( 'Use this tool to help debug referral tracking.', 'affiliate-wp' ); ?></p>
+						<textarea class="large-text" rows="15"><?php echo esc_textarea( $logs->get_log() ); ?></textarea>
+						<input type="submit" class="button" name="affwp-clear-debug-log" value="<?php _e( 'Clear Debug Log', 'affiliate-wp' ); ?>"/>
+						<?php wp_nonce_field( 'affwp-clear-debug' ); ?>
+					</form>
+				</div><!-- .inside -->
+			</div><!-- .postbox -->
+		</div><!-- .metabox-holder -->
+	</div><!-- #affwp-dashboard-widgets-wrap -->
+<?php
+}
+add_action( 'affwp_tools_tab_debug', 'affwp_debug_tab' );
+
+/**
+ * Clear the debug log
+ *
+ * @since       1.7.15
+ * @return      void
+ */
+function affwp_clear_debug_log() {
+
+	if( empty( $_POST['affwp-clear-debug-log'] ) ) {
+		return;
+	}
+
+	if( ! current_user_can( 'manage_affiliate_options' ) ) {
+		return;
+	}
+
+	check_admin_referer( 'affwp-clear-debug' );
+
+	$logs = new Affiliate_WP_Logging;
+	$logs->clear_log();
+
+	wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-tools&tab=debug' ) ); exit;
+
+}
+add_action( 'admin_init', 'affwp_clear_debug_log' );

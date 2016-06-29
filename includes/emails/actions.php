@@ -117,7 +117,9 @@ function affwp_notify_on_approval( $affiliate_id = 0, $status = '', $old_status 
 	$subject      = apply_filters( 'affwp_application_accepted_subject', $subject, $args );
 	$message      = apply_filters( 'affwp_application_accepted_email', $message, $args );
 
-	$emails->send( $email, $subject, $message );
+	if ( apply_filters( 'affwp_notify_on_approval', true ) ) {
+		$emails->send( $email, $subject, $message );
+	}
 
 }
 add_action( 'affwp_set_affiliate_status', 'affwp_notify_on_approval', 10, 3 );
@@ -153,7 +155,9 @@ function affwp_notify_on_pending_affiliate_registration( $affiliate_id = 0, $sta
 		$message .= __( 'We\'re currently reviewing your affiliate application and will be in touch soon!', 'affiliate-wp' ) . "\n\n";
 	}
 
-	$emails->send( $email, $subject, $message );
+	if ( apply_filters( 'affwp_notify_on_pending_affiliate_registration', true ) ) {
+		$emails->send( $email, $subject, $message );
+	}
 
 }
 add_action( 'affwp_register_user', 'affwp_notify_on_pending_affiliate_registration', 10, 3 );
@@ -189,7 +193,9 @@ function affwp_notify_on_rejected_affiliate_registration( $affiliate_id = 0, $st
 		$message .= __( 'We regret to inform you that your recent affiliate registration on {site_name} was rejected.', 'affiliate-wp' ) . "\n\n";
 	}
 
-	$emails->send( $email, $subject, $message );
+	if ( apply_filters( 'affwp_notify_on_rejected_affiliate_registration', true ) ) {
+		$emails->send( $email, $subject, $message );
+	}
 
 }
 add_action( 'affwp_set_affiliate_status', 'affwp_notify_on_rejected_affiliate_registration', 10, 3 );

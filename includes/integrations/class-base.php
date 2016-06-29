@@ -2,280 +2,377 @@
 
 abstract class Affiliate_WP_Base {
 
-	/**
-	 * The context for referrals. This refers to the integration that is being used.
-	 *
-	 * @access  public
-	 * @since   1.2
-	 */
-	public $context;
+    /**
+     * The context for referrals. This refers to the integration that is being used.
+     *
+     * @access  public
+     * @since   1.2
+     */
+    public $context;
 
-	/**
-	 * The ID of the referring affiliate
-	 *
-	 * @access  public
-	 * @since   1.2
-	 */
-	public $affiliate_id;
+    /**
+     * The ID of the referring affiliate
+     *
+     * @access  public
+     * @since   1.2
+     */
+    public $affiliate_id;
 
-	/**
-	 * Constructor
-	 *
-	 * @access  public
-	 * @since   1.0
-	 */
-	public function __construct() {
+    /**
+     * Debug mode
+     *
+     * @access  public
+     * @since   1.8
+     */
+    public $debug;
 
-		$this->affiliate_id = affiliate_wp()->tracking->get_affiliate_id();
+    /**
+     * Logging class object
+     *
+     * @access  public
+     * @since   1.8
+     */
+    public $logs;
 
-		$this->init();
+    /**
+     * Constructor
+     *
+     * @access  public
+     * @since   1.0
+     */
+    public function __construct() {
 
-	}
+        $this->debug = (bool) affiliate_wp()->settings->get( 'debug_mode', false );
 
-	/**
-	 * Gets things started
-	 *
-	 * @access  public
-	 * @since   1.0
-	 * @return  void
-	 */
-	public function init() {
+        if( $this->debug ) {
+            $this->logs = new Affiliate_WP_Logging;
+        }
 
-	}
+        $this->affiliate_id = affiliate_wp()->tracking->get_affiliate_id();
 
-	/**
-	 * Determines if the current session was referred through an affiliate link
-	 *
-	 * @access  public
-	 * @since   1.0
-	 * @return  bool
-	 */
-	public function was_referred() {
-		return affiliate_wp()->tracking->was_referred();
-	}
+        $this->init();
 
-	/**
-	 * Inserts a pending referral. Used when orders are initially created
-	 *
-	 * @access  public
-	 * @since   1.0
-	 * @param   $amount The final referral commission amount
-	 * @param   $reference The reference column for the referral per the current context
-	 * @param   $description A plaintext description of the referral
-	 * @param   $products An array of product details
-	 * @param   $data Any custom data that can be passed to and stored with the referral
-	 * @return  bool
-	 */
-	public function insert_pending_referral( $amount = '', $reference = 0, $description = '', $products = array(), $data = array() ) {
+    }
 
-		if ( ! (bool) apply_filters( 'affwp_integration_create_referral', true, $this->context ) ) {
-			return false; // Allow extensions to prevent referrals from being created
-		}
+    /**
+     * Gets things started
+     *
+     * @access  public
+     * @since   1.0
+     * @return  void
+     */
+    public function init() {
 
-		if ( affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context ) ) {
-			return false; // Referral already created for this reference
-		}
+    }
 
-		if ( empty( $amount ) && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
-			return false; // Ignore a zero amount referral
-		}
+    /**
+     * Determines if the current session was referred through an affiliate link
+     *
+     * @access  public
+     * @since   1.0
+     * @return  bool
+     */
+    public function was_referred() {
+        return affiliate_wp()->tracking->was_referred();
+    }
 
-		$visit_id = affiliate_wp()->tracking->get_visit_id();
+    /**
+     * Inserts a pending referral. Used when orders are initially created
+     *
+     * @access  public
+     * @since   1.0
+     * @param   $amount The final referral commission amount
+     * @param   $reference The reference column for the referral per the current context
+     * @param   $description A plaintext description of the referral
+     * @param   $products An array of product details
+     * @param   $data Any custom data that can be passed to and stored with the referral
+     * @return  bool
+     */
+    public function insert_pending_referral( $amount = '', $reference = 0, $description = '', $products = array(), $data = array() ) {
 
-		// get affiliate ID
-		$this->affiliate_id = isset( $data['affiliate_id'] ) ? $data['affiliate_id'] : $this->get_affiliate_id( $reference, $this->context );
+        // get affiliate ID
+        $this->affiliate_id = isset( $data['affiliate_id'] ) ? $data['affiliate_id'] : $this->get_affiliate_id( $reference, $this->context );
 
-		$args = apply_filters( 'affwp_insert_pending_referral', array(
-			'amount'       => $amount,
-			'reference'    => $reference,
-			'description'  => $description,
-			'campaign'     => affiliate_wp()->tracking->get_campaign(),
-			'affiliate_id' => $this->affiliate_id,
-			'visit_id'     => $visit_id,
-			'products'     => ! empty( $products ) ? maybe_serialize( $products ) : '',
-			'custom'       => ! empty( $data ) ? maybe_serialize( $data ) : '',
-			'context'      => $this->context
-		), $amount, $reference, $description, $this->affiliate_id, $visit_id, $data, $this->context );
+        if ( ! (bool) apply_filters( 'affwp_integration_create_referral', true, array( 'affiliate_id' => $this->affiliate_id, 'amount' => $amount, 'reference' => $reference, 'description' => $description, 'products' => $products, 'data' => $data ) ) ) {
 
-		return affiliate_wp()->referrals->add( $args );
+            if( $this->debug ) {
+                $this->log( 'Referral not created because integration is disabled via filter' );
+            }
 
-	}
+            return false; // Allow extensions to prevent referrals from being created
+        }
 
-	/**
-	 * Completes a referal. Used when orders are marked as completed
-	 *
-	 * @access  public
-	 * @since   1.0
-	 * @param   $reference The reference column for the referral to complete per the current context
-	 * @return  bool
-	 */
-	public function complete_referral( $reference = 0 ) {
-		if ( empty( $reference ) ) {
-			return false;
-		}
+        if ( affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context ) ) {
 
-		$referral = affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context );
+            if( $this->debug ) {
+                $this->log( sprintf( 'Referral for Reference %s already created', $reference ) );
+            }
 
-		if ( empty( $referral ) ) {
-			return false;
-		}
+            return false; // Referral already created for this reference
+        }
 
-		if ( is_object( $referral ) && $referral->status != 'pending' ) {
-			// This referral has already been completed, rejected, or paid
-			return false;
-		}
+        if ( empty( $amount ) && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 
-		if ( ! apply_filters( 'affwp_auto_complete_referral', true ) )
-			return false;
+            if( $this->debug ) {
+                $this->log( 'Referral not created due to 0.00 amount.' );
+            }
 
-		if ( affwp_set_referral_status( $referral->referral_id, 'unpaid' ) ) {
+            return false; // Ignore a zero amount referral
+        }
 
-			do_action( 'affwp_complete_referral', $referral->referral_id, $referral, $reference );
+        $visit_id = affiliate_wp()->tracking->get_visit_id();
 
-			return true;
-		}
+        $args = apply_filters( 'affwp_insert_pending_referral', array(
+            'amount'       => $amount,
+            'reference'    => $reference,
+            'description'  => $description,
+            'campaign'     => affiliate_wp()->tracking->get_campaign(),
+            'affiliate_id' => $this->affiliate_id,
+            'visit_id'     => $visit_id,
+            'products'     => ! empty( $products ) ? maybe_serialize( $products ) : '',
+            'custom'       => ! empty( $data ) ? maybe_serialize( $data ) : '',
+            'context'      => $this->context
+        ), $amount, $reference, $description, $this->affiliate_id, $visit_id, $data, $this->context );
 
-		return false;
+        $referral_id = affiliate_wp()->referrals->add( $args );
 
-	}
+        if( $this->debug ) {
+            $this->log( sprintf( 'Pending Referral #%d created successfully', $referral_id ) );
+        }
 
-	/**
-	 * Rejects a referal. Used when orders are refunded, deleted, or voided
-	 *
-	 * @access  public
-	 * @since   1.0
-	 * @param   $reference The reference column for the referral to reject per the current context
-	 * @return  bool
-	 */
-	public function reject_referral( $reference = 0 ) {
-		if ( empty( $reference ) ) {
-			return false;
-		}
+        return $referral_id;
 
-		$referral = affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context );
+    }
 
-		if ( empty( $referral ) ) {
-			return false;
-		}
+    /**
+     * Completes a referal. Used when orders are marked as completed
+     *
+     * @access  public
+     * @since   1.0
+     * @param   $reference The reference column for the referral to complete per the current context
+     * @return  bool
+     */
+    public function complete_referral( $reference = 0 ) {
 
-		if ( is_object( $referral ) && 'paid' == $referral->status ) {
-			// This referral has already been paid so it cannot be rejected
-			return false;
-		}
+        if ( empty( $reference ) ) {
+            return false;
+        }
 
-		if ( affiliate_wp()->referrals->update( $referral->referral_id, array( 'status' => 'rejected' ), '', 'referral' ) ) {
+        $referral = affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context );
 
-			return true;
+        if ( empty( $referral ) ) {
+            return false;
+        }
 
-		}
+        if ( is_object( $referral ) && $referral->status != 'pending' ) {
+            // This referral has already been completed, rejected, or paid
+            return false;
+        }
 
-		return false;
+        if ( ! apply_filters( 'affwp_auto_complete_referral', true ) ) {
 
-	}
+            if( $this->debug ) {
+                $this->log( 'Referral not marked as complete because of affwp_auto_complete_referral filter' );
+            }
 
-	/**
-	 * Retrieves the ID of the referring affiliate
-	 *
-	 * @access  public
-	 * @since   1.0
-	 * @return  int
-	 */
-	public function get_affiliate_id( $reference = 0 ) {
-		return absint( apply_filters( 'affwp_get_referring_affiliate_id', $this->affiliate_id, $reference, $this->context ) );
-	}
+            return false;
+        }
 
-	/**
-	 * Retrieves the email address of the referring affiliate
-	 *
-	 * @access  public
-	 * @since   1.0
-	 * @return  string
-	 */
-	public function get_affiliate_email() {
-		return affwp_get_affiliate_email( $this->get_affiliate_id() );
-	}
+        if ( affwp_set_referral_status( $referral->referral_id, 'unpaid' ) ) {
 
-	/**
-	 * Determine if the passed email belongs to the affiliate
-	 *
-	 * Checks a given email address against the referring affiliate's
-	 * user email and payment email addresses to prevent customers from
-	 * referring themselves.
-	 *
-	 * @access  public
-	 * @since   1.6
-	 * @param   string $email
-	 * @return  bool
-	 */
-	public function is_affiliate_email( $email, $affiliate_id = 0 ) {
+            do_action( 'affwp_complete_referral', $referral->referral_id, $referral, $reference );
 
-		$is_affiliate_email = false;
+            if( $this->debug ) {
+                $this->log( sprintf( 'Referral #%d set to Unpaid successfully', $referral->referral_id ) );
+            }
 
-		// allow an affiliate ID to be passed in
-		$affiliate_id = isset( $affiliate_id ) ? $affiliate_id : $this->get_affiliate_id();
+            return true;
+        }
 
-		// Get affiliate emails
-		$user_email  = affwp_get_affiliate_email( $affiliate_id );
+        if( $this->debug ) {
+            $this->log( sprintf( 'Referral #%d failed to be set to Unpaid', $referral->referral_id ) );
+        }
 
-		$payment_email = affwp_get_affiliate_payment_email( $affiliate_id );
+        return false;
 
-		// True if the email is valid and matches affiliate user email or payment email, otherwise false
-		$is_affiliate_email = ( is_email( $email ) && ( $user_email === $email || $payment_email === $email ) );
+    }
 
-		return (bool) apply_filters( 'affwp_is_customer_email_affiliate_email', $is_affiliate_email, $email, $affiliate_id );
+    /**
+     * Rejects a referal. Used when orders are refunded, deleted, or voided
+     *
+     * @access  public
+     * @since   1.0
+     * @param   $reference The reference column for the referral to reject per the current context
+     * @return  bool
+     */
+    public function reject_referral( $reference = 0 ) {
+        if ( empty( $reference ) ) {
+            return false;
+        }
 
-	}
+        $referral = affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context );
 
-	/**
-	 * Retrieves the rate and type for a specific product
-	 *
-	 * @access  public
-	 * @since   1.2
-	 * @return  array
-	 */
-	public function calculate_referral_amount( $base_amount = '', $reference = '', $product_id = 0, $affiliate_id = 0 ) {
+        if ( empty( $referral ) ) {
+            return false;
+        }
 
-		// the affiliate ID can be optionally passed in to override the referral amount
-		$affiliate_id = ! empty( $affiliate_id ) ? $affiliate_id : $this->get_affiliate_id( $reference );
+        if ( is_object( $referral ) && 'paid' == $referral->status ) {
+            // This referral has already been paid so it cannot be rejected
+            return false;
+        }
 
-		$rate = '';
+        if ( affwp_set_referral_status( $referral->referral_id, 'rejected' ) ) {
 
-		if ( ! empty( $product_id ) ) {
-			$rate = $this->get_product_rate( $product_id, $args = array( 'reference' => $reference, 'affiliate_id' => $affiliate_id ) );
-		}
+            if( $this->debug ) {
+                $this->log( sprintf( 'Referral #%d set to Rejected successfully', $referral->referral_id ) );
+            }
 
-		$amount = affwp_calc_referral_amount( $base_amount, $affiliate_id, $reference, $rate, $product_id );
+            return true;
 
-		return $amount;
+        }
 
-	}
+        if( $this->debug ) {
+            $this->log( sprintf( 'Referral #%d failed to be set to Rejected', $referral->referral_id ) );
+        }
 
-	/**
-	 * Retrieves the rate and type for a specific product
-	 *
-	 * @access  public
-	 * @since   1.2
-	 * @return  float
-	*/
-	public function get_product_rate( $product_id = 0, $args = array() ) {
+        return false;
 
-		$affiliate_id = isset( $args['affiliate_id'] ) ? $args['affiliate_id'] : $this->get_affiliate_id( $args['reference'] );
+    }
 
-		$rate = get_post_meta( $product_id, '_affwp_' . $this->context . '_product_rate', true );
+    /**
+     * Retrieves the ID of the referring affiliate
+     *
+     * @access  public
+     * @since   1.0
+     * @return  int
+     */
+    public function get_affiliate_id( $reference = 0 ) {
+        return absint( apply_filters( 'affwp_get_referring_affiliate_id', $this->affiliate_id, $reference, $this->context ) );
+    }
 
-		return apply_filters( 'affwp_get_product_rate', $rate, $product_id, $args, $affiliate_id, $this->context );
+    /**
+     * Retrieves the email address of the referring affiliate
+     *
+     * @access  public
+     * @since   1.0
+     * @return  string
+     */
+    public function get_affiliate_email() {
+        return affwp_get_affiliate_email( $this->get_affiliate_id() );
+    }
 
-	}
+    /**
+     * Determine if the passed email belongs to the affiliate
+     *
+     * Checks a given email address against the referring affiliate's
+     * user email and payment email addresses to prevent customers from
+     * referring themselves.
+     *
+     * @access  public
+     * @since   1.6
+     * @param   string $email
+     * @return  bool
+     */
+    public function is_affiliate_email( $email, $affiliate_id = 0 ) {
 
-	/**
-	 * Retrieves the product details array for the referral
-	 *
-	 * @access  public
-	 * @since   1.6
-	 * @return  array
-	*/
-	public function get_products( $order_id = 0 ) {
-		return array();
-	}
+        $is_affiliate_email = false;
+
+        // allow an affiliate ID to be passed in
+        $affiliate_id = isset( $affiliate_id ) ? $affiliate_id : $this->get_affiliate_id();
+
+        // Get affiliate emails
+        $user_email  = affwp_get_affiliate_email( $affiliate_id );
+
+        $payment_email = affwp_get_affiliate_payment_email( $affiliate_id );
+
+        // True if the email is valid and matches affiliate user email or payment email, otherwise false
+        $is_affiliate_email = ( is_email( $email ) && ( $user_email === $email || $payment_email === $email ) );
+
+        return (bool) apply_filters( 'affwp_is_customer_email_affiliate_email', $is_affiliate_email, $email, $affiliate_id );
+
+    }
+
+    /**
+     * Retrieves the rate and type for a specific product
+     *
+     * @since 1.2
+     * @access public
+     *
+     * @param string $base_amount      Optional. Base amount to calculate the referral amount from.
+     *                                 Default empty.
+     * @param string|int $reference    Optional. Referral reference (usually the order ID). Default empty.
+     * @param int        $product_id   Optional. Product ID. Default 0.
+     * @param int        $affiliate_id Optional. Affiliate ID.
+     * @return string Referral amount.
+     */
+    public function calculate_referral_amount( $base_amount = '', $reference = '', $product_id = 0, $affiliate_id = 0 ) {
+
+        // the affiliate ID can be optionally passed in to override the referral amount
+        $affiliate_id = ! empty( $affiliate_id ) ? $affiliate_id : $this->get_affiliate_id( $reference );
+
+        $rate = '';
+
+        if ( ! empty( $product_id ) ) {
+            $rate = $this->get_product_rate( $product_id, $args = array( 'reference' => $reference, 'affiliate_id' => $affiliate_id ) );
+        }
+
+        $amount = affwp_calc_referral_amount( $base_amount, $affiliate_id, $reference, $rate, $product_id );
+
+        return $amount;
+
+    }
+
+    /**
+     * Retrieves the rate and type for a specific product
+     *
+     * @access  public
+     * @since   1.2
+     * @return  float
+    */
+    public function get_product_rate( $product_id = 0, $args = array() ) {
+
+        $affiliate_id = isset( $args['affiliate_id'] ) ? $args['affiliate_id'] : $this->get_affiliate_id( $args['reference'] );
+
+        $rate = get_post_meta( $product_id, '_affwp_' . $this->context . '_product_rate', true );
+
+        /**
+         * Filters the integration product rate.
+         *
+         * @since 1.2
+         *
+         * @param float  $rate         Product-level referral rate.
+         * @param int    $product_id   Product ID.
+         * @param array  $args         Arguments for retrieving the product rate.
+         * @param int    $affiliate_id Affilaite ID.
+         * @param string $context      Order context.
+         */
+        return apply_filters( 'affwp_get_product_rate', $rate, $product_id, $args, $affiliate_id, $this->context );
+    }
+
+    /**
+     * Retrieves the product details array for the referral
+     *
+     * @access  public
+     * @since   1.6
+     * @return  array
+    */
+    public function get_products( $order_id = 0 ) {
+        return array();
+    }
+
+    /**
+     * Write log message
+     *
+     * @since 1.8
+     */
+    public function log( $message = '' ) {
+
+        if( $this->debug ) {
+
+            $this->logs->log( $message );
+
+        }
+
+    }
 
 }

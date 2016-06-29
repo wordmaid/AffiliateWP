@@ -47,6 +47,8 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		add_action( 'affwp_pre_flush_rewrites', array( $this, 'skip_generate_rewrites' ) );
 
+		// Shop page.
+		add_action( 'pre_get_posts', array( $this, 'force_shop_page_for_referrals' ), 5 );
 	}
 
 	/**
@@ -73,6 +75,11 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 			// Customers cannot refer themselves
 			if ( $this->is_affiliate_email( $this->order->billing_email, $affiliate_id ) ) {
+
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
+
 				return false;
 			}
 
@@ -85,6 +92,10 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			}
 
 			$cart_shipping = $this->order->get_total_shipping();
+
+			if ( ! affiliate_wp()->settings->get( 'exclude_tax' ) ) {
+				$cart_shipping += $this->order->get_shipping_tax();
+			}
 
 			$items = $this->order->get_items();
 
@@ -111,7 +122,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					$product_total += $product['line_tax'];
 				}
 
-				if ( $product_total <= 0 ) {
+				if ( $product_total <= 0 && 'flat' !== affwp_get_affiliate_rate_type( $affiliate_id ) ) {
 					continue;
 				}
 
@@ -120,6 +131,11 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			}
 
 			if ( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
+
+				if( $this->debug ) {
+					$this->log( 'Referral not created due to 0.00 amount.' );
+				}
+
 				return false; // Ignore a zero amount referral
 			}
 
@@ -140,6 +156,10 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					'context'      => $this->context
 				) );
 
+				if( $this->debug ) {
+					$this->log( sprintf( 'WooCommerce Referral #%d updated successfully.', $existing->referral_id ) );
+				}
+
 			} else {
 
 				// Create a new referral
@@ -156,10 +176,20 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 				if ( $referral_id ) {
 
+					if( $this->debug ) {
+						$this->log( sprintf( 'Referral #%d created successfully.', $referral_id ) );
+					}
+
 					$amount = affwp_currency_filter( affwp_format_amount( $amount ) );
 					$name   = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
 
 					$this->order->add_order_note( sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral_id, $amount, $name ) );
+
+				} else {
+
+					if( $this->debug ) {
+						$this->log( 'Referral failed to be created.' );
+					}
 
 				}
 			}
@@ -205,15 +235,21 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Mark referral as complete when payment is completed
+	 * Marks a referral as complete when payment is completed.
 	 *
-	 * @access  public
-	 * @since   1.0
-	*/
+	 * @since 1.0
+	 * @since 1.8 Orders that are COD and 'wc-processing' status are now skipped from "completion".
+	 * @access public
+	 */
 	public function mark_referral_complete( $order_id = 0 ) {
+		// If the WC status is 'wc-processing' and a COD order, leave as 'pending'.
+		if ( current_action( 'woocommerce_order_status_processing' )
+		     && 'cod' === get_post_meta( $order_id, '_payment_method', true )
+		) {
+			return;
+		}
 
 		$this->complete_referral( $order_id );
-
 	}
 
 	/**
@@ -283,9 +319,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				<span class="affwp-woo-coupon-input-wrap">
 					<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 					<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" />
-					<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 				</span>
-				<span id="affwp_user_search_results"></span>
 				<img class="help_tip" data-tip='<?php _e( 'If you would like to connect this discount to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?>' src="<?php echo WC()->plugin_url(); ?>/assets/images/help.png" height="16" width="16" />
 			</span>
 		</p>
@@ -484,6 +518,47 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	*/
 	public function skip_generate_rewrites() {
 		remove_filter( 'rewrite_rules_array', 'wc_fix_rewrite_rules', 10 );
+	}
+
+	/**
+	 * Forces the WC shop page to recognize it as such, even when accessed via a referral URL.
+	 *
+	 * @since 1.8
+	 * @access public
+	 *
+	 * @param WP_Query $query Current query.
+	 */
+	public function force_shop_page_for_referrals( $query ) {
+		if ( ! $query->is_main_query() ) {
+			return;
+		}
+
+		if ( function_exists( 'wc_get_page_id' ) ) {
+			$ref = affiliate_wp()->tracking->get_referral_var();
+
+			if ( ( isset( $query->queried_object_id ) && wc_get_page_id( 'shop' ) == $query->queried_object_id )
+				&& ! empty( $query->query_vars[ $ref ] )
+			) {
+				// Force WC to recognize that this is the shop page.
+				$GLOBALS['wp_rewrite']->use_verbose_page_rules = true;
+			}
+		}
+	}
+
+	/**
+	 * Strips pretty referral bits from pagination links on the Shop page.
+	 *
+	 * @since 1.8
+	 * @since 1.8.1 Skipped for product taxonomies and searches
+	 * @deprecated 1.8.3
+	 * @see Affiliate_WP_Tracking::strip_referral_from_paged_urls()
+	 * @access public
+	 *
+	 * @param string $link Pagination link.
+	 * @return string (Maybe) filtered pagination link.
+	 */
+	public function strip_referral_from_paged_urls( $link ) {
+		return affiliate_wp()->tracking->strip_referral_from_paged_urls( $link );
 	}
 
 }

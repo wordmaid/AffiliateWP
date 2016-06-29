@@ -13,6 +13,10 @@ class Affiliate_WP_Register {
 
 		add_action( 'affwp_affiliate_register', array( $this, 'process_registration' ) );
 		add_action( 'user_register', array( $this, 'auto_register_user_as_affiliate' ) );
+		add_action( 'user_new_form', array( $this, 'add_as_affiliate' ) );
+		add_action( 'user_register', array( $this, 'process_add_as_affiliate' ) );
+		add_action( 'added_existing_user', array( $this, 'process_add_as_affiliate' ) );
+		add_action( 'admin_footer', array( $this, 'scripts' ) );
 
 	}
 
@@ -379,5 +383,124 @@ class Affiliate_WP_Register {
 
 	}
 
+	/**
+	 * Adds an "Add As Affiliate" checkbox to the WordPress "Add New User" screen
+	 * On multisite this will only show when the "Skip Confirmation Email" checkbox is enabled
+	 *
+	 * @since 1.8
+	 * @return void
+	 */
+	public function add_as_affiliate( $context ) {
+
+		if ( affiliate_wp()->settings->get( 'auto_register' ) ) {
+			return;
+		}
+
+		?>
+		<table id="affwp-create-affiliate" class="form-table" style="margin-top:0;">
+			<tr>
+				<th scope="row"><label for="create-affiliate-<?php echo $context; ?>"><?php _e( 'Add as Affiliate',  'affiliate-wp' ); ?></label></th>
+				<td>
+					<label for="create-affiliate-<?php echo $context; ?>"><input type="checkbox" id="create-affiliate-<?php echo $context; ?>" name="affwp_create_affiliate" value="1" /> <?php _e( 'Add the user as an affiliate.', 'affiliate-wp' ); ?></label>
+				</td>
+			</tr>
+			<?php if ( ! affiliate_wp()->emails->is_email_disabled() ) : ?>
+			<tr>
+				<th scope="row"><label for="disable-affiliate-email-<?php echo $context; ?>"><?php _e( 'Disable Affiliate Email',  'affiliate-wp' ); ?></label></th>
+				<td>
+					<label for="disable-affiliate-email-<?php echo $context; ?>"><input type="checkbox" id="disable-affiliate-email-<?php echo $context; ?>" name="disable_affiliate_email" value="1" /> <?php _e( 'Disable the application accepted email sent to the affiliate.', 'affiliate-wp' ); ?></label>
+				</td>
+			</tr>
+			<?php endif; ?>
+		</table>
+		<?php
+	}
+
+	/**
+	 * Adds a new affiliate when the "Add As Affiliate" checkbox is enabled
+	 * Only works when "Skip Confirmation Email" is enabled
+	 *
+	 * @since 1.8
+	 * @return void
+	 */
+	public function process_add_as_affiliate( $user_id = 0 ) {
+
+		if ( affiliate_wp()->settings->get( 'auto_register' ) ) {
+			return;
+		}
+
+		$add_affiliate     = isset( $_POST['affwp_create_affiliate'] ) ? $_POST['affwp_create_affiliate'] : '';
+		$skip_confirmation = isset( $_POST['noconfirmation'] ) ? $_POST['noconfirmation'] : '';
+
+		if ( is_multisite() && ! ( $add_affiliate && $skip_confirmation ) ) {
+			return;
+		} elseif ( ! $add_affiliate ) {
+			return;
+		}
+
+		if ( $add_affiliate && isset( $_POST['disable_affiliate_email'] ) ) {
+			add_filter( 'affwp_notify_on_approval', '__return_false' );
+		}
+
+		// add the affiliate
+		affwp_add_affiliate( array( 'user_id' => $user_id ) );
+
+	}
+
+	/**
+	 * Scripts
+	 *
+	 * @since 1.8
+	 * @return void
+	 */
+	function scripts() {
+
+		if ( affiliate_wp()->settings->get( 'auto_register' ) ) {
+			return;
+		}
+
+		global $pagenow;
+
+		/**
+		 * Javascript for the "Add New User" screen on (multisite only)
+		 */
+		if ( ( ! empty( $pagenow ) && ( 'user-new.php' === $pagenow ) && is_multisite() ) ) : ?>
+
+		<script>
+		jQuery(document).ready(function($) {
+
+			var optionSkipConfirmation = $('input[name="noconfirmation"]');
+
+			// show or hide the add affiliate table based on the "Skip Confirmation" checkbox option
+			optionSkipConfirmation.click( function(e) {
+
+				var tableNoConfirmation = this.closest('table');
+				var tableAddAffiliate = $( tableNoConfirmation ).next('table');
+
+				if ( this.checked ) {
+					tableAddAffiliate.show();
+
+				} else {
+					tableAddAffiliate.hide();
+				}
+
+			});
+
+			var tableNoConfirmation = $( optionSkipConfirmation ).closest('table');
+			var tableAddAffiliate = $( tableNoConfirmation ).next('table');
+
+			if ( optionSkipConfirmation.is(':checked') ) {
+				tableAddAffiliate.show();
+			} else {
+				tableAddAffiliate.hide();
+			}
+
+		});
+
+		</script>
+
+		<?php endif;
+
+	}
 
 }

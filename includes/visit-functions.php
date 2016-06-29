@@ -30,8 +30,13 @@ function affwp_delete_visit( $visit ) {
 		return false;
 	}
 
+	// If the visit is invalid, bail.
+	if ( ! $visit = affiliate_wp()->visits->get( $visit_id ) ) {
+		return false;
+	}
+
 	// Decrease the visit count
-	affwp_decrease_affiliate_visit_count( $visit_id );
+	affwp_decrease_affiliate_visit_count( $visit->affiliate_id );
 
 	if( affiliate_wp()->visits->delete( $visit_id ) ) {
 

@@ -22,6 +22,7 @@ class Affiliate_WP_Settings {
 		add_filter( 'affwp_settings_emails', array( $this, 'email_approval_settings' ) );
 		add_filter( 'affwp_settings_sanitize', array( $this, 'sanitize_referral_variable' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_text', array( $this, 'sanitize_text_fields' ), 10, 2 );
+		add_filter( 'affwp_settings_sanitize_url', array( $this, 'sanitize_url_fields' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_checkbox', array( $this, 'sanitize_cb_fields' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_number', array( $this, 'sanitize_number_fields' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_rich_editor', array( $this, 'sanitize_rich_editor_fields' ), 10, 2 );
@@ -61,8 +62,62 @@ class Affiliate_WP_Settings {
 
 		}
 
+		// Handle network-wide debug mode constant.
+		if ( 'debug_mode' === $key ) {
+			if ( defined( 'AFFILIATE_WP_DEBUG' ) && AFFILIATE_WP_DEBUG ) {
+				$value = true;
+			}
+		}
+
 		return $value;
 
+	}
+
+	/**
+	 * Sets an option (in memory).
+	 *
+	 * @since 1.8
+	 * @access public
+	 *
+	 * @param array $settings An array of `key => value` setting pairs to set.
+	 * @param bool  $save     Optional. Whether to trigger saving the option or options. Default false.
+	 * @return bool If `$save` is not false, whether the options were saved successfully. True otherwise.
+	 */
+	public function set( $settings, $save = false ) {
+		foreach ( $settings as $option => $value ) {
+			$this->options[ $option ] = $value;
+		}
+
+		if ( false !== $save ) {
+			return $this->save();
+		}
+
+		return true;
+	}
+
+	/**
+	 * Saves option values queued in memory.
+	 *
+	 * Note: If posting separately from the main settings submission process, this method should
+	 * be called directly for direct saving to prevent memory pollution. Otherwise, this method
+	 * is only accessible via the optional `$save` parameter in the set() method.
+	 *
+	 * @since 1.8
+	 * @since 1.8.3 Added the `$options` parameter to facilitate direct saving.
+	 * @access protected
+	 *
+	 * @see Affiliate_WP_Settings::set()
+	 *
+	 * @param array $options Optional. Options to save/overwrite directly. Default empty array.
+	 * @return bool False if the options were not updated (saved) successfully, true otherwise.
+	 */
+	protected function save( $options = array() ) {
+		$all_options = $this->get_all();
+
+		if ( ! empty( $options ) ) {
+			$all_options = array_merge( $all_options, $options );
+		}
+		return update_option( 'affwp_settings', $all_options );
 	}
 
 	/**
@@ -113,16 +168,17 @@ class Affiliate_WP_Settings {
 					'affwp_settings_' . $tab,
 					'affwp_settings_' . $tab,
 					array(
-						'id'      => $key,
-						'desc'    => ! empty( $option['desc'] ) ? $option['desc'] : '',
-						'name'    => isset( $option['name'] ) ? $option['name'] : null,
-						'section' => $tab,
-						'size'    => isset( $option['size'] ) ? $option['size'] : null,
-						'max'     => isset( $option['max'] ) ? $option['max'] : null,
-						'min'     => isset( $option['min'] ) ? $option['min'] : null,
-						'step'    => isset( $option['step'] ) ? $option['step'] : null,
-						'options' => isset( $option['options'] ) ? $option['options'] : '',
-						'std'     => isset( $option['std'] ) ? $option['std'] : '',
+						'id'       => $key,
+						'desc'     => ! empty( $option['desc'] ) ? $option['desc'] : '',
+						'name'     => isset( $option['name'] ) ? $option['name'] : null,
+						'section'  => $tab,
+						'size'     => isset( $option['size'] ) ? $option['size'] : null,
+						'max'      => isset( $option['max'] ) ? $option['max'] : null,
+						'min'      => isset( $option['min'] ) ? $option['min'] : null,
+						'step'     => isset( $option['step'] ) ? $option['step'] : null,
+						'options'  => isset( $option['options'] ) ? $option['options'] : '',
+						'std'      => isset( $option['std'] ) ? $option['std'] : '',
+						'disabled' => isset( $option['disabled'] ) ? $option['disabled'] : '',
 					)
 				);
 			}
@@ -251,6 +307,16 @@ class Affiliate_WP_Settings {
 	}
 
 	/**
+	 * Sanitize URL fields
+	 *
+	 * @since 1.7.15
+	 * @return string
+	*/
+	public function sanitize_url_fields( $value = '', $key = '' ) {
+		return sanitize_text_field( $value );
+	}
+
+	/**
 	 * Sanitize checkbox fields
 	 *
 	 * @since 1.7
@@ -291,6 +357,22 @@ class Affiliate_WP_Settings {
 		// get currently logged in username
 		$user_info = get_userdata( get_current_user_id() );
 		$username  = $user_info ? esc_html( $user_info->user_login ) : '';
+
+		// Handle debug_mode description.
+		if ( defined( 'AFFILIATE_WP_DEBUG' ) && true === AFFILIATE_WP_DEBUG ) {
+			$this->options['debug_mode'] = 1;
+
+			// Globally enabled.
+			add_filter( 'affwp_settings_misc', function( $misc_settings ) {
+				$misc_settings['debug_mode']['disabled'] = true;
+
+				return $misc_settings;
+			} );
+
+			$debug_mode_desc = __( 'Debug mode is globally enabled via <code>AFFILIATE_WP_DEBUG</code> set in <code>wp-config.php</code>. This setting cannot be modified from this screen.', 'affiliate-wp' );
+		} else {
+			$debug_mode_desc = __( 'Check this box to enable debug mode. This will turn on error logging for the referral process to help identify problems.', 'affiliate-wp' );
+		}
 
 		$settings = array(
 			/** General Settings */
@@ -529,6 +611,11 @@ class Affiliate_WP_Settings {
 						'desc' => __( 'Automatically register new users as affiliates?', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
+					'default_referral_url' => array(
+						'name' => __( 'Default Referral URL', 'affiliate-wp' ),
+						'desc' => __( 'The default referral URL shown in the affiliate area. Also changes the URL shown in the referral URL generator and {referral_url} email tag.', 'affiliate-wp' ),
+						'type' => 'url'
+					),
 					'recaptcha_enabled' => array(
 						'name' => __( 'Enable reCAPTCHA', 'affiliate-wp' ),
 						'desc' => __( 'Would you like to prevent bots from registering affiliate accounts using Google reCAPTCHA?', 'affiliate-wp' ),
@@ -557,6 +644,11 @@ class Affiliate_WP_Settings {
 					'ignore_zero_referrals' => array(
 						'name' => __( 'Ignore Zero Referrals?', 'affiliate-wp' ),
 						'desc' => __( 'Check this box if you would like AffiliateWP to completely ignore referrals for a zero total amount. This can be useful for multi-price products that start at zero, or if a discount was used, which resulted in a zero amount. Please note: if this setting is enabled and a visit results in a zero referral, then the visit would be considered not converted.', 'affiliate-wp' ),
+						'type' => 'checkbox'
+					),
+					'debug_mode' => array(
+						'name' => __( 'Enable Debug Mode?', 'affiliate-wp' ),
+						'desc' => $debug_mode_desc,
 						'type' => 'checkbox'
 					),
 					'uninstall_on_delete' => array(
@@ -640,9 +732,11 @@ class Affiliate_WP_Settings {
 	 */
 	function checkbox_callback( $args ) {
 
-		$checked = isset($this->options[$args['id']]) ? checked(1, $this->options[$args['id']], false) : '';
+		$checked  = isset( $this->options[ $args['id'] ] ) ? checked( 1, $this->options[ $args['id'] ], false) : '';
+		$disabled = $this->is_setting_disabled( $args ) ? disabled( $args['disabled'], true, false ) : '';
+
 		$html = '<label for="affwp_settings[' . $args['id'] . ']">';
-		$html .= '<input type="checkbox" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>&nbsp;';
+		$html .= '<input type="checkbox" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="1" ' . $checked . ' ' . $disabled . '/>&nbsp;';
 		$html .= $args['desc'];
 		$html .= '</label>';
 
@@ -719,6 +813,30 @@ class Affiliate_WP_Settings {
 
 		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
 		$html = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+		$html .= '<p class="description">'  . $args['desc'] . '</p>';
+
+		echo $html;
+	}
+
+	/**
+	 * URL Callback
+	 *
+	 * Renders URL fields.
+	 *
+	 * @since 1.7.15
+	 * @param array $args Arguments passed by the setting
+	 * @global $this->options Array of all the AffiliateWP Options
+	 * @return void
+	 */
+	function url_callback( $args ) {
+
+		if ( isset( $this->options[ $args['id'] ] ) )
+			$value = $this->options[ $args['id'] ];
+		else
+			$value = isset( $args['std'] ) ? $args['std'] : '';
+
+		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
+		$html = '<input type="url" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
 		$html .= '<p class="description">'  . $args['desc'] . '</p>';
 
 		echo $html;
@@ -934,6 +1052,21 @@ class Affiliate_WP_Settings {
 		echo $html;
 	}
 
+	/**
+	 * Determines whether a setting is disabled.
+	 *
+	 * @since 1.8.3
+	 * @access public
+	 *
+	 * @param array $args Setting arguments.
+	 * @return bool True or false if the setting is disabled, otherwise false.
+	 */
+	public function is_setting_disabled( $args ) {
+		if ( isset( $args['disabled'] ) ) {
+			return $args['disabled'];
+		}
+		return false;
+	}
 
 	public function activate_license() {
 
@@ -971,11 +1104,7 @@ class Affiliate_WP_Settings {
 		// decode the license data
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-		$options = $this->get_all();
-
-		$options['license_status'] = $license_data->license;
-
-		update_option( 'affwp_settings', $options );
+		$this->save( array( 'license_status' => $license_data->license ) );
 
 		delete_transient( 'affwp_license_check' );
 
@@ -1010,11 +1139,7 @@ class Affiliate_WP_Settings {
 		if ( is_wp_error( $response ) )
 			return false;
 
-		$options = $this->get_all();
-
-		$options['license_status'] = 0;
-
-		update_option( 'affwp_settings', $options );
+		$this->save( array( 'license_status' => 0 ) );
 
 		delete_transient( 'affwp_license_check' );
 
@@ -1046,18 +1171,14 @@ class Affiliate_WP_Settings {
 			if ( is_wp_error( $response ) ) {
 
 				// Connection failed, try again in three hours
-				set_transient( 'affwp_license_check', $response, 10800 );
+				set_transient( 'affwp_license_check', $response, 3 * HOUR_IN_SECONDS );
 
 				return false;
 			}
 
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-			$options = $this->get_all();
-
-			$options['license_status'] = $license_data->license;
-
-			update_option( 'affwp_settings', $options );
+			$this->save( array( 'license_status' => $license_data->license ) );
 
 			set_transient( 'affwp_license_check', $license_data->license, DAY_IN_SECONDS );
 

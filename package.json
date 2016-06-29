@@ -1,6 +1,6 @@
 {
 	"name": "AffiliateWP",
-	"version": "1.7.7",
+	"version": "1.8.3",
 	"description": "Affiliate Plugin for WordPress",
 	"homepage": "https://affiliatewp.com/",
 	"author": {
@@ -42,6 +42,7 @@
 		"grunt-contrib-clean": "~0.5.0",
 		"grunt-contrib-compress": "~0.8.0",
 		"grunt-contrib-copy": "~0.5.0",
+		"grunt-contrib-cssmin": "~1.0.0",
 		"grunt-exec": "~0.4.5",
 		"grunt-newer": "^1.1.0",
 		"grunt-phpcs": "^0.4.0",

@@ -58,6 +58,11 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 
 			// Customers cannot refer themselves
 			if ( $this->is_affiliate_email( $customer_email, $affiliate_id ) ) {
+
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
+
 				return false;
 			}
 
@@ -66,6 +71,11 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 				$was_renewal = get_post_meta( $payment_id, '_edd_sl_is_renewal', true );
 
 				if ( $was_renewal ) {
+				
+					if( $this->debug ) {
+						$this->log( 'Referral not created because order was a renewal.' );
+					}
+
 					return;
 				}
 
@@ -78,6 +88,11 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 			$desc = $this->get_referral_description( $payment_id );
 
 			if ( empty( $desc ) ) {
+
+				if( $this->debug ) {
+					$this->log( 'Referral not created due to empty description.' );
+				}
+				
 				return;
 			}
 
@@ -105,6 +120,11 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 				$was_renewal = get_post_meta( $payment_id, '_edd_sl_is_renewal', true );
 
 				if ( $was_renewal ) {
+
+					if( $this->debug ) {
+						$this->log( 'Referral not created because order was a renewal.' );
+					}
+
 					return;
 				}
 
@@ -128,6 +148,11 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 				$this->affiliate_id = $affiliate_id;
 
 				if ( ! affiliate_wp()->tracking->is_valid_affiliate( $this->affiliate_id ) ) {
+				
+					if( $this->debug ) {
+						$this->log( 'Referral not created because affiliate is invalid.' );
+					}
+
 					continue;
 				}
 
@@ -142,16 +167,30 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 					// If a referral was already recorded, overwrite it with the linked discount affiliate
 					affiliate_wp()->referrals->update( $existing->referral_id, array( 'affiliate_id' => $this->affiliate_id, 'status' => 'unpaid', 'amount' => $referral_total ), '', 'referral' );
 
+					if( $this->debug ) {
+						$this->log( sprintf( 'Referral #%d updated successfully.', $existing->referral_id ) );
+					}
+
 				} else {
 					// new referral
 
 					if ( 0 == $referral_total && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
+					
+						if( $this->debug ) {
+							$this->log( 'Referral not created due to 0.00 amount.' );
+						}
+
 						return false; // Ignore a zero amount referral
 					}
 
 					$desc = $this->get_referral_description( $payment_id );
 
 					if ( empty( $desc ) ) {
+
+						if( $this->debug ) {
+							$this->log( 'Referral not created due to empty description.' );
+						}
+
 						return false;
 					}
 
@@ -166,6 +205,10 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 							'products'     => $this->get_products( $payment_id )
 						)
 					);
+
+					if( $this->debug ) {
+						$this->log( sprintf( 'Referral #%d created successfully.', $referral_id ) );
+					}
 				}
 			}
 		}
@@ -414,9 +457,7 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 						<span class="affwp-ajax-search-wrap">
 							<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 							<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" style="width: 300px;" />
-							<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 						</span>
-						<div id="affwp_user_search_results"></div>
 						<p class="description"><?php _e( 'If you would like to connect this discount to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></p>
 					</td>
 				</tr>

@@ -42,7 +42,7 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 		
 			$campaigns = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $this->table_name WHERE affiliate_id = %d;", $affiliate_id ) );
 
-			wp_cache_set( $cache_key, $campaigns, 'campaigns', 3600 );
+			wp_cache_set( $cache_key, $campaigns, 'campaigns', HOUR_IN_SECONDS );
 
 		}
 

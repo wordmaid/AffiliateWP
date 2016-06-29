@@ -180,7 +180,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			$data['date'] = date_i18n( 'Y-m-d H:i:s', strtotime( $data['date'] ) );
 		}
 
-		$update = $this->update( $referral_id, $data, '', 'referral' );
+		$update = $this->update( $referral->ID, $data, '', 'referral' );
 
 		if( $update ) {
 

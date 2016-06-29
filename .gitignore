@@ -28,3 +28,4 @@ $RECYCLE.BIN/
 /vendor/
 composer.lock
 /build/
+docs

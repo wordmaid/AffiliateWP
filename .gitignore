@@ -22,7 +22,11 @@ $RECYCLE.BIN/
 *.pydevproject
 .project
 .metadata
+
+# Package managers
 /node_modules/
+/vendor/
+composer.lock
 /build/
 composer.lock
 vendor

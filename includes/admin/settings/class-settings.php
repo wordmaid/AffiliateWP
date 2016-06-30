@@ -14,11 +14,17 @@ class Affiliate_WP_Settings {
 
 		$this->options = get_option( 'affwp_settings', array() );
 
+		// Set up.
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_init', array( $this, 'activate_license' ) );
 		add_action( 'admin_init', array( $this, 'deactivate_license' ) );
 		add_action( 'admin_init', array( $this, 'check_license' ) );
 
+		// Global settings.
+		add_action( 'affwp_pre_get_registered_settings', array( $this, 'handle_global_license_setting' ) );
+		add_action( 'affwp_pre_get_registered_settings', array( $this, 'handle_global_debug_mode_setting' ) );
+
+		// Sanitization.
 		add_filter( 'affwp_settings_emails', array( $this, 'email_approval_settings' ) );
 		add_filter( 'affwp_settings_sanitize', array( $this, 'sanitize_referral_variable' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_text', array( $this, 'sanitize_text_fields' ), 10, 2 );
@@ -235,6 +241,13 @@ class Affiliate_WP_Settings {
 		// Loop through each setting being saved and pass it through a sanitization filter
 		foreach ( $input as $key => $value ) {
 
+			// Don't overwrite the global license key.
+			if ( 'license_key' === $key ) {
+				if ( self::global_license_set() && $value !== self::get_license_key() ) {
+					$value = self::get_license_key();
+				}
+			}
+
 			// Get the setting type (checkbox, select, etc)
 			$type              = isset( $settings[ $tab ][ $key ][ 'type' ] ) ? $settings[ $tab ][ $key ][ 'type' ] : false;
 			$sanitize_callback = isset( $settings[ $tab ][ $key ][ 'sanitize_callback' ] ) ? $settings[ $tab ][ $key ][ 'sanitize_callback' ] : false;
@@ -358,21 +371,14 @@ class Affiliate_WP_Settings {
 		$user_info = get_userdata( get_current_user_id() );
 		$username  = $user_info ? esc_html( $user_info->user_login ) : '';
 
-		// Handle debug_mode description.
-		if ( defined( 'AFFILIATE_WP_DEBUG' ) && true === AFFILIATE_WP_DEBUG ) {
-			$this->options['debug_mode'] = 1;
-
-			// Globally enabled.
-			add_filter( 'affwp_settings_misc', function( $misc_settings ) {
-				$misc_settings['debug_mode']['disabled'] = true;
-
-				return $misc_settings;
-			} );
-
-			$debug_mode_desc = __( 'Debug mode is globally enabled via <code>AFFILIATE_WP_DEBUG</code> set in <code>wp-config.php</code>. This setting cannot be modified from this screen.', 'affiliate-wp' );
-		} else {
-			$debug_mode_desc = __( 'Check this box to enable debug mode. This will turn on error logging for the referral process to help identify problems.', 'affiliate-wp' );
-		}
+		/**
+		 * Fires before attempting to retrieve registered settings.
+		 *
+		 * @since 1.9
+		 *
+		 * @param Affiliate_WP_Settings $this Settings instance.
+		 */
+		do_action( 'affwp_pre_get_registered_settings', $this );
 
 		$settings = array(
 			/** General Settings */
@@ -648,7 +654,7 @@ class Affiliate_WP_Settings {
 					),
 					'debug_mode' => array(
 						'name' => __( 'Enable Debug Mode?', 'affiliate-wp' ),
-						'desc' => $debug_mode_desc,
+						'desc' => __( 'Check this box to enable debug mode. This will turn on error logging for the referral process to help identify problems.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'uninstall_on_delete' => array(
@@ -854,13 +860,17 @@ class Affiliate_WP_Settings {
 	 */
 	function license_callback( $args ) {
 
-		if ( isset( $this->options[ $args['id'] ] ) )
+		if ( isset( $this->options[ $args['id'] ] ) ) {
 			$value = $this->options[ $args['id'] ];
-		else
+		} else {
 			$value = isset( $args['std'] ) ? $args['std'] : '';
+		}
+
+		// Must use a 'readonly' attribute over disabled to ensure the value is passed in $_POST.
+		$readonly = $this->is_setting_disabled( $args ) ? __checked_selected_helper( $args['disabled'], true, false, 'readonly' ) : '';
 
 		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
-		$html = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+		$html = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" ' . $readonly . '/>';
 		$license_status = $this->get( 'license_status' );
 		$license_key = ! empty( $value ) ? $value : false;
 
@@ -1053,6 +1063,45 @@ class Affiliate_WP_Settings {
 	}
 
 	/**
+	 * Handles overriding and disabling the license key setting if a global key is defined.
+	 *
+	 * @since 1.9
+	 * @access public
+	 */
+	public function handle_global_license_setting() {
+		if ( self::global_license_set() ) {
+			$this->options['license_key'] = self::get_license_key();
+
+			add_filter( 'affwp_settings_general', function ( $general_settings ) {
+				$general_settings['license_key']['disabled'] = true;
+				$general_settings['license_key']['desc']     = sprintf( __( 'Your license key is globally defined via <code>AFFILIATE_WP_LICENSE_KEY</code> set in <code>wp-config.php</code>.<br />It cannot be modified from this screen.<br />An active license key is needed for automatic plugin updates and <a href="%s" target="_blank">support</a>.', 'affiliate-wp' ), 'https://affiliatewp.com/support/' );
+
+				return $general_settings;
+			} );
+		}
+	}
+
+	/**
+	 * Handles overriding and disabling the debug mode setting if globally enabled.
+	 *
+	 * @since 1.9
+	 * @access public
+	 */
+	public function handle_global_debug_mode_setting() {
+		if ( defined( 'AFFILIATE_WP_DEBUG' ) && true === AFFILIATE_WP_DEBUG ) {
+			$this->options['debug_mode'] = 1;
+
+			// Globally enabled.
+			add_filter( 'affwp_settings_misc', function( $misc_settings ) {
+				$misc_settings['debug_mode']['disabled'] = true;
+				$misc_settings['debug_mode']['desc']     = __( 'Debug mode is globally enabled via <code>AFFILIATE_WP_DEBUG</code> set in <code>wp-config.php</code>. This setting cannot be modified from this screen.', 'affiliate-wp' );
+
+				return $misc_settings;
+			} );
+		}
+	}
+
+	/**
 	 * Determines whether a setting is disabled.
 	 *
 	 * @since 1.8.3
@@ -1079,9 +1128,8 @@ class Affiliate_WP_Settings {
 		if( ! isset( $_POST['affwp_settings']['license_key'] ) )
 			return;
 
-		// retrieve the license from the database
+		// Retrieve the license status from the database.
 		$status  = $this->get( 'license_status' );
-		$license = trim( $_POST['affwp_settings']['license_key'] );
 
 		if( 'valid' == $status )
 			return; // license already activated and valid
@@ -1089,7 +1137,7 @@ class Affiliate_WP_Settings {
 		// data to send in our API request
 		$api_params = array(
 			'edd_action'=> 'activate_license',
-			'license' 	=> $license,
+			'license' 	=> self::get_license_key( $_POST['affwp_settings']['license_key'] ),
 			'item_name' => 'AffiliateWP',
 			'url'       => home_url()
 		);
@@ -1105,9 +1153,6 @@ class Affiliate_WP_Settings {
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
 		$this->save( array( 'license_status' => $license_data->license ) );
-
-		delete_transient( 'affwp_license_check' );
-
 	}
 
 	public function deactivate_license() {
@@ -1121,13 +1166,10 @@ class Affiliate_WP_Settings {
 		if( ! isset( $_POST['affwp_settings']['license_key'] ) )
 			return;
 
-		// retrieve the license from the database
-		$license = trim( $_POST['affwp_settings']['license_key'] );
-
 		// data to send in our API request
 		$api_params = array(
 			'edd_action'=> 'deactivate_license',
-			'license' 	=> $license,
+			'license' 	=> $_POST['affwp_settings']['license_key'],
 			'item_name' => 'AffiliateWP',
 			'url'       => home_url()
 		);
@@ -1140,9 +1182,6 @@ class Affiliate_WP_Settings {
 			return false;
 
 		$this->save( array( 'license_status' => 0 ) );
-
-		delete_transient( 'affwp_license_check' );
-
 	}
 
 	public function check_license() {
@@ -1159,7 +1198,7 @@ class Affiliate_WP_Settings {
 			// data to send in our API request
 			$api_params = array(
 				'edd_action'=> 'check_license',
-				'license' 	=> $this->get( 'license_key' ),
+				'license' 	=> self::get_license_key(),
 				'item_name' => 'AffiliateWP',
 				'url'       => home_url()
 			);
@@ -1194,4 +1233,43 @@ class Affiliate_WP_Settings {
 		return $this->check_license() == 'valid';
 	}
 
+	/**
+	 * Retrieves the license key.
+	 *
+	 * If the `AFFILIATE_WP_LICENSE_KEY` constant is defined, it will override values
+	 * stored in the database.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @static
+	 *
+	 * @param array $request_data POST or other data.
+	 * @return string License key.
+	 */
+	public static function get_license_key( $key = '' ) {
+		if ( self::global_license_set() ) {
+			$license = AFFILIATE_WP_LICENSE_KEY;
+		} elseif ( ! empty( $key ) ) {
+			$license = $key;
+		} else {
+			$license = affiliate_wp()->settings->get( 'license_key' );
+		}
+		return trim( $license );
+	}
+
+	/**
+	 * Determines whether the global license key has been defined.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @static
+	 *
+	 * @return bool True if the global license has been defined, otherwise false.
+	 */
+	public static function global_license_set() {
+		if ( defined( 'AFFILIATE_WP_LICENSE_KEY' ) && is_string( AFFILIATE_WP_LICENSE_KEY ) ) {
+			return true;
+		}
+		return false;
+	}
 }

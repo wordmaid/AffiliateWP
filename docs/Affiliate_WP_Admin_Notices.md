@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_class-notices.php
+- Since: 1.0

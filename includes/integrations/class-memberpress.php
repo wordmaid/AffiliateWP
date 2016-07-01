@@ -18,6 +18,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 
 		add_action( 'mepr-txn-status-pending', array( $this, 'add_pending_referral' ), 10 );
 		add_action( 'mepr-txn-status-complete', array( $this, 'mark_referral_complete' ), 10 );
+		add_action( 'mepr-txn-status-confirmed', array( $this, 'mark_referral_complete' ), 10 );
 		add_action( 'mepr-txn-status-refunded', array( $this, 'revoke_referral_on_refund' ), 10 );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );

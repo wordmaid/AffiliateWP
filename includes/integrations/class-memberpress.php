@@ -135,7 +135,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 
 		}
 
-		$url = admin_url( 'admin.php?page=memberpress-trans&search=' . $reference );
+		$url = admin_url( 'admin.php?page=memberpress-trans&action=edit&id=' . $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 	}

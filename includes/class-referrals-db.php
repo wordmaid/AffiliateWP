@@ -176,7 +176,11 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			$data['products'] = maybe_serialize( $data['products'] );
 		}
 
-		$update = $this->update( $referral_id, $data, '', 'referral' );
+		if ( ! empty( $data['date'] ) ) {
+			$data['date'] = date_i18n( 'Y-m-d H:i:s', strtotime( $data['date'] ) );
+		}
+
+		$update = $this->update( $referral->ID, $data, '', 'referral' );
 
 		if( $update ) {
 

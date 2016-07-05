@@ -191,7 +191,7 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @access public
 	 *
-	 * @param string $row_id Row ID for the record being updated.
+	 * @param int    $row_id Row ID for the record being updated.
 	 * @param array  $data   Optional. Array of columns and associated data to update. Default empty array.
 	 * @param string $where  Optional. Column to match against in the WHERE clause. If empty, $primary_key
 	 *                       will be used. Default empty.

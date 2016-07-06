@@ -64,7 +64,8 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 
 			if( $this->is_version_3 ) {
 				$amount         = $order->get_meta( 'mp_order_total' );
-				$items          = $order->get_meta( 'mp_cart_info' );
+				$cart           = $order->get_meta( 'mp_cart_info' );
+				$items          = wp_list_pluck( $cart->get_items_as_objects(), 'ID' );
 				$tax_total      = $order->get_meta( 'mp_tax_total', 0 );
 				$shipping_total = $order->get_meta( 'mp_shipping_total', 0 );
 				$order_post     = get_post( $order->ID );
@@ -109,11 +110,15 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 
 		    foreach( $items as $item ) {
 
-		        $order_items = $item;
+			    if ( is_array( $item ) ) {
+				    $order_items = $item;
 
-		        foreach( $order_items as $order_item ) {
-		            $description[] .= $order_item['name'];
-		        }
+				    foreach( $order_items as $order_item ) {
+					    $description[] = $order_item['name'];
+				    }
+			    } else {
+				    $description[] = get_the_title( $item );
+			    }
 
 		    }
 

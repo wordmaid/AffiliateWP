@@ -551,8 +551,8 @@ class Affiliate_WP_Settings {
 						'std' => get_bloginfo( 'admin_email' )
 					),
 					'registration_notifications' => array(
-						'name' => __( 'Notify Admins', 'affiliate-wp' ),
-						'desc' => __( 'Notify site admins of new affiliate registrations?', 'affiliate-wp' ),
+						'name' => __( 'Notify Admin', 'affiliate-wp' ),
+						'desc' => __( 'Notify site admin of new affiliate registrations?', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'registration_subject' => array(

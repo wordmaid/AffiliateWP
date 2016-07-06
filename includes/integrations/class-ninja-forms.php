@@ -3,7 +3,7 @@
 class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 
 	/**
-	 * Get thigns started
+	 * Get things started
 	 *
 	 * @access  public
 	 * @since   1.6
@@ -16,7 +16,7 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 			add_action( 'nf_affiliatewp_add_referral', array( $this, 'add_referral' ) );
 			add_filter( 'ninja_forms_register_actions', array( $this, 'register_actions' ) );
 		} else {
-			add_action('nf_save_sub', array($this, 'deprecated_add_referral'));
+			add_action( 'nf_save_sub', array( $this, 'deprecated_add_referral' ) );
 			add_filter( 'ninja_forms_form_settings_restrictions', array( $this, 'deprecated_add_restriction_setting' ) );
 		}
 
@@ -32,7 +32,7 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 	 * Record referral on submission
 	 *
 	 * @access  public
-	 * @since   TODO: add version
+	 * @since   1.8.4
 	 * @param   $referral_total
 	 * @param   $reference
 	 * @param   $description
@@ -126,20 +126,19 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 	 * Register Ninja Forms Action
 	 *
 	 * @access  public
-	 * @since   TODO: add version
+	 * @since   1.8.4
 	 * @param   array $actions
-	 * @return  array $action
+	 * @return  array $actions
 	 */
-	public function register_actions($actions)
-	{
+	public function register_actions( $actions ) {
 		require_once 'class-ninja-forms-action-add-referral.php';
-		$actions[ 'affiliatewp_add_referral' ] = new Affiliate_WP_Ninja_Forms_ActionAddReferral();
+		$actions[ 'affiliatewp_add_referral' ] = new Affiliate_WP_Ninja_Forms_Add_Referral();
 
 		return $actions;
 	}
 
 	/*
-	 * DEPRECATED
+	 * Deprecated as of Ninja Forms 3.0
 	 */
 
 	/**
@@ -232,7 +231,6 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 		if ( is_array ( $total ) ) {
 
 			// If this is an array, grab the string total.
-
 			if ( isset ( $total['total'] ) ) {
 
 				$purchase_total = $total['total'];
@@ -255,9 +253,7 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 		}
 
 		return affwp_sanitize_amount( $purchase_total );
-
 	}
-
 }
 
 new Affiliate_WP_Ninja_Forms;

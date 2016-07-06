@@ -18,7 +18,7 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 		if( $this->is_version_3 ){
 			add_action( 'mp_order/new_order', array( $this, 'add_pending_referral' ) );
 			add_action( 'mp_order_order_paid', array( $this, 'mark_referral_complete' ) );
-			add_action( 'mp_order_trashed', array( $this, 'revoke_referral_on_delete' ), 10, 2 );
+			add_action( 'mp_order_trashed', array( $this, 'revoke_referral_on_delete' ) );
 		} else {
 			add_action( 'mp_new_order', array( $this, 'add_pending_referral' ) );
 			add_action( 'mp_order_paid', array( $this, 'mark_referral_complete' ) );
@@ -170,7 +170,7 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 	 * @access  public
 	 * @since   1.6
 	*/
-	public function revoke_referral_on_delete( $order, $post ) {
+	public function revoke_referral_on_delete( $order ) {
 
 		$order_id = $order;
 

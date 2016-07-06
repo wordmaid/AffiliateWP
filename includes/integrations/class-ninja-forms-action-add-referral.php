@@ -113,18 +113,19 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
 
 
     /**
-     * Get the total of the form
+     * Get the total of the referral
      *
      * @since  1.8.4
      *
      * @param  array  $action_settings  The form action settings
      *
-     * @return int                      Total amount of the form
+     * @return int                      Total amount of the referral
      */
     private function get_total( $action_settings ) {
         $total = 0;
         if( isset( $action_settings[ 'affiliatewp_total' ] ) ) {
             $total = $action_settings[ 'affiliatewp_total' ];
+            $total = affwp_calc_referral_amount( $total );
         }
         return $total;
     }

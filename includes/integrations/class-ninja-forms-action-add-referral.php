@@ -20,7 +20,7 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     protected $_timing = 'late';
 
     /**
-     * @var   int
+     * @var   string
      * @since 1.8.4
      */
     protected $_priority = '10';

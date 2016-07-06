@@ -213,9 +213,14 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 
 		}
 
-		$url = admin_url( 'edit.php?post_type=product&page=marketpress-orders&order_id=' . $reference );
+		$args = array(
+			'post'   => absint( $reference ),
+			'action' => 'edit'
+		);
 
-		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
+		$url = add_query_arg( $args, admin_url( 'post.php' ) );
+
+		return '<a href="' . esc_url( $url ) . '">' . esc_html( $reference ) . '</a>';
 
 	}
 

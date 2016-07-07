@@ -1,6 +1,6 @@
 <?php
 /**
- * AffiliateWP Admin Metabox Base class
+ * AffiliateWP Admin Meta Box Base class
  * Provides a base structure for AffiliateWP content meta boxes
  *
  * @package     AffiliateWP
@@ -11,18 +11,18 @@
  */
 
 // Exit if accessed directly
-if (!defined('ABSPATH')) {
+if ( ! defined('ABSPATH') ) {
     exit;
 }
 
 /**
- * The main AffWP_Metabox_Base class.
+ * The main AffWP_Meta_Box_Base class.
  * This class may be extended using the example below.
  *
  * @abstract
  * @since  1.9
  */
-abstract class AffWP_Metabox_Base {
+abstract class AffWP_Meta_Box_Base {
 
     /**
      * An AffiliateWP meta box can be added to AffiliateWP by any
@@ -30,11 +30,11 @@ abstract class AffWP_Metabox_Base {
      *
      * Example:
      *
-     * class My_Integration_AffWP_Metabox extends AffWP_Metabox_Base {
+     * class My_Integration_AffWP_Meta_Box extends AffWP_Meta_Box_Base {
      *
      *    public $meta_box_id   = 'my_integration_affwp_metabox';
      *
-     *    public $meta_box_name = 'My Integration AffWP Metabox';
+     *    public $meta_box_name = 'My Integration AffWP Meta box';
      *
      *    Optional; defaults to primary AffiliateWP Reports Overview page
      *    (screen id: affiliates_page_affiliate-wp-reports)
@@ -51,7 +51,7 @@ abstract class AffWP_Metabox_Base {
      *
      * }
      *
-     * new My_Integration_AffWP_Metabox;)
+     * new My_Integration_AffWP_Meta_Box;
      *
      **/
 
@@ -86,16 +86,17 @@ abstract class AffWP_Metabox_Base {
      * @var     $affwp_screen The screen ID of the page on which to display this meta box.
      * @since   1.9
      */
-    private $affwp_screen = array( 'toplevel_page_affiliate-wp',
-                                   'affiliates_page_affiliate-wp-affiliates',
-                                   'affiliates_page_affiliate-wp-referrals',
-                                   'affiliates_page_affiliate-wp-visits',
-                                   'affiliates_page_affiliate-wp-creatives',
-                                   'affiliates_page_affiliate-wp-reports',
-                                   'affiliates_page_affiliate-wp-tools',
-                                   'affiliates_page_affiliate-wp-settings',
-                                   'affiliates_page_affiliate-wp-add-ons'
-                                   );
+    private $affwp_screen = array(
+                                'toplevel_page_affiliate-wp',
+                                'affiliates_page_affiliate-wp-affiliates',
+                                'affiliates_page_affiliate-wp-referrals',
+                                'affiliates_page_affiliate-wp-visits',
+                                'affiliates_page_affiliate-wp-creatives',
+                                'affiliates_page_affiliate-wp-reports',
+                                'affiliates_page_affiliate-wp-tools',
+                                'affiliates_page_affiliate-wp-settings',
+                                'affiliates_page_affiliate-wp-add-ons'
+                            );
     /**
      * The position in which the meta box will be loaded.
      * AffiliateWP uses custom metabox contexts.
@@ -133,7 +134,7 @@ abstract class AffWP_Metabox_Base {
      * @since   1.9
      */
     public function init() {
-        add_action( 'add_meta_box',     array( $this, 'add_meta_box' ) );
+        add_action( 'add_meta_box',             array( $this, 'add_meta_box' ) );
         add_action( 'affwp_reports_meta_boxes', array( $this, 'add_meta_box' ) );
         $this->meta_box_name = __( 'AffiliateWP meta box name', 'affiliate-wp' );
     }

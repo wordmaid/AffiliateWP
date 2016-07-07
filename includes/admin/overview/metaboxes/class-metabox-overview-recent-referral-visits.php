@@ -1,6 +1,6 @@
 <?php
 
-class AffWP_Metabox_Overview_Recent_Referral_Visits extends AffWP_Metabox_Base {
+class AffWP_Meta_Box_Overview_Recent_Referral_Visits extends AffWP_Meta_Box_Base {
 
 	/**
 	* The id of the meta box. Must be unique.
@@ -91,4 +91,4 @@ class AffWP_Metabox_Overview_Recent_Referral_Visits extends AffWP_Metabox_Base {
 	<?php }
 }
 
-new AffWP_Metabox_Overview_Recent_Referral_Visits;
+new AffWP_Meta_Box_Overview_Recent_Referral_Visits;

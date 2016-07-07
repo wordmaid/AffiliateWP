@@ -214,7 +214,7 @@ jQuery( document ).ready( function( $ ) {
 
 	// Save AffiliateWP metabox states
 	if ( typeof postboxes !== 'undefined' ) {
-		postboxes.add_postbox_toggles( 'affiliate-wp' );
+		postboxes.add_postbox_toggles( pagenow );
 	}
 
 } );

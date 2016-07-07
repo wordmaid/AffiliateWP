@@ -1,7 +1,7 @@
 <?php
 
 
-class AffWP_Metabox_Reports_Top_Performers extends AffWP_Metabox_Base {
+class AffWP_Meta_Box_Reports_Top_Performers extends AffWP_Meta_Box_Base {
 
 
     /**
@@ -61,4 +61,4 @@ class AffWP_Metabox_Reports_Top_Performers extends AffWP_Metabox_Base {
     <?php }
 }
 
-new AffWP_Metabox_Reports_Top_Performers;
+new AffWP_Meta_Box_Reports_Top_Performers;

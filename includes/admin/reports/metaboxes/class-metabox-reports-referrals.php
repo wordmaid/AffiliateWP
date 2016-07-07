@@ -1,7 +1,7 @@
 <?php
 
 
-class AffWP_Metabox_Reports_Referrals extends AffWP_Metabox_Base {
+class AffWP_Meta_Box_Reports_Referrals extends AffWP_Meta_Box_Base {
 
     /**
     * The id of the meta box. Must be unique.
@@ -104,4 +104,4 @@ class AffWP_Metabox_Reports_Referrals extends AffWP_Metabox_Base {
     <?php }
 }
 
-new AffWP_Metabox_Reports_Referrals;
+new AffWP_Meta_Box_Reports_Referrals;

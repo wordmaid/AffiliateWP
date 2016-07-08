@@ -49,8 +49,6 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 		if ( $this->is_affiliate_email( $customer_email ) ) {
 			return;
 		}
-		$nf_sub_time    = ( date("Y-m-d-s", time() ) );
-		$reference      = $reference . '-' . $nf_sub_time;
 
 		$this->insert_pending_referral( $referral_total, $reference, $description );
 		$this->complete_referral( $reference );

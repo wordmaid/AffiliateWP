@@ -130,7 +130,7 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
         $data[ 'actions' ][ 'save' ][ 'sub_id' ] = $sub->get_id();
 
         $referral_total = $this->get_total( $action_settings );
-        $reference      = $this->get_reference( $data );
+        $reference      = $sub->get_id();
         $description    = $this->get_description( $action_settings, $data );
         $customer_email = $this->get_customer_email( $action_settings );
 

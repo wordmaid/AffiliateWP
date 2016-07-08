@@ -69,7 +69,7 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 			return;
 		}
 
-		if( 'nf_sub' != get_post_type( $sub_id ) ) {
+		if( 'nf_sub' !== get_post_type( $sub_id ) ) {
 			return;
 		}
 
@@ -94,7 +94,7 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 			return;
 		}
 
-		if( 'nf_sub' != get_post_type( $sub_id ) ) {
+		if( 'nf_sub' !== get_post_type( $sub_id ) ) {
 			return;
 		}
 

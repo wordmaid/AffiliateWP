@@ -212,7 +212,7 @@ jQuery( document ).ready( function( $ ) {
 
 	} );
 
-	// Save AffiliateWP metabox states
+	// Enable meta box toggles
 	if ( typeof postboxes !== 'undefined' ) {
 		postboxes.add_postbox_toggles( pagenow );
 	}

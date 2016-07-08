@@ -99,8 +99,9 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
      *
      */
     public function process( $action_settings, $form_id, $data ) {
+        $nf_sub_time    = ( date("Y-m-d-s", time() ) );
         $referral_total = $this->get_total( $action_settings );
-        $reference      = $this->get_reference( $data );
+        $reference      = $this->get_reference( $data ) . '-' . $nf_sub_time;
         $description    = $this->get_description( $action_settings, $data );
         $customer_email = $this->get_customer_email( $action_settings );
 

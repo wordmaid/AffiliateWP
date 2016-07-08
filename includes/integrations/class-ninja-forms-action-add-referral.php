@@ -99,9 +99,38 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
      *
      */
     public function process( $action_settings, $form_id, $data ) {
-        $nf_sub_time    = ( date("Y-m-d-s", time() ) );
+
+        if( isset( $data['settings']['is_preview'] ) && $data['settings']['is_preview'] ){
+            return $data;
+        }
+
+        $sub = Ninja_Forms()->form( $form_id )->sub()->get();
+
+        $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
+
+        foreach( $data['fields'] as $field ){
+
+            if( in_array( $field[ 'type' ], array_values( $hidden_field_types ) ) ) {
+                $data['actions']['save']['hidden'][] = $field['type'];
+                continue;
+            }
+
+            $sub->update_field_value( $field['id'], $field['value'] );
+        }
+
+        if( isset( $data[ 'extra' ] ) ) {
+            $sub->update_extra_values( $data['extra'] );
+        }
+
+        do_action( 'nf_save_sub', $sub->get_id() );
+        do_action( 'ninja_forms_save_sub', $sub->get_id() );
+
+        $sub->save();
+
+        $data[ 'actions' ][ 'save' ][ 'sub_id' ] = $sub->get_id();
+
         $referral_total = $this->get_total( $action_settings );
-        $reference      = $this->get_reference( $data ) . '-' . $nf_sub_time;
+        $reference      = $this->get_reference( $data );
         $description    = $this->get_description( $action_settings, $data );
         $customer_email = $this->get_customer_email( $action_settings );
 
@@ -145,6 +174,7 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
         if( isset( $data[ 'actions' ][ 'save' ][ 'id' ] ) ) {
             $reference = $data[ 'actions' ][ 'save' ][ 'id' ];
         }
+
         return $reference;
     }
 

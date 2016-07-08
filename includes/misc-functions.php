@@ -65,6 +65,7 @@ function affwp_get_currencies() {
 		'CHF' => __( 'Swiss Franc', 'affiliate-wp' ),
 		'TWD' => __( 'Taiwan New Dollars', 'affiliate-wp' ),
 		'THB' => __( 'Thai Baht', 'affiliate-wp' ),
+		'TND' => __( 'Tunisian Dinar', 'affiliate-wp' ),
 		'TRY' => __( 'Turkish Lira', 'affiliate-wp' ),
 		'AED' => __( 'United Arab Emirates Dirham', 'affiliate-wp' ),
 		'VND' => __( 'Vietnamese Dong', 'affiliate-wp' ),

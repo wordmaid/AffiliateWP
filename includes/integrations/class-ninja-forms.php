@@ -13,15 +13,15 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 		$this->context = 'ninja-forms';
 
 		if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>=' ) && ! get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
-			add_action( 'nf_affiliatewp_add_referral', array( $this, 'add_referral' ) );
+			add_action( 'nf_affiliatewp_add_referral',  array( $this, 'add_referral' ) );
 			add_filter( 'ninja_forms_register_actions', array( $this, 'register_actions' ) );
 		} else {
 			add_action( 'nf_save_sub', array( $this, 'deprecated_add_referral' ) );
 			add_filter( 'ninja_forms_form_settings_restrictions', array( $this, 'deprecated_add_restriction_setting' ) );
 		}
 
-		add_action( 'untrash_post', array( $this, 'restore_referral' ) );
-		add_action( 'delete_post', array( $this, 'revoke_referral_on_delete' ) );
+		add_action( 'untrash_post',  array( $this, 'restore_referral' ) );
+		add_action( 'delete_post',   array( $this, 'revoke_referral_on_delete' ) );
 		add_action( 'wp_trash_post', array( $this, 'revoke_referral_on_delete' ) );
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 
@@ -50,7 +50,8 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 			return;
 		}
 		$nf_sub_time    = ( date("Y-m-d-s", time() ) );
-		$reference = $reference . '-' . $nf_sub_time;
+		$reference      = $reference . '-' . $nf_sub_time;
+
 		$this->insert_pending_referral( $referral_total, $reference, $description );
 		$this->complete_referral( $reference );
 	}

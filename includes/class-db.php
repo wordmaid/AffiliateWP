@@ -160,20 +160,30 @@ abstract class Affiliate_WP_DB {
 		// White list columns
 		$data = array_intersect_key( $data, $column_formats );
 
-		// Unslash data.
-		$data = wp_unslash( $data );
-
 		// Reorder $column_formats to match the order of columns given in $data
 		$data_keys = array_keys( $data );
 		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
 
-		$wpdb->insert( $this->table_name, $data, $column_formats );
+		$inserted = $wpdb->insert( $this->table_name, $data, $column_formats );
 
-		wp_cache_flush();
+		if ( ! $inserted ) {
+			return false;
+		}
 
-		do_action( 'affwp_post_insert_' . $type, $wpdb->insert_id, $data );
+		$object = $this->get_core_object( $wpdb->insert_id, $this->query_object_type );
 
-		return $wpdb->insert_id;
+		// Prime the item cache, and invalidate related query caches.
+		affwp_clean_item_cache( $object );
+
+		/**
+		 * Fires immediately after an item has been created in the database.
+		 *
+		 * @param int   $object_id Object ID.
+		 * @param array $data      Array of object data.
+		 */
+		do_action( 'affwp_post_insert_' . $type, $object->ID, $data );
+
+		return $object->ID;
 	}
 
 	/**
@@ -181,7 +191,7 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @access public
 	 *
-	 * @param string $row_id Row ID for the record being updated.
+	 * @param int    $row_id Row ID for the record being updated.
 	 * @param array  $data   Optional. Array of columns and associated data to update. Default empty array.
 	 * @param string $where  Optional. Column to match against in the WHERE clause. If empty, $primary_key
 	 *                       will be used. Default empty.
@@ -193,8 +203,12 @@ abstract class Affiliate_WP_DB {
 
 		// Row ID must be positive integer
 		$row_id = absint( $row_id );
-		if( empty( $row_id ) )
+
+		$object = $this->get_core_object( $row_id, $this->query_object_type );
+
+		if ( ! $object ) {
 			return false;
+		}
 
 		if( empty( $where ) ) {
 			$where = $this->primary_key;
@@ -209,19 +223,22 @@ abstract class Affiliate_WP_DB {
 		// White list columns
 		$data = array_intersect_key( $data, $column_formats );
 
-		// Unslash data.
-		$data = wp_unslash( $data );
-
 		// Reorder $column_formats to match the order of columns given in $data
 		$data_keys = array_keys( $data );
 		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
 
-		if ( false === $wpdb->update( $this->table_name, $data, array( $where => $row_id ), $column_formats ) ) {
+		if ( false === $wpdb->update( $this->table_name, $data, array( $where => $object->ID ), $column_formats ) ) {
 			return false;
 		}
 
-		wp_cache_flush();
+		// Invalidate and prime the item cache, and invalidate related query caches.
+		affwp_clean_item_cache( $object );
 
+		/**
+		 * Fires immediately after an item has been successfully updated.
+		 *
+		 * @param array $data Array of item data.
+		 */
 		do_action( 'affwp_post_update_' . $type, $data );
 		
 		return true;
@@ -243,16 +260,52 @@ abstract class Affiliate_WP_DB {
 
 		// Row ID must be positive integer
 		$row_id = absint( $row_id );
-		if( empty( $row_id ) )
+		$object = $this->get_core_object( $row_id, $this->query_object_type );
+
+		if ( ! $object )
 			return false;
 
-		if ( false === $wpdb->query( $wpdb->prepare( "DELETE FROM $this->table_name WHERE $this->primary_key = %d", $row_id ) ) ) {
+		if ( false === $wpdb->query( $wpdb->prepare( "DELETE FROM $this->table_name WHERE $this->primary_key = %d", $object->ID ) ) ) {
 			return false;
 		}
 
-		wp_cache_flush();
+		// Invalidate the item cachea along with related query caches.
+		affwp_clean_item_cache( $object );
 
 		return true;
 	}
 
+	/**
+	 * Retrieves a core object instance based on the given type.
+	 *
+	 * @since 1.9
+	 * @access protected
+	 *
+	 * @param object|int $instance Instance or object ID.
+	 * @param string     $class    Object class name.
+	 * @return object|false Object instance, otherwise false.
+	 */
+	protected function get_core_object( $instance, $object_class ) {
+		if ( ! class_exists( $object_class ) ) {
+			return false;
+		}
+
+		if ( $instance instanceof $object_class ) {
+			$_object = $instance;
+		} elseif ( is_object( $instance ) ) {
+			if ( isset( $instance->{$this->primary_key} ) ) {
+				$_object = new $object_class( $instance );
+			} else {
+				$_object = $object_class::get_instance( $instance );
+			}
+		} else {
+			$_object = $object_class::get_instance( $instance );
+		}
+
+		if ( ! $_object ) {
+			return false;
+		}
+
+		return $_object;
+	}
 }

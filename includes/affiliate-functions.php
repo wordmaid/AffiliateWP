@@ -1207,7 +1207,7 @@ function affwp_get_affiliate_area_page_url( $tab = '' ) {
 	}
 
 	/**
-	 * Filter the Affilate Area page URL.
+	 * Filter the Affiliate Area page URL.
 	 *
 	 * @since 1.8
 	 *

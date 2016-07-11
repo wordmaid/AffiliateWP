@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * The AffWP_Meta_Box_Overview_Registrations class.
+ *
+ * This class extends AffWP_Meta_Box_Base, and defines
+ * a meta box which displays recent affiliate registrations.
+ *
+ * @since  1.9
+ * @see    AffWP_Meta_Box_Base
+ */
 class AffWP_Meta_Box_Overview_Registrations extends AffWP_Meta_Box_Base {
 
     /**

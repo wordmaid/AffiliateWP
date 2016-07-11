@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * The AffWP_Meta_Box_Overview_Totals class.
+ *
+ * This class extends AffWP_Meta_Box_Base, and defines
+ * a meta box which displays an overview of recent affiliate
+ * earnings activity, and related totals during
+ * various date ranges.
+ *
+ * @since  1.9
+ * @see    AffWP_Meta_Box_Base
+ */
 class AffWP_Meta_Box_Overview_Totals extends AffWP_Meta_Box_Base {
 
 	/**

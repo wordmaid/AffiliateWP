@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * The AffWP_Meta_Box_Overview_Recent_Referral_Visits class.
+ *
+ * This class extends AffWP_Meta_Box_Base, and defines
+ * a meta box which displays recent referrals and visits.
+ *
+ * @since  1.9
+ * @see    AffWP_Meta_Box_Base
+ */
 class AffWP_Meta_Box_Overview_Recent_Referral_Visits extends AffWP_Meta_Box_Base {
 
 	/**

@@ -156,6 +156,13 @@ abstract class AffWP_Meta_Box_Base {
         );
     }
 
+    /**
+     * Gets the content set in $this->content(),
+     * which is retrieved by $this->_content().
+     *
+     * @return mixed string The content of the meta box.
+     * @since  1.9
+     */
     public function get_content() {
         return apply_filters( 'affwp_meta_box_' . $this->meta_box_id, $this->_content() );
     }
@@ -163,7 +170,7 @@ abstract class AffWP_Meta_Box_Base {
     /**
      * A protected method which echoes the content within $this->content().
      *
-     * @return mixed string The content of the meta box
+     * @return mixed string The content of the meta box.
      * @since  1.9
      */
     protected function _content() {

@@ -1,6 +1,13 @@
 <?php
-
-
+/**
+ * The AffWP_Meta_Box_Reports_Referrals class.
+ *
+ * This class extends AffWP_Meta_Box_Base, and defines
+ * a meta box which displays recent referrals.
+ *
+ * @since  1.9
+ * @see    AffWP_Meta_Box_Base
+ */
 class AffWP_Meta_Box_Reports_Referrals extends AffWP_Meta_Box_Base {
 
     /**

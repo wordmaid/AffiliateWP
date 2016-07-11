@@ -1,7 +1,15 @@
 <?php
-
-
-class AffWP_Meta_Box_Reports_Top_Performers extends AffWP_Meta_Box_Base {
+/**
+ * The AffWP_Meta_Box_Reports_Top_References class.
+ *
+ * This class extends AffWP_Meta_Box_Base, and defines
+ * a meta box which displays the top-performing references,
+ * across all referrals, given a specified data range.
+ *
+ * @since  1.9
+ * @see    AffWP_Meta_Box_Base
+ */
+class AffWP_Meta_Box_Reports_Top_References extends AffWP_Meta_Box_Base {
 
 
     /**
@@ -60,4 +68,4 @@ class AffWP_Meta_Box_Reports_Top_Performers extends AffWP_Meta_Box_Base {
     <?php }
 }
 
-new AffWP_Meta_Box_Reports_Top_Performers;
+new AffWP_Meta_Box_Reports_Top_References;

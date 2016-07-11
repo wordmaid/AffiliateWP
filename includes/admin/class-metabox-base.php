@@ -53,7 +53,7 @@ abstract class AffWP_Meta_Box_Base {
      *
      * new My_Integration_AffWP_Meta_Box;
      *
-     **/
+     */
 
     /**
      * The ID of the meta box. Must be unique.

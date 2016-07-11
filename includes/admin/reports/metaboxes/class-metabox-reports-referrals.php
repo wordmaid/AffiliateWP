@@ -4,11 +4,11 @@
 class AffWP_Meta_Box_Reports_Referrals extends AffWP_Meta_Box_Base {
 
     /**
-    * The id of the meta box. Must be unique.
-    *
-    * @access  public
-    * @since   1.9
-    */
+     * The id of the meta box. Must be unique.
+     *
+     * @access  public
+     * @since   1.9
+     */
     public $meta_box_id = 'reports-referrals-earnings';
 
     /**

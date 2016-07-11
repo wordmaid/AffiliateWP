@@ -5,19 +5,19 @@ class AffWP_Meta_Box_Reports_Affiliate_Leaderboard extends AffWP_Meta_Box_Base {
 
 
     /**
-    * The id of the meta box. Must be unique.
-    *
-    * @access  public
-    * @since   1.9
-    */
+     * The id of the meta box. Must be unique.
+     *
+     * @access  public
+     * @since   1.9
+     */
     public $meta_box_id = 'reports-affiliate-leaderboard';
 
     /**
-    * The name of the meta box. Must be unique.
-    *
-    * @access  public
-    * @since   1.9
-    */
+     * The name of the meta box. Must be unique.
+     *
+     * @access  public
+     * @since   1.9
+     */
     public $meta_box_name;
 
     /**

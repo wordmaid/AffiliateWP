@@ -3,19 +3,19 @@
 class AffWP_Meta_Box_Overview_Totals extends AffWP_Meta_Box_Base {
 
 	/**
-	* The id of the meta box. Must be unique.
-	*
-	* @access  public
-	* @since   1.9
-	*/
+	 * The id of the meta box. Must be unique.
+	 *
+	 * @access  public
+	 * @since   1.9
+	 */
 	public $meta_box_id = 'overview-totals';
 
 	/**
-	* The name of the meta box. Must be unique.
-	*
-	* @access  public
-	* @since   1.9
-	*/
+	 * The name of the meta box. Must be unique.
+	 *
+	 * @access  public
+	 * @since   1.9
+	 */
 	public $meta_box_name;
 
 	/**

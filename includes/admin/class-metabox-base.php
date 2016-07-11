@@ -164,23 +164,33 @@ abstract class AffWP_Meta_Box_Base {
      * @since  1.9
      */
     public function get_content() {
-        return apply_filters( 'affwp_meta_box_' . $this->meta_box_id, $this->_content() );
+        /**
+         * Filter the title tag content for an admin page.
+         *
+         * @param string $content The content of the meta box, set in $this->content()
+         * @since 1.9
+         *
+         */
+        $content = $this->_content();
+        return apply_filters( 'affwp_meta_box_' . $this->meta_box_id, $content );
     }
 
     /**
-     * A protected method which echoes the content within $this->content().
+     * A protected method which echoes the $this->content().
      *
      * @return mixed string The content of the meta box.
      * @since  1.9
      */
     protected function _content() {
-        $content = $this->content();
-        return $content;
+        return $this->content();
     }
 
     /**
      * Defines the meta box content, as well as a
      * filter by which the content may be adjusted.
+     *
+     * Use this method in your child class to define
+     * the content of your meta box.
      *
      * Given a $meta_box_id value of 'my-metabox-id',
      * the filter would be: affwp_meta_box_my-meta-box-id.

@@ -149,11 +149,26 @@ abstract class AffWP_Meta_Box_Base {
         add_meta_box(
                                     $this->meta_box_id,
             __( $this->meta_box_name, 'affiliate-wp' ),
-                             array( $this, 'content' ),
+                         array( $this, 'get_content' ),
                                    $this->affwp_screen,
                                         $this->context,
                                               'default'
         );
+    }
+
+    public function get_content() {
+        return apply_filters( 'affwp_meta_box_' . $this->meta_box_id, $this->_content() );
+    }
+
+    /**
+     * A protected method which echoes the content within $this->content().
+     *
+     * @return mixed string The content of the meta box
+     * @since  1.9
+     */
+    protected function _content() {
+        $content = $this->content();
+        return $content;
     }
 
     /**
@@ -166,7 +181,5 @@ abstract class AffWP_Meta_Box_Base {
      * @return mixed string The content of the meta box
      * @since  1.9
      */
-    public function content() {
-        echo apply_filters( 'affwp_meta_box_' . $this->meta_box_id, $this->content );
-    }
+    abstract public function content();
 }

@@ -39,7 +39,10 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 	 */
 	public function add_referral( $args ) {
 
-		extract( $args );
+		$customer_email = ( $args[ 'customer_email' ]) ? $args[ 'customer_email' ] : '';
+		$referral_total = ( $args[ 'referral_total' ]) ? $args[ 'referral_total' ] : '';
+		$reference      = ( $args[ 'reference' ] )     ? $args[ 'reference' ]      : '';
+		$description    = ( $args[ 'description' ])    ? $args[ 'description' ]    : '';
 
 		if ( ! $this->was_referred() ) {
 			return;

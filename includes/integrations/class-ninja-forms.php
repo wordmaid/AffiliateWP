@@ -130,7 +130,7 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 	 * @return  array $actions
 	 */
 	public function register_actions( $actions ) {
-		require_once 'class-ninja-forms-action-add-referral.php';
+		require_once 'extras/class-ninja-forms-action-add-referral.php';
 		$actions[ 'affiliatewp_add_referral' ] = new Affiliate_WP_Ninja_Forms_Add_Referral();
 
 		return $actions;

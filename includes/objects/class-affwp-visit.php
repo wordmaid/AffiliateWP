@@ -17,6 +17,8 @@ namespace AffWP;
  *
  * @see AffWP\Object
  * @see affwp_get_visit()
+ * 
+ * @property-read int $ID Alias for `$visit_id`
  */
 final class Visit extends Object {
 
@@ -28,15 +30,6 @@ final class Visit extends Object {
 	 * @var int
 	 */
 	public $visit_id = 0;
-
-	/**
-	 * Object ID (alias for visit_id).
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @var int
-	 */
-	public $ID = 0;
 
 	/**
 	 * Affiliate ID.
@@ -157,22 +150,6 @@ final class Visit extends Object {
 		self::$object_group = affiliate_wp()->visits->cache_group;
 
 		return parent::get_instance( $object_id );
-	}
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 1.9
-	 * @access public
-	 *
-	 * @param Visit $visit Visit object.
-	 */
-	public function __construct( $visit ) {
-		parent::__construct( $visit );
-
-		$primary_key = affiliate_wp()->visits->primary_key;
-
-		$this->ID = $this->{$primary_key};
 	}
 
 }

@@ -319,12 +319,12 @@ function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_
 	$product_rate = ( null !== $product_rate ) ? $product_rate : $default_rate;
 
 	// Get rate in order of priority: Affiliate -> Product -> Global
-	$rate = affwp_abs_number_round( $affiliate->rate );
+	$rate = affwp_abs_number_round( $affiliate->rate() );
 
 	$rate = ( null !== $rate ) ? $rate : $product_rate;
 
 	// Get the referral rate type.
-	$type = $affiliate->rate_type;
+	$type = $affiliate->rate_type();
 
 	// Format percentage rates
 	$rate = ( 'percentage' === $type ) ? $rate / 100 : $rate;
@@ -344,21 +344,7 @@ function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_
 	}
 
 	// Format the rate based on the type
-	switch ( $type ) {
-
-		case 'percentage' :
-
-			$rate = affwp_abs_number_round( $rate * 100 ) . '%';
-
-			break;
-
-		case 'flat' :
-
-			$rate = affwp_currency_filter( $rate );
-
-			break;
-
-	}
+	$rate = affwp_format_rate( $rate, $type );
 
 	return $rate;
 
@@ -507,7 +493,7 @@ function affwp_get_affiliate_payment_email( $affiliate = 0 ) {
 		return false;
 	}
 
-	return $affiliate->payment_email;
+	return $affiliate->payment_email();
 }
 
 /**

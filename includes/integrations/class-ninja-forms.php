@@ -32,7 +32,7 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 	 * Record referral on submission
 	 *
 	 * @access  public
-	 * @since   1.8.4
+	 * @since   1.8.6
 	 * @param   $referral_total
 	 * @param   $reference
 	 * @param   $description
@@ -125,7 +125,7 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 	 * Register Ninja Forms Action
 	 *
 	 * @access  public
-	 * @since   1.8.4
+	 * @since   1.8.6
 	 * @param   array $actions
 	 * @return  array $actions
 	 */

@@ -3,25 +3,25 @@
 final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     /**
      * @var   string
-     * @since 1.8.4
+     * @since 1.8.6
      */
     protected $_name  = 'affiliatewp_add_referral';
 
     /**
      * @var   array
-     * @since 1.8.4
+     * @since 1.8.6
      */
     protected $_tags = array( 'affiliate', 'affiliatewp', 'referral' );
 
     /**
      * @var   string
-     * @since 1.8.4
+     * @since 1.8.6
      */
     protected $_timing = 'late';
 
     /**
      * @var   string
-     * @since 1.8.4
+     * @since 1.8.6
      */
     protected $_priority = '10';
 
@@ -78,7 +78,7 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     /**
      * Public save method
      *
-     * @since  1.8.4
+     * @since  1.8.6
      *
      * @param  array  $action_settings  [description]
      *
@@ -89,7 +89,7 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     /**
      * Processes the AffiliateWP referral
      *
-     * @since  1.8.4
+     * @since  1.8.6
      *
      * @param  array   $action_settings Form action settings
      * @param  int     $form_id         The form ID
@@ -145,7 +145,7 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     /**
      * Get the total of the referral
      *
-     * @since  1.8.4
+     * @since  1.8.6
      *
      * @param  array  $action_settings  The form action settings
      *
@@ -163,7 +163,7 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     /**
      * Get the referral reference
      *
-     * @since  1.8.4
+     * @since  1.8.6
      *
      * @param  mixed   $data       Form data
      *
@@ -181,7 +181,7 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     /**
      * Get the referral description
      *
-     * @since  1.8.4
+     * @since  1.8.6
      *
      * @param  array   $action_settings  The form action settings
      * @param  mixed   $data             Form data

@@ -1,14 +1,16 @@
 <?php
+namespace AffWP\Meta_Box;
+
 /**
- * The AffWP_Meta_Box_Overview_Recent_Referral_Visits class.
+ * The AffWP\Meta_Box\Overview_Recent_Referral_Visits class.
  *
- * This class extends AffWP_Meta_Box_Base, and defines
+ * This class extends AffWP\Meta_Box\Base, and defines
  * a meta box which displays recent referrals and visits.
  *
  * @since  1.9
- * @see    AffWP_Meta_Box_Base
+ * @see    AffWP\Meta_Box\Base
  */
-class AffWP_Meta_Box_Overview_Recent_Referral_Visits extends AffWP_Meta_Box_Base {
+class Overview_Recent_Referral_Visits extends Base {
 
 	/**
 	 * The id of the meta box. Must be unique.
@@ -106,4 +108,4 @@ class AffWP_Meta_Box_Overview_Recent_Referral_Visits extends AffWP_Meta_Box_Base
 	<?php }
 }
 
-new AffWP_Meta_Box_Overview_Recent_Referral_Visits;
+new Overview_Recent_Referral_Visits;

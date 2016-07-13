@@ -1,8 +1,10 @@
 <?php
+namespace AffWP\Meta_Box;
+
 /**
- * The AffWP_Meta_Box_Overview_Most_Valuable class.
+ * The AffWP\Meta_Box\Overview_Most_Valuable class.
  *
- * This class extends AffWP_Meta_Box_Base, and defines
+ * This class extends AffWP\Meta_Box\Base, and defines
  * a meta box which displays the "most valuable" affiliates,
  * which is determined by showign the highest:
  *
@@ -11,9 +13,9 @@
  * - Visits generated
  *
  * @since  1.9
- * @see    AffWP_Meta_Box_Base
+ * @see    AffWP\Meta_Box\Base
  */
-class AffWP_Meta_Box_Overview_Most_Valuable extends AffWP_Meta_Box_Base {
+class Overview_Most_Valuable extends Base {
 
 	/**
 	 * The id of the meta box. Must be unique.
@@ -113,4 +115,4 @@ class AffWP_Meta_Box_Overview_Most_Valuable extends AffWP_Meta_Box_Base {
 	<?php }
 }
 
-new AffWP_Meta_Box_Overview_Most_Valuable;
+new Overview_Most_Valuable;

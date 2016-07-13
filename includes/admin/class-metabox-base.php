@@ -1,4 +1,6 @@
 <?php
+namespace AffWP\Meta_Box;
+
 /**
  * AffiliateWP Admin Meta Box Base class.
  * Provides a base structure for AffiliateWP content meta boxes.
@@ -16,7 +18,7 @@ if ( ! defined('ABSPATH') ) {
 }
 
 /**
- * The main AffWP_Meta_Box_Base class.
+ * The main AffWP\Meta_Box\Base class.
  * This class may be extended using the example below.
  *
  * An AffiliateWP meta box can be added to AffiliateWP by any
@@ -24,33 +26,35 @@ if ( ! defined('ABSPATH') ) {
  *
  * Example:
  *
- * class My_Integration_AffWP_Meta_Box extends AffWP_Meta_Box_Base {
+ *    namespace AffWP\Meta_Box;
  *
- *    public $meta_box_id   = 'my_integration_affwp_metabox';
+ *    class My_Integration extends Base {
  *
- *    public $meta_box_name = 'My Integration AffWP Meta box';
+ *        public $meta_box_id   = 'my_integration_affwp_metabox';
  *
- *    Optional; defaults to primary AffiliateWP Reports Overview page
- *    (screen id: affiliates_page_affiliate-wp-reports)
- *    public $affwp_screen  = 'affiliates_page_affiliate-wp-reports'
- *    public $affwp_screen  = array( define multiple screens in an array );
+ *        public $meta_box_name = 'My Integration AffWP Meta box';
  *
- *    public function content() {
- *        $this->my_meta_box_content();
+ *        // Optional; defaults to primary AffiliateWP Reports Overview page
+ *        // (screen id: affiliates_page_affiliate-wp-reports)
+ *        public $affwp_screen  = 'affiliates_page_affiliate-wp-reports'
+ *        public $affwp_screen  = array( define multiple screens in an array );
+ *
+ *        public function content() {
+ *            $this->my_meta_box_content();
+ *        }
+ *
+ *        public function my_meta_box_content() {
+ *            echo 'Here is some content I'd like to share with AffiliateWP users!;
+ *        }
+ *
  *    }
  *
- *    public function my_meta_box_content() {
- *        echo 'Here is some content I'd like to share with AffiliateWP users!;
- *    }
- *
- * }
- *
- * new My_Integration_AffWP_Meta_Box;
+ *    new My_Integration;
  *
  * @abstract
  * @since  1.9
  */
-abstract class AffWP_Meta_Box_Base {
+abstract class Base {
 
 	/**
 	 * The ID of the meta box. Must be unique.
@@ -99,9 +103,9 @@ abstract class AffWP_Meta_Box_Base {
 	 * AffiliateWP uses custom meta box contexts.
 	 * These contexts are listed below.
 	 *
-	 * 'primary'   will load in the left column
-	 * 'secondary' will load in the center column
-	 * 'tertiary'  will load in the right column
+	 * 'primary':   Loads in the left column.
+	 * 'secondary': Loads in the center column.
+	 * 'tertiary':  Loads in the right column.
 	 *
 	 * All columns will collapse as needed on smaller screens,
 	 * as WordPress core meta boxes are in use.
@@ -147,8 +151,8 @@ abstract class AffWP_Meta_Box_Base {
 	 *
 	 * Example:
 	 *
-	 * $this->action        = 'affwp_overview_meta_boxes';
-	 * $this->meta_box_name = __( 'Name of the meta box', 'affiliate-wp' );
+	 *    $this->action        = 'affwp_overview_meta_boxes';
+	 *    $this->meta_box_name = __( 'Name of the meta box', 'affiliate-wp' );
 	 *
 	 * @access  public
 	 * @return  void
@@ -160,7 +164,7 @@ abstract class AffWP_Meta_Box_Base {
 	 * Adds the meta box
 	 *
 	 * @return  A meta box which will display on the specified AffiliateWP Reports admin page.
-	 * @uses  add_meta_box
+	 * @uses    add_meta_box
 	 * @since   1.9
 	 */
 	public function add_meta_box() {

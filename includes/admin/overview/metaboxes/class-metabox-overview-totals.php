@@ -39,15 +39,22 @@ class AffWP_Meta_Box_Overview_Totals extends AffWP_Meta_Box_Base {
 	public $context = 'primary';
 
 	/**
-	 * Initialize
+	 * Initialize.
+	 *
+	 * Define the meta box name,
+	 * and the action on which to hook the meta box here.
+	 *
+	 * Example:
+	 *
+	 * $this->action        = 'affwp_overview_meta_boxes';
+	 * $this->meta_box_name = __( 'Name of the meta box', 'affiliate-wp' );
 	 *
 	 * @access  public
 	 * @return  void
 	 * @since   1.9
 	 */
 	public function init() {
-		add_action( 'add_meta_box',              array( $this, 'add_meta_box' ) );
-		add_action( 'affwp_overview_meta_boxes', array( $this, 'add_meta_box' ) );
+		$this->action        = 'affwp_overview_meta_boxes';
 		$this->meta_box_name = __( 'Totals', 'affiliate-wp' );
 	}
 

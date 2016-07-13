@@ -1,7 +1,7 @@
 <?php
 /**
- * AffiliateWP Admin Meta Box Base class
- * Provides a base structure for AffiliateWP content meta boxes
+ * AffiliateWP Admin Meta Box Base class.
+ * Provides a base structure for AffiliateWP content meta boxes.
  *
  * @package     AffiliateWP
  * @subpackage  Admin/Metaboxes
@@ -19,41 +19,38 @@ if ( ! defined('ABSPATH') ) {
  * The main AffWP_Meta_Box_Base class.
  * This class may be extended using the example below.
  *
+ * An AffiliateWP meta box can be added to AffiliateWP by any
+ * 3rd-party source, by extending this class.
+ *
+ * Example:
+ *
+ * class My_Integration_AffWP_Meta_Box extends AffWP_Meta_Box_Base {
+ *
+ *    public $meta_box_id   = 'my_integration_affwp_metabox';
+ *
+ *    public $meta_box_name = 'My Integration AffWP Meta box';
+ *
+ *    Optional; defaults to primary AffiliateWP Reports Overview page
+ *    (screen id: affiliates_page_affiliate-wp-reports)
+ *    public $affwp_screen  = 'affiliates_page_affiliate-wp-reports'
+ *    public $affwp_screen  = array( define multiple screens in an array );
+ *
+ *    public function content() {
+ *        $this->my_meta_box_content();
+ *    }
+ *
+ *    public function my_meta_box_content() {
+ *        echo 'Here is some content I'd like to share with AffiliateWP users!;
+ *    }
+ *
+ * }
+ *
+ * new My_Integration_AffWP_Meta_Box;
+ *
  * @abstract
  * @since  1.9
  */
 abstract class AffWP_Meta_Box_Base {
-
-	/**
-	 * An AffiliateWP meta box can be added to AffiliateWP by any
-	 * 3rd-party source, by extending this class.
-	 *
-	 * Example:
-	 *
-	 * class My_Integration_AffWP_Meta_Box extends AffWP_Meta_Box_Base {
-	 *
-	 *    public $meta_box_id   = 'my_integration_affwp_metabox';
-	 *
-	 *    public $meta_box_name = 'My Integration AffWP Meta box';
-	 *
-	 *    Optional; defaults to primary AffiliateWP Reports Overview page
-	 *    (screen id: affiliates_page_affiliate-wp-reports)
-	 *    public $affwp_screen  = 'affiliates_page_affiliate-wp-reports'
-	 *    public $affwp_screen  = array( define multiple screens in an array );
-	 *
-	 *    public function content() {
-	 *        $this->my_meta_box_content();
-	 *    }
-	 *
-	 *    public function my_meta_box_content() {
-	 *        echo 'Here is some content I'd like to share with AffiliateWP users!;
-	 *    }
-	 *
-	 * }
-	 *
-	 * new My_Integration_AffWP_Meta_Box;
-	 *
-	 */
 
 	/**
 	 * The ID of the meta box. Must be unique.
@@ -116,6 +113,20 @@ abstract class AffWP_Meta_Box_Base {
 	public $context = 'primary';
 
 	/**
+	 * The action on which the meta box will be loaded.
+	 * AffiliateWP uses custom meta box actions.
+	 * These contexts are listed below:
+	 *
+	 * 'affwp_overview_meta_boxes': Loads on the Overview page.
+	 *
+	 *
+	 * @access  public
+	 * @var     $action
+	 * @since   1.9
+	 */
+	public $action;
+
+	/**
 	 * Constructor
 	 *
 	 * @access  public
@@ -124,19 +135,26 @@ abstract class AffWP_Meta_Box_Base {
 	 */
 	public function __construct() {
 		$this->init();
+		add_action( 'add_meta_box', array( $this, 'add_meta_box' ) );
+		add_action( $this->action,  array( $this, 'add_meta_box' ) );
 	}
 
 	/**
-	 * Initialize
+	 * Initialize.
+	 *
+	 * Define the meta box name,
+	 * and the action on which to hook the meta box here.
+	 *
+	 * Example:
+	 *
+	 * $this->action        = 'affwp_overview_meta_boxes';
+	 * $this->meta_box_name = __( 'Name of the meta box', 'affiliate-wp' );
 	 *
 	 * @access  public
 	 * @return  void
 	 * @since   1.9
 	 */
-	public function init() {
-		add_action( 'add_meta_box', array( $this, 'add_meta_box' ) );
-		$this->meta_box_name = __( 'AffiliateWP meta box name', 'affiliate-wp' );
-	}
+	abstract public function init();
 
 	/**
 	 * Adds the meta box

@@ -35,23 +35,30 @@ class AffWP_Meta_Box_Overview_Recent_Referral_Visits extends AffWP_Meta_Box_Base
 	 * @since   1.9
 	 */
 	public $context = 'tertiary';
+	public $action = 'affwp_overview_meta_boxes';
 
 	/**
-	 * Initialize
+	 * Initialize.
+	 *
+	 * Define the meta box name,
+	 * and the action on which to hook the meta box here.
+	 *
+	 * Example:
+	 *
+	 * $this->action        = 'affwp_overview_meta_boxes';
+	 * $this->meta_box_name = __( 'Name of the meta box', 'affiliate-wp' );
 	 *
 	 * @access  public
 	 * @return  void
 	 * @since   1.9
 	 */
 	public function init() {
-		add_action( 'add_meta_box',              array( $this, 'add_meta_box' ) );
-		add_action( 'affwp_overview_meta_boxes', array( $this, 'add_meta_box' ) );
-
+		$this->action        = 'affwp_overview_meta_boxes';
 		$this->meta_box_name = __( 'Recent Referral Visits', 'affiliate-wp' );
 	}
 
 	/**
-	 * Displays the content of the metabox
+	 * Defines the content of the metabox
 	 *
 	 * @return mixed content  The metabox content
 	 * @since  1.9

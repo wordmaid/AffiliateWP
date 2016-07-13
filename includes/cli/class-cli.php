@@ -195,6 +195,30 @@ class CLI extends \WP_CLI_Command {
 	}
 
 	/**
+	 * Displays the contents of the AffWP debug log.
+	 *
+	 * ## OPTIONS
+	 *
+	 * [--clear]
+	 * : Whether to clear the debug log. Requires confirmation.
+	 *
+	 * @alias debug
+	 */
+	public function debug_log( $_, $assoc_args ) {
+		$logger = new \Affiliate_WP_Logging();
+		$clear  = \WP_CLI\Utils\get_flag_value( $assoc_args, 'clear', false );
+
+		if ( $clear ) {
+			\WP_CLI::confirm( __( 'Are you sure you want to clear the debug log?', 'affiliate-wp' ), $assoc_args );
+
+			$logger->clear_log();
+
+			\WP_CLI::success( __( 'The debug log has been cleared.', 'affiliate-wp' ) );
+		}
+		echo "\n" . $logger->get_log();
+	}
+
+	/**
 	 * Serves as a shorthand wrapper for \WP_CLI::line() combined with \WP_CLI::colorize().
 	 *
 	 * @since 1.9

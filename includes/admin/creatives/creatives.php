@@ -66,7 +66,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 /**
  * AffWP_Creatives_Table Class
  *
- * Renders the Creatives table on the Creatives page
+ * Renders the Affiliates table on the Affiliates page
  *
  * @since 1.2
  */

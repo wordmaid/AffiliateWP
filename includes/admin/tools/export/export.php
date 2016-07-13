@@ -38,32 +38,6 @@ function affwp_process_affiliates_export() {
 add_action( 'affwp_export_affiliates', 'affwp_process_affiliates_export' );
 
 /**
- * Process an affiliates export initiated from the reports page
- *
- * @since       1.8
- * @return      void
- */
-function affwp_process_report_affiliates_export() {
-
-	if( empty( $_POST['affwp_export_report_affiliates_nonce'] ) ) {
-		return;
-	}
-
-	if( ! wp_verify_nonce( $_POST['affwp_export_report_affiliates_nonce'], 'affwp_export_report_affiliates_nonce' ) ) {
-		return;
-	}
-
-	$status  = ! empty( $_POST['status'] ) ? sanitize_text_field( $_POST['status'] ) : false;
-
-	$export = new Affiliate_WP_Reports_Export;
-	$export->status    = $status;
-	$export->export();
-
-}
-add_action( 'affwp_export_report_affiliates', 'affwp_process_report_affiliates_export' );
-
-
-/**
  * Process a referrals export
  *
  * @since       1.0

@@ -189,7 +189,7 @@ class CLI extends \AffWP\Object\CLI {
 	 * : Referral rate type. Accepts 'percentage', 'flat', or any custom rate type.
 	 *
 	 * [--status=<status>]
-	 * : Affiliate status. Accepts 'active', 'inactive', or 'pending'.
+	 * : Affiliate status. Accepts 'active', 'inactive', 'pending', or 'rejected'.
 	 *
 	 * ## EXAMPLES
 	 *

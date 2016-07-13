@@ -1033,6 +1033,7 @@ function affwp_add_affiliate( $data = array() ) {
  * Updates an affiliate.
  *
  * @since 1.0
+ * @since 1.9 Support was added for updating an affiliate's status.
  *
  * @todo Document `$data` as a hash notation
  *
@@ -1053,6 +1054,7 @@ function affwp_update_affiliate( $data = array() ) {
 	$args['payment_email'] = ! empty( $data['payment_email' ] ) && is_email( $data['payment_email' ] ) ? sanitize_text_field( $data['payment_email'] ) : '';
 	$args['rate']          = ( isset( $data['rate' ] ) && '' !== $data['rate' ] )                      ? sanitize_text_field( $data['rate'] )          : '';
 	$args['rate_type']     = ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '';
+	$args['status']        = ! empty( $data['status'] ) ? sanitize_text_field( $data['status'] ) : '';
 	$args['user_id']       = $user_id;
 
 	/**

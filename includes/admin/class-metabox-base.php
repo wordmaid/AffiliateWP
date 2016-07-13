@@ -87,16 +87,16 @@ abstract class AffWP_Meta_Box_Base {
 	 * @since   1.9
 	 */
 	private $affwp_screen = array(
-								'toplevel_page_affiliate-wp',
-								'affiliates_page_affiliate-wp-affiliates',
-								'affiliates_page_affiliate-wp-referrals',
-								'affiliates_page_affiliate-wp-visits',
-								'affiliates_page_affiliate-wp-creatives',
-								'affiliates_page_affiliate-wp-reports',
-								'affiliates_page_affiliate-wp-tools',
-								'affiliates_page_affiliate-wp-settings',
-								'affiliates_page_affiliate-wp-add-ons'
-							);
+		'toplevel_page_affiliate-wp',
+		'affiliates_page_affiliate-wp-affiliates',
+		'affiliates_page_affiliate-wp-referrals',
+		'affiliates_page_affiliate-wp-visits',
+		'affiliates_page_affiliate-wp-creatives',
+		'affiliates_page_affiliate-wp-reports',
+		'affiliates_page_affiliate-wp-tools',
+		'affiliates_page_affiliate-wp-settings',
+		'affiliates_page_affiliate-wp-add-ons'
+	);
 	/**
 	 * The position in which the meta box will be loaded.
 	 * AffiliateWP uses custom metabox contexts.
@@ -147,12 +147,12 @@ abstract class AffWP_Meta_Box_Base {
 	 */
 	public function add_meta_box() {
 		add_meta_box(
-									$this->meta_box_id,
+			$this->meta_box_id,
 			__( $this->meta_box_name, 'affiliate-wp' ),
-						 array( $this, 'get_content' ),
-								   $this->affwp_screen,
-										$this->context,
-											  'default'
+			array( $this, 'get_content' ),
+			$this->affwp_screen,
+			$this->context,
+			'default'
 		);
 	}
 

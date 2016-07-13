@@ -298,7 +298,7 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affiliates-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-capabilities.php';
 
-		if( is_admin() ) {
+		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/AFFWP_Plugin_Updater.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/affiliates/actions.php';
@@ -331,8 +331,8 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/emails/functions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/emails/actions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-graph.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/graphs/class-referrals-graph.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/graphs/class-visits-graph.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-referrals-graph.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-visits-graph.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-integrations.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-login.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';
@@ -355,6 +355,21 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/install.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/plugin-compatibility.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/scripts.php';
+
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-cli.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-object-cli.php';
+
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-affiliate-cli-fetcher.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-referral-cli-fetcher.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-creative-cli-fetcher.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-visit-cli-fetcher.php';
+
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-affiliate-cli.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-referral-cli.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-creative-cli.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-visit-cli.php';
+		}
 	}
 
 	/**

@@ -96,7 +96,7 @@ abstract class AffWP_Meta_Box_Base {
 	);
 	/**
 	 * The position in which the meta box will be loaded.
-	 * AffiliateWP uses custom metabox contexts.
+	 * AffiliateWP uses custom meta box contexts.
 	 * These contexts are listed below.
 	 *
 	 * 'primary'   will load in the left column

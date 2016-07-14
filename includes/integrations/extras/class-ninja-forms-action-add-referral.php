@@ -1,5 +1,14 @@
 <?php if ( ! defined( 'ABSPATH' ) || ! class_exists( 'NF_Abstracts_Action' ) ) exit;
 
+/**
+ * The Affiliate_WP_Ninja_Forms_Add_Referral class.
+ *
+ * This class adds a Ninja Forms 3.0+ 'Action',
+ * by extending the NF_Abstracts_Action class.
+ *
+ * @since 1.8.6
+ * @link  ninja-forms/includes/Abstracts/Action.php
+ */
 final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     /**
      * @var   string
@@ -27,8 +36,6 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
 
     /**
      * Constructor
-     *
-     * @see  [ninja-forms]/includes/abtracts/Action
      */
     public function __construct() {
         parent::__construct();
@@ -94,15 +101,15 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     }
 
     /**
-     * Processes the AffiliateWP referral
+     * Processes the AffiliateWP referral.
      *
      * @since  1.8.6
      *
-     * @param  array   $action_settings Form action settings
-     * @param  int     $form_id         The form ID
-     * @param  mixed   $data            Form data
+     * @param  array   $action_settings Form action settings.
+     * @param  int     $form_id         The form ID.
+     * @param  mixed   $data            Form data.
      *
-     * @return mixed   $data            Form data
+     * @return mixed   $data            Form data.
      *
      */
     public function process( $action_settings, $form_id, $data ) {
@@ -150,13 +157,13 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
 
 
     /**
-     * Get the total of the referral
+     * Get the total of the referral.
      *
      * @since  1.8.6
      *
-     * @param  array  $action_settings  The form action settings
+     * @param  array  $action_settings  The form action settings.
      *
-     * @return int                      Total amount of the referral
+     * @return int                      The total amount of the referral.
      */
     private function get_total( $action_settings ) {
         $total = 0;
@@ -168,13 +175,13 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     }
 
     /**
-     * Get the referral reference
+     * Get the referral reference.
      *
      * @since  1.8.6
      *
-     * @param  mixed   $data       Form data
+     * @param  mixed   $data       Form data.
      *
-     * @return string  $reference  The referral reference
+     * @return string  $reference  The referral reference.
      */
     private function get_reference( $data ) {
         $reference = '';
@@ -186,12 +193,12 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
     }
 
     /**
-     * Get the referral description
+     * Get the referral description.
      *
      * @since  1.8.6
      *
-     * @param  array   $action_settings  The form action settings
-     * @param  mixed   $data             Form data
+     * @param  array   $action_settings  The form action settings.
+     * @param  mixed   $data             Form data.
      *
      * @return string  $description      The referral description. Will first check for
      *                                   an AffiliateWP custom description. Uses the form
@@ -207,6 +214,15 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
         return $description;
     }
 
+    /**
+     * Get the customer email.
+     *
+     * @since  1.8.6
+     *
+     * @param  array  $action_settings The settings for this action.
+     *
+     * @return string $email           The customer email.
+     */
     private function get_customer_email( $action_settings ) {
         $email = 0;
         if( isset( $action_settings[ 'affiliatewp_email' ] ) ) {

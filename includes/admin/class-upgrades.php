@@ -2,12 +2,38 @@
 
 class Affiliate_WP_Upgrades {
 
+	/**
+	 * Whether debug mode is enabled.
+	 *
+	 * @since 1.8.6
+	 * @access private
+	 * @var bool
+	 */
+	private $debug;
+
+	/**
+	 * Affiliate_WP_Logging instance.
+	 *
+	 * @since 1.8.6
+	 * @access private
+	 * @var Affiliate_WP_Logging
+	 */
+	private $logs;
+
 	private $upgraded = false;
 
 	public function __construct() {
 
 		add_action( 'admin_init', array( $this, 'init' ), -9999 );
 
+		$settings = new Affiliate_WP_Settings;
+		$this->debug = (bool) $settings->get( 'debug_mode', false );
+
+		if ( $this->debug ) {
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';
+
+			$this->logs = new Affiliate_WP_Logging;
+		}
 	}
 
 	public function init() {
@@ -49,6 +75,10 @@ class Affiliate_WP_Upgrades {
 			$this->v1714_upgrades();
 		}
 
+		if ( version_compare( $version, '1.8.6', '<' ) ) {
+			$this->v186_upgrades();
+		}
+
 		// Inconsistency between current and saved version.
 		if ( version_compare( $version, AFFILIATEWP_VERSION, '<>' ) ) {
 			$this->upgraded = true;
@@ -60,6 +90,20 @@ class Affiliate_WP_Upgrades {
 			update_option( 'affwp_version', AFFILIATEWP_VERSION );
 		}
 
+	}
+
+	/**
+	 * Writes a log message.
+	 *
+	 * @access private
+	 * @since 1.8.6
+	 *
+	 * @param string $message Optional. Message to log.
+	 */
+	private function log( $message = '' ) {
+		if ( $this->debug ) {
+			$this->logs->log( $message );
+		}
 	}
 
 	/**
@@ -354,6 +398,62 @@ class Affiliate_WP_Upgrades {
 
 		$this->upgraded = true;
 
+	}
+
+	/**
+	 * Perform database upgrades for version 1.8.6.
+	 *
+	 * Attempts to update core table charsets to utf8mb4.
+	 *
+	 * @access private
+	 * @since 1.8.6
+	 */
+	private function v186_upgrades() {
+
+		/**
+		 * Filters whether to skip the utf8mb4 table upgrade.
+		 *
+		 * Explicitly passing a true value to this hook will exit the table upgrade routine early.
+		 *
+		 * @since 1.8.6
+		 *
+		 * @param bool $skip Whether to skip the utf8mb4 upgrade routine. Default false.
+		 */
+		$skip_upgrade = apply_filters( 'affwp_skip_utf8mb4_upgrade', false );
+
+		// If skipping, log that it was skipped.
+		if ( true === $skip_upgrade ) {
+			$this->log( __( 'The utf8mb4 upgrade was skipped.', 'affiliate-wp' ) );
+
+			return;
+		}
+
+		$tables = array(
+			@affiliate_wp()->affiliate_meta->table_name,
+			@affiliate_wp()->affiliates->table_name,
+			@affiliate_wp()->creatives->table_name,
+			@affiliate_wp()->referrals->table_name,
+			@affiliate_wp()->visits->table_name
+		);
+
+		$success = __( "The character set for the %s table was successfully upgraded to utf8mb4.", 'affiliate-wp' );
+		$failure = __( "The character set for the %s table could not be upgraded or was already using utf8mb4.", 'affiliate-wp' );
+
+		// Upgrade core table charsets and log success or failure for each.
+		if ( ! empty( $tables ) ) {
+			/** Load WordPress Administration Upgrade API */
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+			foreach ( $tables as $table ) {
+				$result = maybe_convert_table_to_utf8mb4( $table );
+
+				$message = sprintf( true === $result ? $success : $failure, $table );
+
+				$this->log( $message );
+			}
+		}
+
+		$this->upgraded = true;
 	}
 
 }

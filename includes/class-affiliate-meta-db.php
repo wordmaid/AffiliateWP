@@ -138,7 +138,7 @@ class Affiliate_WP_Affiliate_Meta_DB extends Affiliate_WP_DB {
 			PRIMARY KEY  (meta_id),
 			KEY affiliate_id (affiliate_id),
 			KEY meta_key (meta_key)
-			) CHARACTER SET utf8 COLLATE utf8_general_ci;";
+			) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;";
 
 		dbDelta( $sql );
 

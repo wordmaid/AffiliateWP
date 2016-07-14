@@ -185,7 +185,7 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 			date datetime NOT NULL,
 			PRIMARY KEY  (creative_id),
 			KEY creative_id (creative_id)
-			) CHARACTER SET utf8 COLLATE utf8_general_ci;";
+			) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;";
 
 		dbDelta( $sql );
 

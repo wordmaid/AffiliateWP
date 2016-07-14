@@ -298,6 +298,10 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affiliates-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-capabilities.php';
 
+		if ( is_admin() ) {
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
+		}
+
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/AFFWP_Plugin_Updater.php';
@@ -314,7 +318,6 @@ final class Affiliate_WP {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/referrals/referrals.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/reports.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/visits/visits.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/tools.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-upgrades.php';

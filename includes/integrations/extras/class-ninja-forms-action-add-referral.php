@@ -36,28 +36,28 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
         $this->_nicename = __( 'Add Referral', 'affiliate-wp' );
 
         $this->_settings[ 'affiliatewp_total' ] = array(
-            'name' => 'affiliatewp_total',
-            'label' => __( 'Total Field', 'affiliate-wp' ),
-            'type' => 'textbox',
-            'width' => 'full',
-            'value' => '',
-            'group' => 'primary',
+            'name'           => 'affiliatewp_total',
+            'label'          => __( 'Total Field', 'affiliate-wp' ),
+            'type'           => 'textbox',
+            'width'          => 'full',
+            'value'          => '',
+            'group'          => 'primary',
             'use_merge_tags' => array(
                 'exclude' => array(
                     'post',
                     'user',
                     'system'
                 )
-            ),
+            )
         );
 
         $this->_settings[ 'affiliatewp_email' ] = array(
-            'name' => 'affiliatewp_email',
-            'label' => __( 'Customer Email', 'affiliate-wp' ),
-            'type' => 'textbox',
-            'width' => 'full',
-            'value' => '',
-            'group' => 'primary',
+            'name'           => 'affiliatewp_email',
+            'label'          => __( 'Customer Email', 'affiliate-wp' ),
+            'type'           => 'textbox',
+            'width'          => 'full',
+            'value'          => '',
+            'group'          => 'primary',
             'use_merge_tags' => array(
                 'exclude' => array(
                     'user'
@@ -66,12 +66,19 @@ final class Affiliate_WP_Ninja_Forms_Add_Referral extends NF_Abstracts_Action {
         );
 
         $this->_settings[ 'affiliatewp_description' ] = array(
-            'name' => 'affiliatewp_description',
-            'label' => __( 'Description', 'affiliate-wp' ),
-            'type' => 'textbox',
-            'width' => 'full',
-            'value' => '',
-            'group' => 'advanced'
+            'name'           => 'affiliatewp_description',
+            'label'          => __( 'Description', 'affiliate-wp' ),
+            'type'           => 'textbox',
+            'width'          => 'full',
+            'value'          => '',
+            'group'          => 'advanced',
+            'use_merge_tags' => array(
+                'exclude' => array(
+                    'post',
+                    'user',
+                    'system'
+                )
+            )
         );
     }
 

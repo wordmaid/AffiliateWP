@@ -91,7 +91,7 @@ function affwp_notify_on_approval( $affiliate_id = 0, $status = '', $old_status 
 	 * Affiliate approval is disabled ( $status = active, $old_status = active )
 	 * Affiliate approval is enabled and the affiliate is accepted ( $status = active, $old_status = pending )
 	 */
-	if ( ! ( 'active' == $status && 'active' == $old_status || 'active' == $status && 'pending' == $old_status ) ) {
+	if ( ! ( 'active' == $status && 'inactive' == $old_status || 'active' == $status && 'pending' == $old_status || 'active' == $status && 'rejected' == $old_status ) ) {
 		return;
 	}
 

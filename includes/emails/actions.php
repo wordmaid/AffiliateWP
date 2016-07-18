@@ -86,12 +86,17 @@ function affwp_notify_on_approval( $affiliate_id = 0, $status = '', $old_status 
 		return;
 	}
 
-	/**
-	 * Only send email if:
-	 * Affiliate approval is disabled ( $status = active, $old_status = active )
-	 * Affiliate approval is enabled and the affiliate is accepted ( $status = active, $old_status = pending )
+	/*
+	 * Only send approval email if:
+	 *
+	 * - Affiliate was inactive now active
+	 * - Affiliate was pending now active
+	 * - Affiliate was rejected now active
 	 */
-	if ( ! ( 'active' == $status && 'inactive' == $old_status || 'active' == $status && 'pending' == $old_status || 'active' == $status && 'rejected' == $old_status ) ) {
+	if (! ( 'active' == $status && 'inactive' == $old_status )
+		|| ( 'active' == $status && 'pending' == $old_status )
+		|| ( 'active' == $status && 'rejected' == $old_status )
+	) {
 		return;
 	}
 

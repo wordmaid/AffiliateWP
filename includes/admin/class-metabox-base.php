@@ -77,7 +77,8 @@ abstract class Base {
 	public $meta_box_id;
 
 	/**
-	 * The name of the meta box. Must be unique.
+	 * The name of the meta box.
+	 * This should very briefly describe the contents of the meta box.
 	 *
 	 * @abstract
 	 * @access  public

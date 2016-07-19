@@ -31,6 +31,9 @@ if ( ! defined('ABSPATH') ) {
  * Example:
  *
  *    namespace AffWP\Meta_Box;
+ *    if ( ! defined( 'AFFILIATEWP_PLUGIN_DIR' ) && ! empty( AFFILIATEWP_PLUGIN_DIR ) ) {
+ *        return;
+ *    }
  *    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
  *
  *    class My_Integration extends Base {

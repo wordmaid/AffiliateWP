@@ -24,27 +24,37 @@ if ( ! defined('ABSPATH') ) {
  * An AffiliateWP meta box can be added to AffiliateWP by any
  * 3rd-party source, by extending this class.
  *
+ * A functional example of extending this class may also
+ * be seen in our AffiliateWP Developer Docs:
+ * docs.affiliatewp.com/#TODO
+ *
  * Example:
  *
  *    namespace AffWP\Meta_Box;
  *
  *    class My_Integration extends Base {
  *
- *        public $meta_box_id   = 'my_integration_affwp_metabox';
+ *        public function init() {
+ *            $this->meta_box_id   = 'my_integration_affwp_metabox';
+ *            $this->meta_box_name = __( 'My Integration AffWP Meta box', 'affiliate-wp' );
  *
- *        public $meta_box_name = 'My Integration AffWP Meta box';
- *
- *        // Optional; defaults to primary AffiliateWP Reports Overview page
- *        // (screen id: affiliates_page_affiliate-wp-reports)
- *        public $affwp_screen  = 'affiliates_page_affiliate-wp-reports'
- *        public $affwp_screen  = array( define multiple screens in an array );
+ *            // Optionally, you may define:
+ *            //
+ *            // $this->action:  The AffiliateWP action on which the meta box loads.
+ *            //                 Defaults to the Overview page action, `affwp_overview_meta_boxes`.
+ *            //                 Note that a corresponding `do_metaboxes()` must be called at the
+ *            //                 location where this action fires in order for the meta box to show.
+ *            //
+ *            // $this->context: Define the context here. Defaults to `primary`.
+ *            //                 Options are `primary`,`secondary`, or `tertiary`.
+ *        }
  *
  *        public function content() {
  *            $this->my_meta_box_content();
  *        }
  *
  *        public function my_meta_box_content() {
- *            echo 'Here is some content I'd like to share with AffiliateWP users!;
+ *            _e( 'Here is some content I\'d like to share with AffiliateWP users!', 'affiliate-wp' );
  *        }
  *
  *    }
@@ -128,7 +138,7 @@ abstract class Base {
 	 * @var     $action
 	 * @since   1.9
 	 */
-	public $action;
+	public $action = 'affwp_overview_meta_boxes';
 
 	/**
 	 * Constructor

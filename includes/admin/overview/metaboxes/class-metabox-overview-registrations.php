@@ -13,27 +13,9 @@ namespace AffWP\Meta_Box;
 class Overview_Registrations extends Base {
 
     /**
-     * The id of the meta box. Must be unique.
-     *
-     * @access  public
-     * @since   1.9
-     */
-    public $meta_box_id = 'overview-registrations';
-
-    /**
-     * The position in which the meta box will be loaded
-     * Either 'normal', 'side', or 'advanced'.
-     *
-     * @access  public
-     * @var     $context
-     * @since   1.9
-     */
-    public $context = 'primary';
-
-    /**
      * Initialize.
      *
-     * Define the meta box name,
+     * Define the meta box name, meta box id,
      * and the action on which to hook the meta box here.
      *
      * Example:
@@ -48,12 +30,14 @@ class Overview_Registrations extends Base {
     public function init() {
         $this->action        = 'affwp_overview_meta_boxes';
         $this->meta_box_name = __( 'Latest Affiliate Registrations', 'affiliate-wp' );
+        $this->meta_box_id   = 'overview-registrations';
+        $this->context       = 'primary';
     }
 
     /**
-     * Displays the content of the metabox
+     * Displays the content of the metabox.
      *
-     * @return mixed content  The metabox content
+     * @return mixed content  The metabox content.
      * @since  1.9
      */
     public function content() { ?>

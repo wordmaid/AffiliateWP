@@ -13,35 +13,9 @@ namespace AffWP\Meta_Box;
 class Overview_Recent_Referrals extends Base {
 
 	/**
-	 * The id of the meta box. Must be unique.
-	 *
-	 * @access  public
-	 * @since   1.9
-	 */
-	public $meta_box_id = 'overview-recent-referrals';
-
-	/**
-	 * The name of the meta box. Must be unique.
-	 *
-	 * @access  public
-	 * @since   1.9
-	 */
-	public $meta_box_name;
-
-	/**
-	 * The position in which the meta box will be loaded
-	 * Either 'normal', 'side', or 'advanced'.
-	 *
-	 * @access  public
-	 * @var     $context
-	 * @since   1.9
-	 */
-	public $context = 'secondary';
-
-	/**
 	 * Initialize.
 	 *
-	 * Define the meta box name,
+	 * Define the meta box name, meta box id,
 	 * and the action on which to hook the meta box here.
 	 *
 	 * Example:
@@ -56,12 +30,14 @@ class Overview_Recent_Referrals extends Base {
 	public function init() {
 		$this->action        = 'affwp_overview_meta_boxes';
 		$this->meta_box_name = __( 'Recent Referrals', 'affiliate-wp' );
+		$this->meta_box_id   = 'overview-recent-referrals';
+		$this->context       = 'secondary';
 	}
 
 	/**
-	 * Displays the content of the metabox
+	 * Displays the content of the metabox.
 	 *
-	 * @return mixed content  The metabox content
+	 * @return mixed content  The metabox content.
 	 * @since  1.9
 	 */
 	public function content() {

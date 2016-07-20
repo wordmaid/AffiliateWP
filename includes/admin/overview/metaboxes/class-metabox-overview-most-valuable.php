@@ -62,10 +62,10 @@ class Overview_Most_Valuable extends Base {
 			<thead>
 
 				<tr>
-					<th><?php _e( 'Affiliate', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Earnings', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Referrals', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Visits', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Affiliate', 'Affiliate column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Earnings', 'Earnings column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Referrals', 'Referrals column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Visits', 'Visits column table header', 'affiliate-wp' ); ?></th>
 				</tr>
 
 			</thead>

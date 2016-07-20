@@ -48,9 +48,9 @@ class Overview_Registrations extends Base {
             <thead>
 
                 <tr>
-                    <th><?php _e( 'Affiliate', 'affiliate-wp' ); ?></th>
-                    <th><?php _e( 'Status', 'affiliate-wp' ); ?></th>
-                    <th><?php _e( 'Actions', 'affiliate-wp' ); ?></th>
+                    <th><?php _e( 'Affiliate', 'Affiliate column table header', 'affiliate-wp' ); ?></th>
+                    <th><?php _e( 'Status', 'Status column table header', 'affiliate-wp' ); ?></th>
+                    <th><?php _e( 'Actions', 'Actions column table header', 'affiliate-wp' ); ?></th>
                 </tr>
 
             </thead>

@@ -53,9 +53,9 @@ class Overview_Recent_Referral_Visits extends Base {
 			<thead>
 
 				<tr>
-					<th><?php _e( 'Affiliate', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'URL',       'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Converted', 'affiliate-wp' ); ?></th>
+					<th><?php _e( 'Affiliate', 'Affiliate column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _e( 'URL', 'URL column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _e( 'Converted', 'Converted column table header', 'affiliate-wp' ); ?></th>
 				</tr>
 
 			</thead>

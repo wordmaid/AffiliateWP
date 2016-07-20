@@ -178,7 +178,7 @@ abstract class Base {
 	/**
 	 * Adds the meta box
 	 *
-	 * @return  A meta box which will display on the specified AffiliateWP Reports admin page.
+	 * @return  A meta box which will display on the specified AffiliateWP admin screen.
 	 * @uses    add_meta_box
 	 * @since   1.9
 	 */
@@ -194,14 +194,13 @@ abstract class Base {
 	}
 
 	/**
-	 * Gets the content set in $this->content(),
-	 * which is retrieved by $this->_content().
+	 * Gets the content set in $this->content().
 	 *
 	 * @return mixed string The content of the meta box.
 	 * @since  1.9
 	 */
 	public function get_content() {
-		$content = $this->_content();
+		$content = $this->content();
 		/**
 		 * Filter the title tag content for an admin page.
 		 *
@@ -213,23 +212,13 @@ abstract class Base {
 	}
 
 	/**
-	 * A protected method which echoes the $this->content().
-	 *
-	 * @return mixed string The content of the meta box.
-	 * @since  1.9
-	 */
-	protected function _content() {
-		return $this->content();
-	}
-
-	/**
 	 * Defines the meta box content, as well as a
 	 * filter by which the content may be adjusted.
 	 *
 	 * Use this method in your child class to define
 	 * the content of your meta box.
 	 *
-	 * Given a $meta_box_id value of 'my-metabox-id',
+	 * For example, given a $meta_box_id value of 'my-metabox-id',
 	 * the filter would be: affwp_meta_box_my-meta-box-id.
 	 *
 	 * @return mixed string The content of the meta box

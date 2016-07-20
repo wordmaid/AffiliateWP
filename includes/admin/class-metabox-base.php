@@ -185,7 +185,7 @@ abstract class Base {
 	public function add_meta_box() {
 		add_meta_box(
 			$this->meta_box_id,
-			__( $this->meta_box_name, 'affiliate-wp' ),
+			$this->meta_box_name,
 			array( $this, 'get_content' ),
 			$this->affwp_screen,
 			$this->context,

@@ -119,7 +119,7 @@ class Affiliate_WP_Ninja_Forms extends Affiliate_WP_Base {
 	 */
 	public function reference_link( $reference = 0, $referral ) {
 
-		if( empty( $referral->context ) || 'ninja-forms' != $referral->context ) {
+		if( empty( $referral->context ) || 'ninja-forms' !== $referral->context ) {
 			return $reference;
 		}
 

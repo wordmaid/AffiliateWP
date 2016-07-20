@@ -77,7 +77,7 @@ class Overview_Recent_Referral_Visits extends Base {
 							<td><a href="<?php echo esc_url( $visit->url ); ?>"><?php echo esc_html( $visit->url ); ?></a></td>
 							<td>
 								<?php $converted = ! empty( $visit->referral_id ) ? 'yes' : 'no'; ?>
-								<span class="visit-converted <?php echo $converted; ?>"><i></i></span>
+								<span class="visit-converted <?php echo esc_attr( $converted ); ?>" aria-label="<?php printf( esc_attr__( 'Visit converted: %s', 'affiliate-wp' ), $converted ); ?>"><i></i></span>
 							</td>
 						</tr>
 					<?php endforeach; ?>

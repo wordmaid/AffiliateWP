@@ -201,6 +201,7 @@ abstract class Base {
 	 * @since  1.9
 	 */
 	public function get_content() {
+		$content = $this->_content();
 		/**
 		 * Filter the title tag content for an admin page.
 		 *
@@ -208,7 +209,6 @@ abstract class Base {
 		 * @since 1.9
 		 *
 		 */
-		$content = $this->_content();
 		return apply_filters( 'affwp_meta_box_' . $this->meta_box_id, $content );
 	}
 

@@ -209,7 +209,7 @@ final class Affiliate extends Object {
 			$value = floatval( $value );
 		}
 
-		return parent::get_instance( $object_id );
+		return $value;
 	}
 
 	/**

@@ -44,7 +44,7 @@ class Overview_Totals extends Base {
 	 */
 	public function content() { ?>
 
-				<table class="affwp_table">
+		<table class="affwp_table">
 
 			<thead>
 

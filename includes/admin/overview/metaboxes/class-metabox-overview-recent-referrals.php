@@ -43,6 +43,15 @@ class Overview_Recent_Referrals extends Base {
 	public function content() {
 
 		$referrals = affiliate_wp()->referrals->get_referrals(
+			/**
+	 		 * Filter the get_referrals() query.
+	 		 *
+	 		 * @param array The query arguments for get_referrals().
+	 		 *              By default, this query shows the five
+	 		 *              most recent unpaid referrals.
+	 		 * @since 1.9
+	 		 *
+	 		 */
 			apply_filters( 'affwp_overview_recent_referrals',
 				array(
 					'number' => 5,

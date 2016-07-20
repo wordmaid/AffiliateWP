@@ -42,7 +42,22 @@ class Overview_Registrations extends Base {
      */
     public function content() { ?>
 
-        <?php $affiliates = affiliate_wp()->affiliates->get_affiliates( apply_filters( 'affwp_overview_latest_affiliate_registrations', array( 'number' => 5 ) ) ); ?>
+        <?php $affiliates = affiliate_wp()->affiliates->get_affiliates(
+            /**
+             * Filter the get_affiliates() query.
+             *
+             * @param array The query arguments for get_affiliates().
+             *              By default, this query shows the five
+             *              most recent affiliate registrations.
+             * @since 1.9
+             *
+             */
+            apply_filters( 'affwp_overview_latest_affiliate_registrations',
+                array(
+                'number' => 5
+                )
+            )
+        ); ?>
         <table class="affwp_table">
 
             <thead>

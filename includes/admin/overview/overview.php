@@ -165,8 +165,8 @@ function affwp_affiliates_dashboard() {
 
 									<tr>
 										<th><?php _e( 'Affiliate', 'affiliate-wp' ); ?></th>
-										<th><?php _e( 'Earnings', 'affiliate-wp' ); ?></th>
-										<th><?php _e( 'Referrals', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Paid Earnings', 'affiliate-wp' ); ?></th>
+										<th><?php _e( 'Paid Referrals', 'affiliate-wp' ); ?></th>
 										<th><?php _e( 'Visits', 'affiliate-wp' ); ?></th>
 									</tr>
 

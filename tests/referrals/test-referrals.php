@@ -48,5 +48,16 @@ class Referral_Tests extends WP_UnitTestCase {
 		affwp_set_referral_status( $this->_referral_id, 'rejected' );
 		$this->assertEquals( 'rejected', affwp_get_referral_status( $this->_referral_id ) );
 	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 */
+	public function test_get_referrals_referral_id() {
+		$referrals = affiliate_wp()->referrals->get_referrals( array(
+			'referral_id' => $this->_referral_id
+		) );
+
+		$this->assertSame( (string) $this->_referral_id, $referrals[0]->referral_id );
+	}
 }
 

@@ -215,7 +215,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		$defaults = array(
 			'number'       => 20,
 			'offset'       => 0,
-			'referrals_id' => 0,
+			'referral_id'  => 0,
 			'affiliate_id' => 0,
 			'reference'    => '',
 			'context'      => '',

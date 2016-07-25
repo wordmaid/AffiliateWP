@@ -54,10 +54,6 @@ if ( ! defined('ABSPATH') ) {
  *        }
  *
  *        public function content() {
- *            $this->my_meta_box_content();
- *        }
- *
- *        public function my_meta_box_content() {
  *            _e( 'Here is some content I\'d like to share with AffiliateWP users!', 'affiliate-wp' );
  *        }
  *

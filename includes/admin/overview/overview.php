@@ -214,7 +214,7 @@ function affwp_affiliates_dashboard() {
 									<?php foreach( $referrals as $referral  ) : ?>
 										<tr>
 											<td><?php echo affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id ); ?></td>
-											<td><?php echo affwp_currency_filter( $referral->amount ); ?></td>
+											<td><?php echo affwp_currency_filter( affwp_format_amount( $referral->amount ) ); ?></td>
 											<td><?php echo ! empty( $referral->description ) ? esc_html( $referral->description ) : ''; ?></td>
 										</tr>
 									<?php endforeach; ?>

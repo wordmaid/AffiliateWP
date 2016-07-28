@@ -197,8 +197,6 @@ function affwp_currency_filter( $amount ) {
 		$amount = substr( $amount, 1 ); // Remove proceeding "-" -
 	}
 
-	$amount = affwp_format_amount( $amount );
-
 	if ( $position == 'before' ):
 		switch ( $currency ):
 			case "GBP" :

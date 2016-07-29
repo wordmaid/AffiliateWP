@@ -275,6 +275,11 @@ final class Affiliate_WP {
 		if ( ! defined( 'AFFILIATEWP_PLUGIN_FILE' ) ) {
 			define( 'AFFILIATEWP_PLUGIN_FILE', __FILE__ );
 		}
+
+		// Make sure CAL_GREGORIAN is defined.
+		if ( ! defined( 'CAL_GREGORIAN' ) ) {
+			define( 'CAL_GREGORIAN', 1 );
+		}
 	}
 
 	/**

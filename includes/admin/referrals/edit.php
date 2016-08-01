@@ -77,14 +77,14 @@ $referral = affwp_get_referral( absint( $_GET['referral_id'] ) );
 			</tr>
 
 			<tr class="form-row form-required">
-
+				<?php $readonly = __checked_selected_helper( true, ! empty( $referral->context ), false, 'readonly' ); ?>
 				<th scope="row">
 					<label for="context"><?php _e( 'Context', 'affiliate-wp' ); ?></label>
 				</th>
 
 				<td>
-					<input type="text" name="context" id="context" value="<?php echo esc_attr( $referral->context ); ?>" />
-					<p class="description"><?php _e( 'Enter a context for this referral (optional). Usually this is used to help identify the payment system that was used for the transaction.', 'affiliate-wp' ); ?></p>
+					<input type="text" name="context" id="context" value="<?php echo esc_attr( $referral->context ); ?>" <?php echo $readonly; ?> />
+					<p class="description"><?php _e( 'Context for this referral (optional). Usually this is used to help identify the payment system that was used for the transaction.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>

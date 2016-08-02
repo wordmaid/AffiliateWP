@@ -11,12 +11,15 @@
 # Build everything
 build:
 - 'cssmin'
+- 'uglify'
 - 'clean'
 - 'copy'
 - 'compress'
 # CSS minification
 style:
 - 'cssmin'
+jsmin:
+- 'uglify'
 # Default task
 default:
 - 'makepot'

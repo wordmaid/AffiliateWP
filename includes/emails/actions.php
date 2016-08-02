@@ -82,16 +82,24 @@ add_action( 'affwp_auto_register_user', 'affwp_notify_on_registration', 10, 3 );
  */
 function affwp_notify_on_approval( $affiliate_id = 0, $status = '', $old_status = '' ) {
 
-	if( empty( $affiliate_id ) ) {
+	if( empty( $affiliate_id ) || 'active' !== $status ) {
 		return;
 	}
 
-	/**
-	 * Only send email if:
-	 * Affiliate approval is disabled ( $status = active, $old_status = active )
-	 * Affiliate approval is enabled and the affiliate is accepted ( $status = active, $old_status = pending )
+	/*
+	 * Skip sending the acceptance email for a now-'active' affiliate under
+	 * certain conditions:
+	 *
+	 * 1. The affiliate was previously of 'inactive' or 'rejected' status.
+	 * 2. The affiliate was previously of 'pending' status, where the status
+	 *    transition wasn't triggered by a registration.
+	 * 3. The affiliate's 'active' status didn't change, and the status
+	 *    "transition" wasn't triggered by a registration, i.e. the affiliate
+	 *    was updated in a bulk action and the 'active' status didn't change.
 	 */
-	if ( ! ( 'active' == $status && 'active' == $old_status || 'active' == $status && 'pending' == $old_status ) ) {
+	if ( ! in_array( $old_status, array( 'active', 'pending' ), true )
+		&& ! did_action( 'affwp_affiliate_register' )
+	) {
 		return;
 	}
 

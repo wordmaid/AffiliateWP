@@ -5,7 +5,7 @@
  * Description: Affiliate Plugin for WordPress
  * Author: AffiliateWP, LLC
  * Author URI: https://affiliatewp.com
- * Version: 1.8.5
+ * Version: 1.8.6
  * Text Domain: affiliate-wp
  * Domain Path: languages
  *
@@ -24,7 +24,7 @@
  * @package AffiliateWP
  * @category Core
  * @author Pippin Williamson
- * @version 1.8.5
+ * @version 1.8.6
  */
 
 // Exit if accessed directly
@@ -51,7 +51,7 @@ final class Affiliate_WP {
 	 *
 	 * @since 1.0
 	 */
-	private $version = '1.8.5';
+	private $version = '1.8.6';
 
 	/**
 	 * The affiliates DB instance variable.
@@ -274,6 +274,11 @@ final class Affiliate_WP {
 		// Plugin Root File
 		if ( ! defined( 'AFFILIATEWP_PLUGIN_FILE' ) ) {
 			define( 'AFFILIATEWP_PLUGIN_FILE', __FILE__ );
+		}
+
+		// Make sure CAL_GREGORIAN is defined.
+		if ( ! defined( 'CAL_GREGORIAN' ) ) {
+			define( 'CAL_GREGORIAN', 1 );
 		}
 	}
 

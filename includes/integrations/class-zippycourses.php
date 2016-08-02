@@ -248,7 +248,7 @@ class Affiliate_WP_ZippyCourses extends Affiliate_WP_Base {
 	*/
 	public function mark_referral_complete( Zippy_Event $event ) {
 
-		if( $event->new_status == 'complete' && $event->old_status != 'complete' ) {
+		if( $this->order_is_complete_or_active( $event ) ) {
 
 			$order = $event->order;
 
@@ -314,6 +314,11 @@ class Affiliate_WP_ZippyCourses extends Affiliate_WP_Base {
 		$url = get_edit_post_link( $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . get_the_title($reference) . '</a>';
+	}
+
+	private function order_is_complete_or_active( Zippy_Event $event ) {
+		return ( ($event->new_status == 'complete' && $event->old_status != 'complete')
+			||  ( $event->new_status == 'active' && $event->old_status != 'active') );
 	}
 
 }

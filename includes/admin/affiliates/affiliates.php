@@ -345,7 +345,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 	 * @return string earnings link
 	 */
 	function column_earnings( $affiliate ) {
-		$value = affwp_currency_filter( affwp_format_amount( affwp_get_affiliate_earnings( $affiliate->affiliate_id ) ) );
+		$value = affwp_get_affiliate_earnings( $affiliate->affiliate_id, true );
 		return apply_filters( 'affwp_affiliate_table_earnings', $value, $affiliate );
 	}
 
@@ -463,7 +463,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 			'delete'     => __( 'Delete', 'affiliate-wp' )
 		);
 
-		return apply_filters( 'affwp_affilates_bulk_actions', $actions );
+		return apply_filters( 'affwp_affiliates_bulk_actions', $actions );
 	}
 
 	/**

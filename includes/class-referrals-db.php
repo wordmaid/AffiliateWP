@@ -247,7 +247,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		$defaults = array(
 			'number'       => 20,
 			'offset'       => 0,
-			'referrals_id' => 0,
+			'referral_id'  => 0,
 			'affiliate_id' => 0,
 			'reference'    => '',
 			'context'      => '',
@@ -599,37 +599,52 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	}
 
 	/**
+	 * Counts the total number of referrals for the given status.
+	 *
+	 * @access public
+	 * @since  1.8.6
+	 *
+	 * @param string $status       Referral status.
+	 * @param int    $affiliate_id Optional. Affiliate ID. Default 0.
+	 * @param string $date         Optional. Date range in which to search. Accepts 'month'. Default empty.
+	 * @return int Number of referrals for the given status or 0 if the affiliate doesn't exist.
+	 */
+	public function count_by_status( $status, $affiliate_id = 0, $date = '' ) {
+
+		$args = array(
+			'status'       => $status,
+			'affiliate_id' => absint( $affiliate_id ),
+		);
+
+		if ( ! empty( $date ) ) {
+			switch( $date ) {
+				case 'month':
+					$args['date'] = array(
+						'start' => date( 'Y-m-01 00:00:00', current_time( 'timestamp' ) ),
+						'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 00:00:00', current_time( 'timestamp' ) ),
+					);
+					break;
+			}
+		}
+
+		return $this->count( $args );
+	}
+
+	/**
 	 * Count the total number of unpaid referrals
 	 *
 	 * @access  public
 	 * @since   1.0
+	 * @since   1.8.6 Converted to a wrapper for count_by_status()
+	 *
+	 * @see count_by_status()
+	 *
+	 * @param string $date         Optional. Date range in which to search. Accepts 'month'. Default empty.
+	 * @param int    $affiliate_id Optional. Affiliate ID. Default 0.
+	 * @return int Number of referrals for the given status or 0 if the affiliate doesn't exist.
 	*/
 	public function unpaid_count( $date = '', $affiliate_id = 0 ) {
-
-		$args = array(
-			'affiliate_id' => absint( $affiliate_id ),
-			'status'       => 'unpaid',
-		);
-
-		if ( ! empty( $date ) ) {
-
-			switch ( $date ) {
-
-				case 'month' :
-
-					$date = array(
-						'start' => date( 'Y-m-01 00:00:00', current_time( 'timestamp' ) ),
-						'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 00:00:00', current_time( 'timestamp' ) ),
-					);
-
-					break;
-
-			}
-
-			$args['date'] = $date;
-		}
-
-		return $this->count( $args );
+		return $this->count_by_status( 'unpaid', $affiliate_id, $date );
 	}
 
 	/**

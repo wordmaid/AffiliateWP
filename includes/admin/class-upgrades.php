@@ -2,12 +2,38 @@
 
 class Affiliate_WP_Upgrades {
 
+	/**
+	 * Whether debug mode is enabled.
+	 *
+	 * @since 1.8.6
+	 * @access private
+	 * @var bool
+	 */
+	private $debug;
+
+	/**
+	 * Affiliate_WP_Logging instance.
+	 *
+	 * @since 1.8.6
+	 * @access private
+	 * @var Affiliate_WP_Logging
+	 */
+	private $logs;
+
 	private $upgraded = false;
 
 	public function __construct() {
 
 		add_action( 'admin_init', array( $this, 'init' ), -9999 );
 
+		$settings = new Affiliate_WP_Settings;
+		$this->debug = (bool) $settings->get( 'debug_mode', false );
+
+		if ( $this->debug ) {
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';
+
+			$this->logs = new Affiliate_WP_Logging;
+		}
 	}
 
 	public function init() {
@@ -60,6 +86,20 @@ class Affiliate_WP_Upgrades {
 			update_option( 'affwp_version', AFFILIATEWP_VERSION );
 		}
 
+	}
+
+	/**
+	 * Writes a log message.
+	 *
+	 * @access private
+	 * @since 1.8.6
+	 *
+	 * @param string $message Optional. Message to log.
+	 */
+	private function log( $message = '' ) {
+		if ( $this->debug ) {
+			$this->logs->log( $message );
+		}
 	}
 
 	/**

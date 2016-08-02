@@ -599,7 +599,7 @@ function affwp_get_affiliate_earnings( $affiliate, $formatted = false ) {
 
 	if ( $formatted ) {
 
-		$earnings = affwp_currency_filter( $earnings );
+		$earnings = affwp_currency_filter( affwp_format_amount( $earnings ) );
 
 	}
 
@@ -641,7 +641,7 @@ function affwp_get_affiliate_unpaid_earnings( $affiliate, $formatted = false ) {
 
 	if ( $formatted ) {
 
-		$earnings = affwp_currency_filter( $earnings );
+		$earnings = affwp_currency_filter( affwp_format_amount( $earnings ) );
 
 	}
 

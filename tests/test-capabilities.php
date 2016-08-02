@@ -30,6 +30,7 @@ class Capabilities_Tests extends WP_UnitTestCase {
 
 		$this->assertTrue( $user->has_cap( 'view_affiliate_reports' ) );
 		$this->assertTrue( $user->has_cap( 'export_affiliate_data' ) );
+		$this->assertTrue( $user->has_cap( 'export_referral_data' ) );
 		$this->assertTrue( $user->has_cap( 'manage_affiliate_options' ) );
 		$this->assertTrue( $user->has_cap( 'manage_affiliates' ) );
 		$this->assertTrue( $user->has_cap( 'manage_referrals' ) );
@@ -54,4 +55,3 @@ class Capabilities_Tests extends WP_UnitTestCase {
 	}
 
 }
-

@@ -163,13 +163,6 @@ class Visit_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_delete_visit()
 	 */
-	public function test_delete_visit_with_no_visit_should_return_false() {
-		$this->assertFalse( affwp_delete_visit( affwp_get_visit() ) );
-	}
-
-	/**
-	 * @covers affwp_delete_visit()
-	 */
 	public function test_delete_visit_with_invalid_visit_id_should_return_false() {
 		$this->assertFalse( affwp_delete_visit( 0 ) );
 	}
@@ -178,21 +171,29 @@ class Visit_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_delete_visit()
 	 */
 	public function test_delete_visit_with_valid_visit_id_should_return_true() {
-		$this->assertTrue( affwp_delete_visit( $this->_visit_id ) );
+		$visit_id = affiliate_wp()->visits->add( array(
+			'affiliate_id' => 1
+		) );
+
+		$this->assertTrue( affwp_delete_visit( $visit_id ) );
 	}
 
 	/**
 	 * @covers affwp_delete_visit()
 	 */
 	public function test_delete_visit_with_invalid_visit_object_should_return_false() {
-		$this->assertFalse( affwp_delete_visit( affwp_get_visit() ) );
+		$this->assertFalse( affwp_delete_visit( new stdClass() ) );
 	}
 
 	/**
 	 * @covers affwp_delete_visit()
 	 */
 	public function test_delete_visit_with_valid_visit_object_should_return_true() {
-		$visit = affiliate_wp()->visits->get( $this->_visit_id );
+		$visit_id = affiliate_wp()->visits->add( array(
+			'affiliate_id' => 1
+		) );
+
+		$visit = affiliate_wp()->visits->get( $visit_id );
 
 		$this->assertTrue( affwp_delete_visit( $visit ) );
 	}
@@ -200,18 +201,37 @@ class Visit_Functions_Tests extends WP_UnitTestCase {
 	/**
 	 * @covers affwp_delete_visit()
 	 */
+	public function test_delete_visit_with_non_object_non_numeric_should_return_false() {
+		$this->assertFalse( affwp_delete_visit( 'foo' ) );
+	}
+
+	/**
+	 * @covers affwp_delete_visit()
+	 */
 	public function test_delete_visit_should_decrease_affiliate_visit_count() {
-		// Inflate visit count.
-		affwp_increase_affiliate_visit_count( $this->_affiliate_id );
-		affwp_increase_affiliate_visit_count( $this->_affiliate_id );
+		$affiliate_id = affiliate_wp()->affiliates->add( array(
+			'user_id' => $this->factory->user->create()
+		) );
 
-		$old_count = affwp_get_affiliate_visit_count( $this->_affiliate_id );
+		$visit_ids = array();
 
-		affwp_delete_visit( $this->_visit_id );
+		for ( $i = 0; $i <= 2; $i++ ) {
+			$visit_ids[] = affiliate_wp()->visits->add( array(
+				'affiliate_id' => $affiliate_id
+			) );
+		}
 
-		$new_count = affwp_get_affiliate_visit_count( $this->_affiliate_id );
+		$this->assertEquals( 3, affwp_get_affiliate_visit_count( $affiliate_id ) );
 
-		$this->assertEquals( $old_count--, $new_count );
+		// 3 becomes 2.
+		affwp_delete_visit( $visit_ids[0] );
+
+		$this->assertEquals( 2, affwp_get_affiliate_visit_count( $affiliate_id ) );
+
+		// 2 becomes 1.
+		affwp_delete_visit( $visit_ids[1] );
+
+		$this->assertEquals( 1, affwp_get_affiliate_visit_count( $affiliate_id ) );
 	}
 
 	public function test_sanitize_visit_url() {

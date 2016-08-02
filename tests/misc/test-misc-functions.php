@@ -143,7 +143,7 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 	 * @covers affwp_format_rate()
 	 */
 	public function test_format_rate_should_format_non_percentage_as_flat() {
-		$this->assertSame( '&#36;20.00', affwp_format_rate( 20, 'flat' ) );
+		$this->assertSame( '&#36;20', affwp_format_rate( 20, 'flat' ) );
 	}
 
 }

@@ -29,7 +29,7 @@ class Referral_Tests extends WP_UnitTestCase {
 	}
 
 	function test_get_referral() {
-		$this->assertNull( affwp_get_referral( 0 ) );
+		$this->assertFalse( affwp_get_referral( 0 ) );
 		$this->assertNotEmpty( affwp_get_referral( $this->_referral_id ) );
 	}
 
@@ -57,7 +57,7 @@ class Referral_Tests extends WP_UnitTestCase {
 			'referral_id' => $this->_referral_id
 		) );
 
-		$this->assertSame( (string) $this->_referral_id, $referrals[0]->referral_id );
+		$this->assertSame( $this->_referral_id, $referrals[0]->referral_id );
 	}
 }
 

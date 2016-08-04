@@ -650,4 +650,4 @@ function affwp_add_screen_options_nonces() {
 
 
 }
-add_action( 'admin_init', 'affwp_add_screen_options_nonces' );
+add_action( 'admin_footer', 'affwp_add_screen_options_nonces' );

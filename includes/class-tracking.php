@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * The Affiliate_WP_Tracking class.
+ *
+ * This class defines all primary methods by which
+ * AffiliateWP tracks referral activity.
+ *
+ * @since  1.0
+ * @uses   Affiliate_WP_Logging  Logs activity.
+ */
 class Affiliate_WP_Tracking {
 
 	private $referral_var;
@@ -672,11 +680,11 @@ class Affiliate_WP_Tracking {
 	/**
 	 * Get the current page URL
 	 *
-	 * @since 1.0
+	 * @since  1.0
 	 * @global $post
 	 * @return string $page_url Current page URL
 	 */
-	function get_current_page_url() {
+	public function get_current_page_url() {
 		global $post;
 
 		if ( is_front_page() ) {
@@ -685,19 +693,7 @@ class Affiliate_WP_Tracking {
 
 		} else {
 
-			$page_url = 'http';
-
-			if ( isset( $_SERVER["HTTPS"] ) && $_SERVER["HTTPS"] == "on" ) {
-				$page_url .= "s";
-			}
-
-			$page_url .= "://";
-
-			if ( $_SERVER["SERVER_PORT"] != "80" ) {
-				$page_url .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-			} else {
-				$page_url .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-			}
+			$page_url = set_url_scheme( 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] );
 
 		}
 

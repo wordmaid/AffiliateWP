@@ -30,7 +30,7 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 		<tbody>
 
 			<tr>
-				<td><?php echo affwp_currency_filter( affwp_get_affiliate_earnings( $affiliate_id ) ); ?></td>
+				<td><?php echo affwp_get_affiliate_earnings( $affiliate_id, true ); ?></td>
 				<td><?php echo affwp_get_affiliate_unpaid_earnings( $affiliate_id, true ); ?></td>
 				<td><?php echo affwp_get_affiliate_referral_count( $affiliate_id ); ?></td>
 				<td><?php echo affiliate_wp()->referrals->count( array( 'affiliate_id' => $affiliate_id, 'status' => 'unpaid' ) ); ?></td>

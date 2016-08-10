@@ -45,7 +45,7 @@ function affwp_get_currencies() {
 		'IDR' => __( 'Indonesia Rupiah', 'affiliate-wp' ),
 		'INR' => __( 'Indian Rupee', 'affiliate-wp' ),
 		'ILS' => __( 'Israeli Shekel', 'affiliate-wp' ),
-		'IRT' => __( 'Iranian Toman', 'affiliate-wp' ),
+		'IRR' => __( 'Iranian Rial', 'affiliate-wp' ),
 		'JPY' => __( 'Japanese Yen', 'affiliate-wp' ),
 		'KIP' => __( 'Lao Kip', 'affiliate-wp' ),
 		'MYR' => __( 'Malaysian Ringgits', 'affiliate-wp' ),
@@ -265,8 +265,8 @@ function affwp_currency_filter( $amount ) {
 			case "KRW" :
 				$formatted = $amount . '&#8361;';
 				break;
-			case "IRT" :
-				$formatted = $amount . ' تومان';
+			case "IRR" :
+				$formatted = $amount . '&#65020;';
 				break;
 			default :
 			    $formatted = $amount . ' ' . $currency;

@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/migration.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-recount.php';
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/system-info.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/import/import.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/export.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-export.php';
@@ -75,6 +76,7 @@ function affwp_get_tools_tabs() {
 	$tabs['export_import'] = __( 'Export / Import', 'affiliate-wp' );
 	$tabs['recount']       = __( 'Recount Stats', 'affiliate-wp' );
 	$tabs['migration']     = __( 'Migration Assistant', 'affiliate-wp' );
+	$tabs['system_info']   = __( 'System Info', 'affiliate-wp' );
 
 	if( affiliate_wp()->settings->get( 'debug_mode', false ) ) {	
 		$tabs['debug']     = __( 'Debug Assistant', 'affiliate-wp' );
@@ -346,6 +348,65 @@ function affwp_export_import_tab() {
 <?php
 }
 add_action( 'affwp_tools_tab_export_import', 'affwp_export_import_tab' );
+
+/**
+ * System Info tab.
+ *
+ * @since 1.8.7
+ */
+function affwp_system_info_tab() {
+	if ( ! current_user_can( 'manage_affiliate_options' ) ) {
+		return;
+	}
+
+	$action_url = add_query_arg( array(
+		'page' => 'affiliate-wp-tools',
+		'tab'  => 'system_info'
+	), admin_url( 'admin.php' ) );
+
+	?>
+	<form action="<?php echo esc_url( $action_url ); ?>" method="post" dir="ltr">
+		<textarea readonly="readonly" onclick="this.focus(); this.select()" id="affwp-system-info-textarea" name="affwp-sysinfo" title="<?php esc_attr_e( 'To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'affiliate-wp' ); ?>">
+			<?php echo affwp_tools_system_info_report(); ?>
+		</textarea>
+		<p class="submit">
+			<input type="hidden" name="affwp-action" value="download_sysinfo" />
+			<?php submit_button( 'Download System Info File', 'primary', 'affwp-download-sysinfo', false ); ?>
+		</p>
+	</form>
+	<?php
+}
+
+add_action( 'affwp_tools_tab_system_info', 'affwp_system_info_tab' );
+
+/**
+ * Listens for system info download requests and delivers the file.
+ *
+ * @since 1.8.7
+ */
+function affwp_tools_sysinfo_download() {
+
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		return;
+	}
+
+	if ( ! current_user_can( 'manage_affiliate_options' ) ) {
+		return;
+	}
+
+	if ( ! isset( $_POST['affwp-download-sysinfo'] ) ) {
+		return;
+	}
+
+	nocache_headers();
+
+	header( 'Content-Type: text/plain' );
+	header( 'Content-Disposition: attachment; filename="affwp-system-info.txt"' );
+
+	echo wp_strip_all_tags( $_POST['affwp-sysinfo'] );
+	exit;
+}
+add_action( 'admin_init', 'affwp_tools_sysinfo_download' );
 
 /**
  * Debug Tab

@@ -225,6 +225,16 @@ table.affwp_table td a {
   padding-top: 10px;
 }
 
+#affwp-system-info-textarea {
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+	display: block;
+	font-family: Menlo,Monaco,monospace;
+	height: 400px;
+	overflow: auto;
+	white-space: pre;
+	width: 800px;
+}
+
 /* Media Queries */
 @media screen and ( max-width: 782px ) {
 	#affwp-affiliates-filter .column-affiliate_id,

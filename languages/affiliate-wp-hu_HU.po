@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-05-05 14:11:19+00:00\n"
+"POT-Creation-Date: 2016-07-07 07:36:11+00:00\n"
 "PO-Revision-Date: 2015-04-09 10:01-0600\n"
 "Last-Translator: Chris Christoff <chriscct7@gmail.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
@@ -63,8 +63,7 @@ msgstr "Nincs jogosultsága a plugin frissítés telepítéséhez"
 #: includes/admin/affiliates/actions.php:138
 #: includes/admin/affiliates/actions.php:142
 #: includes/admin/class-addon-updater.php:280
-#: includes/admin/class-notices.php:219
-#: includes/admin/creatives/actions.php:16
+#: includes/admin/class-notices.php:239 includes/admin/creatives/actions.php:16
 #: includes/admin/creatives/actions.php:44
 #: includes/admin/creatives/actions.php:48
 #: includes/admin/creatives/actions.php:52
@@ -126,8 +125,7 @@ msgstr "Nincs jogosultsága az Affiliate Partner fiókok törléséhez"
 
 #: includes/admin/affiliates/actions.php:56
 #: includes/admin/affiliates/actions.php:142
-#: includes/admin/class-notices.php:219
-#: includes/admin/creatives/actions.php:48
+#: includes/admin/class-notices.php:239 includes/admin/creatives/actions.php:48
 #: includes/admin/referrals/actions.php:20
 #: includes/admin/referrals/actions.php:51
 #: includes/admin/referrals/actions.php:82
@@ -139,9 +137,8 @@ msgid "No affiliate IDs specified for deletion"
 msgstr ""
 "Az Affiliate Partner Azonosító (ID) nem került meghatározásra a törléshez"
 
-#: includes/admin/affiliates/affiliates.php:54
-#: includes/admin/class-menu.php:11 includes/admin/class-menu.php:13
-#: includes/admin/class-welcome.php:298
+#: includes/admin/affiliates/affiliates.php:54 includes/admin/class-menu.php:11
+#: includes/admin/class-menu.php:13 includes/admin/class-welcome.php:298
 msgid "Affiliates"
 msgstr "Affiliate Partnerek"
 
@@ -152,14 +149,14 @@ msgstr "Új Hozzáadása"
 
 #: includes/admin/affiliates/affiliates.php:59
 #: includes/admin/referrals/referrals.php:61
-#: includes/admin/visits/visits.php:33
+#: includes/admin/visits/visits.php:34
 msgid "Search"
 msgstr "Keresés"
 
 #: includes/admin/affiliates/affiliates.php:203
 #: includes/admin/creatives/creatives.php:142
 #: includes/admin/referrals/referrals.php:206
-#: includes/admin/visits/visits.php:44
+#: includes/admin/visits/visits.php:45
 msgid "All"
 msgstr "Összes"
 
@@ -180,8 +177,8 @@ msgid "Inactive"
 msgstr "Inaktív"
 
 #: includes/admin/affiliates/affiliates.php:206
-#: includes/admin/affiliates/new.php:43 includes/admin/referrals/edit.php:90
-#: includes/admin/referrals/new.php:91
+#: includes/admin/affiliates/new.php:43 includes/admin/referrals/edit.php:102
+#: includes/admin/referrals/new.php:103
 #: includes/admin/referrals/referrals.php:209
 #: includes/admin/tools/tools.php:271 includes/admin/tools/tools.php:300
 #: includes/affiliate-functions.php:271 includes/referral-functions.php:55
@@ -189,7 +186,7 @@ msgid "Pending"
 msgstr "Függő"
 
 #: includes/admin/affiliates/affiliates.php:207
-#: includes/admin/referrals/edit.php:91 includes/admin/referrals/new.php:92
+#: includes/admin/referrals/edit.php:103 includes/admin/referrals/new.php:104
 #: includes/admin/referrals/referrals.php:210
 #: includes/admin/tools/tools.php:272 includes/admin/tools/tools.php:301
 #: includes/affiliate-functions.php:274 includes/referral-functions.php:54
@@ -206,7 +203,7 @@ msgstr "Név"
 #: includes/admin/affiliates/affiliates.php:224
 #: includes/admin/affiliates/edit.php:70
 #: includes/admin/affiliates/review.php:34
-#: includes/admin/settings/class-settings.php:396
+#: includes/admin/settings/class-settings.php:429
 #: includes/admin/tools/export/class-export-affiliates.php:50
 #: templates/login.php:15 templates/login.php:16 templates/register.php:48
 #: templates/register.php:49
@@ -246,12 +243,11 @@ msgstr "Fizetett Referáltak"
 #: includes/admin/affiliates/affiliates.php:230
 #: includes/admin/class-menu.php:15 includes/admin/class-welcome.php:308
 #: includes/admin/overview/overview.php:170
-#: includes/admin/reports/reports.php:66
-#: includes/admin/reports/reports.php:185
+#: includes/admin/reports/reports.php:66 includes/admin/reports/reports.php:185
 #: includes/admin/tools/export/class-export-affiliates.php:55
-#: includes/admin/tools/tools.php:132 includes/admin/visits/visits.php:30
+#: includes/admin/tools/tools.php:132 includes/admin/visits/visits.php:31
 #: templates/dashboard-tab-stats.php:10 templates/dashboard-tab-stats.php:57
-#: templates/dashboard.php:60
+#: templates/dashboard.php:80
 msgid "Visits"
 msgstr "Látogatók"
 
@@ -259,7 +255,7 @@ msgstr "Látogatók"
 #: includes/admin/creatives/creatives.php:162
 #: includes/admin/creatives/edit.php:94 includes/admin/creatives/new.php:84
 #: includes/admin/overview/overview.php:117
-#: includes/admin/referrals/edit.php:83 includes/admin/referrals/new.php:84
+#: includes/admin/referrals/edit.php:95 includes/admin/referrals/new.php:96
 #: includes/admin/referrals/referrals.php:232
 #: includes/admin/tools/export/class-export-affiliates.php:56
 #: includes/admin/tools/export/class-export-referrals.php:70
@@ -280,14 +276,14 @@ msgid "(user deleted)"
 msgstr "(törölt felhasználó)"
 
 #: includes/admin/affiliates/affiliates.php:418
-#: includes/admin/class-menu.php:17 includes/admin/user-profile.php:44
+#: includes/admin/class-menu.php:17 includes/admin/user-profile.php:49
 msgid "Reports"
 msgstr "Riportok"
 
 #: includes/admin/affiliates/affiliates.php:419
 #: includes/admin/creatives/creatives.php:236
 #: includes/admin/referrals/referrals.php:387
-#: includes/admin/user-profile.php:46
+#: includes/admin/user-profile.php:51
 msgid "Edit"
 msgstr "Szerkesztés"
 
@@ -413,7 +409,7 @@ msgid "The affiliate's registration date. This cannot be changed."
 msgstr "Az Affiliate Partner Azonosítója (ID). Nem változtatható meg."
 
 #: includes/admin/affiliates/edit.php:96 includes/admin/affiliates/new.php:53
-#: includes/admin/settings/class-settings.php:412
+#: includes/admin/settings/class-settings.php:445
 msgid "Referral Rate Type"
 msgstr "Referált Ráta Típus"
 
@@ -426,9 +422,9 @@ msgid "The affiliate's referral rate type."
 msgstr "Az affiliate partner referált ráta típusa."
 
 #: includes/admin/affiliates/edit.php:114 includes/admin/affiliates/new.php:71
-#: includes/admin/settings/class-settings.php:418
+#: includes/admin/settings/class-settings.php:451
 #: includes/integrations/class-edd.php:601
-#: includes/integrations/class-memberpress.php:160
+#: includes/integrations/class-memberpress.php:173
 #: includes/integrations/class-pmp.php:361
 #: includes/integrations/class-zippycourses.php:76
 #: includes/integrations/extras/class-exchange-feature.php:31
@@ -485,8 +481,9 @@ msgid "New Affiliate"
 msgstr "Új Affiliate Partner"
 
 #: includes/admin/affiliates/new.php:13
+#, fuzzy
 msgid ""
-"Use this screen to register a new affiliate. Each affiliate is tied directly "
+"Use this form to register a new affiliate. Each affiliate is tied directly "
 "to a user account, so if the user account for the affiliate does not yet "
 "exist, <a href=\"%s\" target=\"_blank\">create one</a>."
 msgstr ""
@@ -625,12 +622,12 @@ msgstr "Áttekintés"
 #: includes/admin/reports/reports.php:65
 #: includes/admin/tools/export/class-export-affiliates.php:54
 #: includes/admin/tools/tools.php:131 templates/dashboard-tab-referrals.php:3
-#: templates/dashboard.php:54
+#: templates/dashboard.php:74
 msgid "Referrals"
 msgstr "Referáltak"
 
 #: includes/admin/class-menu.php:16 includes/admin/creatives/creatives.php:42
-#: templates/dashboard-tab-creatives.php:3 templates/dashboard.php:66
+#: templates/dashboard-tab-creatives.php:3 templates/dashboard.php:86
 msgid "Creatives"
 msgstr "Kreatív Bannerek"
 
@@ -638,7 +635,7 @@ msgstr "Kreatív Bannerek"
 msgid "Tools"
 msgstr "Eszközök"
 
-#: includes/admin/class-menu.php:19 templates/dashboard.php:72
+#: includes/admin/class-menu.php:19 templates/dashboard.php:92
 msgid "Settings"
 msgstr "Beállítások"
 
@@ -650,121 +647,121 @@ msgstr "AffiliateWP Migráció"
 msgid "Add-ons"
 msgstr ""
 
-#: includes/admin/class-notices.php:18
+#: includes/admin/class-notices.php:38
 msgid ""
 "There are currently no AffiliateWP <a href=\"%s\">integrations</a> enabled. "
 "If you are using AffiliateWP without any integrations, you may disregard "
 "this message."
 msgstr ""
 
-#: includes/admin/class-notices.php:26
-#: includes/admin/settings/class-settings.php:249
+#: includes/admin/class-notices.php:46
+#: includes/admin/settings/class-settings.php:266
 msgid "Settings updated."
 msgstr "Beállítások elmentve."
 
-#: includes/admin/class-notices.php:35
+#: includes/admin/class-notices.php:55
 msgid "Affiliate added successfully"
 msgstr "Az Affiliate Partner hozzáadása sikerült"
 
-#: includes/admin/class-notices.php:41
+#: includes/admin/class-notices.php:61
 msgid "Affiliate wasn't added, please try again."
 msgstr "Az Affiliate Partner hozzáadása nem sikerült, kérjük próbálja újra!"
 
-#: includes/admin/class-notices.php:48
+#: includes/admin/class-notices.php:68
 msgid "Affiliate updated successfully"
 msgstr "Affiliate Partner frissítése sikerült"
 
-#: includes/admin/class-notices.php:50
+#: includes/admin/class-notices.php:70
 msgid "<a href=\"%s\">Back to Affiliates</a>"
 msgstr "<a href=\"%s\">Vissza az Affiliate Partnerekhez</a>"
 
-#: includes/admin/class-notices.php:56
+#: includes/admin/class-notices.php:76
 msgid "Affiliate update failed, please try again"
 msgstr "Az Affiliate Partner frissítése nem sikerült, kérjük próbálja újra"
 
-#: includes/admin/class-notices.php:63
+#: includes/admin/class-notices.php:83
 msgid "Affiliate account(s) deleted successfully"
 msgstr "Az Affiliate Partner fiókjának/fiókjainak törlése sikerült"
 
-#: includes/admin/class-notices.php:69
+#: includes/admin/class-notices.php:89
 msgid "Affiliate deletion failed, please try again"
 msgstr "Az Affiliate Partner törlése nem sikerült, kérjük próbálja újra"
 
-#: includes/admin/class-notices.php:76
+#: includes/admin/class-notices.php:96
 msgid "Affiliate account activated"
 msgstr "Affiliate Partner fiók aktiválva"
 
-#: includes/admin/class-notices.php:82
+#: includes/admin/class-notices.php:102
 msgid "Affiliate account deactivated"
 msgstr "Affiliate Partner fiók inaktiválva"
 
-#: includes/admin/class-notices.php:88
+#: includes/admin/class-notices.php:108
 msgid "Affiliate request was accepted"
 msgstr "Affiliate Partner igény elfogadva"
 
-#: includes/admin/class-notices.php:94
+#: includes/admin/class-notices.php:114
 msgid "Affiliate request was rejected"
 msgstr "Affiliate Partner igény visszautasítva"
 
-#: includes/admin/class-notices.php:100
+#: includes/admin/class-notices.php:120
 msgid "Affiliate stats have been recounted!"
 msgstr "Affiliate Partner statisztika újraszámolva!"
 
-#: includes/admin/class-notices.php:106
+#: includes/admin/class-notices.php:126
 msgid "Referral added successfully"
 msgstr "Referált sikeresen felvéve"
 
-#: includes/admin/class-notices.php:112
+#: includes/admin/class-notices.php:132
 msgid "Referral updated successfully"
 msgstr "Referált sikeresen frissítve"
 
-#: includes/admin/class-notices.php:118
+#: includes/admin/class-notices.php:138
 msgid "Referral update failed, please try again"
 msgstr "Referált frissítése sikertelen, kérjük próbálja újra"
 
-#: includes/admin/class-notices.php:124
+#: includes/admin/class-notices.php:144
 msgid "Referral deleted successfully"
 msgstr "Referált sikeresen törölve"
 
-#: includes/admin/class-notices.php:130
+#: includes/admin/class-notices.php:150
 msgid "Referral deletion failed, please try again"
 msgstr "Referált törlése sikertelen, kérjük próbálja újra"
 
-#: includes/admin/class-notices.php:137
+#: includes/admin/class-notices.php:157
 msgid "Creative updated successfully"
 msgstr "Kreatív Banner sikeresen frissítve"
 
-#: includes/admin/class-notices.php:139
+#: includes/admin/class-notices.php:159
 msgid "<a href=\"%s\">Back to Creatives</a>"
 msgstr "<a href=\"%s\">Vissza a Kreatív Bannerekhez</a>"
 
-#: includes/admin/class-notices.php:145
+#: includes/admin/class-notices.php:165
 msgid "Creative added successfully"
 msgstr "Kreatív Banner sikeresen létrehozva"
 
-#: includes/admin/class-notices.php:151
+#: includes/admin/class-notices.php:171
 msgid "Creative deleted successfully"
 msgstr "Kreatív Banner törlése sikerült"
 
-#: includes/admin/class-notices.php:157
+#: includes/admin/class-notices.php:177
 msgid "Creative activated"
 msgstr "Kreatív Banner aktiválva"
 
-#: includes/admin/class-notices.php:163
+#: includes/admin/class-notices.php:183
 msgid "Creative deactivated"
 msgstr "Kreatív Banner inaktiválva"
 
-#: includes/admin/class-notices.php:169
+#: includes/admin/class-notices.php:189
 msgid "Settings successfully imported"
 msgstr "Beállítások sikeresen importálva"
 
-#: includes/admin/class-notices.php:193
+#: includes/admin/class-notices.php:213
 msgid ""
 "Your license key for AffiliateWP has expired. Please renew your license to "
 "re-enable automatic updates."
 msgstr ""
 
-#: includes/admin/class-notices.php:201
+#: includes/admin/class-notices.php:221
 msgid ""
 "Please <a href=\"%s\">enter and activate</a> your license key for "
 "AffiliateWP to enable automatic updates."
@@ -1043,7 +1040,7 @@ msgstr ""
 "beléphet az oldalra és jóváhagyhatja vagy visszautasíthatja a jelentkezést."
 
 #: includes/admin/class-welcome.php:281
-#: includes/admin/settings/class-settings.php:365 includes/install.php:29
+#: includes/admin/settings/class-settings.php:398 includes/install.php:29
 msgid "Affiliate Area"
 msgstr "Affiliate Partner Szekció"
 
@@ -1196,7 +1193,7 @@ msgstr "A kreatív banner neve. Ez csak egy Ön számára szükséges azonosít�
 
 #: includes/admin/creatives/edit.php:30 includes/admin/creatives/new.php:29
 #: includes/admin/overview/overview.php:207
-#: includes/admin/referrals/edit.php:44 includes/admin/referrals/new.php:45
+#: includes/admin/referrals/edit.php:56 includes/admin/referrals/new.php:57
 #: includes/admin/referrals/referrals.php:229
 #: includes/admin/tools/export/class-export-referrals.php:66
 #: templates/dashboard-tab-referrals.php:25
@@ -1326,11 +1323,11 @@ msgstr "Utolsó Affiliate Partner Regisztrációk"
 #: includes/admin/overview/overview.php:116
 #: includes/admin/overview/overview.php:167
 #: includes/admin/overview/overview.php:205
-#: includes/admin/overview/overview.php:240
-#: includes/admin/referrals/new.php:16
+#: includes/admin/overview/overview.php:240 includes/admin/referrals/new.php:16
 #: includes/admin/referrals/referrals.php:227
-#: includes/admin/visits/visits.php:143
-#: includes/integrations/class-memberpress.php:240
+#: includes/admin/visits/visits.php:144
+#: includes/integrations/class-lifterlms.php:472
+#: includes/integrations/class-memberpress.php:253
 msgid "Affiliate"
 msgstr "Affiliate Partner"
 
@@ -1359,6 +1356,7 @@ msgstr "Legutóbbi Referáltak"
 #: includes/admin/referrals/referrals.php:226
 #: includes/admin/tools/export/class-export-referrals-payout.php:41
 #: includes/admin/tools/export/class-export-referrals.php:64
+#: includes/integrations/class-lifterlms.php:467
 #: templates/dashboard-tab-referrals.php:24
 msgid "Amount"
 msgstr "Mennyiség"
@@ -1371,9 +1369,9 @@ msgstr "Nincsenek még rögzítve referált adatok"
 msgid "Recent Referral Visits"
 msgstr "Legutóbbi Referált Látogatások"
 
-#: includes/admin/overview/overview.php:242
-#: includes/admin/visits/visits.php:45 includes/admin/visits/visits.php:146
-#: templates/dashboard-tab-stats.php:59 templates/dashboard-tab-visits.php:27
+#: includes/admin/overview/overview.php:242 includes/admin/visits/visits.php:46
+#: includes/admin/visits/visits.php:147 templates/dashboard-tab-stats.php:59
+#: templates/dashboard-tab-visits.php:27
 msgid "Converted"
 msgstr "Konvertált"
 
@@ -1525,17 +1523,28 @@ msgstr "Az Affiliate Partner Azonosítója (ID). Nem változtatható meg."
 msgid "The amount of the referral, such as 15."
 msgstr "A referált mennyiség, pl. 15."
 
-#: includes/admin/referrals/edit.php:49 includes/admin/referrals/new.php:50
+#: includes/admin/referrals/edit.php:44 includes/admin/referrals/new.php:45
+#: includes/admin/referrals/referrals.php:230
+#: includes/admin/tools/export/class-export-referrals.php:71
+#: includes/admin/tools/export/class-export.php:70
+#: includes/admin/visits/visits.php:148
+#: templates/dashboard-tab-referrals.php:27
+#: templates/dashboard-tab-visits.php:28
+msgid "Date"
+msgstr "Dátum"
+
+#: includes/admin/referrals/edit.php:61 includes/admin/referrals/new.php:62
 msgid "Enter a description for this referral."
 msgstr "Írjon egy leírást ehhez a referálthoz."
 
-#: includes/admin/referrals/edit.php:57 includes/admin/referrals/new.php:58
+#: includes/admin/referrals/edit.php:69 includes/admin/referrals/new.php:70
 #: includes/admin/referrals/referrals.php:228
 #: includes/admin/tools/export/class-export-referrals.php:68
+#: includes/integrations/class-lifterlms.php:477
 msgid "Reference"
 msgstr "Hivatkozás"
 
-#: includes/admin/referrals/edit.php:62 includes/admin/referrals/new.php:63
+#: includes/admin/referrals/edit.php:74 includes/admin/referrals/new.php:75
 msgid ""
 "Enter a reference for this referral (optional). Usually this would be the "
 "transaction ID of the associated purchase."
@@ -1543,12 +1552,12 @@ msgstr ""
 "Adja meg a referált referenciáját (opcionális). Általában ez a tranzakciós "
 "azonosító ID, amely a vásárláshoz tartozik."
 
-#: includes/admin/referrals/edit.php:70 includes/admin/referrals/new.php:71
+#: includes/admin/referrals/edit.php:82 includes/admin/referrals/new.php:83
 #: includes/admin/tools/export/class-export-referrals.php:69
 msgid "Context"
 msgstr "Kontextus"
 
-#: includes/admin/referrals/edit.php:75 includes/admin/referrals/new.php:76
+#: includes/admin/referrals/edit.php:87 includes/admin/referrals/new.php:88
 msgid ""
 "Enter a context for this referral (optional). Usually this is used to help "
 "identify the payment system that was used for the transaction."
@@ -1557,23 +1566,23 @@ msgstr ""
 "beazonosítani a fizetési rendszert, amely segítségével megvalósul a "
 "tranzakció."
 
-#: includes/admin/referrals/edit.php:88 includes/admin/referrals/new.php:89
+#: includes/admin/referrals/edit.php:100 includes/admin/referrals/new.php:101
 #: includes/admin/referrals/referrals.php:208
 #: includes/admin/tools/tools.php:299 includes/referral-functions.php:53
 msgid "Unpaid"
 msgstr "Kifizetetlen"
 
-#: includes/admin/referrals/edit.php:89 includes/admin/referrals/new.php:90
+#: includes/admin/referrals/edit.php:101 includes/admin/referrals/new.php:102
 #: includes/admin/referrals/referrals.php:207
 #: includes/admin/tools/tools.php:298 includes/referral-functions.php:52
 msgid "Paid"
 msgstr "Kifizetett"
 
-#: includes/admin/referrals/edit.php:93 includes/admin/referrals/new.php:94
+#: includes/admin/referrals/edit.php:105 includes/admin/referrals/new.php:106
 msgid "Select the status of the referral."
 msgstr "Válassza ki a referált státuszát."
 
-#: includes/admin/referrals/edit.php:106
+#: includes/admin/referrals/edit.php:118
 #, fuzzy
 msgid "Update Referral"
 msgstr "Kifizetetlen Referáltak"
@@ -1597,7 +1606,7 @@ msgstr ""
 "Írja be az affiliate partner nevét vagy adja meg a név részletét vagy email "
 "címét a keresés futtatásához."
 
-#: includes/admin/referrals/new.php:106
+#: includes/admin/referrals/new.php:118
 msgid "Add Referral"
 msgstr "Referált Hozzáadása"
 
@@ -1615,13 +1624,13 @@ msgstr "Bezárás"
 
 #: includes/admin/referrals/referrals.php:48
 #: includes/admin/referrals/referrals.php:447
-#: includes/admin/tools/tools.php:294 includes/admin/visits/visits.php:39
+#: includes/admin/tools/tools.php:294 includes/admin/visits/visits.php:40
 msgid "From - mm/dd/yyyy"
 msgstr "Dátum -tól - mm/dd/yyyy"
 
 #: includes/admin/referrals/referrals.php:49
 #: includes/admin/referrals/referrals.php:448
-#: includes/admin/tools/tools.php:295 includes/admin/visits/visits.php:40
+#: includes/admin/tools/tools.php:295 includes/admin/visits/visits.php:41
 msgid "To - mm/dd/yyyy"
 msgstr "Dátum -ig - mm/dd/yyyy"
 
@@ -1642,14 +1651,6 @@ msgstr ""
 "Ez a funkció Kifizetettnek jelöli az összes kifizetetlen referáltat ebben az "
 "időkeretben. A referáltak <em>Kifizetetlentől</em> eltérő állapotú "
 "exportálásához menjen az <a href=\"%s\">Eszközök &rarr; Export</a> oldalra."
-
-#: includes/admin/referrals/referrals.php:230
-#: includes/admin/tools/export/class-export-referrals.php:71
-#: includes/admin/tools/export/class-export.php:70
-#: includes/admin/visits/visits.php:147
-#: templates/dashboard-tab-referrals.php:27
-msgid "Date"
-msgstr "Dátum"
 
 #: includes/admin/referrals/referrals.php:363
 #: includes/admin/referrals/referrals.php:470
@@ -1674,7 +1675,7 @@ msgid "Apply"
 msgstr "Jelentkezés"
 
 #: includes/admin/referrals/referrals.php:452
-#: includes/admin/visits/visits.php:48 includes/class-graph.php:404
+#: includes/admin/visits/visits.php:49 includes/class-graph.php:404
 msgid "Filter"
 msgstr "Szűrő"
 
@@ -1697,15 +1698,27 @@ msgstr "Sikeres Koverziók"
 msgid "Conversion Rate"
 msgstr "Konverziós Ráta"
 
-#: includes/admin/settings/class-settings.php:349
+#: includes/admin/settings/class-settings.php:372
+msgid ""
+"Debug mode is globally enabled via <code>AFFILIATE_WP_DEBUG</code> set in "
+"<code>wp-config.php</code>. This setting cannot be modified from this screen."
+msgstr ""
+
+#: includes/admin/settings/class-settings.php:374
+msgid ""
+"Check this box to enable debug mode. This will turn on error logging for the "
+"referral process to help identify problems."
+msgstr ""
+
+#: includes/admin/settings/class-settings.php:382
 msgid "License Settings"
 msgstr "Licensz beállítások"
 
-#: includes/admin/settings/class-settings.php:354
+#: includes/admin/settings/class-settings.php:387
 msgid "License Key"
 msgstr "Licensz Kulcs"
 
-#: includes/admin/settings/class-settings.php:355
+#: includes/admin/settings/class-settings.php:388
 msgid ""
 "Please enter your license key. An active license key is needed for automatic "
 "plugin updates and <a href=\"%s\" target=\"_blank\">support</a>."
@@ -1713,78 +1726,78 @@ msgstr ""
 "Kérjük adja meg a licensz kulcsot. Automatikus plugin frissítéshez és <a "
 "href=\"%s\" target=\"_blank\">támogatáshoz</a> aktív licensz kulcs szükséges."
 
-#: includes/admin/settings/class-settings.php:360
+#: includes/admin/settings/class-settings.php:393
 msgid "Pages"
 msgstr "Oldalak"
 
-#: includes/admin/settings/class-settings.php:366
+#: includes/admin/settings/class-settings.php:399
 msgid "This is the page where affiliates will manage their affiliate account."
 msgstr "Az Affiliate Partnerek ezen a lapon kezelhetik fiókjukat."
 
-#: includes/admin/settings/class-settings.php:372
+#: includes/admin/settings/class-settings.php:405
 msgid "Terms of Use"
 msgstr "Használati szabályzat"
 
-#: includes/admin/settings/class-settings.php:373
+#: includes/admin/settings/class-settings.php:406
 msgid "Select the page that shows the terms of use for Affiliate Registration"
 msgstr ""
 "Válassza ki a lapot, amely a használati szabályzat megtekintését lehetővé "
 "teszi az Affiliate Partnerek Regisztrációjakor"
 
-#: includes/admin/settings/class-settings.php:379
+#: includes/admin/settings/class-settings.php:412
 msgid "Referral Settings"
 msgstr "Referáltak Beállításai"
 
-#: includes/admin/settings/class-settings.php:384
+#: includes/admin/settings/class-settings.php:417
 msgid "Referral Variable"
 msgstr "Referáltak Változói"
 
-#: includes/admin/settings/class-settings.php:385
+#: includes/admin/settings/class-settings.php:418
 msgid "The URL variable for referral URLs. For example: <strong>%s</strong>."
 msgstr "A referált URL-hez tartozó változó, pl.: <strong>%s</strong>."
 
-#: includes/admin/settings/class-settings.php:390
+#: includes/admin/settings/class-settings.php:423
 #, fuzzy
 msgid "Default Referral Format"
 msgstr "Termékenkénti Referált Ráta"
 
-#: includes/admin/settings/class-settings.php:391
+#: includes/admin/settings/class-settings.php:424
 msgid ""
 "Show referral URLs to affiliates with either their affiliate ID or Username "
 "appended.<br/> For example: <strong>%s or %s</strong>."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:395
+#: includes/admin/settings/class-settings.php:428
 #: includes/admin/tools/export/class-export.php:69
 msgid "ID"
 msgstr "Azonosító ID"
 
-#: includes/admin/settings/class-settings.php:402
+#: includes/admin/settings/class-settings.php:435
 #, fuzzy
 msgid "Pretty Affiliate URLs"
 msgstr "Affiliate URL-ek"
 
-#: includes/admin/settings/class-settings.php:403
+#: includes/admin/settings/class-settings.php:436
 #, fuzzy
 msgid ""
 "Show pretty affiliate referrals to affiliates. For example: <strong>%s or "
 "%s</strong>"
 msgstr "A referált URL-hez tartozó változó, pl.: <strong>%s</strong>."
 
-#: includes/admin/settings/class-settings.php:407
+#: includes/admin/settings/class-settings.php:440
 #, fuzzy
 msgid "Credit Last Referrer"
 msgstr "Referált Hozzáadása"
 
-#: includes/admin/settings/class-settings.php:408
+#: includes/admin/settings/class-settings.php:441
 msgid "Credit the last affiliate who referred the customer."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:413
+#: includes/admin/settings/class-settings.php:446
 msgid "Should referrals be based on a percentage or flat rate amounts?"
 msgstr "A referáltak százalékos vagy fix összeg alapon legyenek összegezve?"
 
-#: includes/admin/settings/class-settings.php:419
+#: includes/admin/settings/class-settings.php:452
 msgid ""
 "Default referral rate. A percentage if Referral Rate Type is Percentage, a "
 "flat amount otherwise. Rates can be set for each affiliate individually as "
@@ -1794,46 +1807,46 @@ msgstr ""
 "százalékos alapon, egyébként fix összeg. A ráta egyedileg állítható minden "
 "egyes Affiliate Partnerre nézve."
 
-#: includes/admin/settings/class-settings.php:426
+#: includes/admin/settings/class-settings.php:459
 msgid "Exclude Shipping"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:427
+#: includes/admin/settings/class-settings.php:460
 #, fuzzy
 msgid "Should shipping costs be excluded from referral calculations?"
 msgstr "Mellőzzük az adót a referált összeg-kalkulációkból?"
 
-#: includes/admin/settings/class-settings.php:431
+#: includes/admin/settings/class-settings.php:464
 msgid "Exclude Tax"
 msgstr "Adó Nélkül"
 
-#: includes/admin/settings/class-settings.php:432
+#: includes/admin/settings/class-settings.php:465
 msgid "Should taxes be excluded from referral calculations?"
 msgstr "Mellőzzük az adót a referált összeg-kalkulációkból?"
 
-#: includes/admin/settings/class-settings.php:436
+#: includes/admin/settings/class-settings.php:469
 msgid "Cookie Expiration"
 msgstr "Cookie Lejárata"
 
-#: includes/admin/settings/class-settings.php:437
+#: includes/admin/settings/class-settings.php:470
 msgid "How many days should the referral tracking cookie be valid for?"
 msgstr "Hány napig maradjon érvényes a refferáltak követésére szolgáló cookie?"
 
-#: includes/admin/settings/class-settings.php:443
+#: includes/admin/settings/class-settings.php:476
 msgid "Currency Settings"
 msgstr "Pénznem Beállítások"
 
-#: includes/admin/settings/class-settings.php:444
+#: includes/admin/settings/class-settings.php:477
 msgid "Configure the currency options"
 msgstr "Konfigurálja a pénznem beállításokat"
 
-#: includes/admin/settings/class-settings.php:448
+#: includes/admin/settings/class-settings.php:481
 #: includes/admin/tools/export/class-export-referrals-payout.php:42
 #: includes/admin/tools/export/class-export-referrals.php:65
 msgid "Currency"
 msgstr "Pénznem"
 
-#: includes/admin/settings/class-settings.php:449
+#: includes/admin/settings/class-settings.php:482
 msgid ""
 "Choose your currency. Note that some payment gateways have currency "
 "restrictions."
@@ -1841,44 +1854,44 @@ msgstr ""
 "Válassza ki a használt pénznemét. Megjegyezzük: néhány fizetés kezelő "
 "rendszer pénznem megszorításokkal rendelkezik."
 
-#: includes/admin/settings/class-settings.php:454
+#: includes/admin/settings/class-settings.php:487
 msgid "Currency Position"
 msgstr "Pénznem pozíció"
 
-#: includes/admin/settings/class-settings.php:455
+#: includes/admin/settings/class-settings.php:488
 msgid "Choose the location of the currency sign."
 msgstr "Válassza ki a pénznem jelzés helyét."
 
-#: includes/admin/settings/class-settings.php:458
+#: includes/admin/settings/class-settings.php:491
 msgid "Before - $10"
 msgstr "Előtte - $10"
 
-#: includes/admin/settings/class-settings.php:459
+#: includes/admin/settings/class-settings.php:492
 msgid "After - 10$"
 msgstr "Utána - 10$"
 
-#: includes/admin/settings/class-settings.php:463
+#: includes/admin/settings/class-settings.php:496
 msgid "Thousands Separator"
 msgstr "Ezres Elválasztójel"
 
-#: includes/admin/settings/class-settings.php:464
+#: includes/admin/settings/class-settings.php:497
 msgid "The symbol (usually , or .) to separate thousands"
 msgstr "A szimbólum (általában , vagy .) amely elválasztja az ezreseket"
 
-#: includes/admin/settings/class-settings.php:470
+#: includes/admin/settings/class-settings.php:503
 msgid "Decimal Separator"
 msgstr "Tizedes Elválasztójel"
 
-#: includes/admin/settings/class-settings.php:471
+#: includes/admin/settings/class-settings.php:504
 msgid "The symbol (usually , or .) to separate decimal points"
 msgstr "A szimbólum (általában , vagy .) amely elválasztja a tizedeseket"
 
-#: includes/admin/settings/class-settings.php:482
+#: includes/admin/settings/class-settings.php:515
 #: includes/admin/settings/display-settings.php:74
 msgid "Integrations"
 msgstr "Integrációk"
 
-#: includes/admin/settings/class-settings.php:483
+#: includes/admin/settings/class-settings.php:516
 #, fuzzy
 msgid ""
 "Choose the integrations to enable. If you are not using any of these, you "
@@ -1891,133 +1904,135 @@ msgstr ""
 "referáltak létrehozására és követésére. Bővebb információt a <a href=\"%s\" "
 "target=\"_blank\">dokumentációban</a> találhat."
 
-#: includes/admin/settings/class-settings.php:493
+#: includes/admin/settings/class-settings.php:526
 #, fuzzy
 msgid "Disable All Emails"
 msgstr "Referáltak tiltása"
 
-#: includes/admin/settings/class-settings.php:494
+#: includes/admin/settings/class-settings.php:527
 msgid "Should all email notifications be disabled?"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:498
+#: includes/admin/settings/class-settings.php:531
 msgid "Logo"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:499
+#: includes/admin/settings/class-settings.php:532
 msgid "Upload or choose a logo to be displayed at the top of emails."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:503
+#: includes/admin/settings/class-settings.php:536
 msgid "Email Template"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:504
+#: includes/admin/settings/class-settings.php:537
 msgid "Choose a template to use for email messages."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:509
+#: includes/admin/settings/class-settings.php:542
 #, fuzzy
 msgid "From Name"
 msgstr "Az Ön Neve"
 
-#: includes/admin/settings/class-settings.php:510
+#: includes/admin/settings/class-settings.php:543
 msgid ""
 "The name emails are said to come from. This should probably be your site "
 "name."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:515
+#: includes/admin/settings/class-settings.php:548
 #, fuzzy
 msgid "From Email"
 msgstr "Email"
 
-#: includes/admin/settings/class-settings.php:516
+#: includes/admin/settings/class-settings.php:549
 msgid ""
 "Email to send emails from. This will act as the \"from\" and \"reply-to\" "
 "address."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:521
-msgid "Notify Admins"
+#: includes/admin/settings/class-settings.php:554
+#, fuzzy
+msgid "Notify Admin"
 msgstr "Adminisztrátor Értesítése"
 
-#: includes/admin/settings/class-settings.php:522
-msgid "Notify site admins of new affiliate registrations?"
+#: includes/admin/settings/class-settings.php:555
+#, fuzzy
+msgid "Notify site admin of new affiliate registrations?"
 msgstr ""
 "Értesítse a website adminisztrátorokat a rendszer új affiliate partner "
 "regisztrációja esetén?"
 
-#: includes/admin/settings/class-settings.php:526
+#: includes/admin/settings/class-settings.php:559
 msgid "Registration Email Subject"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:527
+#: includes/admin/settings/class-settings.php:560
 msgid ""
 "Enter the subject line for the registration email sent to admins when new "
 "affiliates register."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:529
+#: includes/admin/settings/class-settings.php:562
 #: includes/emails/actions.php:41
 msgid "New Affiliate Registration"
 msgstr "Új Affiliate Partner Regisztrációja"
 
-#: includes/admin/settings/class-settings.php:532
+#: includes/admin/settings/class-settings.php:565
 msgid "Registration Email Content"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:533
+#: includes/admin/settings/class-settings.php:566
 msgid ""
 "Enter the email to send when a new affiliate registers. HTML is accepted. "
 "Available template tags:"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:535
+#: includes/admin/settings/class-settings.php:568
 msgid "A new affiliate has registered on your site, %s"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:535
+#: includes/admin/settings/class-settings.php:568
 #, fuzzy
 msgid "Name: "
 msgstr "Név: %s"
 
-#: includes/admin/settings/class-settings.php:538
+#: includes/admin/settings/class-settings.php:571
 #, fuzzy
 msgid "Application Accepted Email Subject"
 msgstr "Affiliate Partner Jelentkezés Elfogadva"
 
-#: includes/admin/settings/class-settings.php:539
+#: includes/admin/settings/class-settings.php:572
 msgid ""
 "Enter the subject line for accepted application emails sent to affiliates "
 "when their account is approved."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:541
+#: includes/admin/settings/class-settings.php:574
 #: includes/emails/actions.php:106
 msgid "Affiliate Application Accepted"
 msgstr "Affiliate Partner Jelentkezés Elfogadva"
 
-#: includes/admin/settings/class-settings.php:544
+#: includes/admin/settings/class-settings.php:577
 #, fuzzy
 msgid "Application Accepted Email Content"
 msgstr "Affiliate Partner Jelentkezés Elfogadva"
 
-#: includes/admin/settings/class-settings.php:545
+#: includes/admin/settings/class-settings.php:578
 msgid ""
 "Enter the email to send when an application is accepted. HTML is accepted. "
 "Available template tags:"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:547
-#: includes/admin/settings/class-settings.php:559
+#: includes/admin/settings/class-settings.php:580
+#: includes/admin/settings/class-settings.php:592
 #, fuzzy
 msgid "Congratulations {name}!"
 msgstr ""
 "Gratulálunk %s!\n"
 "\n"
 
-#: includes/admin/settings/class-settings.php:547
+#: includes/admin/settings/class-settings.php:580
 #: includes/emails/actions.php:111
 #, fuzzy
 msgid "Your affiliate application on %s has been accepted!"
@@ -2026,53 +2041,53 @@ msgstr ""
 "került!\n"
 "\n"
 
-#: includes/admin/settings/class-settings.php:547
+#: includes/admin/settings/class-settings.php:580
 #, fuzzy
 msgid "Log into your affiliate area at"
 msgstr ""
 "Lépjen be az Affiliate Partner szekcióba: %s\n"
 "\n"
 
-#: includes/admin/settings/class-settings.php:550
+#: includes/admin/settings/class-settings.php:583
 #, fuzzy
 msgid "New Referral Email Subject"
 msgstr "Új Referált"
 
-#: includes/admin/settings/class-settings.php:551
+#: includes/admin/settings/class-settings.php:584
 msgid ""
 "Enter the subject line for new referral emails sent when affiliates earn "
 "referrals."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:553
+#: includes/admin/settings/class-settings.php:586
 #: includes/emails/actions.php:231
 msgid "Referral Awarded!"
 msgstr "Referált Jegyezve!"
 
-#: includes/admin/settings/class-settings.php:556
+#: includes/admin/settings/class-settings.php:589
 #, fuzzy
 msgid "New Referral Email Content"
 msgstr "Új Referált"
 
-#: includes/admin/settings/class-settings.php:557
+#: includes/admin/settings/class-settings.php:590
 msgid ""
 "Enter the email to send on new referrals. HTML is accepted. Available "
 "template tags:"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:559
+#: includes/admin/settings/class-settings.php:592
 #, fuzzy
 msgid "You have been awarded a new referral of"
 msgstr ""
 "Új %s referált jegyezve a/az %s termék/programba!\n"
 "\n"
 
-#: includes/admin/settings/class-settings.php:559
+#: includes/admin/settings/class-settings.php:592
 #, fuzzy
 msgid "on %s!"
 msgstr "Verzió %s"
 
-#: includes/admin/settings/class-settings.php:559
+#: includes/admin/settings/class-settings.php:592
 #, fuzzy
 msgid ""
 "Log into your affiliate area to view your earnings or disable these "
@@ -2082,19 +2097,19 @@ msgstr ""
 "kapcsolja ki az értesítést: %s\n"
 "\n"
 
-#: includes/admin/settings/class-settings.php:567
+#: includes/admin/settings/class-settings.php:600
 msgid "Allow affiliate registration"
 msgstr "Affiliate partnerek regisztrációjának engedélyezése."
 
-#: includes/admin/settings/class-settings.php:568
+#: includes/admin/settings/class-settings.php:601
 msgid "Should affiliates be able to register accounts for themselves?"
 msgstr "Az affiliate partnerek regisztrálhatnak fiókot maguknak?"
 
-#: includes/admin/settings/class-settings.php:572
+#: includes/admin/settings/class-settings.php:605
 msgid "Require approval"
 msgstr "Jóváhagyás szükséges"
 
-#: includes/admin/settings/class-settings.php:573
+#: includes/admin/settings/class-settings.php:606
 msgid ""
 "Require that site admins approve affiliates before they can begin earning "
 "referrals?"
@@ -2102,60 +2117,60 @@ msgstr ""
 "Szükséges a weboldal adminisztrátorok jóváhagyása mielőtt az affiliate "
 "partner referált jövedelmet szerezhet?"
 
-#: includes/admin/settings/class-settings.php:577
+#: includes/admin/settings/class-settings.php:610
 msgid "Auto Register New Users"
 msgstr "Új Felhasználók Automatikus Regisztrációja"
 
-#: includes/admin/settings/class-settings.php:578
+#: includes/admin/settings/class-settings.php:611
 msgid "Automatically register new users as affiliates?"
 msgstr ""
 "Regisztrálja automatikusan affiliate partnerként az új felhasználókat a "
 "rendszer?"
 
-#: includes/admin/settings/class-settings.php:582
+#: includes/admin/settings/class-settings.php:615
 #, fuzzy
 msgid "Default Referral URL"
 msgstr "Termékenkénti Referált Ráta"
 
-#: includes/admin/settings/class-settings.php:583
+#: includes/admin/settings/class-settings.php:616
 msgid ""
 "The default referral URL shown in the affiliate area. Also changes the URL "
 "shown in the referral URL generator and {referral_url} email tag."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:587
+#: includes/admin/settings/class-settings.php:620
 msgid "Enable reCAPTCHA"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:588
+#: includes/admin/settings/class-settings.php:621
 msgid ""
 "Would you like to prevent bots from registering affiliate accounts using "
 "Google reCAPTCHA?"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:592
+#: includes/admin/settings/class-settings.php:625
 msgid "reCAPTCHA Site Key"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:593
+#: includes/admin/settings/class-settings.php:626
 msgid "This is used to identify your site to Google reCAPTCHA."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:597
+#: includes/admin/settings/class-settings.php:630
 msgid "reCAPTCHA Secret Key"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:598
+#: includes/admin/settings/class-settings.php:631
 msgid ""
 "This is used for communication between your site and Google reCAPTCHA. Be "
 "sure to keep it a secret."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:602
+#: includes/admin/settings/class-settings.php:635
 msgid "Reject Unpaid Referrals on Refund?"
 msgstr "Visszatérítéskor elutasításra Kerüljenek A Kifizetetlen Referáltak?"
 
-#: includes/admin/settings/class-settings.php:603
+#: includes/admin/settings/class-settings.php:636
 msgid ""
 "Should unpaid referrals get automatically rejected when the originating "
 "purchase is refunded or revoked?"
@@ -2163,11 +2178,11 @@ msgstr ""
 "A kifizetetlen referáltak automatikusan elutasításra kerüljenek amikor az "
 "eredendő vásárlás visszatérítésre vagy visszavonásra került?"
 
-#: includes/admin/settings/class-settings.php:607
+#: includes/admin/settings/class-settings.php:640
 msgid "Use Fallback Referral Tracking Method?"
 msgstr "Használatos a Visszamenőleges Referált Követés Módszer?"
 
-#: includes/admin/settings/class-settings.php:608
+#: includes/admin/settings/class-settings.php:641
 msgid ""
 "The method used to track referral links can fail on sites that have jQuery "
 "errors. Check this if referrals are not getting tracked properly."
@@ -2175,11 +2190,11 @@ msgstr ""
 "A referált linkek követésére használt módszer hibázhat a jQuerry hibás "
 "oldalakon. Jelölje be, ha a referáltak követése nem megfelelő."
 
-#: includes/admin/settings/class-settings.php:612
+#: includes/admin/settings/class-settings.php:645
 msgid "Ignore Zero Referrals?"
 msgstr "Nullás Referáltak Figyelmenkívül Hagyása?"
 
-#: includes/admin/settings/class-settings.php:613
+#: includes/admin/settings/class-settings.php:646
 msgid ""
 "Check this box if you would like AffiliateWP to completely ignore referrals "
 "for a zero total amount. This can be useful for multi-price products that "
@@ -2194,21 +2209,15 @@ msgstr ""
 "ez az opció be van kapcsolva, és egy látogatás nullás referálással végződik, "
 "akkor a látogatás nem konvertáltnak minősül."
 
-#: includes/admin/settings/class-settings.php:617
+#: includes/admin/settings/class-settings.php:650
 msgid "Enable Debug Mode?"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:618
-msgid ""
-"Check this box to enable debug mode. This will turn on error logging for the "
-"referral process to help identify problems."
-msgstr ""
-
-#: includes/admin/settings/class-settings.php:622
+#: includes/admin/settings/class-settings.php:655
 msgid "Remove Data on Uninstall?"
 msgstr "Adatok Eltávolítása Uninstalláció Esetén?"
 
-#: includes/admin/settings/class-settings.php:623
+#: includes/admin/settings/class-settings.php:656
 msgid ""
 "Check this box if you would like AffiliateWP to completely remove all of its "
 "data when the plugin is deleted."
@@ -2216,16 +2225,16 @@ msgstr ""
 "Jelölje be ezt a jelölődobozt, ha azt szeretné, hogy az AffiliateWP minden "
 "adatát eltávolítsa, ha a plugin törlésre kerül."
 
-#: includes/admin/settings/class-settings.php:648
+#: includes/admin/settings/class-settings.php:681
 #, fuzzy
 msgid "Application Pending Email Subject"
 msgstr "Affiliate Partner Jelentkezés Elfogadva"
 
-#: includes/admin/settings/class-settings.php:649
+#: includes/admin/settings/class-settings.php:682
 msgid "Enter the subject line for pending affiliate application emails."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:651
+#: includes/admin/settings/class-settings.php:684
 #: includes/emails/actions.php:149
 #, fuzzy
 msgid "Your Affiliate Application Is Being Reviewed"
@@ -2234,43 +2243,43 @@ msgstr ""
 "került!\n"
 "\n"
 
-#: includes/admin/settings/class-settings.php:654
+#: includes/admin/settings/class-settings.php:687
 #, fuzzy
 msgid "Application Pending Email Content"
 msgstr "Affiliate Partner Jelentkezés Elfogadva"
 
-#: includes/admin/settings/class-settings.php:655
+#: includes/admin/settings/class-settings.php:688
 msgid ""
 "Enter the email to send when an application is pending. HTML is accepted. "
 "Available template tags:"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:657
+#: includes/admin/settings/class-settings.php:690
 msgid "Hi {name}!"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:657
+#: includes/admin/settings/class-settings.php:690
 #: includes/emails/actions.php:154
 msgid "Thanks for your recent affiliate registration on {site_name}."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:657
+#: includes/admin/settings/class-settings.php:690
 #: includes/emails/actions.php:155
 msgid ""
 "We're currently reviewing your affiliate application and will be in touch "
 "soon!"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:660
+#: includes/admin/settings/class-settings.php:693
 #, fuzzy
 msgid "Application Rejection Email Subject"
 msgstr "Affiliate Partner Jelentkezés Elfogadva"
 
-#: includes/admin/settings/class-settings.php:661
+#: includes/admin/settings/class-settings.php:694
 msgid "Enter the subject line for rejected affiliate application emails."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:663
+#: includes/admin/settings/class-settings.php:696
 #: includes/emails/actions.php:188
 #, fuzzy
 msgid "Your Affiliate Application Has Been Rejected"
@@ -2279,41 +2288,41 @@ msgstr ""
 "került!\n"
 "\n"
 
-#: includes/admin/settings/class-settings.php:666
+#: includes/admin/settings/class-settings.php:699
 #, fuzzy
 msgid "Application Rejection Email Content"
 msgstr "Affiliate Partner Jelentkezés Elfogadva"
 
-#: includes/admin/settings/class-settings.php:667
+#: includes/admin/settings/class-settings.php:700
 msgid ""
 "Enter the email to send when an application is rejected. HTML is accepted. "
 "Available template tags:"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:669
+#: includes/admin/settings/class-settings.php:702
 msgid "Hi {name},"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:669
+#: includes/admin/settings/class-settings.php:702
 #: includes/emails/actions.php:193
 msgid ""
 "We regret to inform you that your recent affiliate registration on "
 "{site_name} was rejected."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:833
+#: includes/admin/settings/class-settings.php:868
 msgid "Deactivate License"
 msgstr "Licensz Deaktiválása"
 
-#: includes/admin/settings/class-settings.php:834
+#: includes/admin/settings/class-settings.php:869
 msgid "Your license is valid!"
 msgstr "A licensze érvényes!"
 
-#: includes/admin/settings/class-settings.php:837
+#: includes/admin/settings/class-settings.php:872
 msgid "Renew Your License"
 msgstr "Licensz Megújítása"
 
-#: includes/admin/settings/class-settings.php:838
+#: includes/admin/settings/class-settings.php:873
 msgid ""
 "Your license has expired, renew today to continue getting updates and "
 "support!"
@@ -2321,17 +2330,17 @@ msgstr ""
 "Az Ön licensze lejárt, újítsa meg még ma, hogy részesüljön a folyamatos "
 "frissítésekben és támogatásokban!"
 
-#: includes/admin/settings/class-settings.php:840
+#: includes/admin/settings/class-settings.php:875
 msgid "Activate License"
 msgstr "Licensz Aktiválása"
 
-#: includes/admin/settings/class-settings.php:939
+#: includes/admin/settings/class-settings.php:974
 msgid ""
 "The callback function used for the <strong>%s</strong> setting is missing."
 msgstr ""
 "A visszahívás funkció a <strong>%s</strong> beállítás esetén használatos."
 
-#: includes/admin/settings/class-settings.php:1014
+#: includes/admin/settings/class-settings.php:1049
 msgid "Upload File"
 msgstr ""
 
@@ -2419,7 +2428,7 @@ msgstr ""
 "Használja ezt az eszközt az affliate partner statisztikák újraszámolásához."
 
 #: includes/admin/tools/tools.php:127 includes/admin/tools/tools.php:291
-#: includes/admin/visits/visits.php:35
+#: includes/admin/visits/visits.php:36
 msgid "Affiliate name"
 msgstr "Affiliate Partner neve"
 
@@ -2596,22 +2605,22 @@ msgstr ""
 msgid "Clear Debug Log"
 msgstr ""
 
-#: includes/admin/user-profile.php:17
+#: includes/admin/user-profile.php:22
 #, fuzzy
 msgid "Affiliate Registration Status"
 msgstr "Affiliate Partner Regisztrációk"
 
-#: includes/admin/user-profile.php:35
+#: includes/admin/user-profile.php:40
 #, fuzzy
 msgid "Not Registered"
 msgstr "Regisztráció Dátuma"
 
-#: includes/admin/user-profile.php:41
+#: includes/admin/user-profile.php:46
 #, fuzzy
 msgid "Affiliate Actions"
 msgstr "Indítsd az AffiliateWP Beállításokat"
 
-#: includes/admin/user-profile.php:48 templates/register.php:116
+#: includes/admin/user-profile.php:53 templates/register.php:116
 msgid "Register"
 msgstr "Regisztráljon"
 
@@ -2705,36 +2714,36 @@ msgstr ""
 msgid "Number of visits per page:"
 msgstr ""
 
-#: includes/admin/visits/visits.php:42
+#: includes/admin/visits/visits.php:43
 msgid "Filter by status"
 msgstr ""
 
-#: includes/admin/visits/visits.php:46
+#: includes/admin/visits/visits.php:47
 #, fuzzy
 msgid "Unconverted"
 msgstr "Konvertált"
 
-#: includes/admin/visits/visits.php:141
+#: includes/admin/visits/visits.php:142
 msgid "Landing Page"
 msgstr "Érkezési Lap"
 
-#: includes/admin/visits/visits.php:142 templates/dashboard-tab-visits.php:26
+#: includes/admin/visits/visits.php:143 templates/dashboard-tab-visits.php:26
 msgid "Referring URL"
 msgstr "Referáló URL"
 
-#: includes/admin/visits/visits.php:144
+#: includes/admin/visits/visits.php:145
 msgid "Referral ID"
 msgstr "Referáló Azonosító ID"
 
-#: includes/admin/visits/visits.php:145
+#: includes/admin/visits/visits.php:146
 msgid "IP"
 msgstr "IP"
 
-#: includes/admin/visits/visits.php:210 templates/dashboard-tab-visits.php:41
+#: includes/admin/visits/visits.php:211 templates/dashboard-tab-visits.php:42
 msgid "Direct traffic"
 msgstr "Közvetlen forgalom"
 
-#: includes/admin/visits/visits.php:235
+#: includes/admin/visits/visits.php:236
 msgid "No visits found."
 msgstr "Nem található látogatás."
 
@@ -3053,7 +3062,7 @@ msgstr "Nincsenek még rögzítve referált adatok"
 #: includes/integrations/class-pmp.php:158
 #: includes/integrations/class-shopp.php:80
 #: includes/integrations/class-sproutinvoices.php:53
-#: includes/integrations/class-woocommerce.php:184
+#: includes/integrations/class-woocommerce.php:186
 #: includes/integrations/class-zippycourses.php:263
 msgid "Referral #%d for %s recorded for %s"
 msgstr ""
@@ -3062,16 +3071,16 @@ msgstr ""
 #: includes/integrations/class-edd.php:454
 #: includes/integrations/class-pmp.php:257
 #: includes/integrations/class-rcp.php:207
-#: includes/integrations/class-woocommerce.php:315
+#: includes/integrations/class-woocommerce.php:317
 msgid "Affiliate Discount?"
 msgstr "Affiliate Partneri Engedmény?"
 
 #: includes/integrations/class-edd.php:461
 #: includes/integrations/class-jigoshop.php:173
-#: includes/integrations/class-memberpress.php:262
+#: includes/integrations/class-memberpress.php:275
 #: includes/integrations/class-pmp.php:264
 #: includes/integrations/class-rcp.php:214
-#: includes/integrations/class-woocommerce.php:321
+#: includes/integrations/class-woocommerce.php:323
 msgid ""
 "If you would like to connect this discount to an affiliate, enter the name "
 "of the affiliate it belongs to."
@@ -3116,7 +3125,7 @@ msgid "Disable referrals on this %s"
 msgstr "Referáltak tiltása a következőn: %s"
 
 #: includes/integrations/class-edd.php:612
-#: includes/integrations/class-memberpress.php:171
+#: includes/integrations/class-memberpress.php:184
 #: includes/integrations/class-zippycourses.php:87
 #, fuzzy
 msgid ""
@@ -3193,14 +3202,94 @@ msgstr "Referáltak tiltása"
 msgid "Affiliate Data"
 msgstr "Affiliate Partneri Ráta"
 
-#: includes/integrations/class-memberpress.php:138
+#: includes/integrations/class-lifterlms.php:81
+msgid "Referral not created because WooCommerce was used for payment."
+msgstr ""
+
+#: includes/integrations/class-lifterlms.php:117
+#, fuzzy
+msgid "Referral not created because affiliate's own account was used."
+msgstr "Az Affiliate Partnerek felhasználói fiókjai is törlendők?"
+
+#: includes/integrations/class-lifterlms.php:130
+msgid "Referral not created due to 0.00 amount."
+msgstr ""
+
+#: includes/integrations/class-lifterlms.php:162
+#, fuzzy
+msgid "LifterLMS Referral #%d updated successfully."
+msgstr "Referált sikeresen frissítve"
+
+#: includes/integrations/class-lifterlms.php:190
+#, fuzzy
+msgid "Referral #%d created successfully."
+msgstr "Referált sikeresen frissítve"
+
+#: includes/integrations/class-lifterlms.php:197
+#, fuzzy
+msgid "Referral failed to be created."
+msgstr "Új Referált"
+
+#: includes/integrations/class-lifterlms.php:238
+msgid "Search for an affiliate by username or email."
+msgstr ""
+
+#: includes/integrations/class-lifterlms.php:246
+#, fuzzy
+msgid "Affiliate Discount"
+msgstr "Affiliate Partneri Engedmény?"
+
+#: includes/integrations/class-lifterlms.php:247
+msgid "Connect this coupon with an affiliate."
+msgstr ""
+
+#: includes/integrations/class-lifterlms.php:460
+#, fuzzy
+msgid "Referral Details"
+msgstr "Referáltak Beállításai"
+
+#: includes/integrations/class-lifterlms.php:523
+#: includes/integrations/class-pmp.php:370
+#, fuzzy
+msgid "Disable Referrals"
+msgstr "Referáltak tiltása"
+
+#: includes/integrations/class-lifterlms.php:524
+#, fuzzy
+msgid ""
+"Check this box to prevent orders for this %s from generating referral "
+"commissions for affiliates."
+msgstr ""
+"Ez a funkció tiltja a termék/program megrendelésekor a referált jutalék "
+"képzését Affiliate Partnerek számára."
+
+#: includes/integrations/class-lifterlms.php:532
+#, fuzzy
+msgid "Enable %s Referral Rate"
+msgstr "Referált Ráta"
+
+#: includes/integrations/class-lifterlms.php:533
+msgid "Check this box to enable %s referral rate overrides"
+msgstr ""
+
+#: includes/integrations/class-lifterlms.php:541
+#, fuzzy
+msgid "%s Referral Rate"
+msgstr "Referált Ráta"
+
+#: includes/integrations/class-lifterlms.php:542
+#, fuzzy
+msgid "Enter a referral rate for this %s"
+msgstr "Az affiliate partner referált ráta típusa."
+
+#: includes/integrations/class-memberpress.php:151
 #: includes/integrations/class-rcp.php:338
 #: includes/integrations/class-rcp.php:360
-#: includes/integrations/class-woocommerce.php:433
+#: includes/integrations/class-woocommerce.php:435
 msgid "Affiliate Rate"
 msgstr "Affiliate Partneri Ráta"
 
-#: includes/integrations/class-memberpress.php:167
+#: includes/integrations/class-memberpress.php:180
 #, fuzzy
 msgid "Disable referrals on this membership"
 msgstr "Referáltak tiltása a következőn: %s"
@@ -3231,11 +3320,6 @@ msgstr ""
 "Az affiliate partner referált rátája, pl. 20, ami 20%-ot jelöl. Ha üres, az "
 "oldalon alapértelmezett érték kerül felhasználásra."
 
-#: includes/integrations/class-pmp.php:370
-#, fuzzy
-msgid "Disable Referrals"
-msgstr "Referáltak tiltása"
-
 #: includes/integrations/class-pmp.php:372
 msgid "Check to disable per-membership referrals."
 msgstr ""
@@ -3251,7 +3335,7 @@ msgstr ""
 "jövedelmek eladásonkénti összege kiszámolásra. Az alapértelmezett Affiliate "
 "Partneri jutalék ráták használatához hagyja üresen!"
 
-#: includes/integrations/class-woocommerce.php:435
+#: includes/integrations/class-woocommerce.php:437
 #: includes/integrations/extras/class-exchange-feature.php:27
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
@@ -3261,11 +3345,11 @@ msgstr ""
 "jövedelmek eladásonkénti összege kiszámolásra. Az alapértelmezett Affiliate "
 "Partneri jutalék ráták használatához hagyja üresen!"
 
-#: includes/integrations/class-woocommerce.php:439
+#: includes/integrations/class-woocommerce.php:441
 msgid "Disable referrals"
 msgstr "Referáltak tiltása"
 
-#: includes/integrations/class-woocommerce.php:440
+#: includes/integrations/class-woocommerce.php:442
 msgid ""
 "This will prevent orders of this product from generating referral "
 "commissions for affiliates."
@@ -3291,177 +3375,194 @@ msgid "Euros"
 msgstr "Euró (EUR)"
 
 #: includes/misc-functions.php:28
+#, fuzzy
+msgid "Argentine Peso"
+msgstr "Mexikói peso (MXN)"
+
+#: includes/misc-functions.php:29
 msgid "Australian Dollars"
 msgstr "Ausztrál dollár (AUD)"
 
-#: includes/misc-functions.php:29
+#: includes/misc-functions.php:30
 msgid "Bangladeshi Taka"
 msgstr "Bangladesi taka (BDT)"
 
-#: includes/misc-functions.php:30
+#: includes/misc-functions.php:31
 msgid "Brazilian Real"
 msgstr "Brazil reál (BRL)"
 
-#: includes/misc-functions.php:31
+#: includes/misc-functions.php:32
 msgid "Bulgarian Lev"
 msgstr "Bolgár lev (BGN)"
 
-#: includes/misc-functions.php:32
+#: includes/misc-functions.php:33
 msgid "Canadian Dollars"
 msgstr "Kanadai dollár (CAD)"
 
-#: includes/misc-functions.php:33
+#: includes/misc-functions.php:34
 msgid "Chilean Peso"
 msgstr "Chilei peso (CLP)"
 
-#: includes/misc-functions.php:34
+#: includes/misc-functions.php:35
 msgid "Chinese Yuan"
 msgstr "Kínai jüan (CNY)"
 
-#: includes/misc-functions.php:35
+#: includes/misc-functions.php:36
 msgid "Colombian Peso"
 msgstr "Kolumbiai peso (COP)"
 
-#: includes/misc-functions.php:36
+#: includes/misc-functions.php:37
 #, fuzzy
 msgid "Croatia Kuna"
 msgstr "Horvát kuna (HRK)"
 
-#: includes/misc-functions.php:37
+#: includes/misc-functions.php:38
 msgid "Czech Koruna"
 msgstr "Cseh korona (CZK)"
 
-#: includes/misc-functions.php:38
+#: includes/misc-functions.php:39
 msgid "Danish Krone"
 msgstr "Dán korona (DKK)"
 
-#: includes/misc-functions.php:39
+#: includes/misc-functions.php:40
 msgid "Dominican Peso"
 msgstr "Dominikai peso (DOP)"
 
-#: includes/misc-functions.php:40
+#: includes/misc-functions.php:41
 msgid "Egyptian Pound"
 msgstr "Egyiptomi font (EGP)"
 
-#: includes/misc-functions.php:41
+#: includes/misc-functions.php:42
 msgid "Hong Kong Dollar"
 msgstr "Hongkongi dollár (HKD)"
 
-#: includes/misc-functions.php:42
+#: includes/misc-functions.php:43
 msgid "Hungarian Forint"
 msgstr "Magyar forint (HUF)"
 
-#: includes/misc-functions.php:43
+#: includes/misc-functions.php:44
 #, fuzzy
 msgid "Icelandic Krona"
 msgstr "Izlandi korona (ISK)"
 
-#: includes/misc-functions.php:44
+#: includes/misc-functions.php:45
 msgid "Indonesia Rupiah"
 msgstr "Indonéz rúpia (IDR)"
 
-#: includes/misc-functions.php:45
+#: includes/misc-functions.php:46
 msgid "Indian Rupee"
 msgstr "Indiai rúpia (INR)"
 
-#: includes/misc-functions.php:46
+#: includes/misc-functions.php:47
 msgid "Israeli Shekel"
 msgstr "Izraeli új sékel (ILS)"
 
-#: includes/misc-functions.php:47
+#: includes/misc-functions.php:48
 msgid "Japanese Yen"
 msgstr "Japán jen (JPY)"
 
-#: includes/misc-functions.php:48
+#: includes/misc-functions.php:49
 msgid "Lao Kip"
 msgstr "Laoszi kip (LAK)"
 
-#: includes/misc-functions.php:49
+#: includes/misc-functions.php:50
 msgid "Malaysian Ringgits"
 msgstr "Maláj ringgit (MYR)"
 
-#: includes/misc-functions.php:50
+#: includes/misc-functions.php:51
 msgid "Mexican Peso"
 msgstr "Mexikói peso (MXN)"
 
-#: includes/misc-functions.php:51
+#: includes/misc-functions.php:52
 msgid "Nepali Rupee"
 msgstr "Nepáli rúpia (NPR)"
 
-#: includes/misc-functions.php:52
+#: includes/misc-functions.php:53
 msgid "Nigerian Naira"
 msgstr "Nigériai naira (NGN)"
 
-#: includes/misc-functions.php:53
+#: includes/misc-functions.php:54
 msgid "Norwegian Krone"
 msgstr "Norvég korona (NOK)"
 
-#: includes/misc-functions.php:54
+#: includes/misc-functions.php:55
 msgid "New Zealand Dollar"
 msgstr "Új-zélandi dollár (NZD)"
 
-#: includes/misc-functions.php:55
+#: includes/misc-functions.php:56
 msgid "Paraguayan Guaraní"
 msgstr "Paraguayi guaraní (PYG)"
 
-#: includes/misc-functions.php:56
+#: includes/misc-functions.php:57
 msgid "Philippine Pesos"
 msgstr "Fülöp-szigeteki peso (PHP)"
 
-#: includes/misc-functions.php:57
+#: includes/misc-functions.php:58
 msgid "Polish Zloty"
 msgstr "Lengyel złoty (PLN)"
 
-#: includes/misc-functions.php:58
+#: includes/misc-functions.php:59
 msgid "Pounds Sterling"
 msgstr "Font sterling (GBP)"
 
-#: includes/misc-functions.php:59
+#: includes/misc-functions.php:60
 msgid "Romanian Leu"
 msgstr "Román lej (RON)"
 
-#: includes/misc-functions.php:60
+#: includes/misc-functions.php:61
 msgid "Russian Ruble"
 msgstr "Orosz rubel (RUB)"
 
-#: includes/misc-functions.php:61
+#: includes/misc-functions.php:62
+msgid "Saudi Arabian Riyal"
+msgstr ""
+
+#: includes/misc-functions.php:63
 msgid "Singapore Dollar"
 msgstr "Szingapúri dollár (SGD)"
 
-#: includes/misc-functions.php:62
+#: includes/misc-functions.php:64
 #, fuzzy
 msgid "South African Rand"
 msgstr "Dél-afrikai rand (ZAR)"
 
-#: includes/misc-functions.php:63
+#: includes/misc-functions.php:65
 msgid "South Korean Won"
 msgstr "Dél-koreai von (KRW)"
 
-#: includes/misc-functions.php:64
+#: includes/misc-functions.php:66
 msgid "Swedish Krona"
 msgstr "Svéd korona (SEK)"
 
-#: includes/misc-functions.php:65
+#: includes/misc-functions.php:67
 msgid "Swiss Franc"
 msgstr "Svájci frank (CHF)"
 
-#: includes/misc-functions.php:66
+#: includes/misc-functions.php:68
 msgid "Taiwan New Dollars"
 msgstr "Tajvani új dollár (TWD)"
 
-#: includes/misc-functions.php:67
+#: includes/misc-functions.php:69
 msgid "Thai Baht"
 msgstr "Thai bát (THB)"
 
-#: includes/misc-functions.php:68
+#: includes/misc-functions.php:70
+msgid "Tunisian Dinar"
+msgstr ""
+
+#: includes/misc-functions.php:71
 msgid "Turkish Lira"
 msgstr "Török líra (TRL)"
 
-#: includes/misc-functions.php:69
+#: includes/misc-functions.php:72
 msgid "United Arab Emirates Dirham"
 msgstr "Egyesült Arab Emírségek dirham (AED)"
 
-#: includes/misc-functions.php:70
+#: includes/misc-functions.php:73
+msgid "Ukrainian Hryvnia"
+msgstr ""
+
+#: includes/misc-functions.php:74
 msgid "Vietnamese Dong"
 msgstr "Vietnami đồng (VND)"
 
@@ -3511,7 +3612,7 @@ msgstr "Új Referált Jelzés Aktiválása"
 msgid "Save Profile Settings"
 msgstr "Profil Beállítások Mentése"
 
-#: templates/dashboard-tab-stats.php:3 templates/dashboard.php:42
+#: templates/dashboard-tab-stats.php:3 templates/dashboard.php:62
 msgid "Statistics"
 msgstr "Statisztikák"
 
@@ -3588,36 +3689,36 @@ msgid ""
 "referral."
 msgstr ""
 
-#: templates/dashboard-tab-visits.php:44
+#: templates/dashboard-tab-visits.php:45
 #, fuzzy
 msgid "Visit converted: %s"
 msgstr "Konvertált"
 
-#: templates/dashboard-tab-visits.php:54
+#: templates/dashboard-tab-visits.php:58
 msgid "You have not received any visits yet."
 msgstr "Még nem fogadott egyetlen látogatást sem."
 
-#: templates/dashboard.php:9
+#: templates/dashboard.php:7
 msgid "Your affiliate account is pending approval"
 msgstr "Az Ön affiliate partner fiókja jóváhagyásra vár"
 
-#: templates/dashboard.php:13
+#: templates/dashboard.php:11
 msgid "Your affiliate account is not active"
 msgstr "Az Ön affiliate partner fiókja nem aktív"
 
-#: templates/dashboard.php:17
+#: templates/dashboard.php:15
 msgid "Your affiliate account request has been rejected"
 msgstr "Az Ön affiliate partner kérelme elutasításra került"
 
-#: templates/dashboard.php:27
+#: templates/dashboard.php:36
 msgid "Your affiliate profile has been updated"
 msgstr "Az Ön profilja frissítésre került"
 
-#: templates/dashboard.php:36
+#: templates/dashboard.php:56
 msgid "Affiliate URLs"
 msgstr "Affiliate URL-ek"
 
-#: templates/dashboard.php:48
+#: templates/dashboard.php:68
 msgid "Graphs"
 msgstr "Gráfok"
 
@@ -3680,12 +3781,12 @@ msgctxt "Affiliate ID, affiliate name"
 msgid "ID #%d: %s"
 msgstr "Azonosító (ID) #%d: %s"
 
-#: includes/admin/class-notices.php:19
+#: includes/admin/class-notices.php:39
 msgctxt "Integrations"
 msgid "Dismiss Notice"
 msgstr ""
 
-#: includes/admin/class-notices.php:194 includes/admin/class-notices.php:202
+#: includes/admin/class-notices.php:214 includes/admin/class-notices.php:222
 msgctxt "License"
 msgid "Dismiss Notice"
 msgstr ""
@@ -3694,9 +3795,6 @@ msgstr ""
 msgctxt "Creative ID, creative name"
 msgid "Creative ID #%d: %s"
 msgstr "Kreatív Banner Azonosító ID #%d: %s"
-
-#~ msgid "Delete affiliate's user accounts as well?"
-#~ msgstr "Az Affiliate Partnerek felhasználói fiókjai is törlendők?"
 
 #~ msgid "No users found"
 #~ msgstr "Nincs felhasználó"

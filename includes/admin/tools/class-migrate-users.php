@@ -64,7 +64,7 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 				'type'  => 'users',
 				'part'  => $part,
 				'step'  => $step,
-				'roles' => implode( ',', array_map( 'sanitize_text_field', $this->roles ) )
+				'roles' => array_map( 'sanitize_key', $this->roles )
 			),
 			admin_url( 'index.php' )
 		);
@@ -98,7 +98,8 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 			'offset'     => ( $step - 1 ) * 100,
 			'orderby'    => 'ID',
 			'order'      => 'ASC',
-			'role__in'   => $this->roles
+			'role__in'   => $this->roles,
+			'fields'     => array( 'ID', 'user_email', 'user_registered' )
 		);
 
 		$users = get_users( $args );
@@ -111,7 +112,7 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 
 		foreach ( $users as $user ) {
 
-			$affiliate_exists = affiliate_wp()->affiliates->get_by( 'user_id', $user->data->ID );
+			$affiliate_exists = affiliate_wp()->affiliates->get_by( 'user_id', $user->ID );
 
 			if ( $affiliate_exists ) {
 				continue;
@@ -119,9 +120,9 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 
 			$args = array(
 				'status'          => 'active',
-				'user_id'         => $user->data->ID,
-				'payment_email'	  => $user->data->user_email,
-				'date_registered' => $user->data->user_registered
+				'user_id'         => $user->ID,
+				'payment_email'	  => $user->user_email,
+				'date_registered' => $user->user_registered
 			);
 
 			$inserted[] = affiliate_wp()->affiliates->insert( $args, 'affiliate' );

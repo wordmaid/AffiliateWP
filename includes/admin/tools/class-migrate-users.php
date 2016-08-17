@@ -19,6 +19,58 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 	public $roles = array();
 
 	/**
+	 * Whether debug mode is enabled.
+	 *
+	 * @access  public
+	 * @since   1.8.8
+	 * @var     bool
+	 */
+	public $debug;
+
+	/**
+	 * Logging class object
+	 *
+	 * @access  public
+	 * @since   1.8.8
+	 * @var     Affiliate_WP_Logging
+	 */
+	public $logs;
+
+	/**
+	 * Constructor.
+	 *
+	 * Sets up logging.
+	 *
+	 * @access  public
+	 * @since   1.8.8
+	 */
+	public function __construct() {
+
+		$this->debug = (bool) affiliate_wp()->settings->get( 'debug_mode', false );
+
+		if( $this->debug ) {
+			$this->logs = new Affiliate_WP_Logging;
+		}
+	}
+
+	/**
+	 * Writes a log message.
+	 *
+	 * @access  public
+	 * @since   1.8.8
+	 *
+	 * @param string $message Optional. Message to log. Default empty.
+	 */
+	public function log( $message = '' ) {
+
+		if ( $this->debug ) {
+
+			$this->logs->log( $message );
+
+		}
+	}
+
+	/**
 	 * Process the migration routine
 	 *
 	 * @since  1.3
@@ -156,30 +208,6 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 		wp_safe_redirect( $redirect );
 
 		exit;
-
-	}
-
-	public function __construct() {
-
-	        $this->debug = (bool) affiliate_wp()->settings->get( 'debug_mode', false );
-
-		if( $this->debug ) {
-			$this->logs = new Affiliate_WP_Logging;
-		}
-	}
-
-	/**
-	 * Write log message
-	 *
-	 * @since 1.8
-	 */
-	public function log( $message = '' ) {
-
-        	if( $this->debug ) {
-
-	            $this->logs->log( $message );
-
-	        }
 
 	}
 

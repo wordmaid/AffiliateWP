@@ -69,6 +69,10 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 			admin_url( 'index.php' )
 		);
 
+		if( $this->debug ) {
+			$this->log( $redirect );
+		}
+
 		wp_safe_redirect( $redirect );
 
 		exit;
@@ -85,6 +89,7 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 	public function do_users( $step = 1 ) {
 
 		if ( ! $this->roles ) {
+			
 			return false;
 		}
 
@@ -150,6 +155,30 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 		wp_safe_redirect( $redirect );
 
 		exit;
+
+	}
+
+	public function __construct() {
+
+	        $this->debug = (bool) affiliate_wp()->settings->get( 'debug_mode', false );
+
+		if( $this->debug ) {
+			$this->logs = new Affiliate_WP_Logging;
+		}
+	}
+
+	/**
+	 * Write log message
+	 *
+	 * @since 1.8
+	 */
+	public function log( $message = '' ) {
+
+        	if( $this->debug ) {
+
+	            $this->logs->log( $message );
+
+	        }
 
 	}
 

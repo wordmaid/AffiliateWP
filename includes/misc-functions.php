@@ -574,3 +574,33 @@ function affwp_make_url_human_readable( $url ) {
 function affwp_affiliate_area_show_tab( $tab = '' ) {
 	return apply_filters( 'affwp_affiliate_area_show_tab', true, $tab );
 }
+
+/**
+ * Retrieve a list of all published pages
+ *
+ * On large sites this can be expensive, so only load if on the settings page or $force is set to true
+ *
+ * @since 1.0
+ * @since 1.8.8 Moved to misc-functions.php to prevent fatal errors with other plugins incorrectly loading admin code without actually loading WP admin.
+ *        See https://github.com/AffiliateWP/AffiliateWP/issues/1431
+ *        See https://github.com/AffiliateWP/AffiliateWP/issues/1038
+ * @param bool $force Force the pages to be loaded even if not on settings
+ * @return array $pages_options An array of the pages
+ */
+function affwp_get_pages( $force = false ) {
+
+	$pages_options = array( 0 => '' ); // Blank option
+
+	if( ( ! isset( $_GET['page'] ) || 'affiliate-wp-settings' != $_GET['page'] ) && ! $force ) {
+		return $pages_options;
+	}
+
+	$pages = get_pages();
+	if ( $pages ) {
+		foreach ( $pages as $page ) {
+			$pages_options[ $page->ID ] = $page->post_title;
+		}
+	}
+
+	return $pages_options;
+}

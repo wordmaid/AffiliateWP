@@ -1,6 +1,6 @@
 <?php
 
-class Affiliate_WP_PayPal extends Affiliate_WP_Base {
+class Affiliate_WP_stripe extends Affiliate_WP_Base {
 
 	/**
 	 * Get thigns started
@@ -10,7 +10,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 	 */
 	public function init() {
 
-		$this->context = 'paypal'; 
+		$this->context = 'stripe'; 
 
 		add_action( 'wp_footer', array( $this, 'scripts' ) );
 		add_action( 'wp_ajax_affwp_maybe_insert_stripe_referral', array( $this, 'maybe_insert_referral' ) );
@@ -22,7 +22,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Add JS to site footer for detecting PayPal form submissions
+	 * Add JS to site footer for detecting Stripe form submissions
 	 *
 	 * @access  public
 	 * @since   1.9
@@ -38,7 +38,6 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 				e.preventDefault();
 
 				var $form = $(this);
-				var ipn_url = "<?php echo home_url( 'index.php?affwp-listener=paypal' ); ?>";
 
 				$.ajax({
 					type: "POST",
@@ -69,7 +68,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Create a referral during PayPal form submission if customer was referred
+	 * Create a referral during stripe form submission if customer was referred
 	 *
 	 * @access  public
 	 * @since   1.9
@@ -81,7 +80,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 		if( $this->was_referred() ) {
 
 			$reference   = affiliate_wp()->tracking->get_visit_id() . '|' . $this->affiliate_id . '|' . time();
-			$referral_id = $this->insert_pending_referral( 0.01, $reference, __( 'Pending PayPal referral', 'affiliate-wp' ) );
+			$referral_id = $this->insert_pending_referral( 0.01, $reference, __( 'Pending Stripe referral', 'affiliate-wp' ) );
 
 			if( $referral_id && $this->debug ) {
 
@@ -102,7 +101,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Process PayPal IPN requests in order to mark referrals as Unpaid
+	 * Process stripe IPN requests in order to mark referrals as Unpaid
 	 *
 	 * @access  public
 	 * @since   1.9
@@ -113,215 +112,6 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 			return;
 		}
 
-		$ipn_data = $_POST;
-
-		$to_process = array(
-			'web_accept',
-			'cart',
-			'subscr_payment',
-			'express_checkout',
-			'recurring_payment',
-			'subscr_payment'
-		);
-
-		if( ! in_array( $ipn_data['txn_type'], $to_process ) ) {
-			return;
-		}
-
-		if( empty( $ipn_data['mc_gross'] ) ) {
-
-			if( $this->debug ) {
-				$this->log( 'IPN not processed because mc_gross was empty' );
-			}
-
-			return;
-		}
-
-		if( empty( $ipn_data['custom'] ) ) {
-
-			if( $this->debug ) {
-				$this->log( 'IPN not processed because custom was empty' );
-			}
-
-			return;
-		}
-
-		$total        = sanitize_text_field( $ipn_data['mc_gross'] );
-		$custom       = explode( '|', $ipn_data['custom'] );
-		$visit_id     = $custom[0];
-		$affiliate_id = $custom[1];
-		$referral_id  = $custom[2];
-		$visit        = affwp_get_visit( $visit_id );
-		$referral     = affwp_get_referral( $referral_id );
-
-		if( empty( $affiliate_id ) ) {
-
-			if( $this->debug ) {
-				$this->log( 'IPN not processed because affiliate ID was empty' );
-			}
-
-			return;
-		}
-
-		if( ! $visit || ! $referral ) {
-
-			if( $this->debug ) {
-
-				if( ! $visit ) {
-
-					$this->log( 'Visit not successfully retrieved during process_ipn()' );
-
-				}
-
-				if( ! $referral ) {
-
-					$this->log( 'Referral not successfully retrieved during process_ipn()' );
-
-				}
-
-			}
-
-			die( 'Missing visit or referral data' );
-		}
-
-		if( 'pending' !== $referral->status ) {
-
-			if( $this->debug ) {
-
-				$this->log( 'Referral has status other than Pending during process_ipn()' );
-
-			}
-
-			die( 'Referral not pending' );
-		}
-
-		$visit->set( 'referral_id', $referral->ID, true );
-
-		if( $this->debug ) {
-
-			$this->log( 'Referral ID (' . $referral->ID . ') successfully retrieved during process_ipn()' );
-
-		}
-
-		if( 'completed' === strtolower( $ipn_data['payment_status'] ) ) {
-
-			$reference   = sanitize_text_field( $ipn_data['txn_id'] );
-			$description = ! empty( $ipn_data['item_name'] ) ? sanitize_text_field( $ipn_data['item_name'] ) : sanitize_text_field( $ipn_data['payer_email'] );
-			$amount      = $this->calculate_referral_amount( $total, $reference, 0, $referral->affiliate_id );
-
-			$referral->set( 'description', $description );
-			$referral->set( 'amount', $amount );
-			$referral->set( 'reference', $reference );
-
-			$this->log( 'Referral updated in preparation for save(): ' . print_r( $referral->to_array(), true ) );
-
-			if( $referral->save() ) {
-
-				$this->log( 'Referral saved: ' . print_r( $referral->to_array(), true ) );
-
-				$completed = $this->complete_referral( $referral );
-
-				if( $completed ) {
-
-					if( $this->debug ) {
-
-						$this->log( 'Referral completed successfully during process_ipn()' );
-
-					}
-
-					die( 'Referral completed successfully' );
-
-				} else if ( $this->debug ) {
-
-					$this->log( 'Referral failed to be completed during process_ipn()' );
-
-				}
-
-				die( 'Referral not completed successfully' );
-
-			} else {
-
-				if ( $this->debug ) {
-
-					$this->log( 'Referral not updated successfully during process_ipn()' );
-
-				}
-
-				die( 'Referral not updated successfully' );
-
-			}
-
-		} else {
-
-			if ( $this->debug ) {
-
-				$this->log( 'Payment status in IPN data not Complete' );
-
-			}
-
-		}
-
-	}
-
-	/**
-	 * Verify IPN from PayPal
-	 *
-	 * @access  public
-	 * @since   1.9
-	 * @return  bool True|false
-	*/
-	private function verify_ipn( $post_data ) {
-
-		$verified = false;
-		$endpoint = array_key_exists( 'test_ipn', $post_data ) ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr';
-		$args     = array_merge( array( 'cmd' => '_notify-validate' ),  $post_data );
-
-		if( $this->debug ) {
-
-			$this->log( 'Data passed to verify_ipn(): ' . print_r( $post_data, true ) );
-			$this->log( 'Data to be sent to IPN verification: ' . print_r( $args, true ) );
-
-		}
-
-		$request  = wp_remote_post( $endpoint, array( 'timeout' => 45, 'sslverify' => false, 'httpversion' => '1.1', 'body' => $args ) );
-		$body     = wp_remote_retrieve_body( $request );
-		$code     = wp_remote_retrieve_response_code( $request );
-		$message  = wp_remote_retrieve_response_message( $request );
-
-		if( ! is_wp_error( $request ) && 200 === (int) $code && 'OK' == $message ) {
-
-			if( 'VERIFIED' == strtoupper( $body ) ) {
-
-				$verified = true;
-
-				if( $this->debug ) {
-
-					$this->log( 'IPN successfully verified' );
-
-				}
-
-			} else {
-
-				if( $this->debug ) {
-
-					$this->log( 'IPN response came back as INVALID' );
-
-				}
-
-			}
-
-		} else {
-
-			if( $this->debug ) {
-
-				$this->log( 'IPN verification request failed' );
-				$this->log( 'Request: ' . print_r( $request, true ) );
-
-			}
-
-		}
-
-		return $verified;
 	}
 
 	/**
@@ -332,16 +122,16 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 	*/
 	public function reference_link( $reference = 0, $referral ) {
 
-		if ( empty( $referral->context ) || 'paypal' != $referral->context ) {
+		if ( empty( $referral->context ) || 'stripe' != $referral->context ) {
 
 			return $reference;
 
 		}
 
-		$url = 'https://www.paypal.com/webscr?cmd=_history-details-from-hub&id=' . $reference ;
+		$url = 'https://dashboard.stripe.com/payments/' . $reference ;
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 	}
 
 }
-new Affiliate_WP_PayPal;
+new Affiliate_WP_stripe;

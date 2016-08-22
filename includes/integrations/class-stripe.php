@@ -37,8 +37,6 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 				e.preventDefault();
 
-				var $form = $(this);
-
 				$.ajax({
 					type: "POST",
 					data: {
@@ -46,10 +44,6 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 					},
 					url: affwp_scripts.ajaxurl,
 					success: function (response) {
-
-						$form.append( '<input type="hidden" name="custom" value="' + response.data.ref + '"/>' );
-
-						$form.get(0).submit();
 
 					}
 

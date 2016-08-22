@@ -1,6 +1,6 @@
 <?php
 
-class Affiliate_WP_stripe extends Affiliate_WP_Base {
+class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 	/**
 	 * Get thigns started
@@ -134,4 +134,4 @@ class Affiliate_WP_stripe extends Affiliate_WP_Base {
 	}
 
 }
-new Affiliate_WP_stripe;
+new Affiliate_WP_Stripe;

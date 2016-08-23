@@ -294,6 +294,7 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-object.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-affiliate.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-creative.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-payout.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-referral.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-visit.php';
 
@@ -301,6 +302,7 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/settings/class-settings.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affiliates-db.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-payouts-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-capabilities.php';
 
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
@@ -318,6 +320,7 @@ final class Affiliate_WP {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/overview/overview.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/referrals/actions.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/referrals/referrals.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/payouts/payouts.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/reports.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/visits/visits.php';
@@ -354,6 +357,7 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/affiliate-functions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/affiliate-meta-functions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/misc-functions.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/payout-functions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/referral-functions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/visit-functions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/creative-functions.php';

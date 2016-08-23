@@ -519,7 +519,13 @@ class AffWP_Referrals_Table extends WP_List_Table {
 			}
 
 			if ( 'mark_as_paid' === $this->current_action() ) {
-				affwp_set_referral_status( $id, 'paid' );
+				if ( $referral = affwp_get_referral( $id ) ) {
+					affwp_add_payout( array(
+						'affiliate_id'  => $referral->affiliate_id,
+						'referrals'     => $id,
+						'payout_method' => 'manual'
+					) );
+				}
 			}
 
 			if ( 'mark_as_unpaid' === $this->current_action() ) {

@@ -366,18 +366,20 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/scripts.php';
 
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-cli.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-object-cli.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-command.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-sub-commands-base.php';
 
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-affiliate-cli-fetcher.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-referral-cli-fetcher.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-creative-cli-fetcher.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-visit-cli-fetcher.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-affiliate-fetcher.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-creative-fetcher.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-payout-fetcher.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-referral-fetcher.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/utils/class-visit-fetcher.php';
 
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-affiliate-cli.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-referral-cli.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-creative-cli.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-visit-cli.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-affiliate-sub-commands.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-creative-sub-commands.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-payout-sub-commands.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-referral-sub-commands.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-visit-sub-commands.php';
 		}
 	}
 

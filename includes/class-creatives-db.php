@@ -89,23 +89,37 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 	}
 
 	/**
-	 * Retrieve creatives from the database
+	 * Retrieves creatives from the database.
 	 *
-	 * @access  public
-	 * @since   1.2
-	 * @param   array $args
-	 * @param   bool  $count  Return only the total number of results found (optional)
+	 * @access public
+	 * @since  1.2
+	 *
+	 * @param array $args {
+	 *     Optional. Arguments for querying creatives. Default empty array.
+	 *
+	 *     @type int       $number      Number of creatives to query for. Default 20.
+	 *     @type int       $offset      Number of creatives to offset the query for. Default 0.
+	 *     @type int|array $creative_id Creative ID or array of creative IDs to explicitly retrieve. Default 0.
+	 *     @type string    $status      Creative status. Default empty (all).
+	 *     @type string    $order       How to order returned creative results. Accepts 'ASC' or 'DESC'.
+	 *                                  Default 'DESC'.
+	 *     @type string    $orderby     Creatives table column to order results by. Accepts any AffWP\Creative
+	 *                                  field. Default 'creative_id'.
+	 *     @type string    $fields      Fields to limit the selection for. Accepts 'ids'. Default '*' for all.
+	 * }
+	 * @param bool $count Whether to retrieve only the total number of results found. Default false.
 	 */
 	public function get_creatives( $args = array(), $count = false ) {
 		global $wpdb;
 
 		$defaults = array(
-			'number'  => 20,
-			'offset'  => 0,
-			'status'  => '',
-			'orderby' => $this->primary_key,
-			'order'   => 'ASC',
-			'fields'  => '',
+			'number'      => 20,
+			'offset'      => 0,
+			'creative_id' => 0,
+			'status'      => '',
+			'orderby'     => $this->primary_key,
+			'order'       => 'ASC',
+			'fields'      => '',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -116,16 +130,35 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 
 		$where = '';
 
+		// Specific creative ID or IDs.
+		if ( ! empty( $args['creative_id'] ) ) {
+
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
+			if( is_array( $args['creative_id'] ) ) {
+				$creatives = implode( ',', array_map( 'intval', $args['creative_id'] ) );
+			} else {
+				$creatives = intval( $args['creative_id'] );
+			}
+
+			$where .= "`creative_id` IN( {$creatives} ) ";
+		}
+
+		// Status.
 		if ( ! empty( $args['status'] ) ) {
+
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
 			$status = esc_sql( $args['status'] );
 
 			if ( ! empty( $where ) ) {
-				$where .= "AND `status` = '" . $status . "' ";
+				$where .= "`status` = '" . $status . "' ";
 			} else {
-				$where .= "WHERE `status` = '" . $status . "' ";
+				$where .= "`status` = '" . $status . "' ";
 			}
 		}
 
+		// There can be only two orders.
 		if ( 'ASC' === strtoupper( $args['order'] ) ) {
 			$order = 'ASC';
 		} else {

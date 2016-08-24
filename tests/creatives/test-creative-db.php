@@ -86,18 +86,28 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * Helper to set up creatives.
-	 *
-	 * @since 1.9
-	 * @access public
-	 *
-	 * @param int   $count          Optional. Number of creatives to create. Default 3.
-	 * @param array $creatives_args Optional. Arguments for adding creatives. Default empty array.
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
 	 */
-	public function _set_up_creatives( $count = 3, $creatives_args = array() ) {
-		for ( $i = 1; $i <= $count; $i++ ) {
-			$this->creatives[] = affiliate_wp()->creatives->add();
-		}
+	public function test_get_creatives_single_creative_id_should_return_only_that_creative() {
+		$results = affiliate_wp()->creatives->get_creatives( array(
+			'creative_id' => self::$creatives[2],
+			'fields'      => 'ids',
+		) );
+
+		$this->assertEqualSets( array( self::$creatives[2] ), $results );
 	}
 
+	/**
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 */
+	public function test_get_creatives_multiple_creative_ids_should_return_only_those_creatives() {
+		$creatives = array( self::$creatives[1], self::$creatives[3] );
+
+		$results = affiliate_wp()->creatives->get_creatives( array(
+			'creative_id' => $creatives,
+			'fields'      => 'ids',
+		) );
+
+		$this->assertEqualSets( $creatives, $results );
+	}
 }

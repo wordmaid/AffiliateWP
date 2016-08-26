@@ -44,7 +44,9 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 		// Per product referral rates
 		add_filter( 'woocommerce_product_data_tabs', array( $this, 'product_tab' ) );
 		add_action( 'woocommerce_product_data_panels', array( $this, 'product_settings' ), 100 );
+		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'variation_settings' ), 100, 3 );
 		add_action( 'save_post', array( $this, 'save_meta' ) );
+		add_action( 'woocommerce_ajax_save_product_variations', array( $this, 'save_variation_data' ) );
 
 		add_action( 'affwp_pre_flush_rewrites', array( $this, 'skip_generate_rewrites' ) );
 
@@ -109,6 +111,10 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					continue; // Referrals are disabled on this product
 				}
 
+				if( ! empty( $product['variation_id'] ) && get_post_meta( $product['variation_id'], '_affwp_' . $this->context . '_referrals_disabled', true ) ) {
+					continue; // Referrals are disabled on this variation
+				}
+
 				// The order discount has to be divided across the items
 				$product_total = $product['line_total'];
 				$shipping      = 0;
@@ -126,7 +132,11 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					continue;
 				}
 
-				$amount += $this->calculate_referral_amount( $product_total, $order_id, $product['product_id'], $affiliate_id );
+				$product_id_for_rate = $product['product_id'];
+				if( ! empty( $product['variation_id'] ) && $this->get_product_rate( $product['variation_id'] ) ) {
+					$product_id_for_rate = $product['variation_id'];
+				}
+				$amount += $this->calculate_referral_amount( $product_total, $order_id, $product_id_for_rate, $affiliate_id );
 
 			}
 
@@ -215,10 +225,18 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				continue; // Referrals are disabled on this product
 			}
 
+			if( ! empty( $product['variation_id'] ) && get_post_meta( $product['variation_id'], '_affwp_' . $this->context . '_referrals_disabled', true ) ) {
+				continue; // Referrals are disabled on this variation
+			}
+
 			if( affiliate_wp()->settings->get( 'exclude_tax' ) ) {
 				$amount = $product['line_total'] - $product['line_tax'];
 			} else {
 				$amount = $product['line_total'];
+			}
+
+			if( ! empty( $product['variation_id'] ) ) {
+				$product['name'] .= ' ' . sprintf( __( '(Variation ID %d)', 'affiliate-wp' ), $product['variation_id'] );
 			}
 
 			$products[] = array(
@@ -406,11 +424,19 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		foreach ( $items as $key => $item ) {
 
-			$description[] = $item['name'];
-
 			if ( get_post_meta( $item['product_id'], '_affwp_' . $this->context . '_referrals_disabled', true ) ) {
 				continue; // Referrals are disabled on this product
 			}
+
+			if( ! empty( $item['variation_id'] ) && get_post_meta( $item['variation_id'], '_affwp_' . $this->context . '_referrals_disabled', true ) ) {
+				continue; // Referrals are disabled on this variation
+			}
+
+			if( ! empty( $item['variation_id'] ) ) {
+				$item['name'] .= ' ' . sprintf( __( '(Variation ID %d)', 'affiliate-wp' ), $item['variation_id'] );
+			}
+
+			$description[] = $item['name'];
 
 		}
 
@@ -476,6 +502,34 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	}
 
 	/**
+	 * Adds per-product variation referral rate settings input fields
+	 *
+	 * @access  public
+	 * @since   1.9
+	*/
+	public function variation_settings( $loop, $variation_data, $variation ) {
+
+		$rate     = $this->get_product_rate( $variation->ID );
+		$disabled = get_post_meta( $variation->ID, '_affwp_woocommerce_referrals_disabled', true );
+?>
+		<div id="affwp_product_variation_settings">
+
+			<div class="form-row form-row-full">
+				<p><?php _e( 'Configure affiliate rates for this product variation', 'affiliate-wp' ); ?></p>
+				<p class="form-row form-row-full options">
+					<label><?php echo __( 'Referral Rate', 'affiliate-wp' ); ?></label>
+					<input type="text" size="5" name="_affwp_woocommerce_variation_rates[<?php echo $variation->ID; ?>]" value="<?php echo esc_attr( $rate ); ?>" class="wc_input_price" placeholder="<?php esc_attr_e( 'Referral rate (optional)', 'affiliate-wp' ); ?>" />
+					<label>
+						<input type="checkbox" class="checkbox" name="_affwp_woocommerce_variation_referrals_disabled[<?php echo $variation->ID; ?>]" <?php checked( $disabled, true ); ?> /> <?php _e( 'Disable referrals for this product variation', 'affiliate-wp' ); ?>
+					</label>
+				</p>
+			</div>
+		</div>
+<?php
+
+	}
+
+	/**
 	 * Saves per-product referral rate settings input fields
 	 *
 	 * @access  public
@@ -524,6 +578,8 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		}
 
+		$this->save_variation_data( $post_id );
+
 		if( isset( $_POST['_affwp_' . $this->context . '_referrals_disabled'] ) ) {
 
 			update_post_meta( $post_id, '_affwp_' . $this->context . '_referrals_disabled', 1 );
@@ -534,6 +590,47 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		}
 
+	}
+
+	/**
+	 * Saves variation data
+	 *
+	 * @access  public
+	 * @since   1.9
+	*/
+	public function save_variation_data( $product_id = 0 ) {
+	
+		if( ! empty( $_POST['variable_post_id'] ) && is_array( $_POST['variable_post_id'] ) ) {
+
+			foreach( $_POST['variable_post_id'] as $variation_id ) {
+
+				$variation_id = absint( $variation_id );
+
+				if( ! empty( $_POST['_affwp_woocommerce_variation_rates'] ) && ! empty( $_POST['_affwp_woocommerce_variation_rates'][ $variation_id ] ) ) {
+
+					$rate = sanitize_text_field( $_POST['_affwp_woocommerce_variation_rates'][ $variation_id ] );
+					update_post_meta( $variation_id, '_affwp_' . $this->context . '_product_rate', $rate );
+
+				} else {
+
+					delete_post_meta( $variation_id, '_affwp_' . $this->context . '_product_rate' );
+
+				}
+
+				if( ! empty( $_POST['_affwp_woocommerce_variation_referrals_disabled'] ) && ! empty( $_POST['_affwp_woocommerce_variation_referrals_disabled'][ $variation_id ] ) ) {
+
+					update_post_meta( $variation_id, '_affwp_' . $this->context . '_referrals_disabled', 1 );
+
+				} else {
+
+					delete_post_meta( $variation_id, '_affwp_' . $this->context . '_referrals_disabled' );
+
+				}
+
+			}
+
+		}
+	
 	}
 
 	/**

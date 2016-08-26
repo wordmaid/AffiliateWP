@@ -353,6 +353,11 @@ abstract class Affiliate_WP_Base {
 	*/
 	public function get_product_rate( $product_id = 0, $args = array() ) {
 
+		$args = wp_parse_args( $args, array(
+			'reference'    => '',
+			'affiliate_id' => 0
+		) );
+
 		$affiliate_id = isset( $args['affiliate_id'] ) ? $args['affiliate_id'] : $this->get_affiliate_id( $args['reference'] );
 
 		$rate = get_post_meta( $product_id, '_affwp_' . $this->context . '_product_rate', true );

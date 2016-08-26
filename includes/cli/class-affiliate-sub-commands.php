@@ -86,7 +86,7 @@ class Sub_Commands extends Base {
 	 *
 	 * ## OPTIONS
 	 *
-	 * <username>|<id>
+	 * <username|id>
 	 * : Username or ID for an existing user.
 	 *
 	 * [--payment_email=<email>]

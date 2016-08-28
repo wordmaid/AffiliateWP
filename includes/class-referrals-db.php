@@ -270,7 +270,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *                                        Default 'referral_id'.
 	 *     @type string       $order          How to order results. Accepts 'ASC' (ascending) or 'DESC' (descending).
 	 *                                        Default 'DESC'.
-	 *     @type bool         $search         Whether a search query is being performaed. Default false.
+	 *     @type bool         $search         Whether a search query is being performed. Default false.
 	 *     @type string       $fields         Fields to query for. Accepts 'ids' or '*' (all). Default '*'.
 	 * }
 	 * @param   bool  $count  Optional. Whether to return only the total number of results found. Default false.

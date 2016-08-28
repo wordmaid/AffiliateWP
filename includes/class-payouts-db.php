@@ -289,9 +289,11 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 	 *     @type int          $offset         Number of payouts to offset the query for. Default 0.
 	 *     @type int|array    $payout_id      Payout ID or array of payout IDs to explicitly retrieve. Default 0.
 	 *     @type int|array    $affiliate_id   Affiliate ID or array of affiliate IDs to retrieve payouts for. Default 0.
-	 *     @type int|array    $referrals      Array of referral IDsReferral ID or array of referral IDs to retrieve payouts for.
+	 *     @type int|array    $referrals      Array of referral IDsReferral ID or array of referral IDs to retrieve
+	 *                                        payouts for. Default empty array.
 	 *     @type float|array  $amount {
 	 *         Payout amount to retrieve payouts for or min/max range to retrieve payouts for.
+	 *         Default 0.
 	 *
 	 *         @type float $min Minimum payout amount.
 	 *         @type float $max Maximum payout amount. Use -1 for no limit.
@@ -299,7 +301,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 	 *     @type string       $amount_compare Comparison operator to use in coordination with with $amount when passed
 	 *                                        as a float or string. Accepts '>', '<', '>=', '<=', '=', or '!='.
 	 *                                        Default '='.
-	 *     @type string       $payout_method  Payout method to retrieve payouts for.
+	 *     @type string       $payout_method  Payout method to retrieve payouts for. Default empty (all).
 	 *     @type string|array $date {
 	 *         Date string or start/end range to retrieve payouts for.
 	 *

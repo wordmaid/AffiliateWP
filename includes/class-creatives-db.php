@@ -105,7 +105,7 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 	 *                                  Default 'DESC'.
 	 *     @type string    $orderby     Creatives table column to order results by. Accepts any AffWP\Creative
 	 *                                  field. Default 'creative_id'.
-	 *     @type string    $fields      Fields to limit the selection for. Accepts 'ids'. Default '*' for all.
+	 *     @type string    $fields      Fields to limit the selection for. Accepts 'ids' or '*' (all). Default '*'.
 	 * }
 	 * @param bool $count Whether to retrieve only the total number of results found. Default false.
 	 */

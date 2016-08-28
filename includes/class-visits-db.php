@@ -120,7 +120,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 			$args['number'] = 999999999999;
 		}
 
-		$where = '';
+		$where = $join = '';
 
 		// visits for specific affiliates
 		if( ! empty( $args['affiliate_id'] ) ) {
@@ -275,34 +275,12 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 
 		if ( false === $results ) {
 
-			if ( true === $count ) {
+			$clauses = compact( 'fields', 'join', 'where', 'orderby', 'order', 'count' );
 
-				$results = absint( $wpdb->get_var( "SELECT COUNT({$this->primary_key}) FROM {$this->table_name} {$where};" ) );
+			$results = $this->get_results( $clauses, $args );
 
-			} elseif ( 'ids' === $args['fields'] ) {
-
-				$results = $wpdb->get_col(
-					$wpdb->prepare(
-						"SELECT {$fields} FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
-						absint( $args['offset'] ),
-						absint( $args['number'] )
-					)
-				);
-
-				// Ensure returned IDs are integers.
-				$results = array_map( 'intval', $results );
-
-			} else {
-
-				$results = $wpdb->get_results(
-					$wpdb->prepare(
-						"SELECT * FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
-						absint( $args['offset'] ),
-						absint( $args['number'] )
-					)
-				);
-
-				// Convert to AffWP\Visit objects.
+			// If not a count query or ids only, convert to objects.
+			if ( ! is_numeric( $results ) && 'ids' !== $args['fields'] ) {
 				$results = array_map( 'affwp_get_visit', $results );
 			}
 		}

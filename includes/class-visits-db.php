@@ -79,7 +79,24 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 	 *
 	 * @access  public
 	 * @since   1.0
-	 * @param   array $args
+	 * @param   array $args {
+	 *     Optional. Arguments to retrieve visits. Default empty array.
+	 *
+	 *     @type int          $number          Number of visits to retrieve. Accepts -1 for all. Default 20.
+	 *     @type int          $offset          Number of visits to offset in the query. Default 0.
+	 *     @type int|array    $affiliate_id    Specific affiliate ID or array of IDs to query visits for.
+	 *                                         Default 0 (all).
+	 *     @type int|array    $referral_id     Specific referral ID or array of IDs to query visits for.
+	 *                                         Default 0 (all).
+	 *     @type string       $referral_status Specific conversion status to query for. Accepts 'converted'
+	 *                                         or 'unconverted'. Default empty (all).
+	 *     @type string       $campaign        Specific campaign to query visits for. Default empty.
+	 *     @type string       $orderby         Column to order results by. Accepts any valid referrals table column.
+	 *                                         Default 'referral_id'.
+	 *     @type string       $order           How to order results. Accepts 'ASC' (ascending) or 'DESC' (descending).
+	 *                                         Default 'DESC'.
+	 *     @type string       $fields          Fields to query for. Accepts 'ids' or '*' (all). Default '*'.
+	 * }
 	 * @param   bool  $count  Return only the total number of results found (optional)
 	*/
 	public function get_visits( $args = array(), $count = false ) {

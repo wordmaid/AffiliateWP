@@ -238,8 +238,42 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *
 	 * @access  public
 	 * @since   1.0
-	 * @param   array $args
-	 * @param   bool  $count  Return only the total number of results found (optional)
+	 * @param array $args {
+	 *     Optional. Arguments to retrieve referrals from the database.
+	 *
+	 *     @type int          $number         Number of referrals to retrieve. Accepts -1 for all. Default 20.
+	 *     @type int          $offset         Number of referrals to offset in the query. Default 0.
+	 *     @type int|array    $referral_id    Specific referral ID or array of IDs to query for. Default 0 (all).
+	 *     @type int|array    $affiliate_id   Affiliate ID or array of IDs to query referrals for. Default 0 (all).
+	 *     @type float|array  $amount {
+	 *         Specific amount to query for or min/max range. If float, can be used with `$amount_compare`.
+	 *         If array, `BETWEEN` is used.
+	 *
+	 *         @type float $min Minimum amount to query for.
+	 *         @type float $max Maximum amount to query for.
+	 *     }
+	 *     @type string       $amount_compare Comparison operator to use with `$amount`. Accepts '>', '<', '>=',
+	 *                                        '<=', '=', or '!='. Default '='.
+	 *     @type string|array $date {
+	 *         Date string or start/end range to retrieve referrals for.
+	 *
+	 *         @type string $start Start date to retrieve referrals for.
+	 *         @type string $end   End date to retrieve referrals for.
+	 *     }
+	 *     @type string       $reference      Specific reference to query referrals for (usually an order number).
+	 *                                        Default empty.
+	 *     @type string       $context        Specific context to query referrals for. Default empty.
+	 *     @type string       $campaign       Specific campaign to query referrals for. Default empty.
+	 *     @type string|array $status         Referral status or array of statuses to query referrals for.
+	 *                                        Default empty (all).
+	 *     @type string       $orderby        Column to order results by. Accepts any valid referrals table column.
+	 *                                        Default 'referral_id'.
+	 *     @type string       $order          How to order results. Accepts 'ASC' (ascending) or 'DESC' (descending).
+	 *                                        Default 'DESC'.
+	 *     @type bool         $search         Whether a search query is being performaed. Default false.
+	 *     @type string       $fields         Fields to query for. Accepts 'ids' or '*' (all). Default '*'.
+	 * }
+	 * @param   bool  $count  Optional. Whether to return only the total number of results found. Default false.
 	*/
 	public function get_referrals( $args = array(), $count = false ) {
 

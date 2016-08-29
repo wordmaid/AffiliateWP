@@ -101,6 +101,8 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 		$count = affwp_get_decimal_count();
 
 		$this->assertEquals( 3, $count );
+
+		remove_all_filters( 'affwp_decimal_count' );
 	}
 
 	/**
@@ -129,6 +131,43 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 			array( 'http://www.example.com/blog/?s=My+query', '../blog/?s=My+query' ),
 			array( 'http://www.example.com/blog/?privateVar=stuff', '../blog/' )
 		);
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_commas() {
+		$this->assertSame( '20000.20', affwp_sanitize_amount( '20,000.20' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_spaces() {
+		$this->assertSame( '20000.20', affwp_sanitize_amount( '20 000.20' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_default_to_two_decimals() {
+		$this->assertSame( '20.20', affwp_sanitize_amount( '20.2' ) );
+		$this->assertSame( '25.42', affwp_sanitize_amount( '25.42221112993' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_currency_symols() {
+		$this->assertSame( '20.20', affwp_sanitize_amount( '$20.2' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_currency_symbols_and_default_to_two_decimals() {
+		$this->assertSame( '10.00', affwp_sanitize_amount( '£10') );
+		$this->assertSame( '20.20', affwp_sanitize_amount( '₱20.2' ) );
 	}
 
 }

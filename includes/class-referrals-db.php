@@ -302,7 +302,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			$args['number'] = 999999999999;
 		}
 
-		$where = $join = '';
+		$where    = '';
 
 		// Specific referrals
 		if( ! empty( $args['referral_id'] ) ) {
@@ -540,15 +540,35 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		if ( false === $results ) {
 
-			$clauses = compact( 'fields', 'join', 'where', 'orderby', 'order', 'count' );
+			if ( true === $count ) {
 
-			$results = $this->get_results( $clauses, $args );
+				$results = absint( $wpdb->get_var( "SELECT COUNT({$this->primary_key}) FROM {$this->table_name} {$where};" ) );
 
-			// If not a count query or ids only, convert to objects.
-			if ( ! is_numeric( $results ) && 'ids' !== $args['fields'] ) {
+			} elseif ( 'ids' === $args['fields'] ) {
+
+				$results = $wpdb->get_col(
+					$wpdb->prepare(
+						"SELECT {$fields} FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
+						absint( $args['offset'] ),
+						absint( $args['number'] )
+					)
+				);
+
+				// Ensure returned IDs are integers.
+				$results = array_map( 'intval', $results );
+			} else {
+
+				$results = $wpdb->get_results(
+					$wpdb->prepare(
+						"SELECT * FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
+						absint( $args['offset'] ),
+						absint( $args['number'] )
+					)
+				);
+
+				// Convert to AffWP\Referral objects.
 				$results = array_map( 'affwp_get_referral', $results );
 			}
-
 		}
 
 		wp_cache_add( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );

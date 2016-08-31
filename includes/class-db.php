@@ -133,54 +133,6 @@ abstract class Affiliate_WP_DB {
 	}
 
 	/**
-	 * Retrieves results for a variety of query types.
-	 *
-	 * @access public
-	 * @since  1.9
-	 *
-	 * @param array $clauses Compacted array of query clauses.
-	 * @param array $args    Query arguments.
-	 * @return array|int|null|object Query results.
-	 */
-	public function get_results( $clauses, $args ) {
-		global $wpdb;
-
-		if ( true === $clauses['count'] ) {
-
-			$results = $wpdb->get_var(
-				"SELECT COUNT({$this->primary_key}) FROM {$this->table_name} {$clauses['where']};"
-			);
-
-			$results = absint( $results );
-
-		} elseif ( 'ids' === $args['fields'] ) {
-
-			$results = $wpdb->get_col(
-				$wpdb->prepare(
-					"SELECT {$clauses['fields']} FROM {$this->table_name} {$clauses['join']} {$clauses['where']} ORDER BY {$clauses['orderby']} {$clauses['order']} LIMIT %d, %d;",
-					absint( $args['offset'] ),
-					absint( $args['number'] )
-				)
-			);
-
-			$results = array_map( 'intval', $results );
-
- 		} else {
-
-			$results = $wpdb->get_results(
-				$wpdb->prepare(
-					"SELECT * FROM {$this->table_name} {$clauses['join']} {$clauses['where']} ORDER BY {$clauses['orderby']} {$clauses['order']} LIMIT %d, %d;",
-					absint( $args['offset'] ),
-					absint( $args['number'] )
-				)
-			);
-
-		}
-
-		return $results;
-	}
-
-	/**
 	 * Inserts a new record into the database.
 	 *
 	 * Please note: inserting a record flushes the cache.

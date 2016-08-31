@@ -67,6 +67,11 @@ table.affwp_table td a {
 	margin: 0 8px 20px;
 }
 
+/* Consumers */
+.row-actions span.revoke a {
+	color: #a00;
+}
+
 /* Creatives */
 #affwp_add_creative table,
 #affwp_edit_creative table {

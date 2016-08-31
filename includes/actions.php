@@ -10,7 +10,17 @@
 */
 function affwp_do_actions() {
 	if ( isset( $_REQUEST['affwp_action'] ) ) {
-		do_action( 'affwp_' . $_REQUEST['affwp_action'], $_REQUEST );
+		$action = $_REQUEST['affwp_action'];
+
+		/**
+		 * Fires for every AffiliateWP action passed via `affwp_action`.
+		 *
+		 * The dynamic portion of the hook name, `$action`, refers to the action passed via
+		 * the `affwp_action` parameter.
+		 *
+		 * @param array $_REQUEST Request data.
+		 */
+		do_action( "affwp_{$action}", $_REQUEST );
 	}
 }
 add_action( 'init', 'affwp_do_actions' );

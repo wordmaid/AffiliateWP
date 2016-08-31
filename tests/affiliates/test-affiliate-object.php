@@ -71,7 +71,7 @@ class Tests extends UnitTestCase {
 	 * @covers AffWP\Affiliate
 	 */
 	public function test_affiliate_user_object_should_be_lazy_loadable() {
-		$this->assertInstanceOf( '\WP_User', affwp_get_affiliate( self::$affiliate_id )->user );
+		$this->assertInstanceOf( '\stdClass', affwp_get_affiliate( self::$affiliate_id )->user );
 	}
 
 	/**
@@ -82,7 +82,7 @@ class Tests extends UnitTestCase {
 
 		update_user_meta( self::$user_id, 'first_name', $first_name );
 
-		$this->assertEquals( $first_name, affwp_get_affiliate( self::$affiliate_id )->user->data->first_name );
+		$this->assertEquals( $first_name, affwp_get_affiliate( self::$affiliate_id )->user->first_name );
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Tests extends UnitTestCase {
 
 		update_user_meta( self::$user_id, 'last_name', $last_name );
 
-		$this->assertSame( $last_name, affwp_get_affiliate( self::$affiliate_id )->user->data->last_name );
+		$this->assertSame( $last_name, affwp_get_affiliate( self::$affiliate_id )->user->last_name );
 	}
 
 	/**

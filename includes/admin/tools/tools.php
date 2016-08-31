@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/migration.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-recount.php';
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-rest-consumers-table.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/import/import.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/export.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-export.php';
@@ -73,6 +74,7 @@ function affwp_get_tools_tabs() {
 
 	$tabs                  = array();
 	$tabs['export_import'] = __( 'Export / Import', 'affiliate-wp' );
+	$tabs['api_keys']      = __( 'API Keys', 'affiliate-wp' );
 	$tabs['recount']       = __( 'Recount Stats', 'affiliate-wp' );
 	$tabs['migration']     = __( 'Migration Assistant', 'affiliate-wp' );
 
@@ -80,6 +82,13 @@ function affwp_get_tools_tabs() {
 		$tabs['debug']     = __( 'Debug Assistant', 'affiliate-wp' );
 	}
 
+	/**
+	 * Filters AffiliateWP tools tabs.
+	 *
+	 * @since 1.0
+	 *
+	 * @param array $tabs Array of tools tabs.
+	 */
 	return apply_filters( 'affwp_tools_tabs', $tabs );
 }
 
@@ -401,3 +410,22 @@ function affwp_clear_debug_log() {
 
 }
 add_action( 'admin_init', 'affwp_clear_debug_log' );
+
+/**
+ * Renders the API Keys tools tab.
+ *
+ * @since 1.9
+ */
+function affwp_rest_api_keys_tab() {
+	// Load WP_List_Table if not loaded
+	if ( ! class_exists( 'WP_List_Table' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+	}
+
+	$keys_table = new \AffWP\REST\Admin\List_Table;
+	$keys_table->prepare_items();
+
+	$keys_table->views();
+	$keys_table->display();
+}
+add_action( 'affwp_tools_tab_api_keys', 'affwp_rest_api_keys_tab' );

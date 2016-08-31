@@ -5,7 +5,7 @@
  * Description: Affiliate Plugin for WordPress
  * Author: AffiliateWP, LLC
  * Author URI: https://affiliatewp.com
- * Version: 1.8.7
+ * Version: 1.9
  * Text Domain: affiliate-wp
  * Domain Path: languages
  *
@@ -24,7 +24,7 @@
  * @package AffiliateWP
  * @category Core
  * @author Pippin Williamson
- * @version 1.8.7
+ * @version 1.9
  */
 
 // Exit if accessed directly
@@ -41,137 +41,166 @@ final class Affiliate_WP {
 	/** Singleton *************************************************************/
 
 	/**
-	 * @var Affiliate_WP The one true Affiliate_WP
-	 * @since 1.0
+	 * AffiliateWP instance.
+	 *
+	 * @access private
+	 * @since  1.0
+	 * @var    Affiliate_WP The one true Affiliate_WP
 	 */
 	private static $instance;
 
 	/**
-	 * The version number of AffiliateWP
+	 * The version number of AffiliateWP.
 	 *
-	 * @since 1.0
+	 * @access private
+	 * @since  1.0
+	 * @var    string
 	 */
-	private $version = '1.8.7';
+	private $version = '1.9';
 
 	/**
 	 * The affiliates DB instance variable.
 	 *
-	 * @var Affiliate_WP_DB_Affiliates
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    Affiliate_WP_DB_Affiliates
 	 */
 	public $affiliates;
 
 	/**
 	 * The affiliate meta DB instance variable.
 	 *
-	 * @var Affiliate_WP_Affiliate_Meta_DB
-	 * @since 1.6
+	 * @access public
+	 * @since  1.6
+	 * @var    Affiliate_WP_Affiliate_Meta_DB
 	 */
 	public $affiliate_meta;
 
 	/**
 	 * The referrals instance variable.
 	 *
-	 * @var Affiliate_WP_Referrals_DB
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    Affiliate_WP_Referrals_DB
 	 */
 	public $referrals;
 
 	/**
 	 * The campaigns instance variable.
 	 *
-	 * @var Affiliate_WP_Campaigns_DB
-	 * @since 1.7
+	 * @access public
+	 * @since  1.7
+	 * @var    Affiliate_WP_Campaigns_DB
 	 */
 	public $campaigns;
 
 	/**
 	 * The visits DB instance variable
 	 *
-	 * @var Affiliate_WP_Visits_DB
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    Affiliate_WP_Visits_DB
 	 */
 	public $visits;
 
 	/**
 	 * The settings instance variable
 	 *
-	 * @var Affiliate_WP_Settings
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    Affiliate_WP_Settings
 	 */
 	public $settings;
 
 	/**
 	 * The affiliate tracking handler instance variable
 	 *
-	 * @var Affiliate_WP_Tracking
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    Affiliate_WP_Tracking
 	 */
 	public $tracking;
 
 	/**
 	 * The template loader instance variable
 	 *
-	 * @var Affiliate_WP_Templates
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    Affiliate_WP_Templates
 	 */
 	public $templates;
 
 	/**
 	 * The affiliate login handler instance variable
 	 *
-	 * @var Affiliate_WP_Login
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    Affiliate_WP_Login
 	 */
 	public $login;
 
 	/**
 	 * The affiliate registration handler instance variable
 	 *
-	 * @var Affiliate_WP_Register
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    Affiliate_WP_Register
 	 */
 	public $register;
 
 	/**
 	 * The integrations handler instance variable
 	 *
-	 * @var Affiliate_WP_Integrations
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    Affiliate_WP_Integrations
 	 */
 	public $integrations;
 
 	/**
 	 * The email notification handler instance variable
 	 *
-	 * @var Affiliate_WP_Emails
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 * @var    Affiliate_WP_Emails
 	 */
 	public $emails;
 
 	/**
 	 * The creatives instance variable
 	 *
-	 * @var Affiliate_WP_Creatives_DB
-	 * @since 1.2
+	 * @access public
+	 * @since  1.2
+	 * @var    Affiliate_WP_Creatives_DB
 	 */
 	public $creatives;
 
 	/**
 	 * The creative class instance variable
 	 *
-	 * @var Affiliate_WP_Creatives
-	 * @since 1.3
+	 * @access public
+	 * @since  1.3
+	 * @var    Affiliate_WP_Creatives
 	 */
 	public $creative;
 
 	/**
 	 * The rewrite class instance variable
 	 *
-	 * @var Affiliate_WP_Rewrites
-	 * @since 1.7.8
+	 * @access public
+	 * @since  1.7.8
+	 * @var    Affiliate_WP_Rewrites
 	 */
 	public $rewrites;
+
+	/**
+	 * REST API bootstrap.
+	 *
+	 * @access public
+	 * @since  1.9
+	 * @var    Affiliate_WP_REST
+	 */
+	public $REST;
 
 	/**
 	 * Main Affiliate_WP Instance
@@ -365,6 +394,21 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/plugin-compatibility.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/scripts.php';
 
+		// REST bootstrap.
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/rest-functions.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-rest-consumer.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-rest.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-rest-authentication.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-rest-consumers-db.php';
+
+		// REST endpoints.
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-rest-controller.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-affiliates-endpoints.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-creatives-endpoints.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-payouts-endpoints.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-referrals-endpoints.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-visits-endpoints.php';
+
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-command.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/cli/class-sub-commands-base.php';
@@ -407,6 +451,7 @@ final class Affiliate_WP {
 		self::$instance->creatives      = new Affiliate_WP_Creatives_DB;
 		self::$instance->creative       = new Affiliate_WP_Creatives;
 		self::$instance->rewrites       = new Affiliate_WP_Rewrites;
+		self::$instance->REST           = new Affiliate_WP_REST;
 
 		self::$instance->updater();
 	}

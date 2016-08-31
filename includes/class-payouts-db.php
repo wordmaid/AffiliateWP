@@ -5,6 +5,8 @@
  * @since 1.9
  *
  * @see \Affiliate_WP_DB
+ *
+ * @property-read \AffWP\Affiliate\Payout\REST\v1\Endpoints $REST Affiliates REST endpoints.
  */
 class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 
@@ -36,7 +38,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 	 * @since  1.9
 	*/
 	public function __construct() {
-		global $wpdb;
+		global $wpdb, $wp_version;
 
 		if( defined( 'AFFILIATE_WP_NETWORK_WIDE' ) && AFFILIATE_WP_NETWORK_WIDE ) {
 			// Allows a single payouts table for the whole network.
@@ -46,6 +48,11 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 		}
 		$this->primary_key = 'payout_id';
 		$this->version     = '1.0';
+
+		// REST endpoints.
+		if ( version_compare( $wp_version, '4.4', '>=' ) ) {
+			$this->REST = new \AffWP\Affiliate\Payout\REST\v1\Endpoints;
+		}
 	}
 
 	/**
@@ -289,8 +296,8 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 	 *     @type int          $offset         Number of payouts to offset the query for. Default 0.
 	 *     @type int|array    $payout_id      Payout ID or array of payout IDs to explicitly retrieve. Default 0.
 	 *     @type int|array    $affiliate_id   Affiliate ID or array of affiliate IDs to retrieve payouts for. Default 0.
-	 *     @type int|array    $referrals      Array of referral IDsReferral ID or array of referral IDs to retrieve
-	 *                                        payouts for. Default empty array.
+	 *     @type int|array    $referrals      Referral ID or array of referral IDs to retrieve payouts for.
+	 *                                        Default empty array.
 	 *     @type float|array  $amount {
 	 *         Payout amount to retrieve payouts for or min/max range to retrieve payouts for.
 	 *         Default 0.

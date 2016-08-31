@@ -50,6 +50,7 @@ class Affiliate_WP_Admin_Notices {
 
 			switch( $_GET['affwp_notice'] ) {
 
+				// Affiliates.
 				case 'affiliate_added' :
 
 					$message = __( 'Affiliate added successfully', 'affiliate-wp' );
@@ -121,6 +122,7 @@ class Affiliate_WP_Admin_Notices {
 
 					break;
 
+				// Referrals.
 				case 'referral_added' :
 
 					$message = __( 'Referral added successfully', 'affiliate-wp' );
@@ -152,6 +154,7 @@ class Affiliate_WP_Admin_Notices {
 
 					break;
 
+				// Creatives.
 				case 'creative_updated' :
 
 					$message = __( 'Creative updated successfully', 'affiliate-wp' );
@@ -184,12 +187,38 @@ class Affiliate_WP_Admin_Notices {
 
 					break;
 
+				// Importer.
 				case 'settings-imported' :
 
 					$message = __( 'Settings successfully imported', 'affiliate-wp' );
 
 					break;
 
+				// API keys.
+				case 'api_key_generated' :
+
+					$message = __( 'The API keys were successfully generated.', 'affiliate-wp' );
+
+					break;
+
+				case 'api_key_failed' :
+
+					$message = __( 'The API keys could not be generated.', 'affiliate-wp' );
+					$class   = 'error';
+
+					break;
+
+				case 'api_key_regenerated' :
+
+					$message = __( 'The API keys were successfully regenerated.', 'affiliate-wp' );
+
+					break;
+
+				case 'api_key_revoked' :
+
+					$message = __( 'The API keys were successfully revoked.', 'affiliate-wp' );
+
+					break;
 			}
 		}
 

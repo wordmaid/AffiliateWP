@@ -427,8 +427,11 @@ class Affiliate_WP_Tracking {
 			$path = ! empty( $_SERVER['REQUEST_URI' ] ) ? $_SERVER['REQUEST_URI' ] : '';
 
 			if( false !== strpos( $path, $this->get_referral_var() . '/' ) ) {
-				$pieces = explode( '/', $path );
+
+				$pieces = explode( '/', str_replace( '?', '/', $path ) );
+				$pieces = array_map( 'sanitize_key', $pieces );
 				$key    = array_search( $this->get_referral_var(), $pieces );
+
 				if( $key ) {
 
 					$key += 1;
@@ -463,6 +466,7 @@ class Affiliate_WP_Tracking {
 
 		return $affiliate_id;
 	}
+
 
 	/**
 	 * Get the referral campaign

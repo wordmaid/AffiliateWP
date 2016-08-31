@@ -885,13 +885,14 @@ class Affiliate_WP_Settings {
 
 		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
 		$html = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" ' . $readonly . '/>';
-		$license_status = $this->get( 'license_status' );
 		$license_key = ! empty( $value ) ? $value : false;
+		$status = $this->get( 'license_status' );
+		$status = is_object( $status ) ? $status->license : $status;
 
-		if( 'valid' === $license_status && ! empty( $license_key ) ) {
+		if( 'valid' === $status && ! empty( $license_key ) ) {
 			$html .= '<input type="submit" class="button" name="affwp_deactivate_license" value="' . esc_attr__( 'Deactivate License', 'affiliate-wp' ) . '"/>';
 			$html .= '<span style="color:green;">&nbsp;' . __( 'Your license is valid!', 'affiliate-wp' ) . '</span>';
-		} elseif( 'expired' === $license_status && ! empty( $license_key ) ) {
+		} elseif( 'expired' === $status && ! empty( $license_key ) ) {
 			$renewal_url = esc_url( add_query_arg( array( 'edd_license_key' => $license_key, 'download_id' => 17 ), 'https://affiliatewp.com/checkout' ) );
 			$html .= '<a href="' . esc_url( $renewal_url ) . '" class="button-primary">' . __( 'Renew Your License', 'affiliate-wp' ) . '</a>';
 			$html .= '<br/><span style="color:red;">&nbsp;' . __( 'Your license has expired, renew today to continue getting updates and support!', 'affiliate-wp' ) . '</span>';
@@ -1133,20 +1134,24 @@ class Affiliate_WP_Settings {
 
 	public function activate_license() {
 
-		if( ! isset( $_POST['affwp_settings'] ) )
+		if( ! isset( $_POST['affwp_settings'] ) ) {
 			return;
+		}
 
-		if( ! isset( $_POST['affwp_activate_license'] ) )
+		if( ! isset( $_POST['affwp_activate_license'] ) ) {
 			return;
+		}
 
-		if( ! isset( $_POST['affwp_settings']['license_key'] ) )
+		if( ! isset( $_POST['affwp_settings']['license_key'] ) ) {
 			return;
+		}
 
 		// Retrieve the license status from the database.
-		$status  = $this->get( 'license_status' );
+		$status = $this->get( 'license_status' );
 
-		if( 'valid' == $status )
+		if( 'valid' == $status ) {
 			return; // license already activated and valid
+		}
 
 		// data to send in our API request
 		$api_params = array(
@@ -1160,25 +1165,40 @@ class Affiliate_WP_Settings {
 		$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
 
 		// make sure the response came back okay
-		if ( is_wp_error( $response ) )
-			return false;
+		if ( is_wp_error( $response ) ) {
+
+			wp_safe_redirect( add_query_arg( array( 'affwp_notice' => 'license-http-failure', 'affwp_message' => $response->get_error_message(), 'affwp_success' => 'no' ), admin_url( 'admin.php?page=affiliate-wp-settings' ) ) ); exit;
+
+		}
 
 		// decode the license data
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-		$this->save( array( 'license_status' => $license_data->license ) );
+		$this->save( array( 'license_status' => $license_data ) );
+
+		if( 'valid' !== $license_data->license || empty( $license_data->success ) ) {
+
+			wp_safe_redirect( add_query_arg( array( 'affwp_notice' => 'license-' . $license_data->error, 'affwp_success' => 'no' ), admin_url( 'admin.php?page=affiliate-wp-settings' ) ) ); exit;
+
+		}
+
+		wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-settings' ) ); exit;
+
 	}
 
 	public function deactivate_license() {
 
-		if( ! isset( $_POST['affwp_settings'] ) )
+		if( ! isset( $_POST['affwp_settings'] ) ) {
 			return;
+		}
 
-		if( ! isset( $_POST['affwp_deactivate_license'] ) )
+		if( ! isset( $_POST['affwp_deactivate_license'] ) ) {
 			return;
+		}
 
-		if( ! isset( $_POST['affwp_settings']['license_key'] ) )
+		if( ! isset( $_POST['affwp_settings']['license_key'] ) ) {
 			return;
+		}
 
 		// data to send in our API request
 		$api_params = array(
@@ -1189,13 +1209,22 @@ class Affiliate_WP_Settings {
 		);
 
 		// Call the custom API.
+		$message  = '';
+		$success  = true;
 		$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 35, 'sslverify' => false, 'body' => $api_params ) );
 
 		// make sure the response came back okay
-		if ( is_wp_error( $response ) )
-			return false;
+		if ( is_wp_error( $response ) ) {
+
+			$success = false;
+			$message = $response->get_error_message();
+
+			wp_safe_redirect( add_query_arg( array( 'message' => $message, 'success' => $success ), admin_url( 'admin.php?page=affiliate-wp-settings' ) ) ); exit;
+
+		}
 
 		$this->save( array( 'license_status' => 0 ) );
+
 	}
 
 	public function check_license() {
@@ -1231,7 +1260,7 @@ class Affiliate_WP_Settings {
 
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-			$this->save( array( 'license_status' => $license_data->license ) );
+			$this->save( array( 'license_status' => $license_data ) );
 
 			set_transient( 'affwp_license_check', $license_data->license, DAY_IN_SECONDS );
 

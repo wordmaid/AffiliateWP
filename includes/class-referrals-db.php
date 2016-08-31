@@ -688,7 +688,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 				case 'month':
 					$args['date'] = array(
 						'start' => date( 'Y-m-01 00:00:00', current_time( 'timestamp' ) ),
-						'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 00:00:00', current_time( 'timestamp' ) ),
+						'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 23:59:59', current_time( 'timestamp' ) ),
 					);
 					break;
 			}

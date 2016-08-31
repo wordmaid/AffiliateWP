@@ -170,4 +170,29 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 		$this->assertSame( '20.20', affwp_sanitize_amount( '₱20.2' ) );
 	}
 
+	/**
+	 * @covers ::affwp_get_logout_url
+	 */
+	public function test_affwp_get_logout_url() {
+		$this->assertSame( wp_logout_url( get_permalink() ), affwp_get_logout_url() );
+	}
+
+	/**
+	 * @covers ::affwp_get_logout_url
+	 */
+	public function test_affwp_get_logout_url_with_empty_filter() {
+		add_filter( 'affwp_logout_url', '__return_empty_string' );
+		$this->assertSame('', affwp_get_logout_url() );
+	}
+
+	/**
+	 * @covers ::affwp_get_logout_url
+	 */
+	public function test_affwp_get_logout_url_with_custom_url() {
+		add_filter( 'affwp_logout_url', function() {
+			return home_url( '?action=logout' );
+		} );
+		$this->assertSame( home_url( '?action=logout' ), affwp_get_logout_url() );
+	}
+
 }

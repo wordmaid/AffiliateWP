@@ -576,6 +576,23 @@ function affwp_affiliate_area_show_tab( $tab = '' ) {
 }
 
 /**
+ * Get the logout URL
+ *
+ * @since  1.8.8
+ * @return string logout URL
+ */
+function affwp_get_logout_url() {
+
+	/**
+	 * Filters the URL to log out the current user.
+	 *
+	 * @since 1.8.8
+	 * @param string $logout_url URL to log out the current user.
+	 */
+	return apply_filters( 'affwp_logout_url', wp_logout_url( get_permalink() ) );
+}
+
+/**
  * Retrieve a list of all published pages
  *
  * On large sites this can be expensive, so only load if on the settings page or $force is set to true
@@ -603,4 +620,5 @@ function affwp_get_pages( $force = false ) {
 	}
 
 	return $pages_options;
+
 }

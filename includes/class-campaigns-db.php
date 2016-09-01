@@ -33,13 +33,13 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 	public function get_campaigns( $affiliate_id = 0 ) {
 
 		global $wpdb;
-		
+
 		$cache_key = 'affwp_affiliate_campaigns_' . $affiliate_id;
 
 		$results = wp_cache_get( $cache_key, 'campaigns' );
 
 		if ( false === $results ) {
-		
+
 			$campaigns = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $this->table_name WHERE affiliate_id = %d;", $affiliate_id ) );
 
 			wp_cache_set( $cache_key, $campaigns, 'campaigns', HOUR_IN_SECONDS );
@@ -73,7 +73,7 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 	 *
 	 * @since  1.7
 	 */
-	public function delete( $row_id = 0 ) {
+	public function delete( $row_id = 0, $type = '' ) {
 		_doing_it_wrong( 'delete', 'The AffiliateWP Campaigns table is a read-only VIEW. Data cannot be deleted.', '1.7' );
 	}
 

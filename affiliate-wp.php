@@ -395,11 +395,11 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/scripts.php';
 
 		// REST bootstrap.
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/rest-functions.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-rest-consumer.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-rest.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-rest-authentication.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-rest-consumers-db.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/rest-functions.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/class-rest-consumer.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/class-rest.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/class-rest-authentication.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/class-rest-consumers-db.php';
 
 		// REST endpoints.
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/REST/v1/class-rest-controller.php';

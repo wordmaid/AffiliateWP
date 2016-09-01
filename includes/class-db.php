@@ -1,12 +1,18 @@
 <?php
-
+/**
+ * Affiliate_WP_DB base class.
+ *
+ * The base class for all core objects.
+ *
+ * @since  1.9
+ */
 abstract class Affiliate_WP_DB {
 
 	/**
 	 * Database table name.
 	 *
 	 * @access public
-	 * @var string
+	 * @var    string
 	 */
 	public $table_name;
 
@@ -14,7 +20,7 @@ abstract class Affiliate_WP_DB {
 	 * Database version.
 	 *
 	 * @access public
-	 * @var string
+	 * @var    string
 	 */
 	public $version;
 
@@ -22,7 +28,7 @@ abstract class Affiliate_WP_DB {
 	 * Primary key (unique field) for the database table.
 	 *
 	 * @since public
-	 * @var string
+	 * @var   string
 	 */
 	public $primary_key;
 
@@ -64,7 +70,7 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * Corresponds to the value of $primary_key.
 	 *
-	 * @param int $row_id Row ID.
+	 * @param  int                    $row_id Row ID.
 	 * @return array|null|object|void
 	 */
 	public function get( $row_id ) {
@@ -77,9 +83,9 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @access public
 	 *
-	 * @param string     $column Column name. See get_columns().
-	 * @param int|string $row_id Row ID.
-	 * @return object|null Database query result object or null on failure
+	 * @param  string      $column Column name. See get_columns().
+	 * @param  int|string  $row_id Row ID.
+	 * @return object|null         Database query result object or null on failure.
 	 */
 	public function get_by( $column, $row_id ) {
 		global $wpdb;
@@ -96,9 +102,9 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @access public
 	 *
-	 * @param string     $column Column name. See get_columns().
-	 * @param int|string $row_id Row ID.
-	 * @return string|null Database query result (as string), or null on failure
+	 * @param  string      $column Column name. See get_columns().
+	 * @param  int|string  $row_id Row ID.
+	 * @return string|null         Database query result (as string), or null on failure
 	 */
 	public function get_column( $column, $row_id ) {
 		global $wpdb;
@@ -115,10 +121,10 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @access public
 	 *
-	 * @param string $column       Column name. See get_columns().
-	 * @param string $column_where Column to match against in the WHERE clause.
-	 * @param $column_value        Value to match to the column in the WHERE clause.
-	 * @return string|null Database query result (as string), or null on failure
+	 * @param  string $column       Column name. See get_columns().
+	 * @param  string $column_where Column to match against in the WHERE clause.
+	 * @param  $column_value        Value to match to the column in the WHERE clause.
+	 * @return string|null          Database query result (as string), or null on failure
 	 */
 	public function get_column_by( $column, $column_where, $column_value ) {
 		global $wpdb;
@@ -138,8 +144,8 @@ abstract class Affiliate_WP_DB {
 	 * @access public
 	 * @since  1.9
 	 *
-	 * @param array $clauses Compacted array of query clauses.
-	 * @param array $args    Query arguments.
+	 * @param  array $clauses        Compacted array of query clauses.
+	 * @param  array $args           Query arguments.
 	 * @return array|int|null|object Query results.
 	 */
 	public function get_results( $clauses, $args ) {
@@ -187,9 +193,9 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @access public
 	 *
-	 * @param array  $data Column data. See get_column_defaults().
-	 * @param string $type Optional. Data type context, e.g. 'affiliate', 'creative', etc. Default empty.
-	 * @return int ID for the newly inserted record.
+	 * @param  array  $data Column data. See get_column_defaults().
+	 * @param  string $type Optional. Data type context, e.g. 'affiliate', 'creative', etc. Default empty.
+	 * @return int          ID for the newly inserted record.
 	 */
 	public function insert( $data, $type = '' ) {
 		global $wpdb;
@@ -242,12 +248,12 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @access public
 	 *
-	 * @param int    $row_id Row ID for the record being updated.
-	 * @param array  $data   Optional. Array of columns and associated data to update. Default empty array.
-	 * @param string $where  Optional. Column to match against in the WHERE clause. If empty, $primary_key
-	 *                       will be used. Default empty.
-	 * @param string $type   Optional. Data type context, e.g. 'affiliate', 'creative', etc. Default empty.
-	 * @return bool False if the record could not be updated, true otherwise.
+	 * @param  int    $row_id Row ID for the record being updated.
+	 * @param  array  $data   Optional. Array of columns and associated data to update. Default empty array.
+	 * @param  string $where  Optional. Column to match against in the WHERE clause. If empty, $primary_key
+	 *                        will be used. Default empty.
+	 * @param  string $type   Optional. Data type context, e.g. 'affiliate', 'creative', etc. Default empty.
+	 * @return bool           False if the record could not be updated, true otherwise.
 	 */
 	public function update( $row_id, $data = array(), $where = '', $type = '' ) {
 		global $wpdb;
@@ -310,25 +316,44 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @access public
 	 *
-	 * @param int|string $row_id Row ID.
-	 * @return bool False if the record could not be deleted, true otherwise.
+	 * @param  int|string $row_id Row ID.
+	 * @return bool               False if the record could not be deleted, true otherwise.
 	 */
-	public function delete( $row_id = 0 ) {
-
+	public function delete( $row_id = 0, $type='' ) {
 		global $wpdb;
 
 		// Row ID must be positive integer
 		$row_id = absint( $row_id );
 		$object = $this->get_core_object( $row_id, $this->query_object_type );
 
-		if ( ! $object )
+		if ( ! $object ) {
 			return false;
+		}
+
+		/**
+		 * Fires immediately before an item deletion has been attempted.
+		 *
+		 * @param string     $object Core object type.
+		 * @param int|string $row_id Row ID.
+		 */
+		do_action( 'affwp_pre_delete_' . $type, $row_id );
 
 		if ( false === $wpdb->query( $wpdb->prepare( "DELETE FROM $this->table_name WHERE $this->primary_key = %d", $object->ID ) ) ) {
 			return false;
 		}
 
-		// Invalidate the item cachea along with related query caches.
+		/**
+		 * Fires immediately after an item has been successfully deleted.
+		 *
+		 * In the case of deletion, this must fire prior
+		 * to the cache being invalidated below.
+		 *
+		 * @param string     $object Core object type.
+		 * @param int|string $row_id Row ID.
+		 */
+		do_action( 'affwp_post_delete_' . $type, $row_id );
+
+		// Invalidate the item cache along with related query caches.
 		affwp_clean_item_cache( $object );
 
 		return true;
@@ -337,12 +362,12 @@ abstract class Affiliate_WP_DB {
 	/**
 	 * Retrieves a core object instance based on the given type.
 	 *
-	 * @since 1.9
+	 * @since  1.9
 	 * @access protected
 	 *
-	 * @param object|int $instance Instance or object ID.
-	 * @param string     $class    Object class name.
-	 * @return object|false Object instance, otherwise false.
+	 * @param  object|int   $instance Instance or object ID.
+	 * @param  string       $class    Object class name.
+	 * @return object|false           Object instance, otherwise false.
 	 */
 	protected function get_core_object( $instance, $object_class ) {
 		if ( ! class_exists( $object_class ) ) {

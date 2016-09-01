@@ -320,12 +320,12 @@ final class Affiliate_WP {
 	 */
 	private function includes() {
 
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-base-object.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-affiliate.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-creative.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-payout.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-referral.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-visit.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-base-object.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-affiliate.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-creative.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-payout.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-referral.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-visit.php';
 
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/actions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/settings/class-settings.php';

@@ -329,7 +329,7 @@ final class Affiliate_WP {
 
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/actions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/settings/class-settings.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-db.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affiliates-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-payouts-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-capabilities.php';

@@ -15,12 +15,12 @@ namespace AffWP;
  *
  * @since 1,9
  *
- * @see AffWP\Object
+ * @see AffWP\Base_Object
  * @see affwp_get_visit()
  * 
  * @property-read int $ID Alias for `$visit_id`
  */
-final class Visit extends Object {
+final class Visit extends Base_Object {
 
 	/**
 	 * Visit ID.
@@ -102,14 +102,14 @@ final class Visit extends Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP\Object::get_cache_key()
+	 * @see AffWP\Base_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_visits';
 
 	/**
 	 * Database group.
 	 *
-	 * Used in \AffWP\Object for accessing the visits DB class methods.
+	 * Used in \AffWP\Base_Object for accessing the visits DB class methods.
 	 *
 	 * @since 1.9
 	 * @access public

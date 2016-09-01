@@ -4,9 +4,9 @@ namespace AffWP\Object;
 use AffWP\Tests\UnitTestCase;
 
 /**
- * AffWP\Object tests
+ * AffWP\Base_Object tests
  *
- * @covers AffWP\Object
+ * @covers AffWP\Base_Object
  */
 class Tests extends UnitTestCase {
 
@@ -49,7 +49,7 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers AffWP\Object::__get()
+	 * @covers AffWP\Base_Object::__get()
 	 */
 	public function test__get_with_real_property_should_return_property_value() {
 		$status = affwp_get_affiliate_status( self::$affiliate_id );
@@ -60,7 +60,7 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers AffWP\Object::__get()
+	 * @covers AffWP\Base_Object::__get()
 	 */
 	public function test__get_with_fake_property_should_return_null() {
 		$key = rand_str( 8 );
@@ -71,7 +71,7 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers AffWP\Object::set()
+	 * @covers AffWP\Base_Object::set()
 	 */
 	public function test_set_should_return_always_true_if_save_is_default_false() {
 		if ( $affiliate = affwp_get_affiliate( self::$affiliate_id ) ) {
@@ -80,7 +80,7 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers AffWP\Object::__set()
+	 * @covers AffWP\Base_Object::__set()
 	 */
 	public function test__set_magic_method_should_set_property_in_memory_only() {
 		$key   = rand_str( 5 );
@@ -95,7 +95,7 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers AffWP\Object::set()
+	 * @covers AffWP\Base_Object::set()
 	 */
 	public function test_set_should_set_property_in_memory_only() {
 		$key   = rand_str( 5 );
@@ -110,7 +110,7 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers AffWP\Object::set()
+	 * @covers AffWP\Base_Object::set()
 	 */
 	public function test_set_with_save_parameter_true_and_fake_key_should_return_false() {
 		$key   = rand_str( 5 );
@@ -122,7 +122,7 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers AffWP\Object::set()
+	 * @covers AffWP\Base_Object::set()
 	 */
 	public function test_set_with_save_parameter_true_and_real_key_should_return_true() {
 		if ( $affiliate = affwp_get_affiliate( self::$affiliate_id ) ) {
@@ -139,7 +139,7 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers AffWP\Object::save()
+	 * @covers AffWP\Base_Object::save()
 	 */
 	public function test_save_on_success_should_return_true() {
 		if ( $affiliate = affwp_get_affiliate( self::$affiliate_id ) ) {
@@ -150,7 +150,7 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers AffWP\Object::save()
+	 * @covers AffWP\Base_Object::save()
 	 */
 	public function test_save_on_failure_should_return_false() {
 		if ( $affiliate = affwp_get_affiliate( self::$affiliate_id ) ) {

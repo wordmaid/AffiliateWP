@@ -16,7 +16,7 @@ namespace AffWP;
  * @since 1.9
  * @abstract
  */
-abstract class Object {
+abstract class Base_Object {
 
 	/**
 	 * Whether the object members have been filled.

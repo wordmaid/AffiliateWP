@@ -15,12 +15,12 @@ namespace AffWP;
  *
  * @since 1,9
  *
- * @see AffWP\Object
+ * @see AffWP\Base_Object
  * @see affwp_get_creative()
  *
  * @property-read int $ID Alias for `$creative_id`
  */
-final class Creative extends Object {
+final class Creative extends Base_Object {
 
 	/**
 	 * Creative ID.
@@ -102,14 +102,14 @@ final class Creative extends Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP\Object::get_cache_key()
+	 * @see AffWP\Base_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_creatives';
 
 	/**
 	 * Database group.
 	 *
-	 * Used in \AffWP\Object for accessing the creatives DB class methods.
+	 * Used in \AffWP\Base_Object for accessing the creatives DB class methods.
 	 *
 	 * @since 1.9
 	 * @access public

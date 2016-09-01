@@ -15,11 +15,11 @@ namespace AffWP\REST;
  *
  * @since 1.9
  *
- * @see \AffWP\Object
+ * @see \AffWP\Base_Object
  *
  * @property-read int $ID Alias for `$user_id`.
  */
-final class Consumer extends \AffWP\Object {
+final class Consumer extends \AffWP\Base_Object {
 
 	/**
 	 * API consumer ID.
@@ -74,14 +74,14 @@ final class Consumer extends \AffWP\Object {
 	 * @var    string
 	 * @static
 	 *
-	 * @see AffWP\Object::get_cache_key()
+	 * @see AffWP\Base_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_consumers';
 
 	/**
 	 * Database group.
 	 *
-	 * Used in \AffWP\Object for accessing the consumers DB class methods.
+	 * Used in \AffWP\Base_Object for accessing the consumers DB class methods.
 	 *
 	 * Note the use of primary and secondary db groups separated with a colon.
 	 *

@@ -320,7 +320,7 @@ final class Affiliate_WP {
 	 */
 	private function includes() {
 
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-object.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-base-object.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-affiliate.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-creative.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/objects/class-affwp-payout.php';

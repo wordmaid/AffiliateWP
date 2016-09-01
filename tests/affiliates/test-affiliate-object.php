@@ -8,7 +8,7 @@ use AffWP\Affiliate as Affiliate;
  * Tests for AffWP\Affiliate
  *
  * @covers AffWP\Affiliate
- * @covers AffWP\Object
+ * @covers AffWP\Base_Object
  *
  * @group affiliates
  * @group objects
@@ -52,14 +52,14 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers AffWP\Object::get_instance()
+	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_invalid_affiliate_id_should_return_false() {
 		$this->assertFalse( Affiliate::get_instance( 0 ) );
 	}
 
 	/**
-	 * @covers AffWP\Object::get_instance()
+	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_affiliate_id_should_return_Affiliate_object() {
 		$affiliate = Affiliate::get_instance( self::$affiliate_id );

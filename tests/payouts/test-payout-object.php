@@ -8,7 +8,7 @@ use AffWP\Affiliate\Payout;
  * Tests for AffWP\Affiliate\Payout
  *
  * @covers AffWP\Affiliate\Payout
- * @covers AffWP\Object
+ * @covers AffWP\Base_Object
  *
  * @group payouts
  * @group objects
@@ -16,14 +16,14 @@ use AffWP\Affiliate\Payout;
 class Tests extends UnitTestCase {
 
 	/**
-	 * @covers AffWP\Object::get_instance()
+	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_invalid_payout_id_should_return_false() {
 		$this->assertFalse( Payout::get_instance( 0 ) );
 	}
 
 	/**
-	 * @covers AffWP\Object::get_instance()
+	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_payout_id_should_return_Payout_object() {
 		$payout_id = $this->factory->payout->create();

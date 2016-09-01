@@ -15,12 +15,12 @@ namespace AffWP;
  *
  * @since 1,9
  *
- * @see AffWP\Object
+ * @see AffWP\Base_Object
  * @see affwp_get_referral()
  *
  * @property-read int $ID Alias for `$referral_id`
  */
-final class Referral extends Object {
+final class Referral extends Base_Object {
 
 	/**
 	 * Referral ID.
@@ -147,14 +147,14 @@ final class Referral extends Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP\Object::get_cache_key()
+	 * @see AffWP\Base_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_referrals';
 
 	/**
 	 * Database group.
 	 *
-	 * Used in \AffWP\Object for accessing the referrals DB class methods.
+	 * Used in \AffWP\Base_Object for accessing the referrals DB class methods.
 	 *
 	 * @since 1.9
 	 * @access public

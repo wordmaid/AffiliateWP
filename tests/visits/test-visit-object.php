@@ -8,7 +8,7 @@ use AffWP\Visit;
  * Tests for AffWP\Visit
  *
  * @covers AffWP\Visit
- * @covers AffWP\Object
+ * @covers AffWP\Base_Object
  *
  * @group visits
  * @group objects
@@ -16,14 +16,14 @@ use AffWP\Visit;
 class Tests extends UnitTestCase {
 
 	/**
-	 * @covers AffWP\Object::get_instance()
+	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_invalid_visit_id_should_return_false() {
 		$this->assertFalse( Visit::get_instance( 0 ) );
 	}
 
 	/**
-	 * @covers AffWP\Object::get_instance()
+	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_visit_id_should_return_Visit_object() {
 		$visit_id = $this->factory->visit->create( array(

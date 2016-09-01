@@ -15,13 +15,13 @@ namespace AffWP;
  *
  * @since 1,9
  *
- * @see AffWP\Object
+ * @see AffWP\Base_Object
  * @see affwp_get_affiliate()
  *
  * @property-read int     $ID   Alias for `$affiliate_id`.
  * @property      WP_User $user User object.
  */
-final class Affiliate extends Object {
+final class Affiliate extends Base_Object {
 
 	/**
 	 * Affiliate ID.
@@ -125,14 +125,14 @@ final class Affiliate extends Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP\Object::get_cache_key()
+	 * @see AffWP\Base_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_affiliates';
 
 	/**
 	 * Database group.
 	 *
-	 * Used in \AffWP\Object for accessing the affiliates DB class methods.
+	 * Used in \AffWP\Base_Object for accessing the affiliates DB class methods.
 	 *
 	 * @since 1.9
 	 * @access public

@@ -15,12 +15,12 @@ namespace AffWP\Affiliate;
  *
  * @since 1,9
  *
- * @see AffWP\Object
+ * @see AffWP\Base_Object
  * @see affwp_get_payouts()
  *
  * @property-read int $ID Alias for `$payout_id`.
  */
-final class Payout extends \AffWP\Object {
+final class Payout extends \AffWP\Base_Object {
 
 	/**
 	 * Payout ID.
@@ -93,14 +93,14 @@ final class Payout extends \AffWP\Object {
 	 * @var    string
 	 * @static
 	 *
-	 * @see AffWP\Object::get_cache_key()
+	 * @see AffWP\Base_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_payouts';
 
 	/**
 	 * Database group.
 	 *
-	 * Used in \AffWP\Object for accessing the affiliates DB class methods.
+	 * Used in \AffWP\Base_Object for accessing the affiliates DB class methods.
 	 *
 	 * @since 1.9
 	 * @access public

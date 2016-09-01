@@ -607,7 +607,7 @@ function affwp_affiliate_area_show_tab( $tab = '' ) {
  *
  * @since 1.9
  *
- * @param AffWP\Object $object Object.
+ * @param AffWP\Base_Object $object Base_Object.
  * @return bool True if the item cache was cleaned, false otherwise.
  */
 function affwp_clean_item_cache( $object ) {

@@ -45,13 +45,6 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * Destroy fixtures.
-	 */
-	public static function wpTearDownAfterClass() {
-		affwp_delete_affiliate( self::$affiliate_id );
-	}
-
-	/**
 	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_invalid_affiliate_id_should_return_false() {

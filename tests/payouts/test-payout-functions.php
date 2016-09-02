@@ -53,21 +53,6 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * Destroy fixtures.
-	 */
-	public static function wpTearDownAfterClass() {
-		affwp_delete_affiliate( self::$affiliate_id );
-
-		foreach ( self::$referrals as $referral ) {
-			affwp_delete_referral( $referral );
-		}
-
-		foreach ( self::$payouts as $payout ) {
-			affwp_delete_payout( $payout );
-		}
-	}
-
-	/**
 	 * @covers ::affwp_get_payout()
 	 */
 	public function test_get_payout_with_an_invalid_payout_id_should_return_false() {

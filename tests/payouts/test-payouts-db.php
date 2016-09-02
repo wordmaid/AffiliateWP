@@ -54,38 +54,6 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * Destroy fixtures.
-	 */
-	public static function wpTearDownAfterClass() {
-		$affiliates = affiliate_wp()->affiliates->get_affiliates( array(
-			'number' => -1,
-			'fields' => 'ids',
-		) );
-
-		foreach ( $affiliates as $affiliate ) {
-			affwp_delete_affiliate( $affiliate );
-		}
-
-		$referrals = affiliate_wp()->referrals->get_referrals( array(
-			'number' => -1,
-			'fields' => 'ids',
-		) );
-
-		foreach ( $referrals as $referral ) {
-			affwp_delete_referral( $referral );
-		}
-
-		$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
-			'number' => -1,
-			'fields' => 'ids',
-		) );
-
-		foreach ( $payouts as $payout ) {
-			affwp_delete_payout( $payout );
-		}
-	}
-
-	/**
 	 * @covers Affiliate_WP_Payouts_DB::add()
 	 */
 	public function test_add_should_return_false_if_affiliate_id_undefined() {

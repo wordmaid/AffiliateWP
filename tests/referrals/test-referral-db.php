@@ -28,16 +28,6 @@ class Referrals_DB_Tests extends UnitTestCase {
 	}
 
 	/**
-	 * Destroy fixtures.
-	 */
-	public static function wpTearDownAfterClass() {
-		foreach ( self::$referrals as $referral ) {
-			affwp_delete_referral( $referral );
-		}
-		affwp_delete_affiliate( self::$affiliate_id );
-	}
-
-	/**
 	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
 	 */
 	public function test_get_referrals_should_return_array_of_Referral_objects_if_not_count_query() {

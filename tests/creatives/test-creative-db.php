@@ -29,20 +29,6 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * Destroy fixtures.
-	 */
-	public static function wpTearDownAfterClass() {
-		$creatives = affiliate_wp()->creatives->get_creatives( array(
-			'number' => -1,
-			'fields' => 'ids',
-		) );
-
-		foreach ( $creatives as $creative ) {
-			affwp_delete_creative( $creative );
-		}
-	}
-
-	/**
 	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
 	 */
 	public function test_get_creatives_should_return_array_of_Creative_objects_if_not_count_query() {

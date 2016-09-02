@@ -61,20 +61,6 @@ class Tests extends UnitTestCase {
 
 	}
 
-	/**
-	 * Destroy fixtures.
-	 */
-	public static function wpTearDownAfterClass() {
-		$affiliates = affiliate_wp()->affiliates->get_affiliates( array(
-			'number' => -1,
-			'fields' => 'ids',
-		) );
-
-		foreach ( $affiliates as $affiliate ) {
-			affwp_delete_affiliate( $affiliate );
-		}
-	}
-
 	public function setUp() {
 		parent::setUp();
 

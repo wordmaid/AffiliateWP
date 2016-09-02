@@ -28,6 +28,28 @@ class UnitTestCase extends \WP_UnitTestCase {
 		return $factory;
 	}
 
+	public static function tearDownAfterClass() {
+		self::_delete_all_data();
+
+		return parent::tearDownAfterClass();
+	}
+
+	protected static function _delete_all_data() {
+		global $wpdb;
+
+		foreach ( array(
+			affiliate_wp()->affiliates->table_name,
+			affiliate_wp()->affiliate_meta->table_name,
+			affiliate_wp()->creatives->table_name,
+			affiliate_wp()->affiliates->payouts->table_name,
+			affiliate_wp()->referrals->table_name,
+			affiliate_wp()->REST->consumers->table_name,
+			affiliate_wp()->visits->table_name
+		) as $table ) {
+			$wpdb->query( "DELETE FROM {$table}" );
+		}
+	}
+
 	/**
 	 * Helper to flush the $wp_roles global.
 	 */

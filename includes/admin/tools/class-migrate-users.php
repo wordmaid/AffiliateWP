@@ -19,6 +19,58 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 	public $roles = array();
 
 	/**
+	 * Whether debug mode is enabled.
+	 *
+	 * @access  public
+	 * @since   1.8.8
+	 * @var     bool
+	 */
+	public $debug;
+
+	/**
+	 * Logging class object
+	 *
+	 * @access  public
+	 * @since   1.8.8
+	 * @var     Affiliate_WP_Logging
+	 */
+	public $logs;
+
+	/**
+	 * Constructor.
+	 *
+	 * Sets up logging.
+	 *
+	 * @access  public
+	 * @since   1.8.8
+	 */
+	public function __construct() {
+
+		$this->debug = (bool) affiliate_wp()->settings->get( 'debug_mode', false );
+
+		if( $this->debug ) {
+			$this->logs = new Affiliate_WP_Logging;
+		}
+	}
+
+	/**
+	 * Writes a log message.
+	 *
+	 * @access  public
+	 * @since   1.8.8
+	 *
+	 * @param string $message Optional. Message to log. Default empty.
+	 */
+	public function log( $message = '' ) {
+
+		if ( $this->debug ) {
+
+			$this->logs->log( $message );
+
+		}
+	}
+
+	/**
 	 * Process the migration routine
 	 *
 	 * @since  1.3
@@ -64,10 +116,14 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 				'type'  => 'users',
 				'part'  => $part,
 				'step'  => $step,
-				'roles' => implode( ',', array_map( 'sanitize_text_field', $this->roles ) )
+				'roles' => array_map( 'sanitize_key', $this->roles )
 			),
 			admin_url( 'index.php' )
 		);
+
+		if( $this->debug ) {
+			$this->log( $redirect );
+		}
 
 		wp_safe_redirect( $redirect );
 
@@ -85,6 +141,7 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 	public function do_users( $step = 1 ) {
 
 		if ( ! $this->roles ) {
+			
 			return false;
 		}
 
@@ -93,7 +150,8 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 			'offset'     => ( $step - 1 ) * 100,
 			'orderby'    => 'ID',
 			'order'      => 'ASC',
-			'role__in'   => $this->roles
+			'role__in'   => $this->roles,
+			'fields'     => array( 'ID', 'user_email', 'user_registered' )
 		);
 
 		$users = get_users( $args );
@@ -106,7 +164,7 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 
 		foreach ( $users as $user ) {
 
-			$affiliate_exists = affiliate_wp()->affiliates->get_by( 'user_id', $user->data->ID );
+			$affiliate_exists = affiliate_wp()->affiliates->get_by( 'user_id', $user->ID );
 
 			if ( $affiliate_exists ) {
 				continue;
@@ -114,9 +172,9 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 
 			$args = array(
 				'status'          => 'active',
-				'user_id'         => $user->data->ID,
-				'payment_email'	  => $user->data->user_email,
-				'date_registered' => $user->data->user_registered
+				'user_id'         => $user->ID,
+				'payment_email'	  => $user->user_email,
+				'date_registered' => $user->user_registered
 			);
 
 			$inserted[] = affiliate_wp()->affiliates->insert( $args, 'affiliate' );

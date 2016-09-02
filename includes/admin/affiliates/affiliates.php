@@ -330,7 +330,8 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 
 		$row_actions = array();
 		$user_info = get_userdata( $affiliate->user_id );
-		$username  = $user_info->user_login;
+
+		$username = ( $user_info ) ? $user_info->user_login : false;
 
 		if ( $username ) {
 			$value = $username;

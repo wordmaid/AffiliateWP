@@ -144,11 +144,13 @@ abstract class Affiliate_WP_DB {
 	 * @access public
 	 * @since  1.9
 	 *
-	 * @param  array $clauses        Compacted array of query clauses.
-	 * @param  array $args           Query arguments.
+	 * @param array    $clauses        Compacted array of query clauses.
+	 * @param array    $args           Query arguments.
+	 * @param callable $callback       Optional. Callback to run against results in the generic results case.
+	 *                                 Default empty.
 	 * @return array|int|null|object Query results.
 	 */
-	public function get_results( $clauses, $args ) {
+	public function get_results( $clauses, $args, $callback = '' ) {
 		global $wpdb;
 
 		if ( true === $clauses['count'] ) {
@@ -181,6 +183,9 @@ abstract class Affiliate_WP_DB {
 				)
 			);
 
+			if ( ! empty( $callback ) && is_callable( $callback ) ) {
+				$results = array_map( $callback, $results );
+			}
 		}
 
 		return $results;

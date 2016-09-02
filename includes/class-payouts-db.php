@@ -567,13 +567,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 
 			$clauses = compact( 'fields', 'join', 'where', 'orderby', 'order', 'count' );
 
-			$results = $this->get_results( $clauses, $args );
-
-			// If not a count query or ids only, convert to objects.
-			if ( ! is_numeric( $results ) && 'ids' !== $args['fields'] ) {
-				$results = array_map( 'affwp_get_payout', $results );
-			}
-
+			$results = $this->get_results( $clauses, $args, 'affwp_get_payout' );
 		}
 
 		wp_cache_add( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );

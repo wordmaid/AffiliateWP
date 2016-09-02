@@ -133,7 +133,7 @@ class Database extends \Affiliate_WP_DB {
 			$args['number'] = 999999999999;
 		}
 
-		$where = '';
+		$where = $join = '';
 
 		// Specific consumers.
 		if ( ! empty( $args['consumer_id'] ) ) {
@@ -200,36 +200,9 @@ class Database extends \Affiliate_WP_DB {
 
 		if ( false === $results ) {
 
-			if ( true === $count ) {
+			$clauses = compact( 'fields', 'join', 'where', 'orderby', 'order', 'count' );
 
-				$results = absint( $wpdb->get_var( "SELECT COUNT({$this->primary_key}) FROM {$this->table_name} {$where};" ) );
-
-			} elseif ( 'ids' === $args['fields'] ) {
-
-				$results = $wpdb->get_col(
-					$wpdb->prepare(
-						"SELECT {$fields} FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
-						absint( $args['offset'] ),
-						absint( $args['number'] )
-					)
-				);
-
-				// Ensure returned IDs are integers.
-				$results = array_map( 'intval', $results );
-
-			} else {
-
-				$results = $wpdb->get_results(
-					$wpdb->prepare(
-						"SELECT {$fields} FROM {$this->table_name} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
-						absint( $args['offset'] ),
-						absint( $args['number'] )
-					)
-				);
-
-				// Convert to AffWP\REST\Consumer objects.
-				$results = array_map( 'affwp_get_rest_consumer', $results );
-			}
+			$results = $this->get_results( $clauses, $args, 'affwp_get_rest_consumer' );
 		}
 
 		wp_cache_add( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );

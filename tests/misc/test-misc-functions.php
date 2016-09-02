@@ -171,6 +171,26 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_handle_nonstandard_thousands_and_decimal_separators() {
+		affiliate_wp()->settings->set( array(
+			'thousands_separator' => '.',
+			'decimal_separator' => ','
+		) );
+
+		$this->assertSame( '10000.00', affwp_sanitize_amount( '10.000,00' ) );
+		$this->assertSame( '10.00', affwp_sanitize_amount( '10,00' ) );
+
+		// Clean up.
+		affiliate_wp()->settings->set( array(
+			'thousands_separator' => ',',
+			'decimal_separator' => '.'
+		) );
+
+	}
+
+	/**
 	 * @covers ::affwp_get_logout_url
 	 */
 	public function test_affwp_get_logout_url() {

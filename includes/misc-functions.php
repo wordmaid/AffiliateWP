@@ -100,17 +100,14 @@ function affwp_get_currency() {
  * @return string $amount Newly sanitized amount
  */
 function affwp_sanitize_amount( $amount ) {
-	global $affwp_options;
 
+	$is_negative   = false;
 	$thousands_sep = affiliate_wp()->settings->get( 'thousands_separator', ',' );
 	$decimal_sep   = affiliate_wp()->settings->get( 'decimal_separator', '.' );
 
-	// Remove non-numeric numbers
-	$amount = preg_replace("/([^0-9\\.])/i", "", $amount );
-
 	// Sanitize the amount
 	if ( $decimal_sep == ',' && false !== ( $found = strpos( $amount, $decimal_sep ) ) ) {
-		if ( $thousands_sep == '.' && false !== ( $found = strpos( $amount, $thousands_sep ) ) ) {
+		if ( ( $thousands_sep == '.' || $thousands_sep == ' ' ) && false !== ( $found = strpos( $amount, $thousands_sep ) ) ) {
 			$amount = str_replace( $thousands_sep, '', $amount );
 		} elseif( empty( $thousands_sep ) && false !== ( $found = strpos( $amount, '.' ) ) ) {
 			$amount = str_replace( '.', '', $amount );
@@ -121,10 +118,36 @@ function affwp_sanitize_amount( $amount ) {
 		$amount = str_replace( $thousands_sep, '', $amount );
 	}
 
-	$decimals = apply_filters( 'affwp_sanitize_amount_decimals', affwp_get_decimal_count(), $amount );
-	$amount   = number_format( floatval( $amount ), absint( $decimals ), '.', '' );
+	if( $amount < 0 ) {
+		$is_negative = true;
+	}
 
+	$amount   = preg_replace( '/[^0-9\.]/', '', $amount );
+
+	/**
+	 * Filter number of decimals to use for prices
+	 *
+	 * @since 1.0
+	 *
+	 * @param int $number Number of decimals
+	 * @param int|string $amount Price
+	 */
+	$decimals = apply_filters( 'affwp_sanitize_amount_decimals', affwp_get_decimal_count(), $amount );
+	$amount   = number_format( (double) $amount, $decimals, '.', '' );
+
+	if( $is_negative ) {
+		$amount *= -1;
+	}
+
+	/**
+	 * Filter the sanitized price before returning
+	 *
+	 * @since 1.0
+	 *
+	 * @param string $amount Price
+	 */
 	return apply_filters( 'affwp_sanitize_amount', $amount );
+
 }
 
 /**

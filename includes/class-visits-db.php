@@ -154,18 +154,22 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		// visits for specific affiliates
 		if( ! empty( $args['affiliate_id'] ) ) {
 
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
 			if( is_array( $args['affiliate_id'] ) ) {
 				$affiliate_ids = implode( ',', array_map( 'intval', $args['affiliate_id'] ) );
 			} else {
 				$affiliate_ids = intval( $args['affiliate_id'] );
 			}
 
-			$where .= "WHERE `affiliate_id` IN( {$affiliate_ids} ) ";
+			$where .= "`affiliate_id` IN( {$affiliate_ids} ) ";
 
 		}
 
 		// visits for specific referral
 		if( ! empty( $args['referral_id'] ) ) {
+
+			$where .= empty( $where ) ? "WHERE " : "AND ";
 
 			if( is_array( $args['referral_id'] ) ) {
 				$referral_ids = implode( ',', array_map( 'intval', $args['referral_id'] ) );
@@ -173,23 +177,19 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 				$referral_ids = intval( $args['referral_id'] );
 			}
 
-			$where .= "WHERE `referral_id` IN( {$referral_ids} ) ";
+			$where .= "`referral_id` IN( {$referral_ids} ) ";
 
 		}
 
 		// visits for specific campaign
 		if( ! empty( $args['campaign'] ) ) {
 
-			if( empty( $where ) ) {
-				$where .= " WHERE";
-			} else {
-				$where .= " AND";
-			}
+			$where .= empty( $where ) ? "WHERE " : "AND ";
 
 			if( is_array( $args['campaign'] ) ) {
-				$where .= " `campaign` IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
+				$where .= "`campaign` IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
 			} else {
-				$where .= " `campaign` = '" . esc_sql( $args['campaign'] ) . "' ";
+				$where .= "`campaign` = '" . esc_sql( $args['campaign'] ) . "' ";
 			}
 
 		}
@@ -197,10 +197,12 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		// visits for specific referral status
 		if ( ! empty( $args['referral_status'] ) ) {
 
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
 			if ( 'converted' === $args['referral_status'] ) {
-				$where .= "WHERE `referral_id` > 0";
+				$where .= "`referral_id` > 0 ";
 			} elseif ( 'unconverted' === $args['referral_status'] ) {
-				$where .= "WHERE `referral_id` = 0";
+				$where .= "`referral_id` = 0 ";
 			}
 
 		}
@@ -212,26 +214,20 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 
 				if( ! empty( $args['date']['start'] ) ) {
 
+					$where .= empty( $where ) ? "WHERE " : "AND ";
+
 					$start = esc_sql( date( 'Y-m-d H:i:s', strtotime( $args['date']['start'] ) ) );
 
-					if( ! empty( $where ) ) {
-						$where .= " AND `date` >= '{$start}'";
-					} else {
-						$where .= " WHERE `date` >= '{$start}'";
-					}
-
+					$where .= "`date` >= '{$start}' ";
 				}
 
 				if( ! empty( $args['date']['end'] ) ) {
 
+					$where .= empty( $where ) ? "WHERE " : "AND ";
+
 					$end = esc_sql( date( 'Y-m-d H:i:s', strtotime( $args['date']['end'] ) ) );
 
-					if( ! empty( $where ) ) {
-						$where .= " AND `date` <= '{$end}'";
-					} else {
-						$where .= " WHERE `date` <= '{$end}'";
-					}
-
+					$where .= "`date` <= '{$end}' ";
 				}
 
 			} else {
@@ -240,13 +236,9 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 				$month = date( 'm', strtotime( $args['date'] ) );
 				$day   = date( 'd', strtotime( $args['date'] ) );
 
-				if( empty( $where ) ) {
-					$where .= " WHERE";
-				} else {
-					$where .= " AND";
-				}
+				$where .= empty( $where ) ? "WHERE " : "AND ";
 
-				$where .= " $year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date )";
+				$where .= "$year = YEAR ( date ) AND $month = MONTH ( date ) AND $day = DAY ( date ) ";
 			}
 
 		}
@@ -254,18 +246,14 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		// Build the search query
 		if( ! empty( $args['search'] ) ) {
 
-			if( empty( $where ) ) {
-				$where .= " WHERE";
-			} else {
-				$where .= " AND";
-			}
+			$where .= empty( $where ) ? "WHERE " : "AND ";
 
 			if ( filter_var( $args['search'], FILTER_VALIDATE_IP ) ) {
-				$where .= " `ip` LIKE '%%" . esc_sql( $args['search'] ) . "%%' ";
+				$where .= "`ip` LIKE '%%" . esc_sql( $args['search'] ) . "%%' ";
 			} else {
 				$search_value = esc_sql( $args['search'] );
 
-				$where .= " ( `referrer` LIKE '%%" . $search_value . "%%' OR `url` LIKE '%%" . $search_value . "%%' ) ";
+				$where .= "( `referrer` LIKE '%%" . $search_value . "%%' OR `url` LIKE '%%" . $search_value . "%%' ) ";
 			}
 		}
 

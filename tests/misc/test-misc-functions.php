@@ -106,6 +106,8 @@ class Tests extends UnitTestCase {
 		$count = affwp_get_decimal_count();
 
 		$this->assertEquals( 3, $count );
+
+		remove_all_filters( 'affwp_decimal_count' );
 	}
 
 	/**
@@ -148,6 +150,89 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_format_rate_should_format_non_percentage_as_flat() {
 		$this->assertSame( '&#36;20', affwp_format_rate( 20, 'flat' ) );
+	}
+
+	/*
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_commas() {
+		$this->assertSame( '20000.20', affwp_sanitize_amount( '20,000.20' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_spaces() {
+		$this->assertSame( '20000.20', affwp_sanitize_amount( '20 000.20' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_default_to_two_decimals() {
+		$this->assertSame( '20.20', affwp_sanitize_amount( '20.2' ) );
+		$this->assertSame( '25.42', affwp_sanitize_amount( '25.42221112993' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_currency_symols() {
+		$this->assertSame( '20.20', affwp_sanitize_amount( '$20.2' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_currency_symbols_and_default_to_two_decimals() {
+		$this->assertSame( '10.00', affwp_sanitize_amount( '£10') );
+		$this->assertSame( '20.20', affwp_sanitize_amount( '₱20.2' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_handle_nonstandard_thousands_and_decimal_separators() {
+		affiliate_wp()->settings->set( array(
+			'thousands_separator' => '.',
+			'decimal_separator' => ','
+		) );
+
+		$this->assertSame( '10000.00', affwp_sanitize_amount( '10.000,00' ) );
+		$this->assertSame( '10.00', affwp_sanitize_amount( '10,00' ) );
+
+		// Clean up.
+		affiliate_wp()->settings->set( array(
+			'thousands_separator' => ',',
+			'decimal_separator' => '.'
+		) );
+
+	}
+
+	/**
+	 * @covers ::affwp_get_logout_url
+	 */
+	public function test_affwp_get_logout_url() {
+		$this->assertSame( wp_logout_url( get_permalink() ), affwp_get_logout_url() );
+	}
+
+	/**
+	 * @covers ::affwp_get_logout_url
+	 */
+	public function test_affwp_get_logout_url_with_empty_filter() {
+		add_filter( 'affwp_logout_url', '__return_empty_string' );
+		$this->assertSame('', affwp_get_logout_url() );
+	}
+
+	/**
+	 * @covers ::affwp_get_logout_url
+	 */
+	public function test_affwp_get_logout_url_with_custom_url() {
+		add_filter( 'affwp_logout_url', function() {
+			return home_url( '?action=logout' );
+		} );
+		$this->assertSame( home_url( '?action=logout' ), affwp_get_logout_url() );
+>>>>>>> master
 	}
 
 }

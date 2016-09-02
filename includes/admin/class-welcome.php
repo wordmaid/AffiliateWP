@@ -126,6 +126,14 @@ class Affiliate_WP_Welcome {
 			float: right;
 			margin-left: 10px !important;
 		}
+		.dashboard_page_affwp-what-is-new .about-wrap p,
+		.dashboard_page_affwp-getting-started .about-wrap p {
+			margin-left: 0;
+		}
+
+		.dashboard_page_affwp-what-is-new .about-wrap h2 {
+			text-align: left;
+		}
 		/*]]>*/
 		</style>
 		<?php

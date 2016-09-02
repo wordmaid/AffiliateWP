@@ -232,7 +232,6 @@ class Tests extends UnitTestCase {
 			return home_url( '?action=logout' );
 		} );
 		$this->assertSame( home_url( '?action=logout' ), affwp_get_logout_url() );
->>>>>>> master
 	}
 
 }

@@ -80,4 +80,29 @@ class Tests extends UnitTestCase {
 
 	}
 
+	/**
+	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 */
+	public function test_get_visits_with_singular_visit_id_should_return_that_visit() {
+		$results = affiliate_wp()->visits->get_visits( array(
+			'visit_id' => self::$visits[0],
+			'fields'   => 'ids',
+		) );
+
+		$this->assertSame( self::$visits[0], $results[0] );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 */
+	public function test_get_visits_with_multiple_visits_should_return_only_those_visits() {
+		$visits = array( self::$visits[1], self::$visits[3] );
+
+		$results = affiliate_wp()->visits->get_visits( array(
+			'visit_id' => $visits,
+			'fields'   => 'ids',
+		) );
+
+		$this->assertEqualSets( $visits, $results );
+	}
 }

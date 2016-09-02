@@ -95,6 +95,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 	 *
 	 *     @type int          $number          Number of visits to retrieve. Accepts -1 for all. Default 20.
 	 *     @type int          $offset          Number of visits to offset in the query. Default 0.
+	 *     @type int|array    $visit_id        Specific visit ID or array of IDs to query for. Default 0 (all).
 	 *     @type int|array    $affiliate_id    Specific affiliate ID or array of IDs to query visits for.
 	 *                                         Default 0 (all).
 	 *     @type int|array    $referral_id     Specific referral ID or array of IDs to query visits for.
@@ -116,6 +117,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		$defaults = array(
 			'number'          => 20,
 			'offset'          => 0,
+			'visit_id'        => 0,
 			'affiliate_id'    => 0,
 			'referral_id'     => 0,
 			'referral_status' => '',
@@ -132,6 +134,22 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		}
 
 		$where = $join = '';
+
+		// Specific visits.
+		if( ! empty( $args['visit_id'] ) ) {
+
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
+			if( is_array( $args['visit_id'] ) ) {
+				$visit_ids = implode( ',', array_map( function( $visit_id ) {
+					return esc_sql( intval( $visit_id ) );
+				}, $args['visit_id'] ) );
+			} else {
+				$visit_ids = esc_sql( intval( $args['visit_id'] ) );
+			}
+
+			$where .= "`visit_id` IN( {$visit_ids} ) ";
+		}
 
 		// visits for specific affiliates
 		if( ! empty( $args['affiliate_id'] ) ) {

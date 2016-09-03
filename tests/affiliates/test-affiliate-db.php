@@ -226,6 +226,67 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
 	 */
+	public function test_get_affiliates_number_should_return_that_number_or_less() {
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'number' => 2
+		) );
+
+		$this->assertCount( 2, $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 */
+	public function test_get_affiliates_number_all_should_return_all() {
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'number' => -1
+		) );
+
+		$this->assertCount( 4, $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 */
+	public function test_get_affiliates_offset_should_offset_that_number() {
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'offset' => 2,
+			'fields' => 'ids',
+			'order'  => 'ASC',
+		) );
+
+		$affiliates = array( self::$affiliates[2], self::$affiliates[3] );
+
+		$this->assertEqualSets( $affiliates, $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 */
+	public function test_get_affiliates_exclude_with_single_affiliate_id_should_exclude_that_affiliate() {
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'exclude' => self::$affiliates[0],
+			'fields'  => 'ids',
+		) );
+
+		$this->assertFalse( in_array( self::$affiliates[0], $results, true ) );
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 */
+	public function test_get_affiliates_exclude_with_multiple_affiliate_ids_should_exclude_those_affiliates() {
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'exclude' => array( self::$affiliates[0], self::$affiliates[1] ),
+			'fields'  => 'ids',
+		) );
+
+		$this->assertEqualSets( array( self::$affiliates[2], self::$affiliates[3] ), $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 */
 	public function test_get_affiliates_default_orderby_should_order_by_affiliate_id() {
 		$results = affiliate_wp()->affiliates->get_affiliates( array(
 			'order'  => 'ASC',
@@ -503,6 +564,29 @@ class Tests extends UnitTestCase {
 				'earnings'     => 0
 			) );
 		}
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 */
+	public function test_get_affiliates_order_ASC_should_order_ascending() {
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'order'  => 'ASC', // default 'DESC'
+			'fields' => 'ids',
+		) );
+
+		$this->assertEqualSets( array_reverse( self::$affiliates ), $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 */
+	public function test_get_affiliates_order_DESC_should_order_descending() {
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'fields' => 'ids',
+		) );
+
+		$this->assertEqualSets( self::$affiliates, $results );
 	}
 
 	/**

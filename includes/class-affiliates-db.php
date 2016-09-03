@@ -133,6 +133,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 *     @type string    $orderby      Affiliates table column to order results by. Also accepts 'paid',
 	 *                                   'unpaid', 'rejected', or 'pending' referral statuses, 'name'
 	 *                                   (user display_name), or 'username' (user user_login). Default 'affiliate_id'.
+	 *     @type string    $fields       Specific fields to retrieve. Accepts 'ids' or '*' (all). Default '*'.
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 * @return array Array of affiliate objects (if found).
@@ -169,7 +170,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 			$where .= empty( $where ) ? "WHERE " : "AND ";
 
 			if ( is_array( $args['exclude'] ) ) {
-				$exclude = array_map( 'intval', $args['exclude'] );
+				$exclude = implode( ',', array_map( 'intval', $args['exclude'] ) );
 			} else {
 				$exclude = intval( $args['exclude'] );
 			}

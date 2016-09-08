@@ -72,8 +72,13 @@ table.affiliates #name {
 	width: 240px;
 }
 
-table.affiliates #rate, table.affiliates #visits {
+table.affiliates #rate,
+table.affiliates #visits {
 	width: 80px;
+}
+
+table.affiliates #unpaid {
+	width: 150px;
 }
 
 /* Consumers */

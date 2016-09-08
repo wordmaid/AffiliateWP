@@ -425,6 +425,29 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 	}
 
 	/**
+	 * Renders the status column.
+	 *
+	 * @access public
+	 * @since  1.9
+	 *
+	 * @param AffWP\Affiliate $affiliate The current affiliate.
+	 * @return string Displays the affiliate status.
+	 */
+	public function column_status( $affiliate ) {
+		$value ='<span class="affwp-status ' . $affiliate->status . '"><i></i>' . affwp_get_affiliate_status_label( $affiliate ) . '</span>';
+
+		/**
+		 * Filters the value of the Status column for the current affiliate in the Affiliates list table.
+		 *
+		 * @since 1.9
+		 *
+		 * @param string          $value     Column value.
+		 * @param AffWP\Affiliate $affiliate Current affiliate object.
+		 */
+		return apply_filters( 'affwp_affiliate_table_status', $value, $affiliate );
+	}
+
+	/**
 	 * Message to be displayed when there are no items
 	 *
 	 * @since 1.7.2

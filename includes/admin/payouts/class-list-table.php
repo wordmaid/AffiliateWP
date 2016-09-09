@@ -423,7 +423,14 @@ class AffWP_Payouts_Table extends WP_List_Table {
 	 */
 	function column_actions( $payout ) {
 
-		$row_actions['view'] = '<a href="' . esc_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'view_payout', 'payout_id' => $payout->ID ) ) ) . '">' . __( 'View', 'affiliate-wp' ) . '</a>';
+		$view_url = add_query_arg( array(
+			'page'         => 'affiliate-wp-payouts',
+			'action'       => 'view_payout',
+			'payout_id'    => $payout->ID,
+			'affwp_notice' => false,
+		) );
+
+		$row_actions['view'] = '<a href="' . esc_url( $view_url ) . '">' . __( 'View', 'affiliate-wp' ) . '</a>';
 
 		if ( strtolower( $payout->status ) == 'failed' ) {
 			$row_actions['retry'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'payout_retried', 'action' => 'retry_payment', 'payout_id' => $payout->ID ) ), 'payout-nonce' ) . '">' . __( 'Retry Payment', 'affiliate-wp' ) . '</a>';

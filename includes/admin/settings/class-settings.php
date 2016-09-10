@@ -1154,6 +1154,10 @@ class Affiliate_WP_Settings {
 		// Retrieve the license status from the database.
 		$status = $this->get( 'license_status' );
 
+		if( is_object( $status ) ) {
+			$status = $status->license;
+		}
+
 		if( 'valid' == $status ) {
 			return; // license already activated and valid
 		}

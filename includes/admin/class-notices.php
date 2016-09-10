@@ -300,7 +300,7 @@ class Affiliate_WP_Admin_Notices {
 		}
 
 		if ( ! empty( $message ) ) {
-			echo '<div class="' . esc_attr( $class ) . '"><p><strong>' .  $message  . '</strong></p></div>';
+			echo '<div class="' . esc_attr( $class ) . '"><p>' .  $message  . '</p></div>';
 		}
 
 		$license = affiliate_wp()->settings->check_license();

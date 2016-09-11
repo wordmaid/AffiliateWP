@@ -9,13 +9,10 @@
  * @since       1.9
  */
 
+use AffWP\Admin\List_Table;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
-
-// Load WP_List_Table if not loaded
-if ( ! class_exists( 'WP_List_Table' ) ) {
-	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-}
 
 /**
  * AffWP_Visits_Table Class
@@ -23,8 +20,10 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
  * Renders the Affiliates table on the Affiliates page
  *
  * @since 1.0
+ *
+ * @see \AffWP\Admin\List_Table
  */
-class AffWP_Visits_Table extends WP_List_Table {
+class AffWP_Visits_Table extends List_Table {
 
 	/**
 	 * Default number of items to show per page
@@ -45,15 +44,21 @@ class AffWP_Visits_Table extends WP_List_Table {
 	/**
 	 * Get things started
 	 *
-	 * @since 1.0
+	 * @access public
+	 * @since  1.0
+	 *
 	 * @see WP_List_Table::__construct()
+	 *
+	 * @param array $args Optional. Arbitrary display and query arguments to pass through
+	 *                    the list table. Default empty array.
 	 */
-	public function __construct() {
-		global $status, $page;
-
-		parent::__construct( array(
-			'ajax'      => false
+	public function __construct( $args = array() ) {
+		$args = wp_parse_args( $args, array(
+			'singular' => 'payout',
+			'plurla'   => 'payouts',
 		) );
+
+		parent::__construct( $args );
 	}
 
 	/**
@@ -252,7 +257,7 @@ class AffWP_Visits_Table extends WP_List_Table {
 
 		$per_page = $this->get_items_per_page( 'affwp_edit_visits_per_page', $this->per_page );
 
-		$args = array(
+		$args = wp_parse_args( $this->query_args, array(
 			'number'          => $this->per_page,
 			'offset'          => $this->per_page * ( $page - 1 ),
 			'affiliate_id'    => $affiliate_id,
@@ -263,7 +268,7 @@ class AffWP_Visits_Table extends WP_List_Table {
 			'order'           => $order,
 			'search'          => $search,
 			'referral_status' => $status
-		);
+		) );
 
 		$this->total_count = affiliate_wp()->visits->count( $args );
 

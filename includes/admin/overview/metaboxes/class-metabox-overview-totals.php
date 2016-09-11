@@ -1,18 +1,19 @@
 <?php
-namespace AffWP\Meta_Box;
+namespace AffWP\Admin\Overview\Meta_Box;
+
+use AffWP\Admin\Meta_Box;
 
 /**
- * The AffWP\Meta_Box\Overview_Totals class.
+ * Implements a Totals meta box for the Overview screen.
  *
- * This class extends AffWP\Meta_Box\Base, and defines
- * a meta box which displays an overview of recent affiliate
+ * The meta box displays an overview of recent affiliate
  * earnings activity, and related totals during
  * various date ranges.
  *
- * @since  1.9
- * @see    AffWP\Meta_Box\Base
+ * @since 1.9
+ * @see   \AffWP\Admin\Meta_Box
  */
-class Overview_Totals extends Base {
+class Totals extends Meta_Box implements Meta_Box\Base {
 
 	/**
 	 * Initialize.
@@ -123,4 +124,4 @@ class Overview_Totals extends Base {
 <?php }
 }
 
-new Overview_Totals;
+new Totals;

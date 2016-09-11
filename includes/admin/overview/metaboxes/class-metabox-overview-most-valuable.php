@@ -1,21 +1,21 @@
 <?php
-namespace AffWP\Meta_Box;
+namespace AffWP\Admin\Overview\Meta_Box;
+
+use AffWP\Admin\Meta_Box;
 
 /**
- * The AffWP\Meta_Box\Overview_Most_Valuable class.
+ * Implements a Most Valuable Affiliates meta box for the Overview screen.
  *
- * This class extends AffWP\Meta_Box\Base, and defines
- * a meta box which displays the "most valuable" affiliates,
- * which is determined by showign the highest:
+ * The meta box displays the "most valuable" affiliates, determined by showing the highest:
  *
  * - Earnings
  * - Referrals generated
  * - Visits generated
  *
- * @since  1.9
- * @see    AffWP\Meta_Box\Base
+ * @since 1.9
+ * @see   \AffWP\Admin\Meta_Box
  */
-class Overview_Most_Valuable extends Base {
+class Most_Valuable_Affiliates extends Meta_Box implements Meta_Box\Base {
 
 	/**
 	 * Initialize.
@@ -100,4 +100,4 @@ class Overview_Most_Valuable extends Base {
 	<?php }
 }
 
-new Overview_Most_Valuable;
+new Most_Valuable_Affiliates;

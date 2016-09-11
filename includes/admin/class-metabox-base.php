@@ -1,5 +1,5 @@
 <?php
-namespace AffWP\Meta_Box;
+namespace AffWP\Admin;
 
 /**
  * AffiliateWP Admin Meta Box Base class.
@@ -61,10 +61,9 @@ if ( ! defined('ABSPATH') ) {
  *
  *    new My_Integration;
  *
- * @abstract
  * @since  1.9
  */
-abstract class Base {
+class Meta_Box {
 
 	/**
 	 * The ID of the meta box. Must be unique.
@@ -142,20 +141,80 @@ abstract class Base {
 	public $action = 'affwp_overview_meta_boxes';
 
 	/**
+	 * Display callback for the meta box.
+	 *
+	 * Normal instantiation uses the content() method for display.
+	 *
+	 * @access public
+	 * @since  1.9
+	 * @var    string
+	 */
+	public $display_callback;
+
+	/**
+	 * Additional arguments to pass to the meta box display callback.
+	 *
+	 * @access public
+	 * @since  1.9
+	 * @var    array
+	 */
+	public $extra_args = array();
+
+	/**
 	 * Constructor
 	 *
 	 * @access  public
 	 * @return void
 	 * @since   1.9
+	 *
+	 * @param array $args {
+	 *     Optional. Arguments passed when instantiating standalone meta boxes. If defined,
+	 *     all arguments are required.
+	 *
+	 *     @type string $meta_box_id      Meta box ID.
+	 *     @type string $meta_box_name    Meta box name label.
+	 *     @type string $context          The position in which the meta box will be loaded.
+	 *     @type string $action           The action upon which the meta box will be loaded.
+	 *     @type string $display_callback Display callback for the meta box.
+	 * }
 	 */
-	public function __construct() {
-		$this->init();
+	public function __construct( $args = array() ) {
+		if ( ! empty( $args ) ) {
+			$this->maybe_process_args( $args );
+		} else {
+			$this->display_callback = array( $this, 'content' );
+
+			$this->init();
+		}
+
 		add_action( 'add_meta_box', array( $this, 'add_meta_box' ) );
 		add_action( $this->action,  array( $this, 'add_meta_box' ) );
 	}
 
 	/**
-	 * Initialize.
+	 * Handles passing of arbitrary arguments to override properties normally set
+	 * by extending sub-classes.
+	 *
+	 * @access private
+	 * @since  1.9
+	 *
+	 * @param array $args AffWP\Admin\Meta_Box arguments.
+	 */
+	private function maybe_process_args( $args ) {
+
+		// Whitelist.
+		$required = array( 'meta_box_id', 'meta_box_name', 'action', 'context', 'display_callback', 'extra_args' );
+
+		foreach ( $args as $arg => $value ) {
+			if ( in_array( $arg, $required, true ) ) {
+				$this->{$arg} = $value;
+			}
+		}
+
+	}
+
+	/**
+	 * Initializes the meta box.
 	 *
 	 * Define the meta box name,
 	 * and the action on which to hook the meta box here.
@@ -169,7 +228,9 @@ abstract class Base {
 	 * @return  void
 	 * @since   1.9
 	 */
-	abstract public function init();
+	public function init() {
+		die( 'function AffWP\Admin\Meta_Box::init() must be overriden in a sub-class' );
+	}
 
 	/**
 	 * Adds the meta box
@@ -185,7 +246,8 @@ abstract class Base {
 			array( $this, 'get_content' ),
 			$this->affwp_screen,
 			$this->context,
-			'default'
+			'default',
+			$this->extra_args
 		);
 	}
 
@@ -196,7 +258,12 @@ abstract class Base {
 	 * @since  1.9
 	 */
 	public function get_content() {
-		$content = $this->content();
+		$content = '';
+
+		if ( is_callable( $this->display_callback ) ) {
+			$content = call_user_func( $this->display_callback, $this->extra_args );
+		}
+
 		/**
 		 * Filter the title tag content for an admin page.
 		 *
@@ -220,5 +287,7 @@ abstract class Base {
 	 * @return mixed string The content of the meta box
 	 * @since  1.9
 	 */
-	abstract public function content();
+	public function content() {
+		die( 'function AffWP\Admin\Meta_Box::content() must be overriden in a sub-class' );
+	}
 }

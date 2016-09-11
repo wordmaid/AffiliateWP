@@ -8,13 +8,10 @@
  * @since      1.9
  */
 
+use AffWP\Admin\List_Table;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
-
-// Load WP_List_Table if not loaded
-if ( ! class_exists( 'WP_List_Table' ) ) {
-	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-}
 
 /**
  * AffWP_Payouts_Table Class
@@ -22,8 +19,10 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
  * Renders the Payouts table on the Payouts page
  *
  * @since 1.0
+ *
+ * @see \AffWP\Admin\List_Table
  */
-class AffWP_Payouts_Table extends WP_List_Table {
+class AffWP_Payouts_Table extends List_Table {
 
 	/**
 	 * Default number of items to show per page
@@ -62,35 +61,20 @@ class AffWP_Payouts_Table extends WP_List_Table {
 	public $failed_count;
 
 	/**
-	 * Optional arguments to pass when preparing items.
-	 *
-	 * @access public
-	 * @since  1.9
-	 * @var    array
-	 */
-	public $payout_args = array();
-
-	/**
 	 * Payouts table constructor.
 	 *
 	 * @access public
 	 * @since  1.9
 	 *
 	 * @see WP_List_Table::__construct()
+	 *
+	 * @param array $args Optional. Arbitrary display and query arguments to pass through
+	 *                    the list table. Default empty array.
 	 */
 	public function __construct( $args = array() ) {
-		global $status, $page;
-
-		if ( ! empty( $args['payout_args'] ) ) {
-			$this->payout_args = $args['payout_args'];
-
-			unset( $args['payout_args'] );
-		}
-
 		$args = wp_parse_args( $args, array(
-			'singular'  => 'payout',
-			'plural'    => 'payouts',
-			'ajax'      => false,
+			'singular' => 'payout',
+			'plurla'   => 'payouts',
 		) );
 
 		parent::__construct( $args );
@@ -423,17 +407,30 @@ class AffWP_Payouts_Table extends WP_List_Table {
 	 */
 	function column_actions( $payout ) {
 
-		$view_url = add_query_arg( array(
-			'page'         => 'affiliate-wp-payouts',
-			'action'       => 'view_payout',
-			'payout_id'    => $payout->ID,
-			'affwp_notice' => false,
-		) );
+		$base_query_args = array(
+			'page'      => 'affiliate-wp-payouts',
+			'payout_id' => $payout->ID
+		);
 
-		$row_actions['view'] = '<a href="' . esc_url( $view_url ) . '">' . __( 'View', 'affiliate-wp' ) . '</a>';
+		// View.
+		$row_actions['view'] = $this->get_row_action_link(
+			__( 'View', 'affiliate-wp' ),
+			array_merge( $base_query_args, array(
+				'action'       => 'view_payout',
+				'affwp_notice' => false,
+			) )
+		);
 
 		if ( strtolower( $payout->status ) == 'failed' ) {
-			$row_actions['retry'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'payout_retried', 'action' => 'retry_payment', 'payout_id' => $payout->ID ) ), 'payout-nonce' ) . '">' . __( 'Retry Payment', 'affiliate-wp' ) . '</a>';
+			// Retry Payment.
+			$row_actions['retry'] = $this->get_row_action_link(
+				__( 'Retry Payment', 'affiliate-wp' ),
+				array_merge( $base_query_args, array(
+					'affwp_notice' => 'payout_retried',
+					'action'       => 'retry_payment',
+				) ),
+				'payout-nonce'
+			);
 		}
 
 		/**
@@ -552,11 +549,11 @@ class AffWP_Payouts_Table extends WP_List_Table {
 	 */
 	public function get_payout_counts() {
 		$this->paid_count = affiliate_wp()->affiliates->payouts->count(
-			array_merge( $this->payout_args, array( 'status' => 'paid' ) )
+			array_merge( $this->query_args, array( 'status' => 'paid' ) )
 		);
 
 		$this->failed_count = affiliate_wp()->affiliates->payouts->count(
-			array_merge( $this->payout_args, array( 'status' => 'failed' ) )
+			array_merge( $this->query_args, array( 'status' => 'failed' ) )
 		);
 
 		$this->total_count  = $this->paid_count + $this->failed_count;
@@ -633,7 +630,7 @@ class AffWP_Payouts_Table extends WP_List_Table {
 
 		$per_page = $this->get_items_per_page( 'affwp_edit_payouts_per_page', $this->per_page );
 
-		$args = wp_parse_args( $this->payout_args, array(
+		$args = wp_parse_args( $this->query_args, array(
 			'number'       => $per_page,
 			'offset'       => $per_page * ( $page - 1 ),
 			'payout_id'    => $payout_ids,

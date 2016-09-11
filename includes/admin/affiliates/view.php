@@ -55,7 +55,7 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 	}
 
 	$payouts_table = new AffWP_Payouts_Table( array(
-		'payout_args' => array(
+		'query_args' => array(
 			'affiliate_id' => $affiliate_id
 		)
 	) );

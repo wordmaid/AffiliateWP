@@ -9,13 +9,10 @@
  * @since       1.9
  */
 
+use AffWP\Admin\List_Table;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
-
-// Load WP_List_Table if not loaded
-if ( ! class_exists( 'WP_List_Table' ) ) {
-	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-}
 
 /**
  * AffWP_Creatives_Table Class
@@ -23,8 +20,10 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
  * Renders the Affiliates table on the Affiliates page
  *
  * @since 1.2
+ *
+ * @see \AffWP\Admin\List_Table
  */
-class AffWP_Creatives_Table extends WP_List_Table {
+class AffWP_Creatives_Table extends List_Table {
 
 	/**
 	 * Default number of items to show per page
@@ -61,18 +60,21 @@ class AffWP_Creatives_Table extends WP_List_Table {
 	/**
 	 * Get things started
 	 *
-	 * @since 1.2
-	 * @uses AffWP_Creatives_Table::get_creative_counts()
+	 * @access public
+	 * @since  1.2
+	 *
 	 * @see WP_List_Table::__construct()
+	 *
+	 * @param array $args Optional. Arbitrary display and query arguments to pass through
+	 *                    the list table. Default empty array.
 	 */
-	public function __construct() {
-		global $status, $page;
-
-		parent::__construct( array(
-			'singular'  => 'creative',
-			'plural'    => 'creatives',
-			'ajax'      => false
+	public function __construct( $args = array() ) {
+		$args = wp_parse_args( $args, array(
+			'singular' => 'creative',
+			'plurla'   => 'creatives',
 		) );
+
+		parent::__construct( $args );
 
 		$this->get_creative_counts();
 	}
@@ -187,16 +189,65 @@ class AffWP_Creatives_Table extends WP_List_Table {
 	 */
 	function column_actions( $creative ) {
 
-		$row_actions['edit'] = '<a href="' . esc_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'edit_creative', 'creative_id' => $creative->creative_id ) ) ) . '">' . __( 'Edit', 'affiliate-wp' ) . '</a>';
+		$base_query_args = array(
+			'page'        => 'affiliate-wp-creatives',
+			'creative_id' => $creative->ID
+		);
+
+		// Edit.
+		$row_actions['edit'] = $this->get_row_action_link(
+			__( 'Edit', 'affiliate-wp' ),
+			array_merge( $base_query_args, array(
+				'affwp_notice' => false,
+				'action'       => 'edit_creative'
+			) )
+		);
+
 
 		if ( strtolower( $creative->status ) == 'active' ) {
-			$row_actions['deactivate'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'creative_deactivated', 'action' => 'deactivate', 'creative_id' => $creative->creative_id ) ), 'affwp-creative-nonce' ) . '">' . __( 'Deactivate', 'affiliate-wp' ) . '</a>';
+
+			// Deactivate.
+			$row_actions['deactivate'] = $this->get_row_action_link(
+				__( 'Deactivate', 'affiliate-wp' ),
+				array_merge( $base_query_args, array(
+					'affwp_notice' => 'creative_deactivated',
+					'action'       => 'deactivate'
+				) ),
+				array( 'nonce' => 'affwp-creative-nonce' )
+			);
+
 		} else {
-			$row_actions['activate'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'creative_activated', 'action' => 'activate', 'creative_id' => $creative->creative_id ) ), 'affwp-creative-nonce' ) . '">' . __( 'Activate', 'affiliate-wp' ) . '</a>';
+
+			// Activate.
+			$row_actions['activate'] = $this->get_row_action_link(
+				__( 'Activate', 'affiliate-wp' ),
+				array_merge( $base_query_args, array(
+					'affwp_notice' => 'creative_activated',
+					'action'       => 'activate'
+				) ),
+				array( 'nonce' => 'affwp-creative-nonce' )
+			);
+
 		}
 
-		$row_actions['delete'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'action' => 'delete', 'creative_id' => $creative->creative_id, 'affwp_notice' => false ) ), 'affwp-creative-nonce' ) . '">' . __( 'Delete', 'affiliate-wp' ) . '</a>';
+		// Delete.
+		$row_actions['delete'] = $this->get_row_action_link(
+			__( 'Delete', 'affiliate-wp' ),
+			array_merge( $base_query_args, array(
+				'affwp_notice' => false,
+				'action'       => 'delete'
+			) ),
+			array( 'nonce' => 'affwp-creative-nonce' )
+		);
 
+		/**
+		 * Filters the row actions array for the Creatives list table.
+		 *
+		 * @since 1.2
+		 *
+		 * @param array           $row_actions Row actions array.
+		 * @param \AffWP\Creative $creative    Current creative.
+		 */
 		$row_actions = apply_filters( 'affwp_creative_row_actions', $row_actions, $creative );
 
 		return $this->row_actions( $row_actions, true );
@@ -268,9 +319,15 @@ class AffWP_Creatives_Table extends WP_List_Table {
 	 * @return void
 	 */
 	public function get_creative_counts() {
-		$this->active_count   = affiliate_wp()->creatives->count( array( 'status' => 'active' ) );
-		$this->inactive_count = affiliate_wp()->creatives->count( array( 'status' => 'inactive' ) );
-		$this->total_count    = $this->active_count + $this->inactive_count;
+		$this->active_count = affiliate_wp()->creatives->count(
+			array_merge( $this->query_args, array( 'status' => 'active' ) )
+		);
+
+		$this->inactive_count = affiliate_wp()->creatives->count(
+			array_merge( $this->query_args, array( 'status' => 'inactive' ) )
+		);
+
+		$this->total_count = $this->active_count + $this->inactive_count;
 	}
 
 	/**
@@ -286,11 +343,13 @@ class AffWP_Creatives_Table extends WP_List_Table {
 		$status   = isset( $_GET['status'] ) ? $_GET['status'] : '';
 		$per_page = $this->get_items_per_page( 'affwp_edit_creatives_per_page', $this->per_page );
 
-		$creatives = affiliate_wp()->creatives->get_creatives( array(
+		$args = wp_parse_args( $this->query_args, array(
 			'number'  => $per_page,
 			'offset'  => $per_page * ( $page - 1 ),
 			'status'  => $status,
 		) );
+
+		$creatives = affiliate_wp()->creatives->get_creatives( $args );
 
 		return $creatives;
 

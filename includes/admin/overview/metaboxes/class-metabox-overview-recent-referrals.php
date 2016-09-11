@@ -1,16 +1,17 @@
 <?php
-namespace AffWP\Meta_Box;
+namespace AffWP\Admin\Overview\Meta_Box;
+
+use AffWP\Admin\Meta_Box;
 
 /**
- * The AffWP\Meta_Box\Overview_Recent_Referrals class.
+ * Implements a Recent Referrals meta box for the Overview screen.
  *
- * This class extends AffWP\Meta_Box\Base, and defines
- * a meta box which displays recent referrals.
+ * The meta box displays recent referrals.
  *
- * @since  1.9
- * @see    AffWP\Meta_Box\Base
+ * @since 1.9
+ * @see   \AffWP\Admin\Meta_Box
  */
-class Overview_Recent_Referrals extends Base {
+class Recent_Referrals extends Meta_Box implements Meta_Box\Base {
 
 	/**
 	 * Initialize.
@@ -92,4 +93,4 @@ class Overview_Recent_Referrals extends Base {
 	<?php }
 }
 
-new Overview_Recent_Referrals;
+new Recent_Referrals;

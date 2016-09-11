@@ -1,16 +1,17 @@
 <?php
-namespace AffWP\Meta_Box;
+namespace AffWP\Admin\Overview\Meta_Box;
+
+use AffWP\Admin\Meta_Box;
 
 /**
- * The AffWP\Meta_Box\Overview_Registrations class.
+ * Implements an Affiliate Registrations meta box for the Overview screen.
  *
- * This class extends AffWP\Meta_Box\Base, and defines
- * a meta box which displays recent affiliate registrations.
+ * The meta box displays recent affiliate registrations.
  *
- * @since  1.9
- * @see    AffWP\Meta_Box\Base
+ * @since 1.9
+ * @see   \AffWP\Admin\Meta_Box
  */
-class Overview_Registrations extends Base {
+class Affiliate_Registrations extends Meta_Box implements Meta_Box\Base {
 
     /**
      * Initialize.
@@ -100,4 +101,4 @@ class Overview_Registrations extends Base {
 <?php }
 }
 
-new Overview_Registrations;
+new Affiliate_Registrations;

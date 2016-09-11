@@ -320,7 +320,7 @@ final class Affiliate_WP {
 	 */
 	private function includes() {
 
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-base-object.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-object.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-affiliate.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-creative.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affwp-payout.php';
@@ -336,7 +336,11 @@ final class Affiliate_WP {
 
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
+			// Bootstrap.
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/AFFWP_Plugin_Updater.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-list-table.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-meta-box-base.php';
+
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/affiliates/actions.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/ajax-actions.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-addon-updater.php';

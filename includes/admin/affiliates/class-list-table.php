@@ -9,14 +9,10 @@
  * @since       1.9
  */
 
+use AffWP\Admin\List_Table;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
-
-// Load WP_List_Table if not loaded
-if ( ! class_exists( 'WP_List_Table' ) ) {
-	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-}
 
 /**
  * AffWP_Affiliates_Table Class
@@ -24,8 +20,10 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
  * Renders the Affiliates table on the Affiliates page
  *
  * @since 1.0
+ *
+ * @see \AffWP\Admin\List_Table
  */
-class AffWP_Affiliates_Table extends WP_List_Table {
+class AffWP_Affiliates_Table extends List_Table {
 
 	/**
 	 * Default number of items to show per page
@@ -78,18 +76,21 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 	/**
 	 * Get things started
 	 *
-	 * @since 1.0
-	 * @uses AffWP_Affiliates_Table::get_affiliate_counts()
+	 * @access public
+	 * @since  1.0
+	 *
 	 * @see WP_List_Table::__construct()
+	 *
+	 * @param array $args Optional. Arbitrary display and query arguments to pass through
+	 *                    the list table. Default empty array.
 	 */
-	public function __construct() {
-		global $status, $page;
-
-		parent::__construct( array(
-			'singular'  => 'affiliate',
-			'plural'    => 'affiliates',
-			'ajax'      => false
+	public function __construct( $args = array() ) {
+		$args = wp_parse_args( $args, array(
+			'singular' => 'affiliate',
+			'plural'   => 'affiliates',
 		) );
+
+		parent::__construct( $args );
 
 		$this->get_affiliate_counts();
 	}
@@ -238,21 +239,105 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 			$value = __( '(user deleted)', 'affiliate-wp' );
 		}
 
-		$row_actions['reports'] = '<a href="' . esc_url( add_query_arg( array( 'affwp_notice' => false, 'affiliate_id' => $affiliate->affiliate_id, 'action' => 'view_affiliate' ) ) ) . '">' . __( 'Reports', 'affiliate-wp' ) . '</a>';
-		$row_actions['edit'] = '<a href="' . esc_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'edit_affiliate', 'affiliate_id' => $affiliate->affiliate_id ) ) ) . '">' . __( 'Edit', 'affiliate-wp' ) . '</a>';
+		$base_query_args = array(
+			'page'         => 'affiliate-wp-affiliates',
+			'affiliate_id' => $affiliate->ID
+		);
+
+		// Reports.
+		$row_actions['reports'] = $this->get_row_action_link(
+			__( 'Reports', 'affiliate-wp' ),
+			array_merge( $base_query_args, array(
+				'affwp_notice' => false,
+				'action'       => 'view_affiliate',
+			) )
+		);
+
+		// Edit.
+		$row_actions['edit'] = $this->get_row_action_link(
+			__( 'Edit', 'affiliate-wp' ),
+			array_merge( $base_query_args, array(
+				'affwp_notice' => false,
+				'action'       => 'edit_affiliate',
+			) )
+		);
 
 		if ( strtolower( $affiliate->status ) == 'active' ) {
-			$row_actions['deactivate'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'affiliate_deactivated', 'action' => 'deactivate', 'affiliate_id' => $affiliate->affiliate_id ) ), 'affiliate-nonce' ) . '">' . __( 'Deactivate', 'affiliate-wp' ) . '</a>';
+
+			// Deactivate.
+			$row_actions['deactivate'] = $this->get_row_action_link(
+				__( 'Deactivate', 'affiliate-wp' ),
+				array_merge( $base_query_args, array(
+					'affwp_notice' => 'affiliate_deactivated',
+					'action'       => 'deactivate'
+				) ),
+				array( 'nonce' => 'affiliate-nonce' )
+			);
+
 		} elseif( strtolower( $affiliate->status ) == 'pending' ) {
-			$row_actions['review'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'review_affiliate', 'affiliate_id' => $affiliate->affiliate_id ) ), 'affiliate-nonce' ) . '">' . __( 'Review', 'affiliate-wp' ) . '</a>';
-			$row_actions['accept'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'affiliate_accepted', 'action' => 'accept', 'affiliate_id' => $affiliate->affiliate_id ) ), 'affiliate-nonce' ) . '">' . __( 'Accept', 'affiliate-wp' ) . '</a>';
-			$row_actions['reject'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'affiliate_rejected', 'action' => 'reject', 'affiliate_id' => $affiliate->affiliate_id ) ), 'affiliate-nonce' ) . '">' . __( 'Reject', 'affiliate-wp' ) . '</a>';
+
+			// Review.
+			$row_actions['review'] = $this->get_row_action_link(
+				__( 'Review', 'affiliate-wp' ),
+				array_merge( $base_query_args, array(
+					'affwp_notice' => false,
+					'action'       => 'review_affiliate'
+				) ),
+				array( 'nonce' => 'affiliate-nonce' )
+			);
+
+			// Accept.
+			$row_actions['accept'] = $this->get_row_action_link(
+				__( 'Accept', 'affiliate-wp' ),
+				array_merge( $base_query_args, array(
+					'affwp_notice' => 'affiliate_accepted',
+					'action'       => 'accept'
+				) ),
+				array( 'nonce' => 'affiliate-nonce' )
+			);
+
+			// Reject.
+			$row_actions['reject'] = $this->get_row_action_link(
+				__( 'Reject', 'affiliate-wp' ),
+				array_merge( $base_query_args, array(
+					'affwp_notice' => 'affiliate_rejected',
+					'action'       => 'reject'
+				) ),
+				array( 'nonce' => 'affiliate-nonce' )
+			);
+
 		} else {
-			$row_actions['activate'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'affwp_notice' => 'affiliate_activated', 'action' => 'activate', 'affiliate_id' => $affiliate->affiliate_id ) ), 'affiliate-nonce' ) . '">' . __( 'Activate', 'affiliate-wp' ) . '</a>';
+
+			// Activate.
+			$row_actions['activate'] = $this->get_row_action_link(
+				__( 'Activate', 'affiliate-wp' ),
+				array_merge( $base_query_args, array(
+					'affwp_notice' => 'affiliate_activated',
+					'action'       => 'activate'
+				) ),
+				array( 'nonce' => 'affiliate-nonce' )
+			);
+
 		}
 
-		$row_actions['delete'] = '<a href="' . wp_nonce_url( add_query_arg( array( 'action' => 'delete', 'affiliate_id' => $affiliate->affiliate_id, 'affwp_notice' => false ) ), 'affiliate-nonce' ) . '">' . __( 'Delete', 'affiliate-wp' ) . '</a>';
+		// Delete.
+		$row_actions['delete'] = $this->get_row_action_link(
+			__( 'Delete', 'affiliate-wp' ),
+			array_merge( $base_query_args, array(
+				'affwp_notice' => false,
+				'action'       => 'delete'
+			) ),
+			array( 'nonce' => 'affiliate-nonce' )
+		);
 
+		/**
+		 * Filters the row actions array for the Affiliates list table.
+		 *
+		 * @since 1.0
+		 *
+		 * @param array            $row_actions Row actions array.
+		 * @param \AffWP\Affiliate $affiliate   Current affiliate.
+		 */
 		$row_actions = apply_filters( 'affwp_affiliate_row_actions', $row_actions, $affiliate );
 
 		$value .= '<div class="row-actions">' . $this->row_actions( $row_actions, true ) . '</div>';
@@ -457,11 +542,35 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 
 		$search = isset( $_GET['s'] ) ? $_GET['s'] : '';
 
-		$this->active_count   = affiliate_wp()->affiliates->count( array( 'status' => 'active', 'search' => $search ) );
-		$this->inactive_count = affiliate_wp()->affiliates->count( array( 'status' => 'inactive', 'search' => $search ) );
-		$this->pending_count  = affiliate_wp()->affiliates->count( array( 'status' => 'pending', 'search' => $search ) );
-		$this->rejected_count = affiliate_wp()->affiliates->count( array( 'status' => 'rejected', 'search' => $search ) );
-		$this->total_count    = $this->active_count + $this->inactive_count + $this->pending_count + $this->rejected_count;
+		$this->active_count = affiliate_wp()->affiliates->count(
+			array_merge( $this->query_args, array(
+				'status' => 'active',
+				'search' => $search
+			) )
+		);
+
+		$this->inactive_count = affiliate_wp()->affiliates->count(
+			array_merge( $this->query_args, array(
+				'status' => 'inactive',
+				'search' => $search
+			) )
+		);
+
+		$this->pending_count = affiliate_wp()->affiliates->count(
+			array_merge( $this->query_args, array(
+				'status' => 'pending',
+				'search' => $search
+			) )
+		);
+
+		$this->rejected_count = affiliate_wp()->affiliates->count(
+			array_merge( $this->query_args, array(
+				'status' => 'rejected',
+				'search' => $search
+			) )
+		);
+
+		$this->total_count = $this->active_count + $this->inactive_count + $this->pending_count + $this->rejected_count;
 	}
 
 	/**
@@ -481,7 +590,7 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 
 		$per_page = $this->get_items_per_page( 'affwp_edit_affiliates_per_page', $this->per_page );
 
-		$affiliates   = affiliate_wp()->affiliates->get_affiliates( array(
+		$args = wp_parse_args( $this->query_args, array(
 			'number'  => $per_page,
 			'offset'  => $per_page * ( $page - 1 ),
 			'status'  => $status,
@@ -489,6 +598,9 @@ class AffWP_Affiliates_Table extends WP_List_Table {
 			'orderby' => sanitize_text_field( $orderby ),
 			'order'   => sanitize_text_field( $order )
 		) );
+
+		$affiliates   = affiliate_wp()->affiliates->get_affiliates( $args );
+
 		return $affiliates;
 	}
 

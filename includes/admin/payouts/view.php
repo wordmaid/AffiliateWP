@@ -125,7 +125,10 @@ $payout = affwp_get_payout( absint( $_GET['payout_id'] ) );
 	$referrals = new AffWP_Referrals_Table( array(
 		'query_args' => array(
 			'payout_id' => $payout->ID
-		)
+		),
+		'display_args' => array(
+			'hide_table_nav' => true
+		),
 	) );
 	$referrals->prepare_items();
 	?>

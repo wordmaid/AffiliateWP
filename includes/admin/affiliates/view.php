@@ -49,11 +49,6 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 	$graph->set( 'affiliate_id', $affiliate_id );
 	$graph->display();
 
-	// Load WP_List_Table if not loaded
-	if ( ! class_exists( 'WP_List_Table' ) ) {
-		require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-	}
-
 	$payouts_table = new AffWP_Payouts_Table( array(
 		'query_args' => array(
 			'affiliate_id' => $affiliate_id

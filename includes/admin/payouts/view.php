@@ -58,31 +58,6 @@ $payout = affwp_get_payout( absint( $_GET['payout_id'] ) );
 		<tr class="form-row">
 
 			<th scope="row">
-				<?php _e( 'Referrals', 'affiliate-wp' ); ?>
-			</th>
-
-			<td>
-				<?php
-				$referrals = affiliate_wp()->affiliates->payouts->get_referral_ids( $payout );
-				$links     = array();
-				$base      = admin_url( 'admin.php?page=affiliate-wp-referrals&action=edit_referral&referral_id=' );
-
-				foreach ( $referrals as $referral_id ) {
-					$links[] = sprintf( '<a href="%1$s">%2$s</a>',
-						esc_url( $base . $referral_id ),
-						esc_html( $referral_id )
-					);
-				}
-
-				echo implode( ', ', $links );
-				?>
-			</td>
-
-		</tr>
-
-		<tr class="form-row">
-
-			<th scope="row">
 				<?php _e( 'Amount', 'affiliate-wp' ); ?>
 			</th>
 
@@ -147,6 +122,18 @@ $payout = affwp_get_payout( absint( $_GET['payout_id'] ) );
 	</table>
 
 	<?php
+	$referrals = new AffWP_Referrals_Table( array(
+		'query_args' => array(
+			'payout_id' => $payout->ID
+		)
+	) );
+	$referrals->prepare_items();
+	?>
+	<h2><?php _e( 'Associated Referrals', 'affiliate-wp' ); ?></h2>
+	<?php
+	$referrals->views();
+	$referrals->display();
+
 	/**
 	 * Fires at the end of the 'View Payout' page, just inside the closing div.
 	 *

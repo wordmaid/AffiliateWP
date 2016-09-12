@@ -63,6 +63,11 @@ abstract class List_Table extends \WP_List_Table {
 	public function __construct( $args = array() ) {
 		$this->screen = get_current_screen();
 
+		$display_args = array(
+			'pre_table_callback' => '',
+			'hide_table_nav'     => false
+		);
+
 		if ( ! empty( $args['query_args'] ) ) {
 			$this->query_args = $args['query_args'];
 
@@ -70,7 +75,7 @@ abstract class List_Table extends \WP_List_Table {
 		}
 
 		if ( ! empty( $args['display_args'] ) ) {
-			$this->display_args = $args['display_args'];
+			$this->display_args = wp_parse_args( $args['display_args'], $display_args );
 
 			unset( $args['display_args'] );
 		}
@@ -112,4 +117,44 @@ abstract class List_Table extends \WP_List_Table {
 
 		return sprintf( '<a href="%1$s"%2$s>%3$s</a>', $url, $class, esc_html( $label ) );
 	}
+
+	/**
+	 * Generates the table navigation above or below the table.
+	 *
+	 * @access protected
+	 * @since  1.9
+	 *
+	 * @param string $which Which location the builk actions are being rendered for.
+	 *                      Will be 'top' or 'bottom'.
+	 */
+	protected function display_tablenav( $which ) {
+		if ( 'top' === $which ) {
+			wp_nonce_field( 'bulk-' . $this->_args['plural'] );
+		}
+
+		if ( ! empty( $this->display_args['pre_table_callback'] )
+			&& is_callable( $this->display_args['pre_table_callback'] )
+			&& 'top' === $which
+		) {
+
+			echo call_user_func( $this->display_args['pre_table_callback'] );
+		}
+
+		if ( true !== $this->display_args['hide_table_nav'] ) : ?>
+			<div class="tablenav <?php echo esc_attr( $which ); ?>">
+
+				<?php if ( $this->has_items() ): ?>
+					<div class="alignleft actions bulkactions">
+						<?php $this->bulk_actions( $which ); ?>
+					</div>
+				<?php endif;
+				$this->extra_tablenav( $which );
+				$this->pagination( $which );
+				?>
+
+				<br class="clear" />
+			</div>
+		<?php endif;
+	}
+
 }

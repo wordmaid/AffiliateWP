@@ -1,20 +1,17 @@
 <?php
 namespace AffWP\REST\Admin;
 
+use AffWP\Admin\List_Table;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
-
-// Load WP_List_Table if not loaded
-if ( ! class_exists( 'WP_List_Table' ) ) {
-	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-}
 
 /**
  * Core class used to display a list table of API records.
  *
  * @since 1.9
  */
-class List_Table extends \WP_List_Table {
+class Consumers_Table extends List_Table  {
 
 	/**
 	 * Number of records to list per page.
@@ -34,14 +31,12 @@ class List_Table extends \WP_List_Table {
 	 * @see WP_List_Table::__construct()
 	 */
 	public function __construct() {
-		global $status, $page;
-
-		// Set parent defaults
-		parent::__construct( array(
-			'singular'  => __( 'API Key', 'affiliate-wp' ),
-			'plural'    => __( 'API Keys', 'affiliate-wp' ),
-			'ajax'      => false,
+		$args = wp_parse_args( $args, array(
+			'singular' => __( 'API Key', 'affiliate-wp' ),
+			'plural'   => __( 'API Keys', 'affiliate-wp' ),
 		) );
+
+		parent::__construct( $args );
 
 		$this->query();
 	}
@@ -135,26 +130,33 @@ class List_Table extends \WP_List_Table {
 	 */
 	public function column_username( $item ) {
 
-		$actions = array();
+		$row_actions = array();
 
-		$actions['reissue'] = sprintf(
-			'<a href="%1$s" class="affwp-regenerate-api-key">%2$s</a>',
-			esc_url( wp_nonce_url( add_query_arg( array(
-				'user_id'           => $item->user_id,
-				'affwp_action'      => 'process_api_key',
-				'affwp_api_process' => 'regenerate'
-			) ), 'affwp-api-nonce' ) ),
-			__( 'Reissue', 'affiliate-wp' )
+		$base_query_args = array(
+			'user_id'      => $item->user_id,
+			'affwp_action' => 'process_api_key'
 		);
 
-		$actions['revoke'] = sprintf(
-			'<a href="%s" class="affwp-revoke-api-key affwp-delete">%s</a>',
-			esc_url( wp_nonce_url( add_query_arg( array(
-				'user_id'           => $item->user_id,
-				'affwp_action'      => 'process_api_key',
+		$row_actions['reissue'] = $this->get_row_action_link(
+			__( 'Reissue', 'affiliate-wp' ),
+			array_merge( $base_query_args, array(
+				'affwp_api_process' => 'regenerate'
+			) ),
+			array(
+				'nonce' => 'affwp-api-nonce',
+				'class' => 'affwp-regenerate-api-key',
+			)
+		);
+
+		$row_actions['revoke'] = $this->get_row_action_link(
+			__( 'Revoke', 'affiliate-wp' ),
+			array_merge( $base_query_args, array(
 				'affwp_api_process' => 'revoke'
-			) ), 'affwp-api-nonce' ) ),
-			__( 'Revoke', 'affiliate-wp' )
+			) ),
+			array(
+				'nonce' => 'affwp-api-nonce',
+				'class' => 'affwp-revoke-api-key affwp-delete',
+			)
 		);
 
 		/**
@@ -162,17 +164,17 @@ class List_Table extends \WP_List_Table {
 		 *
 		 * @since 1.9
 		 *
-		 * @param array                $actions Consumer row actions.
-		 * @param \AffWP\REST\Consumer $item    Current REST consumer.
+		 * @param array                $row_actions Consumer row actions.
+		 * @param \AffWP\REST\Consumer $item        Current REST consumer.
 		 */
-		$actions = apply_filters( 'affwp_api_row_actions', array_filter( $actions ), $item );
+		$actions = apply_filters( 'affwp_api_row_actions', $row_actions, $item );
 
 		$username = sprintf( '<a href="%1$s"><strong>%2$s</strong></a>',
 			esc_url( add_query_arg( 'user_id', $item->user_id, admin_url( 'user-edit.php' ) ) ),
 			affiliate_wp()->REST->consumers->get_consumer_username( $item->user_id )
 		);
 
-		return sprintf('%1$s %2$s', $username, $this->row_actions( $actions ) );
+		return sprintf('%1$s %2$s', $username, $this->row_actions( $row_actions ) );
 	}
 
 	/**

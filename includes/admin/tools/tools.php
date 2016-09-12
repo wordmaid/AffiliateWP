@@ -478,12 +478,7 @@ add_action( 'admin_init', 'affwp_clear_debug_log' );
  * @since 1.9
  */
 function affwp_rest_api_keys_tab() {
-	// Load WP_List_Table if not loaded
-	if ( ! class_exists( 'WP_List_Table' ) ) {
-		require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-	}
-
-	$keys_table = new \AffWP\REST\Admin\List_Table;
+	$keys_table = new \AffWP\REST\Admin\Consumers_Table;
 	$keys_table->prepare_items();
 
 	$keys_table->views();

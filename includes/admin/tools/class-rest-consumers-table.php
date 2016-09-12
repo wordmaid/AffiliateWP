@@ -29,8 +29,11 @@ class Consumers_Table extends List_Table  {
 	 * @since  1.9
 	 *
 	 * @see WP_List_Table::__construct()
+	 *
+	 * @param array $args Optional. Arbitrary display and query arguments to pass through
+	 *                    the list table. Default empty array.
 	 */
-	public function __construct() {
+	public function __construct( $args = array() ) {
 		$args = wp_parse_args( $args, array(
 			'singular' => __( 'API Key', 'affiliate-wp' ),
 			'plural'   => __( 'API Keys', 'affiliate-wp' ),

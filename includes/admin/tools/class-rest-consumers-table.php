@@ -3,6 +3,10 @@ namespace AffWP\REST\Admin;
 
 use AffWP\Admin\List_Table;
 
+if ( ! class_exists( 'AffWP\Admin\List_Table' ) ) {
+	require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-list-table.php';
+}
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 

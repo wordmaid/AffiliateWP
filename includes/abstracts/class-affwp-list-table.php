@@ -65,7 +65,8 @@ abstract class List_Table extends \WP_List_Table {
 
 		$display_args = array(
 			'pre_table_callback' => '',
-			'hide_table_nav'     => false
+			'hide_table_nav'     => false,
+			'columns_to_hide'    => array(),
 		);
 
 		if ( ! empty( $args['query_args'] ) ) {
@@ -155,6 +156,30 @@ abstract class List_Table extends \WP_List_Table {
 				<br class="clear" />
 			</div>
 		<?php endif;
+	}
+
+	/**
+	 * Prepares columns for display.
+	 *
+	 * Applies display arguments passed in the constructor to the list of columns.
+	 *
+	 * @access protected
+	 * @since  1.9
+	 *
+	 * @param array $columns List of columns.
+	 * @return array (Maybe) filtered list of columns.
+	 */
+	public function prepare_columns( $columns ) {
+		if ( ! empty( $this->display_args['columns_to_hide'] ) ) {
+			$columns_to_hide = $this->display_args['columns_to_hide'];
+
+			foreach ( $columns_to_hide as $column ) {
+				if ( array_key_exists( $column, $columns ) ) {
+					unset( $columns[ $column ] );
+				}
+			}
+		}
+		return $columns;
 	}
 
 }

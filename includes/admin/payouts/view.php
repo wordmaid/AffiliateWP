@@ -127,7 +127,8 @@ $payout = affwp_get_payout( absint( $_GET['payout_id'] ) );
 			'payout_id' => $payout->ID
 		),
 		'display_args' => array(
-			'hide_table_nav' => true
+			'hide_table_nav'  => true,
+			'columns_to_hide' => array( 'actions', 'status' ),
 		),
 	) );
 	$referrals->prepare_items();

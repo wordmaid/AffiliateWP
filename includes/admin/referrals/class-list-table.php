@@ -174,7 +174,7 @@ class AffWP_Referrals_Table extends List_Table {
 			'status'      => __( 'Status', 'affiliate-wp' ),
 		);
 
-		return apply_filters( 'affwp_referral_table_columns', $columns );
+		return apply_filters( 'affwp_referral_table_columns', $this->prepare_columns( $columns ) );
 	}
 
 	/**

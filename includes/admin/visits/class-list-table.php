@@ -109,7 +109,7 @@ class AffWP_Visits_Table extends List_Table {
 			'date'         => __( 'Date', 'affiliate-wp' ),
 		);
 
-		return apply_filters( 'affwp_visit_table_columns', $columns );
+		return apply_filters( 'affwp_visit_table_columns', $this->prepare_columns( $columns ) );
 	}
 
 	/**

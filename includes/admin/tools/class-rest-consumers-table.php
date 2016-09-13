@@ -196,7 +196,7 @@ class Consumers_Table extends List_Table  {
 			'secret_key' => __( 'Secret Key', 'affiliate-wp' ),
 		);
 
-		return $columns;
+		return $this->prepare_columns( $columns );
 	}
 
 	/**

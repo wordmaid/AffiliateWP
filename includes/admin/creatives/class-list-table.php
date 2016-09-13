@@ -119,7 +119,7 @@ class AffWP_Creatives_Table extends List_Table {
 			'actions'    => __( 'Actions', 'affiliate-wp' ),
 		);
 
-		return $columns;
+		return $this->prepare_columns( $columns );
 	}
 
 	/**

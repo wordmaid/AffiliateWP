@@ -193,7 +193,7 @@ class AffWP_Payouts_Table extends List_Table {
 		 *
 		 * @param array $columns List table columns.
 		 */
-		return apply_filters( 'affwp_payout_table_columns', $columns );
+		return apply_filters( 'affwp_payout_table_columns', $this->prepare_columns( $columns ) );
 	}
 
 	/**

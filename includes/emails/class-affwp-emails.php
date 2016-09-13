@@ -481,6 +481,11 @@ class Affiliate_WP_Emails {
 				'tag'         => 'review_url',
 				'description' => __( 'The URL to the review page for a pending affiliate', 'affiliate-wp' ),
 				'function'    => 'affwp_email_tag_review_url'
+			),
+			array(
+				'tag'         => 'landing_page',
+				'description' => __( 'The URL the customer landing page that led to a referral being created', 'affiliate-wp' ),
+				'function'    => 'affwp_email_tag_get_landing_page'
 			)
 		);
 

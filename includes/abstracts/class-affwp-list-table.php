@@ -79,6 +79,8 @@ abstract class List_Table extends \WP_List_Table {
 			$this->display_args = wp_parse_args( $args['display_args'], $display_args );
 
 			unset( $args['display_args'] );
+		} else {
+			$this->display_args = $display_args;
 		}
 
 		$args = wp_parse_args( $args, array(

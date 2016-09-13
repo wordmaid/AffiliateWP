@@ -133,9 +133,8 @@ $payout = affwp_get_payout( absint( $_GET['payout_id'] ) );
 	) );
 	$referrals->prepare_items();
 	?>
-	<h2><?php _e( 'Associated Referrals', 'affiliate-wp' ); ?></h2>
+	<h2><?php _e( 'Referrals Paid', 'affiliate-wp' ); ?></h2>
 	<?php
-	$referrals->views();
 	$referrals->display();
 
 	/**

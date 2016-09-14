@@ -49,31 +49,13 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 	$graph->set( 'affiliate_id', $affiliate_id );
 	$graph->display();
 
-	// Recent Referrals.
-	$referrals_table = new AffWP_Referrals_Table( array(
-		'query_args' => array(
-			'affiliate_id' => $affiliate_id,
-			'number'       => 5,
-		),
-		'display_args' => array(
-			'hide_table_nav'  => true,
-		),
-	) );
-	$referrals_table->prepare_items();
-	?>
-	<h2><?php _e( 'Recent Referrals', 'affiliate-wp' ); ?></h2>
-
-	<?php
-	$referrals_table->views();
-	$referrals_table->display();
-
 	// Recent Payouts.
 	$payouts_table = new AffWP_Payouts_Table( array(
 		'query_args' => array(
 			'affiliate_id' => $affiliate_id
 		),
 		'display_args' => array(
-			'hide_table_nav'  => true,
+			'hide_bulk_options'  => true,
 			'columns_to_hide' => array( 'status' ),
 		),
 	) );

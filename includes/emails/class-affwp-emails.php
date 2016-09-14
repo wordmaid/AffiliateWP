@@ -484,7 +484,7 @@ class Affiliate_WP_Emails {
 			),
 			array(
 				'tag'         => 'landing_page',
-				'description' => __( 'The URL the customer landing page that led to a referral being created', 'affiliate-wp' ),
+				'description' => __( 'The URL the customer landed on that led to a referral being created', 'affiliate-wp' ),
 				'function'    => 'affwp_email_tag_get_landing_page'
 			)
 		);

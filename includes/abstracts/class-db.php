@@ -161,7 +161,7 @@ abstract class Affiliate_WP_DB {
 
 			$results = absint( $results );
 
-		} elseif ( 'ids' === $args['fields'] ) {
+		} elseif ( '*' !== $clauses['fields'] ) {
 
 			$results = $wpdb->get_col(
 				$wpdb->prepare(
@@ -171,7 +171,9 @@ abstract class Affiliate_WP_DB {
 				)
 			);
 
-			$results = array_map( 'intval', $results );
+			if ( 'ids' === $args['fields'] ) {
+				$results = array_map( 'intval', $results );
+			}
 
  		} else {
 

@@ -50,6 +50,13 @@ function affwp_remove_query_args( $query_args ) {
 		$query_args[] = '_wpnonce';
 	}
 
+	if ( ( isset( $_GET['filter_from'] ) || isset( $_GET['filter_to'] ) )
+		&& ( isset( $_GET['range'] ) && 'other' !== $_GET['range'] )
+	) {
+		$query_args[] = 'filter_from';
+		$query_args[] = 'filter_to';
+	}
+
 	return $query_args;
 }
 add_filter( 'removable_query_args', 'affwp_remove_query_args' );

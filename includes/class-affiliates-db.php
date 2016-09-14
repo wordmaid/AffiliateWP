@@ -319,6 +319,11 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 				$orderby = 'earnings+0';
 				break;
 
+			case 'referrals':
+				// Referrals.
+				$orderby = 'referrals+0';
+				break;
+
 			case 'paid':
 			case 'unpaid':
 			case 'rejected':
@@ -345,10 +350,10 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		$fields = "*";
 
 		if ( ! empty( $args['fields'] ) ) {
-			switch ( $args['fields'] ) {
-				case 'ids':
-					$fields = "$this->primary_key";
-					break;
+			if ( 'ids' === $args['fields'] ) {
+				$fields = "$this->primary_key";
+			} elseif ( array_key_exists( $args['fields'], $this->get_columns() ) ) {
+				$fields = $args['fields'];
 			}
 		}
 

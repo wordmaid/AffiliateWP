@@ -39,8 +39,8 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 			'lines'           => true,
 			'points'          => true,
 			'affiliate_id'    => false,
+			'show_controls'   => true,
 		);
-
 	}
 
 	/**

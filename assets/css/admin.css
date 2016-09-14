@@ -198,6 +198,78 @@ table.affiliates #unpaid {
 	color: #ef6c5e;
 }
 
+/* Reports */
+#reports-nav {
+	background-color: #fff;
+	margin: 20px 0 10px;
+	overflow: auto;
+	padding: 10px;
+	border: 1px solid #ddd;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets {
+	overflow: auto;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets .postbox-container {
+	width: 33.3%;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets .postbox-container .empty-container {
+	margin-top: 1px;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets #primary-sortables {
+	margin-left: 0;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets #tertiary-sortables {
+	margin-right: 0;
+}
+
+#affwp-reports-widgets-wrap .metabox-holder .empty-container {
+	height: 127px;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets .postbox,
+#affwp-reports-widgets-wrap #dashboard-widgets .meta-box-sortables {
+	min-height: 127px;
+}
+
+#affwp-reports-widgets-wrap h2.hndle {
+	margin-left: 25px;
+	text-align: center;
+	font-weight: normal;
+	color: #999;
+}
+
+#affwp-reports-widgets-wrap .postbox .inside {
+	text-align: center;
+}
+
+#affwp-reports-widgets-wrap .inside span {
+	display: block;
+}
+
+#affwp-reports-widgets-wrap .inside .tile-value {
+	color: #21759b;
+	font-size: 3em;
+	line-height: 1;
+}
+
+#affwp-reports-widgets-wrap .inside .tile-compare {
+	color: #333;
+	padding-top: 10px;
+	font-size: 1.1em;
+}
+
+.reports-filters {
+	padding: 25px 20px;
+	background-color: #fff;
+	margin-bottom: 10px;
+	box-sizing: content-box;
+}
+
 /* WooCommerce Admin Tweaks */
 .affwp-woo-coupon-field .affwp-ajax-search-wrap {
 	position: relative;
@@ -261,6 +333,25 @@ table.affiliates #unpaid {
 }
 
 /* Media Queries */
+@media screen and ( max-width: 1024px ) {
+
+	#affwp-reports-widgets-wrap #dashboard-widgets .postbox-container {
+		width: 50%;
+	}
+
+	#affwp-reports-widgets-wrap #dashboard-widgets .postbox-container:last-child {
+		width: 99%;
+	}
+
+	#affwp-reports-widgets-wrap #dashboard-widgets #tertiary-sortables {
+		margin-left: 0;
+	}
+
+	#affwp-reports-widgets-wrap #dashboard-widgets .postbox {
+		min-height: normal;
+	}
+}
+
 @media screen and ( max-width: 782px ) {
 	#affwp-affiliates-filter .column-affiliate_id,
 	#affwp-affiliates-filter .column-rate,
@@ -271,6 +362,17 @@ table.affiliates #unpaid {
 
 	#affwp-affiliates-filter .column-actions span {
 		display: block;
+	}
+
+	#affwp-reports-widgets-wrap #dashboard-widgets .postbox-container {
+		width: 99%;
+	}
+
+	#affwp-reports-widgets-wrap #dashboard-widgets #primary-sortables,
+	#affwp-reports-widgets-wrap #dashboard-widgets #secondary-sortables,
+	#affwp-reports-widgets-wrap #dashboard-widgets #tertiary-sortables {
+		margin-left: 0;
+		margin-right: 0;
 	}
 }
 

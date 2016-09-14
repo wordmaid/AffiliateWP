@@ -389,6 +389,7 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affiliate-meta-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/affiliate-functions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/affiliate-meta-functions.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/reports/class-registrations-graph.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/misc-functions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/payout-functions.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/referral-functions.php';

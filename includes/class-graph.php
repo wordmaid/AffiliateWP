@@ -95,12 +95,12 @@ class Affiliate_WP_Graph {
 			'multiple_y_axes' => false,
 			'bgcolor'         => '#f9f9f9',
 			'bordercolor'     => '#ccc',
-			'color'           => '#bbb',
 			'borderwidth'     => 2,
 			'bars'            => false,
 			'lines'           => true,
 			'points'          => true,
-			'currency'        => true
+			'currency'        => true,
+			'show_controls'   => true,
 		);
 
 	}
@@ -225,7 +225,6 @@ class Affiliate_WP_Graph {
 						grid: {
 							show: true,
 							aboveData: false,
-							color: "<?php echo $this->options[ 'color' ]; ?>",
 							backgroundColor: "<?php echo $this->options[ 'bgcolor' ]; ?>",
 							borderColor: "<?php echo $this->options[ 'bordercolor' ]; ?>",
 							borderWidth: <?php echo absint( $this->options[ 'borderwidth' ] ); ?>,
@@ -304,7 +303,11 @@ class Affiliate_WP_Graph {
 
 			});
 		</script>
-		<?php echo $this->graph_controls(); ?>
+		<?php
+		if ( false !== $this->get( 'show_controls' ) ) {
+			echo $this->graph_controls();
+		}
+		?>
 		<div id="affwp-graph-<?php echo $this->id; ?>" class="affwp-graph" style="height: 300px; width:100%;"></div>
 <?php
 		return ob_get_clean();
@@ -377,28 +380,18 @@ class Affiliate_WP_Graph {
 				</select>
 
 				<div id="affwp-date-range-options" <?php echo $display; ?>>
-					<span><?php _e( 'From', 'affiliate-wp' ); ?>&nbsp;</span>
-					<select id="affwp-graphs-month-start" name="m_start">
-						<?php for ( $i = 1; $i <= 12; $i++ ) : ?>
-							<option value="<?php echo absint( $i ); ?>" <?php selected( $i, $dates['m_start'] ); ?>><?php echo affwp_month_num_to_name( $i ); ?></option>
-						<?php endfor; ?>
-					</select>
-					<select id="affwp-graphs-year" name="year_start">
-						<?php for ( $i = 2007; $i <= date( 'Y', $current_time ); $i++ ) : ?>
-							<option value="<?php echo absint( $i ); ?>" <?php selected( $i, $dates['year'] ); ?>><?php echo $i; ?></option>
-						<?php endfor; ?>
-					</select>
-					<span><?php _e( 'To', 'affiliate-wp' ); ?>&nbsp;</span>
-					<select id="affwp-graphs-month-start" name="m_end">
-						<?php for ( $i = 1; $i <= 12; $i++ ) : ?>
-							<option value="<?php echo absint( $i ); ?>" <?php selected( $i, $dates['m_end'] ); ?>><?php echo affwp_month_num_to_name( $i ); ?></option>
-						<?php endfor; ?>
-					</select>
-					<select id="affwp-graphs-year" name="year_end">
-						<?php for ( $i = 2007; $i <= date( 'Y', $current_time ); $i++ ) : ?>
-							<option value="<?php echo absint( $i ); ?>" <?php selected( $i, $dates['year_end'] ); ?>><?php echo $i; ?></option>
-						<?php endfor; ?>
-					</select>
+
+					<?php
+					$from = empty( $_REQUEST['filter_from'] ) ? '' : $_REQUEST['filter_from'];
+					$to   = empty( $_REQUEST['filter_to'] )   ? '' : $_REQUEST['filter_to'];
+					?>
+					<span class="affwp-search-date">
+						<span><?php _ex( 'From', 'date filter', 'affiliate-wp' ); ?></span>
+						<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_from" placeholder="<?php esc_attr_e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>" aria-label="<?php esc_attr_e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $from ); ?>" />
+						<span><?php _ex( 'To', 'date filter', 'affiliate-wp' ); ?></span>
+						<input type="text" class="affwp-datepicker" autocomplete="off" name="filter_to" placeholder="<?php esc_attr_e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>" aria-label="<?php esc_attr_e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>" value="<?php echo esc_attr( $to ); ?>" />
+					</span>
+
 				</div>
 
 				<input type="submit" class="button" value="<?php _e( 'Filter', 'affiliate-wp' ); ?>"/>
@@ -423,13 +416,19 @@ function affwp_get_report_dates() {
 
 	$current_time = current_time( 'timestamp' );
 
+	$dates['date_from']  = ! empty( $_REQUEST['filter_from'] ) ? $_REQUEST['filter_from'] : date( 'j/n/Y', $current_time );
+	$dates['date_to']    = ! empty( $_REQUEST['filter_to'] )   ? $_REQUEST['filter_to']   : date( 'j/n/Y', $current_time );
+
+	$variable_from_time  = ! empty( $_REQUEST['filter_from'] ) ? strtotime( $dates['date_from'] ) : $current_time;
+	$variable_to_time    = ! empty( $_REQUEST['filter_to'] )   ? strtotime( $dates['date_to'] )   : $current_time;
+
 	$dates['range']      = isset( $_GET['range'] )      ? $_GET['range']      : 'this_month';
-	$dates['year']       = isset( $_GET['year_start'] ) ? $_GET['year_start'] : date( 'Y', $current_time );
-	$dates['year_end']   = isset( $_GET['year_end'] )   ? $_GET['year_end']   : date( 'Y', $current_time );
-	$dates['m_start']    = isset( $_GET['m_start'] )    ? $_GET['m_start']    : 1;
-	$dates['m_end']      = isset( $_GET['m_end'] )      ? $_GET['m_end']      : 12;
-	$dates['day']        = isset( $_GET['day'] )        ? $_GET['day']        : 1;
-	$dates['day_end']    = isset( $_GET['day_end'] )    ? $_GET['day_end']    : cal_days_in_month( CAL_GREGORIAN, $dates['m_start'], $dates['year'] );
+	$dates['year']       = isset( $_GET['year_start'] ) ? $_GET['year_start'] : date( 'Y', $variable_from_time );
+	$dates['year_end']   = isset( $_GET['year_end'] )   ? $_GET['year_end']   : date( 'Y', $variable_to_time );
+	$dates['m_start']    = isset( $_GET['m_start'] )    ? $_GET['m_start']    : date( 'n', $variable_from_time );
+	$dates['m_end']      = isset( $_GET['m_end'] )      ? $_GET['m_end']      : date( 'n', $variable_to_time );
+	$dates['day']        = isset( $_GET['day'] )        ? $_GET['day']        : date( 'd', $variable_from_time );
+	$dates['day_end']    = isset( $_GET['day_end'] )    ? $_GET['day_end']    : date( 'd', $variable_to_time );
 
 	// Modify dates based on predefined ranges
 	switch ( $dates['range'] ) :

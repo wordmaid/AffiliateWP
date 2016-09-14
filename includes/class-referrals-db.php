@@ -529,10 +529,10 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		$fields = "*";
 
 		if ( ! empty( $args['fields'] ) ) {
-			switch ( $args['fields'] ) {
-				case 'ids':
-					$fields = "$this->primary_key";
-					break;
+			if ( 'ids' === $args['fields'] ) {
+				$fields = "$this->primary_key";
+			} elseif ( array_key_exists( $args['fields'], $this->get_columns() ) ) {
+				$fields = $args['fields'];
 			}
 		}
 
@@ -589,16 +589,25 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		if( ! empty( $date ) ) {
 
-			switch( $date ) {
+			// Back-compat for string date rates.
+			if ( is_string( $date ) ) {
+				switch ( $date ) {
 
-				case 'month' :
+					case 'month' :
 
-					$date = array(
-						'start' => date( 'Y-m-01 00:00:00', current_time( 'timestamp' ) ),
-						'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 00:00:00', current_time( 'timestamp' ) ),
-					);
-					break;
+						$date = array(
+							'start' => date( 'Y-m-01 00:00:00', current_time( 'timestamp' ) ),
+							'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 23:59:59', current_time( 'timestamp' ) ),
+						);
+						break;
 
+					case 'last-month':
+						$date = array(
+							'start' => date( 'Y-m-01 00:00:00', ( current_time( 'timestamp' ) - MONTH_IN_SECONDS ) ),
+							'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 23:59:59', ( current_time( 'timestamp' ) - MONTH_IN_SECONDS ) ),
+						);
+						break;
+				}
 			}
 
 			$args['date'] = $date;
@@ -641,16 +650,26 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		if( ! empty( $date ) ) {
 
-			switch( $date ) {
+			if ( is_string( $date ) ) {
+				switch( $date ) {
 
-				case 'month' :
+					case 'month' :
 
-					$date = array(
-						'start' => date( 'Y-m-01 00:00:00', current_time( 'timestamp' ) ),
-						'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 00:00:00', current_time( 'timestamp' ) ),
-					);
-					break;
+						$date = array(
+							'start' => date( 'Y-m-01 00:00:00', current_time( 'timestamp' ) ),
+							'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 23:59:59', current_time( 'timestamp' ) ),
+						);
+						break;
 
+					case 'last-month' :
+
+						$date = array(
+							'start' => date( 'Y-m-01 00:00:00', ( current_time( 'timestamp' ) - MONTH_IN_SECONDS ) ),
+							'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 23:59:59', ( current_time( 'timestamp' ) - MONTH_IN_SECONDS ) ),
+						);
+						break;
+
+				}
 			}
 
 			$args['date'] = $date;
@@ -687,14 +706,30 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		);
 
 		if ( ! empty( $date ) ) {
-			switch( $date ) {
-				case 'month':
-					$args['date'] = array(
-						'start' => date( 'Y-m-01 00:00:00', current_time( 'timestamp' ) ),
-						'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 23:59:59', current_time( 'timestamp' ) ),
-					);
-					break;
+
+			// Whitelist for back-compat string values.
+			if ( is_string( $date ) && ! in_array( $date, array( 'month', 'last-month' ) ) ) {
+				$date = '';
 			}
+
+			if ( is_string( $date ) ) {
+				switch( $date ) {
+					case 'month':
+						$date = array(
+							'start' => date( 'Y-m-01 00:00:00', current_time( 'timestamp' ) ),
+							'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 23:59:59', current_time( 'timestamp' ) ),
+						);
+						break;
+
+					case 'last-month':
+						$date = array(
+							'start' => date( 'Y-m-01 00:00:00', ( current_time( 'timestamp' ) - MONTH_IN_SECONDS ) ),
+							'end'   => date( 'Y-m-' . cal_days_in_month( CAL_GREGORIAN, date( 'n' ), date( 'Y' ) ) . ' 23:59:59', ( current_time( 'timestamp' ) - MONTH_IN_SECONDS ) ),
+						);
+						break;
+				}
+			}
+			$args['date'] = $date;
 		}
 
 		return $this->count( $args );

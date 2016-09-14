@@ -545,10 +545,10 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 		$fields = "*";
 
 		if ( ! empty( $args['fields'] ) ) {
-			switch ( $args['fields'] ) {
-				case 'ids':
-					$fields = 'payout_id';
-					break;
+			if ( 'ids' === $args['fields'] ) {
+				$fields = "$this->primary_key";
+			} elseif ( array_key_exists( $args['fields'], $this->get_columns() ) ) {
+				$fields = $args['fields'];
 			}
 		}
 

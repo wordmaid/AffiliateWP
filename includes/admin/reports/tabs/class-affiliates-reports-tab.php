@@ -76,7 +76,9 @@ class Tab extends Reports\Tab {
 		$this->register_tile( 'new_affiliates', array(
 			'label'           => __( 'New Affiliates', 'affiliate-wp' ),
 			'type'            => 'number',
-			'data'            => affiliate_wp()->affiliates->count( $this->date_query ),
+			'data'            => affiliate_wp()->affiliates->count( array(
+				'date' => $this->date_query
+			) ),
 			'comparison_data' => $this->get_date_comparison_label(),
 			'context'         => 'secondary',
 		) );

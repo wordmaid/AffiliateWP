@@ -66,6 +66,8 @@ abstract class List_Table extends \WP_List_Table {
 		$display_args = array(
 			'pre_table_callback' => '',
 			'hide_table_nav'     => false,
+			'hide_bulk_options'  => false,
+			'hide_pagination'    => false,
 			'columns_to_hide'    => array(),
 		);
 
@@ -146,13 +148,16 @@ abstract class List_Table extends \WP_List_Table {
 		if ( true !== $this->display_args['hide_table_nav'] ) : ?>
 			<div class="tablenav <?php echo esc_attr( $which ); ?>">
 
-				<?php if ( $this->has_items() ): ?>
+				<?php if ( $this->has_items() && true !== $this->display_args['hide_bulk_options'] ) : ?>
 					<div class="alignleft actions bulkactions">
 						<?php $this->bulk_actions( $which ); ?>
 					</div>
 				<?php endif;
 				$this->extra_tablenav( $which );
-				$this->pagination( $which );
+
+				if ( true !== $this->display_args['hide_pagination'] ) :
+					$this->pagination( $which );
+				endif;
 				?>
 
 				<br class="clear" />

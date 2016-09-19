@@ -30,9 +30,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 	public function scripts() {
 ?>
 		<script type="text/javascript">
-		var affwp_scripts;
 		jQuery(document).ready(function($) {
-
 
 			$('form').on('submit', function(e) {
 
@@ -52,7 +50,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 					data: {
 						action: 'affwp_maybe_insert_paypal_referral'
 					},
-					url: affwp_scripts.ajaxurl,
+					url: <?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>,
 					success: function (response) {
 
 						$form.append( '<input type="hidden" name="custom" value="' + response.data.ref + '"/>' );

@@ -55,8 +55,9 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 			'affiliate_id' => $affiliate_id
 		),
 		'display_args' => array(
-			'hide_bulk_options'  => true,
-			'columns_to_hide' => array( 'status' ),
+			'hide_bulk_options'    => true,
+			'columns_to_hide'      => array( 'status' ),
+			'hide_column_controls' => true,
 		),
 	) );
 	$payouts_table->prepare_items();

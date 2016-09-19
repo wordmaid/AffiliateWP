@@ -3,6 +3,8 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/affiliates/class-list-table.php';
+
 /**
  * Add per page screen option to the Affiliates list table
  *
@@ -24,6 +26,19 @@ function affwp_affiliates_screen_options() {
 			'default' => 30,
 		)
 	);
+
+	/*
+	 * Instantiate the list table to make the columns array available to screen options.
+	 *
+	 * If the 'view_affiliate' action is set, don't instantiate. Instantiating in sub-views
+	 * creates conflicts in the screen option column controls if another list table is being
+	 * displayed.
+	 */
+	if ( empty( $_REQUEST['action'] )
+		|| ( ! empty( $_REQUEST['action'] ) && 'view_affiliate' !== $_REQUEST['action'] )
+	) {
+		new AffWP_Affiliates_Table();
+	}
 
 	do_action( 'affwp_affiliates_screen_options', $screen );
 

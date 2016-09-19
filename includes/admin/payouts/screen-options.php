@@ -11,6 +11,8 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/payouts/class-list-table.php';
+
 /**
  * Adds per-page screen option to the Payouts list table.
  *
@@ -32,6 +34,19 @@ function affwp_payouts_screen_options() {
 			'default' => 30,
 		)
 	);
+
+	/*
+	 * Instantiate the list table to make the columns array available to screen options.
+	 *
+	 * If the 'view_payout' action is set, don't instantiate. Instantiating in sub-views
+	 * creates conflicts in the screen option column controls if another list table is being
+	 * displayed.
+	 */
+	if ( empty( $_REQUEST['action'] )
+	     || ( ! empty( $_REQUEST['action'] ) && 'view_payout' !== $_REQUEST['action'] )
+	) {
+		new AffWP_Payouts_Table;
+	}
 
 	/**
 	 * Fires at the end of the Payouts screen options callback.

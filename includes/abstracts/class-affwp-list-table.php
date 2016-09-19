@@ -54,21 +54,45 @@ abstract class List_Table extends \WP_List_Table {
 	 *     Optional. Arbitrary display and query arguments to pass through to the list table.
 	 *     Default empty array.
 	 *
-	 *     @type array $query_args   Arguments to pass through to the query used for preparing items.
-	 *     @type array $display_args Arguments to pass through for use when displaying queried items.
 	 *     @type string $singular    Singular version of the list table item.
 	 *     @type string $plural      Plural version of the list table item.
+	 *     @type array $query_args   Optional. Arguments to pass through to the query used for preparing items.
+	 *                               Accepts any valid arguments accepted by the given query methods.
+	 *     @type array $display_args {
+	 *         Optional. Arguments to pass through for use when displaying queried items.
+	 *
+	 *         @type string $pre_table_callback   Callback to fire at the top of the list table, just before the list
+	 *                                            table navigation is displayed. Default empty (disabled).
+	 *         @type bool   $hide_table_nav       Whether to hide the entire table navigation at the top and bottom
+	 *                                            of the list table. Will hide the bulk actions, extra tablenav, and
+	 *                                            pagination. Use `$hide_bulk_options`, or `$hide_pagination` for more
+	 *                                            fine-grained control. Default false.
+	 *         @type bool   $hide_bulk_options    Whether to hide the bulk options controls at the top and bottom of
+	 *                                            the list table. Default false.
+	 *         @type array  $hide_pagination      Whether to hide the pagination controls at the top and bottom of the
+	 *                                            list table. Default false.
+	 *         @type bool   $columns_to_hide      An array of column IDs to hide for the current instance of the list
+	 *                                            table. Note: other columns may be already hidden depending on current
+	 *                                            user settings determined by screen options column controls. Default
+	 *                                            empty array.
+	 *         @type bool   $hide_column_controls Whether to hide the screen options column controls for the list table.
+	 *                                            This should always be enabled when instantiating a standalone list
+	 *                                            table in sub-views such as view_affiliate or view_payout due to
+	 *                                            conflicts introduced in column controls generated for list tables
+	 *                                            instantiated at the primary-view level. Default false.
+	 *     }
 	 * }
 	 */
 	public function __construct( $args = array() ) {
 		$this->screen = get_current_screen();
 
 		$display_args = array(
-			'pre_table_callback' => '',
-			'hide_table_nav'     => false,
-			'hide_bulk_options'  => false,
-			'hide_pagination'    => false,
-			'columns_to_hide'    => array(),
+			'pre_table_callback'   => '',
+			'hide_table_nav'       => false,
+			'hide_bulk_options'    => false,
+			'hide_pagination'      => false,
+			'columns_to_hide'      => array(),
+			'hide_column_controls' => false,
 		);
 
 		if ( ! empty( $args['query_args'] ) ) {
@@ -189,4 +213,29 @@ abstract class List_Table extends \WP_List_Table {
 		return $columns;
 	}
 
+	/**
+	 * Retrieves a list of all, hidden,sortable, and primary columns, with filters applied.
+	 *
+	 * Also sets up column show/hide controls.
+	 *
+	 * @access protected
+	 * @since  1.9
+	 *
+	 * @return array Column headers.
+	 */
+	protected function get_column_info() {
+		if ( true === $this->display_args['hide_column_controls'] ) {
+			$columns = $this->get_columns();
+
+			$hidden = array();
+
+			$sortable = $this->get_sortable_columns();
+
+			$this->_column_headers = array( $columns, $hidden, $sortable, $this->get_primary_column_name() );
+		} else {
+			$this->_column_headers = parent::get_column_info();
+		}
+
+		return $this->_column_headers;
+	}
 }

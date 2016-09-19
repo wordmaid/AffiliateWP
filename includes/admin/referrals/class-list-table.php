@@ -685,13 +685,7 @@ class AffWP_Referrals_Table extends List_Table {
 	public function prepare_items() {
 		$per_page = $this->get_items_per_page( 'affwp_edit_referrals_per_page', $this->per_page );
 
-		$columns = $this->get_columns();
-
-		$hidden = array();
-
-		$sortable = $this->get_sortable_columns();
-
-		$this->_column_headers = array( $columns, $hidden, $sortable );
+		$this->get_column_info();
 
 		$this->process_bulk_action();
 

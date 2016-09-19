@@ -3,6 +3,8 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/creatives/class-list-table.php';
+
 /**
  * Add per page screen option to the Creatives list table
  *
@@ -24,6 +26,9 @@ function affwp_creatives_screen_options() {
 			'default' => 30,
 		)
 	);
+
+	// Instantiate the list table to make the columns array available to screen options.
+	new AffWP_Creatives_Table;
 
 	do_action( 'affwp_creatives_screen_options', $screen );
 

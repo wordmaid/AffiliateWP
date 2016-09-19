@@ -39,8 +39,11 @@ class Consumers_Table extends List_Table  {
 	 */
 	public function __construct( $args = array() ) {
 		$args = wp_parse_args( $args, array(
-			'singular' => __( 'API Key', 'affiliate-wp' ),
-			'plural'   => __( 'API Keys', 'affiliate-wp' ),
+			'singular'     => __( 'API Key', 'affiliate-wp' ),
+			'plural'       => __( 'API Keys', 'affiliate-wp' ),
+			'display_args' => array(
+				'hide_column_controls' => true
+			)
 		) );
 
 		parent::__construct( $args );
@@ -322,12 +325,7 @@ class Consumers_Table extends List_Table  {
 	 * @see consumers_data()
 	 */
 	public function prepare_items() {
-		$columns = $this->get_columns();
-
-		$hidden = array(); // No hidden columns
-		$sortable = array(); // Not sortable... for now
-
-		$this->_column_headers = array( $columns, $hidden, $sortable, 'id' );
+		$this->get_column_info();
 
 		$data = $this->consumers_data();
 

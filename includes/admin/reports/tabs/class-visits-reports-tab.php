@@ -98,7 +98,6 @@ class Tab extends Reports\Tab {
 
 			$this->register_tile( 'top_referrer', array(
 				'label'           => __( 'Top Referrer', 'affiliate-wp' ),
-				'type'            => 'text-special',
 				'context'         => 'secondary',
 				'data'            => 'direct' === $top_referrer ? __( 'Direct Traffic', 'affiliate-wp' ) : $top_referrer,
 				'comparison_data' => $this->get_date_comparison_label(),

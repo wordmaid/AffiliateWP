@@ -62,7 +62,6 @@ class Tab extends Reports\Tab {
 
 			$this->register_tile( 'top_earning_affiliate', array(
 				'label' => __( 'Top Earning Affiliate', 'affiliate-wp' ),
-				'type'  => 'text-special',
 				'data'  => $data_link,
 				'comparison_data' => sprintf( '%1$s (%2$s)',
 					$this->get_date_comparison_label(),
@@ -105,7 +104,6 @@ class Tab extends Reports\Tab {
 
 			$this->register_tile( 'highest_converting_affiliate', array(
 				'label'           => __( 'Highest Converting Affiliate', 'affiliate-wp' ),
-				'type'            => 'text-special',
 				'context'         => 'secondary',
 				'data'            => $data_link,
 				'comparison_data' => sprintf( '%1$s (%2$d referrals)',

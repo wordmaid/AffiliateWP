@@ -82,7 +82,6 @@ class Tab extends Reports\Tab {
 				'label'           => sprintf( __( 'Best Converting Campaign (%s)', 'affiliate-wp' ),
 					$this->get_date_comparison_label( __( 'Custom', 'affiliate-wp' ) )
 				),
-				'type'            => 'text-special',
 				'context'         => 'tertiary',
 				'data'            => empty( $campaign->campaign ) ? __( 'n/a', 'affiliate-wp' ) : $campaign->campaign,
 				'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a> | Visits: %3$d', 'affiliate-wp' ),
@@ -116,7 +115,6 @@ class Tab extends Reports\Tab {
 				'label'           => sprintf( __( 'Most Active Campaign (%s)', 'affiliate-wp' ),
 					$this->get_date_comparison_label( __( 'Custom', 'affiliate-wp' ) )
 				),
-				'type'            => 'text-special',
 				'context'         => 'secondary',
 				'data'            => empty( $campaign->campaign ) ? __( 'n/a', 'affiliate-wp' ) : $campaign->campaign,
 				'comparison_data' => sprintf( __( 'Affiliate: <a href="%1$s">%2$s</a> | Visits: %3$d', 'affiliate-wp' ),

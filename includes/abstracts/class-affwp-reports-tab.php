@@ -225,7 +225,7 @@ abstract class Tab {
 		$args = wp_parse_args( $args, array(
 			'label'             => 'Meta Box',
 			'context'           => 'primary',
-			'type'              => 'number',
+			'type'              => '',
 			'data'              => '',
 			'comparison_data'   => '',
 			'display_callback'  => 'default_tile'
@@ -318,7 +318,7 @@ abstract class Tab {
 
 			switch( $tile['type'] ) {
 				case 'number':
-					echo '<span class="tile-number tile-value">' . esc_html( $tile['data'] ) . '</span>';
+					echo '<span class="tile-number tile-value">' . affwp_format_amount( $tile['data'], false ) . '</span>';
 					break;
 
 				case 'amount':
@@ -329,7 +329,6 @@ abstract class Tab {
 					echo '<span class="tile-rate tile-value">' . affwp_format_rate( $tile['data'] ) . '</span>';
 					break;
 
-				case 'text-special':
 				default:
 					echo '<span class="tile-value">' . $tile['data'] . '</span>';
 					break;

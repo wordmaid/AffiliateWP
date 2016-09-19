@@ -63,6 +63,8 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 			'end'   => $end
 		);
 
+		$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
+
 		$visits = affiliate_wp()->visits->get_visits( array(
 			'orderby'      => 'date',
 			'order'        => 'ASC',
@@ -79,7 +81,13 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 			// Loop through each visit and find how many there are per day
 			foreach( $visits as $visit ) {
 
-				$date = date( 'Y-m-d', strtotime( $visit->date ) );
+				if ( in_array( $dates['range'], array( 'this_year', 'last_year' ), true )
+					|| $difference >= YEAR_IN_SECONDS
+				) {
+					$date = date( 'Y-m', strtotime( $visit->date ) );
+				} else {
+					$date = date( 'Y-m-d', strtotime( $visit->date ) );
+				}
 
 				$this->total += 1;
 

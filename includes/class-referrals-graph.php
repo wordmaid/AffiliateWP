@@ -63,6 +63,8 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 			'end'   => $end
 		);
 
+		$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
+
 		//echo '<pre>'; print_r( $date ); echo '</pre>'; exit;
 
 		$referrals = affiliate_wp()->referrals->get_referrals( array(
@@ -93,7 +95,9 @@ class Affiliate_WP_Referrals_Graph extends Affiliate_WP_Graph {
 						$totals[ $status ] = array();
 					}
 
-					if ( in_array( $dates['range'], array( 'this_year', 'last_year' ), true ) ) {
+					if ( in_array( $dates['range'], array( 'this_year', 'last_year' ), true )
+					     || $difference >= YEAR_IN_SECONDS
+					) {
 						$date = date( 'Y-m', strtotime( $referral->date ) );
 					} else {
 						$date = date( 'Y-m-d', strtotime( $referral->date ) );

@@ -219,7 +219,6 @@ class Sub_Commands extends Base {
 		}
 
 		$data['affiliate_id']  = $affiliate->affiliate_id;
-		$data['account_email'] = Utils\get_flag_value( $assoc_args, 'account_email', $affiliate->affiliate_id  );
 		$data['payment_email'] = Utils\get_flag_value( $assoc_args, 'payment_email', $affiliate->payment_email );
 		$data['rate']          = Utils\get_flag_value( $assoc_args, 'rate',          $affiliate->rate          );
 		$data['rate_type']     = Utils\get_flag_value( $assoc_args, 'rate_type',     $affiliate->rate_type     );

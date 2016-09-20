@@ -1054,7 +1054,7 @@ function affwp_update_affiliate( $data = array() ) {
 	$args['payment_email'] = ! empty( $data['payment_email' ] ) && is_email( $data['payment_email' ] ) ? sanitize_text_field( $data['payment_email'] ) : '';
 	$args['rate']          = ( isset( $data['rate' ] ) && '' !== $data['rate' ] )                      ? sanitize_text_field( $data['rate'] )          : '';
 	$args['rate_type']     = ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '';
-	$args['status']        = ! empty( $data['status'] ) ? sanitize_text_field( $data['status'] ) : '';
+	$args['status']        = ! empty( $data['status'] ) ? sanitize_text_field( $data['status'] ) : $affiliate->status;
 	$args['user_id']       = $user_id;
 
 	/**

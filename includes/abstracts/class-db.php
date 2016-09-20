@@ -33,6 +33,15 @@ abstract class Affiliate_WP_DB {
 	public $primary_key;
 
 	/**
+	 * Object type to query for.
+	 *
+	 * @access public
+	 * @since  1.9
+	 * @var    string
+	 */
+	public $query_object_type = 'stdClass';
+
+	/**
 	 * Constructor.
 	 *
 	 * Sub-classes should define $table_name, $version, and $primary_key here.
@@ -245,9 +254,9 @@ abstract class Affiliate_WP_DB {
 		 * @param int   $object_id Object ID.
 		 * @param array $data      Array of object data.
 		 */
-		do_action( 'affwp_post_insert_' . $type, $object->ID, $data );
+		do_action( 'affwp_post_insert_' . $type, $object->{$this->primary_key}, $data );
 
-		return $object->ID;
+		return $object->{$this->primary_key};
 	}
 
 	/**
@@ -299,7 +308,7 @@ abstract class Affiliate_WP_DB {
 		$data_keys = array_keys( $data );
 		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
 
-		if ( false === $wpdb->update( $this->table_name, $data, array( $where => $object->ID ), $column_formats ) ) {
+		if ( false === $wpdb->update( $this->table_name, $data, array( $where => $object->{$this->primary_key} ), $column_formats ) ) {
 			return false;
 		}
 
@@ -326,7 +335,7 @@ abstract class Affiliate_WP_DB {
 	 * @param  int|string $row_id Row ID.
 	 * @return bool               False if the record could not be deleted, true otherwise.
 	 */
-	public function delete( $row_id = 0, $type='' ) {
+	public function delete( $row_id = 0, $type = '' ) {
 		global $wpdb;
 
 		// Row ID must be positive integer
@@ -345,7 +354,7 @@ abstract class Affiliate_WP_DB {
 		 */
 		do_action( 'affwp_pre_delete_' . $type, $row_id );
 
-		if ( false === $wpdb->query( $wpdb->prepare( "DELETE FROM $this->table_name WHERE $this->primary_key = %d", $object->ID ) ) ) {
+		if ( false === $wpdb->query( $wpdb->prepare( "DELETE FROM $this->table_name WHERE $this->primary_key = %d", $object->{$this->primary_key} ) ) ) {
 			return false;
 		}
 
@@ -377,6 +386,11 @@ abstract class Affiliate_WP_DB {
 	 * @return object|false           Object instance, otherwise false.
 	 */
 	protected function get_core_object( $instance, $object_class ) {
+		// Back-compat for non-core objects.
+		if ( 'stdClass' === $object_class ) {
+			return $this->get( $instance );
+		}
+
 		if ( ! class_exists( $object_class ) ) {
 			return false;
 		}

@@ -145,9 +145,21 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 			return false;
 		}
 
+		$affiliate_user_ids = get_transient( 'affwp_migrate_users_user_ids' );
+
+		if ( false === $affiliate_user_ids ) {
+			$affiliate_user_ids = affiliate_wp()->affiliates->get_affiliates( array(
+				'number' => -1,
+				'fields' => 'user_id',
+			) );
+
+			set_transient( 'affwp_migrate_users_user_ids', $affiliate_user_ids, 10 * MINUTE_IN_SECONDS );
+		}
+
 		$args = array(
 			'number'     => 100,
 			'offset'     => ( $step - 1 ) * 100,
+			'exclude'    => $affiliate_user_ids,
 			'orderby'    => 'ID',
 			'order'      => 'ASC',
 			'role__in'   => $this->roles,
@@ -163,12 +175,6 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 		$inserted = array();
 
 		foreach ( $users as $user ) {
-
-			$affiliate_exists = affiliate_wp()->affiliates->get_by( 'user_id', $user->ID );
-
-			if ( $affiliate_exists ) {
-				continue;
-			}
 
 			$args = array(
 				'status'          => 'active',
@@ -196,6 +202,9 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 	 * @return void
 	 */
 	public function finish() {
+
+		// Clean up.
+		delete_transient( 'affwp_migrate_users_user_ids' );
 
 		$redirect = add_query_arg(
 			array(

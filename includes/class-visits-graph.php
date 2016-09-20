@@ -40,6 +40,7 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 			'points'          => true,
 			'affiliate_id'    => false,
 			'show_controls'   => true,
+			'query_args'      => array(),
 		);
 	}
 
@@ -65,13 +66,15 @@ class Affiliate_WP_Visits_Graph extends Affiliate_WP_Graph {
 
 		$difference = ( strtotime( $date['end'] ) - strtotime( $date['start'] ) );
 
-		$visits = affiliate_wp()->visits->get_visits( array(
+		$args = wp_parse_args( $this->get( 'query_args' ), array(
 			'orderby'      => 'date',
 			'order'        => 'ASC',
 			'date'         => $date,
 			'number'       => -1,
 			'affiliate_id' => $this->get( 'affiliate_id' )
 		) );
+
+		$visits = affiliate_wp()->visits->get_visits( $args );
 
 		$converted_data   = array();
 		$unconverted_data = array();

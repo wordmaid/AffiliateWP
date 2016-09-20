@@ -44,23 +44,27 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 	 * @param array $args {
 	 *     Optional. Arguments to retrieve campaigns.
 	 *
-	 *     @type int          $number          Number of campaigns to query for. Default 20.
-	 *     @type int          $offset          Number of campaigns to offset the query for. Default 0.
-	 *     @type int|array    $affiliate_id    Affiliate ID or array of IDs. Default 0.
-	 *     @type string|array $campaign        Campaign or array of campaigns. Default empty.
-	 *     @type float|array  $conversion_rate {
+	 *     @type int          $number           Number of campaigns to query for. Default 20.
+	 *     @type int          $offset           Number of campaigns to offset the query for. Default 0.
+	 *     @type int|array    $affiliate_id     Affiliate ID or array of IDs. Default 0.
+	 *     @type string|array $campaign         Campaign or array of campaigns. Default empty.
+	 *     @type string       $campaign_compare Comparison operator to use when querying for visits by campaign.
+	 *                                          Accepts '=', '!=' or 'NOT EMPTY'. If 'EMPTY' or 'NOT EMPTY', `$campaign`
+	 *                                          will be ignored and campaigns will simply be queried based on whether
+	 *                                          the `campaign` column is empty or not. Default '='.
+	 *     @type float|array  $conversion_rate  {
 	 *         Specific conversion rate to query for or min/max range. If float, can be used with `$rate_compare`.
 	 *         If array, `BETWEEN` is used.
 	 *
 	 *         @type float $min Minimum conversion rate to query for.
 	 *         @type float $max Maximum conversion rate to query for.
 	 *     }
-	 *     @type string       $rate_compare    Comparison operator to use with `$conversion_rate`. Accepts '>', '<',
-	 *                                         '>=', '<=', '=', or '!='. Default '='.
-	 *     @type string       $order           How to order returned campaign results. Accepts 'ASC' or 'DESC'.
-	 *                                         Default 'DESC'.
-	 *     @type string       $orderby         Campaigns table column to order results by. Default 'affiliate_id'.
-	 *     @type string       $fields          Specific fields to retrieve. Accepts 'ids' or '*' (all). Default '*'.
+	 *     @type string       $rate_compare     Comparison operator to use with `$conversion_rate`. Accepts '>', '<',
+	 *                                          '>=', '<=', '=', or '!='. Default '='.
+	 *     @type string       $order            How to order returned campaign results. Accepts 'ASC' or 'DESC'.
+	 *                                          Default 'DESC'.
+	 *     @type string       $orderby          Campaigns table column to order results by. Default 'affiliate_id'.
+	 *     @type string       $fields           Specific fields to retrieve. Accepts 'ids' or '*' (all). Default '*'.
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 * @return array
@@ -78,15 +82,16 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 		}
 
 		$defaults = array(
-			'number'          => 20,
-			'offset'          => 0,
-			'affiliate_id'    => 0,
-			'campaign'        => '',
-			'conversion_rate' => 0,
-			'rate_compare'    => '',
-			'orderby'         => 'affiliate_id',
-			'order'           => 'DESC',
-			'fields'          => '',
+			'number'           => 20,
+			'offset'           => 0,
+			'affiliate_id'     => 0,
+			'campaign'         => '',
+			'campaign_compare' => '=',
+			'conversion_rate'  => 0,
+			'rate_compare'     => '',
+			'orderby'          => 'affiliate_id',
+			'order'            => 'DESC',
+			'fields'           => '',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -113,14 +118,46 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 		}
 
 		// Specific campaign(s).
-		if ( ! empty( $args['campaign'] ) ) {
+		if ( empty( $args['campaign_compare'] ) ) {
+			$campaign_compare = '=';
+		} else {
+			if ( 'NOT EMPTY' === $args['campaign_compare'] ) {
+				$campaign_compare = '!=';
+
+				// Cancel out campaign value for comparison purposes.
+				$args['campaign'] = '';
+			} elseif ( 'EMPTY' === $args['campaign_compare'] ) {
+				$campaign_compare = '=';
+
+				// Cancel out campaign value for comparison purposes.
+				$args['campaign'] = '';
+			} else {
+				$campaign_compare = $args['campaign_compare'];
+			}
+		}
+
+		// visits for specific campaign
+		if( ! empty( $args['campaign'] )
+		    || ( empty( $args['campaign'] ) && '=' !== $campaign_compare )
+		) {
 
 			$where .= empty( $where ) ? "WHERE " : "AND ";
 
-			if ( is_array( $args['campaign'] ) ) {
-				$where .= "`campaign` IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
+			if( is_array( $args['campaign'] ) ) {
+
+				if ( '!=' === $campaign_compare ) {
+					$where .= "`campaign` NOT IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
+				} else {
+					$where .= "`campaign` IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
+				}
+
 			} else {
-				$where .= "`campaign` = '" . esc_sql( $args['campaign'] ) . "' ";
+
+				if ( empty( $args['campaign'] ) ) {
+					$where .= "`campaign` {$campaign_compare} '' ";
+				} else {
+					$where .= "`campaign` {$campaign_compare} {$args['campaign']} ";
+				}
 			}
 
 		}

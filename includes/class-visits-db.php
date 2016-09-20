@@ -93,21 +93,26 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 	 * @param   array $args {
 	 *     Optional. Arguments to retrieve visits. Default empty array.
 	 *
-	 *     @type int          $number          Number of visits to retrieve. Accepts -1 for all. Default 20.
-	 *     @type int          $offset          Number of visits to offset in the query. Default 0.
-	 *     @type int|array    $visit_id        Specific visit ID or array of IDs to query for. Default 0 (all).
-	 *     @type int|array    $affiliate_id    Specific affiliate ID or array of IDs to query visits for.
-	 *                                         Default 0 (all).
-	 *     @type int|array    $referral_id     Specific referral ID or array of IDs to query visits for.
-	 *                                         Default 0 (all).
-	 *     @type string       $referral_status Specific conversion status to query for. Accepts 'converted'
-	 *                                         or 'unconverted'. Default empty (all).
-	 *     @type string       $campaign        Specific campaign to query visits for. Default empty.
-	 *     @type string       $orderby         Column to order results by. Accepts any valid referrals table column.
-	 *                                         Default 'referral_id'.
-	 *     @type string       $order           How to order results. Accepts 'ASC' (ascending) or 'DESC' (descending).
-	 *                                         Default 'DESC'.
-	 *     @type string       $fields          Fields to query for. Accepts 'ids' or '*' (all). Default '*'.
+	 *     @type int          $number           Number of visits to retrieve. Accepts -1 for all. Default 20.
+	 *     @type int          $offset           Number of visits to offset in the query. Default 0.
+	 *     @type int|array    $visit_id         Specific visit ID or array of IDs to query for. Default 0 (all).
+	 *     @type int|array    $affiliate_id     Specific affiliate ID or array of IDs to query visits for.
+	 *                                          Default 0 (all).
+	 *     @type int|array    $referral_id      Specific referral ID or array of IDs to query visits for.
+	 *                                          Default 0 (all).
+	 *     @type string       $referral_status  Specific conversion status to query for. Accepts 'converted'
+	 *                                          or 'unconverted'. Default empty (all).
+	 *     @type string|array $campaign         Specific campaign or array of campaigns to query visits for. Default
+	 *                                          empty.
+	 *     @type string       $campaign_compare Comparison operator to use when querying for visits by campaign.
+	 *                                          Accepts '=', '!=' or 'NOT EMPTY'. If 'EMPTY' or 'NOT EMPTY', `$campaign`
+	 *                                          will be ignored and visits will simply be queried based on whether
+	 *                                          the campaign column is empty or not. Default '='.
+	 *     @type string       $orderby          Column to order results by. Accepts any valid referrals table column.
+	 *                                          Default 'referral_id'.
+	 *     @type string       $order            How to order results. Accepts 'ASC' (ascending) or 'DESC' (descending).
+	 *                                          Default 'DESC'.
+	 *     @type string       $fields           Fields to query for. Accepts 'ids' or '*' (all). Default '*'.
 	 * }
 	 * @param   bool  $count  Return only the total number of results found (optional)
 	*/
@@ -115,16 +120,17 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 		global $wpdb;
 
 		$defaults = array(
-			'number'          => 20,
-			'offset'          => 0,
-			'visit_id'        => 0,
-			'affiliate_id'    => 0,
-			'referral_id'     => 0,
-			'referral_status' => '',
-			'campaign'        => '',
-			'order'           => 'DESC',
-			'orderby'         => 'visit_id',
-			'fields'          => '',
+			'number'           => 20,
+			'offset'           => 0,
+			'visit_id'         => 0,
+			'affiliate_id'     => 0,
+			'referral_id'      => 0,
+			'referral_status'  => '',
+			'campaign'         => '',
+			'campaign_compare' => '=',
+			'order'            => 'DESC',
+			'orderby'          => 'visit_id',
+			'fields'           => '',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -181,15 +187,46 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 
 		}
 
+		if ( empty( $args['campaign_compare'] ) ) {
+			$campaign_compare = '=';
+		} else {
+			if ( 'NOT EMPTY' === $args['campaign_compare'] ) {
+				$campaign_compare = '!=';
+
+				// Cancel out campaign value for comparison purposes.
+				$args['campaign'] = '';
+			} elseif ( 'EMPTY' === $args['campaign_compare'] ) {
+				$campaign_compare = '=';
+
+				// Cancel out campaign value for comparison purposes.
+				$args['campaign'] = '';
+			} else {
+				$campaign_compare = $args['campaign_compare'];
+			}
+		}
+
 		// visits for specific campaign
-		if( ! empty( $args['campaign'] ) ) {
+		if( ! empty( $args['campaign'] )
+			|| ( empty( $args['campaign'] ) && '=' !== $campaign_compare )
+		) {
 
 			$where .= empty( $where ) ? "WHERE " : "AND ";
 
 			if( is_array( $args['campaign'] ) ) {
-				$where .= "`campaign` IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
+
+				if ( '!=' === $campaign_compare ) {
+					$where .= "`campaign` NOT IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
+				} else {
+					$where .= "`campaign` IN(" . implode( ',', array_map( 'esc_sql', $args['campaign'] ) ) . ") ";
+				}
+
 			} else {
-				$where .= "`campaign` = '" . esc_sql( $args['campaign'] ) . "' ";
+
+				if ( empty( $args['campaign'] ) ) {
+					$where .= "`campaign` {$campaign_compare} '' ";
+				} else {
+					$where .= "`campaign` {$campaign_compare} {$args['campaign']} ";
+				}
 			}
 
 		}

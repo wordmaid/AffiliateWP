@@ -136,7 +136,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 *     @type string    $fields       Specific fields to retrieve. Accepts 'ids' or '*' (all). Default '*'.
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
-	 * @return array Array of affiliate objects (if found).
+	 * @return array|int Array of affiliate objects (if found), int if `$count` is true.
 	 */
 	public function get_affiliates( $args = array(), $count = false ) {
 		global $wpdb;
@@ -382,10 +382,13 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	}
 
 	/**
-	 * Return the number of results found for a given query
+	 * Retrieves the number of results found for a given query.
 	 *
-	 * @param  array  $args
-	 * @return int
+	 * @access public
+	 * @since  1.0
+	 *
+	 * @param array $args Optional. Any valid get_affiliates() arguments. Default empty array.
+	 * @return int Number of affiliates found for the given arguments.
 	 */
 	public function count( $args = array() ) {
 		return $this->get_affiliates( $args, true );

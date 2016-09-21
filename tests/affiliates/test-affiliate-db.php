@@ -681,6 +681,17 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
 	 */
+	public function test_get_affiliates_fields_valid_field_should_return_array_of_that_field_only() {
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'fields' => 'affiliate_id'
+		) );
+
+		$this->assertEqualSets( self::$affiliates, $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
+	 */
 	public function test_get_affiliates_invalid_fields_arg_should_return_regular_Affiliate_object_results() {
 		$affiliates = array_map( 'affwp_get_affiliate', self::$affiliates );
 

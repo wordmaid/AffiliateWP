@@ -95,7 +95,10 @@ function affwp_get_affiliate_name( $affiliate = 0 ) {
 		return '';
 	}
 
-	$user_info    = get_userdata( $affiliate->user_id );
+	if ( ! $user_info = get_userdata( $affiliate->user_id ) ) {
+		return '';
+	}
+
 	$first_name   = esc_html( $user_info->first_name );
 	$last_name    = esc_html( $user_info->last_name );
 

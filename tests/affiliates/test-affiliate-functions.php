@@ -134,6 +134,25 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_get_affiliate_name()
 	 */
+	public function test_get_affiliate_name_with_no_user_id_should_return_empty_string() {
+		$affiliate_id = $this->factory->affiliate->create( array(
+			'user_id' => $this->factory->user->create()
+		) );
+
+		affwp_update_affiliate( array(
+			'affiliate_id' => $affiliate_id,
+			'user_id'      => 0
+		) );
+
+		$this->assertSame( '', affwp_get_affiliate_name( $affiliate_id ) );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_name()
+	 */
 	public function test_affwp_get_affiliate_name_should_return_first_name_last_name() {
 		update_user_meta( self::$users[0], 'first_name', 'Alf' );
 		update_user_meta( self::$users[0], 'last_name', 'Alferson' );

@@ -65,6 +65,30 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::get_object()
+	 */
+	public function test_get_object_should_return_valid_object_when_passed_a_valid_affiliate_id() {
+		$object = affiliate_wp()->affiliates->get_object( self::$affiliates[0] );
+		$this->assertEquals( 'AffWP\Affiliate', get_class( $object ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::get_object()
+	 */
+	public function test_get_object_should_Return_false_when_passed_an_invalid_affiliate_id() {
+		$this->assertFalse( affiliate_wp()->affiliates->get_object( 0 ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::get_object()
+	 */
+	public function test_get_object_should_return_valid_object_when_passed_a_valid_affiliate_object() {
+		$object = affiliate_wp()->affiliates->get_object( affwp_get_affiliate( self::$affiliates[0] ) );
+
+		$this->assertEquals( 'AffWP\Affiliate', get_class( $object ) );
+	}
+
+	/**
 	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
 	 */
 	public function test_get_affiliates_should_return_array_of_Affiliate_objects_if_not_count_query() {

@@ -203,7 +203,7 @@ abstract class Tab {
 	 *
 	 * Uses the core meta box API.
 	 *
-	 * @access protected
+	 * @access public
 	 * @since  1.9
 	 *
 	 * @param int      $tile_id  Tile ID.
@@ -221,7 +221,7 @@ abstract class Tab {
 	 *                                      which leverages `$type`.
 	 * }
 	 */
-	protected function register_tile( $tile_id, $args = array() ) {
+	public function register_tile( $tile_id, $args = array() ) {
 		$args = wp_parse_args( $args, array(
 			'label'             => 'Meta Box',
 			'context'           => 'primary',

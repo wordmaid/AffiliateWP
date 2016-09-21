@@ -111,6 +111,17 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::get_column_defaults()
+	 */
+	public function test_get_column_defaults_should_return_column_defaults() {
+		$expected = array(
+			'user_id'  => get_current_user_id()
+		);
+
+		$this->assertEqualSets( $expected, affiliate_wp()->affiliates->get_column_defaults() );
+	}
+
+	/**
 	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
 	 */
 	public function test_get_affiliates_should_return_array_of_Affiliate_objects_if_not_count_query() {
@@ -293,7 +304,7 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
 	 */
-	public function test_get_affiliates_number_should_return_that_number_or_less() {
+	public function test_get_affiliates_number_should_return_that_number_if_available() {
 		$results = affiliate_wp()->affiliates->get_affiliates( array(
 			'number' => 2
 		) );

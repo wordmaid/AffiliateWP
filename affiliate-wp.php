@@ -359,7 +359,6 @@ final class Affiliate_WP {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/visits/visits.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/tools.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-upgrades.php';
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-welcome.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/plugins.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-migrate.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/add-ons.php';

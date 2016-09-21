@@ -399,16 +399,23 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 *
 	 * @access public
 	 * @since  1.0
+	 *
+	 * @param int|\AffWP\Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+	 * @return string|null Affiliate name on success, otherwise null.
 	*/
-	public function get_affiliate_name( $affiliate_id = 0 ) {
+	public function get_affiliate_name( $affiliate = 0 ) {
 		global $wpdb;
 
-		$cache_key = 'affwp_affiliate_name_' . $affiliate_id;
+		if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+			return;
+		}
+
+		$cache_key = "affwp_affiliate_name_{$affiliate->ID}";
 
 		$name = wp_cache_get( $cache_key, 'affiliates' );
 
 		if( false === $name ) {
-			$name = $wpdb->get_var( $wpdb->prepare( "SELECT u.display_name FROM {$wpdb->users} u INNER JOIN {$this->table_name} a ON u.ID = a.user_id WHERE a.affiliate_id = %d;", $affiliate_id ) );
+			$name = $wpdb->get_var( $wpdb->prepare( "SELECT u.display_name FROM {$wpdb->users} u INNER JOIN {$this->table_name} a ON u.ID = a.user_id WHERE a.affiliate_id = %d;", $affiliate->ID ) );
 			wp_cache_set( $cache_key, $name, 'affiliates', HOUR_IN_SECONDS );
 		}
 

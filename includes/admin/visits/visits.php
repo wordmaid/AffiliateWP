@@ -29,7 +29,10 @@ function affwp_visits_admin() {
 	?>
 	<div class="wrap">
 
-		<h2><?php _e( 'Visits', 'affiliate-wp' ); ?></h2>
+		<h1>
+			<?php _e( 'Visits', 'affiliate-wp' ); ?>
+			<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'affiliate-wp-reports', 'tab' => 'visits' ) ) ); ?>" class="page-title-action"><?php _ex( 'Reports', 'visits', 'affiliate-wp' ); ?></a>
+		</h1>
 		<?php do_action( 'affwp_affiliates_page_top' ); ?>
 		<form id="affwp-visits-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp' ); ?>">
 			<?php $visits_table->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-affiliates' ); ?>

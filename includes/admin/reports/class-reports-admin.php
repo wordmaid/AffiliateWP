@@ -49,10 +49,54 @@ class Reports {
 
 		$active_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $this->get_reports_tabs() ) ? $_GET['tab'] : 'referrals';
 
+		$manage_button_template = '<a href="%1$s" class="page-title-action">%2$s</a>';
+
+		switch( $active_tab ) {
+			case 'referrals':
+				$manage_button = sprintf( $manage_button_template,
+					esc_url( add_query_arg( array(
+						'page' => 'affiliate-wp-referrals'
+					), admin_url( 'admin.php' ) ) ),
+					__( 'Manage Referrals', 'affiliate-wp' )
+				);
+				break;
+
+			case 'affiliates':
+				$manage_button = sprintf( $manage_button_template,
+					esc_url( add_query_arg( array(
+						'page' => 'affiliate-wp-affiliates'
+					), admin_url( 'admin.php' ) ) ),
+					__( 'Manage Affiliates', 'affiliate-wp' )
+				);
+
+				$manage_button .= sprintf( $manage_button_template,
+					esc_url( add_query_arg( array(
+						'page' => 'affiliate-wp-payouts',
+					), admin_url( 'admin.php' ) ) ),
+					__( 'View Payouts', 'affiliate-wp' )
+				);
+				break;
+
+			case 'visits':
+				$manage_button = sprintf( $manage_button_template,
+					esc_url( add_query_arg( array(
+						'page' => 'affiliate-wp-visits'
+					), admin_url( 'admin.php' ) ) ),
+					__( 'Manage Visits', 'affiliate-wp' )
+				);
+				break;
+
+			default:
+				$manage_button = '';
+				break;
+		}
 		?>
 		<div class="wrap">
 
-			<h1><?php _e( 'Reports', 'affiliate-wp' ); ?></h1>
+			<h1>
+				<?php _e( 'Reports', 'affiliate-wp' ); ?>
+				<?php echo $manage_button; ?>
+			</h1>
 
 			<?php do_action( 'affwp_reports_page_top' ); ?>
 

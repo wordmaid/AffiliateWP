@@ -33,14 +33,17 @@ function affwp_referrals_admin() {
 		$referrals_table->prepare_items();
 		?>
 		<div class="wrap">
-			<h2><?php _e( 'Referrals', 'affiliate-wp' ); ?></h2>
+			<h1>
+				<?php _e( 'Referrals', 'affiliate-wp' ); ?>
+				<a href="<?php echo esc_url( add_query_arg( 'action', 'add_referral' ) ); ?>" class="page-title-action"><?php _e( 'Add New', 'affiliate-wp' ); ?></a>
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'affiliate-wp-reports', 'tab' => 'referrals' ) ) ); ?>" class="page-title-action"><?php _ex( 'Reports', 'referrals', 'affiliate-wp' ); ?></a>
+				<button class="page-title-action affwp-referrals-export-toggle"><?php _e( 'Generate Payout File', 'affiliate-wp' ); ?></button>
+				<button class="page-title-action affwp-referrals-export-toggle" style="display:none"><?php _e( 'Close', 'affiliate-wp' ); ?></button>
+			</h1>
 
 			<?php do_action( 'affwp_referrals_page_top' ); ?>
 
 			<div id="affwp-referrals-export-wrap">
-				<a href="<?php echo esc_url( add_query_arg( 'action', 'add_referral' ) ); ?>" class="button-secondary"><?php _e( 'Add New Referral', 'affiliate-wp' ); ?></a>
-				<button class="button-primary affwp-referrals-export-toggle"><?php _e( 'Generate Payout File', 'affiliate-wp' ); ?></button>
-				<button class="button-primary affwp-referrals-export-toggle" style="display:none"><?php _e( 'Close', 'affiliate-wp' ); ?></button>
 
 				<?php do_action( 'affwp_referrals_page_buttons' ); ?>
 

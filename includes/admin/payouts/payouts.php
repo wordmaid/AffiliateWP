@@ -33,7 +33,11 @@ function affwp_payouts_admin() {
 		$payouts_table->prepare_items();
 ?>
 		<div class="wrap">
-			<h2><?php _e( 'Payouts', 'affiliate-wp' ); ?></h2>
+			<h1>
+				<?php _e( 'Payouts', 'affiliate-wp' ); ?>
+
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'affiliate-wp-referrals' ) ) ); ?>" class="page-title-action"><?php _e( 'Manage Referrals', 'affiliate-wp' ); ?></a>
+			</h1>
 			<?php
 			/**
 			 * Fires at the top of the Payouts page (outside the form element).

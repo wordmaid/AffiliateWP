@@ -153,10 +153,10 @@ abstract class Affiliate_WP_DB {
 	 * @access public
 	 * @since  1.9
 	 *
-	 * @param array    $clauses        Compacted array of query clauses.
-	 * @param array    $args           Query arguments.
-	 * @param callable $callback       Optional. Callback to run against results in the generic results case.
-	 *                                 Default empty.
+	 * @param array    $clauses  Compacted array of query clauses.
+	 * @param array    $args     Query arguments.
+	 * @param callable $callback Optional. Callback to run against results in the generic results case.
+	 *                           Default empty.
 	 * @return array|int|null|object Query results.
 	 */
 	public function get_results( $clauses, $args, $callback = '' ) {

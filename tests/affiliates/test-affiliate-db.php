@@ -85,7 +85,29 @@ class Tests extends UnitTestCase {
 	public function test_get_object_should_return_valid_object_when_passed_a_valid_affiliate_object() {
 		$object = affiliate_wp()->affiliates->get_object( affwp_get_affiliate( self::$affiliates[0] ) );
 
-		$this->assertEquals( 'AffWP\Affiliate', get_class( $object ) );
+		$this->assertSame( 'AffWP\Affiliate', get_class( $object ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::get_columns()
+	 */
+	public function test_get_columns_should_return_all_columns() {
+		$columns = affiliate_wp()->affiliates->get_columns();
+
+		$expected = array(
+			'affiliate_id'    => '%d',
+			'user_id'         => '%d',
+			'rate'            => '%s',
+			'rate_type'       => '%s',
+			'payment_email'   => '%s',
+			'status'          => '%s',
+			'earnings'        => '%s',
+			'referrals'       => '%d',
+			'visits'          => '%d',
+			'date_registered' => '%s',
+		);
+
+		$this->assertEqualSets( $expected, $columns );
 	}
 
 	/**

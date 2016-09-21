@@ -702,4 +702,17 @@ class Tests extends UnitTestCase {
 		$this->assertEqualSets( $affiliates, $results );
 	}
 
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::count()
+	 */
+	public function test_count_should_count_based_on_query_args() {
+		$this->assertSame( 4, affiliate_wp()->affiliates->count() );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::get_affiliate_name()
+	 */
+	public function test_get_affiliate_name_with_invalid_affiliate_id_should_return_null() {
+		$this->assertNull( affiliate_wp()->affiliates->get_affiliate_name( 0 ) );
+	}
 }

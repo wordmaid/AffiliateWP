@@ -44,6 +44,27 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::$query_object_type
+	 */
+	public function test_query_object_type_should_be_AffWP_Affiliate() {
+		$this->assertSame( 'AffWP\Affiliate', affiliate_wp()->affiliates->query_object_type );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::$primary_key
+	 */
+	public function test_primary_key_should_be_affiliate_id() {
+		$this->assertSame( 'affiliate_id', affiliate_wp()->affiliates->primary_key );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::$REST
+	 */
+	public function test_REST_should_be_AffWP_Affiliate_REST_v1_Endpoints() {
+		$this->assertSame( 'AffWP\Affiliate\REST\v1\Endpoints', get_class( affiliate_wp()->affiliates->REST ) );
+	}
+
+	/**
 	 * @covers Affiliate_WP_DB_Affiliates::get_affiliates()
 	 */
 	public function test_get_affiliates_should_return_array_of_Affiliate_objects_if_not_count_query() {

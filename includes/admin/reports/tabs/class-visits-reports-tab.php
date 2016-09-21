@@ -76,6 +76,16 @@ class Tab extends Reports\Tab {
 			'comparison_data' => $this->get_date_comparison_label(),
 		) );
 
+		$this->top_referrer_tile();
+	}
+
+	/**
+	 * Registers the 'Top Referrer' date-based tile.
+	 *
+	 * @access public
+	 * @since  1.9
+	 */
+	public function top_referrer_tile() {
 		// Top Referrer.
 		$referrers = affiliate_wp()->visits->get_visits( array(
 			'number' => -1,
@@ -99,11 +109,18 @@ class Tab extends Reports\Tab {
 			$this->register_tile( 'top_referrer', array(
 				'label'           => __( 'Top Referrer', 'affiliate-wp' ),
 				'context'         => 'secondary',
+				'type'            => 'url',
 				'data'            => 'direct' === $top_referrer ? __( 'Direct Traffic', 'affiliate-wp' ) : $top_referrer,
 				'comparison_data' => $this->get_date_comparison_label(),
 			) );
+		} else {
+			$this->register_tile( 'top_referrer', array(
+				'label'           => __( 'Top Referrer', 'affiliate-wp' ),
+				'context'         => 'secondary',
+				'data'            => '',
+				'comparison_data' => $this->get_date_comparison_label(),
+			) );
 		}
-
 	}
 
 	/**

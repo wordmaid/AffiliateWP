@@ -47,15 +47,17 @@ class Tab extends Reports\Tab {
 
 		$this->register_tile( 'paid_earnings', array(
 			'label'           => __( 'Paid Earnings', 'affiliate-wp' ),
-			'data'            => affiliate_wp()->referrals->paid_earnings( $this->date_query ),
-			'comparison_data' => $this->get_date_comparison_label(),
 			'context'         => 'secondary',
+			'type'            => 'amount',
+			'data'            => affiliate_wp()->referrals->paid_earnings( $this->date_query, 0, false ),
+			'comparison_data' => $this->get_date_comparison_label(),
 		) );
 
 		$this->register_tile( 'unpaid_earnings', array(
 			'label'           => __( 'Unpaid Earnings', 'affiliate-wp' ),
 			'context'         => 'tertiary',
-			'data'            => affiliate_wp()->referrals->unpaid_earnings( $this->date_query ),
+			'type'            => 'amount',
+			'data'            => affiliate_wp()->referrals->unpaid_earnings( $this->date_query, 0, false ),
 			'comparison_data' => $this->get_date_comparison_label(),
 		) );
 

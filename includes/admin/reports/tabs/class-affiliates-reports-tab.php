@@ -28,19 +28,27 @@ class Tab extends Reports\Tab {
 	}
 
 	/**
-	 * Registers the Affiliates tab tiles.
+	 * Registers the 'Total Affiliates' (all time) tile.
 	 *
 	 * @access public
 	 * @since  1.9
 	 */
-	public function register_tiles() {
+	public function total_affiliates_tile() {
 		$this->register_tile( 'total_affiliates', array(
 			'label'           => __( 'Total Affiliates', 'affiliate-wp' ),
 			'type'            => 'number',
 			'data'            => affiliate_wp()->affiliates->count(),
 			'comparison_data' => __( 'All Time', 'affiliate-wp' ),
 		) );
+	}
 
+	/**
+	 * Registers the 'Top Earning Affiliate' date-based tile.
+	 *
+	 * @access public
+	 * @since  1.9
+	 */
+	public function top_earning_affiliates_tile() {
 		$top_affiliate = affiliate_wp()->affiliates->get_affiliates( array(
 			'number'  => 1,
 			'orderby' => 'earnings',
@@ -68,10 +76,22 @@ class Tab extends Reports\Tab {
 					affwp_currency_filter( affwp_format_amount( $affiliate->earnings ) )
 				),
 			) );
-
-			unset( $affiliate, $data_link );
+		} else {
+			$this->register_tile( 'top_earning_affiliate', array(
+				'label' => __( 'Top Earning Affiliate', 'affiliate-wp' ),
+				'data'  => '',
+				'comparison_data' => $this->get_date_comparison_label(),
+			) );
 		}
 
+	}
+	/**
+	 * Registers the 'New Affiliates' date-based tile.
+	 *
+	 * @access public
+	 * @since  1.9
+	 */
+	public function new_affiliates_tile() {
 		$this->register_tile( 'new_affiliates', array(
 			'label'           => __( 'New Affiliates', 'affiliate-wp' ),
 			'type'            => 'number',
@@ -81,7 +101,15 @@ class Tab extends Reports\Tab {
 			'comparison_data' => $this->get_date_comparison_label(),
 			'context'         => 'secondary',
 		) );
+	}
 
+	/**
+	 * Register the 'Highest Converting Affiliate' date-based tile.
+	 *
+	 * @access public
+	 * @since  1.9
+	 */
+	public function highest_converting_affiliate_tile() {
 		$highest_converter = affiliate_wp()->affiliates->get_affiliates( array(
 			'number'  => 1,
 			'orderby' => 'referrals',
@@ -113,8 +141,23 @@ class Tab extends Reports\Tab {
 			) );
 
 			unset( $affiliate, $data_link );
+		} else {
+			$this->register_tile( 'highest_converting_affiliate', array(
+				'label'           => __( 'Highest Converting Affiliate', 'affiliate-wp' ),
+				'context'         => 'secondary',
+				'data'            => '',
+				'comparison_data' => $this->get_date_comparison_label(),
+			) );
 		}
+	}
 
+	/**
+	 * Registers the 'Average Payout' date-based tile.
+	 *
+	 * @access public
+	 * @since  1.9
+	 */
+	public function average_payout_tile() {
 		$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
 			'number' => -1,
 			'fields' => 'amount',
@@ -132,6 +175,20 @@ class Tab extends Reports\Tab {
 			'data'            => array_sum( $payouts ) / count( $payouts ),
 			'comparison_data' => $this->get_date_comparison_label(),
 		) );
+	}
+
+	/**
+	 * Registers the Affiliates tab tiles.
+	 *
+	 * @access public
+	 * @since  1.9
+	 */
+	public function register_tiles() {
+		$this->total_affiliates_tile();
+		$this->top_earning_affiliates_tile();
+		$this->new_affiliates_tile();
+		$this->highest_converting_affiliate_tile();
+		$this->average_payout_tile();
 	}
 
 	/**

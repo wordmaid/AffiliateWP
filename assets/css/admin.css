@@ -236,6 +236,10 @@ table.affiliates #unpaid {
 	min-height: 127px;
 }
 
+#affwp-reports-widgets-wrap #dashboard-widgets .postbox.closed {
+	min-height: 0;
+}
+
 #affwp-reports-widgets-wrap h2.hndle {
 	margin-left: 25px;
 	text-align: center;
@@ -255,6 +259,16 @@ table.affiliates #unpaid {
 	color: #21759b;
 	font-size: 3em;
 	line-height: 1;
+}
+
+#affwp-reports-widgets-wrap .inside .tile-value.tile-no-data {
+	color: #888;
+	font-size: 1.5em;
+	line-height: 1;
+}
+
+#affwp-reports-widgets-wrap .inside .tile-value.tile-url {
+	font-size: 1.5em;
 }
 
 #affwp-reports-widgets-wrap .inside .tile-compare {
@@ -348,7 +362,7 @@ table.affiliates #unpaid {
 	}
 
 	#affwp-reports-widgets-wrap #dashboard-widgets .postbox {
-		min-height: normal;
+		min-height: 0;
 	}
 }
 

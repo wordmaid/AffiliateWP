@@ -28,12 +28,12 @@ class Tab extends Reports\Tab {
 	}
 
 	/**
-	 * Registers the Campaigns tab tiles.
+	 * Registers the 'Best Converting Campaign' (all time) tile.
 	 *
 	 * @access public
 	 * @since  1.9
 	 */
-	public function register_tiles() {
+	public function best_converting_campaign_tile() {
 		$top_campaign = affiliate_wp()->campaigns->get_campaigns( array(
 			'orderby'          => 'conversion_rate',
 			'campaign_compare' => 'NOT EMPTY',
@@ -59,10 +59,21 @@ class Tab extends Reports\Tab {
 					$campaign->visits
 				)
 			) );
-
-			unset( $campaign, $affiliate_link );
+		} else {
+			$this->register_tile( 'best_converting_campaign', array(
+				'label'           => __( 'Best Converting Campaign (All Time)', 'affiliate-wp' ),
+				'data'            => '',
+			) );
 		}
+	}
 
+	/**
+	 * Registers the 'Best Converting Campaign' date-based tile.
+	 *
+	 * @access public
+	 * @since  1.9
+	 */
+	public function best_converting_campaign_date_tile() {
 		$top_campaign_visits = affiliate_wp()->visits->get_visits( array(
 			'date'             => $this->date_query,
 			'referral_status'  => 'converted',
@@ -95,10 +106,24 @@ class Tab extends Reports\Tab {
 					$campaign->visits
 				)
 			) );
-
-			unset( $campaign, $affiliate_link );
+		} else {
+			$this->register_tile( 'best_converting_campaign_date', array(
+				'label'           => sprintf( __( 'Best Converting Campaign (%s)', 'affiliate-wp' ),
+					$this->get_date_comparison_label( __( 'Custom', 'affiliate-wp' ) )
+				),
+				'context'         => 'tertiary',
+				'data'            => '',
+			) );
 		}
+	}
 
+	/**
+	 * Registers the 'Most Active Campaign' date-based tile.
+	 *
+	 * @access public
+	 * @since  1.9
+	 */
+	public function most_active_campaign_tile() {
 		$active_campaign_visits = affiliate_wp()->visits->get_visits( array(
 			'date'             => $this->date_query,
 			'campaign_compare' => 'NOT EMPTY',
@@ -130,8 +155,14 @@ class Tab extends Reports\Tab {
 					$campaign->visits
 				),
 			) );
-
-			unset( $campaign, $affiliate_link );
+		} else {
+			$this->register_tile( 'most_active_campaign', array(
+				'label'           => sprintf( __( 'Most Active Campaign (%s)', 'affiliate-wp' ),
+					$this->get_date_comparison_label( __( 'Custom', 'affiliate-wp' ) )
+				),
+				'context'         => 'secondary',
+				'data'            => '',
+			) );
 		}
 
 	}
@@ -178,6 +209,18 @@ class Tab extends Reports\Tab {
 		$counts = array_reverse( $counts );
 
 		return reset( $counts );
+	}
+
+	/**
+	 * Registers the Campaigns tab tiles.
+	 *
+	 * @access public
+	 * @since  1.9
+	 */
+	public function register_tiles() {
+		$this->best_converting_campaign_tile();
+		$this->best_converting_campaign_date_tile();
+		$this->most_active_campaign_tile();
 	}
 
 	/**

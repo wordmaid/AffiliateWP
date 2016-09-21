@@ -228,7 +228,7 @@ abstract class Tab {
 			'type'              => '',
 			'data'              => '',
 			'comparison_data'   => '',
-			'display_callback'  => 'default_tile'
+			'display_callback'  => array( $this, 'default_tile' )
 		) );
 
 		$this->tiles[ $tile_id ] = $args;
@@ -277,7 +277,7 @@ abstract class Tab {
 				'meta_box_name'    => empty( $atts['label'] ) ? $this->label : $atts['label'],
 				'context'          => $atts['context'],
 				'action'           => "affwp_reports_{$this->tab_id}_meta_boxes",
-				'display_callback' => array( $this, $atts['display_callback'] ),
+				'display_callback' => $atts['display_callback'],
 				'extra_args'       => $this->tiles[ $tile_id ],
 			);
 
@@ -312,26 +312,34 @@ abstract class Tab {
 	 * @param $tile
 	 */
 	public function default_tile( $tile ) {
-		if ( ! empty( $tile['display_callback'] ) && 'default_tile' !== $tile['display_callback'] ) {
-			call_user_func( array( $this, $tile['display_callback'] ) );
+		if ( ! empty( $tile['display_callback'] ) && array( $this, 'default_tile' ) !== $tile['display_callback'] ) {
+			call_user_func( $tile['display_callback'], $tile );
 		} else {
 
-			switch( $tile['type'] ) {
-				case 'number':
-					echo '<span class="tile-number tile-value">' . affwp_format_amount( $tile['data'], false ) . '</span>';
-					break;
+			if ( empty( $tile['data'] ) ) {
+				echo '<span class="tile-no-data tile-value">' . __( 'No data for the current date range.', 'affiliate-wp' ) . '</span>';
+			} else {
+				switch( $tile['type'] ) {
+					case 'number':
+						echo '<span class="tile-number tile-value">' . affwp_format_amount( $tile['data'], false ) . '</span>';
+						break;
 
-				case 'amount':
-					echo '<span class="tile-amount tile-value">' . affwp_currency_filter( affwp_format_amount( $tile['data'] ) ) . '</span>';
-					break;
+					case 'amount':
+						echo '<span class="tile-amount tile-value">' . affwp_currency_filter( affwp_format_amount( $tile['data'] ) ) . '</span>';
+						break;
 
-				case 'rate':
-					echo '<span class="tile-rate tile-value">' . affwp_format_rate( $tile['data'] ) . '</span>';
-					break;
+					case 'rate':
+						echo '<span class="tile-rate tile-value">' . affwp_format_rate( $tile['data'] ) . '</span>';
+						break;
 
-				default:
-					echo '<span class="tile-value">' . $tile['data'] . '</span>';
-					break;
+					case 'url':
+						echo '<span class="tile-url tile-value">' . $tile['data'] . '</span>';
+						break;
+
+					default:
+						echo '<span class="tile-value">' . $tile['data'] . '</span>';
+						break;
+				}
 			}
 
 			if ( ! empty( $tile['comparison_data'] ) ) {

@@ -139,6 +139,17 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_Creatives_DB::get_creatives()
+	 */
+	public function test_get_creatives_fields_with_valid_field_should_return_array_of_that_field() {
+		$results = affiliate_wp()->creatives->get_creatives( array(
+			'fields' => 'creative_id'
+		) );
+
+		$this->assertEqualSets( self::$creatives, $results );
+	}
+
+	/**
 	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
 	 */
 	public function test_get_creatives_invalid_fields_arg_should_return_regular_Creative_object_results() {

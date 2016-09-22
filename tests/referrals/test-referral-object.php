@@ -1,26 +1,29 @@
 <?php
-use AffWP\Referral as Referral;
+namespace AffWP\Referral\Object;
+
+use AffWP\Tests\UnitTestCase;
+use AffWP\Referral;
 
 /**
  * Tests for AffWP\Referral
  *
  * @covers AffWP\Referral
- * @covers AffWP\Object
+ * @covers AffWP\Base_Object
  *
  * @group referrals
  * @group objects
  */
-class AffWP_Referral_Tests extends WP_UnitTestCase {
+class Tests extends UnitTestCase {
 
 	/**
-	 * @covers AffWP\Object::get_instance()
+	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_invalid_referral_id_should_return_false() {
 		$this->assertFalse( Referral::get_instance( 0 ) );
 	}
 
 	/**
-	 * @covers AffWP\Object::get_instance()
+	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_referral_id_should_return_Referral_object() {
 		$user_id = $this->factory->user->create();

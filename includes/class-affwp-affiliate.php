@@ -15,10 +15,13 @@ namespace AffWP;
  *
  * @since 1,9
  *
- * @see AffWP\Object
+ * @see AffWP\Base_Object
  * @see affwp_get_affiliate()
+ *
+ * @property-read int     $ID   Alias for `$affiliate_id`.
+ * @property      WP_User $user User object.
  */
-final class Affiliate extends Object {
+final class Affiliate extends Base_Object {
 
 	/**
 	 * Affiliate ID.
@@ -28,15 +31,6 @@ final class Affiliate extends Object {
 	 * @var int
 	 */
 	public $affiliate_id = 0;
-
-	/**
-	 * Object ID (alias for affiliate_id).
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @var int
-	 */
-	public $ID = 0;
 
 	/**
 	 * Affiliate user ID.
@@ -51,32 +45,32 @@ final class Affiliate extends Object {
 	 * Affiliate rate.
 	 *
 	 * @since 1.9
-	 * @access protected
+	 * @access public
 	 * @var string
 	 *
-	 * @see Affiliate::get_rate()
+	 * @see Affiliate::rate()
 	 */
-	protected $rate;
+	public $rate;
 
 	/**
 	 * Affiliate rate type.
 	 *
 	 * @since 1.9
-	 * @access protected
+	 * @access public
 	 * @var string
 	 *
-	 * @see Affiliate::get_rate_type()
+	 * @see Affiliate::rate_type()
 	 */
-	protected $rate_type;
+	public $rate_type;
 
 	/**
 	 * Affiliate payment email.
 	 *
 	 * @since 1.9
-	 * @access protected
+	 * @access public
 	 * @var string
 	 */
-	protected $payment_email;
+	public $payment_email;
 
 	/**
 	 * Affiliate status.
@@ -92,7 +86,7 @@ final class Affiliate extends Object {
 	 *
 	 * @since 1.9
 	 * @access public
-	 * @var string
+	 * @var float
 	 */
 	public $earnings;
 
@@ -131,9 +125,20 @@ final class Affiliate extends Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP\Object::get_cache_key()
+	 * @see AffWP\Base_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_affiliates';
+
+	/**
+	 * Database group.
+	 *
+	 * Used in \AffWP\Base_Object for accessing the affiliates DB class methods.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public static $db_group = 'affiliates';
 
 	/**
 	 * Object type.
@@ -146,6 +151,43 @@ final class Affiliate extends Object {
 	 * @var string
 	 */
 	public static $object_type = 'affiliate';
+
+	/**
+	 * Retrieves the values of the given key.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param string $key Key to retrieve the value for.
+	 * @return mixed|\WP_User Value.
+	 */
+	public function __get( $key ) {
+		if ( 'user' === $key ) {
+			return $this->get_user();
+		}
+
+		return parent::__get( $key );
+	}
+
+	/**
+	 * Builds the lazy-loaded user object with first and last name fields.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @return false|\WP_User Built user object or false if it doesn't exist.
+	 */
+	public function get_user() {
+		$user = get_user_by( 'id', $this->user_id );
+
+		if ( $user ) {
+			foreach ( array( 'first_name', 'last_name' ) as $field ) {
+				$user->data->{$field} = get_user_meta( $this->user_id, $field, true );
+			}
+			return $user->data;
+		}
+		return $user;
+	}
 
 	/**
 	 * Sanitizes an affiliate object field.
@@ -163,67 +205,8 @@ final class Affiliate extends Object {
 			$value = (int) $value;
 		}
 
-		return $value;
-	}
-
-	/**
-	 * Retrieves the object instance.
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @static
-	 *
-	 * @param int $object Object ID.
-	 * @return object|false Object instance or false.
-	 */
-	public static function get_instance( $object_id ) {
-		self::$object_group = affiliate_wp()->affiliates->cache_group;
-
-		return parent::get_instance( $object_id );
-	}
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 1.9
-	 * @access public
-	 *
-	 * @param Affiliate $affiliate Affiliate object.
-	 */
-	public function __construct( $affiliate ) {
-		parent::__construct( $affiliate );
-
-		$primary_key = affiliate_wp()->affiliates->primary_key;
-
-		$this->ID = $this->{$primary_key};
-	}
-
-	/**
-	 * Gets values of non-public properties.
-	 *
-	 * @since 1.9
-	 * @access public
-	 *
-	 * @param string $key Property to retrieve a value for.
-	 * @return mixed Property value.
-	 */
-	public function __get( $key ) {
-		switch ( $key ) {
-			// Derived properties.
-			case 'rate':
-				$value = $this->get_rate();
-				break;
-			case 'rate_type':
-				$value = $this->get_rate_type();
-				break;
-			case 'payment_email':
-				$value = $this->get_payment_email();
-				break;
-
-			// Everything else.
-			default:
-				$value = parent::__get( $key );
-				break;
+		if ( 'earnings' === $field ) {
+			$value = floatval( $value );
 		}
 
 		return $value;
@@ -233,12 +216,11 @@ final class Affiliate extends Object {
 	 * Retrieves the affiliate rate type.
 	 *
 	 * @since 1.9
-	 * @access protected
+	 * @access public
 	 *
 	 * @return string Rate type. If empty, defaults to the global referral rate type.
 	 */
-	protected function get_rate_type() {
-
+	public function rate_type() {
 		if ( empty( $this->rate_type ) ) {
 			return affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
 		}
@@ -250,11 +232,11 @@ final class Affiliate extends Object {
 	 * Retrieves the affiliate rate.
 	 *
 	 * @since 1.9
-	 * @access private
+	 * @access public
 	 *
 	 * @return int Rate. If empty, defaults to the global referral rate.
 	 */
-	private function get_rate() {
+	public function rate() {
 		if ( empty( $this->rate ) ) {
 			return affiliate_wp()->settings->get( 'referral_rate', 20 );
 		}
@@ -268,11 +250,11 @@ final class Affiliate extends Object {
 	 * If not set or invalid, the affiliate's account email is used instead.
 	 *
 	 * @since 1.9
-	 * @access private
+	 * @access public
 	 *
 	 * @return string Payment email.
 	 */
-	private function get_payment_email() {
+	public function payment_email() {
 		if ( empty( $this->payment_email ) || ! is_email( $this->payment_email ) ) {
 			$email = affwp_get_affiliate_email( $this->ID );
 		} else {
@@ -286,7 +268,7 @@ final class Affiliate extends Object {
 	 * Determines if the current affiliate has a custom rate value.
 	 *
 	 * @since 1.9
-	 * @access protected
+	 * @access public
 	 *
 	 * @return bool True if the affiliate has a custom rate, otherwise false.
 	 */

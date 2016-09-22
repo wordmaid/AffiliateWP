@@ -15,10 +15,12 @@ namespace AffWP;
  *
  * @since 1,9
  *
- * @see AffWP\Object
+ * @see AffWP\Base_Object
  * @see affwp_get_visit()
+ * 
+ * @property-read int $ID Alias for `$visit_id`
  */
-final class Visit extends Object {
+final class Visit extends Base_Object {
 
 	/**
 	 * Visit ID.
@@ -28,15 +30,6 @@ final class Visit extends Object {
 	 * @var int
 	 */
 	public $visit_id = 0;
-
-	/**
-	 * Object ID (alias for visit_id).
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @var int
-	 */
-	public $ID = 0;
 
 	/**
 	 * Affiliate ID.
@@ -109,9 +102,20 @@ final class Visit extends Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP\Object::get_cache_key()
+	 * @see AffWP\Base_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_visits';
+
+	/**
+	 * Database group.
+	 *
+	 * Used in \AffWP\Base_Object for accessing the visits DB class methods.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public static $db_group = 'visits';
 
 	/**
 	 * Object type.
@@ -141,38 +145,6 @@ final class Visit extends Object {
 			$value = (int) $value;
 		}
 		return $value;
-	}
-
-	/**
-	 * Retrieves the object instance.
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @static
-	 *
-	 * @param int $object Object ID.
-	 * @return object|false Object instance or false.
-	 */
-	public static function get_instance( $object_id ) {
-		self::$object_group = affiliate_wp()->visits->cache_group;
-
-		return parent::get_instance( $object_id );
-	}
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 1.9
-	 * @access public
-	 *
-	 * @param Visit $visit Visit object.
-	 */
-	public function __construct( $visit ) {
-		parent::__construct( $visit );
-
-		$primary_key = affiliate_wp()->visits->primary_key;
-
-		$this->ID = $this->{$primary_key};
 	}
 
 }

@@ -16,34 +16,22 @@ namespace AffWP;
  * @since 1.9
  * @abstract
  */
-abstract class Object {
+abstract class Base_Object {
 
 	/**
 	 * Whether the object members have been filled.
 	 *
-	 * @since 1.9
 	 * @access protected
-	 * @var bool|null
+	 * @since  1.9
+	 * @var    bool|null
 	 */
 	protected $filled = null;
 
 	/**
-	 * Object group.
-	 *
-	 * Should be initialized in extending class versions of get_instance().
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @static
-	 * @var string
-	 */
-	public static $object_group;
-
-	/**
 	 * Retrieves the object instance.
 	 *
-	 * @since 1.9
 	 * @access public
+	 * @since  1.9
 	 * @static
 	 *
 	 * @param int $object Object ID.
@@ -54,15 +42,20 @@ abstract class Object {
 			return false;
 		}
 
-		$Sub_Class    = get_called_class();
-		$cache_key    = self::get_cache_key( $object_id );
-		$cache_group  = $Sub_Class::$object_type;
-		$object_group = $Sub_Class::$object_group;
+		$Sub_Class   = get_called_class();
+		$cache_key   = self::get_cache_key( $object_id );
+		$cache_group = static::$object_type;
 
 		$_object = wp_cache_get( $cache_key, $cache_group );
 
 		if ( false === $_object ) {
-			$_object = affiliate_wp()->{$object_group}->get( $object_id );
+			$db_groups = self::get_db_groups();
+
+			if ( isset( $db_groups->secondary ) ) {
+				$_object = affiliate_wp()->{$db_groups->primary}->{$db_groups->secondary}->get( $object_id );
+			} else {
+				$_object = affiliate_wp()->{$db_groups->primary}->get( $object_id );
+			}
 
 			if ( ! $_object ) {
 				return false;
@@ -80,8 +73,8 @@ abstract class Object {
 	/**
 	 * Retrieves the built cache key for the given single object.
 	 *
-	 * @since 1.9
 	 * @access public
+	 * @since  1.9
 	 * @static
 	 *
 	 * @see Object::get_instance()
@@ -91,16 +84,15 @@ abstract class Object {
 	 * @return string Cache key for the object type and ID.
 	 */
 	public static function get_cache_key( $object_id ) {
-		$Sub_Class = get_called_class();
-
-		return md5( $Sub_Class::$cache_token . ':' . $object_id );
+		return md5( static::$cache_token . ':' . $object_id );
 	}
 
 	/**
 	 * Object constructor.
 	 *
-	 * @since 1.9
 	 * @access public
+	 * @since  1.9
+	 *
 	 * @param mixed $object Object to populate members for.
 	 */
 	public function __construct( $object ) {
@@ -112,13 +104,25 @@ abstract class Object {
 	/**
 	 * Retrieves the value of a given property.
 	 *
-	 * @since 1.9
 	 * @access public
+	 * @since  1.9
 	 *
 	 * @param string $key Property to retrieve a value for.
 	 * @return mixed Otherwise, the value of the property if set.
 	 */
 	public function __get( $key ) {
+		if ( 'ID' === $key ) {
+			$db_groups = self::get_db_groups();
+
+			if ( isset( $db_groups->secondary ) ) {
+				$primary_key = affiliate_wp()->{$db_groups->primary}->{$db_groups->secondary}->primary_key;
+			} else {
+				$primary_key = affiliate_wp()->{$db_groups->primary}->primary_key;
+			}
+
+			return $this->{$primary_key};
+		}
+
 		if ( isset( $this->{$key} ) ) {
 			return $this->{$key};
 		}
@@ -127,8 +131,8 @@ abstract class Object {
 	/**
 	 * Sets a property.
 	 *
-	 * @since 1.9
 	 * @access public
+	 * @since  1.9
 	 *
 	 * @see set()
 	 *
@@ -142,55 +146,109 @@ abstract class Object {
 	/**
 	 * Sets an object property value and optionally save.
 	 *
-	 * @since 1.9
+	 * @internal Note: Checking isset() on $this->{$key} is missing here because
+	 *           this method is also used directly by __set() which is leveraged for
+	 *           magic properties.
+	 *
 	 * @access public
+	 * @since  1.9
 	 *
 	 * @param string $key   Property name.
 	 * @param mixed  $value Property value.
 	 * @param bool   $save  Optional. Whether to save the new value in the database.
-	 * @return int|false The object ID on success, false otherwise.
+	 * @return int|false True if the value was set. If `$save` is true, true if the save was successful.
+	 *                   False if `$save` is true and the save was unsuccessful. false otherwise.
 	 */
 	public function set( $key, $value, $save = false ) {
-		if ( ! isset( $key ) ) {
-			return false;
-		}
-
 		$this->$key = static::sanitize_field( $key, $value );
 
 		if ( true === $save ) {
+			// Only real properties can be saved.
+			$keys = array_keys( get_class_vars( get_called_class() ) );
+
+			if ( ! in_array( $key, $keys ) ) {
+				return false;
+			}
+
 			return $this->save();
-		} else {
-			return $this->ID;
 		}
+
+		return true;
 	}
 
 	/**
 	 * Saves an object with current property values.
 	 *
-	 * @since 1.9
 	 * @access public
+	 * @since  1.9
 	 *
-	 * @return int|false The object ID on success, false otherwise.
+	 * @return bool True on success, false on failure.
 	 */
 	public function save() {
-		$Sub_Class    = get_called_class();
-		$object_type  = $Sub_Class::$object_type;
-		$object_group = $Sub_Class::$object_group;
+		$object_type = static::$object_type;
 
-		$updated = affiliate_wp()->{$object_group}->update( $this->ID, $this->to_array(), '', $object_type );
+		switch ( $object_type ) {
+			case 'referral':
+				$updated = affiliate_wp()->referrals->update_referral( $this->ID, $this->to_array() );
+				break;
+
+			case 'visit':
+				$updated = affiliate_wp()->visits->update_visit( $this->ID, $this->to_array() );
+				break;
+
+			default:
+				// Affiliates and Creatives have update() methods.
+				$db_groups = self::get_db_groups();
+
+				// Handle secondary groups.
+				if ( isset( $db_groups->secondary ) ) {
+					$updated = affiliate_wp()->{$db_groups->primary}->{$db_groups->secondary}->update( $this->ID, $this->to_array(), '', $object_type );
+				} else {
+					$updated = affiliate_wp()->{$db_groups->primary}->update( $this->ID, $this->to_array(), '', $object_type );
+				}
+				break;
+		}
 
 		if ( $updated ) {
-			return $this->ID;
-		} else {
-			return false;
+			return true;
 		}
+
+		return false;
+	}
+
+	/**
+	 * Splits the db groups if there is more than one.
+	 *
+	 * CURIE is ':'.
+	 *
+	 * @access public
+	 * @since  1.9
+	 * @static
+	 *
+	 * @return object Object containing the primary and secondary group values.
+	 */
+	public static function get_db_groups() {
+		$groups = array(
+			'primary' => static::$db_group
+		);
+
+		if ( false !== strpos( static::$db_group, ':' ) ) {
+			$split = explode( ':', static::$db_group, 2 );
+
+			if ( 2 == count( $split) ) {
+				$groups['primary']   = $split[0];
+				$groups['secondary'] = $split[1];
+			}
+		}
+
+		return (object) $groups;
 	}
 
 	/**
 	 * Converts the given object to an array.
 	 *
-	 * @since 1.9
 	 * @access public
+	 * @since  1.9
 	 *
 	 * @param mixed $object Object.
 	 * @return array Array version of the given object.
@@ -202,8 +260,8 @@ abstract class Object {
 	/**
 	 * Fills object members.
 	 *
-	 * @since 1.9
 	 * @access public
+	 * @since  1.9
 	 * @static
 	 *
 	 * @param object|array $object Object or array of object data.
@@ -237,8 +295,8 @@ abstract class Object {
 	 *
 	 * Sub-class should override this method.
 	 *
-	 * @since 1.9
 	 * @access public
+	 * @since  1.9
 	 * @static
 	 *
 	 * @param string $field Object field.

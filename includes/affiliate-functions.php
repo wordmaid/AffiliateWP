@@ -95,7 +95,10 @@ function affwp_get_affiliate_name( $affiliate = 0 ) {
 		return '';
 	}
 
-	$user_info    = get_userdata( $affiliate->user_id );
+	if ( ! $user_info = get_userdata( $affiliate->user_id ) ) {
+		return '';
+	}
+
 	$first_name   = esc_html( $user_info->first_name );
 	$last_name    = esc_html( $user_info->last_name );
 
@@ -319,12 +322,12 @@ function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_
 	$product_rate = ( null !== $product_rate ) ? $product_rate : $default_rate;
 
 	// Get rate in order of priority: Affiliate -> Product -> Global
-	$rate = affwp_abs_number_round( $affiliate->rate );
+	$rate = affwp_abs_number_round( $affiliate->rate() );
 
-	$rate = ( null !== $rate ) ? $rate : $product_rate;
+	$rate = $affiliate->has_custom_rate() ? $rate : $product_rate;
 
 	// Get the referral rate type.
-	$type = $affiliate->rate_type;
+	$type = $affiliate->rate_type();
 
 	// Format percentage rates
 	$rate = ( 'percentage' === $type ) ? $rate / 100 : $rate;
@@ -344,21 +347,7 @@ function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_
 	}
 
 	// Format the rate based on the type
-	switch ( $type ) {
-
-		case 'percentage' :
-
-			$rate = affwp_abs_number_round( $rate * 100 ) . '%';
-
-			break;
-
-		case 'flat' :
-
-			$rate = affwp_currency_filter( $rate );
-
-			break;
-
-	}
+	$rate = affwp_format_rate( $rate, $type );
 
 	return $rate;
 
@@ -507,7 +496,7 @@ function affwp_get_affiliate_payment_email( $affiliate = 0 ) {
 		return false;
 	}
 
-	return $affiliate->payment_email;
+	return $affiliate->payment_email();
 }
 
 /**
@@ -613,7 +602,7 @@ function affwp_get_affiliate_earnings( $affiliate, $formatted = false ) {
 
 	if ( $formatted ) {
 
-		$earnings = affwp_currency_filter( $earnings );
+		$earnings = affwp_currency_filter( affwp_format_amount( $earnings ) );
 
 	}
 
@@ -655,7 +644,7 @@ function affwp_get_affiliate_unpaid_earnings( $affiliate, $formatted = false ) {
 
 	if ( $formatted ) {
 
-		$earnings = affwp_currency_filter( $earnings );
+		$earnings = affwp_currency_filter( affwp_format_amount( $earnings ) );
 
 	}
 
@@ -1047,6 +1036,7 @@ function affwp_add_affiliate( $data = array() ) {
  * Updates an affiliate.
  *
  * @since 1.0
+ * @since 1.9 Support was added for updating an affiliate's status.
  *
  * @todo Document `$data` as a hash notation
  *
@@ -1067,6 +1057,7 @@ function affwp_update_affiliate( $data = array() ) {
 	$args['payment_email'] = ! empty( $data['payment_email' ] ) && is_email( $data['payment_email' ] ) ? sanitize_text_field( $data['payment_email'] ) : '';
 	$args['rate']          = ( isset( $data['rate' ] ) && '' !== $data['rate' ] )                      ? sanitize_text_field( $data['rate'] )          : '';
 	$args['rate_type']     = ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '';
+	$args['status']        = ! empty( $data['status'] ) ? sanitize_text_field( $data['status'] ) : $affiliate->status;
 	$args['user_id']       = $user_id;
 
 	/**
@@ -1318,7 +1309,7 @@ function affwp_get_affiliate_area_page_url( $tab = '' ) {
 	$affiliate_area_page_url = get_permalink( $affiliate_area_page_id );
 
 	if ( ! empty( $tab )
-		&& in_array( $tab, array( 'urls', 'stats', 'graphs', 'referrals', 'visits', 'creatives', 'settings' ) )
+		&& in_array( $tab, array( 'urls', 'stats', 'graphs', 'referrals', 'payouts', 'visits', 'creatives', 'settings' ) )
 	) {
 		$affiliate_area_page_url = add_query_arg( array( 'tab' => $tab ), $affiliate_area_page_url );
 	}
@@ -1354,7 +1345,7 @@ function affwp_get_active_affiliate_area_tab() {
 	 */
 	$tabs = apply_filters( 'affwp_affiliate_area_tabs', array(
 		'urls', 'stats', 'graphs', 'referrals',
-		'visits', 'creatives', 'settings'
+		'payouts', 'visits', 'creatives', 'settings'
 	) );
 
 	// If the tab can't be shown, remove it from play.

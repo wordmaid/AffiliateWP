@@ -3,6 +3,8 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/referrals/class-list-table.php';
+
 /**
  * Add per page screen option to the Referrals list table
  *
@@ -24,6 +26,9 @@ function affwp_referrals_screen_options() {
 			'default' => 30,
 		)
 	);
+
+	// Instantiate the list table to make the columns array available to screen options.
+	new AffWP_Referrals_Table;
 
 	do_action( 'affwp_referrals_screen_options', $screen );
 

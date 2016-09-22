@@ -64,7 +64,7 @@ function affwp_delete_visit( $visit ) {
 
 	if ( affiliate_wp()->visits->delete( $visit->ID ) ) {
 		// Decrease the visit count
-		affwp_decrease_affiliate_visit_count( $visit->ID );
+		affwp_decrease_affiliate_visit_count( $visit->affiliate_id );
 
 		/**
 		 * Fires immediately after a visit has been deleted.

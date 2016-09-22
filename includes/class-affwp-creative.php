@@ -15,10 +15,12 @@ namespace AffWP;
  *
  * @since 1,9
  *
- * @see AffWP\Object
+ * @see AffWP\Base_Object
  * @see affwp_get_creative()
+ *
+ * @property-read int $ID Alias for `$creative_id`
  */
-final class Creative extends Object {
+final class Creative extends Base_Object {
 
 	/**
 	 * Creative ID.
@@ -28,15 +30,6 @@ final class Creative extends Object {
 	 * @var int
 	 */
 	public $creative_id = 0;
-
-	/**
-	 * Object ID (alias for creative_id).
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @var int
-	 */
-	public $ID = 0;
 
 	/**
 	 * Name of the creative.
@@ -109,9 +102,20 @@ final class Creative extends Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP\Object::get_cache_key()
+	 * @see AffWP\Base_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_creatives';
+
+	/**
+	 * Database group.
+	 *
+	 * Used in \AffWP\Base_Object for accessing the creatives DB class methods.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public static $db_group = 'creatives';
 
 	/**
 	 * Object type.
@@ -141,38 +145,6 @@ final class Creative extends Object {
 			$value = (int) $value;
 		}
 		return $value;
-	}
-
-	/**
-	 * Retrieves the object instance.
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @static
-	 *
-	 * @param int $object Object ID.
-	 * @return object|false Object instance or false.
-	 */
-	public static function get_instance( $object_id ) {
-		self::$object_group = affiliate_wp()->creatives->cache_group;
-
-		return parent::get_instance( $object_id );
-	}
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 1.9
-	 * @access public
-	 *
-	 * @param Creative $creative Creative object.
-	 */
-	public function __construct( $creative ) {
-		parent::__construct( $creative );
-
-		$primary_key = affiliate_wp()->creatives->primary_key;
-
-		$this->ID = $this->{$primary_key};
 	}
 
 }

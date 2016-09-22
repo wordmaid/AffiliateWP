@@ -24,6 +24,7 @@ function affwp_is_admin_page() {
 		'affiliate-wp',
 		'affiliate-wp-affiliates',
 		'affiliate-wp-referrals',
+		'affiliate-wp-payouts',
 		'affiliate-wp-visits',
 		'affiliate-wp-creatives',
 		'affiliate-wp-reports',
@@ -69,6 +70,9 @@ function affwp_admin_scripts() {
 	}
 
 	wp_enqueue_script( 'jquery-ui-datepicker' );
+
+	// Enqueue postbox for core meta boxes.
+	wp_enqueue_script( 'postbox' );
 }
 add_action( 'admin_enqueue_scripts', 'affwp_admin_scripts' );
 
@@ -122,6 +126,7 @@ function affwp_frontend_scripts_and_styles() {
 			'pretty_affiliate_urls' => affwp_is_pretty_referral_urls(),
 			'currency_sign'         => affwp_currency_filter(''),
 			'currency_pos'          => affiliate_wp()->settings->get( 'currency_position', 'before' ),
+			'invalid_url'           => __( 'Please enter a valid URL for this site', 'affiliate-wp' )
 		));
 
 		wp_enqueue_style( 'affwp-forms' );

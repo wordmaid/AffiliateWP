@@ -18,6 +18,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 
 		add_action( 'mepr-txn-status-pending', array( $this, 'add_pending_referral' ), 10 );
 		add_action( 'mepr-txn-status-complete', array( $this, 'mark_referral_complete' ), 10 );
+		add_action( 'mepr-txn-status-confirmed', array( $this, 'mark_referral_complete' ), 10 );
 		add_action( 'mepr-txn-status-refunded', array( $this, 'revoke_referral_on_refund' ), 10 );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
@@ -73,14 +74,20 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 				return; // Referrals are disabled on this membership
 			}
 
-			/*
-			 * Coupon trial amount supercedes a regular sale amount or coupon sale amount without
-			 * a trial. MemberPress handles applying the non-trial coupon amount to $txn->amount.
-			 */
+			// Set the base amount from the transaction at the top of the stack.
+			$amount = $txn->amount;
+
+			// If there's a free trial subscription and rate type is percentage, override $amount.
+			if ( $txn->subscription()
+				&& ( $txn->subscription()->trial && 0 == intval( $txn->subscription()->trial_amount ) )
+				&& 'percentage' === affwp_get_affiliate_rate_type( $this->affiliate_id )
+			) {
+				$amount = $txn->subscription()->trial_amount;
+			}
+
+			// If there's coupon trial amount, override $amount.
 			if ( $txn->coupon() && $txn->coupon()->trial ) {
 				$amount = $txn->coupon()->trial_amount;
-			} else {
-				$amount = $txn->amount;
 			}
 
 			// get referral total
@@ -134,7 +141,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 
 		}
 
-		$url = admin_url( 'admin.php?page=memberpress-trans&search=' . $reference );
+		$url = admin_url( 'admin.php?page=memberpress-trans&action=edit&id=' . $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 	}

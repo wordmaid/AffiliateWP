@@ -15,10 +15,12 @@ namespace AffWP;
  *
  * @since 1,9
  *
- * @see AffWP\Object
+ * @see AffWP\Base_Object
  * @see affwp_get_referral()
+ *
+ * @property-read int $ID Alias for `$referral_id`
  */
-final class Referral extends Object {
+final class Referral extends Base_Object {
 
 	/**
 	 * Referral ID.
@@ -28,15 +30,6 @@ final class Referral extends Object {
 	 * @var int
 	 */
 	public $referral_id = 0;
-
-	/**
-	 * Object ID (alias for referral_id).
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @var int
-	 */
-	public $ID = 0;
 
 	/**
 	 * Affiliate ID.
@@ -154,9 +147,20 @@ final class Referral extends Object {
 	 * @static
 	 * @var string
 	 *
-	 * @see AffWP\Object::get_cache_key()
+	 * @see AffWP\Base_Object::get_cache_key()
 	 */
 	public static $cache_token = 'affwp_referrals';
+
+	/**
+	 * Database group.
+	 *
+	 * Used in \AffWP\Base_Object for accessing the referrals DB class methods.
+	 *
+	 * @since 1.9
+	 * @access public
+	 * @var string
+	 */
+	public static $db_group = 'referrals';
 
 	/**
 	 * Object type.
@@ -186,38 +190,6 @@ final class Referral extends Object {
 			$value = (int) $value;
 		}
 		return $value;
-	}
-
-	/**
-	 * Retrieves the object instance.
-	 *
-	 * @since 1.9
-	 * @access public
-	 * @static
-	 *
-	 * @param int $object Object ID.
-	 * @return object|false Object instance or false.
-	 */
-	public static function get_instance( $object_id ) {
-		self::$object_group = affiliate_wp()->referrals->cache_group;
-
-		return parent::get_instance( $object_id );
-	}
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 1.9
-	 * @access public
-	 *
-	 * @param Referral $referral Referral object.
-	 */
-	public function __construct( $referral ) {
-		parent::__construct( $referral );
-
-		$primary_key = affiliate_wp()->referrals->primary_key;
-
-		$this->ID = $this->{$primary_key};
 	}
 
 }

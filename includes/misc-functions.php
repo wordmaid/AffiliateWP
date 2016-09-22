@@ -45,6 +45,7 @@ function affwp_get_currencies() {
 		'IDR' => __( 'Indonesia Rupiah', 'affiliate-wp' ),
 		'INR' => __( 'Indian Rupee', 'affiliate-wp' ),
 		'ILS' => __( 'Israeli Shekel', 'affiliate-wp' ),
+		'IRR' => __( 'Iranian Rial', 'affiliate-wp' ),
 		'JPY' => __( 'Japanese Yen', 'affiliate-wp' ),
 		'KIP' => __( 'Lao Kip', 'affiliate-wp' ),
 		'MYR' => __( 'Malaysian Ringgits', 'affiliate-wp' ),
@@ -67,6 +68,7 @@ function affwp_get_currencies() {
 		'CHF' => __( 'Swiss Franc', 'affiliate-wp' ),
 		'TWD' => __( 'Taiwan New Dollars', 'affiliate-wp' ),
 		'THB' => __( 'Thai Baht', 'affiliate-wp' ),
+		'TND' => __( 'Tunisian Dinar', 'affiliate-wp' ),
 		'TRY' => __( 'Turkish Lira', 'affiliate-wp' ),
 		'AED' => __( 'United Arab Emirates Dirham', 'affiliate-wp' ),
 		'UAH' => __( 'Ukrainian Hryvnia', 'affiliate-wp' ),
@@ -98,17 +100,14 @@ function affwp_get_currency() {
  * @return string $amount Newly sanitized amount
  */
 function affwp_sanitize_amount( $amount ) {
-	global $affwp_options;
 
+	$is_negative   = false;
 	$thousands_sep = affiliate_wp()->settings->get( 'thousands_separator', ',' );
 	$decimal_sep   = affiliate_wp()->settings->get( 'decimal_separator', '.' );
 
-	// Remove non-numeric numbers
-	$amount = preg_replace("/([^0-9\\.])/i", "", $amount );
-
 	// Sanitize the amount
 	if ( $decimal_sep == ',' && false !== ( $found = strpos( $amount, $decimal_sep ) ) ) {
-		if ( $thousands_sep == '.' && false !== ( $found = strpos( $amount, $thousands_sep ) ) ) {
+		if ( ( $thousands_sep == '.' || $thousands_sep == ' ' ) && false !== ( $found = strpos( $amount, $thousands_sep ) ) ) {
 			$amount = str_replace( $thousands_sep, '', $amount );
 		} elseif( empty( $thousands_sep ) && false !== ( $found = strpos( $amount, '.' ) ) ) {
 			$amount = str_replace( '.', '', $amount );
@@ -119,10 +118,36 @@ function affwp_sanitize_amount( $amount ) {
 		$amount = str_replace( $thousands_sep, '', $amount );
 	}
 
-	$decimals = apply_filters( 'affwp_sanitize_amount_decimals', affwp_get_decimal_count(), $amount );
-	$amount   = number_format( floatval( $amount ), absint( $decimals ), '.', '' );
+	if( $amount < 0 ) {
+		$is_negative = true;
+	}
 
+	$amount   = preg_replace( '/[^0-9\.]/', '', $amount );
+
+	/**
+	 * Filter number of decimals to use for prices
+	 *
+	 * @since 1.0
+	 *
+	 * @param int $number Number of decimals
+	 * @param int|string $amount Price
+	 */
+	$decimals = apply_filters( 'affwp_sanitize_amount_decimals', affwp_get_decimal_count(), $amount );
+	$amount   = number_format( (double) $amount, $decimals, '.', '' );
+
+	if( $is_negative ) {
+		$amount *= -1;
+	}
+
+	/**
+	 * Filter the sanitized price before returning
+	 *
+	 * @since 1.0
+	 *
+	 * @param string $amount Price
+	 */
 	return apply_filters( 'affwp_sanitize_amount', $amount );
+
 }
 
 /**
@@ -176,6 +201,33 @@ function affwp_format_amount( $amount, $decimals = true ) {
  */
 function affwp_get_decimal_count() {
 	return apply_filters( 'affwp_decimal_count', 2 );
+}
+
+/**
+ * Formats referral rate based on the given type.
+ *
+ * @since 1.9
+ *
+ * @param int    $rate   Referral rate.
+ * @param string $type   Optional. Rate type. Accepts 'percentage' or 'flat'. Default 'percentage'.
+ * @return string Formatted rate string.
+ */
+function affwp_format_rate( $rate, $type = 'percentage' ) {
+	if ( 'percentage' === $type ) {
+		$rate = affwp_abs_number_round( $rate * 100 ) . '%';
+	} else {
+		$rate = affwp_currency_filter( $rate );
+	}
+
+	/**
+	 * Filter the rate format.
+	 *
+	 * @since 1.9
+	 *
+	 * @param string $rate Formatted rate.
+	 * @param string $type Rate type.
+	 */
+	return apply_filters( 'affwp_format_rate', $rate, $type );
 }
 
 /**
@@ -264,6 +316,9 @@ function affwp_currency_filter( $amount ) {
 				break;
 			case "KRW" :
 				$formatted = $amount . '&#8361;';
+				break;
+			case "IRR" :
+				$formatted = $amount . '&#65020;';
 				break;
 			default :
 			    $formatted = $amount . ' ' . $currency;
@@ -577,7 +632,7 @@ function affwp_affiliate_area_show_tab( $tab = '' ) {
  *
  * @since 1.9
  *
- * @param AffWP\Object $object Object.
+ * @param AffWP\Base_Object $object Base_Object.
  * @return bool True if the item cache was cleaned, false otherwise.
  */
 function affwp_clean_item_cache( $object ) {
@@ -589,10 +644,9 @@ function affwp_clean_item_cache( $object ) {
 		return false;
 	}
 
-	$Object_Class      = get_class( $object );
-	$cache_key         = $Object_Class::get_cache_key( $object->ID );
-	$cache_group       = $Object_Class::$object_type;
-	$query_cache_group = $Object_Class::$object_group;
+	$Object_Class = get_class( $object );
+	$cache_key    = $Object_Class::get_cache_key( $object->ID );
+	$cache_group  = $Object_Class::$object_type;
 
 	// Individual object.
 	wp_cache_delete( $cache_key, $cache_group );
@@ -600,6 +654,78 @@ function affwp_clean_item_cache( $object ) {
 	// Prime the item cache.
 	$Object_Class::get_instance( $object->ID );
 
+	$db_groups      = $Object_Class::get_db_groups();
+	$db_cache_group = isset( $db_groups->secondary ) ? $db_groups->secondary : $db_groups->primary;
+
 	// last_changed for queries.
-	wp_cache_set( 'last_changed', microtime(), $query_cache_group );
+	wp_cache_set( 'last_changed', microtime(), $db_cache_group );
+}
+
+/**
+ * Adds AffiliateWP postbox nonces, which are used
+ * to save the position of AffiliateWP meta boxes.
+ *
+ * @since  1.9
+ *
+ * @return void
+ */
+function affwp_add_screen_options_nonces() {
+
+	if ( ! affwp_is_admin_page() ) {
+		return;
+	}
+
+	wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce' , false );
+	wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce' , false );
+
+
+}
+add_action( 'admin_footer', 'affwp_add_screen_options_nonces' );
+
+/*
+ * Get the logout URL
+ *
+ * @since  1.8.8
+ * @return string logout URL
+ */
+function affwp_get_logout_url() {
+
+	/**
+	 * Filters the URL to log out the current user.
+	 *
+	 * @since 1.8.8
+	 * @param string $logout_url URL to log out the current user.
+	 */
+	return apply_filters( 'affwp_logout_url', wp_logout_url( get_permalink() ) );
+}
+
+/**
+ * Retrieve a list of all published pages
+ *
+ * On large sites this can be expensive, so only load if on the settings page or $force is set to true
+ *
+ * @since 1.0
+ * @since 1.8.8 Moved to misc-functions.php to prevent fatal errors with other plugins incorrectly loading admin code without actually loading WP admin.
+ *        See https://github.com/AffiliateWP/AffiliateWP/issues/1431
+ *        See https://github.com/AffiliateWP/AffiliateWP/issues/1038
+ * @param bool $force Force the pages to be loaded even if not on settings
+ * @return array $pages_options An array of the pages
+ */
+function affwp_get_pages( $force = false ) {
+
+	$pages_options = array( 0 => '' ); // Blank option
+
+	if( ( ! isset( $_GET['page'] ) || 'affiliate-wp-settings' != $_GET['page'] ) && ! $force ) {
+		return $pages_options;
+	}
+
+	$pages = get_pages();
+	if ( $pages ) {
+		foreach ( $pages as $page ) {
+			$pages_options[ $page->ID ] = $page->post_title;
+		}
+	}
+
+	return $pages_options;
+
 }

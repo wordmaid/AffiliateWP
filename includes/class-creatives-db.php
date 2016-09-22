@@ -61,8 +61,8 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 	 *
 	 * @see Affiliate_WP_DB::get_core_object()
 	 *
-	 * @param int|object|AffWP\Creative $creative Creative ID or object.
-	 * @return AffWP\Creative|null Creative object, null otherwise.
+	 * @param int|AffWP\Creative $creative Creative ID or object.
+	 * @return AffWP\Creative|false Creative object, otherwise false.
 	 */
 	public function get_object( $creative ) {
 		return $this->get_core_object( $creative, $this->query_object_type );

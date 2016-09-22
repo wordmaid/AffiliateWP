@@ -57,6 +57,29 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_Creatives_DB::get_object()
+	 */
+	public function test_get_object_with_invalid_creative_id_should_return_false() {
+		$this->assertFalse( affiliate_wp()->creatives->get_object( 0 ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Creatives_DB::get_object()
+	 */
+	public function test_get_object_with_valid_creative_id_should_return_a_valid_object() {
+		$this->assertInstanceOf( 'AffWP\Creative', affiliate_wp()->creatives->get_object( self::$creatives[0] ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Creatives_DB::get_object()
+	 */
+	public function test_get_object_with_valid_creative_object_should_return_a_valid_object() {
+		$object = affwp_get_creative( self::$creatives[1] );
+
+		$this->assertInstanceOf( 'AffWP\Creative', affiliate_wp()->creatives->get_object( $object ) );
+	}
+
+	/**
 	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
 	 */
 	public function test_get_creatives_should_return_array_of_Creative_objects_if_not_count_query() {

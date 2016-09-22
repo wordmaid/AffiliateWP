@@ -715,4 +715,32 @@ class Tests extends UnitTestCase {
 	public function test_get_affiliate_name_with_invalid_affiliate_id_should_return_null() {
 		$this->assertNull( affiliate_wp()->affiliates->get_affiliate_name( 0 ) );
 	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::get_affiliate_name()
+	 */
+	public function test_get_affiliate_name_with_valid_affiliate_id_should_return_the_affiliate_name() {
+		$user = get_userdata( affwp_get_affiliate_user_id( self::$affiliates[0] ) );
+
+		$this->assertSame( $user->data->display_name, affiliate_wp()->affiliates->get_affiliate_name( self::$affiliates[0] ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::get_affiliate_name()
+	 */
+	public function test_get_affiliate_name_with_invalid_affiliate_object_should_return_null() {
+		$this->assertNull( affiliate_wp()->affiliates->get_affiliate_name( new \stdClass() ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::get_affiliate_name()
+	 */
+	public function test_get_affiliate_name_with_valid_affiliate_object_should_return_the_affiliate_name() {
+		$user      = get_userdata( affwp_get_affiliate_user_id( self::$affiliates[0] ) );
+		$affiliate = affwp_get_affiliate( self::$affiliates[0] );
+
+		$this->assertSame( $user->data->display_name, affiliate_wp()->affiliates->get_affiliate_name( $affiliate ) );
+	}
+
+
 }

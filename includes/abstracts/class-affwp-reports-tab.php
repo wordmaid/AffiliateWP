@@ -254,7 +254,7 @@ abstract class Tab {
 	 */
 	private function set_up_tiles() {
 		if ( ! class_exists( 'AffWP\Admin\Meta_Box' ) ) {
-			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-meta-box-base.php';
 		}
 
 		$this->register_tiles();

@@ -34,7 +34,7 @@ if ( ! defined('ABSPATH') ) {
  *    if ( ! defined( 'AFFILIATEWP_PLUGIN_DIR' ) && ! empty( AFFILIATEWP_PLUGIN_DIR ) ) {
  *        return;
  *    }
- *    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-metabox-base.php';
+ *    require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-meta-box-base.php';
  *
  *    class My_Integration extends Base {
  *

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-09-02 19:20:53+00:00\n"
+"POT-Creation-Date: 2016-09-22 20:23:58+00:00\n"
 "PO-Revision-Date: 2016-08-10 09:05+0200\n"
 "Last-Translator: FX Bénard <fx@fxbenard.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
@@ -241,6 +241,78 @@ msgstr ""
 msgid "Use any get_visits() arguments to modify the response."
 msgstr ""
 
+#: includes/abstracts/class-affwp-reports-tab.php:114
+#, fuzzy
+msgid "Date Filters"
+msgstr "Filtrer"
+
+#: includes/abstracts/class-affwp-reports-tab.php:129
+msgid "Quick Stats"
+msgstr ""
+
+#: includes/abstracts/class-affwp-reports-tab.php:162
+msgid "Trends"
+msgstr ""
+
+#: includes/abstracts/class-affwp-reports-tab.php:320
+msgid "No data for the current date range."
+msgstr ""
+
+#: includes/abstracts/class-affwp-reports-tab.php:365
+#: includes/class-graph.php:335
+msgid "Today"
+msgstr "Aujourd’hui"
+
+#: includes/abstracts/class-affwp-reports-tab.php:366
+#: includes/class-graph.php:336
+msgid "Yesterday"
+msgstr "Hier"
+
+#: includes/abstracts/class-affwp-reports-tab.php:367
+#: includes/class-graph.php:337
+msgid "This Week"
+msgstr "Cette semaine"
+
+#: includes/abstracts/class-affwp-reports-tab.php:368
+#: includes/class-graph.php:338
+msgid "Last Week"
+msgstr "La semaine dernière"
+
+#: includes/abstracts/class-affwp-reports-tab.php:369
+#: includes/class-graph.php:339
+msgid "This Month"
+msgstr "Ce mois-ci"
+
+#: includes/abstracts/class-affwp-reports-tab.php:370
+#: includes/class-graph.php:340
+msgid "Last Month"
+msgstr "Mois dernier"
+
+#: includes/abstracts/class-affwp-reports-tab.php:371
+#: includes/class-graph.php:341
+msgid "This Quarter"
+msgstr "Ce trimestre"
+
+#: includes/abstracts/class-affwp-reports-tab.php:372
+#: includes/class-graph.php:342
+msgid "Last Quarter"
+msgstr "Dernier trimestre"
+
+#: includes/abstracts/class-affwp-reports-tab.php:373
+#: includes/class-graph.php:343
+msgid "This Year"
+msgstr "Cette année"
+
+#: includes/abstracts/class-affwp-reports-tab.php:374
+#: includes/class-graph.php:344
+msgid "Last Year"
+msgstr "L’année dernière"
+
+#. translators: 1: Starting date, 2: Ending date
+#: includes/abstracts/class-affwp-reports-tab.php:384
+msgid "%1$s to %2$s"
+msgstr ""
+
 #: includes/admin/AFFWP_Plugin_Updater.php:196
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
@@ -335,130 +407,131 @@ msgstr "Échec du test de sécurité"
 msgid "No affiliate IDs specified for deletion"
 msgstr "Aucun ID Affilié spécifié pour la suppression"
 
-#: includes/admin/affiliates/affiliates.php:54
+#: includes/admin/affiliates/affiliates.php:56
 #: includes/admin/class-menu.php:11 includes/admin/class-menu.php:13
-#: includes/admin/class-welcome.php:306
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:23
 msgid "Affiliates"
 msgstr "Affiliations"
 
-#: includes/admin/affiliates/affiliates.php:55
-#: includes/admin/creatives/creatives.php:43
+#: includes/admin/affiliates/affiliates.php:57
+#: includes/admin/creatives/creatives.php:44
+#: includes/admin/referrals/referrals.php:38
 msgid "Add New"
 msgstr "Ajouter"
 
-#: includes/admin/affiliates/affiliates.php:59
-#: includes/admin/payouts/payouts.php:45
-#: includes/admin/referrals/referrals.php:61
-#: includes/admin/visits/visits.php:34
+#: includes/admin/affiliates/affiliates.php:62
+#: includes/admin/payouts/payouts.php:50
+#: includes/admin/referrals/referrals.php:65
+#: includes/admin/visits/visits.php:38
 msgid "Search"
 msgstr "Rechercher"
 
-#: includes/admin/affiliates/affiliates.php:203
-#: includes/admin/creatives/creatives.php:142
-#: includes/admin/referrals/referrals.php:206
-#: includes/admin/visits/visits.php:45
+#: includes/admin/affiliates/class-list-table.php:146
+#: includes/admin/creatives/class-list-table.php:98
+#: includes/admin/referrals/class-list-table.php:148
+#: includes/admin/visits/visits.php:49
 msgid "All"
 msgstr "Tout"
 
-#: includes/admin/affiliates/affiliates.php:204
+#: includes/admin/affiliates/class-list-table.php:147
 #: includes/admin/affiliates/new.php:41
-#: includes/admin/creatives/creatives.php:143
+#: includes/admin/creatives/class-list-table.php:99
 #: includes/admin/creatives/edit.php:99 includes/admin/creatives/new.php:89
-#: includes/admin/tools/tools.php:281 includes/affiliate-functions.php:270
+#: includes/admin/tools/tools.php:281 includes/affiliate-functions.php:273
 msgid "Active"
 msgstr "Actif"
 
-#: includes/admin/affiliates/affiliates.php:205
+#: includes/admin/affiliates/class-list-table.php:148
 #: includes/admin/affiliates/new.php:42
-#: includes/admin/creatives/creatives.php:144
+#: includes/admin/creatives/class-list-table.php:100
 #: includes/admin/creatives/edit.php:100 includes/admin/creatives/new.php:90
-#: includes/affiliate-functions.php:273
+#: includes/affiliate-functions.php:276
 msgid "Inactive"
 msgstr "Inactif"
 
-#: includes/admin/affiliates/affiliates.php:206
-#: includes/admin/affiliates/new.php:43 includes/admin/referrals/edit.php:140
-#: includes/admin/referrals/new.php:103
-#: includes/admin/referrals/referrals.php:209
+#: includes/admin/affiliates/class-list-table.php:149
+#: includes/admin/affiliates/new.php:43
+#: includes/admin/referrals/class-list-table.php:151
+#: includes/admin/referrals/edit.php:140 includes/admin/referrals/new.php:103
 #: includes/admin/tools/tools.php:282 includes/admin/tools/tools.php:311
-#: includes/affiliate-functions.php:276 includes/referral-functions.php:65
+#: includes/affiliate-functions.php:279 includes/referral-functions.php:65
 msgid "Pending"
 msgstr "En attente"
 
-#: includes/admin/affiliates/affiliates.php:207
+#: includes/admin/affiliates/class-list-table.php:150
+#: includes/admin/referrals/class-list-table.php:152
 #: includes/admin/referrals/edit.php:141 includes/admin/referrals/new.php:104
-#: includes/admin/referrals/referrals.php:210
 #: includes/admin/tools/tools.php:283 includes/admin/tools/tools.php:312
-#: includes/affiliate-functions.php:279 includes/referral-functions.php:64
+#: includes/affiliate-functions.php:282 includes/referral-functions.php:64
 msgid "Rejected"
 msgstr "Rejeté"
 
-#: includes/admin/affiliates/affiliates.php:223
+#: includes/admin/affiliates/class-list-table.php:166
 #: includes/admin/affiliates/review.php:22
-#: includes/admin/creatives/creatives.php:159
+#: includes/admin/creatives/class-list-table.php:115
 #: includes/admin/creatives/edit.php:17 includes/admin/creatives/new.php:16
 #: includes/admin/tools/export/class-export-affiliates.php:49
 msgid "Name"
 msgstr "Nom"
 
-#: includes/admin/affiliates/affiliates.php:224
+#: includes/admin/affiliates/class-list-table.php:167
 #: includes/admin/affiliates/edit.php:44 includes/admin/referrals/edit.php:28
 #: includes/admin/tools/export/class-export-affiliates.php:47
 #: includes/admin/tools/export/class-export-referrals.php:61
 msgid "Affiliate ID"
 msgstr "ID Affilié"
 
-#: includes/admin/affiliates/affiliates.php:225
+#: includes/admin/affiliates/class-list-table.php:168
 #: includes/admin/affiliates/edit.php:70
 #: includes/admin/affiliates/review.php:34
 #: includes/admin/settings/class-settings.php:449
-#: includes/admin/tools/class-rest-consumers-table.php:188
+#: includes/admin/tools/class-rest-consumers-table.php:200
 #: includes/admin/tools/export/class-export-affiliates.php:51
 #: templates/login.php:15 templates/login.php:16 templates/register.php:59
 #: templates/register.php:60
 msgid "Username"
 msgstr "Nom d’utilisateur"
 
-#: includes/admin/affiliates/affiliates.php:226
+#: includes/admin/affiliates/class-list-table.php:169
 #: includes/admin/affiliates/view.php:11
 #: includes/admin/tools/export/class-export-affiliates.php:54
 msgid "Earnings"
 msgstr "Gains"
 
-#: includes/admin/affiliates/affiliates.php:227
+#: includes/admin/affiliates/class-list-table.php:170
 #: includes/admin/tools/export/class-export-affiliates.php:52
 msgid "Rate"
 msgstr "Taux"
 
-#: includes/admin/affiliates/affiliates.php:228
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:79
-#: includes/admin/reports/reports.php:138 templates/dashboard-tab-stats.php:8
+#: includes/admin/affiliates/class-list-table.php:171
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:80
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:65
+#: templates/dashboard-tab-stats.php:8
 msgid "Unpaid Referrals"
 msgstr "Parrainages non payés"
 
-#: includes/admin/affiliates/affiliates.php:229
+#: includes/admin/affiliates/class-list-table.php:172
 #: templates/dashboard-tab-stats.php:9
 msgid "Paid Referrals"
 msgstr "Parrainages payés"
 
-#: includes/admin/affiliates/affiliates.php:230
-#: includes/admin/class-menu.php:16 includes/admin/class-welcome.php:316
-#: includes/admin/reports/reports.php:66
-#: includes/admin/reports/reports.php:185
+#: includes/admin/affiliates/class-list-table.php:173
+#: includes/admin/class-menu.php:16
+#: includes/admin/reports/tabs/class-visits-reports-tab.php:23
 #: includes/admin/tools/export/class-export-affiliates.php:56
-#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:31
+#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:33
 #: templates/dashboard-tab-stats.php:10 templates/dashboard-tab-stats.php:57
 #: templates/dashboard.php:86
 msgid "Visits"
 msgstr "Visites"
 
-#: includes/admin/affiliates/affiliates.php:231
-#: includes/admin/creatives/creatives.php:162
+#: includes/admin/affiliates/class-list-table.php:174
+#: includes/admin/creatives/class-list-table.php:118
 #: includes/admin/creatives/edit.php:94 includes/admin/creatives/new.php:84
-#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:67
-#: includes/admin/payouts/view.php:110 includes/admin/referrals/edit.php:133
-#: includes/admin/referrals/new.php:96
-#: includes/admin/referrals/referrals.php:232
+#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:68
+#: includes/admin/payouts/view.php:85
+#: includes/admin/referrals/class-list-table.php:174
+#: includes/admin/referrals/edit.php:133 includes/admin/referrals/new.php:96
 #: includes/admin/tools/export/class-export-affiliates.php:57
 #: includes/admin/tools/export/class-export-referrals.php:70
 #: templates/dashboard-tab-payouts.php:27
@@ -466,64 +539,66 @@ msgstr "Visites"
 msgid "Status"
 msgstr "État"
 
-#: includes/admin/affiliates/affiliates.php:296
-#: includes/admin/affiliates/affiliates.php:339
-#: includes/admin/payouts/payouts.php:372
+#: includes/admin/affiliates/class-list-table.php:239
+#: includes/admin/affiliates/class-list-table.php:366
+#: includes/admin/payouts/class-list-table.php:272
 msgid "(user deleted)"
 msgstr "(utilisateur supprimé)"
 
-#: includes/admin/affiliates/affiliates.php:299
-#: includes/admin/class-menu.php:18 includes/admin/user-profile.php:49
+#: includes/admin/affiliates/class-list-table.php:249
+#: includes/admin/class-menu.php:18
+#: includes/admin/reports/class-reports-admin.php:97
+#: includes/admin/user-profile.php:49
 msgid "Reports"
 msgstr "Rapports"
 
-#: includes/admin/affiliates/affiliates.php:300
-#: includes/admin/creatives/creatives.php:236
-#: includes/admin/referrals/referrals.php:387
+#: includes/admin/affiliates/class-list-table.php:258
+#: includes/admin/creatives/class-list-table.php:199
+#: includes/admin/referrals/class-list-table.php:374
 #: includes/admin/user-profile.php:51
 msgid "Edit"
 msgstr "Modifier"
 
-#: includes/admin/affiliates/affiliates.php:303
-#: includes/admin/affiliates/affiliates.php:449
-#: includes/admin/creatives/creatives.php:239
+#: includes/admin/affiliates/class-list-table.php:269
+#: includes/admin/affiliates/class-list-table.php:476
+#: includes/admin/creatives/class-list-table.php:211
 msgid "Deactivate"
 msgstr "Désactiver"
 
-#: includes/admin/affiliates/affiliates.php:305
-#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:83
+#: includes/admin/affiliates/class-list-table.php:281
+#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:84
 msgid "Review"
 msgstr "Avis"
 
-#: includes/admin/affiliates/affiliates.php:306
-#: includes/admin/affiliates/affiliates.php:446
-#: includes/admin/referrals/referrals.php:375
-#: includes/admin/referrals/referrals.php:467
+#: includes/admin/affiliates/class-list-table.php:291
+#: includes/admin/affiliates/class-list-table.php:473
+#: includes/admin/referrals/class-list-table.php:343
+#: includes/admin/referrals/class-list-table.php:479
 msgid "Accept"
 msgstr "Accepter"
 
-#: includes/admin/affiliates/affiliates.php:307
-#: includes/admin/affiliates/affiliates.php:447
-#: includes/admin/referrals/referrals.php:381
-#: includes/admin/referrals/referrals.php:468
+#: includes/admin/affiliates/class-list-table.php:301
+#: includes/admin/affiliates/class-list-table.php:474
+#: includes/admin/referrals/class-list-table.php:359
+#: includes/admin/referrals/class-list-table.php:480
 msgid "Reject"
 msgstr "Rejeter"
 
-#: includes/admin/affiliates/affiliates.php:309
-#: includes/admin/affiliates/affiliates.php:448
-#: includes/admin/creatives/creatives.php:241
+#: includes/admin/affiliates/class-list-table.php:313
+#: includes/admin/affiliates/class-list-table.php:475
+#: includes/admin/creatives/class-list-table.php:223
 msgid "Activate"
 msgstr "Activer"
 
-#: includes/admin/affiliates/affiliates.php:312
-#: includes/admin/affiliates/affiliates.php:450
-#: includes/admin/creatives/creatives.php:244
-#: includes/admin/referrals/referrals.php:388
-#: includes/admin/referrals/referrals.php:471
+#: includes/admin/affiliates/class-list-table.php:325
+#: includes/admin/affiliates/class-list-table.php:477
+#: includes/admin/creatives/class-list-table.php:235
+#: includes/admin/referrals/class-list-table.php:383
+#: includes/admin/referrals/class-list-table.php:483
 msgid "Delete"
 msgstr "Supprimer"
 
-#: includes/admin/affiliates/affiliates.php:434
+#: includes/admin/affiliates/class-list-table.php:461
 msgid "No affiliates found."
 msgstr "Aucun affilié trouvé."
 
@@ -775,7 +850,7 @@ msgstr "Méthode de promotion"
 msgid "Leave blank if approving this affiliate"
 msgstr "Laissez vide si vous approuvez cette affiliation"
 
-#: includes/admin/affiliates/screen-options.php:22
+#: includes/admin/affiliates/screen-options.php:24
 msgid "Number of affiliates per page:"
 msgstr "Nombre d’affiliés par page :"
 
@@ -811,7 +886,7 @@ msgstr "Total des parrainages rejetés"
 msgid "Total visits"
 msgstr "Total des visites"
 
-#: includes/admin/affiliates/view.php:64
+#: includes/admin/affiliates/view.php:65
 #, fuzzy
 msgid "Recent Payouts"
 msgstr "Parrainages récents"
@@ -840,22 +915,22 @@ msgstr ""
 msgid "Overview"
 msgstr "Vue d’ensemble"
 
-#: includes/admin/class-menu.php:14 includes/admin/class-welcome.php:311
-#: includes/admin/payouts/payouts.php:251 includes/admin/payouts/view.php:61
-#: includes/admin/referrals/referrals.php:35
-#: includes/admin/reports/reports.php:65
+#: includes/admin/class-menu.php:14
+#: includes/admin/payouts/class-list-table.php:151
+#: includes/admin/referrals/referrals.php:37
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:23
 #: includes/admin/tools/export/class-export-affiliates.php:55
 #: includes/admin/tools/tools.php:142 templates/dashboard-tab-referrals.php:3
 #: templates/dashboard.php:74
 msgid "Referrals"
 msgstr "Parrainages"
 
-#: includes/admin/class-menu.php:15 includes/admin/payouts/payouts.php:35
+#: includes/admin/class-menu.php:15 includes/admin/payouts/payouts.php:37
 #: templates/dashboard.php:80
 msgid "Payouts"
 msgstr ""
 
-#: includes/admin/class-menu.php:17 includes/admin/creatives/creatives.php:42
+#: includes/admin/class-menu.php:17 includes/admin/creatives/creatives.php:43
 #: templates/dashboard-tab-creatives.php:3 templates/dashboard.php:92
 msgid "Creatives"
 msgstr "Bannières"
@@ -1056,420 +1131,6 @@ msgstr ""
 "Veuillez <a href=\"%s\">saisir et activer</a> votre clé de licence pour "
 "AffiliateWP pour activer les mises à jour automatiques."
 
-#: includes/admin/class-welcome.php:52 includes/admin/class-welcome.php:53
-#, fuzzy
-msgid "What&#8217;s new in AffiliateWP"
-msgstr "Quoi de neuf sur AffiliateWP"
-
-#: includes/admin/class-welcome.php:61 includes/admin/class-welcome.php:62
-msgid "Getting started with AffiliateWP"
-msgstr "Commencer avec AffiliateWP"
-
-#: includes/admin/class-welcome.php:70 includes/admin/class-welcome.php:71
-msgid "The people that build AffiliateWP"
-msgstr "Les personnes qui ont développé AffiliateWP"
-
-#: includes/admin/class-welcome.php:154
-#, fuzzy
-msgid "What&#8217;s New"
-msgstr "Quoi de neuf"
-
-#: includes/admin/class-welcome.php:157 includes/admin/plugins.php:50
-msgid "Getting Started"
-msgstr "Commencer"
-
-#: includes/admin/class-welcome.php:160
-msgid "Credits"
-msgstr "Crédits"
-
-#: includes/admin/class-welcome.php:177
-msgid "Welcome to AffiliateWP v%s"
-msgstr "Bienvenue sur AffiliateWP v%s"
-
-#: includes/admin/class-welcome.php:178 includes/admin/class-welcome.php:254
-msgid ""
-"Thank you for installing AffiliateWP v%s. The best affiliate marketing "
-"plugin for WordPress."
-msgstr ""
-"Merci d’avoir installé AffiliateWP v%s. La meilleure extension de marketing "
-"d’affiliation pour WordPress."
-
-#: includes/admin/class-welcome.php:179 includes/admin/class-welcome.php:255
-#: includes/admin/class-welcome.php:351
-msgid "Version %s"
-msgstr "Version %s"
-
-#: includes/admin/class-welcome.php:187
-msgid "New Integrations"
-msgstr "Nouvelles intégrations"
-
-#: includes/admin/class-welcome.php:188
-msgid ""
-"We’ve made AffiliateWP more accessible and more valuable to more users with "
-"three new integrations:"
-msgstr ""
-"Pour rendre AffiliateWP plus accessible et plus utile à encore plus "
-"d’utilisateurs, nous avons ajouté trois nouvelles intégrations :"
-
-#: includes/admin/class-welcome.php:196
-msgid "Improved Integrations"
-msgstr "Mises à jour des intégrations"
-
-#: includes/admin/class-welcome.php:199
-msgid ""
-"Per-membership commission rates are now supported in Restrict Content Pro"
-msgstr ""
-"Les taux de commission par adhésion sont désormais pris en charge dans "
-"Restrict Content Pro."
-
-#: includes/admin/class-welcome.php:200
-msgid "Per-membership commission rates are now supported in MemberPress"
-msgstr ""
-"Les taux de commission par adhésion sont désormais pris en charge dans "
-"MemberpPress."
-
-#: includes/admin/class-welcome.php:201
-msgid "Commissions can be disabled on individual forms in Gravity Forms"
-msgstr ""
-"Les commissions peuvent être désactivées sur les formulaires individuels de "
-"Gravity Forms."
-
-#: includes/admin/class-welcome.php:202
-msgid "Commissions can be disabled on individual forms in Ninja Forms"
-msgstr ""
-"Les commissions peuvent être désactivées sur les formulaires individuels de "
-"Ninja Forms."
-
-#: includes/admin/class-welcome.php:203
-msgid ""
-"Affiliate commissions are now shown on the order details screens in Paid "
-"Memberships Pro"
-msgstr ""
-"Les commissions d’affiliation sont maintenant affichées sur l’ écran des "
-"détails de la commande dans Paid Memberships Pro."
-
-#: includes/admin/class-welcome.php:206
-msgid "URL Campaign Tracking"
-msgstr "URL de suivi de campagne"
-
-#: includes/admin/class-welcome.php:207
-msgid ""
-"Affiliates can now include URL campaign parameters in their affiliate URLs "
-"and have them automatically tracked by AffiliateWP. A new \"Campaigns\" "
-"table has been added to the Statistics tab of the affiliate area to show "
-"affiliates the results of their URL campaigns."
-msgstr ""
-"Les affiliées peuvent désormais inclure des paramètres d’URL de campagne "
-"dans leurs URL d’affiliation et les faire suivre automatiquement par "
-"AffiliateWP. Une nouvelle table « Campagnes » a été ajoutée à l'onglet "
-"Statistiques de la zone d’affiliation pour afficher aux affiliés les "
-"résultats de leurs URL de campagnes."
-
-#: includes/admin/class-welcome.php:209
-msgid "Affiliate Rejection Reasons"
-msgstr "Motifs du refus de l’affiliation"
-
-#: includes/admin/class-welcome.php:210
-msgid ""
-"When rejecting affiliate accounts, a rejection reason can be provided that "
-"is then (optionally) emailed to the affiliate and recorded for future "
-"reference."
-msgstr ""
-"Lorsque vous rejetez des comptes d’affiliation, un motif de rejet peut être "
-"fourni et qui est ensuite (optionnelement) envoyé par e-mail à l’affilié et "
-"enregistré comme référence ultérieure."
-
-#: includes/admin/class-welcome.php:212
-msgid "reCaptcha v2.0"
-msgstr "reCaptcha v2.0"
-
-#: includes/admin/class-welcome.php:213
-#, fuzzy
-msgid ""
-"Google&#8217;s reCaptcha version 2.0 library has been introduced to "
-"AffiliateWP to help protect you and your website from spam user "
-"registrations."
-msgstr ""
-"La bibliothèque version 2.0 de reCaptcha de Google a été introduite dans "
-"AffiliateWP pour vous protéger vous et votre site Web des enregistrements "
-"d’utilisateurs indésirables."
-
-#: includes/admin/class-welcome.php:215
-msgid "Additional Updates"
-msgstr "Mises à jour supplémentaires"
-
-#: includes/admin/class-welcome.php:217
-msgid "Improved User Searching"
-msgstr "Recherche d’utilisateur améliorée"
-
-#: includes/admin/class-welcome.php:218
-msgid ""
-"When creating new affiliate accounts, the search process for users in your "
-"WordPress site now return better results."
-msgstr ""
-"Lors de la création de nouveaux comptes d’affiliation, le processus de "
-"recherche des utilisateurs de votre site WordPress renvoie désormais de "
-"meilleurs résultats."
-
-#: includes/admin/class-welcome.php:220
-msgid "Per-Page Options for Admin Screens"
-msgstr "Options par page pour les écrans d’administration"
-
-#: includes/admin/class-welcome.php:221
-msgid ""
-"Admin pages for Affiliates, Referrals, Visits, and Creatives can have the "
-"number of items per-page configured from the Screen Options tab."
-msgstr ""
-"Les pages d’administration des affiliés, parrainages, visites et bannières "
-"peuvent avoir leur nombre d’éléments par page configurée à partir de "
-"l’onglet des Options d’écran."
-
-#: includes/admin/class-welcome.php:223
-msgid "Disable Individual Emails"
-msgstr "Désactiver les e-mails individuels"
-
-#: includes/admin/class-welcome.php:224
-msgid ""
-"New options have been introduced that allow you to pick-and-choose which "
-"email notifications AffiliateWP will send."
-msgstr ""
-"De nouvelles options ont été introduites pour vous permettent de choisir les "
-"notifications par e-mail envoyées par AffiliateWP."
-
-#: includes/admin/class-welcome.php:226
-msgid "Creative Template File"
-msgstr "Modèle de fichier de bannière"
-
-#: includes/admin/class-welcome.php:227
-msgid ""
-"A new template file has been introduced for exact control over the display "
-"of creatives in the affiliate area."
-msgstr ""
-"Un nouveau fichier de modèle a été introduit pour un contrôle parfait de "
-"l’affichage des bannières dans la zone d’affiliation."
-
-#: includes/admin/class-welcome.php:229
-msgid "Import Users By Role"
-msgstr "Importation des utilisateurs par rôle"
-
-#: includes/admin/class-welcome.php:230
-msgid ""
-"When importing existing users as affiliates, an option to import just users "
-"of a specific role is now available."
-msgstr ""
-"Lors de l’importation d’utilisateurs existants en tant qu’affiliées, une "
-"option permettant d’importer uniquement les utilisateurs avec un rôle "
-"spécifique est maintenant disponible."
-
-#: includes/admin/class-welcome.php:236 includes/admin/class-welcome.php:323
-msgid "Go to AffiliateWP Settings"
-msgstr "Aller aux réglages d’AffiliateWP"
-
-#: includes/admin/class-welcome.php:253 includes/admin/class-welcome.php:349
-msgid "Welcome to AffiliateWP %s"
-msgstr "Bienvenue sur AffiliateWP %s"
-
-#: includes/admin/class-welcome.php:259
-msgid ""
-"Use the tips below to get started using AffiliateWP. You will be up and "
-"running in no time!"
-msgstr ""
-"Utilisez les conseils ci-dessous pour vous lancer avec AffiliateWP. Vous "
-"serez opérationnel en un rien de temps !"
-
-#: includes/admin/class-welcome.php:262
-msgid "Overview of Affiliates and Referrals"
-msgstr "Vue d’ensemble des Affiliés et Parrainages"
-
-#: includes/admin/class-welcome.php:267
-msgid "The Overview Page"
-msgstr "La page de vue d’ensemble"
-
-#: includes/admin/class-welcome.php:268
-msgid ""
-"The overview page gives you a quick summary of your recent affiliate "
-"activity, including recent registrations, referrals, and visits."
-msgstr ""
-"La page de vue d’ensemble donne un rapide résumé des activités récentes "
-"d’affiliation, incluant les dernières inscriptions, parrainages et visites."
-
-#: includes/admin/class-welcome.php:269
-#, fuzzy
-msgid ""
-"It also provides a quick summary of your affiliates&#8217; referral earnings."
-msgstr ""
-"Elle donne aussi un rapide résumé des gains de parrainages de vos affiliés."
-
-#: includes/admin/class-welcome.php:270
-#, fuzzy
-msgid ""
-"If you allow affiliate registrations, you can also easily accept or reject "
-"affiliate&#8217;s applications directly from the Overview page"
-msgstr ""
-"Si vous permettez l’enregistrement d’affilié, vous pouvez aussi accepter ou "
-"rejeter les demandes d’affiliation depuis la page de vue d’ensemble."
-
-#: includes/admin/class-welcome.php:273
-msgid "Adding Affiliates"
-msgstr "Ajout d’affilié"
-
-#: includes/admin/class-welcome.php:278
-msgid "Affiliates &rarr; Add New"
-msgstr "Affiliés &rarr; Ajouter nouveau"
-
-#: includes/admin/class-welcome.php:279
-msgid ""
-"From the main Affiliates page, site admins can easily add new affiliates to "
-"AffiliateWP. Simply enter the username, set a rate, and click Add Affiliate!"
-msgstr ""
-"Depuis la page principale des affiliés, les admins du site peuvent "
-"facilement ajouter de nouveaux affiliés à AffiliateWP. Entrez simplement le "
-"nom d’utilisateur, paramétrez un taux, et cliquez sur Ajouter un affilié !"
-
-#: includes/admin/class-welcome.php:281
-msgid "Affiliate Registration"
-msgstr "Inscription Affilié"
-
-#: includes/admin/class-welcome.php:282
-msgid ""
-"When enabled, affiliates can register themselves via the Affiliate Area. If "
-"they already have a user account on your site, they can register by simply "
-"agreeing to the terms of use. If they need to create an entirely new "
-"account, they have that option as well!"
-msgstr ""
-"Si activé, les affiliés peuvent s’enregistrer depuis la Zone Affilié. S’ils "
-"sont déjà en compte sur votre site, ils peuvent simplement s’enregistrer en "
-"acceptant les conditions d’utilisation. S’ils doivent créer entièrement un "
-"nouveau compte, ils ont aussi cette option !"
-
-#: includes/admin/class-welcome.php:284
-msgid "Moderate Registrations"
-msgstr "Gérer les inscriptions"
-
-#: includes/admin/class-welcome.php:285
-msgid ""
-"Affiliate registrations can be moderated and require that a site admin "
-"approve each registration before the affiliate is permitted to begin "
-"tracking referrals."
-msgstr ""
-"Les inscriptions d’affiliés peuvent être modérées et nécessitent qu’un "
-"administrateur du site approuve chaque inscription avant que l’affilié soit "
-"autorisé à commencer à suivre des parrainages."
-
-#: includes/admin/class-welcome.php:286
-msgid ""
-"Each time an affiliate registers, site admins can log into the site and "
-"approve or reject the application."
-msgstr ""
-"Chaque fois qu’un affilié s’enregistre, les administrateurs du site peuvent "
-"se connecter et approuver ou rejeter les demandes."
-
-#: includes/admin/class-welcome.php:289
-#: includes/admin/settings/class-settings.php:418 includes/install.php:32
-msgid "Affiliate Area"
-msgstr "Zone d’affiliation"
-
-#: includes/admin/class-welcome.php:294
-msgid "A Dashboard For Your Affiliates"
-msgstr "Un Tableau de bord pour vos affiliés"
-
-#: includes/admin/class-welcome.php:295
-msgid ""
-"The Affiliate Area, shown on any page containing the <em>[affiliate_area]</"
-"em> shortcode, gives your affiliates access to their performance reports."
-msgstr ""
-"La zone d’affilition, affichée sur n’importe quelle page contenant le code "
-"court <em>[affiliate_area]</em>, donne aux affiliés accès à leurs rapports "
-"de performance."
-
-#: includes/admin/class-welcome.php:296
-msgid ""
-"Affiliates can easily see how much they have earned, how much is awaiting "
-"payment, and even how their referral URLs have done over time."
-msgstr ""
-"Les affiliés peuvent facilement voir combien ils ont gagné, la somme en "
-"attente de paiement, et même comment leurs parrainages ont évolué au fil du "
-"temps."
-
-#: includes/admin/class-welcome.php:297
-msgid ""
-"A log of the referral links that have been clicked and where they were "
-"clicked on from, and whether the link converted into a successful referral, "
-"is also available to affiliates."
-msgstr ""
-"Un journal des liens de parrainages cliqués et depuis où ils l’ont étés, et "
-"si le lien a été converti en une transaction positive, est aussi disponible "
-"pour le affiliés."
-
-#: includes/admin/class-welcome.php:302
-msgid "Quick Terminology"
-msgstr "Terminologie rapide"
-
-#: includes/admin/class-welcome.php:307
-msgid ""
-"These are your best friends. They are the users that are actively promoting "
-"your products and services through referral URLs. When they create a "
-"customer for you, they get paid back in the form of a commission."
-msgstr ""
-"Ce sont vos meilleurs amis. Il s’agit des utilisateurs qui promeuvent "
-"activement vos produits et services à travers les URL de parrainages. Quand "
-"ils génèrent des clients, ils sont payés en retour sous forme de commission."
-
-#: includes/admin/class-welcome.php:312
-msgid ""
-"These are the commission records created anytime an affiliate successfully "
-"sends a potential customer to your site and that customer makes a purchase."
-msgstr ""
-"Ce sont les enregistrements des commissions créés à chaque fois qu’un "
-"affilié envoie un prospect vers votre site et que ce client réalise une "
-"commande."
-
-#: includes/admin/class-welcome.php:317
-msgid ""
-"These are unique hits on the referral URLs shared out by your affiliates. "
-"Each time a potential customer clicks on a referral URL, a visit is recorded."
-msgstr ""
-"Ce sont les clics uniques sur les URL de parrainages partagées par vos "
-"affiliés. Chaque fois qu’un prospect clique sur une URL de parrainage, une "
-"visite est enregistrée."
-
-#: includes/admin/class-welcome.php:327
-msgid "Need Help?"
-msgstr "Besoin d’aide ?"
-
-#: includes/admin/class-welcome.php:330
-msgid "Phenomenal Support"
-msgstr "Assistance phénoménale"
-
-#: includes/admin/class-welcome.php:331
-msgid ""
-"We do our best to provide the best support we can. If you encounter a "
-"problem or have a question, visit our <a href=\"https://affiliatewp.com/"
-"support\">support</a> page to open a ticket."
-msgstr ""
-"Nous faisons de notre mieux pour fournir le meilleur support possible. Si "
-"vous rencontrez un problème ou avez une question, rendez-vous sur notre page "
-"<a href=\"https://affiliatewp.com/support\">de support</a> pour ouvrir un "
-"ticket."
-
-#: includes/admin/class-welcome.php:350
-msgid "Thank you for updating to the latest version!"
-msgstr "Merci pour avoir installé la dernière version !"
-
-#: includes/admin/class-welcome.php:355
-msgid ""
-"AffiliateWP is created by developers from around the world that aim to "
-"provide the #1 affiliate platform for WordPress. Here are just some of the "
-"faces that have helped build AffiliateWP:"
-msgstr ""
-"AffiliateWP est créé par des développeurs du monde entier qui ont pour "
-"objectif de fournir la meilleure plateforme d’affiliation pour WordPress. "
-"Voici certains des visages de ceux qui ont aidé à développer AffiliateWP:"
-
-#: includes/admin/class-welcome.php:382
-msgid "View %s"
-msgstr "Voir %s"
-
 #: includes/admin/creatives/actions.php:16
 #: includes/admin/creatives/actions.php:80
 msgid "You do not have permission to manage creatives"
@@ -1483,25 +1144,25 @@ msgstr "Vous n’avez pas la permission de supprimer les bannières"
 msgid "No creative IDs specified for deletion"
 msgstr "Aucun IDs de bannière n’a été spécifié pour la suppression"
 
-#: includes/admin/creatives/creatives.php:160
+#: includes/admin/creatives/class-list-table.php:116
 #: includes/admin/creatives/edit.php:43 includes/admin/creatives/new.php:42
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:66
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:67
 #: templates/dashboard-tab-visits.php:25
 msgid "URL"
 msgstr "URL"
 
-#: includes/admin/creatives/creatives.php:161
+#: includes/admin/creatives/class-list-table.php:117
 msgid "Shortcode"
 msgstr "Code court"
 
-#: includes/admin/creatives/creatives.php:163
-#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:68
-#: includes/admin/payouts/payouts.php:255
-#: includes/admin/referrals/referrals.php:231
+#: includes/admin/creatives/class-list-table.php:119
+#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:69
+#: includes/admin/payouts/class-list-table.php:155
+#: includes/admin/referrals/class-list-table.php:173
 msgid "Actions"
 msgstr "Actions"
 
-#: includes/admin/creatives/creatives.php:259
+#: includes/admin/creatives/class-list-table.php:264
 msgid "No creatives found."
 msgstr "Aucune bannière trouvée."
 
@@ -1524,9 +1185,9 @@ msgstr ""
 "Le nom de cette bannière. Seulement pour vous permettre de l’identifier."
 
 #: includes/admin/creatives/edit.php:30 includes/admin/creatives/new.php:29
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:70
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:71
+#: includes/admin/referrals/class-list-table.php:171
 #: includes/admin/referrals/edit.php:94 includes/admin/referrals/new.php:57
-#: includes/admin/referrals/referrals.php:229
 #: includes/admin/tools/export/class-export-referrals.php:66
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:77
 #: templates/dashboard-tab-referrals.php:25
@@ -1601,7 +1262,7 @@ msgstr ""
 msgid "Add Creative"
 msgstr "Ajouter Bannière"
 
-#: includes/admin/creatives/screen-options.php:22
+#: includes/admin/creatives/screen-options.php:24
 msgid "Number of creatives per page:"
 msgstr "Nombre de bannières par page :"
 
@@ -1613,45 +1274,47 @@ msgstr "Les meilleurs affiliés"
 msgid "No registered affiliates"
 msgstr "Aucun affilié enregistré"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:32
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:33
 msgid "Recent Referral Visits"
 msgstr "Récentes visites de parrainages"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:65
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:68
-#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:66
-#: includes/admin/payouts/payouts.php:250 includes/admin/payouts/view.php:34
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:66
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:69
+#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:67
+#: includes/admin/payouts/class-list-table.php:150
+#: includes/admin/payouts/view.php:34
+#: includes/admin/referrals/class-list-table.php:169
 #: includes/admin/referrals/new.php:16
-#: includes/admin/referrals/referrals.php:227
-#: includes/admin/visits/visits.php:144
+#: includes/admin/visits/class-list-table.php:105
 #: includes/integrations/class-lifterlms.php:472
 #: includes/integrations/class-memberpress.php:259
 msgid "Affiliate"
 msgstr "Affilié"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:67
-#: includes/admin/visits/visits.php:46 includes/admin/visits/visits.php:147
-#: templates/dashboard-tab-stats.php:59 templates/dashboard-tab-visits.php:27
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:68
+#: includes/admin/visits/class-list-table.php:108
+#: includes/admin/visits/visits.php:50 templates/dashboard-tab-stats.php:59
+#: templates/dashboard-tab-visits.php:27
 msgid "Converted"
 msgstr "Converti"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:80
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:81
 #: templates/dashboard-tab-visits.php:45
 msgid "Visit converted: %s"
 msgstr "Visite convertie : %s"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:86
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:87
 msgid "No referral visits recorded yet"
 msgstr "Pas de visites de parrainage encore enregistrées"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:32
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:33
 msgid "Recent Referrals"
 msgstr "Parrainages récents"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:69
-#: includes/admin/payouts/view.php:86 includes/admin/referrals/edit.php:65
-#: includes/admin/referrals/new.php:32
-#: includes/admin/referrals/referrals.php:226
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:70
+#: includes/admin/payouts/view.php:61
+#: includes/admin/referrals/class-list-table.php:168
+#: includes/admin/referrals/edit.php:65 includes/admin/referrals/new.php:32
 #: includes/admin/tools/export/class-export-referrals-payout.php:62
 #: includes/admin/tools/export/class-export-referrals.php:64
 #: includes/integrations/class-lifterlms.php:467
@@ -1660,108 +1323,113 @@ msgstr "Parrainages récents"
 msgid "Amount"
 msgstr "Quantité"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:86
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:87
 msgid "No referrals recorded yet"
 msgstr "Aucun parrainage enregistré pour l’instant"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:32
+#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:33
 msgid "Latest Affiliate Registrations"
 msgstr "Derniers affiliés inscrits"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:86
+#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:87
 msgid "View Report"
 msgstr "Afficher le rapport"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:94
+#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:95
 msgid "No affiliate registrations yet"
 msgstr "Aucun affilié inscrit encore"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:34
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:35
 msgid "Totals"
 msgstr "Totaux"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:53
-#: includes/admin/reports/reports.php:86 includes/admin/tools/tools.php:141
-#: templates/dashboard-tab-stats.php:34
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:54
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
+#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
 msgid "Paid Earnings"
 msgstr "Gains payés"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:54
-#: includes/admin/reports/reports.php:87
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:55
 msgid "Paid Earnings This Month"
 msgstr "Gains payés ce mois-ci"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:55
-#: includes/admin/reports/reports.php:88
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:56
 msgid "Paid Earnings Today"
 msgstr "Gains payés aujourd’hui"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:80
-#: includes/admin/reports/reports.php:139
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:81
 msgid "Unpaid Referrals This Month"
 msgstr "Parrainages non payés ce mois-ci"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:81
-#: includes/admin/reports/reports.php:140
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:82
 msgid "Unpaid Referrals Today"
 msgstr "Parrainages non payés aujourd’hui"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:104
-#: includes/admin/reports/reports.php:112 templates/dashboard-tab-stats.php:33
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:105
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:57
+#: templates/dashboard-tab-stats.php:33
 msgid "Unpaid Earnings"
 msgstr "Gains non payés"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:105
-#: includes/admin/reports/reports.php:113
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:106
 msgid "Unpaid Earnings This Month"
 msgstr "Gains non payés ce mois-ci"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:106
-#: includes/admin/reports/reports.php:114
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:107
 msgid "Unpaid Earnings Today"
 msgstr "Gains non payés aujourd’hui"
 
-#: includes/admin/payouts/payouts.php:230
+#: includes/admin/payouts/class-list-table.php:130
+#: includes/admin/referrals/class-list-table.php:149
 #: includes/admin/referrals/edit.php:139 includes/admin/referrals/new.php:102
-#: includes/admin/referrals/referrals.php:207
 #: includes/admin/tools/tools.php:309 includes/referral-functions.php:62
 msgid "Paid"
 msgstr "Payé"
 
-#: includes/admin/payouts/payouts.php:231 includes/payout-functions.php:134
+#: includes/admin/payouts/class-list-table.php:131
+#: includes/payout-functions.php:134
 msgid "Failed"
 msgstr ""
 
-#: includes/admin/payouts/payouts.php:248 includes/admin/referrals/edit.php:42
+#: includes/admin/payouts/class-list-table.php:148
+#: includes/admin/referrals/edit.php:42
 msgid "Payout ID"
 msgstr ""
 
-#: includes/admin/payouts/payouts.php:252 includes/admin/payouts/view.php:98
-#: templates/dashboard-tab-payouts.php:26
+#: includes/admin/payouts/class-list-table.php:152
+#: includes/admin/payouts/view.php:73 templates/dashboard-tab-payouts.php:26
 #, fuzzy
 msgid "Payout Method"
 msgstr "Méthode de promotion"
 
-#: includes/admin/payouts/payouts.php:430 includes/admin/payouts/view.php:102
+#: includes/admin/payouts/class-list-table.php:330
+#: includes/admin/payouts/view.php:77
 msgid "(none)"
 msgstr ""
 
-#: includes/admin/payouts/payouts.php:479
+#: includes/admin/payouts/class-list-table.php:386
 #, fuzzy
 msgid "View"
 msgstr "Voir %s"
 
-#: includes/admin/payouts/payouts.php:482
-#: includes/admin/payouts/payouts.php:570
+#: includes/admin/payouts/class-list-table.php:396
+#: includes/admin/payouts/class-list-table.php:490
 msgid "Retry Payment"
 msgstr ""
 
-#: includes/admin/payouts/payouts.php:557
+#: includes/admin/payouts/class-list-table.php:477
 #, fuzzy
 msgid "No payouts found."
 msgstr "Aucune visite trouvée."
 
-#: includes/admin/payouts/screen-options.php:30
+#: includes/admin/payouts/payouts.php:39
+#: includes/admin/reports/class-reports-admin.php:60
+#, fuzzy
+msgid "Manage Referrals"
+msgstr "Parrainages non payés"
+
+#: includes/admin/payouts/screen-options.php:32
 #, fuzzy
 msgid "Number of payouts per page:"
 msgstr "Nombre de visites par page :"
@@ -1770,19 +1438,93 @@ msgstr "Nombre de visites par page :"
 msgid "Payout: #%d"
 msgstr ""
 
-#: includes/admin/payouts/view.php:127
+#: includes/admin/payouts/view.php:102
 msgid "Payout Date"
 msgstr ""
+
+#: includes/admin/payouts/view.php:137
+#, fuzzy
+msgid "Referrals Paid"
+msgstr "Parrainages"
 
 #: includes/admin/plugins.php:27
 msgid "General Settings"
 msgstr "Réglages généraux"
+
+#: includes/admin/plugins.php:53
+msgid "Changelog"
+msgstr ""
 
 #: includes/admin/referrals/actions.php:16
 #: includes/admin/referrals/actions.php:47
 #: includes/admin/referrals/actions.php:78
 msgid "You do not have permission to manage referrals"
 msgstr "Vous n’avez pas la permission pour modifier les parrainages"
+
+#: includes/admin/referrals/class-list-table.php:150
+#: includes/admin/referrals/edit.php:138 includes/admin/referrals/new.php:101
+#: includes/admin/tools/tools.php:310 includes/referral-functions.php:63
+msgid "Unpaid"
+msgstr "Non-payé"
+
+#: includes/admin/referrals/class-list-table.php:170
+#: includes/admin/referrals/edit.php:107 includes/admin/referrals/new.php:70
+#: includes/admin/tools/export/class-export-referrals.php:68
+#: includes/integrations/class-lifterlms.php:477
+msgid "Reference"
+msgstr "Référence"
+
+#: includes/admin/referrals/class-list-table.php:172
+#: includes/admin/referrals/edit.php:82 includes/admin/referrals/new.php:45
+#: includes/admin/tools/export/class-export-referrals.php:71
+#: includes/admin/tools/export/class-export.php:70
+#: includes/admin/visits/class-list-table.php:109
+#: templates/dashboard-tab-payouts.php:24
+#: templates/dashboard-tab-referrals.php:27
+#: templates/dashboard-tab-visits.php:28
+msgid "Date"
+msgstr "Date"
+
+#: includes/admin/referrals/class-list-table.php:311
+#: includes/admin/referrals/class-list-table.php:482
+msgid "Mark as Unpaid"
+msgstr "Marquer comme Impayé"
+
+#: includes/admin/referrals/class-list-table.php:327
+#: includes/admin/referrals/class-list-table.php:481
+msgid "Mark as Paid"
+msgstr "Marquer comme Payé"
+
+#: includes/admin/referrals/class-list-table.php:414
+msgid "No referrals found."
+msgstr "Aucun parrainage trouvé."
+
+#: includes/admin/referrals/class-list-table.php:438
+msgid "Bulk Actions"
+msgstr "Actions globales"
+
+#: includes/admin/referrals/class-list-table.php:450
+msgid "Apply"
+msgstr "Appliquer"
+
+#: includes/admin/referrals/class-list-table.php:459
+#: includes/admin/referrals/referrals.php:52
+#: includes/admin/tools/tools.php:305 includes/admin/visits/visits.php:44
+#: includes/class-graph.php:390
+msgid "From - mm/dd/yyyy"
+msgstr "Du - jj/mm/aaaa"
+
+#: includes/admin/referrals/class-list-table.php:460
+#: includes/admin/referrals/referrals.php:53
+#: includes/admin/tools/tools.php:306 includes/admin/visits/visits.php:45
+#: includes/class-graph.php:392
+msgid "To - mm/dd/yyyy"
+msgstr "Au - jj/mm/aaaa"
+
+#: includes/admin/referrals/class-list-table.php:464
+#: includes/admin/visits/visits.php:53 includes/class-graph.php:397
+msgid "Filter"
+msgstr "Filtrer"
 
 #: includes/admin/referrals/contextual-help.php:29
 #: includes/admin/visits/contextual-help.php:29
@@ -1936,26 +1678,9 @@ msgstr ""
 msgid "The amount of the referral, such as 15."
 msgstr "Le montant du parrainage, comme 15."
 
-#: includes/admin/referrals/edit.php:82 includes/admin/referrals/new.php:45
-#: includes/admin/referrals/referrals.php:230
-#: includes/admin/tools/export/class-export-referrals.php:71
-#: includes/admin/tools/export/class-export.php:70
-#: includes/admin/visits/visits.php:148 templates/dashboard-tab-payouts.php:24
-#: templates/dashboard-tab-referrals.php:27
-#: templates/dashboard-tab-visits.php:28
-msgid "Date"
-msgstr "Date"
-
 #: includes/admin/referrals/edit.php:99 includes/admin/referrals/new.php:62
 msgid "Enter a description for this referral."
 msgstr "Saisissez une description pour ce parainnage."
-
-#: includes/admin/referrals/edit.php:107 includes/admin/referrals/new.php:70
-#: includes/admin/referrals/referrals.php:228
-#: includes/admin/tools/export/class-export-referrals.php:68
-#: includes/integrations/class-lifterlms.php:477
-msgid "Reference"
-msgstr "Référence"
 
 #: includes/admin/referrals/edit.php:112 includes/admin/referrals/new.php:75
 msgid ""
@@ -1978,12 +1703,6 @@ msgstr ""
 "Saisissez un contexte pour ce parrainage (facultatif). Habituellement, cela "
 "est utilisé pour aider à identifier le système de paiement qui a été utilisé "
 "pour la transaction."
-
-#: includes/admin/referrals/edit.php:138 includes/admin/referrals/new.php:101
-#: includes/admin/referrals/referrals.php:208
-#: includes/admin/tools/tools.php:310 includes/referral-functions.php:63
-msgid "Unpaid"
-msgstr "Non-payé"
 
 #: includes/admin/referrals/edit.php:144
 msgid ""
@@ -2032,38 +1751,22 @@ msgid "Add Referral"
 msgstr "Ajouter un parainnage"
 
 #: includes/admin/referrals/referrals.php:40
-msgid "Add New Referral"
-msgstr "Ajouter un nouveau parainnage"
-
-#: includes/admin/referrals/referrals.php:41
 msgid "Generate Payout File"
 msgstr "Générer le fichier de paiement "
 
-#: includes/admin/referrals/referrals.php:42
+#: includes/admin/referrals/referrals.php:41
 msgid "Close"
 msgstr "Fermer"
 
-#: includes/admin/referrals/referrals.php:48
-#: includes/admin/referrals/referrals.php:447
-#: includes/admin/tools/tools.php:305 includes/admin/visits/visits.php:40
-msgid "From - mm/dd/yyyy"
-msgstr "Du - jj/mm/aaaa"
-
-#: includes/admin/referrals/referrals.php:49
-#: includes/admin/referrals/referrals.php:448
-#: includes/admin/tools/tools.php:306 includes/admin/visits/visits.php:41
-msgid "To - mm/dd/yyyy"
-msgstr "Au - jj/mm/aaaa"
-
-#: includes/admin/referrals/referrals.php:50
+#: includes/admin/referrals/referrals.php:54
 msgid "Minimum amount"
 msgstr "Quantité minimale"
 
-#: includes/admin/referrals/referrals.php:53
+#: includes/admin/referrals/referrals.php:57
 msgid "Generate CSV File"
 msgstr "Générer le fichier CSV"
 
-#: includes/admin/referrals/referrals.php:54
+#: includes/admin/referrals/referrals.php:58
 msgid ""
 "This will mark all unpaid referrals in this timeframe as paid. To export "
 "referrals with a status other than <em>unpaid</em>, go to the <a href=\"%s"
@@ -2073,50 +1776,142 @@ msgstr ""
 "impayés . Pour exporter les parrainages autres que <em>impayés</em>, allez "
 "dans le menu <a href=\"%s\">Outils &rarr; Exporter</a>."
 
-#: includes/admin/referrals/referrals.php:363
-#: includes/admin/referrals/referrals.php:470
-msgid "Mark as Unpaid"
-msgstr "Marquer comme Impayé"
-
-#: includes/admin/referrals/referrals.php:369
-#: includes/admin/referrals/referrals.php:469
-msgid "Mark as Paid"
-msgstr "Marquer comme Payé"
-
-#: includes/admin/referrals/referrals.php:402
-msgid "No referrals found."
-msgstr "Aucun parrainage trouvé."
-
-#: includes/admin/referrals/referrals.php:426
-msgid "Bulk Actions"
-msgstr "Actions globales"
-
-#: includes/admin/referrals/referrals.php:438
-msgid "Apply"
-msgstr "Appliquer"
-
-#: includes/admin/referrals/referrals.php:452
-#: includes/admin/visits/visits.php:49 includes/class-graph.php:404
-msgid "Filter"
-msgstr "Filtrer"
-
-#: includes/admin/referrals/screen-options.php:22
+#: includes/admin/referrals/screen-options.php:24
 msgid "Number of referrals per page:"
 msgstr "Nombre de parrainages par page :"
 
 #: includes/admin/reports/class-registrations-graph.php:68
-#: includes/admin/reports/reports.php:67
 msgid "Affiliate Registrations"
 msgstr "Inscriptions d’affiliés"
 
-#: includes/admin/reports/reports.php:186
+#: includes/admin/reports/class-reports-admin.php:69
+#, fuzzy
+msgid "Manage Affiliates"
+msgstr "Ajout d’affilié"
+
+#: includes/admin/reports/class-reports-admin.php:76
+#, fuzzy
+msgid "View Payouts"
+msgstr "Parrainages récents"
+
+#: includes/admin/reports/class-reports-admin.php:85
+#, fuzzy
+msgid "Manage Visits"
+msgstr "Recherche de visites"
+
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:38
+#, fuzzy
+msgid "Total Affiliates"
+msgstr "Exportation des affiliations"
+
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:41
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:45
+#: includes/admin/reports/tabs/class-visits-reports-tab.php:41
+msgid "All Time"
+msgstr ""
+
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:68
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:130
+#, fuzzy
+msgid "Affiliate #%d"
+msgstr "Affilié: #%d %s"
+
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:72
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:81
+#, fuzzy
+msgid "Top Earning Affiliate"
+msgstr "Modifier l’affilié"
+
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:96
+#, fuzzy
+msgid "New Affiliates"
+msgstr "Nouvel affilié"
+
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:134
+#, fuzzy
+msgid "%d referral"
+msgid_plural "%d referrals"
+msgstr[0] "Ajouter un parainnage"
+msgstr[1] "Ajouter un parainnage"
+
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:148
+msgid "Highest Converting Affiliate"
+msgstr ""
+
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:173
+#, fuzzy
+msgid "Average Payout"
+msgstr "Taux de parrainage"
+
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:23
+#, fuzzy
+msgid "Campaigns"
+msgstr "Campagne"
+
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:54
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:64
+msgid "Best Converting Campaign (All Time)"
+msgstr ""
+
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:55
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:102
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:151
+msgid "n/a"
+msgstr ""
+
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:56
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:103
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:152
+msgid "Affiliate: <a href=\"%1$s\">%2$s</a> | Visits: %3$d"
+msgstr ""
+
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:98
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:111
+msgid "Best Converting Campaign (%s)"
+msgstr ""
+
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:99
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:112
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:148
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:161
+#: includes/class-graph.php:345
+msgid "Custom"
+msgstr "Personnalisé"
+
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:147
+#: includes/admin/reports/tabs/class-campaigns-reports-tab.php:160
+msgid "Most Active Campaign (%s)"
+msgstr ""
+
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:81
+#, fuzzy
+msgid "Average Referral Amount"
+msgstr "Taux de parrainage"
+
+#: includes/admin/reports/tabs/class-visits-reports-tab.php:38
+#: includes/admin/reports/tabs/class-visits-reports-tab.php:45
+#, fuzzy
+msgid "Total Visits"
+msgstr "Total des visites"
+
+#: includes/admin/reports/tabs/class-visits-reports-tab.php:61
 msgid "Successful Conversions"
 msgstr "Conversions réussies"
 
-#: includes/admin/reports/reports.php:187 templates/dashboard-tab-stats.php:11
-#: templates/dashboard-tab-stats.php:60
+#: includes/admin/reports/tabs/class-visits-reports-tab.php:73
+#: templates/dashboard-tab-stats.php:11 templates/dashboard-tab-stats.php:60
 msgid "Conversion Rate"
 msgstr "Taux de conversion"
+
+#: includes/admin/reports/tabs/class-visits-reports-tab.php:110
+#: includes/admin/reports/tabs/class-visits-reports-tab.php:118
+msgid "Top Referrer"
+msgstr ""
+
+#: includes/admin/reports/tabs/class-visits-reports-tab.php:113
+#, fuzzy
+msgid "Direct Traffic"
+msgstr "Traffic direct"
 
 #: includes/admin/settings/class-settings.php:402
 msgid "License Settings"
@@ -2138,6 +1933,10 @@ msgstr ""
 #: includes/admin/settings/class-settings.php:413
 msgid "Pages"
 msgstr "Pages"
+
+#: includes/admin/settings/class-settings.php:418 includes/install.php:32
+msgid "Affiliate Area"
+msgstr "Zone d’affiliation"
 
 #: includes/admin/settings/class-settings.php:419
 msgid "This is the page where affiliates will manage their affiliate account."
@@ -2802,47 +2601,47 @@ msgstr "E-mails"
 msgid "Misc"
 msgstr "Divers"
 
-#: includes/admin/tools/class-rest-consumers-table.php:41
+#: includes/admin/tools/class-rest-consumers-table.php:42
 msgid "API Key"
 msgstr ""
 
-#: includes/admin/tools/class-rest-consumers-table.php:42
+#: includes/admin/tools/class-rest-consumers-table.php:43
 #: includes/admin/tools/tools.php:78
 msgid "API Keys"
 msgstr ""
 
-#: includes/admin/tools/class-rest-consumers-table.php:56
+#: includes/admin/tools/class-rest-consumers-table.php:61
 #, fuzzy
 msgid "No API consumers found."
 msgstr "Aucun utilisateur trouvé"
 
-#: includes/admin/tools/class-rest-consumers-table.php:147
+#: includes/admin/tools/class-rest-consumers-table.php:151
 msgid "Reissue"
 msgstr ""
 
-#: includes/admin/tools/class-rest-consumers-table.php:157
+#: includes/admin/tools/class-rest-consumers-table.php:162
 msgid "Revoke"
 msgstr ""
 
-#: includes/admin/tools/class-rest-consumers-table.php:189
+#: includes/admin/tools/class-rest-consumers-table.php:201
 msgid "Public Key"
 msgstr ""
 
-#: includes/admin/tools/class-rest-consumers-table.php:190
+#: includes/admin/tools/class-rest-consumers-table.php:202
 msgid "Token"
 msgstr ""
 
-#: includes/admin/tools/class-rest-consumers-table.php:191
+#: includes/admin/tools/class-rest-consumers-table.php:203
 #, fuzzy
 msgid "Secret Key"
 msgstr "Clé secrète reCAPTCHA"
 
-#: includes/admin/tools/class-rest-consumers-table.php:219
+#: includes/admin/tools/class-rest-consumers-table.php:231
 #, fuzzy
 msgid "Enter username"
 msgstr "Nom d’utilisateur incorrect"
 
-#: includes/admin/tools/class-rest-consumers-table.php:222
+#: includes/admin/tools/class-rest-consumers-table.php:234
 msgid "Generate New API Keys"
 msgstr ""
 
@@ -2919,7 +2718,7 @@ msgid "Use this tool to recount affiliate statistics."
 msgstr "Utiliser cet outil pour recompter les statistiques d’affiliation."
 
 #: includes/admin/tools/tools.php:138 includes/admin/tools/tools.php:302
-#: includes/admin/visits/visits.php:36
+#: includes/admin/visits/visits.php:40
 msgid "Affiliate name"
 msgstr "Nom de l’affilié"
 
@@ -3122,6 +2921,32 @@ msgstr "Actions d’affiliation"
 msgid "Register"
 msgstr "S’enregistrer"
 
+#: includes/admin/visits/class-list-table.php:103
+msgid "Landing Page"
+msgstr "Page d’arrivée"
+
+#: includes/admin/visits/class-list-table.php:104
+#: templates/dashboard-tab-visits.php:26
+msgid "Referring URL"
+msgstr "URL de référence"
+
+#: includes/admin/visits/class-list-table.php:106
+msgid "Referral ID"
+msgstr "ID du parrainage"
+
+#: includes/admin/visits/class-list-table.php:107
+msgid "IP"
+msgstr "IP"
+
+#: includes/admin/visits/class-list-table.php:172
+#: templates/dashboard-tab-visits.php:42
+msgid "Direct traffic"
+msgstr "Traffic direct"
+
+#: includes/admin/visits/class-list-table.php:197
+msgid "No visits found."
+msgstr "Aucune visite trouvée."
+
 #: includes/admin/visits/contextual-help.php:39
 #, fuzzy
 msgid "This screen provides access to your site&#8217;s visit history."
@@ -3209,101 +3034,25 @@ msgid ""
 "&#8221;"
 msgstr "Vous pouvez entrer l’ID de parrainage préfixé par \"parrainage:\""
 
-#: includes/admin/visits/screen-options.php:22
+#: includes/admin/visits/screen-options.php:24
 msgid "Number of visits per page:"
 msgstr "Nombre de visites par page :"
 
-#: includes/admin/visits/visits.php:43
+#: includes/admin/visits/visits.php:47
 msgid "Filter by status"
 msgstr "Filtrer par état"
 
-#: includes/admin/visits/visits.php:47
+#: includes/admin/visits/visits.php:51
 msgid "Unconverted"
 msgstr "Non converti"
 
-#: includes/admin/visits/visits.php:142
-msgid "Landing Page"
-msgstr "Page d’arrivée"
-
-#: includes/admin/visits/visits.php:143 templates/dashboard-tab-visits.php:26
-msgid "Referring URL"
-msgstr "URL de référence"
-
-#: includes/admin/visits/visits.php:145
-msgid "Referral ID"
-msgstr "ID du parrainage"
-
-#: includes/admin/visits/visits.php:146
-msgid "IP"
-msgstr "IP"
-
-#: includes/admin/visits/visits.php:211 templates/dashboard-tab-visits.php:42
-msgid "Direct traffic"
-msgstr "Traffic direct"
-
-#: includes/admin/visits/visits.php:236
-msgid "No visits found."
-msgstr "Aucune visite trouvée."
-
-#: includes/affiliate-functions.php:441
+#: includes/affiliate-functions.php:444
 msgid "Percentage (%)"
 msgstr "Pourcentage (%)"
 
-#: includes/affiliate-functions.php:442
+#: includes/affiliate-functions.php:445
 msgid "Flat %s"
 msgstr "Fixe %s"
-
-#: includes/class-graph.php:332
-msgid "Today"
-msgstr "Aujourd’hui"
-
-#: includes/class-graph.php:333
-msgid "Yesterday"
-msgstr "Hier"
-
-#: includes/class-graph.php:334
-msgid "This Week"
-msgstr "Cette semaine"
-
-#: includes/class-graph.php:335
-msgid "Last Week"
-msgstr "La semaine dernière"
-
-#: includes/class-graph.php:336
-msgid "This Month"
-msgstr "Ce mois-ci"
-
-#: includes/class-graph.php:337
-msgid "Last Month"
-msgstr "Mois dernier"
-
-#: includes/class-graph.php:338
-msgid "This Quarter"
-msgstr "Ce trimestre"
-
-#: includes/class-graph.php:339
-msgid "Last Quarter"
-msgstr "Dernier trimestre"
-
-#: includes/class-graph.php:340
-msgid "This Year"
-msgstr "Cette année"
-
-#: includes/class-graph.php:341
-msgid "Last Year"
-msgstr "L’année dernière"
-
-#: includes/class-graph.php:342
-msgid "Custom"
-msgstr "Personnalisé"
-
-#: includes/class-graph.php:380
-msgid "From"
-msgstr "Du"
-
-#: includes/class-graph.php:391
-msgid "To"
-msgstr "Au"
 
 #: includes/class-login.php:56 includes/class-register.php:85
 msgid "Invalid username"
@@ -3321,19 +3070,19 @@ msgstr "Veuillez saisir un mot de passe"
 msgid "Incorrect username or password"
 msgstr "Nom d’utilisateur ou mot de passe incorrect"
 
-#: includes/class-referrals-graph.php:116
+#: includes/class-referrals-graph.php:147
 msgid "Unpaid Referral Earnings"
 msgstr "Gains de parrainages non payés"
 
-#: includes/class-referrals-graph.php:117
+#: includes/class-referrals-graph.php:148
 msgid "Pending Referral Earnings"
 msgstr "Gains de parrainages en attente"
 
-#: includes/class-referrals-graph.php:118
+#: includes/class-referrals-graph.php:149
 msgid "Rejected Referral Earnings"
 msgstr "Gains de parrainages rejetés"
 
-#: includes/class-referrals-graph.php:119
+#: includes/class-referrals-graph.php:150
 msgid "Paid Referral Earnings"
 msgstr "Gains de parrainages payés"
 
@@ -3417,11 +3166,11 @@ msgstr "Désactiver l’e-mail d’affiliation"
 msgid "Disable the application accepted email sent to the affiliate."
 msgstr "Désactiver l’envoi de l’e-mail de demande acceptée à l’affilié."
 
-#: includes/class-visits-graph.php:126
+#: includes/class-visits-graph.php:137
 msgid "Converted Visits"
 msgstr "Visites converties"
 
-#: includes/class-visits-graph.php:127
+#: includes/class-visits-graph.php:138
 msgid "Unconverted Visits"
 msgstr "Visites non converties"
 
@@ -3452,56 +3201,56 @@ msgstr "Votre compte d’affilition n’est pas actif"
 
 #: includes/cli/class-affiliate-sub-commands.php:214
 #: includes/cli/class-affiliate-sub-commands.php:218
-#: includes/cli/class-affiliate-sub-commands.php:275
-#: includes/cli/class-affiliate-sub-commands.php:279
+#: includes/cli/class-affiliate-sub-commands.php:274
+#: includes/cli/class-affiliate-sub-commands.php:278
 #: includes/cli/class-referral-sub-commands.php:205
 #: includes/cli/class-visit-sub-commands.php:234
 msgid "A valid affiliate username or ID is required to proceed."
 msgstr ""
 
-#: includes/cli/class-affiliate-sub-commands.php:231
+#: includes/cli/class-affiliate-sub-commands.php:230
 #, fuzzy
 msgid "The affiliate was updated successfully."
 msgstr "L’affilié a bien été mis à jour."
 
-#: includes/cli/class-affiliate-sub-commands.php:233
+#: includes/cli/class-affiliate-sub-commands.php:232
 #, fuzzy
 msgid "The affiliate account could not be updated."
 msgstr "Votre compte d’affilition n’est pas actif"
 
-#: includes/cli/class-affiliate-sub-commands.php:288
+#: includes/cli/class-affiliate-sub-commands.php:287
 #, fuzzy
 msgid ""
 "Are you sure you want to delete this affiliate, all its data and its "
 "associated user account?"
 msgstr "Confirmez-vous vouloir supprimer cette bannière ?"
 
-#: includes/cli/class-affiliate-sub-commands.php:290
+#: includes/cli/class-affiliate-sub-commands.php:289
 #, fuzzy
 msgid "Are you sure you want to delete this affiliate and all its data?"
 msgstr "Confirmez-vous vouloir supprimer ce parrainage ?"
 
-#: includes/cli/class-affiliate-sub-commands.php:293
+#: includes/cli/class-affiliate-sub-commands.php:292
 #, fuzzy
 msgid "Are you sure you want to delete this affiliate?"
 msgstr "Confirmez-vous vouloir supprimer cette bannière ?"
 
-#: includes/cli/class-affiliate-sub-commands.php:310
+#: includes/cli/class-affiliate-sub-commands.php:309
 msgid ""
 "The affiliate and its associated user account have been successfully deleted."
 msgstr ""
 
-#: includes/cli/class-affiliate-sub-commands.php:313
+#: includes/cli/class-affiliate-sub-commands.php:312
 #, fuzzy
 msgid "The affiliate account has been successfully deleted."
 msgstr "Le(s) compte(s) d’affiliation ont bien été supprimé(s)."
 
-#: includes/cli/class-affiliate-sub-commands.php:316
+#: includes/cli/class-affiliate-sub-commands.php:315
 #, fuzzy
 msgid "The affiliate account could not be deleted."
 msgstr "Votre demande de compte d’affiliation a été rejetée"
 
-#: includes/cli/class-affiliate-sub-commands.php:392
+#: includes/cli/class-affiliate-sub-commands.php:391
 #, fuzzy
 msgid "Number of affiliates: %d"
 msgstr "Nombre d’affiliés par page :"
@@ -3989,6 +3738,10 @@ msgstr "Le type du taux de parrainage de l’affilié. "
 msgid "The URL to the review page for a pending affiliate"
 msgstr ""
 
+#: includes/emails/class-affwp-emails.php:487
+msgid "The URL the customer landed on that led to a referral being created"
+msgstr ""
+
 #: includes/emails/functions.php:121
 msgid "No reason provided"
 msgstr "Aucun motif fourni"
@@ -4245,7 +3998,7 @@ msgstr "Autoriser les parrainages"
 msgid "Enable affiliate referral creation for this form?"
 msgstr "Permettre la création de parrainage d’affilié pour ce formulaire ?"
 
-#: includes/integrations/class-paypal.php:92
+#: includes/integrations/class-paypal.php:90
 #, fuzzy
 msgid "Pending PayPal referral"
 msgstr "Total des parrainages en attente"
@@ -4766,6 +4519,12 @@ msgstr ""
 msgid "Affiliate Plugin for WordPress"
 msgstr "Extension d’affiliation pour WordPress"
 
+#: includes/admin/affiliates/affiliates.php:58
+#, fuzzy
+msgctxt "affiliates"
+msgid "Reports"
+msgstr "Rapports"
+
 #: includes/admin/affiliates/delete.php:47
 msgctxt "Affiliate ID, affiliate name"
 msgid "ID #%d: %s"
@@ -4810,25 +4569,25 @@ msgctxt "Visits column table header"
 msgid "Visits"
 msgstr "Visites"
 
-#: includes/admin/payouts/payouts.php:229
+#: includes/admin/payouts/class-list-table.php:129
 #, fuzzy
 msgctxt "payouts"
 msgid "All"
 msgstr "Tout"
 
-#: includes/admin/payouts/payouts.php:249
+#: includes/admin/payouts/class-list-table.php:149
 #, fuzzy
 msgctxt "payout"
 msgid "Amount"
 msgstr "Quantité"
 
-#: includes/admin/payouts/payouts.php:253
+#: includes/admin/payouts/class-list-table.php:153
 #, fuzzy
 msgctxt "payout"
 msgid "Status"
 msgstr "État"
 
-#: includes/admin/payouts/payouts.php:254
+#: includes/admin/payouts/class-list-table.php:154
 #, fuzzy
 msgctxt "payout"
 msgid "Date"
@@ -4845,6 +4604,30 @@ msgstr "Voir %s"
 msgctxt "payout"
 msgid "Paid"
 msgstr "Payé"
+
+#: includes/admin/referrals/referrals.php:39
+#, fuzzy
+msgctxt "referrals"
+msgid "Reports"
+msgstr "Rapports"
+
+#: includes/admin/visits/visits.php:34
+#, fuzzy
+msgctxt "visits"
+msgid "Reports"
+msgstr "Rapports"
+
+#: includes/class-graph.php:389
+#, fuzzy
+msgctxt "date filter"
+msgid "From"
+msgstr "Du"
+
+#: includes/class-graph.php:391
+#, fuzzy
+msgctxt "date filter"
+msgid "To"
+msgstr "Au"
 
 #: includes/cli/class-command.php:36
 msgctxt "license status"
@@ -4908,6 +4691,359 @@ msgstr ""
 msgctxt "direct traffic"
 msgid "Direct"
 msgstr "Traffic direct"
+
+#, fuzzy
+#~ msgid "What&#8217;s new in AffiliateWP"
+#~ msgstr "Quoi de neuf sur AffiliateWP"
+
+#~ msgid "Getting started with AffiliateWP"
+#~ msgstr "Commencer avec AffiliateWP"
+
+#~ msgid "The people that build AffiliateWP"
+#~ msgstr "Les personnes qui ont développé AffiliateWP"
+
+#, fuzzy
+#~ msgid "What&#8217;s New"
+#~ msgstr "Quoi de neuf"
+
+#~ msgid "Getting Started"
+#~ msgstr "Commencer"
+
+#~ msgid "Credits"
+#~ msgstr "Crédits"
+
+#~ msgid "Welcome to AffiliateWP v%s"
+#~ msgstr "Bienvenue sur AffiliateWP v%s"
+
+#~ msgid ""
+#~ "Thank you for installing AffiliateWP v%s. The best affiliate marketing "
+#~ "plugin for WordPress."
+#~ msgstr ""
+#~ "Merci d’avoir installé AffiliateWP v%s. La meilleure extension de "
+#~ "marketing d’affiliation pour WordPress."
+
+#~ msgid "Version %s"
+#~ msgstr "Version %s"
+
+#~ msgid "New Integrations"
+#~ msgstr "Nouvelles intégrations"
+
+#~ msgid ""
+#~ "We’ve made AffiliateWP more accessible and more valuable to more users "
+#~ "with three new integrations:"
+#~ msgstr ""
+#~ "Pour rendre AffiliateWP plus accessible et plus utile à encore plus "
+#~ "d’utilisateurs, nous avons ajouté trois nouvelles intégrations :"
+
+#~ msgid "Improved Integrations"
+#~ msgstr "Mises à jour des intégrations"
+
+#~ msgid ""
+#~ "Per-membership commission rates are now supported in Restrict Content Pro"
+#~ msgstr ""
+#~ "Les taux de commission par adhésion sont désormais pris en charge dans "
+#~ "Restrict Content Pro."
+
+#~ msgid "Per-membership commission rates are now supported in MemberPress"
+#~ msgstr ""
+#~ "Les taux de commission par adhésion sont désormais pris en charge dans "
+#~ "MemberpPress."
+
+#~ msgid "Commissions can be disabled on individual forms in Gravity Forms"
+#~ msgstr ""
+#~ "Les commissions peuvent être désactivées sur les formulaires individuels "
+#~ "de Gravity Forms."
+
+#~ msgid "Commissions can be disabled on individual forms in Ninja Forms"
+#~ msgstr ""
+#~ "Les commissions peuvent être désactivées sur les formulaires individuels "
+#~ "de Ninja Forms."
+
+#~ msgid ""
+#~ "Affiliate commissions are now shown on the order details screens in Paid "
+#~ "Memberships Pro"
+#~ msgstr ""
+#~ "Les commissions d’affiliation sont maintenant affichées sur l’ écran des "
+#~ "détails de la commande dans Paid Memberships Pro."
+
+#~ msgid "URL Campaign Tracking"
+#~ msgstr "URL de suivi de campagne"
+
+#~ msgid ""
+#~ "Affiliates can now include URL campaign parameters in their affiliate "
+#~ "URLs and have them automatically tracked by AffiliateWP. A new \"Campaigns"
+#~ "\" table has been added to the Statistics tab of the affiliate area to "
+#~ "show affiliates the results of their URL campaigns."
+#~ msgstr ""
+#~ "Les affiliées peuvent désormais inclure des paramètres d’URL de campagne "
+#~ "dans leurs URL d’affiliation et les faire suivre automatiquement par "
+#~ "AffiliateWP. Une nouvelle table « Campagnes » a été ajoutée à l'onglet "
+#~ "Statistiques de la zone d’affiliation pour afficher aux affiliés les "
+#~ "résultats de leurs URL de campagnes."
+
+#~ msgid "Affiliate Rejection Reasons"
+#~ msgstr "Motifs du refus de l’affiliation"
+
+#~ msgid ""
+#~ "When rejecting affiliate accounts, a rejection reason can be provided "
+#~ "that is then (optionally) emailed to the affiliate and recorded for "
+#~ "future reference."
+#~ msgstr ""
+#~ "Lorsque vous rejetez des comptes d’affiliation, un motif de rejet peut "
+#~ "être fourni et qui est ensuite (optionnelement) envoyé par e-mail à "
+#~ "l’affilié et enregistré comme référence ultérieure."
+
+#~ msgid "reCaptcha v2.0"
+#~ msgstr "reCaptcha v2.0"
+
+#, fuzzy
+#~ msgid ""
+#~ "Google&#8217;s reCaptcha version 2.0 library has been introduced to "
+#~ "AffiliateWP to help protect you and your website from spam user "
+#~ "registrations."
+#~ msgstr ""
+#~ "La bibliothèque version 2.0 de reCaptcha de Google a été introduite dans "
+#~ "AffiliateWP pour vous protéger vous et votre site Web des enregistrements "
+#~ "d’utilisateurs indésirables."
+
+#~ msgid "Additional Updates"
+#~ msgstr "Mises à jour supplémentaires"
+
+#~ msgid "Improved User Searching"
+#~ msgstr "Recherche d’utilisateur améliorée"
+
+#~ msgid ""
+#~ "When creating new affiliate accounts, the search process for users in "
+#~ "your WordPress site now return better results."
+#~ msgstr ""
+#~ "Lors de la création de nouveaux comptes d’affiliation, le processus de "
+#~ "recherche des utilisateurs de votre site WordPress renvoie désormais de "
+#~ "meilleurs résultats."
+
+#~ msgid "Per-Page Options for Admin Screens"
+#~ msgstr "Options par page pour les écrans d’administration"
+
+#~ msgid ""
+#~ "Admin pages for Affiliates, Referrals, Visits, and Creatives can have the "
+#~ "number of items per-page configured from the Screen Options tab."
+#~ msgstr ""
+#~ "Les pages d’administration des affiliés, parrainages, visites et "
+#~ "bannières peuvent avoir leur nombre d’éléments par page configurée à "
+#~ "partir de l’onglet des Options d’écran."
+
+#~ msgid "Disable Individual Emails"
+#~ msgstr "Désactiver les e-mails individuels"
+
+#~ msgid ""
+#~ "New options have been introduced that allow you to pick-and-choose which "
+#~ "email notifications AffiliateWP will send."
+#~ msgstr ""
+#~ "De nouvelles options ont été introduites pour vous permettent de choisir "
+#~ "les notifications par e-mail envoyées par AffiliateWP."
+
+#~ msgid "Creative Template File"
+#~ msgstr "Modèle de fichier de bannière"
+
+#~ msgid ""
+#~ "A new template file has been introduced for exact control over the "
+#~ "display of creatives in the affiliate area."
+#~ msgstr ""
+#~ "Un nouveau fichier de modèle a été introduit pour un contrôle parfait de "
+#~ "l’affichage des bannières dans la zone d’affiliation."
+
+#~ msgid "Import Users By Role"
+#~ msgstr "Importation des utilisateurs par rôle"
+
+#~ msgid ""
+#~ "When importing existing users as affiliates, an option to import just "
+#~ "users of a specific role is now available."
+#~ msgstr ""
+#~ "Lors de l’importation d’utilisateurs existants en tant qu’affiliées, une "
+#~ "option permettant d’importer uniquement les utilisateurs avec un rôle "
+#~ "spécifique est maintenant disponible."
+
+#~ msgid "Go to AffiliateWP Settings"
+#~ msgstr "Aller aux réglages d’AffiliateWP"
+
+#~ msgid "Welcome to AffiliateWP %s"
+#~ msgstr "Bienvenue sur AffiliateWP %s"
+
+#~ msgid ""
+#~ "Use the tips below to get started using AffiliateWP. You will be up and "
+#~ "running in no time!"
+#~ msgstr ""
+#~ "Utilisez les conseils ci-dessous pour vous lancer avec AffiliateWP. Vous "
+#~ "serez opérationnel en un rien de temps !"
+
+#~ msgid "Overview of Affiliates and Referrals"
+#~ msgstr "Vue d’ensemble des Affiliés et Parrainages"
+
+#~ msgid "The Overview Page"
+#~ msgstr "La page de vue d’ensemble"
+
+#~ msgid ""
+#~ "The overview page gives you a quick summary of your recent affiliate "
+#~ "activity, including recent registrations, referrals, and visits."
+#~ msgstr ""
+#~ "La page de vue d’ensemble donne un rapide résumé des activités récentes "
+#~ "d’affiliation, incluant les dernières inscriptions, parrainages et "
+#~ "visites."
+
+#, fuzzy
+#~ msgid ""
+#~ "It also provides a quick summary of your affiliates&#8217; referral "
+#~ "earnings."
+#~ msgstr ""
+#~ "Elle donne aussi un rapide résumé des gains de parrainages de vos "
+#~ "affiliés."
+
+#, fuzzy
+#~ msgid ""
+#~ "If you allow affiliate registrations, you can also easily accept or "
+#~ "reject affiliate&#8217;s applications directly from the Overview page"
+#~ msgstr ""
+#~ "Si vous permettez l’enregistrement d’affilié, vous pouvez aussi accepter "
+#~ "ou rejeter les demandes d’affiliation depuis la page de vue d’ensemble."
+
+#~ msgid "Affiliates &rarr; Add New"
+#~ msgstr "Affiliés &rarr; Ajouter nouveau"
+
+#~ msgid ""
+#~ "From the main Affiliates page, site admins can easily add new affiliates "
+#~ "to AffiliateWP. Simply enter the username, set a rate, and click Add "
+#~ "Affiliate!"
+#~ msgstr ""
+#~ "Depuis la page principale des affiliés, les admins du site peuvent "
+#~ "facilement ajouter de nouveaux affiliés à AffiliateWP. Entrez simplement "
+#~ "le nom d’utilisateur, paramétrez un taux, et cliquez sur Ajouter un "
+#~ "affilié !"
+
+#~ msgid "Affiliate Registration"
+#~ msgstr "Inscription Affilié"
+
+#~ msgid ""
+#~ "When enabled, affiliates can register themselves via the Affiliate Area. "
+#~ "If they already have a user account on your site, they can register by "
+#~ "simply agreeing to the terms of use. If they need to create an entirely "
+#~ "new account, they have that option as well!"
+#~ msgstr ""
+#~ "Si activé, les affiliés peuvent s’enregistrer depuis la Zone Affilié. "
+#~ "S’ils sont déjà en compte sur votre site, ils peuvent simplement "
+#~ "s’enregistrer en acceptant les conditions d’utilisation. S’ils doivent "
+#~ "créer entièrement un nouveau compte, ils ont aussi cette option !"
+
+#~ msgid "Moderate Registrations"
+#~ msgstr "Gérer les inscriptions"
+
+#~ msgid ""
+#~ "Affiliate registrations can be moderated and require that a site admin "
+#~ "approve each registration before the affiliate is permitted to begin "
+#~ "tracking referrals."
+#~ msgstr ""
+#~ "Les inscriptions d’affiliés peuvent être modérées et nécessitent qu’un "
+#~ "administrateur du site approuve chaque inscription avant que l’affilié "
+#~ "soit autorisé à commencer à suivre des parrainages."
+
+#~ msgid ""
+#~ "Each time an affiliate registers, site admins can log into the site and "
+#~ "approve or reject the application."
+#~ msgstr ""
+#~ "Chaque fois qu’un affilié s’enregistre, les administrateurs du site "
+#~ "peuvent se connecter et approuver ou rejeter les demandes."
+
+#~ msgid "A Dashboard For Your Affiliates"
+#~ msgstr "Un Tableau de bord pour vos affiliés"
+
+#~ msgid ""
+#~ "The Affiliate Area, shown on any page containing the "
+#~ "<em>[affiliate_area]</em> shortcode, gives your affiliates access to "
+#~ "their performance reports."
+#~ msgstr ""
+#~ "La zone d’affilition, affichée sur n’importe quelle page contenant le "
+#~ "code court <em>[affiliate_area]</em>, donne aux affiliés accès à leurs "
+#~ "rapports de performance."
+
+#~ msgid ""
+#~ "Affiliates can easily see how much they have earned, how much is awaiting "
+#~ "payment, and even how their referral URLs have done over time."
+#~ msgstr ""
+#~ "Les affiliés peuvent facilement voir combien ils ont gagné, la somme en "
+#~ "attente de paiement, et même comment leurs parrainages ont évolué au fil "
+#~ "du temps."
+
+#~ msgid ""
+#~ "A log of the referral links that have been clicked and where they were "
+#~ "clicked on from, and whether the link converted into a successful "
+#~ "referral, is also available to affiliates."
+#~ msgstr ""
+#~ "Un journal des liens de parrainages cliqués et depuis où ils l’ont étés, "
+#~ "et si le lien a été converti en une transaction positive, est aussi "
+#~ "disponible pour le affiliés."
+
+#~ msgid "Quick Terminology"
+#~ msgstr "Terminologie rapide"
+
+#~ msgid ""
+#~ "These are your best friends. They are the users that are actively "
+#~ "promoting your products and services through referral URLs. When they "
+#~ "create a customer for you, they get paid back in the form of a commission."
+#~ msgstr ""
+#~ "Ce sont vos meilleurs amis. Il s’agit des utilisateurs qui promeuvent "
+#~ "activement vos produits et services à travers les URL de parrainages. "
+#~ "Quand ils génèrent des clients, ils sont payés en retour sous forme de "
+#~ "commission."
+
+#~ msgid ""
+#~ "These are the commission records created anytime an affiliate "
+#~ "successfully sends a potential customer to your site and that customer "
+#~ "makes a purchase."
+#~ msgstr ""
+#~ "Ce sont les enregistrements des commissions créés à chaque fois qu’un "
+#~ "affilié envoie un prospect vers votre site et que ce client réalise une "
+#~ "commande."
+
+#~ msgid ""
+#~ "These are unique hits on the referral URLs shared out by your affiliates. "
+#~ "Each time a potential customer clicks on a referral URL, a visit is "
+#~ "recorded."
+#~ msgstr ""
+#~ "Ce sont les clics uniques sur les URL de parrainages partagées par vos "
+#~ "affiliés. Chaque fois qu’un prospect clique sur une URL de parrainage, "
+#~ "une visite est enregistrée."
+
+#~ msgid "Need Help?"
+#~ msgstr "Besoin d’aide ?"
+
+#~ msgid "Phenomenal Support"
+#~ msgstr "Assistance phénoménale"
+
+#~ msgid ""
+#~ "We do our best to provide the best support we can. If you encounter a "
+#~ "problem or have a question, visit our <a href=\"https://affiliatewp.com/"
+#~ "support\">support</a> page to open a ticket."
+#~ msgstr ""
+#~ "Nous faisons de notre mieux pour fournir le meilleur support possible. Si "
+#~ "vous rencontrez un problème ou avez une question, rendez-vous sur notre "
+#~ "page <a href=\"https://affiliatewp.com/support\">de support</a> pour "
+#~ "ouvrir un ticket."
+
+#~ msgid "Thank you for updating to the latest version!"
+#~ msgstr "Merci pour avoir installé la dernière version !"
+
+#~ msgid ""
+#~ "AffiliateWP is created by developers from around the world that aim to "
+#~ "provide the #1 affiliate platform for WordPress. Here are just some of "
+#~ "the faces that have helped build AffiliateWP:"
+#~ msgstr ""
+#~ "AffiliateWP est créé par des développeurs du monde entier qui ont pour "
+#~ "objectif de fournir la meilleure plateforme d’affiliation pour WordPress. "
+#~ "Voici certains des visages de ceux qui ont aidé à développer AffiliateWP:"
+
+#~ msgid "View %s"
+#~ msgstr "Voir %s"
+
+#~ msgid "Add New Referral"
+#~ msgstr "Ajouter un nouveau parainnage"
 
 #, fuzzy
 #~ msgid "Application Rejected Email Subject"

@@ -1,29 +1,27 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AffiliateWP v1.2.5\n"
+"Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
 "POT-Creation-Date: 2016-09-22 20:23:58+00:00\n"
-"PO-Revision-Date: 2015-12-22 12:56-0200\n"
-"Last-Translator: Rhuan Carlos <rhcarlosweb@gmail.com>\n"
-"Language-Team: \n"
-"Language: pt_BR\n"
+"PO-Revision-Date: 2016-09-06 15:30-0500\n"
+"Last-Translator: Chris Christoff <chriscct7@gmail.com>\n"
+"Language-Team: AffiliateWP <support@affiliatewp.com>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.8.6\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
-"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
-"esc_attr_e\n"
+"X-Generator: Poedit 1.8.9\n"
 "X-Poedit-Basepath: ..\n"
-"X-Textdomain-Support: yes\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-# @ affiliate-wp
 #: affiliate-wp.php:253 affiliate-wp.php:265
 msgid "Cheatin&#8217; huh?"
-msgstr "Trapaceando&#8217; né?"
+msgstr "Varaš&#8217; ha?"
 
 #: affiliate-wp.php:277
 msgid ""
@@ -31,15 +29,11 @@ msgid ""
 "AffiliateWP. Please contact your host and request that your version be "
 "upgraded to 5.3 or later."
 msgstr ""
-"Sua versão do PHP é abaixo a versão mínima do PHP exigido pelo AffiliateWP. "
-"Por favor, entre em contato com seu anfitrião e solicitar que sua versão ser "
-"atualizado para o 5.3 ou posterior."
 
 #: includes/REST/class-rest.php:62
 msgid "Nonce verification failed"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/REST/class-rest.php:62 includes/REST/class-rest.php:66
 #: includes/REST/class-rest.php:79 includes/REST/class-rest.php:82
 #: includes/admin/AFFWP_Plugin_Updater.php:358
@@ -62,20 +56,18 @@ msgstr ""
 #: includes/admin/tools/import/import.php:23
 #: includes/admin/tools/import/import.php:29
 msgid "Error"
-msgstr "Erro"
+msgstr "Greška"
 
-# @ affiliate-wp
 #: includes/REST/class-rest.php:66
 #, fuzzy
 msgid "User ID Required"
-msgstr "ID do Usuário"
+msgstr "Korisnički ID"
 
-# @ affiliate-wp
 #. translators: 1: Generate, regenerate, or revoke
 #: includes/REST/class-rest.php:79 includes/REST/class-rest.php:82
 #, fuzzy
 msgid "You do not have permission to %s API keys for this user."
-msgstr "Você não tem permissão para exportar dados."
+msgstr "Nemaš dozvolu za izvoz podataka"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:187
 #: includes/REST/v1/class-referrals-endpoints.php:159
@@ -100,15 +92,13 @@ msgid ""
 msgstr ""
 
 #: includes/REST/v1/class-affiliates-endpoints.php:224
-#, fuzzy
 msgid "Affiliates table column to order by."
-msgstr "Plugin de Afiliados para WordPress"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/REST/v1/class-affiliates-endpoints.php:231
 #, fuzzy
 msgid "The date array or string to query affiliate registrations within."
-msgstr "Notificar ao administrador novos registros de afiliados?"
+msgstr "Obavjesti administratora o novim registracijama?"
 
 #: includes/REST/v1/class-affiliates-endpoints.php:242
 msgid "Use any get_affiliates() arguments to modify the response."
@@ -246,11 +236,10 @@ msgstr ""
 msgid "Use any get_visits() arguments to modify the response."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:114
 #, fuzzy
 msgid "Date Filters"
-msgstr "Filtrar"
+msgstr "Filtriraj"
 
 #: includes/abstracts/class-affwp-reports-tab.php:129
 msgid "Quick Stats"
@@ -264,65 +253,55 @@ msgstr ""
 msgid "No data for the current date range."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:365
 #: includes/class-graph.php:335
 msgid "Today"
-msgstr "Hoje"
+msgstr "Danas"
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:366
 #: includes/class-graph.php:336
 msgid "Yesterday"
-msgstr "Ontem"
+msgstr "Jučer"
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:367
 #: includes/class-graph.php:337
 msgid "This Week"
-msgstr "Esta semana"
+msgstr "Ovaj tjedan"
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:368
 #: includes/class-graph.php:338
 msgid "Last Week"
-msgstr "Última semana"
+msgstr "Prošli tjedan"
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:369
 #: includes/class-graph.php:339
 msgid "This Month"
-msgstr "Este mês"
+msgstr "Ovaj mjesec"
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:370
 #: includes/class-graph.php:340
 msgid "Last Month"
-msgstr "Último mês"
+msgstr "Prošli mjesec"
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:371
 #: includes/class-graph.php:341
 msgid "This Quarter"
-msgstr "Este Quadrimentre"
+msgstr "Ovaj kvartal"
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:372
 #: includes/class-graph.php:342
 msgid "Last Quarter"
-msgstr "Último Quadrimentre"
+msgstr "Prošli kvartal"
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:373
 #: includes/class-graph.php:343
 msgid "This Year"
-msgstr "Este Ano"
+msgstr "Ove godine"
 
-# @ affiliate-wp
 #: includes/abstracts/class-affwp-reports-tab.php:374
 #: includes/class-graph.php:344
 msgid "Last Year"
-msgstr "Último Ano"
+msgstr "Prošle godine"
 
 #. translators: 1: Starting date, 2: Ending date
 #: includes/abstracts/class-affwp-reports-tab.php:384
@@ -330,34 +309,26 @@ msgid "%1$s to %2$s"
 msgstr ""
 
 #: includes/admin/AFFWP_Plugin_Updater.php:196
-#, fuzzy
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
-"Existe uma nova versão de %1$s disponível. <a target=\"_blank\" class="
-"\"thickbox\" href=\"%2$s\">Ver os detalhes da versão %3$s</a>."
 
 #: includes/admin/AFFWP_Plugin_Updater.php:204
-#, fuzzy
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s "
 "or %5$supdate now%6$s."
 msgstr ""
-"Existe uma nova versão do %1$s disponível. <a target=\"_blank\" class="
-"\"thickbox\" href=\"%2$s\">Veja detalhes da versão %3$s </a> or <a href="
-"\"%4$s\">atualizar agora</a>."
 
-# @ affiliate-wp
 #: includes/admin/AFFWP_Plugin_Updater.php:358
 #: includes/admin/class-addon-updater.php:283
+#, fuzzy
 msgid "You do not have permission to install plugin updates"
-msgstr "Você não tem permissão para instalar atualizações do plugin"
+msgstr "Nemaš ovlasti upravljati Brand ambasadorima"
 
-# @ affiliate-wp
 #: includes/admin/add-ons.php:24
 #, fuzzy
 msgid "Add-ons for AffiliateWP"
-msgstr "Adicionar Afiliado"
+msgstr "Dodaj partnera"
 
 #: includes/admin/add-ons.php:26 includes/admin/add-ons.php:59
 msgid "Browse all add-ons"
@@ -392,19 +363,16 @@ msgid ""
 "again later."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/affiliates/actions.php:20
 #: includes/admin/affiliates/actions.php:107
 #: includes/admin/affiliates/actions.php:138
 msgid "You do not have permission to manage affiliates"
-msgstr "Você não tem permissão para gerenciar os afiliados"
+msgstr "Nemaš ovlasti upravljati Brand ambasadorima"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/actions.php:52
 msgid "You do not have permission to delete affiliate accounts"
-msgstr "Você não tem permissão para deletar contas dos afiliados"
+msgstr "Nemaš ovlasti brisati Brand ambasador račune"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/actions.php:56
 #: includes/admin/affiliates/actions.php:142
 #: includes/admin/class-notices.php:358
@@ -413,62 +381,54 @@ msgstr "Você não tem permissão para deletar contas dos afiliados"
 #: includes/admin/referrals/actions.php:51
 #: includes/admin/referrals/actions.php:82
 msgid "Security check failed"
-msgstr "Falha de verificação de segurança"
+msgstr "Sigurnosna provjera neuspjela"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/actions.php:60
 msgid "No affiliate IDs specified for deletion"
-msgstr "Nenhum ID de afiliado especificado para deletar"
+msgstr "Niti jedan Brand ambasador ID nije označen za brisanje"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/affiliates.php:56
 #: includes/admin/class-menu.php:11 includes/admin/class-menu.php:13
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:23
 msgid "Affiliates"
-msgstr "Afiliados"
+msgstr "Brand ambasadori"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/affiliates.php:57
 #: includes/admin/creatives/creatives.php:44
 #: includes/admin/referrals/referrals.php:38
 msgid "Add New"
-msgstr "Adicionar Novo"
+msgstr "Dodaj novi"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/affiliates.php:62
 #: includes/admin/payouts/payouts.php:50
 #: includes/admin/referrals/referrals.php:65
 #: includes/admin/visits/visits.php:38
 msgid "Search"
-msgstr "Buscar"
+msgstr "Pretraži"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:146
 #: includes/admin/creatives/class-list-table.php:98
 #: includes/admin/referrals/class-list-table.php:148
 #: includes/admin/visits/visits.php:49
 msgid "All"
-msgstr "Todos"
+msgstr "Sve"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:147
 #: includes/admin/affiliates/new.php:41
 #: includes/admin/creatives/class-list-table.php:99
 #: includes/admin/creatives/edit.php:99 includes/admin/creatives/new.php:89
 #: includes/admin/tools/tools.php:281 includes/affiliate-functions.php:273
 msgid "Active"
-msgstr "Ativo"
+msgstr "Aktivni"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:148
 #: includes/admin/affiliates/new.php:42
 #: includes/admin/creatives/class-list-table.php:100
 #: includes/admin/creatives/edit.php:100 includes/admin/creatives/new.php:90
 #: includes/affiliate-functions.php:276
 msgid "Inactive"
-msgstr "Inativo"
+msgstr "Neaktivni"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:149
 #: includes/admin/affiliates/new.php:43
 #: includes/admin/referrals/class-list-table.php:151
@@ -476,35 +436,31 @@ msgstr "Inativo"
 #: includes/admin/tools/tools.php:282 includes/admin/tools/tools.php:311
 #: includes/affiliate-functions.php:279 includes/referral-functions.php:65
 msgid "Pending"
-msgstr "Pendente"
+msgstr "U procesu"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:150
 #: includes/admin/referrals/class-list-table.php:152
 #: includes/admin/referrals/edit.php:141 includes/admin/referrals/new.php:104
 #: includes/admin/tools/tools.php:283 includes/admin/tools/tools.php:312
 #: includes/affiliate-functions.php:282 includes/referral-functions.php:64
 msgid "Rejected"
-msgstr "Rejeitado"
+msgstr "Odbijeno"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:166
 #: includes/admin/affiliates/review.php:22
 #: includes/admin/creatives/class-list-table.php:115
 #: includes/admin/creatives/edit.php:17 includes/admin/creatives/new.php:16
 #: includes/admin/tools/export/class-export-affiliates.php:49
 msgid "Name"
-msgstr "Nome"
+msgstr "Ime"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:167
 #: includes/admin/affiliates/edit.php:44 includes/admin/referrals/edit.php:28
 #: includes/admin/tools/export/class-export-affiliates.php:47
 #: includes/admin/tools/export/class-export-referrals.php:61
 msgid "Affiliate ID"
-msgstr "ID do Afiliado"
+msgstr "Brand ambasador ID"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:168
 #: includes/admin/affiliates/edit.php:70
 #: includes/admin/affiliates/review.php:34
@@ -514,36 +470,31 @@ msgstr "ID do Afiliado"
 #: templates/login.php:15 templates/login.php:16 templates/register.php:59
 #: templates/register.php:60
 msgid "Username"
-msgstr "Nome de Usuário"
+msgstr "Korisničko ime"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:169
 #: includes/admin/affiliates/view.php:11
 #: includes/admin/tools/export/class-export-affiliates.php:54
 msgid "Earnings"
-msgstr "Ganhos"
+msgstr "Zarada"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:170
 #: includes/admin/tools/export/class-export-affiliates.php:52
 msgid "Rate"
-msgstr "Taxa"
+msgstr "Stopa provizije"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:171
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:80
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:65
 #: templates/dashboard-tab-stats.php:8
 msgid "Unpaid Referrals"
-msgstr "Indicações não pagas"
+msgstr "Neplaćene preporuke"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:172
 #: templates/dashboard-tab-stats.php:9
 msgid "Paid Referrals"
-msgstr "Referências Pagas"
+msgstr "Plaćene preporuke"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:173
 #: includes/admin/class-menu.php:16
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:23
@@ -552,9 +503,8 @@ msgstr "Referências Pagas"
 #: templates/dashboard-tab-stats.php:10 templates/dashboard-tab-stats.php:57
 #: templates/dashboard.php:86
 msgid "Visits"
-msgstr "Visitas"
+msgstr "Posjete"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:174
 #: includes/admin/creatives/class-list-table.php:118
 #: includes/admin/creatives/edit.php:94 includes/admin/creatives/new.php:84
@@ -569,104 +519,91 @@ msgstr "Visitas"
 msgid "Status"
 msgstr "Status"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:239
 #: includes/admin/affiliates/class-list-table.php:366
 #: includes/admin/payouts/class-list-table.php:272
 msgid "(user deleted)"
-msgstr "(usuário deletado)"
+msgstr "(korisnik izbrisan)"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:249
 #: includes/admin/class-menu.php:18
 #: includes/admin/reports/class-reports-admin.php:97
 #: includes/admin/user-profile.php:49
 msgid "Reports"
-msgstr "Relatórios"
+msgstr "Izvješća"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:258
 #: includes/admin/creatives/class-list-table.php:199
 #: includes/admin/referrals/class-list-table.php:374
 #: includes/admin/user-profile.php:51
 msgid "Edit"
-msgstr "Editar"
+msgstr "Uređivanje"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:269
 #: includes/admin/affiliates/class-list-table.php:476
 #: includes/admin/creatives/class-list-table.php:211
 msgid "Deactivate"
-msgstr "Desativar"
+msgstr "Deaktivacija"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:281
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:84
 msgid "Review"
-msgstr "Revisar"
+msgstr "Recenzija"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:291
 #: includes/admin/affiliates/class-list-table.php:473
 #: includes/admin/referrals/class-list-table.php:343
 #: includes/admin/referrals/class-list-table.php:479
 msgid "Accept"
-msgstr "Aceitar"
+msgstr "Prihvati"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:301
 #: includes/admin/affiliates/class-list-table.php:474
 #: includes/admin/referrals/class-list-table.php:359
 #: includes/admin/referrals/class-list-table.php:480
 msgid "Reject"
-msgstr "Rejeitar"
+msgstr "Odbaci"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:313
 #: includes/admin/affiliates/class-list-table.php:475
 #: includes/admin/creatives/class-list-table.php:223
 msgid "Activate"
-msgstr "Ativado"
+msgstr "Aktiviraj"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:325
 #: includes/admin/affiliates/class-list-table.php:477
 #: includes/admin/creatives/class-list-table.php:235
 #: includes/admin/referrals/class-list-table.php:383
 #: includes/admin/referrals/class-list-table.php:483
 msgid "Delete"
-msgstr "Deletar"
+msgstr "Izbriši"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:461
 msgid "No affiliates found."
-msgstr "Nenhum afiliado encontrado."
+msgstr "Niti jedan Brand ambasador nije pronađen"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/delete.php:30
 msgid "Delete Affiliates"
-msgstr "Deletar Afiliados"
+msgstr "Izbriši Brand ambasadore"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/delete.php:36
 #, fuzzy
 msgid "You have specified the following affiliate for deletion:"
 msgid_plural "You have specified the following affiliates for deletion:"
-msgstr[0] "Você especificou esses afiliados para deletar:"
-msgstr[1] "Você especificou esses afiliados para deletar:"
+msgstr[0] "Označio/la si ove Brand ambasadore za brisanje:"
+msgstr[1] "Označio/la si ove Brand ambasadore za brisanje:"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/delete.php:55
 #, fuzzy
 msgid "Deleting this affiliate will also delete their referral and visit data."
 msgid_plural ""
 "Deleting these affiliates will also delete their referral and visit data."
 msgstr[0] ""
-"A exclusão desses afiliados também irá apagar seus dados de referência e de "
-"visitas."
+"Brisanjem ovih Brand ambasadora izbrisati će se i njihove preporuke i "
+"izvješća o posjetama."
 msgstr[1] ""
-"A exclusão desses afiliados também irá apagar seus dados de referência e de "
-"visitas."
+"Brisanjem ovih Brand ambasadora izbrisati će se i njihove preporuke i "
+"izvješća o posjetama."
 
 #: includes/admin/affiliates/delete.php:67
 msgid "(The current user will not be deleted)"
@@ -676,16 +613,14 @@ msgstr ""
 msgid "Confirm Deletion"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:15
 msgid "Edit Affiliate"
-msgstr "Editar Afiliado"
+msgstr "Uredi Brand ambasadora"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:26
 #, fuzzy
 msgid "Affiliate Name"
-msgstr "Nome Afiliado"
+msgstr "Ime Brand ambasadora (partnera)"
 
 #: includes/admin/affiliates/edit.php:32
 msgid ""
@@ -699,45 +634,39 @@ msgstr ""
 msgid "A link to the user edit screen for this user."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:49
 #, fuzzy
 msgid "The affiliate&#8217;s ID. This cannot be changed."
-msgstr "O ID do afiliado. Isto não pode ser alterado."
+msgstr "Brand ambasador ID. Nemože biti naknadno promjenjen."
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:57
 msgid "User ID"
-msgstr "ID do Usuário"
+msgstr "Korisnički ID"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:62
 #, fuzzy
 msgid "The affiliate&#8217;s user ID. This cannot be changed."
-msgstr "O ID do afiliado. Isto não pode ser alterado."
+msgstr "Korisnički Brand ambasadora ID. Nemože biti naknadno promjenjen."
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:75
 #, fuzzy
 msgid "The affiliate&#8217;s username. This cannot be changed."
-msgstr "O nome de usuário do afiliado. Isto não pode ser alterado."
+msgstr "Korisnički Brand ambasadora ID. Nemože biti naknadno promjenjen."
 
 #: includes/admin/affiliates/edit.php:83
 #, fuzzy
 msgid "Registration Date"
-msgstr "Assunto Email de Registro"
+msgstr "Registracija partnera"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:88
 #, fuzzy
 msgid "The affiliate&#8217;s registration date. This cannot be changed."
-msgstr "O nome de usuário do afiliado. Isto não pode ser alterado."
+msgstr "Korisnički Brand ambasadora ID. Nemože biti naknadno promjenjen."
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:96
 #, fuzzy
 msgid "Website"
-msgstr "URL de seu Website"
+msgstr "URL Internet stranice"
 
 #: includes/admin/affiliates/edit.php:102
 msgid ""
@@ -746,24 +675,20 @@ msgid ""
 "a>."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:113 includes/admin/affiliates/new.php:53
 #: includes/admin/settings/class-settings.php:465
 msgid "Referral Rate Type"
-msgstr "Tipo de taxa de indicação"
+msgstr "Tip provizije"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:118 includes/admin/affiliates/new.php:58
 msgid "Site Default"
-msgstr "Site Padrão"
+msgstr "Zadana stranica"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:123 includes/admin/affiliates/new.php:63
 #, fuzzy
 msgid "The affiliate&#8217;s referral rate type."
-msgstr "Tipo de taxa de indicação do afiliado."
+msgstr "Tip provizije Brand ambasadora."
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:131 includes/admin/affiliates/new.php:71
 #: includes/admin/settings/class-settings.php:471
 #: includes/integrations/class-edd.php:652
@@ -773,67 +698,59 @@ msgstr "Tipo de taxa de indicação do afiliado."
 #: includes/integrations/class-zippycourses.php:76
 #: includes/integrations/extras/class-exchange-feature.php:31
 msgid "Referral Rate"
-msgstr "Taxa de Indicação"
+msgstr "Stopa provizije"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:136 includes/admin/affiliates/new.php:76
 #, fuzzy
 msgid ""
 "The affiliate&#8217;s referral rate, such as 20 for 20%. If left blank, the "
 "site default will be used."
 msgstr ""
-"Taxa de indicação do afiliado , como 20 para 20%. Se deixado em branco , a "
-"taxa padrão local será usada."
+"Stopa provizije, upiši npr. 20 za 20%. Ako je ostavljeno prazno, stranica "
+"koristi zadanu vrijednost."
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:144 templates/register.php:64
 msgid "Account Email"
-msgstr "E-mail"
+msgstr "Email računa"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:149
 #, fuzzy
 msgid ""
 "The affiliate&#8217;s account email. Updating this will change the email "
 "address shown on the user&#8217;s profile page."
 msgstr ""
-"E-mail da conta do afiliado. Atualizando isso vai mudar o endereço de e-mail "
-"indicado na página de perfil do usuário ."
+"Glavni email Brand ambasador računa. Ažuriranje ovog promjeniti će se email "
+"adresa prikazana na stranici profila korisnika."
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:157 includes/admin/affiliates/new.php:84
 #: includes/admin/tools/export/class-export-affiliates.php:50
 #: includes/admin/tools/export/class-export-referrals.php:63
 #: templates/register.php:69
 msgid "Payment Email"
-msgstr "E-mail de Pagamento (Paypal)"
+msgstr "PayPal email (ako želiš isplatu na PayPal račun)"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:162 includes/admin/affiliates/new.php:89
 #, fuzzy
 msgid ""
 "Affiliate&#8217;s payment email for systems such as PayPal, Moneybookers, or "
 "others. Leave blank to use the affiliate&#8217;s user email."
 msgstr ""
-"E-mail de pagamento do Afiliado para sistemas como o PayPal , Moneybookers, "
-"ou outros. Deixe em branco para usar e-mail do usuário do afiliado."
+"Email za isplatu provizije putem sustava kao PayPal, Moneybookers i slično. "
+"Ostavi prazno za korištenje glavnog emaila Brand ambasador računa."
 
 #: includes/admin/affiliates/edit.php:171
 #: includes/admin/affiliates/review.php:86
 msgid "Rejection Reason"
-msgstr "Razão da Rejeição"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/affiliates/edit.php:189
 msgid "Update Affiliate"
-msgstr "Atualizar Afiliado"
+msgstr "Ažuriraj partnera"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/new.php:7
 msgid "New Affiliate"
-msgstr "Novo Afiliado"
+msgstr "Novi Brand ambasador"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/new.php:13
 #, fuzzy
 msgid ""
@@ -841,140 +758,121 @@ msgid ""
 "to a user account, so if the user account for the affiliate does not yet "
 "exist, <a href=\"%s\" target=\"_blank\">create one</a>."
 msgstr ""
-"Use essa tela para registrar novos afiliados. Cada afiliado está ligada "
-"diretamente a uma conta de usuário, por isso, se a conta de usuário para o "
-"afiliado ainda não existe, <a href=\"%s\" target=\"_blank\">crie uma</a>."
+"Koristi ovo sučelje za registraciju novog Brand ambasadora. Svaki Brand "
+"ambasador je vezan direktno uz korisnički račun, pa ako korisnički račun još "
+"ne postoji, <a href=\"%s\" target=\"_blank\">kreiraj jedan</a>."
 
-# @ affiliate-wp
 #: includes/admin/affiliates/new.php:20
 msgid "User"
-msgstr "Usuário"
+msgstr "Korisnik"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/new.php:28
 msgid ""
 "Begin typing the name of the affiliate to perform a search for their "
 "associated user account."
-msgstr "Comece digitando o nome do afiliado para buscar pela conta do afiliado"
+msgstr ""
+"Započni unositi ime Brand ambasadora kako pronašao korisnički račun asociran "
+"s njim."
 
-# @ affiliate-wp
 #: includes/admin/affiliates/new.php:36
+#, fuzzy
 msgid "Affiliate Status"
-msgstr "Status do Afiliado"
+msgstr "Stopa provizije:"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/new.php:45
 #, fuzzy
 msgid "The status assigned to the affiliate&#8217;s account."
-msgstr "O status atribuído a conta do afiliado."
+msgstr "Nemaš ovlasti brisati Brand ambasador račune"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/new.php:97
+#, fuzzy
 msgid "Welcome Email"
-msgstr "Email de boas-vindas"
+msgstr "Email"
 
 #: includes/admin/affiliates/new.php:103
 msgid "Send welcome email after registering affiliate?"
-msgstr "Enviar email de boas-vindas após registrar afiliado"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/affiliates/new.php:117
 msgid "Add Affiliate"
-msgstr "Adicionar Afiliado"
+msgstr "Dodaj partnera"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/review.php:11
 msgid "Review Affiliate"
-msgstr "Revisar Afiliado"
+msgstr "Pregled partnera"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/review.php:11
 msgid "Go Back"
-msgstr "Voltar"
+msgstr "Vrati nazad"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/review.php:46 templates/register.php:65
 msgid "Email Address"
-msgstr "E-mail"
+msgstr "Email adresa"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/review.php:59 templates/register.php:74
 #: templates/register.php:75
 msgid "Website URL"
-msgstr "URL de seu Website"
+msgstr "URL Internet stranice"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/review.php:63
 #, fuzzy
 msgid "Affiliate&#8217;s Website URL"
-msgstr "URL Site Afiliados"
+msgstr "URL Internet stranice Brand ambasadora"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/review.php:73
 msgid "Promotion Method"
-msgstr "Métod de Promoção"
+msgstr "Metoda promocije"
 
 #: includes/admin/affiliates/review.php:91
 msgid "Leave blank if approving this affiliate"
-msgstr "Deixe em branco para aprovar este afiliado"
+msgstr ""
 
 #: includes/admin/affiliates/screen-options.php:24
 msgid "Number of affiliates per page:"
-msgstr "Número de afiliados por página"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/affiliates/view.php:7
 msgid "Affiliate: #%d %s"
-msgstr "Afiliado: #%d %s"
+msgstr "Partner: #%d %s"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/view.php:18
 msgid "Total earnings"
-msgstr "Total de ganhos"
+msgstr "Ukupna zarada"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/view.php:19
 msgid "Total unpaid earnings"
-msgstr "Total de ganhos não pagos"
+msgstr "Ukupne neisplaćene zarade"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/view.php:20
 msgid "Total paid referrals"
-msgstr "Total de indicações pagas"
+msgstr "Ukupno plaćene preporuke"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/view.php:21
 msgid "Total unpaid referrals"
-msgstr "Total de indicações não pagas"
+msgstr "Ukupno neisplaćene preporuke"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/view.php:22
 msgid "Total pending referrals"
-msgstr "Total indicações pendentes"
+msgstr "Ukupne preporuke u obradi"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/view.php:23
 msgid "Total rejected referrals"
-msgstr "Total indicações rejeitadas"
+msgstr "Ukupno odbijene preporuke"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/view.php:24
 msgid "Total visits"
-msgstr "Total de visitas"
+msgstr "Ukupno posjeta"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/view.php:65
 #, fuzzy
 msgid "Recent Payouts"
-msgstr "Indicações recentes"
+msgstr "Nedavne preporuke"
 
 #: includes/admin/class-addon-updater.php:189
 msgid ""
 "There is a new version of %1$s available. <a target=\"_blank\" class="
 "\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
 msgstr ""
-"Existe uma nova versão de %1$s disponível. <a target=\"_blank\" class="
-"\"thickbox\" href=\"%2$s\">Ver os detalhes da versão %3$s</a>."
 
 #: includes/admin/class-addon-updater.php:196
 msgid ""
@@ -982,18 +880,13 @@ msgid ""
 "\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a href=\"%4$s"
 "\">update now</a>."
 msgstr ""
-"Existe uma nova versão do %1$s disponível. <a target=\"_blank\" class="
-"\"thickbox\" href=\"%2$s\">Veja detalhes da versão %3$s </a> or <a href="
-"\"%4$s\">atualizar agora</a>."
 
-# @ affiliate-wp
 #: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:25
 #: includes/admin/referrals/contextual-help.php:37
 #: includes/admin/visits/contextual-help.php:37
 msgid "Overview"
-msgstr "Visão geral"
+msgstr "Ukupan pregled"
 
-# @ affiliate-wp
 #: includes/admin/class-menu.php:14
 #: includes/admin/payouts/class-list-table.php:151
 #: includes/admin/referrals/referrals.php:37
@@ -1002,33 +895,29 @@ msgstr "Visão geral"
 #: includes/admin/tools/tools.php:142 templates/dashboard-tab-referrals.php:3
 #: templates/dashboard.php:74
 msgid "Referrals"
-msgstr "Indicações"
+msgstr "Preporuke"
 
 #: includes/admin/class-menu.php:15 includes/admin/payouts/payouts.php:37
 #: templates/dashboard.php:80
 msgid "Payouts"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/class-menu.php:17 includes/admin/creatives/creatives.php:43
 #: templates/dashboard-tab-creatives.php:3 templates/dashboard.php:92
 msgid "Creatives"
-msgstr "Banners / Links"
+msgstr "Banneri"
 
-# @ affiliate-wp
 #: includes/admin/class-menu.php:19
 msgid "Tools"
-msgstr "Ferramentas"
+msgstr "Alati"
 
-# @ affiliate-wp
 #: includes/admin/class-menu.php:20 templates/dashboard.php:98
 msgid "Settings"
-msgstr "Configurações"
+msgstr "Postavke"
 
-# @ affiliate-wp
 #: includes/admin/class-menu.php:21 includes/admin/tools/migration.php:17
 msgid "AffiliateWP Migration"
-msgstr "Migração AffiliateWP"
+msgstr "Migracija AffiliateWP"
 
 #: includes/admin/class-menu.php:22
 msgid "Add-ons"
@@ -1040,144 +929,115 @@ msgid ""
 "If you are using AffiliateWP without any integrations, you may disregard "
 "this message."
 msgstr ""
-"Atualmente não há <a href=\"%s\">integrações</a> com AffiliateWP  "
-"habilitado. Se você estiver usando o AffiliateWP sem qualquer integrações, "
-"você pode ignorar esta mensagem."
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:46
 #: includes/admin/settings/class-settings.php:283
 msgid "Settings updated."
-msgstr "Configurações atualizadas."
+msgstr "Postavke ažurirane."
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:56
 msgid "Affiliate added successfully"
-msgstr "Afiliado adicionado com sucesso"
+msgstr "Brand ambasador uspješno dodan"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:62
 #, fuzzy
 msgid "Affiliate wasn&#8217;t added, please try again."
-msgstr "Afiliado não adicionado, por favor, tente novamente"
+msgstr "Brand ambasador nije dodan, molimo pokušaj ponovno."
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:69
 msgid "Affiliate updated successfully"
-msgstr "Afiliado atualizado com sucesso"
+msgstr "Brand ambasador uspješno ažuriran"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:71
 msgid "<a href=\"%s\">Back to Affiliates</a>"
-msgstr "<a href=\"%s\">Volte para Afiliados</a>"
+msgstr "<a href=\"%s\">Nazad na Brand ambasadore</a>"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:77
 msgid "Affiliate update failed, please try again"
-msgstr "Afiliado não atualizado, por favor, tente novamente"
+msgstr "Ažuriranje Brand ambasadora nije uspjelo, molimo pokušaj ponovno"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:84
 msgid "Affiliate account(s) deleted successfully"
-msgstr "Conta(s) de afiliado deletada com sucesso"
+msgstr "Račun Brand ambasadora uspješno izbrisan"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:90
 msgid "Affiliate deletion failed, please try again"
-msgstr "Falha na deleção de conta(s) de afiliado, por favor, tente novamente"
+msgstr "Brisanje Brand ambasadora nije uspjelo, molimo pokušaj ponovno"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:97
 msgid "Affiliate account activated"
-msgstr "Conta de afiliado ativada"
+msgstr "Brand ambasador račun aktiviran"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:103
 msgid "Affiliate account deactivated"
-msgstr "Conta de afiliado desativada"
+msgstr "Brand ambasador račun deaktiviran"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:109
 msgid "Affiliate request was accepted"
-msgstr "Pedido de afiliação aceita"
+msgstr "Brand ambasador zahtjev odobren"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:115
 msgid "Affiliate request was rejected"
-msgstr "Pedido de afiliação rejeitada"
+msgstr "Brand ambasador zahtjev odbijen"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:121
 msgid "Affiliate stats have been recounted!"
-msgstr "Estatísticas de Afiliados foram recontada!"
+msgstr "Izvješća Brand ambasadora su osvježena!"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:128
 msgid "Referral added successfully"
-msgstr "Indicação adicionada com sucesso"
+msgstr "Preporuka uspješno dodana"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:134
 msgid "Referral updated successfully"
-msgstr "Indicação atualizada com sucesso"
+msgstr "Preporuka uspješno ažurirana"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:140
 msgid "Referral update failed, please try again"
-msgstr "Falha na atualização da indicação, tente novamente"
+msgstr "Ažuriranje preporuke nije uspjelo, molimo pokušaj ponovno"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:146
 msgid "Referral deleted successfully"
-msgstr "Indicação deletada com sucesso"
+msgstr "Preporuka uspješno izbrisana"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:152
 msgid "Referral deletion failed, please try again"
-msgstr "Falha ao deletar indicação, tente novamente"
+msgstr "Brisanje preporuke nije uspjelo, molimo pokušaj ponovno"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:160
 msgid "Creative updated successfully"
-msgstr "Campanha atualizada com sucesso"
+msgstr "Banner uspješno ažuriran"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:162
 msgid "<a href=\"%s\">Back to Creatives</a>"
-msgstr "<a href=\"%s\">Voltar para Banners / Links</a>"
+msgstr "<a href=\"%s\">Nazad na bannere</a>"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:168
 msgid "Creative added successfully"
-msgstr "Campanha adicionada com sucesso"
+msgstr "Banner uspješno dodan"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:174
 msgid "Creative deleted successfully"
-msgstr "Campanha deletada com sucesso"
+msgstr "Banner uspješno izbrisan"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:180
 msgid "Creative activated"
-msgstr "Campanha ativada"
+msgstr "Banner aktiviran"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:186
 msgid "Creative deactivated"
-msgstr "Campanha desativada"
+msgstr "Banner deaktiviran"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:193
 msgid "Settings successfully imported"
-msgstr "Configurações importadas com sucesso"
+msgstr "Postavke uspješno uvezene"
 
-# @ affiliate-wp
 #: includes/admin/class-notices.php:201
 #, fuzzy
 msgid ""
 "Your license key expired on %s. Please <a href=\"%s\" target=\"_blank"
 "\">renew your license key</a>."
-msgstr "Concordo com os <a href=\"%s\" target=\"_blank\">Termos de Uso</a>"
+msgstr "Prihvaćam <a href=\"%s\" target=\"_blank\">uvjete sudjelovanja</a>"
 
 #: includes/admin/class-notices.php:213
 msgid ""
@@ -1228,34 +1088,26 @@ msgid ""
 "Your license key for AffiliateWP has expired. Please renew your license to "
 "re-enable automatic updates."
 msgstr ""
-"Sua chave de licença para o plugin AffiliateWP expirou. Renove sua licença "
-"para re-habilitar as atualizações automáticas."
 
 #: includes/admin/class-notices.php:339
 msgid ""
 "Please <a href=\"%s\">enter and activate</a> your license key for "
 "AffiliateWP to enable automatic updates."
 msgstr ""
-"Por favor, <a href=\"%s\">insira e ative</a> sua chave de licença para o "
-"plugin AffiliateWP habilitar as atualizações automáticas."
 
-# @ affiliate-wp
 #: includes/admin/creatives/actions.php:16
 #: includes/admin/creatives/actions.php:80
 msgid "You do not have permission to manage creatives"
-msgstr "Você não tem permissão para gerenciar as campanhas"
+msgstr "Nemaš ovlasti za upravljanje bannerima"
 
-# @ affiliate-wp
 #: includes/admin/creatives/actions.php:44
 msgid "You do not have permission to delete a creative"
-msgstr "Você não tem permissão para deletar a campanha"
+msgstr "Nemaš ovlasti za brisanje bannera"
 
-# @ affiliate-wp
 #: includes/admin/creatives/actions.php:52
 msgid "No creative IDs specified for deletion"
-msgstr "Nenhum ID de campanha especificado para deletar"
+msgstr "Niti jedan ID bannera nije označen za brisanje"
 
-# @ affiliate-wp
 #: includes/admin/creatives/class-list-table.php:116
 #: includes/admin/creatives/edit.php:43 includes/admin/creatives/new.php:42
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:67
@@ -1263,46 +1115,38 @@ msgstr "Nenhum ID de campanha especificado para deletar"
 msgid "URL"
 msgstr "URL"
 
-# @ affiliate-wp
 #: includes/admin/creatives/class-list-table.php:117
 msgid "Shortcode"
-msgstr "Shortcode"
+msgstr "Kratica (shortcode)"
 
-# @ affiliate-wp
 #: includes/admin/creatives/class-list-table.php:119
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:69
 #: includes/admin/payouts/class-list-table.php:155
 #: includes/admin/referrals/class-list-table.php:173
 msgid "Actions"
-msgstr "Ações"
+msgstr "Akcije"
 
-# @ affiliate-wp
 #: includes/admin/creatives/class-list-table.php:264
 msgid "No creatives found."
-msgstr "Não foram encontrados"
+msgstr "Niti jedan banner nije pronađen."
 
-# @ affiliate-wp
 #: includes/admin/creatives/delete.php:10
 #: includes/admin/creatives/delete.php:33
 msgid "Delete Creative"
-msgstr "Deletar Campanha"
+msgstr "Izbriši banner"
 
-# @ affiliate-wp
 #: includes/admin/creatives/delete.php:16
 msgid "Are you sure you want to delete this creative?"
-msgstr "Você tem certeza que deseja deletar essa campanha?"
+msgstr "Jesi siguran da želiš izbrisati ovaj banner?"
 
-# @ affiliate-wp
 #: includes/admin/creatives/edit.php:6
 msgid "Edit Creative"
-msgstr "Editar Campanha"
+msgstr "Uredi banner"
 
-# @ affiliate-wp
 #: includes/admin/creatives/edit.php:22 includes/admin/creatives/new.php:21
 msgid "The name of this creative. For your identification only."
-msgstr "O Nome dessa campanha. Para sua identificação apenas."
+msgstr "Naziv ovog bannera. Samo za tvoju identifikaciju."
 
-# @ affiliate-wp
 #: includes/admin/creatives/edit.php:30 includes/admin/creatives/new.php:29
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:71
 #: includes/admin/referrals/class-list-table.php:171
@@ -1311,103 +1155,89 @@ msgstr "O Nome dessa campanha. Para sua identificação apenas."
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:77
 #: templates/dashboard-tab-referrals.php:25
 msgid "Description"
-msgstr "Descrição"
+msgstr "Opis"
 
 #: includes/admin/creatives/edit.php:35 includes/admin/creatives/new.php:34
 msgid ""
 "An optional description for this creative. This is displayed below the "
 "creative for affiliates."
 msgstr ""
-"Um descrição opcional para essa campanha. Isso será exibido abaixo da "
-"campanha para os afiliados."
 
 #: includes/admin/creatives/edit.php:48 includes/admin/creatives/new.php:47
+#, fuzzy
 msgid ""
 "Where the creative should link to. The affiliate&#8217;s referral ID will be "
 "automatically appended."
 msgstr ""
+"Što bi ovaj banner trebao linkati. ID preporuke će biti dodan automatski."
 
-# @ affiliate-wp
 #: includes/admin/creatives/edit.php:56 includes/admin/creatives/new.php:55
 msgid "Text"
-msgstr "Texto"
+msgstr "Tekst"
 
-# @ affiliate-wp
 #: includes/admin/creatives/edit.php:61 includes/admin/creatives/new.php:60
 msgid "Text for this creative."
-msgstr "Texto para essa campanha."
+msgstr "Tekst za ovaj banner."
 
-# @ affiliate-wp
 #: includes/admin/creatives/edit.php:69 includes/admin/creatives/new.php:68
 msgid "Image"
-msgstr "Imagem"
+msgstr "Slika"
 
-# @ affiliate-wp
 #: includes/admin/creatives/edit.php:75
 msgid ""
 "Select your image. You can also enter an image URL if your image is hosted "
 "elsewhere."
 msgstr ""
-"Selecione uma imagem. Você também pode inserir  a URL da imagem, se sua "
-"imagem está hospedada em outro lugar."
+"Označi svoju sliku. Također možeš unijeti URL slike ako ju imaš negdje "
+"pohranjenu."
 
-# @ affiliate-wp
 #: includes/admin/creatives/edit.php:102 includes/admin/creatives/new.php:92
 msgid "Select the status of the creative."
-msgstr "Selecione o status da campanha."
+msgstr "Označi status bannera."
 
-# @ affiliate-wp
 #: includes/admin/creatives/edit.php:113
 msgid "Update Creative"
-msgstr "Atualizar Campanha"
+msgstr "Ažuriraj banner"
 
-# @ affiliate-wp
 #: includes/admin/creatives/new.php:3
 msgid "New Creative"
-msgstr "Nova Campanha"
+msgstr "Novi banner"
 
-# @ affiliate-wp
 #: includes/admin/creatives/new.php:9
 msgid ""
 "Use this screen to add a new creative, such as a text link or image banner."
 msgstr ""
-"Use essa tela para adicionar uma nova campanha, pode ser um texto para link "
-"ou imagem para banner"
+"Koristi ovaj zaslon kako bi nadodao/la novi banner, kao tekst poveznicu ili "
+"slikovni banner."
 
-# @ affiliate-wp
 #: includes/admin/creatives/new.php:74
 msgid ""
 "Select an image if you would like an image banner. You can also enter an "
 "image URL if your image is hosted elsewhere."
 msgstr ""
-"Selecione uma imagem se você gostaria de usar como banner. Você também pode "
-"colocar o URL de uma imagem que está hospedada em qualquer lugar."
+"Označi sliku ako želiš slikovni banner. Također možeš unijeti URL slike ako "
+"ju imaš negdje pohranjenu ."
 
-# @ affiliate-wp
 #: includes/admin/creatives/new.php:104
 msgid "Add Creative"
-msgstr "Adicionar Campanha"
+msgstr "Dodaj banner"
 
 #: includes/admin/creatives/screen-options.php:24
 msgid "Number of creatives per page:"
-msgstr "Número de campanhas por página:"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:39
 msgid "Most Valuable Affiliates"
-msgstr "Afiliados mais valiosos"
+msgstr "Najbolji Brand ambasadori"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:94
 msgid "No registered affiliates"
-msgstr "Afiliados não registrados"
+msgstr "Nema registriranih partnera"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:33
 msgid "Recent Referral Visits"
-msgstr "Visitas de indicações mais recentes"
+msgstr "Zadnje posjete po preporukama"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:66
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:69
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:67
@@ -1419,33 +1249,29 @@ msgstr "Visitas de indicações mais recentes"
 #: includes/integrations/class-lifterlms.php:472
 #: includes/integrations/class-memberpress.php:259
 msgid "Affiliate"
-msgstr "Afiliado"
+msgstr "Brand ambasador (Partner)"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:68
 #: includes/admin/visits/class-list-table.php:108
 #: includes/admin/visits/visits.php:50 templates/dashboard-tab-stats.php:59
 #: templates/dashboard-tab-visits.php:27
 msgid "Converted"
-msgstr "Convertido"
+msgstr "Konvertirano"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:81
 #: templates/dashboard-tab-visits.php:45
 #, fuzzy
 msgid "Visit converted: %s"
-msgstr "Não convertidos"
+msgstr "Konvertirano"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:87
 msgid "No referral visits recorded yet"
-msgstr "Ainda sem visitas de indicações registrada"
+msgstr "Niti jedan posjet po preporuci nije zabilježen"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:33
 msgid "Recent Referrals"
-msgstr "Indicações recentes"
+msgstr "Nedavne preporuke"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:70
 #: includes/admin/payouts/view.php:61
 #: includes/admin/referrals/class-list-table.php:168
@@ -1456,85 +1282,71 @@ msgstr "Indicações recentes"
 #: templates/dashboard-tab-payouts.php:25
 #: templates/dashboard-tab-referrals.php:24
 msgid "Amount"
-msgstr "Quantidade"
+msgstr "Iznos"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:87
 msgid "No referrals recorded yet"
-msgstr "Ainda não há indicações de afiliados"
+msgstr "Nema zabilježenih preporuka"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:33
 msgid "Latest Affiliate Registrations"
-msgstr "Últimos afiliados cadastrados"
+msgstr "Zadnje registracije"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:87
 msgid "View Report"
-msgstr "Ver Relatório"
+msgstr "Vidi izvješće"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:95
 msgid "No affiliate registrations yet"
-msgstr "Ainda não há cadastro de afiliados"
+msgstr "Nema registriranih partnera"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:35
 msgid "Totals"
-msgstr "Total"
+msgstr "Ukupno"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:54
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
 #: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
 msgid "Paid Earnings"
-msgstr "Rendimentos pagos"
+msgstr "Plaćene provizije"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:55
 msgid "Paid Earnings This Month"
-msgstr "Rendimentos pagos este mês"
+msgstr "Plaćene provizije ovaj mjesec"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:56
 msgid "Paid Earnings Today"
-msgstr "Rendimentos pagos hoje"
+msgstr "Plaćene provizije danas"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:81
 msgid "Unpaid Referrals This Month"
-msgstr "Indicações não pagas este mês"
+msgstr "Neplaćene preporuke ovaj mjesec"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:82
 msgid "Unpaid Referrals Today"
-msgstr "Indicações não pagas hoje"
+msgstr "Neplaćene preporuke danas"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:105
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:57
 #: templates/dashboard-tab-stats.php:33
 msgid "Unpaid Earnings"
-msgstr "Rendimentos não pagos"
+msgstr "Neplaćene provizije"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:106
 msgid "Unpaid Earnings This Month"
-msgstr "Rendimentos não pagos este mês"
+msgstr "Neplaćene provizije ovaj mjesec"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:107
 msgid "Unpaid Earnings Today"
-msgstr "Rendimentos não pagos hoje"
+msgstr "Neplaćene provizije danas"
 
-# @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:130
 #: includes/admin/referrals/class-list-table.php:149
 #: includes/admin/referrals/edit.php:139 includes/admin/referrals/new.php:102
 #: includes/admin/tools/tools.php:309 includes/referral-functions.php:62
 msgid "Paid"
-msgstr "Pago"
+msgstr "Plaćeno"
 
 #: includes/admin/payouts/class-list-table.php:131
 #: includes/payout-functions.php:134
@@ -1546,46 +1358,42 @@ msgstr ""
 msgid "Payout ID"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:152
 #: includes/admin/payouts/view.php:73 templates/dashboard-tab-payouts.php:26
 #, fuzzy
 msgid "Payout Method"
-msgstr "Métod de Promoção"
+msgstr "Metoda promocije"
 
 #: includes/admin/payouts/class-list-table.php:330
 #: includes/admin/payouts/view.php:77
 msgid "(none)"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:386
 #, fuzzy
 msgid "View"
-msgstr "Ver %s"
+msgstr "Pogled %s"
 
 #: includes/admin/payouts/class-list-table.php:396
 #: includes/admin/payouts/class-list-table.php:490
 msgid "Retry Payment"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:477
 #, fuzzy
 msgid "No payouts found."
-msgstr "Nenhuma visita encontrada."
+msgstr "Nema zabilježenih posjeta."
 
-# @ affiliate-wp
 #: includes/admin/payouts/payouts.php:39
 #: includes/admin/reports/class-reports-admin.php:60
 #, fuzzy
 msgid "Manage Referrals"
-msgstr "Indicações não pagas"
+msgstr "Neplaćene preporuke"
 
 #: includes/admin/payouts/screen-options.php:32
 #, fuzzy
 msgid "Number of payouts per page:"
-msgstr "Número de visitas por página:"
+msgstr "Nema zabilježenih preporuka"
 
 #: includes/admin/payouts/view.php:16
 msgid "Payout: #%d"
@@ -1595,45 +1403,38 @@ msgstr ""
 msgid "Payout Date"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/payouts/view.php:137
 #, fuzzy
 msgid "Referrals Paid"
-msgstr "Indicações"
+msgstr "Preporuke"
 
-# @ affiliate-wp
 #: includes/admin/plugins.php:27
-#, fuzzy
 msgid "General Settings"
-msgstr "Configurações de Indicação"
+msgstr "Opće postavke"
 
 #: includes/admin/plugins.php:53
 msgid "Changelog"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/referrals/actions.php:16
 #: includes/admin/referrals/actions.php:47
 #: includes/admin/referrals/actions.php:78
 msgid "You do not have permission to manage referrals"
-msgstr "Você não tem permissão para gerenciar indicações"
+msgstr "Nemaš dozvolu za upravljanje preporukama"
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:150
 #: includes/admin/referrals/edit.php:138 includes/admin/referrals/new.php:101
 #: includes/admin/tools/tools.php:310 includes/referral-functions.php:63
 msgid "Unpaid"
-msgstr "Não Pago"
+msgstr "Neplaćeno"
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:170
 #: includes/admin/referrals/edit.php:107 includes/admin/referrals/new.php:70
 #: includes/admin/tools/export/class-export-referrals.php:68
 #: includes/integrations/class-lifterlms.php:477
 msgid "Reference"
-msgstr "Indicação"
+msgstr "Reference"
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:172
 #: includes/admin/referrals/edit.php:82 includes/admin/referrals/new.php:45
 #: includes/admin/tools/export/class-export-referrals.php:71
@@ -1643,201 +1444,182 @@ msgstr "Indicação"
 #: templates/dashboard-tab-referrals.php:27
 #: templates/dashboard-tab-visits.php:28
 msgid "Date"
-msgstr "Data"
+msgstr "Datum"
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:311
 #: includes/admin/referrals/class-list-table.php:482
 msgid "Mark as Unpaid"
-msgstr "Marcar como Não Pago"
+msgstr "Označi kao neplaćeno"
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:327
 #: includes/admin/referrals/class-list-table.php:481
 msgid "Mark as Paid"
-msgstr "Marcar como Pago"
+msgstr "Označi kao plaćeno"
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:414
 msgid "No referrals found."
-msgstr "Sem indicações encontradas."
+msgstr "Niti jedna preporuka nije nađena."
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:438
 msgid "Bulk Actions"
-msgstr "Ação em massa"
+msgstr "Masovne akcije"
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:450
 msgid "Apply"
-msgstr "Aplicar"
+msgstr "Primjeni"
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:459
 #: includes/admin/referrals/referrals.php:52
 #: includes/admin/tools/tools.php:305 includes/admin/visits/visits.php:44
 #: includes/class-graph.php:390
 msgid "From - mm/dd/yyyy"
-msgstr "De - mm/dd/yyyy"
+msgstr "Od - mm/dd/yyyy"
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:460
 #: includes/admin/referrals/referrals.php:53
 #: includes/admin/tools/tools.php:306 includes/admin/visits/visits.php:45
 #: includes/class-graph.php:392
 msgid "To - mm/dd/yyyy"
-msgstr "Até - mm/dd/yyyy"
+msgstr "Do - mm/dd/yyyy"
 
-# @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:464
 #: includes/admin/visits/visits.php:53 includes/class-graph.php:397
 msgid "Filter"
-msgstr "Filtrar"
+msgstr "Filtriraj"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:29
 #: includes/admin/visits/contextual-help.php:29
 msgid "For more information:"
-msgstr "Para mais informações:"
+msgstr "Za više informacija:"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:30
 #: includes/admin/visits/contextual-help.php:30
 msgid "Visit the <a href=\"%s\">documentation</a> on the AffiliateWP website."
 msgstr ""
-"Acesse a <a href=\"%s\">documentação</a> no site do plugin AffiliateWP."
+"Pogledaj <a href=\"%s\">dokumentaciju</a> na AffiliateWP Internet stranici."
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:31
 #: includes/admin/visits/contextual-help.php:31
 msgid "<a href=\"%s\">Post an issue</a> on <a href=\"%s\">GitHub</a>."
-msgstr "<a href=\"%s\">Publicar um problema</a> no <a href=\"%s\">GitHub.</a>"
+msgstr "<a href=\"%s\">Objavi problem</a> on <a href=\"%s\">GitHub</a>."
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:39
 #, fuzzy
 msgid "This screen provides access to your site&#8217;s referral history."
-msgstr "Esta tela fornece acesso ao histórico de indicações do seu site."
+msgstr "Ovo sučelje omogućuje pristup povijesti preporuka za tvoju stranicu."
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:40
 msgid ""
 "<strong>Reference</strong>: this refers to the order number (or similar) "
 "that created this referral."
 msgstr ""
-"<strong>Referência:</strong> refere-se ao número de ordem (ou similar) que "
-"criou esta referência."
+"<strong>Referenca</strong> - ovo se odnosi na broj narudžbe (ili slično) "
+"koju je kreirala ova preporuka."
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:41
 msgid "Referral statuses:"
-msgstr "Status de indicação:"
+msgstr "Status preporuka:"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:43
 msgid ""
 "<strong>Paid</strong> - this is a referral that has been paid to the "
 "affiliate"
-msgstr ""
-"<strong>Pago</strong> - esta é uma indicação  que já foi paga ao afiliado."
+msgstr "<strong>Plaćeno</strong> - ovo je preporuka koja je plaćena partneru"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:44
 msgid ""
 "<strong>Unpaid</strong> - this is a referral that has been accepted but not "
 "yet paid to the affiliate"
 msgstr ""
-"<strong>Não Pago</strong> - esta é uma referência que foi aceita mas ainda "
-"não paga ao afiliado."
+"<strong>Neplaćeno</strong> - ovo je preporuka koja je prihvaćena ali još "
+"nije plaćena partneru"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:45
 msgid ""
 "<strong>Pending</strong> - this is a referral that is waiting to be accepted"
-msgstr ""
-"<strong>Pendente -</strong> esta é uma referência que está esperando para "
-"ser aceita."
+msgstr "<strong>U obradi</strong> - ovo je preporuka koja čeka na odobrenje"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:46
 msgid ""
 "<strong>Rejected</strong> - this is a referral that has been rejected and "
 "will not be paid to the affiliate"
 msgstr ""
-"<strong>Rejeitado</strong> - esta é uma indicação que foi rejeitada e não "
-"será paga ao afiliado."
+"<strong>Odbijeno</strong> - ovo je preporuka koje je odbijena i neće biti "
+"plaćena partneru"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:52
 msgid "Searching Referrals"
-msgstr "Pesquisando indicações"
+msgstr "Traženje preporuka"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:54
 msgid "Referrals can be searched in several different ways:"
-msgstr "Indicações podem ser pesquisadas de várias maneiras:"
+msgstr "Preporuke mogu biti pretražene u nekoliko različitih načina:"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:56
 #, fuzzy
 msgid "You can enter the referral&#8217;s ID number"
-msgstr "Você pode inserir o ID da referência"
+msgstr "Možeš unijeti ID preporuke"
 
 #: includes/admin/referrals/contextual-help.php:57
+#, fuzzy
 msgid "You can enter the referral reference prefixed by &#8220;ref:&#8221;"
-msgstr ""
+msgstr "Možeš unijeti referencu preporuke s prefiksom 'ref:'"
 
 #: includes/admin/referrals/contextual-help.php:58
+#, fuzzy
 msgid "You can enter the referral context prefixed by &#8220;context:&#8221;"
-msgstr ""
+msgstr "Možeš unijeti kontekst preporuke s prefiksom 'context:'"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:59
 #: includes/admin/visits/contextual-help.php:58
 #, fuzzy
 msgid ""
 "You can enter the affiliate&#8217;s ID number prefixed by &#8220;affiliate:"
 "&#8221;"
-msgstr "Você pode inserir o ID de afiliado precedido de 'affiliate:'"
+msgstr "Možeš unijeti ID Brand ambasadora s prefiksom 'affiliate:'"
 
 #: includes/admin/referrals/contextual-help.php:60
 #: includes/admin/visits/contextual-help.php:59
 #, fuzzy
 msgid "You can enter a URL campaign prefixed by &#8220;campaign:&#8221;"
-msgstr "Você pode inserir a URL da campanha precedido de 'campaign:'"
+msgstr "Možeš unijeti kontekst preporuke s prefiksom 'context:'"
 
-# @ affiliate-wp
 #: includes/admin/referrals/contextual-help.php:66
 msgid "Exporting Referrals"
-msgstr "Exportar Indicações"
+msgstr "Izvoz preporuka"
 
 #: includes/admin/referrals/contextual-help.php:68
+#, fuzzy
 msgid ""
 "Referrals can be exported directly to a CSV file in order to make it easier "
 "for your own accounting needs and for you to payout your affiliates&#8217;s "
 "earnings."
 msgstr ""
+"Preporuke mogu biti izvezene direktno u CSV datoteku kako bi se olakšalo "
+"vođenje računovodstva i i isplate zarade Brand ambasadorima."
 
 #: includes/admin/referrals/contextual-help.php:69
+#, fuzzy
 msgid ""
 "The CSV file generated is structured properly for PayPal&#8217;s Mass "
 "Payment system so you can easily payout all of your affiliates at once via "
 "PayPal."
 msgstr ""
+"Generirana CSV datoteka je strukturirana za PayPal sistem masovne isplate, "
+"tako da možeš putem PayPal-a jednostavno isplatiti sve svoje Brand "
+"ambasadore odjednom."
 
-# @ affiliate-wp
 #: includes/admin/referrals/edit.php:16
+#, fuzzy
 msgid "Edit Referral"
-msgstr "Editar Indicação"
+msgstr "Dodaj preporuku"
 
-# @ affiliate-wp
 #: includes/admin/referrals/edit.php:33
 #, fuzzy
 msgid ""
 "The affiliate&#8217;s ID this referral belongs to. This value cannot be "
 "changed."
-msgstr ""
-"ID do afiliado pertence a esta indicação. Esse valor não pode ser alterado."
+msgstr "Korisnički Brand ambasadora ID. Nemože biti naknadno promjenjen."
 
 #. translators: 1: View payout link, 2: payout amount
 #: includes/admin/referrals/edit.php:49
@@ -1849,140 +1631,132 @@ msgid ""
 "The referral amount cannot be changed once it has been included in a payout."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/referrals/edit.php:73 includes/admin/referrals/new.php:37
 msgid "The amount of the referral, such as 15."
-msgstr ""
+msgstr "Iznos preporuke, npr. 15."
 
-# @ affiliate-wp
 #: includes/admin/referrals/edit.php:99 includes/admin/referrals/new.php:62
 msgid "Enter a description for this referral."
-msgstr "Insira uma descrição para essa indicação."
+msgstr "Unesi opis preporuke."
 
-# @ affiliate-wp
 #: includes/admin/referrals/edit.php:112 includes/admin/referrals/new.php:75
 msgid ""
 "Enter a reference for this referral (optional). Usually this would be the "
 "transaction ID of the associated purchase."
 msgstr ""
+"Unesi referencu za ovu preporuku (neobavezno). Ovo je ID transakcije "
+"povezane kupnje."
 
-# @ affiliate-wp
 #: includes/admin/referrals/edit.php:120 includes/admin/referrals/new.php:83
 #: includes/admin/tools/export/class-export-referrals.php:69
 msgid "Context"
-msgstr "Contexto"
+msgstr "Kontekts "
 
 #: includes/admin/referrals/edit.php:125
+#, fuzzy
 msgid ""
 "Context for this referral (optional). Usually this is used to help identify "
 "the payment system that was used for the transaction."
 msgstr ""
+"Unesi opis ove preporuke (neobavezno). Ovo se koristi za pomoć u "
+"identifikaciji sustava plaćanja korištenog za transakciju."
 
 #: includes/admin/referrals/edit.php:144
 msgid ""
 "The referral status cannot be changed once it has been included in a payout."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/referrals/edit.php:146 includes/admin/referrals/new.php:106
 msgid "Select the status of the referral."
-msgstr "Selecione um status para a referência."
+msgstr "Označi status preporuke"
 
-# @ affiliate-wp
 #: includes/admin/referrals/edit.php:160
+#, fuzzy
 msgid "Update Referral"
-msgstr "Atualizar Indicação"
+msgstr "Neplaćene preporuke"
 
-# @ affiliate-wp
 #: includes/admin/referrals/new.php:3
 msgid "New Referral"
-msgstr "Nova Referência"
+msgstr "Nova preporuka"
 
-# @ affiliate-wp
 #: includes/admin/referrals/new.php:9
 msgid ""
 "Use this screen to manually create a new referral record for an affiliate."
-msgstr ""
+msgstr "Koristi ovo sučelje za ručno stvaranje nove zabilješke preporuke."
 
-# @ affiliate-wp
 #: includes/admin/referrals/new.php:24
 msgid ""
 "Enter the name of the affiliate or enter a partial name or email to perform "
 "a search."
-msgstr ""
+msgstr "Za pretragu unesi ime Brand ambasadora, dio imena ili email."
 
-# @ affiliate-wp
 #: includes/admin/referrals/new.php:88
 msgid ""
 "Enter a context for this referral (optional). Usually this is used to help "
 "identify the payment system that was used for the transaction."
 msgstr ""
+"Unesi opis ove preporuke (neobavezno). Ovo se koristi za pomoć u "
+"identifikaciji sustava plaćanja korištenog za transakciju."
 
-# @ affiliate-wp
 #: includes/admin/referrals/new.php:118
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:43
 msgid "Add Referral"
-msgstr "Adicionar Referência"
+msgstr "Dodaj preporuku"
 
-# @ affiliate-wp
 #: includes/admin/referrals/referrals.php:40
 msgid "Generate Payout File"
-msgstr "Gerar arquivo de pagamento"
+msgstr "Generiraj datoteku za isplatu"
 
-# @ affiliate-wp
 #: includes/admin/referrals/referrals.php:41
 msgid "Close"
-msgstr "Fechar"
+msgstr "Zatvori"
 
 #: includes/admin/referrals/referrals.php:54
 msgid "Minimum amount"
-msgstr "﻿Valor Mínimo"
+msgstr "Minimalan iznos"
 
-# @ affiliate-wp
 #: includes/admin/referrals/referrals.php:57
 msgid "Generate CSV File"
-msgstr "Gerar arquivo CSV"
+msgstr "Generiraj CSV datoteku"
 
-# @ affiliate-wp
 #: includes/admin/referrals/referrals.php:58
 msgid ""
 "This will mark all unpaid referrals in this timeframe as paid. To export "
 "referrals with a status other than <em>unpaid</em>, go to the <a href=\"%s"
 "\">Tools &rarr; Export</a> page."
 msgstr ""
+"Ovo će označiti sve neplaćene preporuke u ovom vremenskom periodu kao "
+"plaćene. Za izvoz preporuka sa statusom narudžbi drugačijim od "
+"<em>neplaćeno</em>, idi na <a href=\"%s\">Alati &rarr; Izvoz</a>."
 
 #: includes/admin/referrals/screen-options.php:24
+#, fuzzy
 msgid "Number of referrals per page:"
-msgstr "Número de indicações por página:"
+msgstr "Nema zabilježenih preporuka"
 
-# @ affiliate-wp
 #: includes/admin/reports/class-registrations-graph.php:68
 msgid "Affiliate Registrations"
-msgstr "Registro de Afiliados"
+msgstr "Registracije Brand ambasadora"
 
-# @ affiliate-wp
 #: includes/admin/reports/class-reports-admin.php:69
 #, fuzzy
 msgid "Manage Affiliates"
-msgstr "Adicionando Afiliados"
+msgstr "Dodavanje partnera"
 
-# @ affiliate-wp
 #: includes/admin/reports/class-reports-admin.php:76
 #, fuzzy
 msgid "View Payouts"
-msgstr "Indicações recentes"
+msgstr "Pogled %s"
 
-# @ affiliate-wp
 #: includes/admin/reports/class-reports-admin.php:85
 #, fuzzy
 msgid "Manage Visits"
-msgstr "Pesquisando Visitas"
+msgstr "Pretraga posjeta"
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:38
 #, fuzzy
 msgid "Total Affiliates"
-msgstr "Exportar Afiliados"
+msgstr "Uredi Brand ambasadora"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:41
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:45
@@ -1990,48 +1764,43 @@ msgstr "Exportar Afiliados"
 msgid "All Time"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:68
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:130
 #, fuzzy
 msgid "Affiliate #%d"
-msgstr "Afiliado: #%d %s"
+msgstr "Partner: #%d %s"
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:72
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:81
 #, fuzzy
 msgid "Top Earning Affiliate"
-msgstr "Editar Afiliado"
+msgstr "Uredi Brand ambasadora"
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:96
 #, fuzzy
 msgid "New Affiliates"
-msgstr "Novo Afiliado"
+msgstr "Novi Brand ambasador"
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:134
 #, fuzzy
 msgid "%d referral"
 msgid_plural "%d referrals"
-msgstr[0] "Adicionar Referência"
-msgstr[1] "Adicionar Referência"
+msgstr[0] "Dodaj preporuku"
+msgstr[1] "Dodaj preporuku"
 
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:148
+#, fuzzy
 msgid "Highest Converting Affiliate"
-msgstr ""
+msgstr "Što je novo u AffiliateWP"
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:173
 #, fuzzy
 msgid "Average Payout"
-msgstr "Taxa de Indicação"
+msgstr "Generiraj datoteku za isplatu"
 
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:23
-#, fuzzy
 msgid "Campaigns"
-msgstr "Campanha"
+msgstr ""
 
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:54
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:64
@@ -2055,174 +1824,156 @@ msgstr ""
 msgid "Best Converting Campaign (%s)"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:99
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:112
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:148
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:161
 #: includes/class-graph.php:345
 msgid "Custom"
-msgstr "Personalizado"
+msgstr "Prilagođeno"
 
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:147
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:160
 msgid "Most Active Campaign (%s)"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:81
 #, fuzzy
 msgid "Average Referral Amount"
-msgstr "Taxa de Indicação"
+msgstr "Nova preporuka"
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:38
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:45
 #, fuzzy
 msgid "Total Visits"
-msgstr "Total de visitas"
+msgstr "Ukupno posjeta"
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:61
 msgid "Successful Conversions"
-msgstr "Conversão Bem Sucedida"
+msgstr "Uspješne konverzije"
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:73
 #: templates/dashboard-tab-stats.php:11 templates/dashboard-tab-stats.php:60
 msgid "Conversion Rate"
-msgstr "Taxa de Conversão"
+msgstr "Stopa konverzije"
 
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:110
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:118
 msgid "Top Referrer"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:113
 #, fuzzy
 msgid "Direct Traffic"
-msgstr "Tráfego Direto"
+msgstr "Direktan promet"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:402
 msgid "License Settings"
-msgstr "Configurações de Licença"
+msgstr "Postavke licence"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:407
 msgid "License Key"
-msgstr "Chave de Licença"
+msgstr "Licencni ključ"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:408
 msgid ""
 "Please enter your license key. An active license key is needed for automatic "
 "plugin updates and <a href=\"%s\" target=\"_blank\">support</a>."
 msgstr ""
-"Por favor digite sua chave de licença. Uma chave de licença ativa é "
-"necessária para atualizações automáticas do plugin e <a href=\"%s\" target="
-"\"_blank\">suporte</a>."
+"Molimo unesi svoji jedinstveni licencni ključ. Aktivna licenca je potrebna "
+"za automatsko nadograđivanje plugina i <a href=\"%s\" target=\"_blank"
+"\">korisničku podršku</a>."
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:413
 msgid "Pages"
-msgstr "Páginas"
+msgstr "Stranice"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:418 includes/install.php:32
 msgid "Affiliate Area"
-msgstr "Área Afiliado"
+msgstr "Brand ambasador sučelje"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:419
 msgid "This is the page where affiliates will manage their affiliate account."
-msgstr "Esta é a página onde afiliados irão gerenciar a sua conta de afiliado."
+msgstr "Stranica na kojoj će Brand ambasador upravljati svojim računom."
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:425
 msgid "Terms of Use"
-msgstr "Termos de Uso"
+msgstr "Uvjeti sudjelovanja"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:426
 msgid "Select the page that shows the terms of use for Affiliate Registration"
 msgstr ""
-"Selecione a página que mostra os termos de uso para o registro de afiliados"
+"Označi stranicu na kojoj su napisani uvjeti sudjelovanja u Brand ambasador "
+"(partner) programu"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:432
 msgid "Referral Settings"
-msgstr "Configurações de Indicação"
+msgstr "Postavke linkova preporuka"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:437
 msgid "Referral Variable"
-msgstr "Variável de indicação"
+msgstr "Varijabla jedinstvenog linka"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:438
 msgid "The URL variable for referral URLs. For example: <strong>%s</strong>."
-msgstr ""
-"A variável de URL para URLs de indicação. Por exemplo: <strong>%s</strong>."
+msgstr "URL varijabla za link preporuke. Npr: <strong>%s</strong>."
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:443
+#, fuzzy
 msgid "Default Referral Format"
-msgstr "Formato Padrão de Indicação"
+msgstr "Definiranje stope provizije na razini proizvoda"
 
 #: includes/admin/settings/class-settings.php:444
 msgid ""
 "Show referral URLs to affiliates with either their affiliate ID or Username "
 "appended.<br/> For example: <strong>%s or %s</strong>."
 msgstr ""
-"Mostrar URLs de indicações para os afiliados, mostra com ID de afiliado ou "
-"nome de usuário. <br/> Por exemplo: <strong>%s ou %s.</strong>"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:448
 #: includes/admin/tools/export/class-export.php:69
 msgid "ID"
 msgstr "ID"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:455
+#, fuzzy
 msgid "Pretty Affiliate URLs"
-msgstr "URL de afiliado bonitas"
+msgstr "Jedinstveni linkovi"
 
 #: includes/admin/settings/class-settings.php:456
+#, fuzzy
 msgid ""
 "Show pretty affiliate referrals to affiliates. For example: <strong>%s or "
 "%s</strong>"
-msgstr ""
-"Mostrar URL de indicações bonitas para os afiliados. Por exemplo:<strong>%s "
-"ou %s</strong>"
+msgstr "URL varijabla za link preporuke. Npr: <strong>%s</strong>."
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:460
+#, fuzzy
 msgid "Credit Last Referrer"
-msgstr ""
+msgstr "Dodaj preporuku"
 
 #: includes/admin/settings/class-settings.php:461
 msgid "Credit the last affiliate who referred the customer."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:466
 msgid "Should referrals be based on a percentage or flat rate amounts?"
 msgstr ""
+"Želiš li obračunavati tip provizije u postocima ili kao fiksni iznos u "
+"zadanoj valuti?"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:472
 msgid ""
 "Default referral rate. A percentage if Referral Rate Type is Percentage, a "
 "flat amount otherwise. Rates can be set for each affiliate individually as "
 "well."
 msgstr ""
+"Zadani iznos provizije. Ovisno o tipu provizije izražen u postocima ili kao "
+"fiksni iznos u zadanoj valuti. Stopa provizije može biti i individualno "
+"definirati za svakog Brand ambasadora."
 
 #: includes/admin/settings/class-settings.php:479
 msgid "Exclude Shipping"
-msgstr "Excluir o frete"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:480
 msgid "Should shipping costs be excluded from referral calculations?"
@@ -2230,131 +1981,121 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:484
 msgid "Exclude Tax"
-msgstr "Excluir Impostos"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:485
 msgid "Should taxes be excluded from referral calculations?"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:489
 msgid "Cookie Expiration"
-msgstr "Expiração de Cookie"
+msgstr "Vremenska vrijednost kolačića"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:490
 msgid "How many days should the referral tracking cookie be valid for?"
-msgstr "Por quantos dias o cookie de rastreamento de indicação será válido?"
+msgstr "Koliko dana kolačić za pračenje preporuke vrijedi?"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:496
 msgid "Currency Settings"
-msgstr "Configurações da moeda"
+msgstr "Postavke valute"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:497
 msgid "Configure the currency options"
-msgstr "Configurar as opções de moeda"
+msgstr "Konfiguracija opcija valute"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:501
 #: includes/admin/tools/export/class-export-referrals-payout.php:63
 #: includes/admin/tools/export/class-export-referrals.php:65
 msgid "Currency"
-msgstr "Moeda"
+msgstr "Valuta"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:502
 msgid ""
 "Choose your currency. Note that some payment gateways have currency "
 "restrictions."
 msgstr ""
-"Escolha a sua moeda. Note que alguns gateways de pagamento têm restrições de "
-"moeda."
+"Odaberi valutu. Imaj na umu da neki payment gateways imaju valutna "
+"ograničenja."
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:507
 msgid "Currency Position"
-msgstr "Posição da Moeda"
+msgstr "Pozicija valutnog znaka"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:508
 msgid "Choose the location of the currency sign."
-msgstr "Escolha a localização do sinal de moeda."
+msgstr "Odaberi poziciju znaka valute"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:511
 msgid "Before - $10"
-msgstr "Antes - $10"
+msgstr "Prije - $10"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:512
 msgid "After - 10$"
-msgstr "Depois - 10$"
+msgstr "Poslije - 10$"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:516
 msgid "Thousands Separator"
-msgstr "Separador de Milhares"
+msgstr "Oznaka tisuću"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:517
 msgid "The symbol (usually , or .) to separate thousands"
-msgstr "O símbolo (normalmente , ou .) para separar milhares"
+msgstr "Simbol (uobičajeno , ili .) označava tisuće"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:523
 msgid "Decimal Separator"
-msgstr "Separador Decimal"
+msgstr "Oznaka decimale"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:524
 msgid "The symbol (usually , or .) to separate decimal points"
-msgstr "O símbolo (geralmente, ou.) para separar decimais"
+msgstr "Simbol (uobičajeno , ili .) označava decimale"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:535
 #: includes/admin/settings/display-settings.php:74
 msgid "Integrations"
-msgstr "Integração"
+msgstr "Integracije"
 
 #: includes/admin/settings/class-settings.php:536
+#, fuzzy
 msgid ""
 "Choose the integrations to enable. If you are not using any of these, you "
 "may use the <strong>[affiliate_conversion_script]</strong> shortcode to "
 "track and create referrals. Refer to the <a href=\"%s\" target=\"_blank"
 "\">documentation</a> for help using this."
 msgstr ""
+"Odaberi vrstu integracije. Ako ne koristiš niti jedan od navedenih sustava, "
+"možeš koristiti <strong>[affiliate_conversion_script]</strong> kraticu za "
+"praćenje i kreiranje preporuka. Za pomoć oko korištenja kratice molimo "
+"pogledaj <a href=\"%s\" target=\"_blank\">dokumentaciju</a>."
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:546
+#, fuzzy
 msgid "Disable All Emails"
-msgstr "Desativar Todos Emails"
+msgstr "Ukupne preporuke u obradi"
 
 #: includes/admin/settings/class-settings.php:547
 msgid "Should all email notifications be disabled?"
-msgstr "Todas as notificações de e-mail devem ser desativadas?"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:551
 msgid "Logo"
-msgstr "Logo"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:552
 msgid "Upload or choose a logo to be displayed at the top of emails."
-msgstr "Envie ou escolha uma logo para ser mostrada no topo dos e-mails."
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:556
 msgid "Email Template"
-msgstr "Modelo de Email"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:557
 msgid "Choose a template to use for email messages."
-msgstr "Escolha um modelo a ser usado para mensagens de e-mail."
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:562
+#, fuzzy
 msgid "From Name"
-msgstr "Nome"
+msgstr "Ime i prezime"
 
 #: includes/admin/settings/class-settings.php:563
 msgid ""
@@ -2362,34 +2103,30 @@ msgid ""
 "name."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:568
+#, fuzzy
 msgid "From Email"
-msgstr "E-mail"
+msgstr "Email"
 
 #: includes/admin/settings/class-settings.php:569
 msgid ""
 "Email to send emails from. This will act as the \"from\" and \"reply-to\" "
 "address."
 msgstr ""
-"E-mail para enviar e-mails a partir de. Isto irá funcionar como o endereço  "
-"\"from\" and \"reply-to\"."
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:574
 #, fuzzy
 msgid "Notify Admin"
-msgstr "Notificar administradores"
+msgstr "Obavjesti administratora"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:575
 #, fuzzy
 msgid "Notify site admin of new affiliate registrations?"
-msgstr "Notificar ao administrador novos registros de afiliados?"
+msgstr "Obavjesti administratora o novim registracijama?"
 
 #: includes/admin/settings/class-settings.php:579
 msgid "Registration Email Subject"
-msgstr "Assunto Email de Registro"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:580
 msgid ""
@@ -2397,11 +2134,10 @@ msgid ""
 "affiliates register."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:582
 #: includes/emails/actions.php:41
 msgid "New Affiliate Registration"
-msgstr "Novo Registo de afiliado"
+msgstr "Registracija novog Brand ambasadora"
 
 #: includes/admin/settings/class-settings.php:585
 msgid "Registration Email Content"
@@ -2412,21 +2148,20 @@ msgid ""
 "Enter the email to send when a new affiliate registers. HTML is accepted. "
 "Available template tags:"
 msgstr ""
-"Insira o e-mail para enviar novos registros de afiliados. Tags HTML são "
-"aceitas. Tags disponíveis:"
 
 #: includes/admin/settings/class-settings.php:588
 msgid "A new affiliate has registered on your site, %s"
-msgstr "Um novo afiliado registrou em seu site, %s"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:588
+#, fuzzy
 msgid "Name: "
-msgstr "Nome"
+msgstr "Ime: %s"
 
 #: includes/admin/settings/class-settings.php:591
+#, fuzzy
 msgid "Application Accepted Email Subject"
-msgstr ""
+msgstr "Prijava za Brand ambasador (partner) program prihvaćena"
 
 #: includes/admin/settings/class-settings.php:592
 msgid ""
@@ -2434,15 +2169,15 @@ msgid ""
 "when their account is approved."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:594
 #: includes/emails/actions.php:114
 msgid "Affiliate Application Accepted"
-msgstr ""
+msgstr "Prijava za Brand ambasador (partner) program prihvaćena"
 
 #: includes/admin/settings/class-settings.php:597
+#, fuzzy
 msgid "Application Accepted Email Content"
-msgstr ""
+msgstr "Prijava za Brand ambasador (partner) program prihvaćena"
 
 #: includes/admin/settings/class-settings.php:598
 msgid ""
@@ -2452,21 +2187,31 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:600
 #: includes/admin/settings/class-settings.php:612
+#, fuzzy
 msgid "Congratulations {name}!"
-msgstr "Parabéns {name}!"
+msgstr ""
+"Čestitamo %s!\n"
+"\n"
 
 #: includes/admin/settings/class-settings.php:600
 #: includes/emails/actions.php:119
+#, fuzzy
 msgid "Your affiliate application on %s has been accepted!"
-msgstr "Seu sistema de afiliados no %s foi aceito!"
+msgstr ""
+"Tvoja prijava za Brand ambasador (partner) program na %s je prihvaćena! \n"
+"\n"
 
 #: includes/admin/settings/class-settings.php:600
+#, fuzzy
 msgid "Log into your affiliate area at"
-msgstr "Faça login na sua área de afiliado em"
+msgstr ""
+"Na svoj Brand ambasador račun prijavi se na %s\n"
+"\n"
 
 #: includes/admin/settings/class-settings.php:603
+#, fuzzy
 msgid "New Referral Email Subject"
-msgstr "Assunto Email Nova Indicação"
+msgstr "Nova preporuka"
 
 #: includes/admin/settings/class-settings.php:604
 msgid ""
@@ -2474,16 +2219,15 @@ msgid ""
 "referrals."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:606
 #: includes/emails/actions.php:239
 msgid "Referral Awarded!"
-msgstr "Referência Premiada!"
+msgstr "Preporuka dodjeljena!"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:609
+#, fuzzy
 msgid "New Referral Email Content"
-msgstr "Novo Email de Indicação"
+msgstr "Nova preporuka"
 
 #: includes/admin/settings/class-settings.php:610
 msgid ""
@@ -2492,56 +2236,56 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:612
+#, fuzzy
 msgid "You have been awarded a new referral of"
-msgstr "Você ganhou um novo afiliado de"
+msgstr ""
+"Dodjeljena ti je nova preporuka od %s za %s!\n"
+"\n"
 
 #: includes/admin/settings/class-settings.php:612
+#, fuzzy
 msgid "on %s!"
-msgstr "em %s!"
+msgstr "Verzija %s"
 
 #: includes/admin/settings/class-settings.php:612
+#, fuzzy
 msgid ""
 "Log into your affiliate area to view your earnings or disable these "
 "notifications:"
 msgstr ""
-"Faça login na sua área de afiliados para ver seus ganhos ou desativar essas "
-"notificações:"
+"Za pregled svoje zarade ili isključivanje ovih obavjesti prijavi se na svoj "
+"Brand ambasador račun: %s\n"
+"\n"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:620
 #, fuzzy
 msgid "Allow Affiliate Registration"
-msgstr "Aceitar registro de afiliados"
+msgstr "Dozvoli registraciju Brand ambasadora"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:621
 msgid "Should affiliates be able to register accounts for themselves?"
-msgstr "Afiliados devem ser capazes de registrar-se por conta própria?"
+msgstr "Mogu li Brand ambasadori sami registrirati račun?"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:625
 #, fuzzy
 msgid "Require Approval"
-msgstr "Aprovação necessária"
+msgstr "Zahtjevaj odobrenje"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:626
 msgid ""
 "Require that site admins approve affiliates before they can begin earning "
 "referrals?"
 msgstr ""
-"Exigem que os administradores do site aprovem o afiliado antes dele começar "
-"a ganhar indicações?"
+"Zahtjevaj od administratora da odobri Brand ambasadora prije nego može "
+"početi sudjelovati u programu?"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:630
 msgid "Auto Register New Users"
-msgstr "Auto Cadastro de Novos Usuários"
+msgstr "Automatska registracija novih korisnika"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:631
 msgid "Automatically register new users as affiliates?"
-msgstr "Registrar automaticamente novos usuários como afiliados?"
+msgstr "Automatski registriraj nove korisnike kao Brand ambasadore?"
 
 #: includes/admin/settings/class-settings.php:635
 msgid "Logout Link"
@@ -2551,11 +2295,10 @@ msgstr ""
 msgid "Add a logout link to the Affiliate Area."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:640
 #, fuzzy
 msgid "Default Referral URL"
-msgstr "Formato Padrão de Indicação"
+msgstr "Definiranje stope provizije na razini proizvoda"
 
 #: includes/admin/settings/class-settings.php:641
 msgid ""
@@ -2565,7 +2308,7 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:645
 msgid "Enable reCAPTCHA"
-msgstr "Ativar reCAPTCHA"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:646
 msgid ""
@@ -2575,15 +2318,15 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:650
 msgid "reCAPTCHA Site Key"
-msgstr "reCAPTCHA Chave Site"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:651
 msgid "This is used to identify your site to Google reCAPTCHA."
-msgstr "Isso é usado para identificar seu site no Google reCAPTCHA"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:655
 msgid "reCAPTCHA Secret Key"
-msgstr "reCAPTCHA Chave Secreta"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:656
 msgid ""
@@ -2591,36 +2334,35 @@ msgid ""
 "sure to keep it a secret."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:660
 msgid "Reject Unpaid Referrals on Refund?"
-msgstr ""
+msgstr "Odbaci neplaćene preporuke u slučaju povrata novca? "
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:661
 msgid ""
 "Should unpaid referrals get automatically rejected when the originating "
 "purchase is refunded or revoked?"
 msgstr ""
+"Trebaju li neplaćene preporuke biti automatski odbijene kada je originalna "
+"transakcija vraćena ili povučena?"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:665
 msgid "Use Fallback Referral Tracking Method?"
-msgstr ""
+msgstr "Koristiti fallback metodu praćenja preporuka?"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:666
 msgid ""
 "The method used to track referral links can fail on sites that have jQuery "
 "errors. Check this if referrals are not getting tracked properly."
 msgstr ""
+"Metoda korištena za pračenje poveznice preporuke može biti neuspjela za "
+"Internet stranice koje imaju jQuery grešku. Označi ako preporuke nisu "
+"praćene pravilno."
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:670
 msgid "Ignore Zero Referrals?"
-msgstr ""
+msgstr "Ignoriraj preporuke s iznosom transakcije nula?"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:671
 msgid ""
 "Check this box if you would like AffiliateWP to completely ignore referrals "
@@ -2629,6 +2371,11 @@ msgid ""
 "Please note: if this setting is enabled and a visit results in a zero "
 "referral, then the visit would be considered not converted."
 msgstr ""
+"Označi ako želiš da AffiliateWP u potpunosti ignorira preporuke s ukupnim "
+"iznosom transakcije nula. Ovoj slučaj se javlja kada imaš proizvode s "
+"cijenom nula ili ako je korišten popust rezultirao ukupnim iznosom nula. "
+"Imaj na umu: ako je ova postavka omogučena i posjeta rezultira  konverzijom "
+"s iznosom nula, ta posjeta smatrat će se ne konvertiranom."
 
 #: includes/admin/settings/class-settings.php:675
 msgid "Enable Debug Mode?"
@@ -2640,21 +2387,22 @@ msgid ""
 "referral process to help identify problems."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:680
 msgid "Remove Data on Uninstall?"
-msgstr ""
+msgstr "Ukloni sve podatke prilikom deinstalacije?"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:681
 msgid ""
 "Check this box if you would like AffiliateWP to completely remove all of its "
 "data when the plugin is deleted."
 msgstr ""
+"Označi ovu kućicu ako želiš da AffiliateWP u potpunosti ukloni sve podatke "
+"povezane s njim prilikom deinstalacije plugina."
 
 #: includes/admin/settings/class-settings.php:706
+#, fuzzy
 msgid "Application Pending Email Subject"
-msgstr ""
+msgstr "Prijava za Brand ambasador (partner) program prihvaćena"
 
 #: includes/admin/settings/class-settings.php:707
 msgid "Enter the subject line for pending affiliate application emails."
@@ -2662,12 +2410,16 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:709
 #: includes/emails/actions.php:157
+#, fuzzy
 msgid "Your Affiliate Application Is Being Reviewed"
 msgstr ""
+"Tvoja prijava za Brand ambasador (partner) program na %s je prihvaćena! \n"
+"\n"
 
 #: includes/admin/settings/class-settings.php:712
+#, fuzzy
 msgid "Application Pending Email Content"
-msgstr ""
+msgstr "Prijava za Brand ambasador (partner) program prihvaćena"
 
 #: includes/admin/settings/class-settings.php:713
 msgid ""
@@ -2677,7 +2429,7 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:715
 msgid "Hi {name}!"
-msgstr "Olá {name}!"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:715
 #: includes/emails/actions.php:162
@@ -2692,8 +2444,9 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:718
+#, fuzzy
 msgid "Application Rejection Email Subject"
-msgstr ""
+msgstr "Prijava za Brand ambasador (partner) program prihvaćena"
 
 #: includes/admin/settings/class-settings.php:719
 msgid "Enter the subject line for rejected affiliate application emails."
@@ -2701,12 +2454,16 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:721
 #: includes/emails/actions.php:196
+#, fuzzy
 msgid "Your Affiliate Application Has Been Rejected"
-msgstr "Seu programa de afiliado foi rejeitado"
+msgstr ""
+"Tvoja prijava za Brand ambasador (partner) program na %s je prihvaćena! \n"
+"\n"
 
 #: includes/admin/settings/class-settings.php:724
+#, fuzzy
 msgid "Application Rejection Email Content"
-msgstr ""
+msgstr "Prijava za Brand ambasador (partner) program prihvaćena"
 
 #: includes/admin/settings/class-settings.php:725
 msgid ""
@@ -2716,7 +2473,7 @@ msgstr ""
 
 #: includes/admin/settings/class-settings.php:727
 msgid "Hi {name},"
-msgstr "Olá {name},"
+msgstr ""
 
 #: includes/admin/settings/class-settings.php:727
 #: includes/emails/actions.php:201
@@ -2725,46 +2482,39 @@ msgid ""
 "{site_name} was rejected."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:898
 msgid "Deactivate License"
-msgstr "Desativar Licença"
+msgstr "Deaktiviraj licencu"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:899
 msgid "Your license is valid!"
-msgstr "Sua licença é válida!"
+msgstr "Tvoja licenca je važeća!"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:902
 msgid "Renew Your License"
-msgstr "Renove sua licença"
+msgstr "Obnovi svoju licencu"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:903
 msgid ""
 "Your license has expired, renew today to continue getting updates and "
 "support!"
 msgstr ""
-"Sua licença expirou, renove hoje para continuar recebendo atualizações e "
-"suporte!"
+"Tvoja licenca je istekla, obnovi ju kako bi nastavio primati nove verzije i "
+"podršku!"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:905
 msgid "Activate License"
-msgstr "Ativar Licença"
+msgstr "Aktivna licenca"
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:1004
 msgid ""
 "The callback function used for the <strong>%s</strong> setting is missing."
-msgstr ""
+msgstr "Povratna funkcija korištena za <strong>%s</strong> postavke nedostaju."
 
 #: includes/admin/settings/class-settings.php:1079
 msgid "Upload File"
-msgstr "Enviar Arquivo"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/class-settings.php:1097
 #, fuzzy
 msgid ""
@@ -2773,9 +2523,9 @@ msgid ""
 "this screen.<br />An active license key is needed for automatic plugin "
 "updates and <a href=\"%s\" target=\"_blank\">support</a>."
 msgstr ""
-"Por favor digite sua chave de licença. Uma chave de licença ativa é "
-"necessária para atualizações automáticas do plugin e <a href=\"%s\" target="
-"\"_blank\">suporte</a>."
+"Molimo unesi svoji jedinstveni licencni ključ. Aktivna licenca je potrebna "
+"za automatsko nadograđivanje plugina i <a href=\"%s\" target=\"_blank"
+"\">korisničku podršku</a>."
 
 #: includes/admin/settings/class-settings.php:1117
 msgid ""
@@ -2783,20 +2533,18 @@ msgid ""
 "<code>wp-config.php</code>. This setting cannot be modified from this screen."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/settings/display-settings.php:73
 msgid "General"
-msgstr "Geral"
+msgstr "Općenito"
 
-# @ affiliate-wp
 #: includes/admin/settings/display-settings.php:75
+#, fuzzy
 msgid "Emails"
-msgstr "Emails"
+msgstr "Email"
 
-# @ affiliate-wp
 #: includes/admin/settings/display-settings.php:76
 msgid "Misc"
-msgstr "Diversos"
+msgstr "Razno"
 
 #: includes/admin/tools/class-rest-consumers-table.php:42
 msgid "API Key"
@@ -2807,11 +2555,10 @@ msgstr ""
 msgid "API Keys"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/tools/class-rest-consumers-table.php:61
 #, fuzzy
 msgid "No API consumers found."
-msgstr "Nenhum usuário encontrado"
+msgstr "Nije pronađen niti jedan korisnik"
 
 #: includes/admin/tools/class-rest-consumers-table.php:151
 msgid "Reissue"
@@ -2830,138 +2577,131 @@ msgid "Token"
 msgstr ""
 
 #: includes/admin/tools/class-rest-consumers-table.php:203
-#, fuzzy
 msgid "Secret Key"
-msgstr "reCAPTCHA Chave Secreta"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/tools/class-rest-consumers-table.php:231
 #, fuzzy
 msgid "Enter username"
-msgstr "Nome de usuário inválido"
+msgstr "Netočno korisničko ime"
 
 #: includes/admin/tools/class-rest-consumers-table.php:234
 msgid "Generate New API Keys"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/tools/export/class-export-affiliates.php:48
 #: includes/admin/tools/export/class-export-referrals-payout.php:61
 #: includes/admin/tools/export/class-export-referrals.php:62
 msgid "Email"
 msgstr "Email"
 
-# @ affiliate-wp
 #: includes/admin/tools/export/class-export-affiliates.php:53
+#, fuzzy
 msgid "Rate Type"
-msgstr "Tipo de Taxa"
+msgstr "Tip provizije"
 
 #: includes/admin/tools/export/class-export-affiliates.php:58
+#, fuzzy
 msgid "Date Registered"
-msgstr "Data de Registro"
+msgstr "Registracija"
 
 #: includes/admin/tools/export/class-export-referrals.php:67
 #: templates/dashboard-tab-stats.php:56
 msgid "Campaign"
-msgstr "Campanha"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/tools/export/class-export.php:173
 msgid "You do not have permission to export data."
-msgstr "Você não tem permissão para exportar dados."
+msgstr "Nemaš dozvolu za izvoz podataka"
 
-# @ affiliate-wp
 #: includes/admin/tools/import/import.php:23
 msgid "Please upload a valid .json file"
-msgstr "Por favor envie um arquivo .json válido"
+msgstr "Molimo unesi važeću .json datoteku"
 
-# @ affiliate-wp
 #: includes/admin/tools/import/import.php:29
 msgid "Please upload a file to import"
-msgstr "Por favor envie um arquivo para importar"
+msgstr "Molimo unesi datoteku za uvoz"
 
-# @ affiliate-wp
 #: includes/admin/tools/migration.php:19
 msgid ""
 "The upgrade process is running, please be patient. This could take several "
 "minutes to complete while affiliate records are upgraded in batches of 100."
 msgstr ""
+"Proces nadogradnje je u tijeku, molimo budi strpljiv. Ovo može potrajati "
+"nekoliko minuta za završetak. Zapisi partnera nadograđuju se u serijama od "
+"100."
 
-# @ affiliate-wp
 #: includes/admin/tools/migration.php:20
 msgid "Step %d running"
-msgstr "Etapa %d sendo executada"
+msgstr "Korak %d u procesu"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:77
 msgid "Export / Import"
-msgstr "Exportar / Importar"
+msgstr "Izvoz / Uvoz"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:79
 msgid "Recount Stats"
-msgstr "Recontar estatísticas"
+msgstr "Osvježi statistiku"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:80
 msgid "Migration Assistant"
-msgstr "Assistente de Migração"
+msgstr "Pomoć za migraciju"
 
 #: includes/admin/tools/tools.php:81
 msgid "System Info"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:84
 #, fuzzy
 msgid "Debug Assistant"
-msgstr "Assistente de Migração"
+msgstr "Pomoć za migraciju"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:132
 msgid "Recount Affiliate Stats"
-msgstr "Recontagem Estatísticas de Afiliados"
+msgstr "Osvježi statistiku Brand ambasadora"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:134
 msgid "Use this tool to recount affiliate statistics."
-msgstr "Use essa ferramenta para recortar as estatísticas dos afiliados."
+msgstr "Koristi ovaj alat za osvježavanje statistike Brand ambasadora."
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:138 includes/admin/tools/tools.php:302
 #: includes/admin/visits/visits.php:40
 msgid "Affiliate name"
-msgstr "Nome Afiliado"
+msgstr "Ime Brand ambasadora (partnera)"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:145
 #, fuzzy
 msgid ""
 "Enter the name of the affiliate or begin typing to perform a search based on "
 "the affiliate&#8217;s name."
-msgstr "Comece digitando o nome do afiliado para buscar pela conta do afiliado"
+msgstr ""
+"Unesi ime Brand ambasadora ili započni unos za pretragu baziranu prema imenu."
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:150
 msgid "Recount"
-msgstr "Recontagem"
+msgstr "Osvježi"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:188
 msgid ""
 "These tools assist in migrating affiliate and referral data from existing "
 "platforms."
 msgstr ""
+"Ovaj alat pomaže u migraciji podataka i preporuka Brand ambasadora s "
+"postojeće platforme."
 
 #: includes/admin/tools/tools.php:193
+#, fuzzy
 msgid "User Accounts"
-msgstr "Contas de Usuários"
+msgstr "Osvježi"
 
 #: includes/admin/tools/tools.php:196
+#, fuzzy
 msgid ""
 "Use this tool to create affiliate accounts for each of your existing "
 "WordPress user accounts that belong to the selected roles below."
 msgstr ""
+"Započni unositi ime Brand ambasadora kako pronašao korisnički račun asociran "
+"s njim."
 
 #: includes/admin/tools/tools.php:197
 msgid ""
@@ -2971,12 +2711,12 @@ msgstr ""
 
 #: includes/admin/tools/tools.php:199
 msgid "Select User Roles"
-msgstr "Selecionar Funções do Usuário"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:212
+#, fuzzy
 msgid "Create Affiliate Accounts for Users"
-msgstr "Criar Contas de Afiliados para Usuários"
+msgstr "Registriraj novi Brand ambasador račun"
 
 #: includes/admin/tools/tools.php:217
 msgid ""
@@ -2992,107 +2732,103 @@ msgid ""
 msgstr ""
 
 #: includes/admin/tools/tools.php:228
+#, fuzzy
 msgid ""
 "Use this tool to migrate existing affiliate / referral data from Affiliates "
 "Pro to AffiliateWP."
 msgstr ""
+"Koristi ovaj alat za migraciju podataka sa Affiliates Pro na AffiliatesWP."
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:229
 msgid ""
 "<strong>NOTE:</strong> this tool should only ever be used on a fresh "
 "install. If you have already collected affiliate or referral data, do not "
 "use this tool."
 msgstr ""
+"<strong>NAPOMENA:</strong> ovaj alat se smije koristiti samo na novoj "
+"instalaciji. Ako već postoje registrirani Brand ambasadori i zabilježene "
+"preporuke, ne koristi ovaj alat."
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:235
 msgid "Migrate Data from Affiliates Pro"
-msgstr ""
+msgstr "Migriraj podatke iz Affiliates Pro"
 
 #: includes/admin/tools/tools.php:244
+#, fuzzy
 msgid ""
 "Use this tool to migrate existing affiliate accounts from WP Affiliate to "
 "AffiliateWP."
 msgstr ""
+"Koristi ovaj alat za migraciju podataka sa Affiliates Pro na AffiliatesWP."
 
 #: includes/admin/tools/tools.php:250
+#, fuzzy
 msgid "Migrate Data from WP Affiliate"
-msgstr "Migrar dados para um WP Affiliate"
+msgstr "Migriraj podatke iz Affiliates Pro"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:274
+#, fuzzy
 msgid "Export Affiliates"
-msgstr "Exportar Afiliados"
+msgstr "Uredi Brand ambasadora"
 
 #: includes/admin/tools/tools.php:276
+#, fuzzy
 msgid "Export affiliates to a CSV file."
-msgstr "Exportar afiliados para um arquivo CSV."
+msgstr "Izvezi preporuke u CSV datoteku"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:280 includes/admin/tools/tools.php:308
 msgid "All Statuses"
-msgstr "Todos os Status"
+msgstr "Svi statusi"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:289 includes/admin/tools/tools.php:319
 #: includes/admin/tools/tools.php:333
 msgid "Export"
-msgstr "Exportar"
+msgstr "Izvoz"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:296
 msgid "Export Referrals"
-msgstr "Exportar Indicações"
+msgstr "Izvoz preporuka"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:298
 msgid "Export referrals to a CSV file."
-msgstr "Exportar Indicações para um arquivo CSV."
+msgstr "Izvezi preporuke u CSV datoteku"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:314
 #, fuzzy
 msgid ""
 "To search for an affiliate, enter the affiliate&#8217;s login name, first "
 "name, or last name. Leave blank to export referrals for all affiliates."
 msgstr ""
-"Para buscar um afiliado, insira o nome de login, nome ou sobrenome do "
-"afiliado. Deixe em branco para exportar as indicações de todos afiliados."
+"Za pretragu Brand ambasadora, unesi korisničko ime, ime ili prezime. Za "
+"izvoz preporuka svih Brand ambasadora ostavi prazno."
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:326
 msgid "Export Settings"
-msgstr "Exportar Configurações"
+msgstr "Izvoz postavki"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:328
 msgid ""
 "Export the AffiliateWP settings for this site as a .json file. This allows "
 "you to easily import the configuration into another site."
 msgstr ""
-"Exportar Configurações do AffiliateWP deste site para um arquivo .json. Isso "
-"permite importar facilmente as configurações para outro site."
+"Izvezi postavke AffiliateWP ove Internet stranice kao .json datoteku. Ovo ti "
+"dozvoljava jednostavan uvoz postavki na drugu Internet stranicu."
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:340
 msgid "Import Settings"
-msgstr "Importar Configurações"
+msgstr "Uvoz postavki"
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:342
 msgid ""
 "Import the AffiliateWP settings from a .json file. This file can be obtained "
 "by exporting the settings on another site using the form above."
 msgstr ""
-"Importe as configurações do AffiliateWP de um arquivo de .json. Este arquivo "
-"pode ser obtido por exportar as configurações em outro site usando o "
-"formulário abaixo."
+"Uvezi postavke AffiliateWP iz .json datoteke. Ova datoteka može se kreirati "
+"izvozom postavki sa druge stranice koristeći obrazac gore."
 
-# @ affiliate-wp
 #: includes/admin/tools/tools.php:350
 msgid "Import"
-msgstr "Importar"
+msgstr "Uvoz"
 
 #: includes/admin/tools/tools.php:378
 msgid ""
@@ -3112,226 +2848,203 @@ msgstr ""
 msgid "Clear Debug Log"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/user-profile.php:22
 #, fuzzy
 msgid "Affiliate Registration Status"
-msgstr "Registro de Afiliados"
+msgstr "Registracije Brand ambasadora"
 
 #: includes/admin/user-profile.php:40
 #, fuzzy
 msgid "Not Registered"
-msgstr "Data de Registro"
+msgstr "Registracija"
 
-# @ affiliate-wp
 #: includes/admin/user-profile.php:46
 #, fuzzy
 msgid "Affiliate Actions"
-msgstr "Configuração Afiliado"
+msgstr "Idi na postavke AffiliateWP"
 
 #: includes/admin/user-profile.php:53 templates/register.php:124
 msgid "Register"
-msgstr "Registrar"
+msgstr "Registracija"
 
-# @ affiliate-wp
 #: includes/admin/visits/class-list-table.php:103
 msgid "Landing Page"
-msgstr "Página de Destino"
+msgstr "Odredišna stranica"
 
-# @ affiliate-wp
 #: includes/admin/visits/class-list-table.php:104
 #: templates/dashboard-tab-visits.php:26
 msgid "Referring URL"
-msgstr "URL de origem"
+msgstr "Link preporuke"
 
-# @ affiliate-wp
 #: includes/admin/visits/class-list-table.php:106
 msgid "Referral ID"
-msgstr "ID do Afiliado:"
+msgstr "ID preporuke"
 
-# @ affiliate-wp
 #: includes/admin/visits/class-list-table.php:107
 msgid "IP"
 msgstr "IP"
 
-# @ affiliate-wp
 #: includes/admin/visits/class-list-table.php:172
 #: templates/dashboard-tab-visits.php:42
 msgid "Direct traffic"
-msgstr "Tráfego Direto"
+msgstr "Direktan promet"
 
-# @ affiliate-wp
 #: includes/admin/visits/class-list-table.php:197
 msgid "No visits found."
-msgstr "Nenhuma visita encontrada."
+msgstr "Nema zabilježenih posjeta."
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:39
 #, fuzzy
 msgid "This screen provides access to your site&#8217;s visit history."
-msgstr "Esta tela fornece acesso ao histórico de indicações do seu site."
+msgstr "Ovo sučelje omogućuje pristup povijesti posjeta tvoje stranice."
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:40
 msgid ""
 "<strong>Landing Page</strong>: this is the page on your site that the "
 "visitor first landed on. It is the URL that the affiliate link pointed to."
 msgstr ""
-"<strong>Página de destino</strong>: esta é a página em seu site que o "
-"visitante visitou pela primeira vez. É a URL que o link de afiliado está "
-"apontando."
+"<strong>Odredišna stranica</strong>: ovo je stranica na tvojoj Internet "
+"stranici na koju je posjetitelj prvo došao. To je URL na koji preusmjerava "
+"link Brand ambasadora."
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:41
 msgid ""
 "<strong>Referring URL</strong>: this is the source URL of the affiliate "
 "link. It is the web page that the visitor found a link to your site on."
 msgstr ""
-"<strong>URL de origem</strong>: esta é a URL de origem do link de afiliado. "
-"É o site que o visitante encontrou o link para seu site."
+"<strong>URL preporuke</strong>: ovo je izvorni URL Brand ambasadora. To je "
+"Internet stranica gdje je posjetitelj kliknuo link na tvoju stranicu."
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:42
 msgid ""
 "<strong>Affiliate</strong>: this the affiliate that the visit was attributed "
 "to."
-msgstr "<strong>Afiliado</strong>: este o afiliado que a visita foi atribuída."
+msgstr ""
+"<strong>Brand ambasador (Partner)</strong>: ovo je Brand ambasador kojem je "
+"dodjeljena posjeta."
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:43
 msgid ""
 "<strong>Referral ID</strong>: this is the ID of the referral that was "
 "created from this visit, if any."
 msgstr ""
+"<strong>ID preporuke</strong>: ovo je ID preporuke koja je kreirana od ove "
+"posjete, ako je je bilo."
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:44
 msgid "<strong>IP</strong>: this is the IP address of the visitor."
-msgstr "<strong>IP</strong>: esse é o endereço de IP do visitante."
+msgstr "<strong>IP</strong>: ovo je IP adresa posjetitelja."
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:45
 msgid ""
 "<strong>Converted</strong>: this is a Yes / No status for whether the visit "
 "turned into a successful converstion."
 msgstr ""
+"<strong>Konvertirano</strong>: ovo je DA / NE status bez obzira da li se "
+"posjeta realizirala u uspješnu konverziju."
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:50
 msgid "Searching Visits"
-msgstr "Pesquisando Visitas"
+msgstr "Pretraga posjeta"
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:52
 msgid "Visit records can be searched in several different ways:"
-msgstr "Registros de visita podem ser pesquisados de várias formas diferentes:"
+msgstr "Zapisi posjeta mogu se pretraživati na nekoliko različitih načina:"
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:54
 msgid "You can enter an IP address to find all visits from a specific IP"
 msgstr ""
-"Você pode inserir um endereço IP para localizar todas as visitas de um IP "
-"específico"
+"Za pronalazak svih posjeta sa specifične IP adrese unesi željenu IP adresu"
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:55
 msgid ""
 "You can enter a complete URL to find all visits that landed on or came from "
 "a specific URL"
 msgstr ""
+"Kako bi vidio/la sve posjete koje su došle sa određene stranice možeš "
+"unijeti cijeli URL"
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:56
 msgid ""
 "You can enter a partial URL to find all visits that landed on or came from a "
 "specific site"
 msgstr ""
+"Kako bi vidio/la sve posjete koje su došle sa stranice možeš unijeti dio URL-"
+"a"
 
-# @ affiliate-wp
 #: includes/admin/visits/contextual-help.php:57
 #, fuzzy
 msgid ""
 "You can enter the referral&#8217;s ID number prefixed by &#8220;referral:"
 "&#8221;"
-msgstr "Você pode inserir o ID de afiliado precedido de 'affiliate:'"
+msgstr "Možeš unijeti ID preporuke s prefiksom 'referral:'"
 
 #: includes/admin/visits/screen-options.php:24
 msgid "Number of visits per page:"
-msgstr "Número de visitas por página:"
+msgstr ""
 
 #: includes/admin/visits/visits.php:47
 msgid "Filter by status"
-msgstr "Filtrar por status"
+msgstr ""
 
 #: includes/admin/visits/visits.php:51
+#, fuzzy
 msgid "Unconverted"
-msgstr "Não convertidos"
+msgstr "Konvertirano"
 
-# @ affiliate-wp
 #: includes/affiliate-functions.php:444
 msgid "Percentage (%)"
-msgstr "Porcentagem (%)"
+msgstr "Postotak (%)"
 
-# @ affiliate-wp
 #: includes/affiliate-functions.php:445
 msgid "Flat %s"
-msgstr "Taxa fixa %s"
+msgstr "Flat %s"
 
-# @ affiliate-wp
 #: includes/class-login.php:56 includes/class-register.php:85
 msgid "Invalid username"
-msgstr "Nome de usuário inválido"
+msgstr "Netočno korisničko ime"
 
-# @ affiliate-wp
 #: includes/class-login.php:66
 msgid "No such user"
-msgstr "Usuário não encontrado"
+msgstr "Nepostojeći korisnik"
 
-# @ affiliate-wp
 #: includes/class-login.php:70 includes/class-register.php:218
 msgid "Please enter a password"
-msgstr "Por favor, digite uma senha"
+msgstr "Molimo unesi lozinku"
 
 #: includes/class-login.php:77
+#, fuzzy
 msgid "Incorrect username or password"
-msgstr "Usuário ou senha incorreta"
+msgstr "Netočna lozinka"
 
-# @ affiliate-wp
 #: includes/class-referrals-graph.php:147
 msgid "Unpaid Referral Earnings"
-msgstr "Rendimentos de Indicação não pagos"
+msgstr "Neisplaćena provizija"
 
-# @ affiliate-wp
 #: includes/class-referrals-graph.php:148
 msgid "Pending Referral Earnings"
-msgstr "Rendimentos de Indicação não pendentes"
+msgstr "Provizija u obradi"
 
-# @ affiliate-wp
 #: includes/class-referrals-graph.php:149
 msgid "Rejected Referral Earnings"
-msgstr "Rendimentos de Indicação rejeitados"
+msgstr "Odbijene provizije"
 
-# @ affiliate-wp
 #: includes/class-referrals-graph.php:150
 msgid "Paid Referral Earnings"
-msgstr "Rendimentos de Indicação pagos"
+msgstr "Isplaćene provizije"
 
-# @ affiliate-wp
 #: includes/class-register.php:73
 #, fuzzy
 msgid "Please enter a valid website URL"
-msgstr "Por favor, digite a URL de seu site"
+msgstr "Molimo unesi URL Internet stranice"
 
-# @ affiliate-wp
 #: includes/class-register.php:78
 msgid "Username already taken"
-msgstr "Nome de usuário já existe"
+msgstr "Korisničko ime je zauzeto"
 
 #: includes/class-register.php:83
 msgid "Invalid username. Only lowercase letters (a-z) and numbers are allowed"
 msgstr ""
-"Nome de usuário inválido. Apenas letras minúsculas (a-z) e números são "
-"permitidos"
 
 #: includes/class-register.php:90 includes/class-register.php:209
 msgid "Invalid username. Must be between 1 and 60 characters."
@@ -3339,89 +3052,75 @@ msgstr ""
 
 #: includes/class-register.php:94
 msgid "Invalid username. Usernames must include at least one letter"
-msgstr "Username inválido. Username precisa ter ao menos uma letra"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/class-register.php:98
 msgid "Email address already taken"
-msgstr "Endereço de e-mail já está cadastrado"
+msgstr "Email adresa je zauzeta"
 
-# @ affiliate-wp
 #: includes/class-register.php:102
 msgid "Invalid email"
-msgstr "Email inválido"
+msgstr "Neispravan email"
 
-# @ affiliate-wp
 #: includes/class-register.php:106
 msgid "Invalid payment email"
-msgstr "Email de pagamento inválido"
+msgstr "Neispravan PayPal email "
 
-# @ affiliate-wp
 #: includes/class-register.php:110
 msgid "Passwords do not match"
-msgstr "Senha não confere"
+msgstr "Lozinke se ne podudaraju"
 
-# @ affiliate-wp
 #: includes/class-register.php:133
 msgid "Please agree to our terms of use"
-msgstr "Por favor, aceite nossos termos de uso"
+msgstr "Molimo prihvati uvjete sudjelovanja"
 
 #: includes/class-register.php:137
 msgid "Please verify that you are not a robot"
-msgstr "Por favor, nos confirme que não é um robô"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/class-register.php:141
 #, fuzzy
 msgid "Nice try honey bear, don&#8217;t touch our honey"
-msgstr "Boa tentativa, doçura!"
+msgstr "Dobar pokušaj mustro, prste dalje od toga"
 
-# @ affiliate-wp
 #: includes/class-register.php:145
 msgid "You are already registered as an affiliate"
-msgstr "Você já está cadastrado como um afiliado"
+msgstr "Već si registriran/a kao Brand ambasador"
 
-# @ affiliate-wp
 #: includes/class-register.php:204
 msgid "Please enter your name"
-msgstr "Por favor, digite seu nome completo"
+msgstr "Molimo unesi svoje ime"
 
-# @ affiliate-wp
 #: includes/class-register.php:214
 msgid "Please enter a website URL"
-msgstr "Por favor, digite a URL de seu site"
+msgstr "Molimo unesi URL Internet stranice"
 
-# @ affiliate-wp
 #: includes/class-register.php:416
 #, fuzzy
 msgid "Add as Affiliate"
-msgstr "Adicionar Afiliado"
+msgstr "Dodaj partnera"
 
-# @ affiliate-wp
 #: includes/class-register.php:418
 #, fuzzy
 msgid "Add the user as an affiliate."
-msgstr "Você já está cadastrado como um afiliado"
+msgstr "Već si registriran/a kao Brand ambasador"
 
-# @ affiliate-wp
 #: includes/class-register.php:423
 #, fuzzy
 msgid "Disable Affiliate Email"
-msgstr "Desativar Todos Emails"
+msgstr "Ukupne preporuke u obradi"
 
 #: includes/class-register.php:425
 msgid "Disable the application accepted email sent to the affiliate."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/class-visits-graph.php:137
 msgid "Converted Visits"
-msgstr "Visitas convertidas"
+msgstr "Konvertirane posjete"
 
-# @ affiliate-wp
 #: includes/class-visits-graph.php:138
 msgid "Unconverted Visits"
-msgstr "Visitas não convertidas"
+msgstr "Nekonvertirane posjete"
 
 #: includes/cli/class-affiliate-sub-commands.php:138
 msgid "A valid username must be specified as the first argument."
@@ -3440,13 +3139,14 @@ msgstr ""
 #: includes/cli/class-affiliate-sub-commands.php:166
 #, fuzzy
 msgid "An affiliate with the username \"%s\" has been created."
-msgstr "Seu sistema de afiliados no %s foi aceito!"
+msgstr ""
+"Tvoja prijava za Brand ambasador (partner) program na %s je prihvaćena! \n"
+"\n"
 
-# @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:168
 #, fuzzy
 msgid "The affiliate account could not be added."
-msgstr "Sua conta de afiliado não está ativa"
+msgstr "Tvoj Brand ambasador (partner) račun nije aktivan"
 
 #: includes/cli/class-affiliate-sub-commands.php:214
 #: includes/cli/class-affiliate-sub-commands.php:218
@@ -3457,174 +3157,153 @@ msgstr "Sua conta de afiliado não está ativa"
 msgid "A valid affiliate username or ID is required to proceed."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:230
 #, fuzzy
 msgid "The affiliate was updated successfully."
-msgstr "Afiliado atualizado com sucesso"
+msgstr "Brand ambasador uspješno ažuriran"
 
-# @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:232
 #, fuzzy
 msgid "The affiliate account could not be updated."
-msgstr "Sua conta de afiliado não está ativa"
+msgstr "Tvoj Brand ambasador (partner) račun nije aktivan"
 
-# @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:287
 #, fuzzy
 msgid ""
 "Are you sure you want to delete this affiliate, all its data and its "
 "associated user account?"
-msgstr "Você tem certeza que deseja deletar essa campanha?"
+msgstr "Jesi siguran da želiš izbrisati ovaj banner?"
 
 #: includes/cli/class-affiliate-sub-commands.php:289
 #, fuzzy
 msgid "Are you sure you want to delete this affiliate and all its data?"
-msgstr "Você tem certeza que quer deletar esta indicação?"
+msgstr "Jesi siguran da želiš izbrisati ovaj banner?"
 
-# @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:292
 #, fuzzy
 msgid "Are you sure you want to delete this affiliate?"
-msgstr "Você tem certeza que deseja deletar essa campanha?"
+msgstr "Jesi siguran da želiš izbrisati ovaj banner?"
 
 #: includes/cli/class-affiliate-sub-commands.php:309
 msgid ""
 "The affiliate and its associated user account have been successfully deleted."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:312
 #, fuzzy
 msgid "The affiliate account has been successfully deleted."
-msgstr "Conta(s) de afiliado deletada com sucesso"
+msgstr "Račun Brand ambasadora uspješno izbrisan"
 
-# @ affiliate-wp
 #: includes/cli/class-affiliate-sub-commands.php:315
 #, fuzzy
 msgid "The affiliate account could not be deleted."
-msgstr "Seu pedido de afiliação foi rejeitado"
+msgstr ""
+"Zahtjev za registraciju tvojeg Brand ambasador (partner) računa je odbijen"
 
 #: includes/cli/class-affiliate-sub-commands.php:391
 #, fuzzy
 msgid "Number of affiliates: %d"
-msgstr "Número de afiliados por página"
+msgstr "Niti jedan Brand ambasador nije pronađen"
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:24
 #, fuzzy
 msgid "AffiliateWP is not installed"
-msgstr "Migração AffiliateWP"
+msgstr "Migracija AffiliateWP"
 
 #: includes/cli/class-command.php:29
 msgid "You are running AffiliateWP version: %s"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:41
 #, fuzzy
 msgid "License status is: %s"
-msgstr "Configurações de Licença"
+msgstr "Postavke licence"
 
 #: includes/cli/class-command.php:50
 msgid "Debug mode is: %s"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:59
 #, fuzzy
 msgid "Affiliates require approval: %s"
-msgstr "Aprovação necessária"
+msgstr "Zahtjevaj odobrenje"
 
 #: includes/cli/class-command.php:72
-#, fuzzy
 msgid "Email notifications are: %s"
-msgstr "Todas as notificações de e-mail devem ser desativadas?"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:85
 #, fuzzy
 msgid "Integrations: %s"
-msgstr "Integração"
+msgstr "Integracije"
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:92
 #, fuzzy
 msgid "Global referral rate: %s"
-msgstr "Permitir criação de indicações de afiliado pelo formulário"
+msgstr "Tip provizije Brand ambasadora."
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:95
 #, fuzzy
 msgid "Global referral rate type: %s"
-msgstr "Tipo de taxa de indicação do afiliado."
+msgstr "Tip provizije Brand ambasadora."
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:98
 #, fuzzy
 msgid "Currency: %s"
-msgstr "Moeda"
+msgstr "Valuta"
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:105
 #, fuzzy
 msgid "Referral variable: %s"
-msgstr "Variável de indicação"
+msgstr "Varijabla jedinstvenog linka"
 
 #: includes/cli/class-command.php:114
 msgid "Show pretty referral URLs: %s"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:126
 #, fuzzy
 msgid "Referral URL (ID): %s"
-msgstr "URL de Indicação"
+msgstr "Link preporuke"
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:129
 #, fuzzy
 msgid "Referral URL (Username): %s"
-msgstr "Gerador de URL de afiliado"
+msgstr "Generator jedinstvenog linka preporuke"
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:134
 #, fuzzy
 msgid "Affiliate Area URL: %s"
-msgstr "Área Afiliado"
+msgstr "Brand ambasador sučelje"
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:139
 #, fuzzy
 msgid "Terms of Use URL: %s"
-msgstr "Termos de Uso"
+msgstr "Uvjeti sudjelovanja"
 
 #: includes/cli/class-command.php:171
 msgid "Found %s sites. Retrieving stats ..."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:188
 #, fuzzy
 msgid "Total Affiliates: %s"
-msgstr "Exportar Afiliados"
+msgstr "Uredi Brand ambasadora"
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:191
 #, fuzzy
 msgid "Total Referrals: %s"
-msgstr "Total de indicações pagas"
+msgstr "Ukupno plaćene preporuke"
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:194
 #, fuzzy
 msgid "Total Visits: %s"
-msgstr "Total de visitas"
+msgstr "Ukupno posjeta"
 
 #: includes/cli/class-command.php:212
 #, fuzzy
 msgid "Are you sure you want to clear the debug log?"
-msgstr "Você tem certeza que quer deletar esta indicação?"
+msgstr "Jesi siguran da želiš izbrisati ovaj banner?"
 
 #: includes/cli/class-command.php:216
 msgid "The debug log has been cleared."
@@ -3641,7 +3320,7 @@ msgstr ""
 #: includes/cli/class-creative-sub-commands.php:135
 #, fuzzy
 msgid "The creative could not be created."
-msgstr "Assunto Email Nova Indicação"
+msgstr "Nova preporuka"
 
 #: includes/cli/class-creative-sub-commands.php:181
 #: includes/cli/class-creative-sub-commands.php:185
@@ -3650,21 +3329,19 @@ msgstr "Assunto Email Nova Indicação"
 msgid "A valid creative ID is required to proceed."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-creative-sub-commands.php:199
 #, fuzzy
 msgid "The creative was successfully updated."
-msgstr "Campanha adicionada com sucesso"
+msgstr "Banner uspješno dodan"
 
 #: includes/cli/class-creative-sub-commands.php:201
 msgid "The creative could not be updated."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-creative-sub-commands.php:226
 #, fuzzy
 msgid "The creative was successfully deleted."
-msgstr "Campanha adicionada com sucesso"
+msgstr "Banner uspješno dodan"
 
 #: includes/cli/class-creative-sub-commands.php:228
 msgid "The creative could not be deleted."
@@ -3673,7 +3350,7 @@ msgstr ""
 #: includes/cli/class-creative-sub-commands.php:301
 #, fuzzy
 msgid "Number of creatives: %d"
-msgstr "Número de campanhas por página:"
+msgstr "Niti jedan banner nije pronađen."
 
 #: includes/cli/class-payout-sub-commands.php:148
 msgid "No referrals were found matching your criteria. Please try again."
@@ -3710,24 +3387,22 @@ msgstr ""
 #: includes/cli/class-payout-sub-commands.php:285
 #, fuzzy
 msgid "Are you sure you want to overwrite this payout's referrals?"
-msgstr "Você tem certeza que quer deletar esta indicação?"
+msgstr "Jesi siguran da želiš izbrisati ovaj banner?"
 
 #: includes/cli/class-payout-sub-commands.php:293
 msgid "All values passed via the --referrals argument are invalid."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-payout-sub-commands.php:299
 #, fuzzy
 msgid ""
 "Are you sure you want to overwrite the affiliate associated with this payout?"
-msgstr "Você tem certeza que deseja deletar essa campanha?"
+msgstr "Jesi siguran da želiš izbrisati ovaj banner?"
 
-# @ affiliate-wp
 #: includes/cli/class-payout-sub-commands.php:303
 #, fuzzy
 msgid "The supplied affiliate ID or username is invalid and has been ignored."
-msgstr "O nome de usuário do afiliado. Isto não pode ser alterado."
+msgstr "Korisnički Brand ambasadora ID. Nemože biti naknadno promjenjen."
 
 #: includes/cli/class-payout-sub-commands.php:310
 msgid ""
@@ -3735,11 +3410,10 @@ msgid ""
 "affwp payout update."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-payout-sub-commands.php:314
 #, fuzzy
 msgid "Payout #%d has been updated successfully."
-msgstr "Campanha atualizada com sucesso"
+msgstr "Banner uspješno ažuriran"
 
 #: includes/cli/class-payout-sub-commands.php:316
 msgid "Payout #%d could not be updated due to an error."
@@ -3750,11 +3424,10 @@ msgstr ""
 msgid "A valid payout ID is required to proceed."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-payout-sub-commands.php:348
 #, fuzzy
 msgid "Are you sure you want to delete this payout?"
-msgstr "Você tem certeza que deseja deletar essa campanha?"
+msgstr "Jesi siguran da želiš izbrisati ovaj banner?"
 
 #: includes/cli/class-payout-sub-commands.php:353
 msgid "The payout has been successfully deleted."
@@ -3784,12 +3457,12 @@ msgstr ""
 #: includes/cli/class-referral-sub-commands.php:144
 #, fuzzy
 msgid "A referral with the ID \"%d\" has been created."
-msgstr "Assunto Email Nova Indicação"
+msgstr "Nova preporuka"
 
 #: includes/cli/class-referral-sub-commands.php:146
 #, fuzzy
 msgid "The referral could not be added."
-msgstr "Assunto Email Nova Indicação"
+msgstr "Nova preporuka"
 
 #: includes/cli/class-referral-sub-commands.php:195
 #: includes/cli/class-referral-sub-commands.php:199
@@ -3798,36 +3471,35 @@ msgstr "Assunto Email Nova Indicação"
 msgid "A valid referral ID is required to proceed."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-referral-sub-commands.php:219
 #, fuzzy
 msgid "The referral was updated successfully."
-msgstr "Indicação atualizada com sucesso"
+msgstr "Preporuka uspješno ažurirana"
 
 #: includes/cli/class-referral-sub-commands.php:221
 #, fuzzy
 msgid "The referral could not be updated"
-msgstr "Assunto Email Nova Indicação"
+msgstr "Nova preporuka"
 
 #: includes/cli/class-referral-sub-commands.php:254 includes/scripts.php:64
+#, fuzzy
 msgid "Are you sure you want to delete this referral?"
-msgstr "Você tem certeza que quer deletar esta indicação?"
+msgstr "Jesi siguran da želiš izbrisati ovaj banner?"
 
-# @ affiliate-wp
 #: includes/cli/class-referral-sub-commands.php:259
 #, fuzzy
 msgid "The referral has been successfully deleted."
-msgstr "Indicação adicionada com sucesso"
+msgstr "Preporuka uspješno dodana"
 
 #: includes/cli/class-referral-sub-commands.php:261
 #, fuzzy
 msgid "The referral could not be deleted."
-msgstr "Assunto Email Nova Indicação"
+msgstr "Nova preporuka"
 
 #: includes/cli/class-referral-sub-commands.php:338
 #, fuzzy
 msgid "Number of referrals: %d"
-msgstr "Número de indicações por página:"
+msgstr "Nema zabilježenih preporuka"
 
 #: includes/cli/class-visit-sub-commands.php:131
 msgid "A URL must be specified as the second argument to proceed."
@@ -3841,16 +3513,15 @@ msgstr ""
 msgid "A valid date string must be supplied. Using the current time."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-visit-sub-commands.php:168
 #, fuzzy
 msgid "The visit was successfully created."
-msgstr "Configurações importadas com sucesso"
+msgstr "Postavke uspješno uvezene"
 
 #: includes/cli/class-visit-sub-commands.php:170
 #, fuzzy
 msgid "The visit could not be created."
-msgstr "Assunto Email Nova Indicação"
+msgstr "Nova preporuka"
 
 #: includes/cli/class-visit-sub-commands.php:222
 #: includes/cli/class-visit-sub-commands.php:225
@@ -3863,21 +3534,19 @@ msgstr ""
 msgid "A valid new date string must be supplied. Using the original date."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-visit-sub-commands.php:262
 #, fuzzy
 msgid "The visit was updated successfully."
-msgstr "Afiliado atualizado com sucesso"
+msgstr "Brand ambasador uspješno ažuriran"
 
 #: includes/cli/class-visit-sub-commands.php:264
 msgid "The visit could not be updated."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-visit-sub-commands.php:296
 #, fuzzy
 msgid "Are you sure you want to delete this visit?"
-msgstr "Você tem certeza que deseja deletar essa campanha?"
+msgstr "Jesi siguran da želiš izbrisati ovaj banner?"
 
 #: includes/cli/class-visit-sub-commands.php:301
 msgid "The visit has been successfully deleted."
@@ -3890,70 +3559,82 @@ msgstr ""
 #: includes/cli/class-visit-sub-commands.php:380
 #, fuzzy
 msgid "Number of visits: %d"
-msgstr "Número de visitas por página:"
+msgstr "Nema zabilježenih posjeta."
 
-# @ affiliate-wp
 #: includes/creative-functions.php:32 includes/creative-functions.php:64
 msgid "Creative"
-msgstr "Campanha"
+msgstr "Banner"
 
 #: includes/emails/actions.php:46
+#, fuzzy
 msgid "A new affiliate has registered on your site, "
-msgstr "Um novo afiliado se registrou em seu site,"
+msgstr "Nema registriranih partnera"
 
-# @ affiliate-wp
 #: includes/emails/actions.php:47
 msgid "Name: %s"
-msgstr "Nome: %s"
+msgstr "Ime: %s"
 
-# @ affiliate-wp
 #: includes/emails/actions.php:50
+#, fuzzy
 msgid "Website URL: %s"
-msgstr "Website URL: %s"
+msgstr "URL Internet stranice:"
 
 #: includes/emails/actions.php:54
+#, fuzzy
 msgid "Promotion method: %s"
-msgstr "Método de Promoção: %s"
+msgstr "Metoda promocije:"
 
 #: includes/emails/actions.php:58
 msgid "Review pending applications: %s"
-msgstr "Revise aplicações pendentes: %s"
+msgstr ""
 
 #: includes/emails/actions.php:118 includes/emails/actions.php:244
+#, fuzzy
 msgid "Congratulations %s!"
-msgstr "Parabéns %s!"
+msgstr ""
+"Čestitamo %s!\n"
+"\n"
 
 #: includes/emails/actions.php:120
+#, fuzzy
 msgid "Log into your affiliate area at %s"
-msgstr "Faça login em sua área de afiliados: %s"
+msgstr ""
+"Na svoj Brand ambasador račun prijavi se na %s\n"
+"\n"
 
 #: includes/emails/actions.php:161
+#, fuzzy
 msgid "Hi %s!"
-msgstr "Olá %s!"
+msgstr "Verzija %s"
 
 #: includes/emails/actions.php:200
 msgid "Hi %s,"
-msgstr "Hi %s,"
+msgstr ""
 
 #: includes/emails/actions.php:245
+#, fuzzy
 msgid "You have been awarded a new referral of %s on %s!"
-msgstr "Você recebeu uma nova indicação de %s no %s!"
+msgstr ""
+"Dodjeljena ti je nova preporuka od %s za %s!\n"
+"\n"
 
 #: includes/emails/actions.php:246
+#, fuzzy
 msgid ""
 "log into your affiliate area to view your earnings or disable these "
 "notifications: %s"
 msgstr ""
-"Faça login em sua área de afiliados e veja seus rendimentos ou desabilite "
-"estas notificações: %s"
+"Za pregled svoje zarade ili isključivanje ovih obavjesti prijavi se na svoj "
+"Brand ambasador račun: %s\n"
+"\n"
 
 #: includes/emails/class-affwp-emails.php:198
 msgid "Default Template"
-msgstr "Template Padrão"
+msgstr ""
 
 #: includes/emails/class-affwp-emails.php:199
 msgid "No template, plain text only"
-msgstr "Nenhum template, apenas texto"
+msgstr ""
 
 #: includes/emails/class-affwp-emails.php:295
 msgid ""
@@ -3963,58 +3644,58 @@ msgstr ""
 
 #: includes/emails/class-affwp-emails.php:422
 msgid "The full name of the affiliate"
-msgstr "O nome completo do afiliado"
+msgstr ""
 
 #: includes/emails/class-affwp-emails.php:427
 msgid "The user name of the affiliate on the site"
-msgstr "O nome de usuário do afiliado no site"
+msgstr ""
 
 #: includes/emails/class-affwp-emails.php:432
 msgid "The email address of the affiliate"
-msgstr "O e-mail para o afiliado"
+msgstr ""
 
 #: includes/emails/class-affwp-emails.php:437
+#, fuzzy
 msgid "The website of the affiliate"
-msgstr "O site do afiliado"
+msgstr "Nema registriranih partnera"
 
 #: includes/emails/class-affwp-emails.php:442
 msgid "The promo method used by the affiliate"
-msgstr "O método de promoção usado pelo afiliado"
+msgstr ""
 
 #: includes/emails/class-affwp-emails.php:447
+#, fuzzy
 msgid "The reason an affiliate area was rejected"
-msgstr "A razão da reprovação"
+msgstr "Brand ambasador zahtjev odbijen"
 
 #: includes/emails/class-affwp-emails.php:452
 msgid "The affiliate login URL to your website"
-msgstr "A URL para login de afiliado em seu site"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/emails/class-affwp-emails.php:457
+#, fuzzy
 msgid "The amount of a given referral"
-msgstr "A quantidade de uma determinada indicação"
+msgstr "Iznos preporuke, npr. 15."
 
 #: includes/emails/class-affwp-emails.php:462
+#, fuzzy
 msgid "Your site name"
-msgstr "O nome de seu site"
+msgstr "Ime i prezime"
 
-# @ affiliate-wp
 #: includes/emails/class-affwp-emails.php:467
 #, fuzzy
 msgid "The affiliate&#8217;s referral URL"
-msgstr "URL de indicação do afiliado"
+msgstr "Tip provizije Brand ambasadora."
 
-# @ affiliate-wp
 #: includes/emails/class-affwp-emails.php:472
 #, fuzzy
 msgid "The affiliate&#8217;s ID"
-msgstr "ID de Afiliado"
+msgstr "Brand ambasador ID"
 
-# @ affiliate-wp
 #: includes/emails/class-affwp-emails.php:477
 #, fuzzy
 msgid "The affiliate&#8217;s referral rate"
-msgstr "Tipo de taxa de indicação do afiliado."
+msgstr "Tip provizije Brand ambasadora."
 
 #: includes/emails/class-affwp-emails.php:482
 msgid "The URL to the review page for a pending affiliate"
@@ -4025,10 +3706,10 @@ msgid "The URL the customer landed on that led to a referral being created"
 msgstr ""
 
 #: includes/emails/functions.php:121
+#, fuzzy
 msgid "No reason provided"
-msgstr "Nenhuma razão fornecida"
+msgstr "Nema zabilježenih preporuka"
 
-# @ affiliate-wp
 #: includes/integrations/class-edd.php:382
 #: includes/integrations/class-gravityforms.php:121
 #: includes/integrations/class-jigoshop.php:94
@@ -4038,18 +3719,15 @@ msgstr "Nenhuma razão fornecida"
 #: includes/integrations/class-woocommerce.php:196
 #: includes/integrations/class-zippycourses.php:263
 msgid "Referral #%d for %s recorded for %s"
-msgstr "AffiliateWP: Referência gravada de #%d de %s para %s"
+msgstr "Preporuka #%d za %s je dodjeljena %s"
 
-# @ affiliate-wp
 #: includes/integrations/class-edd.php:499
 #: includes/integrations/class-pmp.php:257
 #: includes/integrations/class-rcp.php:233
 #: includes/integrations/class-woocommerce.php:335
 msgid "Affiliate Discount?"
-msgstr "Desconto de Afiliado?"
+msgstr "Brand ambasador popust?"
 
-# @ edd
-# @ affiliate-wp
 #: includes/integrations/class-edd.php:506
 #: includes/integrations/class-jigoshop.php:173
 #: includes/integrations/class-memberpress.php:281
@@ -4060,25 +3738,27 @@ msgid ""
 "If you would like to connect this discount to an affiliate, enter the name "
 "of the affiliate it belongs to."
 msgstr ""
-"Se você gostaria de conectar este desconto a um afiliado, digite o nome do "
-"filiado."
+"Ako želiš dodjeliti ovaj popust Brand ambasadoru, unesi ime Brand ambasadora "
+"kojem ga dodjeljuješ."
 
-# @ affiliate-wp
 #: includes/integrations/class-edd.php:597
 msgid "Adjust EDD Commissions"
-msgstr "Ajustar comissões EDD"
+msgstr "Prilagodi EDD proviziju"
 
-# @ affiliate-wp
 #: includes/integrations/class-edd.php:598
 msgid ""
 "Should AffiliateWP adjust the commission amounts recorded for purchases that "
 "include affiliate referrals? This will subtract the referral amount from the "
 "base amount used to calculate the commission total."
 msgstr ""
+"Treba li AffiliateWP prilagoditi iznos provizije zabilježen kod kupnje koje "
+"uključuju preporuke partnera? Ovo će oduzeti iznos od baznog iznosa "
+"korištenog za izračun ukupne provizije."
 
 #: includes/integrations/class-edd.php:618
+#, fuzzy
 msgid "Disable Renewal Referrals"
-msgstr "Desabilitar a renovação indicações"
+msgstr "Nedavne preporuke"
 
 #: includes/integrations/class-edd.php:619
 msgid ""
@@ -4089,7 +3769,7 @@ msgstr ""
 #: includes/integrations/class-edd.php:624
 #, fuzzy
 msgid "Disable Referrals on Upgrades"
-msgstr "Desativar indicações para este produto"
+msgstr "Ukupne preporuke u obradi"
 
 #: includes/integrations/class-edd.php:625
 msgid ""
@@ -4097,88 +3777,90 @@ msgid ""
 "license upgrade purchases with EDD Software Licensing?"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/integrations/class-edd.php:646
 #: includes/integrations/class-zippycourses.php:70
 msgid "Affiliate Rates:"
-msgstr "Taxas de indicação:"
+msgstr "Stopa provizije:"
 
 #: includes/integrations/class-edd.php:659
 #: includes/integrations/class-zippycourses.php:83
 msgid "Disable referrals on this %s"
-msgstr "Desativar indicações sobre este %s"
+msgstr ""
 
 #: includes/integrations/class-edd.php:663
 #: includes/integrations/class-memberpress.php:190
 #: includes/integrations/class-zippycourses.php:87
+#, fuzzy
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
 "blank to use the site default referral rate."
 msgstr ""
-"Essas configurações serão usadas para calcular os lucros por venda do "
-"afiliado. Deixe em branco para usar a taxa de referência padrão."
+"Ove postavke će biti korištene za izračun zarade Brand ambasadora po "
+"realiziranoj prodaji. Ostavi prazno za korištenje zadane stope provizije."
 
-# @ affiliate-wp
 #: includes/integrations/class-exchange.php:300
+#, fuzzy
 msgid "Affiliate coupon?"
-msgstr "Cupom Afiliado"
+msgstr "Brand ambasador popust?"
 
 #: includes/integrations/class-exchange.php:307
+#, fuzzy
 msgid ""
 "If you would like to connect this coupon to an affiliate, enter the name of "
 "the affiliate it belongs to."
 msgstr ""
-"Se você gostaria de conectar este desconto a um afiliado, digite o nome do "
-"afiliado."
+"Ako želiš dodjeliti ovaj popust Brand ambasadoru, unesi ime Brand ambasadora "
+"kojem ga dodjeljuješ."
 
-# @ affiliate-wp
 #: includes/integrations/class-formidablepro.php:71
+#, fuzzy
 msgid " AffiliateWP"
-msgstr "AffiliateWP"
+msgstr "Brand ambasador (Partner)"
 
-# @ affiliate-wp
 #: includes/integrations/class-formidablepro.php:76
+#, fuzzy
 msgid "Referral description"
-msgstr "Descrição da indicação"
+msgstr "Postavke linkova preporuka"
 
 #: includes/integrations/class-formidablepro.php:80
 #: includes/integrations/class-formidablepro.php:106
 msgid "Select Field"
-msgstr "Selecionar Campo"
+msgstr ""
 
 #: includes/integrations/class-formidablepro.php:102
 msgid "Purchase Amount"
-msgstr "Compra Montante"
+msgstr ""
 
 #: includes/integrations/class-formidablepro.php:200
+#, fuzzy
 msgid "AffiliateWP: Referral #%d for %s recorded for %s"
-msgstr "AffiliateWP: Referência gravada de #%d de %s para %s"
+msgstr "Preporuka #%d za %s je dodjeljena %s"
 
 #: includes/integrations/class-formidablepro.php:225
+#, fuzzy
 msgid "AffiliateWP: Referral #%d for %s for %s rejected"
-msgstr "AffiliateWP: Referência #%d de %s para %s rejeitado"
+msgstr "Preporuka #%d za %s je dodjeljena %s"
 
 #: includes/integrations/class-gravityforms.php:143
 #: includes/integrations/class-sproutinvoices.php:76
+#, fuzzy
 msgid "Referral #%d for %s for %s rejected"
-msgstr "AffiliateWP: Referência #%d de %s para %s rejeitado"
+msgstr "Preporuka #%d za %s je dodjeljena %s"
 
-# @ affiliate-wp
 #: includes/integrations/class-gravityforms.php:238
 #, fuzzy
 msgid "Enable affiliate referral creation for this form"
-msgstr "Permitir criação de indicações de afiliado pelo formulário"
+msgstr "Tip provizije Brand ambasadora."
 
-# @ affiliate-wp
 #: includes/integrations/class-gravityforms.php:242
+#, fuzzy
 msgid "Allow referrals"
-msgstr "Aceitar indicações"
+msgstr "Ukupne preporuke u obradi"
 
-# @ affiliate-wp
 #: includes/integrations/class-gravityforms.php:273
 #, fuzzy
 msgid "Affiliate Coupon"
-msgstr "Cupom Afiliado"
+msgstr "Brand ambasador popust?"
 
 #: includes/integrations/class-gravityforms.php:276
 msgid ""
@@ -4187,70 +3869,63 @@ msgid ""
 "referral commission."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/integrations/class-jigoshop.php:153
 #, fuzzy
 msgid "Affiliate Data"
-msgstr "Taxa de Afiliado"
+msgstr "Postotak provizije"
 
 #: includes/integrations/class-lifterlms.php:81
 msgid "Referral not created because WooCommerce was used for payment."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:117
 #, fuzzy
 msgid "Referral not created because affiliate's own account was used."
-msgstr "Deletar conta geral do afiliado também?"
+msgstr "Obrisati i korisnički račun Brand ambasadora?"
 
 #: includes/integrations/class-lifterlms.php:130
 msgid "Referral not created due to 0.00 amount."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:162
 #, fuzzy
 msgid "LifterLMS Referral #%d updated successfully."
-msgstr "Indicação atualizada com sucesso"
+msgstr "Preporuka uspješno ažurirana"
 
-# @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:190
 #, fuzzy
 msgid "Referral #%d created successfully."
-msgstr "Indicação atualizada com sucesso"
+msgstr "Preporuka uspješno ažurirana"
 
 #: includes/integrations/class-lifterlms.php:197
 #, fuzzy
 msgid "Referral failed to be created."
-msgstr "Assunto Email Nova Indicação"
+msgstr "Nova preporuka"
 
 #: includes/integrations/class-lifterlms.php:238
 msgid "Search for an affiliate by username or email."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:246
 #, fuzzy
 msgid "Affiliate Discount"
-msgstr "Desconto de Afiliado?"
+msgstr "Brand ambasador popust?"
 
 #: includes/integrations/class-lifterlms.php:247
 msgid "Connect this coupon with an affiliate."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:460
 #, fuzzy
 msgid "Referral Details"
-msgstr "Configurações de Indicação"
+msgstr "Postavke linkova preporuka"
 
-# @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:523
 #: includes/integrations/class-pmp.php:370
 #: includes/integrations/class-rcp.php:405
 #, fuzzy
 msgid "Disable Referrals"
-msgstr "Desativar indicações"
+msgstr "Ukupne preporuke u obradi"
 
 #: includes/integrations/class-lifterlms.php:524
 msgid ""
@@ -4258,65 +3933,58 @@ msgid ""
 "commissions for affiliates."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:532
 #, fuzzy
 msgid "Enable %s Referral Rate"
-msgstr "Taxa de Indicação"
+msgstr "Stopa provizije"
 
 #: includes/integrations/class-lifterlms.php:533
 msgid "Check this box to enable %s referral rate overrides"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:541
 #, fuzzy
 msgid "%s Referral Rate"
-msgstr "Taxa de Indicação"
+msgstr "Stopa provizije"
 
-# @ affiliate-wp
 #: includes/integrations/class-lifterlms.php:542
 #, fuzzy
 msgid "Enter a referral rate for this %s"
-msgstr "Permitir criação de indicações de afiliado pelo formulário"
+msgstr "Tip provizije Brand ambasadora."
 
-# @ affiliate-wp
 #: includes/integrations/class-memberpress.php:157
 #: includes/integrations/class-rcp.php:364
 #: includes/integrations/class-rcp.php:395
 #: includes/integrations/class-woocommerce.php:485
 msgid "Affiliate Rate"
-msgstr "Taxa de Afiliado"
+msgstr "Postotak provizije"
 
-# @ affiliate-wp
 #: includes/integrations/class-memberpress.php:186
+#, fuzzy
 msgid "Disable referrals on this membership"
-msgstr "Desativar indicações para esse usuário"
+msgstr "Ukupne preporuke u obradi"
 
-# @ affiliate-wp
 #: includes/integrations/class-ninja-forms.php:196
+#, fuzzy
 msgid "Allow Referrals"
-msgstr "Aceitar Indicações"
+msgstr "Preporuke"
 
-# @ affiliate-wp
 #: includes/integrations/class-ninja-forms.php:197
 #, fuzzy
 msgid "Enable affiliate referral creation for this form?"
-msgstr "Permitir criação de indicações de afiliados através deste formulário?"
+msgstr "Tip provizije Brand ambasadora."
 
-# @ affiliate-wp
 #: includes/integrations/class-paypal.php:90
 #, fuzzy
 msgid "Pending PayPal referral"
-msgstr "Total indicações pendentes"
+msgstr "Ukupne preporuke u obradi"
 
-# @ affiliate-wp
 #: includes/integrations/class-pmp.php:356
 #: includes/integrations/class-zippycourses.php:55
+#, fuzzy
 msgid "Affiliate Settings"
-msgstr "Configuração Afiliado"
+msgstr "Idi na postavke AffiliateWP"
 
-# @ affiliate-wp
 #: includes/integrations/class-pmp.php:365
 #, fuzzy
 msgid ""
@@ -4324,8 +3992,8 @@ msgid ""
 "referral rates will override this value. If left blank, the site default "
 "value of %s will be used."
 msgstr ""
-"Taxa de indicação do afiliado , como 20 para 20%. Se deixado em branco , a "
-"taxa padrão local será usada."
+"Stopa provizije, upiši npr. 20 za 20%. Ako je ostavljeno prazno, stranica "
+"koristi zadanu vrijednost."
 
 #: includes/integrations/class-pmp.php:372
 msgid "Check to disable per-membership referrals."
@@ -4333,15 +4001,18 @@ msgstr ""
 
 #: includes/integrations/class-rcp.php:368
 #: includes/integrations/class-rcp.php:399
+#, fuzzy
 msgid ""
 "This rate will be used to calculate affiliate earnings when members "
 "subscribe to this level. Leave blank to use the site default referral rate."
 msgstr ""
+"Ove postavke će biti korištene za izračun zarade Brand ambasadora po "
+"realiziranoj prodaji. Ostavi prazno za korištenje zadane stope provizije."
 
 #: includes/integrations/class-rcp.php:410
 #, fuzzy
 msgid "Disable referrals on this subscription level."
-msgstr "Desativar indicações para este produto"
+msgstr "Ukupne preporuke u obradi"
 
 #: includes/integrations/class-woocommerce.php:239
 #: includes/integrations/class-woocommerce.php:436
@@ -4351,20 +4022,21 @@ msgstr ""
 #: includes/integrations/class-woocommerce.php:481
 #, fuzzy
 msgid "Configure affiliate rates for this product"
-msgstr "Desativar indicações para este produto"
+msgstr "Tip provizije Brand ambasadora."
 
-# @ affiliate-wp
 #: includes/integrations/class-woocommerce.php:487
 #: includes/integrations/extras/class-exchange-feature.php:27
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
 "blank to use default affiliate rates."
 msgstr ""
+"Ove postavke će biti korištene za izračun zarade Brand ambasadora po "
+"realiziranoj prodaji. Ostavi prazno za korištenje zadane stope provizije."
 
-# @ affiliate-wp
 #: includes/integrations/class-woocommerce.php:491
+#, fuzzy
 msgid "Disable referrals"
-msgstr "Desativar indicações"
+msgstr "Ukupne preporuke u obradi"
 
 #: includes/integrations/class-woocommerce.php:492
 msgid ""
@@ -4376,87 +4048,80 @@ msgstr ""
 msgid "Configure affiliate rates for this product variation"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/integrations/class-woocommerce.php:521
 #, fuzzy
 msgid "Referral rate (optional)"
-msgstr "Descrição da indicação"
+msgstr "Postavke linkova preporuka"
 
 #: includes/integrations/class-woocommerce.php:523
 #, fuzzy
 msgid "Disable referrals for this product variation"
-msgstr "Desativar indicações para este produto"
+msgstr "Ukupne preporuke u obradi"
 
 #: includes/integrations/extras/class-exchange-feature.php:39
 msgid "Disable referrals on this product"
-msgstr "Desativar indicações para este produto"
+msgstr ""
 
 #: includes/integrations/extras/class-exchange-feature.php:194
 msgid "Manage per-product affiliate rates."
 msgstr ""
 
-# @ affiliate-wp
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:47
 #, fuzzy
 msgid "Total Field"
-msgstr "Total de visitas"
+msgstr "Ukupno posjeta"
 
-# @ affiliate-wp
 #: includes/integrations/extras/class-ninja-forms-action-add-referral.php:63
 #, fuzzy
 msgid "Customer Email"
-msgstr "Email de boas-vindas"
+msgstr "Email"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:26
+#, fuzzy
 msgid "US Dollars"
-msgstr ""
+msgstr "Američki dolar (&#36;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:27
 msgid "Euros"
 msgstr ""
 
 #: includes/misc-functions.php:28
+#, fuzzy
 msgid "Argentine Peso"
-msgstr ""
+msgstr "Meksički pezo (&#36;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:29
+#, fuzzy
 msgid "Australian Dollars"
-msgstr ""
+msgstr "Australski dolar (&#36;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:30
 msgid "Bangladeshi Taka"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:31
+#, fuzzy
 msgid "Brazilian Real"
-msgstr ""
+msgstr "Brazilski real (R&#36;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:32
 msgid "Bulgarian Lev"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:33
+#, fuzzy
 msgid "Canadian Dollars"
-msgstr ""
+msgstr "Kanadski dolar (&#36;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:34
+#, fuzzy
 msgid "Chilean Peso"
-msgstr ""
+msgstr "Filipinski pezos"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:35
 msgid "Chinese Yuan"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:36
 msgid "Colombian Peso"
 msgstr ""
@@ -4465,177 +4130,159 @@ msgstr ""
 msgid "Croatia Kuna"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:38
 msgid "Czech Koruna"
-msgstr ""
+msgstr "Češka kruna"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:39
 msgid "Danish Krone"
-msgstr ""
+msgstr "Danska kruna"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:40
 msgid "Dominican Peso"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:41
 msgid "Egyptian Pound"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:42
+#, fuzzy
 msgid "Hong Kong Dollar"
-msgstr ""
+msgstr "Hong Kong dolar (&#36;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:43
 msgid "Hungarian Forint"
-msgstr ""
+msgstr "Mađarska forinta"
 
 #: includes/misc-functions.php:44
+#, fuzzy
 msgid "Icelandic Krona"
-msgstr ""
+msgstr "Švedska kruna"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:45
 msgid "Indonesia Rupiah"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:46
+#, fuzzy
 msgid "Indian Rupee"
-msgstr ""
+msgstr "Indijska rupija (&#8377;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:47
+#, fuzzy
 msgid "Israeli Shekel"
-msgstr ""
+msgstr "Izraelski šekel (&#8362;)"
 
 #: includes/misc-functions.php:48
+#, fuzzy
 msgid "Iranian Rial"
-msgstr ""
+msgstr "Brazilski real (R&#36;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:49
+#, fuzzy
 msgid "Japanese Yen"
-msgstr ""
+msgstr "Japanski yen (&yen;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:50
 msgid "Lao Kip"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:51
 msgid "Malaysian Ringgits"
-msgstr ""
+msgstr "Malezijski ringgits"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:52
+#, fuzzy
 msgid "Mexican Peso"
-msgstr ""
+msgstr "Meksički pezo (&#36;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:53
 msgid "Nepali Rupee"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:54
 msgid "Nigerian Naira"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:55
 msgid "Norwegian Krone"
-msgstr ""
+msgstr "Norveška kruna"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:56
+#, fuzzy
 msgid "New Zealand Dollar"
-msgstr ""
+msgstr "Novozelandski dolar (&#36;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:57
 msgid "Paraguayan Guaraní"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:58
 msgid "Philippine Pesos"
-msgstr ""
+msgstr "Filipinski pezos"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:59
 msgid "Polish Zloty"
-msgstr ""
+msgstr "Poljski zlot"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:60
+#, fuzzy
 msgid "Pounds Sterling"
-msgstr ""
+msgstr "Britanska funta (&pound;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:61
 msgid "Romanian Leu"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:62
+#, fuzzy
 msgid "Russian Ruble"
-msgstr ""
+msgstr "Ruski rublji"
 
 #: includes/misc-functions.php:63
 msgid "Saudi Arabian Riyal"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:64
+#, fuzzy
 msgid "Singapore Dollar"
-msgstr ""
+msgstr "Singapurski dolar (&#36;)"
 
 #: includes/misc-functions.php:65
 msgid "South African Rand"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:66
 msgid "South Korean Won"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:67
 msgid "Swedish Krona"
-msgstr ""
+msgstr "Švedska kruna"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:68
 msgid "Swiss Franc"
-msgstr ""
+msgstr "Švicarski franak"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:69
 msgid "Taiwan New Dollars"
-msgstr ""
+msgstr "Tajvanski novi dolar"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:70
+#, fuzzy
 msgid "Thai Baht"
-msgstr ""
+msgstr "Tajlandski bat (&#3647;)"
 
 #: includes/misc-functions.php:71
 msgid "Tunisian Dinar"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:72
+#, fuzzy
 msgid "Turkish Lira"
-msgstr ""
+msgstr "Turska lira (&#8378;)"
 
-# @ affiliate-wp
 #: includes/misc-functions.php:73
 msgid "United Arab Emirates Dirham"
 msgstr ""
@@ -4644,147 +4291,134 @@ msgstr ""
 msgid "Ukrainian Hryvnia"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/misc-functions.php:75
 msgid "Vietnamese Dong"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/scripts.php:63
 msgid ""
 "Are you sure you want to generate the payout file? All included referrals "
 "will be marked as Paid."
 msgstr ""
+"Jesi li siguran da želiš generirati datoteku za isplatu? Sve uključene "
+"preporuke biti će označene kao plaćene."
 
-# @ affiliate-wp
 #: includes/scripts.php:129
 #, fuzzy
 msgid "Please enter a valid URL for this site"
-msgstr "Por favor, digite a URL de seu site"
+msgstr "Molimo unesi URL Internet stranice"
 
-# @ affiliate-wp
 #: templates/creative.php:39
 msgid "Copy and paste the following:"
-msgstr "Copie e cole o seguinte:"
+msgstr "HTML kód ispod kopiraj i zalijepi na svoju stranicu/blog: "
 
-# @ affiliate-wp
 #: templates/dashboard-tab-creatives.php:44
 msgid "Sorry, there are currently no creatives available."
-msgstr "Desculpe, não há banners disponíveis"
+msgstr "Žao nam je, trenutno nema dostupnih bannera."
 
-# @ affiliate-wp
 #: templates/dashboard-tab-graphs.php:3
 msgid "Referral Graphs"
-msgstr "Gráficos de Indicação"
+msgstr "Grafikoni preporuka"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-payouts.php:3
 #, fuzzy
 msgid "Referral Payouts"
-msgstr "Taxa de Indicação"
+msgstr "Stopa provizije"
 
 #: templates/dashboard-tab-payouts.php:54
 msgid "None of your referrals have been paid out yet."
 msgstr ""
 
 #: templates/dashboard-tab-referrals.php:48
+#, fuzzy
 msgid "You have not made any referrals yet."
-msgstr "Você ainda não tem nenhuma indicação."
+msgstr "Do sada nisi imao/la nikakvih posjeta."
 
-# @ affiliate-wp
 #: templates/dashboard-tab-settings.php:9
 msgid "Profile Settings"
-msgstr "Configurações de Perfil"
+msgstr "Postavke profila"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-settings.php:14
 msgid "Your payment email"
-msgstr "Seu e-mail de pagamento"
+msgstr "PayPal email (ako želiš isplatu na PayPal račun)"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-settings.php:20
 msgid "Enable New Referral Notifications"
-msgstr "Habilitar notificações de indicação"
+msgstr "Pošalji mi obavjesti o novo generiranoj preporuci"
 
 #: templates/dashboard-tab-settings.php:28
 msgid "Save Profile Settings"
-msgstr "Salvar Configurações de Perfil"
+msgstr "Spremi postavke profila"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-stats.php:3 templates/dashboard.php:62
 msgid "Statistics"
-msgstr "Estatísticas"
+msgstr "Izvješća"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-stats.php:35
 msgid "Commission Rate"
-msgstr "Taxa de Comissão"
+msgstr "Postotak provizije"
 
 #: templates/dashboard-tab-stats.php:58
 msgid "Unique Links"
-msgstr "Links únicos"
+msgstr ""
 
 #: templates/dashboard-tab-stats.php:68
 msgid "None set"
-msgstr "Nada foi selecionado"
+msgstr ""
 
 #: templates/dashboard-tab-stats.php:77
 msgid "You have no referrals or visits that included a campaign name."
-msgstr "Você não tem indicações ou visitas que incluem o nome de campanha"
+msgstr ""
 
-# @ affiliate-wp
 #: templates/dashboard-tab-urls.php:3
 msgid "Referral URL Generator"
-msgstr "Gerador de URL de afiliado"
+msgstr "Generator jedinstvenog linka preporuke"
 
 #: templates/dashboard-tab-urls.php:8
+#, fuzzy
 msgid "Your affiliate ID is: <strong>%s</strong>"
-msgstr "Seu ID de afiliado é: <strong>%s</strong>"
+msgstr "Tvoj partner ID je: <strong>%d</strong>"
 
 #: templates/dashboard-tab-urls.php:10
+#, fuzzy
 msgid "Your affiliate username is: <strong>%s</strong>"
-msgstr "O nome do seu usuário é: <strong>%s</strong>"
+msgstr "Tvoj partner ID je: <strong>%d</strong>"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-urls.php:13
 msgid "Your referral URL is: <strong>%s</strong>"
-msgstr "Seu link de afiliado é: <strong>%s</strong>"
+msgstr "Tvoj jedinstveni link preporuke je: <strong>%s</strong>"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-urls.php:14
 msgid ""
 "Enter any URL from this website in the form below to generate a referral "
 "link!"
-msgstr "Digite qualquer URL de nosso site para gerar um link de afiliado!"
+msgstr ""
+"U polje ispod unesi bilo koji URL s naše Internet stranice i generiraj link "
+"preporuke!"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-urls.php:18
 msgid "Page URL"
-msgstr "URL da Página"
+msgstr "URL stranice"
 
 #: templates/dashboard-tab-urls.php:23
 msgid "Campaign Name (optional)"
-msgstr "Nome da Campanha (opcional)"
+msgstr ""
 
-# @ affiliate-wp
 #: templates/dashboard-tab-urls.php:28
 msgid "Referral URL"
-msgstr "URL de Indicação"
+msgstr "Link preporuke"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-urls.php:30
 msgid "(now copy this referral link and share it anywhere)"
-msgstr "(agora copie este link e compartilhe)"
+msgstr "(sada možeš kopirati ovu poveznicu i podjeliti ju gdje god želiš)"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-urls.php:36
 msgid "Generate URL"
-msgstr "Gerar URL"
+msgstr "Generiraj jedinstveni link"
 
-# @ affiliate-wp
 #: templates/dashboard-tab-visits.php:3
 msgid "Referral URL Visits"
-msgstr "Visitas / URLs"
+msgstr "Posjete preko jedinstvenih linkova"
 
 #: templates/dashboard-tab-visits.php:6
 msgid ""
@@ -4793,248 +4427,211 @@ msgid ""
 "referral."
 msgstr ""
 
-# @ affiliate-wp
 #: templates/dashboard-tab-visits.php:58
 msgid "You have not received any visits yet."
-msgstr "Você ainda não recebeu visitas"
+msgstr "Do sada nisi imao/la nikakvih posjeta."
 
-# @ affiliate-wp
 #: templates/dashboard.php:7
 msgid "Your affiliate account is pending approval"
-msgstr "Sua conta de afiliação está aguardando aprovação"
+msgstr "Tvoj Brand ambasador (partner) račun čeka odobrenje"
 
-# @ affiliate-wp
 #: templates/dashboard.php:11
 msgid "Your affiliate account is not active"
-msgstr "Sua conta de afiliado não está ativa"
+msgstr "Tvoj Brand ambasador (partner) račun nije aktivan"
 
-# @ affiliate-wp
 #: templates/dashboard.php:15
 msgid "Your affiliate account request has been rejected"
-msgstr "Seu pedido de afiliação foi rejeitado"
+msgstr ""
+"Zahtjev za registraciju tvojeg Brand ambasador (partner) računa je odbijen"
 
-# @ affiliate-wp
 #: templates/dashboard.php:36
 msgid "Your affiliate profile has been updated"
-msgstr "Seu perfil de afiliado foi atualizado"
+msgstr "Tvoj partner profil je ažuriran"
 
-# @ affiliate-wp
 #: templates/dashboard.php:56
 msgid "Affiliate URLs"
-msgstr "Links de Afiliado"
+msgstr "Jedinstveni linkovi"
 
-# @ affiliate-wp
 #: templates/dashboard.php:68
 msgid "Graphs"
-msgstr "Gráficos"
+msgstr "Grafikoni"
 
 #: templates/dashboard.php:104
 msgid "Log out"
 msgstr ""
 
-# @ affiliate-wp
 #: templates/login.php:10
 msgid "Log into Your Account"
-msgstr "Faça Login em sua conta"
+msgstr "Prijavi se na svoj račun"
 
-# @ affiliate-wp
 #: templates/login.php:20 templates/register.php:86
 msgid "Password"
-msgstr "Senha"
+msgstr "Lozinka"
 
-# @ affiliate-wp
 #: templates/login.php:26
 msgid "Remember Me"
-msgstr "Lembre-me"
+msgstr "Zapamti me"
 
 #: templates/login.php:34
 msgid "Login"
-msgstr ""
+msgstr "Prijava"
 
-# @ affiliate-wp
 #: templates/login.php:38
 msgid "Lost Password?"
-msgstr "Perdeu a senha?"
+msgstr "Zaboravljena lozinka? "
 
-# @ affiliate-wp
 #: templates/no-access.php:1
 msgid "The affiliate area is available only for registered affiliates."
-msgstr "A área de afiliados está disponível apenas para afiliados cadastrados"
+msgstr "Brand ambasador sučelje je dostupno samo za registrirane korisnike."
 
-# @ affiliate-wp
 #: templates/register.php:49
 msgid "Register a New Affiliate Account"
-msgstr "Cadastre-se para ser um de nossos afiliados:"
+msgstr "Registriraj novi Brand ambasador račun"
 
-# @ affiliate-wp
 #: templates/register.php:54 templates/register.php:55
 msgid "Your Name"
-msgstr "Seu Nome Completo"
+msgstr "Ime i prezime"
 
-# @ affiliate-wp
 #: templates/register.php:70
 msgid "Payment Email Address"
-msgstr "E-mail de Pagamento (Paypal)"
+msgstr "PayPal email (ako želiš isplatu na PayPal račun)"
 
-# @ affiliate-wp
 #: templates/register.php:79
 msgid "How will you promote us?"
-msgstr "Como você irá nos promover?"
+msgstr "Kako češ vršiti promociju?"
 
-# @ affiliate-wp
 #: templates/register.php:91
 msgid "Confirm Password"
-msgstr "Confirme sua senha"
+msgstr "Potvrdi lozinku"
 
-# @ affiliate-wp
 #: templates/register.php:104
 msgid "Agree to our <a href=\"%s\" target=\"_blank\">Terms of Use</a>"
-msgstr "Concordo com os <a href=\"%s\" target=\"_blank\">Termos de Uso</a>"
+msgstr "Prihvaćam <a href=\"%s\" target=\"_blank\">uvjete sudjelovanja</a>"
 
 #. Description of the plugin/theme
 msgid "Affiliate Plugin for WordPress"
-msgstr "Plugin de Afiliados para WordPress"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/affiliates/affiliates.php:58
 #, fuzzy
 msgctxt "affiliates"
 msgid "Reports"
-msgstr "Relatórios"
+msgstr "Izvješća"
 
-# @ affiliate-wp
 #: includes/admin/affiliates/delete.php:47
 msgctxt "Affiliate ID, affiliate name"
 msgid "ID #%d: %s"
 msgstr "ID #%d: %s"
 
 #: includes/admin/class-notices.php:39
-#, fuzzy
 msgctxt "Integrations"
 msgid "Dismiss Notice"
-msgstr "Dispensar Notificação"
+msgstr ""
 
 #: includes/admin/class-notices.php:331 includes/admin/class-notices.php:340
-#, fuzzy
 msgctxt "License"
 msgid "Dismiss Notice"
-msgstr "Dispensar Notificação"
+msgstr ""
 
-# @ affiliate-wp
 #: includes/admin/creatives/delete.php:22
 msgctxt "Creative ID, creative name"
 msgid "Creative ID #%d: %s"
-msgstr "ID Campanha #%d: %s"
+msgstr "ID bannera #%d: %s"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:74
 #, fuzzy
 msgctxt "Affiliate column table header"
 msgid "Affiliate"
-msgstr "Afiliado"
+msgstr "Brand ambasador (Partner)"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:75
 #, fuzzy
 msgctxt "Earnings column table header"
 msgid "Earnings"
-msgstr "Ganhos"
+msgstr "Zarada"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:76
 #, fuzzy
 msgctxt "Referrals column table header"
 msgid "Referrals"
-msgstr "Indicações"
+msgstr "Preporuke"
 
-# @ affiliate-wp
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:77
 #, fuzzy
 msgctxt "Visits column table header"
 msgid "Visits"
-msgstr "Visitas"
+msgstr "Posjete"
 
-# @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:129
 #, fuzzy
 msgctxt "payouts"
 msgid "All"
-msgstr "Todos"
+msgstr "Sve"
 
-# @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:149
 #, fuzzy
 msgctxt "payout"
 msgid "Amount"
-msgstr "Quantidade"
+msgstr "Iznos"
 
-# @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:153
 #, fuzzy
 msgctxt "payout"
 msgid "Status"
 msgstr "Status"
 
-# @ affiliate-wp
 #: includes/admin/payouts/class-list-table.php:154
 #, fuzzy
 msgctxt "payout"
 msgid "Date"
-msgstr "Data"
+msgstr "Datum"
 
-# @ affiliate-wp
 #: includes/admin/referrals/edit.php:52
 #, fuzzy
 msgctxt "payout"
 msgid "View"
-msgstr "Ver %s"
+msgstr "Pogled %s"
 
-# @ affiliate-wp
 #: includes/payout-functions.php:133 includes/payout-functions.php:137
 #, fuzzy
 msgctxt "payout"
 msgid "Paid"
-msgstr "Pago"
+msgstr "Plaćeno"
 
-# @ affiliate-wp
 #: includes/admin/referrals/referrals.php:39
 #, fuzzy
 msgctxt "referrals"
 msgid "Reports"
-msgstr "Relatórios"
+msgstr "Izvješća"
 
-# @ affiliate-wp
 #: includes/admin/visits/visits.php:34
 #, fuzzy
 msgctxt "visits"
 msgid "Reports"
-msgstr "Relatórios"
+msgstr "Izvješća"
 
-# @ affiliate-wp
 #: includes/class-graph.php:389
 #, fuzzy
 msgctxt "date filter"
 msgid "From"
-msgstr "De"
+msgstr "Od"
 
-# @ affiliate-wp
 #: includes/class-graph.php:391
 #, fuzzy
 msgctxt "date filter"
 msgid "To"
-msgstr "Para"
+msgstr "Za"
 
 #: includes/cli/class-command.php:36
 msgctxt "license status"
 msgid "Valid"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-command.php:38
 #, fuzzy
 msgctxt "license status"
 msgid "Invalid"
-msgstr "Email inválido"
+msgstr "Neispravan email"
 
 #: includes/cli/class-command.php:45
 msgctxt "debug_mode"
@@ -5067,10 +4664,9 @@ msgid "Disabled"
 msgstr ""
 
 #: includes/cli/class-command.php:80
-#, fuzzy
 msgctxt "integrations"
 msgid "None"
-msgstr "Nada foi selecionado"
+msgstr ""
 
 #: includes/cli/class-command.php:109
 msgctxt "show pretty referral URLs"
@@ -5082,183 +4678,400 @@ msgctxt "show pretty referral URLs"
 msgid "Disabled"
 msgstr ""
 
-# @ affiliate-wp
 #: includes/cli/class-visit-sub-commands.php:421
 #, fuzzy
 msgctxt "direct traffic"
 msgid "Direct"
-msgstr "Tráfego Direto"
+msgstr "Direktan promet"
 
-# @ affiliate-wp
-#, fuzzy
-#~ msgid "What&#8217;s new in AffiliateWP"
-#~ msgstr "O que há de novo no AffiliateWP"
-
-# @ affiliate-wp
 #~ msgid "Getting started with AffiliateWP"
-#~ msgstr "Começando com AffiliateWP"
+#~ msgstr "Započni rad sa AffiliateWP"
 
-# @ affiliate-wp
 #~ msgid "The people that build AffiliateWP"
-#~ msgstr "As pessoas que fazem o AffiliateWP"
+#~ msgstr "Ljudi iza AffiliateWP"
 
-# @ affiliate-wp
-#, fuzzy
-#~ msgid "What&#8217;s New"
-#~ msgstr "O que há de novo"
+#~ msgid "What's New"
+#~ msgstr "Što je novo"
 
-# @ affiliate-wp
 #~ msgid "Getting Started"
-#~ msgstr "Começando"
+#~ msgstr "Početak rada"
 
-# @ affiliate-wp
 #~ msgid "Credits"
-#~ msgstr "Créditos"
+#~ msgstr "Zasluge"
 
-# @ affiliate-wp
 #~ msgid "Welcome to AffiliateWP v%s"
-#~ msgstr "Bem vindo ao AffiliateWP v%s"
+#~ msgstr "Dobrodošli na AffiliateWP v%s"
 
-# @ affiliate-wp
 #~ msgid ""
 #~ "Thank you for installing AffiliateWP v%s. The best affiliate marketing "
 #~ "plugin for WordPress."
 #~ msgstr ""
-#~ "Obrigado por Instalar o AffiliateWP v%s. O Melhor marketing de afiliados "
-#~ "para WordPress."
+#~ "Hvala što ste se odlučili na instalaciju Affiliate WP v%s., najboljeg "
+#~ "partner (affiliate) plugina za WordPress."
 
-# @ affiliate-wp
 #~ msgid "Version %s"
-#~ msgstr "Versão %s"
+#~ msgstr "Verzija %s"
 
+#, fuzzy
 #~ msgid "New Integrations"
-#~ msgstr "Novas Integrações"
+#~ msgstr "Integracije"
+
+#, fuzzy
+#~ msgid "Improved Integrations"
+#~ msgstr "Integracije"
+
+#, fuzzy
+#~ msgid "Affiliate Rejection Reasons"
+#~ msgstr "Registracije Brand ambasadora"
+
+#~ msgid "Additional Updates"
+#~ msgstr "Dodatne nadogradnje"
+
+#, fuzzy
+#~ msgid "Disable Individual Emails"
+#~ msgstr "Ukupne preporuke u obradi"
+
+#, fuzzy
+#~ msgid "Creative Template File"
+#~ msgstr "Banner deaktiviran"
+
+#~ msgid "Go to AffiliateWP Settings"
+#~ msgstr "Idi na postavke AffiliateWP"
+
+#~ msgid "Welcome to AffiliateWP %s"
+#~ msgstr "Dobrodošli na AffiliateWP %s"
 
 #~ msgid ""
-#~ "We’ve made AffiliateWP more accessible and more valuable to more users "
-#~ "with three new integrations:"
+#~ "Use the tips below to get started using AffiliateWP. You will be up and "
+#~ "running in no time!"
 #~ msgstr ""
-#~ "Fizemos AffiliateWP mais acessível e mais valioso para mais usuários com "
-#~ "três novas integrações:"
+#~ "Za efikasan početak korištenja AffiliateWP plugina koristite savjete u "
+#~ "nastavku. Biti ćete spremni za korištene u tren oka!"
 
-#~ msgid "Improved Integrations"
-#~ msgstr "Integrações Melhoradas"
-
-#~ msgid "Commissions can be disabled on individual forms in Gravity Forms"
-#~ msgstr ""
-#~ "Comissões podem ser desabilitadas em formulários individuais no Gravity "
-#~ "Forms"
-
-#~ msgid "Commissions can be disabled on individual forms in Ninja Forms"
-#~ msgstr ""
-#~ "Comissões podem ser desabilitadas em formulários individuais no Ninja "
-#~ "Forms"
-
-# @ affiliate-wp
-#~ msgid "Affiliate Rejection Reasons"
-#~ msgstr "Razões para Rejeição de Afiliados"
-
-#~ msgid "reCaptcha v2.0"
-#~ msgstr "reCaptcha v2.0"
-
-# @ affiliate-wp
-#~ msgid "Additional Updates"
-#~ msgstr "Atualizações Adicionais"
-
-# @ affiliate-wp
-#~ msgid "Disable Individual Emails"
-#~ msgstr "Desabilitar os Emails individuais"
-
-# @ affiliate-wp
-#~ msgid "Creative Template File"
-#~ msgstr "Criar Arquivo de Modelo"
-
-#~ msgid "Import Users By Role"
-#~ msgstr "Importar Usuários por Tipo"
-
-# @ affiliate-wp
-#~ msgid "Go to AffiliateWP Settings"
-#~ msgstr "Vá para configurações do AffiliateWP"
-
-# @ affiliate-wp
-#~ msgid "Welcome to AffiliateWP %s"
-#~ msgstr "Bem-vindo ao AffiliateWP %s"
-
-# @ affiliate-wp
 #~ msgid "Overview of Affiliates and Referrals"
-#~ msgstr "Visão geral de Afiliados e Indicações"
+#~ msgstr "Pregled partnera (affiliates) i preporuka"
 
-# @ affiliate-wp
 #~ msgid "The Overview Page"
-#~ msgstr "Página Visão Geral"
+#~ msgstr "Nadzorna ploča"
 
-# @ affiliate-wp
+#~ msgid ""
+#~ "The overview page gives you a quick summary of your recent affiliate "
+#~ "activity, including recent registrations, referrals, and visits."
+#~ msgstr ""
+#~ "Nadzorna ploča daje vam kratak sažetak zadnjih aktivnosti partnera, "
+#~ "uključujući zadnje registracije, preporuke i posjete."
+
+#~ msgid ""
+#~ "It also provides a quick summary of your affiliates' referral earnings."
+#~ msgstr ""
+#~ "Također pruža brzi pregled provizija vaših partnera ostvarenih preko "
+#~ "preporuka."
+
+#~ msgid ""
+#~ "If you allow affiliate registrations, you can also easily accept or "
+#~ "reject affiliate's applications directly from the Overview page"
+#~ msgstr ""
+#~ "Ako dozvolite registraciju partnera, također također možete jednostavno "
+#~ "prihvatiti ili odbaciti prijavu novih partnera direktno s nadzorne ploče"
+
 #~ msgid "Affiliates &rarr; Add New"
-#~ msgstr "Afiliados &rarr; Adicionar Novo"
+#~ msgstr "Partner &rarr; Dodaj novog"
 
-# @ affiliate-wp
+#~ msgid ""
+#~ "From the main Affiliates page, site admins can easily add new affiliates "
+#~ "to AffiliateWP. Simply enter the username, set a rate, and click Add "
+#~ "Affiliate!"
+#~ msgstr ""
+#~ "U sekciji partneri (affiliates), administrator može jednostavno dodati "
+#~ "novog partnera u AffiliateWP. Jednostavno unesite korisničko ime, "
+#~ "postavite iznos provizije i kliknite dodaj partnera!"
+
 #~ msgid "Affiliate Registration"
-#~ msgstr "Registro de Afiliado"
+#~ msgstr "Registracija partnera"
 
-# @ affiliate-wp
+#~ msgid ""
+#~ "When enabled, affiliates can register themselves via the Affiliate Area. "
+#~ "If they already have a user account on your site, they can register by "
+#~ "simply agreeing to the terms of use. If they need to create an entirely "
+#~ "new account, they have that option as well!"
+#~ msgstr ""
+#~ "Ako je omogućeno, partner se može registrirati samostalno kroz partner "
+#~ "(affiliate) sučelje. Ako korisnik već ima korisnički račun na vašoj "
+#~ "Internet stranici, registracija u partner (affiliate) program se vrši "
+#~ "prihvaćanjem uvjeta sudjelovanja. Kod kreiranja potpuno novog računa, "
+#~ "korisnik također mora prihvatiti uvjete sudjelovanja!"
+
 #~ msgid "Moderate Registrations"
-#~ msgstr "Moderar Registros"
+#~ msgstr "Uredi registracije"
 
-# @ affiliate-wp
+#~ msgid ""
+#~ "Affiliate registrations can be moderated and require that a site admin "
+#~ "approve each registration before the affiliate is permitted to begin "
+#~ "tracking referrals."
+#~ msgstr ""
+#~ "Registracija partnera može se uređivati i zahtjeva da administrator "
+#~ "Internet stranice odobri svaku registraciju prije nego je partneru "
+#~ "dozvoljeno sudjelovanje u programu. "
+
+#~ msgid ""
+#~ "Each time an affiliate registers, site admins can log into the site and "
+#~ "approve or reject the application."
+#~ msgstr ""
+#~ "Svaki put prilikom registracije novog partnera, administrator Internet "
+#~ "stranice može se prijaviti na stranicu i odobriti ili odbiti prijavu."
+
 #~ msgid "A Dashboard For Your Affiliates"
-#~ msgstr "Um Painel Para Seus Afiliados"
+#~ msgstr "Nadzorna ploča za tvoje partnere (affiliates)"
 
-# @ affiliate-wp
+#, fuzzy
+#~ msgid ""
+#~ "The Affiliate Area, shown on any page containing the "
+#~ "<em>[affiliate_area]</em> shortcode, gives your affiliates access to "
+#~ "their performance reports."
+#~ msgstr ""
+#~ "Partner (affiliate) sučelje, prikazano je na svakoj stranici koja sadrži "
+#~ "<em>[affiliate_area]</em> kraticu (shortcode), daje tvojim partnerima "
+#~ "pristup njihovim izvješćima."
+
+#~ msgid ""
+#~ "Affiliates can easily see how much they have earned, how much is awaiting "
+#~ "payment, and even how their referral URLs have done over time."
+#~ msgstr ""
+#~ "Partneri mogu jednostavno vidjeti koliko su zaradili, koji iznos "
+#~ "provizije čeka na isplatu, čak i kako njihove preporuke kotiraju kroz "
+#~ "vrijeme."
+
+#~ msgid ""
+#~ "A log of the referral links that have been clicked and where they were "
+#~ "clicked on from, and whether the link converted into a successful "
+#~ "referral, is also available to affiliates."
+#~ msgstr ""
+#~ "Popis jedinstvenih poveznica (linkova) koje su zabilježile klikove i s "
+#~ "kojih je kliknuto dostupan je partneru bez obzira je li se posjet "
+#~ "uspješno konvertirao ili ne."
+
 #~ msgid "Quick Terminology"
-#~ msgstr "Terminologia rápida"
+#~ msgstr "Brzi pojmovi"
 
-# @ affiliate-wp
+#~ msgid ""
+#~ "These are your best friends. They are the users that are actively "
+#~ "promoting your products and services through referral URLs. When they "
+#~ "create a customer for you, they get paid back in the form of a commission."
+#~ msgstr ""
+#~ "Oni su vaši najbolji prijatelji. To su korisnici koji aktivno promoviraju "
+#~ "vaše proizvode i usluge kroz jedinstvene poveznice (linkove). Kada "
+#~ "njihova preporuka rezultira prodajom oni bivaju plaćeni u obliku "
+#~ "provizije."
+
+#~ msgid ""
+#~ "These are the commission records created anytime an affiliate "
+#~ "successfully sends a potential customer to your site and that customer "
+#~ "makes a purchase."
+#~ msgstr ""
+#~ "Ovo je evidencija provizija stvorenih svaki put kada partnerova preporuka "
+#~ "uputi kupca na vašu Internet stranicu i kada posjeta rezultira prodajom "
+#~ "tj. uspješno je konvertirana. "
+
+#~ msgid ""
+#~ "These are unique hits on the referral URLs shared out by your affiliates. "
+#~ "Each time a potential customer clicks on a referral URL, a visit is "
+#~ "recorded."
+#~ msgstr ""
+#~ "Ovo su jedinstveni klikovi na jedinstvene poveznice (linkove) podjeljene "
+#~ "od strane vašeg partnera. Svaki put kada potencijalni kupac klikne na "
+#~ "jedinstvenu poveznicu (link), sustav zabilježi posjetu."
+
 #~ msgid "Need Help?"
-#~ msgstr "Precisa de Ajuda?"
+#~ msgstr "Trebate pomoć?"
 
-# @ affiliate-wp
 #~ msgid "Phenomenal Support"
-#~ msgstr "Suporte Fenomenal"
+#~ msgstr "Fenomenalna podrška"
 
-# @ affiliate-wp
+#, fuzzy
+#~ msgid ""
+#~ "We do our best to provide the best support we can. If you encounter a "
+#~ "problem or have a question, visit our <a href=\"https://affiliatewp.com/"
+#~ "support\">support</a> page to open a ticket."
+#~ msgstr ""
+#~ "Trudimo se osigurati odličnu korisničku podršku. Ako naiđete na problem "
+#~ "ili imate pitanje, posjetite stranicu <a href=\"http://affiliatewp.com/"
+#~ "support\">korisničke podrške</a> i otvorite slučaj."
+
 #~ msgid "Thank you for updating to the latest version!"
-#~ msgstr "Obrigado por atualizar para a versão mais recente!"
+#~ msgstr "Hvala što ste nadogradili AffiliateWP na zadnju verziju!"
 
-# @ affiliate-wp
 #~ msgid ""
 #~ "AffiliateWP is created by developers from around the world that aim to "
 #~ "provide the #1 affiliate platform for WordPress. Here are just some of "
 #~ "the faces that have helped build AffiliateWP:"
 #~ msgstr ""
-#~ "AffiliateWP é criado por desenvolvedores de todo o mundo que visam "
-#~ "fornecer a plataforma número #1 de afiliados para o WordPress. Aqui estão "
-#~ "apenas alguns dos rostos que ajudaram a construir o AffiliateWP:"
+#~ "AffiliateWP je kreiran od doprinosom programera iz cijelog svijeta kojima "
+#~ "je cilj pružiti #1 partner (affiliate) platformu za WordPress. Ovdje su "
+#~ "samo od nekih lica koja su pomogla izgraditi AffiliateWP:"
 
-# @ affiliate-wp
-#~ msgid "View %s"
-#~ msgstr "Ver %s"
-
-# @ affiliate-wp
 #~ msgid "Add New Referral"
-#~ msgstr "Adicionar Nova Indicação"
+#~ msgstr "Dodaj novu preporuku"
 
-# @ affiliate-wp
-#~ msgid "Accept Affiliate"
-#~ msgstr "Aceitar Afiliado"
+#, fuzzy
+#~ msgid "Application Rejected Email Subject"
+#~ msgstr "Prijava za Brand ambasador (partner) program prihvaćena"
 
-# @ affiliate-wp
-#~ msgid "Reject Affiliate"
-#~ msgstr "Rejeitar Afiliado"
+#, fuzzy
+#~ msgid "Affiliate Application Rejected"
+#~ msgstr "Prijava za Brand ambasador (partner) program prihvaćena"
 
-# @ affiliate-wp
-#~ msgid "AffiliateWP"
-#~ msgstr "AffiliateWP"
-
-# @ affiliate-wp
+#, fuzzy
 #~ msgid "Application Rejected Email Content"
-#~ msgstr "Aplicativo Rejeitou Conteúdo de Email"
+#~ msgstr "Prijava za Brand ambasador (partner) program prihvaćena"
 
-# @ affiliate-wp
+#, fuzzy
+#~ msgid ""
+#~ "We regret to inform you that your affiliate application on %s has been "
+#~ "rejected."
+#~ msgstr ""
+#~ "Tvoja prijava za Brand ambasador (partner) program na %s je prihvaćena! \n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "Affiliate Export Improvements"
+#~ msgstr "Banneri Brand ambasadora"
+
+#, fuzzy
+#~ msgid ""
+#~ "The affiliate's username is now included in the exported affiliate .csv "
+#~ "file."
+#~ msgstr "Brand ambasador sučelje je dostupno samo za registrirane korisnike."
+
 #, fuzzy
 #~ msgid "New Affiliate Meta Class"
-#~ msgstr "Novo Afiliado"
+#~ msgstr "Novi Brand ambasador"
+
+#, fuzzy
+#~ msgid "Creative Improvements"
+#~ msgstr "Banneri"
+
+#~ msgid "Accept Affiliate"
+#~ msgstr "Prihvati partnera"
+
+#~ msgid "Reject Affiliate"
+#~ msgstr "Odbaci partnera"
+
+#, fuzzy
+#~ msgid "Congratulations"
+#~ msgstr ""
+#~ "Čestitamo %s!\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "AffiliateWP"
+#~ msgstr "Brand ambasador (Partner)"
+
+#~ msgid "New features"
+#~ msgstr "Nove značajke"
+
+#~ msgid ""
+#~ "With version 1.2, you can now set referral rates on a per-product basis. "
+#~ "Per-product referral rates are supported for both Easy Digital Downloads "
+#~ "and WooCommerce, with more integrations on the way."
+#~ msgstr ""
+#~ "S verzijom 1.2, sada možete postaviti proviziju za preporuku baziranu na "
+#~ "pojedini proizvod. Provizija definirana na razini proizvoda podržana je "
+#~ "za Easy Digital Downloads i WooCommerce. Više integracija uskoro."
+
+#~ msgid ""
+#~ "We have introduced a new admin section for affiliate creatives that you "
+#~ "can share with your affiliates. Easily add image and text creatives which "
+#~ "are shown in affiliate area for your affiliates. Creatives can also be "
+#~ "shown anywhere with a simple shortcode."
+#~ msgstr ""
+#~ "Uveli smo novu sekciju za administratore namjenjenu postavljanje bannera "
+#~ "koje će partneri moći koristiti i vidjeti na svojem sučelju. Za dodavanje "
+#~ "bannera jednostavno dodajte sliku i tekst bannera koje želite da partner "
+#~ "vidi na svom partner sučelju. Banneri također mogu biti prikazani bilo "
+#~ "gdje uz pomoć jednostavne kratice (shortcode)."
+
+#~ msgid "Improved Affiliate Area"
+#~ msgstr "Unaprjeđeno partner (affiliate) sučelje"
+
+#~ msgid ""
+#~ "The Affiliate Area has been simplified and improved with the introduction "
+#~ "of a tabbed interface."
+#~ msgstr ""
+#~ "Partner sučelje je pojednostavljeno i unaprjeđeno uvođenjem tabulatora."
+
+#~ msgid "Integration with EDD Commissions"
+#~ msgstr "Integracija sa EDD provizijama"
+
+#~ msgid ""
+#~ "If you use Commissions for Easy Digital Downloads, you can now "
+#~ "automatically adjust the commission rate when a referral is present."
+#~ msgstr ""
+#~ "Ako koristite provizije za Easy Digital Downloads, možete automatski "
+#~ "prilagoditi stopu provizije kada je preporuka prisutna."
+
+#~ msgid "New Primary URL and Promotion Method Fields"
+#~ msgstr "Novo polje za primarni URL i metodu promocije"
+
+#~ msgid ""
+#~ "The affiliate registration form now includes fields for learning how your "
+#~ "affiliates will be promoting your products and services."
+#~ msgstr ""
+#~ "Obrazac za registraciju od sada uključuje polje za upoznavanje s metodama "
+#~ "koje će vaš partner koristiti u promociji vaših proizvoda i usluga."
+
+#~ msgid "Registration Form Retains Values on Error"
+#~ msgstr "Obrazac za prijavu zadržava vrijednosti u slučaju greške"
+
+#~ msgid ""
+#~ "When there's an error on the affiliate registration form, it no longer "
+#~ "clears the entire form, making it easier for your affiliates to complete "
+#~ "their registration."
+#~ msgstr ""
+#~ "Ako se pojavi greška u popunjavanju obrasca za registraciju, više se ne "
+#~ "neće izbrisati cijeli obrazac, čineći završetak procesa registracije "
+#~ "tvojim partnerima jednostavnijim."
+
+#~ msgid "Improved Affiliate Deletion"
+#~ msgstr "Unaprjeđeno brisanje partnera"
+
+#~ msgid ""
+#~ "When you delete an affiliate account, you now have the option to also "
+#~ "delete the user account and all affiliate data."
+#~ msgstr ""
+#~ "Prilikom brisanja računa partnera, od sada postoji i opcija brisanja "
+#~ "korisničkog računa i svih ostalih podataka vezanih uz partnera."
+
+#~ msgid "Option to Disable the TOS Field"
+#~ msgstr "Opcija za onemogućavanje TOS polja"
+
+#~ msgid ""
+#~ "The Terms of Service checkbox on the affiliate registration form will now "
+#~ "automatically be disabled when the corresponding page is not set in the "
+#~ "admin."
+#~ msgstr ""
+#~ "Kućica uvjeta sudjelovanja na obrazcu za registraciju će sada biti "
+#~ "automatski onemogućena ako odgovarajuća stranica nije postavljena od "
+#~ "strane administratora."
+
+#~ msgid "Enhanced Visit Search Options"
+#~ msgstr "Proširene opcije pretrage posjeta"
+
+#~ msgid ""
+#~ "The Visits page now can be searched with various methods in order to view "
+#~ "visits from specific affiliates, referrals, and more."
+#~ msgstr ""
+#~ "U cilju dosega informacija o specifičnim partnerima, preporukama i "
+#~ "ostalom stranica koja bilježi posjete sada se može pretražiti različitim "
+#~ "metodama."
+
+#~ msgid "Euros (&euro;)"
+#~ msgstr "Euro (&euro;)"
+
+#~ msgid "Korean Won (&#8361;)"
+#~ msgstr "Korejski won (&#8361;)"
+
+#~ msgid "Iranian Rial (&#65020;)"
+#~ msgstr "Iranski rial (&#65020;)"
+
+#~ msgid "Payment Email (if different)"
+#~ msgstr "PayPal email (ako je drugačiji)"

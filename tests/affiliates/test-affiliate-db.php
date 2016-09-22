@@ -44,6 +44,13 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::$cache_group
+	 */
+	public function test_cache_group_should_be_affiliates() {
+		$this->assertSame( 'affiliates', affiliate_wp()->affiliates->cache_group );
+	}
+
+	/**
 	 * @covers \Affiliate_WP_DB_Affiliates::$query_object_type
 	 */
 	public function test_query_object_type_should_be_AffWP_Affiliate() {

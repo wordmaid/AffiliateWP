@@ -187,4 +187,46 @@ class Tests extends UnitTestCase {
 
 		$this->assertEqualSets( $creatives, $results );
 	}
+
+	/**
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 */
+	public function test_get_creatives_with_no_status_should_return_results_for_all_statuses() {
+		$creative = $this->factory->creative->create( array(
+			'status' => 'inactive'
+		) );
+
+		$results = affiliate_wp()->creatives->get_creatives( array(
+			'fields' => 'ids',
+		) );
+
+		$this->assertEqualSets( array_merge( self::$creatives, array( $creative ) ), $results );
+
+		// Clean up.
+		affwp_delete_creative( $creative );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 */
+	public function test_get_creatives_with_valid_status_should_return_results_only_for_that_status() {
+		$results = affiliate_wp()->creatives->get_creatives( array(
+			'status' => 'active',
+			'fields' => 'ids',
+		) );
+
+		$this->assertEqualSets( self::$creatives, $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 */
+	public function test_get_creatives_with_invalid_status_should_return_no_results() {
+		$results = affiliate_wp()->creatives->get_creatives( array(
+			'status' => 'foo'
+		) );
+
+		$this->assertEqualSets( array(), $results );
+	}
+
 }

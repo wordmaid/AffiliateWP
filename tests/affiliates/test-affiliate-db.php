@@ -772,4 +772,32 @@ class Tests extends UnitTestCase {
 		$this->assertTrue( affiliate_wp()->affiliates->affiliate_exists( $object ) );
 	}
 
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::add()
+	 */
+	public function test_add_with_existing_affiliate_user_id_should_return_false() {
+		$this->assertFalse( affiliate_wp()->affiliates->add( array(
+			'user_id' => self::$users[0]
+		) ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::add()
+	 */
+	public function test_add_successful_should_return_id_of_the_new_affiliate() {
+		$affiliate = affiliate_wp()->affiliates->add( array(
+			'user_id' => $this->factory->user->create()
+		) );
+
+		$results = affiliate_wp()->affiliates->get_affiliates( array(
+			'fields'  => 'ids',
+			'number'  => 1,
+			'orderby' => 'affiliate_id'
+		) );
+
+		$this->assertSame( $affiliate, $results[0] );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate );
+	}
 }

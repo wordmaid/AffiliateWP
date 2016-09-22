@@ -130,13 +130,18 @@ class Tab extends Reports\Tab {
 				empty( $name ) ? sprintf( __( 'Affiliate #%d', 'affiliate-wp' ), $affiliate->ID ) : $name
 			);
 
+			$referrals_count = affwp_get_affiliate_referral_count( $affiliate->ID );
+			$referrals_data = sprintf( _n( '%d referral', '%d referrals', $referrals_count, 'affiliate-wp' ),
+				number_format_i18n( $referrals_count )
+			);
+
 			$this->register_tile( 'highest_converting_affiliate', array(
 				'label'           => __( 'Highest Converting Affiliate', 'affiliate-wp' ),
 				'context'         => 'secondary',
 				'data'            => $data_link,
-				'comparison_data' => sprintf( '%1$s (%2$d referrals)',
+				'comparison_data' => sprintf( '%1$s (%2$s)',
 					$this->get_date_comparison_label(),
-					affwp_get_affiliate_referral_count( $affiliate->ID )
+					$referrals_data
 				),
 			) );
 

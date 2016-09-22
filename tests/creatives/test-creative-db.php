@@ -80,6 +80,35 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_Creatives_DB::get_columns()
+	 */
+	public function test_get_columns_should_return_all_columns() {
+		$expected = array(
+			'creative_id'  => '%d',
+			'name'         => '%s',
+			'description'  => '%s',
+			'url'          => '%s',
+			'text'         => '%s',
+			'image'        => '%s',
+			'status'       => '%s',
+			'date'         => '%s',
+		);
+
+		$this->assertEqualSets( $expected, affiliate_wp()->creatives->get_columns() );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Creatives_DB::get_column_defaults()
+	 */
+	public function test_get_column_defaults_should_return_all_column_defaults() {
+		$expected = array(
+			'date' => date( 'Y-m-d H:i:s' ),
+		);
+
+		$this->assertEqualSets( $expected, affiliate_wp()->creatives->get_column_defaults() );
+	}
+
+	/**
 	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
 	 */
 	public function test_get_creatives_should_return_array_of_Creative_objects_if_not_count_query() {

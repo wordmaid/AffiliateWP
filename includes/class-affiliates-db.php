@@ -423,22 +423,24 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	}
 
 	/**
-	 * Checks if an affiliate exists
+	 * Checks if an affiliate exists.
 	 *
 	 * @access public
 	 * @since  1.0
+	 *
+	 * @param int|\AffWP\Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+	 * @return bool True if the affiliate exists, otherwise false.
 	*/
-	public function affiliate_exists( $affiliate_id = 0 ) {
-
+	public function affiliate_exists( $affiliate = 0 ) {
 		global $wpdb;
 
-		if( empty( $affiliate_id ) ) {
+		if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 			return false;
 		}
 
-		$affiliate = $wpdb->query( $wpdb->prepare( "SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $affiliate_id ) );
+		$exists = $wpdb->query( $wpdb->prepare( "SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $affiliate->ID ) );
 
-		return ! empty( $affiliate );
+		return ! empty( $exists );
 	}
 
 	/**

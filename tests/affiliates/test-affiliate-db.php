@@ -742,5 +742,34 @@ class Tests extends UnitTestCase {
 		$this->assertSame( $user->data->display_name, affiliate_wp()->affiliates->get_affiliate_name( $affiliate ) );
 	}
 
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::affiliate_exists()
+	 */
+	public function test_affiliate_exists_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affiliate_wp()->affiliates->affiliate_exists( 0 ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::affiliate_exists()
+	 */
+	public function test_affiliate_exists_with_valid_affiliate_id_should_return_true() {
+		$this->assertTrue( affiliate_wp()->affiliates->affiliate_exists( self::$affiliates[0] ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::affiliate_exists()
+	 */
+	public function test_affiliate_exists_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affiliate_wp()->affiliates->affiliate_exists( new \stdClass() ) );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_DB_Affiliates::affiliate_exists()
+	 */
+	public function test_affiliate_exists_with_valid_affiliate_object_should_return_true() {
+		$object = affwp_get_affiliate( self::$affiliates[1] );
+
+		$this->assertTrue( affiliate_wp()->affiliates->affiliate_exists( $object ) );
+	}
 
 }

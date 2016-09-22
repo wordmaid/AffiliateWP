@@ -193,7 +193,7 @@ class AFFWP_Plugin_Updater {
 
 			if ( empty( $version_info->download_link ) ) {
 				printf(
-					__( 'There is a new version of %1$s available. %2$sView version %3$s details%4$s.', 'easy-digital-downloads' ),
+					__( 'There is a new version of %1$s available. %2$sView version %3$s details%4$s.', 'affiliate=wp' ),
 					esc_html( $version_info->name ),
 					'<a target="_blank" class="thickbox" href="' . esc_url( $changelog_link ) . '">',
 					esc_html( $version_info->new_version ),
@@ -201,7 +201,7 @@ class AFFWP_Plugin_Updater {
 				);
 			} else {
 				printf(
-					__( 'There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s.', 'easy-digital-downloads' ),
+					__( 'There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s.', 'affiliate=wp' ),
 					esc_html( $version_info->name ),
 					'<a target="_blank" class="thickbox" href="' . esc_url( $changelog_link ) . '">',
 					esc_html( $version_info->new_version ),
@@ -355,7 +355,7 @@ class AFFWP_Plugin_Updater {
 		}
 
 		if( ! current_user_can( 'update_plugins' ) ) {
-			wp_die( __( 'You do not have permission to install plugin updates', 'easy-digital-downloads' ), __( 'Error', 'easy-digital-downloads' ), array( 'response' => 403 ) );
+			wp_die( __( 'You do not have permission to install plugin updates', 'affiliate=wp' ), __( 'Error', 'affiliate=wp' ), array( 'response' => 403 ) );
 		}
 
 		$data         = $edd_plugin_data[ $_REQUEST['slug'] ];

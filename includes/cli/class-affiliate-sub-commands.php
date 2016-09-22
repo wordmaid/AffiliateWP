@@ -306,7 +306,7 @@ class Sub_Commands extends Base {
 				}
 
 				if ( $user_deleted ) {
-					$success = __( 'The affiliate and its associated user account have been successfully deleted.', 'affiliate' );
+					$success = __( 'The affiliate and its associated user account have been successfully deleted.', 'affiliate-wp' );
 				}
 			} else {
 				$success = __( 'The affiliate account has been successfully deleted.', 'affiliate-wp' );

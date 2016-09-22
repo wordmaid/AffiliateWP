@@ -184,6 +184,8 @@ final class Affiliate extends Base_Object {
 			foreach ( array( 'first_name', 'last_name' ) as $field ) {
 				$user->data->{$field} = get_user_meta( $this->user_id, $field, true );
 			}
+			// Exclude user pass, activation key, and email from the response.
+			unset( $user->data->user_pass, $user->data->user_activation_key, $user->data->user_email );
 			return $user->data;
 		}
 		return $user;

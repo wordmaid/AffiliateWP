@@ -74,7 +74,17 @@ add_action( 'affwp_email_send_before', 'affwp_disable_mandrill_nl2br');
  */
 function affwp_simple_page_test_compat() {
 
-	if( affiliate_wp()->tracking->was_referred() ) {
+	if( ! defined( 'SPT_PLUGIN_DIR' ) ) {
+		return;
+	}
+
+	$tracking = affiliate_wp()->tracking;
+
+	if( empty( $tracking ) ) {
+		return;
+	}
+
+	if( $tracking->was_referred() ) {
 
 		remove_action( 'pre_get_posts', 'sptRemoveVariationsFromLoop', 10 );
 

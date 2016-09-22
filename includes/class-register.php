@@ -68,6 +68,10 @@ class Affiliate_WP_Register {
 				if ( empty( $field ) ) {
 					$this->add_error( $value['error_id'], $value['error_message'] );
 				}
+
+				if( 'affwp_user_url' === $field_name && false === filter_var( $field, FILTER_VALIDATE_URL ) ) {
+					$this->add_error( 'invalud_url', __( 'Please enter a valid website URL', 'affiliate-wp' ) );
+				}
 			}
 
 			if ( username_exists( $data['affwp_user_login'] ) ) {
@@ -80,6 +84,10 @@ class Affiliate_WP_Register {
 				} else {
 					$this->add_error( 'username_invalid', __( 'Invalid username', 'affiliate-wp' ) );
 				}
+			}
+
+			if ( strlen( $data['affwp_user_login'] ) > 60 ) {
+				$this->add_error( 'username_invalid_length', __( 'Invalid username. Must be between 1 and 60 characters.', 'affiliate-wp' ) );
 			}
 
 			if ( is_numeric( $data['affwp_user_login'] ) ) {
@@ -107,7 +115,7 @@ class Affiliate_WP_Register {
 			// Loop through required fields and show error message
 			foreach ( $this->required_fields() as $field_name => $value ) {
 
-				if( ! empty( $value['logged_out'] ) ) {
+				if ( ! empty( $value['logged_out'] ) ) {
 					continue;
 				}
 
@@ -130,7 +138,7 @@ class Affiliate_WP_Register {
 		}
 
 		if ( ! empty( $_POST['affwp_honeypot'] ) ) {
-			$this->add_error( 'spam', __( 'Nice try honey bear, don\'t touch our honey', 'affiliate-wp' ) );
+			$this->add_error( 'spam', __( 'Nice try honey bear, don&#8217;t touch our honey', 'affiliate-wp' ) );
 		}
 
 		if ( affwp_is_affiliate() ) {
@@ -198,7 +206,7 @@ class Affiliate_WP_Register {
 			),
 			'affwp_user_login' 	=> array(
 				'error_id'      => 'empty_username',
-				'error_message' => __( 'Invalid username', 'affiliate-wp' ),
+				'error_message' => __( 'Invalid username. Must be between 1 and 60 characters.', 'affiliate-wp' ),
 				'logged_out'    => true
 			),
 			'affwp_user_url' 	=> array(
@@ -224,19 +232,22 @@ class Affiliate_WP_Register {
 
 		$status = affiliate_wp()->settings->get( 'require_approval' ) ? 'pending' : 'active';
 
-		if ( ! is_user_logged_in() ) {
-
+		if ( ! empty( $_POST['affwp_user_name'] ) ) {
 			$name       = explode( ' ', sanitize_text_field( $_POST['affwp_user_name'] ) );
 			$user_first = $name[0];
 			$user_last  = isset( $name[1] ) ? $name[1] : '';
+		} else {
+			$user_first = '';
+			$user_last  = '';
+		}
+
+		if ( ! is_user_logged_in() ) {
 
 			$args = array(
 				'user_login'    => sanitize_text_field( $_POST['affwp_user_login'] ),
 				'user_email'    => sanitize_text_field( $_POST['affwp_user_email'] ),
 				'user_pass'     => sanitize_text_field( $_POST['affwp_user_pass'] ),
-				'display_name'  => $user_first . ' ' . $user_last,
-				'first_name'    => $user_first,
-				'last_name'     => $user_last
+				'display_name'  => $user_first . ' ' . $user_last
 			);
 
 			$user_id = wp_insert_user( $args );
@@ -248,6 +259,9 @@ class Affiliate_WP_Register {
 			$args    = (array) $user['data'];
 
 		}
+
+		// update first and last name
+		wp_update_user( array( 'ID' => $user_id, 'first_name' => $user_first, 'last_name' => $user_last ) );
 
 		// promotion method
 		$promotion_method = isset( $_POST['affwp_promotion_method'] ) ? sanitize_text_field( $_POST['affwp_promotion_method'] ) : '';

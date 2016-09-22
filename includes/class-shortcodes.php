@@ -174,6 +174,7 @@ class Affiliate_WP_Shortcodes {
 				'description' => '',
 				'reference'   => '',
 				'context'     => '',
+				'campaign'    => '',
 				'status'      => ''
 			),
 			$atts,
@@ -213,7 +214,7 @@ class Affiliate_WP_Shortcodes {
 		if ( ! empty( $content ) ) {
 			$base_url = $content;
 		} else {
-			$base_url = ! empty( $atts[ 'url' ] ) ? $atts[ 'url' ] : home_url( '/' );
+			$base_url = ! empty( $atts[ 'url' ] ) ? $atts[ 'url' ] : affiliate_wp()->tracking->get_current_page_url();
 		}
 
 		// pretty URLs

@@ -464,13 +464,28 @@ class Affiliate_WP_Emails {
 			),
 			array(
 				'tag'         => 'referral_url',
-				'description' => __( 'The affiliate\'s referral URL', 'affiliate-wp' ),
+				'description' => __( 'The affiliate&#8217;s referral URL', 'affiliate-wp' ),
 				'function'    => 'affwp_email_tag_referral_url'
 			),
 			array(
 				'tag'         => 'affiliate_id',
-				'description' => __( 'The affiliate\'s ID', 'affiliate-wp' ),
+				'description' => __( 'The affiliate&#8217;s ID', 'affiliate-wp' ),
 				'function'    => 'affwp_email_tag_affiliate_id'
+			),
+			array(
+				'tag'         => 'referral_rate',
+				'description' => __( 'The affiliate&#8217;s referral rate', 'affiliate-wp' ),
+				'function'    => 'affwp_email_tag_referral_rate'
+			),
+			array(
+				'tag'         => 'review_url',
+				'description' => __( 'The URL to the review page for a pending affiliate', 'affiliate-wp' ),
+				'function'    => 'affwp_email_tag_review_url'
+			),
+			array(
+				'tag'         => 'landing_page',
+				'description' => __( 'The URL the customer landed on that led to a referral being created', 'affiliate-wp' ),
+				'function'    => 'affwp_email_tag_get_landing_page'
 			)
 		);
 

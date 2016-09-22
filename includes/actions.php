@@ -10,7 +10,17 @@
 */
 function affwp_do_actions() {
 	if ( isset( $_REQUEST['affwp_action'] ) ) {
-		do_action( 'affwp_' . $_REQUEST['affwp_action'], $_REQUEST );
+		$action = $_REQUEST['affwp_action'];
+
+		/**
+		 * Fires for every AffiliateWP action passed via `affwp_action`.
+		 *
+		 * The dynamic portion of the hook name, `$action`, refers to the action passed via
+		 * the `affwp_action` parameter.
+		 *
+		 * @param array $_REQUEST Request data.
+		 */
+		do_action( "affwp_{$action}", $_REQUEST );
 	}
 }
 add_action( 'init', 'affwp_do_actions' );
@@ -34,9 +44,17 @@ function affwp_remove_query_args( $query_args ) {
 			|| isset( $_GET['creative_id'] )
 			|| isset( $_GET['referral_id'] )
 			|| isset( $_GET['visit_id'] )
+			|| isset( $_GET['payout_id'] )
 	     )
 	) {
 		$query_args[] = '_wpnonce';
+	}
+
+	if ( ( isset( $_GET['filter_from'] ) || isset( $_GET['filter_to'] ) )
+		&& ( isset( $_GET['range'] ) && 'other' !== $_GET['range'] )
+	) {
+		$query_args[] = 'filter_from';
+		$query_args[] = 'filter_to';
 	}
 
 	return $query_args;

@@ -204,6 +204,33 @@ function affwp_get_decimal_count() {
 }
 
 /**
+ * Formats referral rate based on the given type.
+ *
+ * @since 1.9
+ *
+ * @param int    $rate   Referral rate.
+ * @param string $type   Optional. Rate type. Accepts 'percentage' or 'flat'. Default 'percentage'.
+ * @return string Formatted rate string.
+ */
+function affwp_format_rate( $rate, $type = 'percentage' ) {
+	if ( 'percentage' === $type ) {
+		$rate = affwp_abs_number_round( $rate * 100 ) . '%';
+	} else {
+		$rate = affwp_currency_filter( $rate );
+	}
+
+	/**
+	 * Filter the rate format.
+	 *
+	 * @since 1.9
+	 *
+	 * @param string $rate Formatted rate.
+	 * @param string $type Rate type.
+	 */
+	return apply_filters( 'affwp_format_rate', $rate, $type );
+}
+
+/**
  * Formats the currency display
  *
  * @since 1.0
@@ -599,6 +626,61 @@ function affwp_affiliate_area_show_tab( $tab = '' ) {
 }
 
 /**
+ * Cleans the cache for a given object.
+ *
+ * @since 1.9
+ *
+ * @param AffWP\Base_Object $object Base_Object.
+ * @return bool True if the item cache was cleaned, false otherwise.
+ */
+function affwp_clean_item_cache( $object ) {
+	if ( ! is_object( $object ) ) {
+		return false;
+	}
+
+	if ( ! method_exists( $object, 'get_cache_key' ) ) {
+		return false;
+	}
+
+	$Object_Class = get_class( $object );
+	$cache_key    = $Object_Class::get_cache_key( $object->ID );
+	$cache_group  = $Object_Class::$object_type;
+
+	// Individual object.
+	wp_cache_delete( $cache_key, $cache_group );
+
+	// Prime the item cache.
+	$Object_Class::get_instance( $object->ID );
+
+	$db_groups      = $Object_Class::get_db_groups();
+	$db_cache_group = isset( $db_groups->secondary ) ? $db_groups->secondary : $db_groups->primary;
+
+	// last_changed for queries.
+	wp_cache_set( 'last_changed', microtime(), $db_cache_group );
+}
+
+/**
+ * Adds AffiliateWP postbox nonces, which are used
+ * to save the position of AffiliateWP meta boxes.
+ *
+ * @since  1.9
+ *
+ * @return void
+ */
+function affwp_add_screen_options_nonces() {
+
+	if ( ! affwp_is_admin_page() ) {
+		return;
+	}
+
+	wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce' , false );
+	wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce' , false );
+
+
+}
+add_action( 'admin_footer', 'affwp_add_screen_options_nonces' );
+
+/*
  * Get the logout URL
  *
  * @since  1.8.8

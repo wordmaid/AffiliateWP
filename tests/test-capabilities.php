@@ -1,21 +1,47 @@
 <?php
+namespace AffWP\Capabilities;
 
-class Capabilities_Tests extends WP_UnitTestCase {
+use AffWP\Tests\UnitTestCase;
 
-	protected $_user_id = 1;
+/**
+ * User capabilities tests.
+ *
+ * @covers Affiliate_WP_Capabilities
+ * @group capabilities
+ * @group users
+ */
+class Tests extends UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	/**
+	 * User fixture.
+	 *
+	 * @access protected
+	 * @var int
+	 * @static
+	 */
+	protected static $user_id = 0;
+
+	/**
+	 * Set up fixtures once.
+	 */
+	public static function wpSetUpBeforeClass() {
+		self::$user_id = parent::affwp()->user->create( array(
+			'role' => 'administrator'
+		) );
+
+		// Flush the $wp_roles global.
+		parent::_flush_roles();
 	}
 
-	function test_admin_has_caps() {
+	/**
+	 * @covers Affiliate_WP_Capabilities
+	 */
+	public function test_admin_has_caps() {
 
-		$this->markTestIncomplete( 'Fails 50% of the time. No idea why' );
-
-		$roles = new Affiliate_WP_Capabilities;
+		$roles = new \Affiliate_WP_Capabilities;
 		$roles->add_caps();
 
-		$user = new WP_User( $this->_user_id );
+		$user = get_user_by( 'id', self::$user_id );
 
 		$this->assertTrue( $user->has_cap( 'view_affiliate_reports' ) );
 		$this->assertTrue( $user->has_cap( 'export_affiliate_data' ) );
@@ -29,3 +55,4 @@ class Capabilities_Tests extends WP_UnitTestCase {
 	}
 
 }
+

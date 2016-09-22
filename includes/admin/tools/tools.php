@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/migration.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-recount.php';
+require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-rest-consumers-table.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/system-info.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/import/import.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/export.php';
@@ -74,14 +75,22 @@ function affwp_get_tools_tabs() {
 
 	$tabs                  = array();
 	$tabs['export_import'] = __( 'Export / Import', 'affiliate-wp' );
+	$tabs['api_keys']      = __( 'API Keys', 'affiliate-wp' );
 	$tabs['recount']       = __( 'Recount Stats', 'affiliate-wp' );
 	$tabs['migration']     = __( 'Migration Assistant', 'affiliate-wp' );
 	$tabs['system_info']   = __( 'System Info', 'affiliate-wp' );
 
-	if( affiliate_wp()->settings->get( 'debug_mode', false ) ) {	
+	if( affiliate_wp()->settings->get( 'debug_mode', false ) ) {
 		$tabs['debug']     = __( 'Debug Assistant', 'affiliate-wp' );
 	}
 
+	/**
+	 * Filters AffiliateWP tools tabs.
+	 *
+	 * @since 1.0
+	 *
+	 * @param array $tabs Array of tools tabs.
+	 */
 	return apply_filters( 'affwp_tools_tabs', $tabs );
 }
 
@@ -133,7 +142,7 @@ function affwp_recount_tab() {
 								<option value="referrals"><?php _e( 'Referrals', 'affiliate-wp' ); ?></option>
 								<option value="visits"><?php _e( 'Visits', 'affiliate-wp' ); ?></option>
 							</select>
-							<div class="description"><?php _e( 'Enter the name of the affiliate or begin typing to perform a search based on the affiliate\'s name.', 'affiliate-wp' ); ?></div>
+							<div class="description"><?php _e( 'Enter the name of the affiliate or begin typing to perform a search based on the affiliate&#8217;s name.', 'affiliate-wp' ); ?></div>
 						</p>
 						<p>
 							<input type="hidden" name="user_id" id="user_id" value="0"/>
@@ -302,7 +311,7 @@ function affwp_export_import_tab() {
 								<option value="pending"><?php _e( 'Pending', 'affiliate-wp' ); ?></option>
 								<option value="rejected"><?php _e( 'Rejected', 'affiliate-wp' ); ?></option>
 							</select>
-							<div class="description"><?php _e( 'To search for an affiliate, enter the affiliate\'s login name, first name, or last name. Leave blank to export referrals for all affiliates.', 'affiliate-wp' ); ?></div>
+							<div class="description"><?php _e( 'To search for an affiliate, enter the affiliate&#8217;s login name, first name, or last name. Leave blank to export referrals for all affiliates.', 'affiliate-wp' ); ?></div>
 						</p>
 						<p>
 							<input type="hidden" name="affwp_action" value="export_referrals" />
@@ -462,3 +471,17 @@ function affwp_clear_debug_log() {
 
 }
 add_action( 'admin_init', 'affwp_clear_debug_log' );
+
+/**
+ * Renders the API Keys tools tab.
+ *
+ * @since 1.9
+ */
+function affwp_rest_api_keys_tab() {
+	$keys_table = new \AffWP\REST\Admin\Consumers_Table;
+	$keys_table->prepare_items();
+
+	$keys_table->views();
+	$keys_table->display();
+}
+add_action( 'affwp_tools_tab_api_keys', 'affwp_rest_api_keys_tab' );

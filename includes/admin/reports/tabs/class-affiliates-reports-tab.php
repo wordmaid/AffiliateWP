@@ -135,25 +135,21 @@ class Tab extends Reports\Tab {
 				number_format_i18n( $referrals_count )
 			);
 
-			$this->register_tile( 'highest_converting_affiliate', array(
-				'label'           => __( 'Highest Converting Affiliate', 'affiliate-wp' ),
-				'context'         => 'secondary',
-				'data'            => $data_link,
-				'comparison_data' => sprintf( '%1$s (%2$s)',
-					$this->get_date_comparison_label(),
-					$referrals_data
-				),
-			) );
-
-			unset( $affiliate, $data_link );
+			$comparison_data = sprintf( '%1$s (%2$s)',
+				$this->get_date_comparison_label(),
+				$referrals_data
+			);
 		} else {
-			$this->register_tile( 'highest_converting_affiliate', array(
-				'label'           => __( 'Highest Converting Affiliate', 'affiliate-wp' ),
-				'context'         => 'secondary',
-				'data'            => '',
-				'comparison_data' => $this->get_date_comparison_label(),
-			) );
+			$data_link = '';
+			$comparison_data = $this->get_date_comparison_label();
 		}
+
+		$this->register_tile( 'highest_converting_affiliate', array(
+			'label'           => __( 'Highest Converting Affiliate', 'affiliate-wp' ),
+			'context'         => 'secondary',
+			'data'            => $data_link,
+			'comparison_data' => $comparison_data,
+		) );
 	}
 
 	/**

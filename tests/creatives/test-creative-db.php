@@ -229,4 +229,28 @@ class Tests extends UnitTestCase {
 		$this->assertEqualSets( array(), $results );
 	}
 
+	/**
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 */
+	public function test_get_creatives_default_orderby_should_be_by_primary_key() {
+		$results = affiliate_wp()->creatives->get_creatives( array(
+			'fields' => 'ids',
+		) );
+
+		$this->assertEqualSets( self::$creatives, $results );
+		$this->assertTrue( $results[3] > $results[2] );
+		$this->assertTrue( $results[2] > $results[1] );
+		$this->assertTrue( $results[1] > $results[0] );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Creatives_DB::get_creatives()
+	 */
+	public function test_get_creatives_default_order_should_be_ascending() {
+		$results = affiliate_wp()->creatives->get_creatives( array(
+			'fields' => 'ids',
+		) );
+
+		$this->assertEqualSets( self::$creatives, $results );
+	}
 }

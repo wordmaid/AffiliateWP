@@ -1453,4 +1453,81 @@ class Tests extends UnitTestCase {
 		return "{$first_part}@{$domain}.dev";
 	}
 
+	/**
+	 * @covers ::affwp_get_affiliate_payouts()
+	 */
+	public function test_get_affiliate_payouts_with_invalid_affiliate_id_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_payouts() );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_payouts()
+	 */
+	public function test_get_affiliate_payouts_with_valid_affiliate_id_should_return_payouts() {
+		$referrals = $this->factory->referral->create_many( 2, array(
+			'affiliate_id' => self::$affiliates[0]
+		) );
+
+		$payouts = array();
+
+		foreach ( $referrals as $referral )  {
+			$payouts[] = $this->factory->payout->create_and_get( array(
+				'affiliate_id' => self::$affiliates[0],
+				'referrals'    => array( $referral )
+			) );
+		}
+
+		$results = affwp_get_affiliate_payouts( self::$affiliates[0] );
+
+		$this->assertEqualSets( $payouts, $results );
+
+		// Clean up.
+		foreach ( $referrals as $referral ) {
+			affwp_delete_referral( $referral );
+		}
+
+		foreach ( $payouts as $payout ) {
+			affwp_delete_payout( $payout );
+		}
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_payouts()
+	 */
+	public function test_get_affiliate_payouts_with_invalid_affiliate_object_should_return_false() {
+		$this->assertFalse( affwp_get_affiliate_payouts( new \stdClass() ) );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_payouts()
+	 */
+	public function test_get_affiliate_payouts_with_valid_affiliate_object_should_return_payouts() {
+		$affiliate = affwp_get_affiliate( self::$affiliates[1] );
+
+		$referrals = $this->factory->referral->create_many( 2, array(
+			'affiliate_id' => $affiliate->ID
+		) );
+
+		$payouts = array();
+
+		foreach ( $referrals as $referral )  {
+			$payouts[] = $this->factory->payout->create_and_get( array(
+				'affiliate_id' => $affiliate->ID,
+				'referrals'    => array( $referral )
+			) );
+		}
+
+		$results = affwp_get_affiliate_payouts( $affiliate );
+
+		$this->assertEqualSets( $payouts, $results );
+
+		// Clean up.
+		foreach ( $referrals as $referral ) {
+			affwp_delete_referral( $referral );
+		}
+
+		foreach ( $payouts as $payout ) {
+			affwp_delete_payout( $payout );
+		}
+	}
 }

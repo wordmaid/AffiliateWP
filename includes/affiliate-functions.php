@@ -1365,3 +1365,31 @@ function affwp_get_active_affiliate_area_tab() {
 
 	return $active_tab;
 }
+
+/**
+ * Retrieves an array of payouts for the given affiliate.
+ *
+ * @since 1.9
+ *
+ * @param int|\AffWP\Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @return array|false Array of payout objects for the given affiliate, otherwise false.
+ */
+function affwp_get_affiliate_payouts( $affiliate = 0 ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		return false;
+	}
+
+	$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
+		'affilate_id' => $affiliate->ID,
+	) );
+
+	/**
+	 * Filters the list of payouts associated with an affiliate.
+	 *
+	 * @since 1.9
+	 *
+	 * @param array $payouts      The affiliate's payouts.
+	 * @param int   $affiliate_id Affiliate ID.
+	 */
+	return apply_filters( 'affwp_get_affiliate_payouts', $payouts, $affiliate->ID );
+}

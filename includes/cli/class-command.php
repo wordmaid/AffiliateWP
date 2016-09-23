@@ -219,6 +219,18 @@ class Command extends \WP_CLI_Command {
 	}
 
 	/**
+	 * Dumps out the System Info log for debugging purposes.
+	 *
+	 * @access public
+	 * @since  1.9
+	 *
+	 * @alias info
+	 */
+	public function system_info( $_, $assoc_args ) {
+		\WP_CLI::log( affwp_tools_system_info_report() );
+	}
+
+	/**
 	 * Serves as a shorthand wrapper for \WP_CLI::line() combined with \WP_CLI::colorize().
 	 *
 	 * @since 1.9

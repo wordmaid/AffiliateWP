@@ -64,9 +64,9 @@ class Affiliate_Registrations extends Meta_Box implements Meta_Box\Base {
             <thead>
 
                 <tr>
-                    <th><?php _e( 'Affiliate', 'Affiliate column table header', 'affiliate-wp' ); ?></th>
-                    <th><?php _e( 'Status', 'Status column table header', 'affiliate-wp' ); ?></th>
-                    <th><?php _e( 'Actions', 'Actions column table header', 'affiliate-wp' ); ?></th>
+                    <th><?php _ex( 'Affiliate', 'Affiliate column table header', 'affiliate-wp' ); ?></th>
+                    <th><?php _ex( 'Status', 'Status column table header', 'affiliate-wp' ); ?></th>
+                    <th><?php _ex( 'Actions', 'Actions column table header', 'affiliate-wp' ); ?></th>
                 </tr>
 
             </thead>

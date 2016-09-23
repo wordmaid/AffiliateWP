@@ -51,9 +51,9 @@ class Totals extends Meta_Box implements Meta_Box\Base {
 
 				<tr>
 
-					<th><?php _e( 'Paid Earnings', 'Paid Earnings column table header', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Paid Earnings This Month', 'Paid Earnings This Month column table header', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Paid Earnings Today', 'Paid Earnings Today column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Paid Earnings', 'Paid Earnings column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Paid Earnings This Month', 'Paid Earnings This Month column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Paid Earnings Today', 'Paid Earnings Today column table header', 'affiliate-wp' ); ?></th>
 
 				</tr>
 
@@ -77,9 +77,9 @@ class Totals extends Meta_Box implements Meta_Box\Base {
 
 				<tr>
 
-					<th><?php _e( 'Unpaid Referrals', 'Unpaid Referrals column table header', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Unpaid Referrals This Month', 'Unpaid Referrals This Month column table header', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Unpaid Referrals Today', 'Unpaid Referrals Today column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Unpaid Referrals', 'Unpaid Referrals column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Unpaid Referrals This Month', 'Unpaid Referrals This Month column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Unpaid Referrals Today', 'Unpaid Referrals Today column table header', 'affiliate-wp' ); ?></th>
 
 				</tr>
 
@@ -102,9 +102,9 @@ class Totals extends Meta_Box implements Meta_Box\Base {
 
 				<tr>
 
-					<th><?php _e( 'Unpaid Earnings', 'Unpaid Earnings column table header', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Unpaid Earnings This Month', 'Unpaid Earnings This Month', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Unpaid Earnings Today', 'Unpaid Earnings Today column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Unpaid Earnings', 'Unpaid Earnings column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Unpaid Earnings This Month', 'Unpaid Earnings This Month', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Unpaid Earnings Today', 'Unpaid Earnings Today column table header', 'affiliate-wp' ); ?></th>
 
 				</tr>
 

@@ -63,9 +63,9 @@ class Recent_Referral_Visits extends Meta_Box implements Meta_Box\Base {
 			<thead>
 
 				<tr>
-					<th><?php _e( 'Affiliate', 'Affiliate column table header', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'URL', 'URL column table header', 'affiliate-wp' ); ?></th>
-					<th><?php _e( 'Converted', 'Converted column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Affiliate', 'Affiliate column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'URL', 'URL column table header', 'affiliate-wp' ); ?></th>
+					<th><?php _ex( 'Converted', 'Converted column table header', 'affiliate-wp' ); ?></th>
 				</tr>
 
 			</thead>

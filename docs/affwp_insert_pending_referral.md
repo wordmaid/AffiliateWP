@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-wpeasycart.php
+- Source file: integrations/class-wpeasycart.php

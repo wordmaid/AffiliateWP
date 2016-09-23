@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_class-addon-updater.php
+- Source file: admin/class-addon-updater.php

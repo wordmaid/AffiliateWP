@@ -1,4 +1,4 @@
-### get_template_part_{$slug}
+###get_template_part_{$slug}
 
 ----
 

@@ -2,4 +2,4 @@
 
 ----
 
-- Package: affiliatewp
+- Since: 1.0

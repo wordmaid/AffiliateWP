@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_add-ons.php
+- Source file: admin/add-ons.php

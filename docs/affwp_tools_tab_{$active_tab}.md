@@ -2,4 +2,4 @@
 
 ----
 
-- Package: admintools2
+- Package: admin/tools

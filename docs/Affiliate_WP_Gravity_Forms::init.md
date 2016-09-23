@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-gravityforms.php
+- Source file: integrations/class-gravityforms.php

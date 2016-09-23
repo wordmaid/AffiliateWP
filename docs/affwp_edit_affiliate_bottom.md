@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_affiliates_edit.php
+- Source file: admin/affiliates_edit.php

@@ -2,4 +2,4 @@
 
 ----
 
-- Package: affiliatewpemailsactions2
+- Package: affiliatewp/emails/actions

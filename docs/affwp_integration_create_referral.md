@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-base.php
+- Source file: integrations/class-base.php

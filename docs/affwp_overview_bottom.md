@@ -2,4 +2,4 @@
 
 ----
 
-- Package: adminoverview2
+- Package: admin/overview

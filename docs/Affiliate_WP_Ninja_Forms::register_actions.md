@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-ninja-forms.php
+- Since: 1.8.6

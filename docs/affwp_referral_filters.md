@@ -2,4 +2,4 @@
 
 ----
 
-- Package: adminreferrals2
+- Package: admin/referrals

@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-pmp.php
+- Source file: integrations/class-pmp.php

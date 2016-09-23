@@ -2,4 +2,4 @@
 
 ----
 
-- Since: 192Here is a test doc for the Affiliate object.
+- Since: 1.9

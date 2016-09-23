@@ -2,4 +2,4 @@
 
 ----
 
-- Package: affiliatewpemailsfunctions2
+- Package: affiliatewp/emails/functions

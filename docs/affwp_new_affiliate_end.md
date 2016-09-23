@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_affiliates_new.php
+- Source file: admin/affiliates/new.php

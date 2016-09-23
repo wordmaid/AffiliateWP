@@ -1,4 +1,4 @@
-### affwp_integrations_loaded
+### affwp_integrations/loaded
 
 ----
 

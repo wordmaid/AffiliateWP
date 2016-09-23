@@ -1,4 +1,4 @@
-### {$currency)}_currency_filter_after
+###{$currency)}_currency_filter_after
 
 ----
 

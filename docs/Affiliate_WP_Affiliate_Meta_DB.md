@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: class-affiliate-meta-db.php
+- Since: 1.6

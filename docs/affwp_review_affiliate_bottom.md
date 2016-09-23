@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_affiliates_review.php
+- Source file: admin/affiliates_review.php

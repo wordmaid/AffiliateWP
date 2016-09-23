@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_reports_class-registrations-graph.php
+- Source file: admin/reports_class-registrations-graph.php

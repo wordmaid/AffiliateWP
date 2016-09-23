@@ -2,4 +2,4 @@
 
 ----
 
-- Package: adminvisits2
+- Package: admin/visits

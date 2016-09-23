@@ -2,4 +2,4 @@
 
 ----
 
-- Package: adminsettings2
+- Package: admin/settings

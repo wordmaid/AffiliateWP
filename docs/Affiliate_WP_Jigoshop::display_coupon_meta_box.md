@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-jigoshop.php
+- Source file: integrations/class-jigoshop.php

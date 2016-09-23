@@ -2,4 +2,4 @@
 
 ----
 
-- Package: adminaffiliates2
+- Since: 1.1

@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: class-affiliates-db.php
+- Since: 1.0

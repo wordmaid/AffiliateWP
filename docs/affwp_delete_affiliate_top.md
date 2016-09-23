@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_affiliates_delete.php
+- Source file: admin/affiliates_delete.php

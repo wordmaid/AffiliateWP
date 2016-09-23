@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: class-db.php
+- Since: 1.9

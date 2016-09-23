@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-shopp.php
+- Source file: integrations/class-shopp.php

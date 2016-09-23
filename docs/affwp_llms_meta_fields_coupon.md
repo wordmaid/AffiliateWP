@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-lifterlms.php
+- Source file: integrations/class-lifterlms.php

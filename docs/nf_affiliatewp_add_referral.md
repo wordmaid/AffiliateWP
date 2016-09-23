@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-ninja-forms-action-add-referral.php
+- Source file: integrations/extras/class-ninja-forms-action-add-referral.php

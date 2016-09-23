@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-woocommerce.php
+- Source file: integrations/class-woocommerce.php

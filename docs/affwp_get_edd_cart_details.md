@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-edd.php
+- Source file: integrations/class-edd.php

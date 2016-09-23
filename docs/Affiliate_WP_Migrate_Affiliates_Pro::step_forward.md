@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_tools_class-migrate-affiliates-pro.php
+- Source file: admin/tools_class-migrate-affiliates-pro.php

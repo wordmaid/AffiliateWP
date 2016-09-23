@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-wpec.php
+- Source file: integrations/class-wpec.php

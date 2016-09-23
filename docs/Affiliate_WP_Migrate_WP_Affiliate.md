@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_tools_class-migrate-wp-affiliate.php
+- Source file: admin/tools_class-migrate-wp-affiliate.php

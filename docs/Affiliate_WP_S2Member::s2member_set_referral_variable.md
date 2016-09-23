@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-s2member.php
+- Source file: integrations/class-s2member.php

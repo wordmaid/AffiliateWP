@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: admin_affwp_plugin_updater.php
+- Source file: admin/affwp_plugin_updater.php

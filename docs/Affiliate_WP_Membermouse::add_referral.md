@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: integrations_class-membermouse.php
+- Source file: integrations/class-membermouse.php

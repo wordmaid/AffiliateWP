@@ -2,4 +2,4 @@
 
 ----
 
-- Source file: class-tracking.php
+- Since: 1.0

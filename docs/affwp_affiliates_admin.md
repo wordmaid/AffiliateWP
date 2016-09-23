@@ -2,4 +2,4 @@
 
 ----
 
-- Package: adminaffiliates2
+- Package: admin/affiliates

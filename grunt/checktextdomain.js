@@ -29,7 +29,7 @@ module.exports = {
 			'**/*.php', // Include all files
 			'!node_modules/**', // Exclude node_modules/
 			'!grunt/**', // Exclude grunt files/
-			'!./build/**', // Exclude build folder/
+			'!build/**', // Exclude build folder/
 
 		]
 	}

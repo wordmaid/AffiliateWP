@@ -5,7 +5,7 @@ namespace AffWP\CLI;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Implements the top-level affwp CLI command.
+ * AffiliateWP WP-CLI Commands.
  *
  * @since 1.9
  *

@@ -8,7 +8,7 @@ use \WP_CLI\Utils;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Implements basic CRUD CLI sub-commands for referrals.
+ * WP-CLI sub-commands for managing referrals.
  *
  * @since 1.9
  *

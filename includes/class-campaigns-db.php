@@ -156,7 +156,7 @@ class Affiliate_WP_Campaigns_DB extends Affiliate_WP_DB {
 				if ( empty( $args['campaign'] ) ) {
 					$where .= "`campaign` {$campaign_compare} '' ";
 				} else {
-					$where .= "`campaign` {$campaign_compare} {$args['campaign']} ";
+					$where .= "`campaign` {$campaign_compare} '{$args['campaign']}' ";
 				}
 			}
 

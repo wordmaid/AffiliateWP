@@ -75,7 +75,7 @@ function affwp_tools_system_info_report() {
 
 	// Integrations
 	$return .= "\n" . '-- AffiliateWP Integrations' . "\n\n";
-	foreach ( $settings->get( 'integrations' ) as $integration ) {
+	foreach ( $settings->get( 'integrations', array() ) as $integration ) {
 		$return .= $integration . "\n";
 	}
 

@@ -49,17 +49,23 @@ class Tab extends Reports\Tab {
 	 * @since  1.9
 	 */
 	public function top_earning_affiliates_tile() {
-		$top_affiliate = affiliate_wp()->affiliates->get_affiliates( array(
-			'number'  => 1,
-			'orderby' => 'earnings',
-			'status'  => 'active',
-			'date'    => $this->date_query,
+		$affiliate_ids = affiliate_wp()->referrals->get_referrals( array(
+			'number' => -1,
+			'status' => 'paid',
+			'fields' => 'affiliate_id',
+			'date'   => $this->date_query
 		) );
 
-		if ( ! empty( $top_affiliate[0] ) ) {
-			$affiliate  = $top_affiliate[0];
-			$name       = affwp_get_affiliate_name( $affiliate->ID );
-			$data_link  = sprintf( '<a href="%1$s">%2$s</a>',
+		$affiliate_counts = array_count_values( $affiliate_ids );
+
+		$top_affiliate = array_slice( $affiliate_counts, 0, 1, true );
+
+		if ( ! empty( $top_affiliate ) ) {
+			$affiliate_id = key( $top_affiliate );
+			$affiliate    = affwp_get_affiliate( $affiliate_id );
+			$name         = affwp_get_affiliate_name( $affiliate->ID );
+
+			$data_link = sprintf( '<a href="%1$s">%2$s</a>',
 				esc_url( add_query_arg( array(
 					'page'         => 'affiliate-wp-affiliates',
 					'affiliate_id' => $affiliate->ID,

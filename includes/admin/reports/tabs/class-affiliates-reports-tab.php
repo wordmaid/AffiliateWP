@@ -58,12 +58,10 @@ class Tab extends Reports\Tab {
 
 		$affiliate_counts = array_count_values( $affiliate_ids );
 
-		$top_affiliate = array_slice( $affiliate_counts, 0, 1, true );
+		$top_affiliate = key( array_slice( $affiliate_counts, 0, 1, true ) );
 
-		if ( ! empty( $top_affiliate ) ) {
-			$affiliate_id = key( $top_affiliate );
-			$affiliate    = affwp_get_affiliate( $affiliate_id );
-			$name         = affwp_get_affiliate_name( $affiliate->ID );
+		if ( ! empty( $top_affiliate ) && $affiliate = affwp_get_affiliate( $top_affiliate ) ) {
+			$name = affwp_get_affiliate_name( $affiliate->ID );
 
 			$data_link = sprintf( '<a href="%1$s">%2$s</a>',
 				esc_url( add_query_arg( array(
@@ -116,15 +114,18 @@ class Tab extends Reports\Tab {
 	 * @since  1.9
 	 */
 	public function highest_converting_affiliate_tile() {
-		$highest_converter = affiliate_wp()->affiliates->get_affiliates( array(
-			'number'  => 1,
-			'orderby' => 'referrals',
-			'status'  => 'active',
-			'date'    => $this->date_query,
+		$affiliate_ids = affiliate_wp()->visits->get_visits( array(
+			'number'          => -1,
+			'referral_status' => 'converted',
+			'fields'          => 'affiliate_id',
+			'date'            => $this->date_query,
 		) );
 
-		if ( ! empty( $highest_converter[0] ) ) {
-			$affiliate = $highest_converter[0];
+		$affiliate_counts = array_count_values( $affiliate_ids );
+
+		$highest_converter = key( array_slice( $affiliate_counts, 0, 1, true ) );
+
+		if ( ! empty( $highest_converter ) && $affiliate = affwp_get_affiliate( $highest_converter ) ) {
 			$name       = affwp_get_affiliate_name( $affiliate->ID );
 			$data_link  = sprintf( '<a href="%1$s">%2$s</a>',
 				esc_url( add_query_arg( array(

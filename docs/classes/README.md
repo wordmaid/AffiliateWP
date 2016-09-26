@@ -1,1 +1,1 @@
-### AffiliateWP classes.
+### AffiliateWP classes

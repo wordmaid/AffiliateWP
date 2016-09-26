@@ -205,6 +205,16 @@ class Sub_Commands extends Base {
 	/**
 	 * Deletes a creative.
 	 *
+	 * ## OPTIONS
+	 *
+	 * <creative_id>
+	 * : Creative ID.
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     # Deletes the creative with ID 20
+	 *     wp affwp creative delete 20
+	 *
 	 * @since 1.9
 	 * @access public
 	 *

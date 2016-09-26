@@ -72,6 +72,7 @@ class Endpoints extends Controller {
 
 		$args['number']          = isset( $request['number'] )          ? $request['number'] : 20;
 		$args['offset']          = isset( $request['offset'] )          ? $request['offset'] : 0;
+		$args['visit_id']        = isset( $request['visit_id'] )        ? $request['visit_id'] : 0;
 		$args['affiliate_id']    = isset( $request['affiliate_id'] )    ? $request['affiliate_id'] : 0;
 		$args['referral_id']     = isset( $request['referral_id'] )     ? $request['referral_id'] : 0;
 		$args['referral_status'] = isset( $request['referral_status'] ) ? $request['referral_status'] : '';
@@ -147,6 +148,14 @@ class Endpoints extends Controller {
 		 * Pass top-level get_visits() args as query vars:
 		 * /visits/?referral_status=pending&order=desc
 		 */
+		$params['visit_id'] = array(
+			'description'       => __( 'The visit ID or array of IDs to query visits for.', 'affiliate-wp' ),
+			'sanitize_callback' => 'absint',
+			'validate_callback' => function( $param, $request, $key ) {
+				return is_numeric( $param );
+			},
+		);
+
 		$params['affiliate_id'] = array(
 			'description'       => __( 'The affiliate ID or array of IDs to query visits for.', 'affiliate-wp' ),
 			'sanitize_callback' => 'absint',

@@ -91,18 +91,6 @@ $payout_link = add_query_arg( array(
 			<tr class="form-row form-required">
 
 				<th scope="row">
-					<label for="amount"><?php _e( 'Date', 'affiliate-wp' ); ?></label>
-				</th>
-
-				<td>
-					<input type="text" name="date" id="date" value="<?php echo esc_attr( date_i18n( get_option( 'date_format' ), strtotime( $referral->date ) ) ); ?>" disabled="disabled" />
-				</td>
-
-			</tr>
-
-			<tr class="form-row form-required">
-
-				<th scope="row">
 					<label for="description"><?php _e( 'Description', 'affiliate-wp' ); ?></label>
 				</th>
 

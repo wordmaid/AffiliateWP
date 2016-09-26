@@ -5,7 +5,7 @@ namespace AffWP\CLI;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Implements the top-level affwp CLI command.
+ * AffiliateWP WP-CLI Commands.
  *
  * @since 1.9
  *
@@ -143,7 +143,7 @@ class Command extends \WP_CLI_Command {
 	}
 
 	/**
-	 * Retrieves AffiliateWP stats.
+	 * Displays count totals for all affiliates, creatives, payouts, referrals, and visits.
 	 *
 	 * ## OPTIONS
 	 *
@@ -176,6 +176,8 @@ class Command extends \WP_CLI_Command {
 				switch_to_blog( $site_id );
 			}
 			$affiliate_count = $affiliate_count + affiliate_wp()->affiliates->count();
+			$creative_count  = $creative_count  + affiliate_wp()->creatives->count();
+			$payout_count    = $payout_count    + affiliate_wp()->affiliates->payouts->count();
 			$referral_count  = $referral_count  + affiliate_wp()->referrals->count();
 			$visit_count     = $visit_count     + affiliate_wp()->visits->count();
 
@@ -186,6 +188,12 @@ class Command extends \WP_CLI_Command {
 
 		// Affiliates.
 		self::format_line( __( 'Total Affiliates: %s', 'affiliate-wp' ), $affiliate_count, '%_' );
+
+		// Creatives.
+		self::format_line( __( 'Total Creatives: %s', 'affiliate-wp' ), $creative_count, '%_' );
+
+		// Payouts.
+		self::format_line( __( 'Total Payouts: %s', 'affiliate-wp' ), $payout_count, '%_' );
 
 		// Referrals.
 		self::format_line( __( 'Total Referrals: %s', 'affiliate-wp' ), $referral_count, '%_' );
@@ -202,7 +210,7 @@ class Command extends \WP_CLI_Command {
 	 * [--clear]
 	 * : Whether to clear the debug log. Requires confirmation.
 	 *
-	 * @alias debug
+	 * @subcommand debug
 	 */
 	public function debug_log( $_, $assoc_args ) {
 		$logger = new \Affiliate_WP_Logging();
@@ -216,6 +224,18 @@ class Command extends \WP_CLI_Command {
 			\WP_CLI::success( __( 'The debug log has been cleared.', 'affiliate-wp' ) );
 		}
 		echo "\n" . $logger->get_log();
+	}
+
+	/**
+	 * Dumps out the System Info log for debugging purposes.
+	 *
+	 * @access public
+	 * @since  1.9
+	 *
+	 * @subcommand info
+	 */
+	public function system_info( $_, $assoc_args ) {
+		\WP_CLI::log( affwp_tools_system_info_report() );
 	}
 
 	/**

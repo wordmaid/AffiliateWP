@@ -8,7 +8,7 @@ use \WP_CLI\Utils;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Implements basic CRUD CLI sub-commands for payouts.
+ * WP-CLI sub-commands for managing payouts.
  *
  * @since 1.9
  *

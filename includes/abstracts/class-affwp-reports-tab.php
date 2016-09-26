@@ -309,7 +309,11 @@ abstract class Tab {
 
 	/**
 	 * Handles default display of a tile.
-	 * @param $tile
+	 *
+	 * @access public
+	 * @since  1.9
+	 *
+	 * @param array $tile Tile data.
 	 */
 	public function default_tile( $tile ) {
 		if ( ! empty( $tile['display_callback'] ) && array( $this, 'default_tile' ) !== $tile['display_callback'] ) {

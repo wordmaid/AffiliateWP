@@ -50,7 +50,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 					data: {
 						action: 'affwp_maybe_insert_paypal_referral'
 					},
-					url: <?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>,
+					url: '<?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>',
 					success: function (response) {
 
 						$form.append( '<input type="hidden" name="custom" value="' + response.data.ref + '"/>' );

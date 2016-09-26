@@ -8,7 +8,7 @@ use \WP_CLI\Utils as Utils;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Implements basic CRUD CLI sub-commands for creatives.
+ * WP-CLI sub-commands for managing creatives.
  *
  * @since 1.9
  * 

@@ -1,0 +1,4 @@
+### details
+
+Namespace: AffWP\CLI
+

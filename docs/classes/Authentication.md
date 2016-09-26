@@ -1,0 +1,4 @@
+### Authentication
+
+Namespace: AffWP\REST
+

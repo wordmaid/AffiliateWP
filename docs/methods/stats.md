@@ -1,0 +1,4 @@
+### stats
+
+Namespace: AffWP\CLI
+

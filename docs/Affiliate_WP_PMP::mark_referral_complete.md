@@ -1,5 +1,0 @@
-### Affiliate_WP_PMP::mark_referral_complete
-
-----
-
-- Source file: integrations/class-pmp.php

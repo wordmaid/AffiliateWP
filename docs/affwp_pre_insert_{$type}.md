@@ -1,5 +1,0 @@
-### affwp_pre_insert_{$type}
-
-----
-
-- Source file: abstracts_class-db.php

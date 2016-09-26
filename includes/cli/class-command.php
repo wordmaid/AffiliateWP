@@ -202,7 +202,7 @@ class Command extends \WP_CLI_Command {
 	 * [--clear]
 	 * : Whether to clear the debug log. Requires confirmation.
 	 *
-	 * @alias debug
+	 * @subcommand debug
 	 */
 	public function debug_log( $_, $assoc_args ) {
 		$logger = new \Affiliate_WP_Logging();
@@ -224,7 +224,7 @@ class Command extends \WP_CLI_Command {
 	 * @access public
 	 * @since  1.9
 	 *
-	 * @alias info
+	 * @subcommand info
 	 */
 	public function system_info( $_, $assoc_args ) {
 		\WP_CLI::log( affwp_tools_system_info_report() );

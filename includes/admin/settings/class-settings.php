@@ -1256,7 +1256,15 @@ class Affiliate_WP_Settings {
 			);
 
 			if( apply_filters( 'affwp_send_site_data', true ) ) {
-				$api_params['site_data'] = $this->get_site_data();
+
+				// Send checkins once per week
+				$last_checked = get_option( 'affwp_last_checkin', false );
+
+				if( ! is_numeric( $last_checked ) || $last_checked < strtotime( '-1 week', current_time( 'timestamp' ) ) ) {
+
+					$api_params['site_data'] = $this->get_site_data();
+
+				}
 			}
 
 			// Call the custom API.
@@ -1276,6 +1284,12 @@ class Affiliate_WP_Settings {
 			$this->save( array( 'license_status' => $license_data ) );
 
 			set_transient( 'affwp_license_check', $license_data->license, DAY_IN_SECONDS );
+
+			if( ! empty( $api_params['site_data'] ) ) {
+
+				update_option( 'affwp_last_checkin', current_time( 'timestamp' ) );
+	
+			}
 
 			$status = $license_data->license;
 

@@ -6,7 +6,7 @@
 
 ----
 
-AffiliateWP developer documentation is updated with each release of AffiliateWP. Documentation exists both in our Github repository, and our [documentation site](https://docs.affiliatewp.com).
+AffiliateWP developer documentation is updated with each release of AffiliateWP. Documentation exists both in our Github repository, and our [documentation site](http://docs.affiliatewp.com/collection/1292-developer-docs).
 
 
 

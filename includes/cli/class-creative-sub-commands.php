@@ -63,8 +63,8 @@ class Sub_Commands extends Base {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     # save the referral field value to a file
-	 *     wp post get 12 --field=earnings > earnings.txt
+	 *     # Retrieve creative ID 12.
+	 *     wp affwp creative get 12
 	 */
 	public function get( $args, $assoc_args ) {
 		parent::get( $args, $assoc_args );
@@ -274,11 +274,14 @@ class Sub_Commands extends Base {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp affwp creative list --field=affiliate_id
+	 *     # List all creatives by name.
+	 *     wp affwp creative list --field=name
 	 *
-	 *     wp affwp creative list --rate_type=percentage --fields=affiliate_id,rate,earnings
+	 *     # List all creative IDs with an 'inactive' status.
+	 *     wp affwp creative list --status=inactive --format=ids
 	 *
-	 *     wp affwp creative list --field=earnings --format=json
+	 *     # List all creatives and display only the ID and image fields.
+	 *     wp affwp creative list --fields=ID,image
 	 *
 	 * @subcommand list
 	 *

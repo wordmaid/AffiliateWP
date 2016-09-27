@@ -378,8 +378,13 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_get_affiliate_rate_with_invalid_affiliate_id_should_default_to_default_rate() {
 		$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
+		$default_type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
 
-		$this->assertSame( $default_rate, affwp_get_affiliate_rate() );
+		if ( 'percentage' === affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' ) ) {
+			$default_rate = $default_rate / 100;
+		}
+
+		$this->assertEquals( $default_rate, affwp_get_affiliate_rate() );
 	}
 
 	/**
@@ -387,8 +392,13 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_get_affiliate_rate_with_invalid_affiliate_object_should_default_to_default_rate() {
 		$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
+		$default_type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
 
-		$this->assertSame( $default_rate, affwp_get_affiliate_rate( new \stdClass() ) );
+		if ( 'percentage' === affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' ) ) {
+			$default_rate = $default_rate / 100;
+		}
+
+		$this->assertEquals( $default_rate, affwp_get_affiliate_rate( new \stdClass() ) );
 	}
 
 	/**

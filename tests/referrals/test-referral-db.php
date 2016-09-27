@@ -71,6 +71,45 @@ class Referrals_DB_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 */
+	public function test_get_referrals_with_single_payout_id_should_return_referrals_matching_that_payout() {
+		$payout = $this->factory->payout->create( array(
+			'referrals' => self::$referrals
+		) );
+
+		$results = affiliate_wp()->referrals->get_referrals( array(
+			'payout_id' => $payout,
+			'fields'    => 'ids'
+		) );
+
+		$this->assertEqualSets( self::$referrals, $results );
+
+		// Clean up.
+		affwp_delete_payout( $payout );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Referrals_DB::get_referrals()
+	 */
+	public function test_get_referrals_with_multiple_payout_ids_should_return_referrals_matching_those_payouts() {
+		$payout1 = $this->factory->payout->create( array(
+			'referrals' => array( self::$referrals[0], self::$referrals[1] )
+		) );
+
+		$payout2 = $this->factory->payout->create( array(
+			'referrals' => array( self::$referrals[2], self::$referrals[3] )
+		) );
+
+		$results = affiliate_wp()->referrals->get_referrals( array(
+			'payout_id' => array( $payout1, $payout2 ),
+			'fields'    => 'ids'
+		) );
+
+		$this->assertEqualSets( self::$referrals, $results );
+	}
+
+	/**
 	 * @covers Affiliate_WP_Referrals_DB::count_by_status()
 	 */
 	public function test_count_by_status_should_return_0_if_status_is_invalid() {

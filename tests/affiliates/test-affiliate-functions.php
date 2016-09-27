@@ -429,6 +429,32 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::affwp_get_affiliate_rate()
+	 */
+	public function test_get_affiliate_rate_with_invalid_affiliate_id_and_product_rate_should_default_to_product_rate() {
+		$default_type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
+
+		if ( 'percentage' === affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' ) ) {
+			$product_rate = 0.3;
+		}
+
+		$this->assertEquals( $product_rate, affwp_get_affiliate_rate( 0, false, 30 ) );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_rate()
+	 */
+	public function test_get_affiliate_rate_with_invalid_affiliate_object_and_product_rate_should_default_to_product_rate() {
+		$default_type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
+
+		if ( 'percentage' === affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' ) ) {
+			$product_rate = 0.3;
+		}
+
+		$this->assertEquals( $product_rate, affwp_get_affiliate_rate( new \stdClass(), false, 30 ) );
+	}
+
+	/**
 	 * @covers ::affwp_affiliate_has_custom_rate()
 	 */
 	public function test_affiliate_has_custom_rate_passed_an_invalid_affiliate_id_should_always_return_false() {

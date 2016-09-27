@@ -254,6 +254,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *     @type int          $offset         Number of referrals to offset in the query. Default 0.
 	 *     @type int|array    $referral_id    Specific referral ID or array of IDs to query for. Default 0 (all).
 	 *     @type int|array    $affiliate_id   Affiliate ID or array of IDs to query referrals for. Default 0 (all).
+	 *     @type int|array    $payout_id      Payout ID or array of IDs to query referrals for. Default 0 (all).
 	 *     @type float|array  $amount {
 	 *         Specific amount to query for or min/max range. If float, can be used with `$amount_compare`.
 	 *         If array, `BETWEEN` is used.

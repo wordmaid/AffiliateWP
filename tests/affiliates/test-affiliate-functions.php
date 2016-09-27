@@ -374,6 +374,20 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::affwp_get_affiliate_rate()
+	 */
+	public function test_get_affiliate_rate_should_return_empty_string_if_invalid_affiliate_id() {
+		$this->assertSame( '', affwp_get_affiliate_rate() );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_rate()
+	 */
+	public function test_get_affiliate_rate_should_return_empty_string_if_invalid_affiliate_object() {
+		$this->assertSame( '', affwp_get_affiliate_rate( new \stdClass() ) );
+	}
+
+	/**
 	 * @covers ::affwp_affiliate_has_custom_rate()
 	 */
 	public function test_affiliate_has_custom_rate_passed_an_invalid_affiliate_id_should_always_return_false() {

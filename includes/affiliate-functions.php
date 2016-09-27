@@ -315,6 +315,7 @@ function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_
 	$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
 	$default_rate = affwp_abs_number_round( $default_rate );
 
+	// Back-compat for optional $affiliate.
 	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 		$affiliate_id   = 0;
 		$affiliate_rate = null;

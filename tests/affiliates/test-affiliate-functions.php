@@ -376,15 +376,82 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_get_affiliate_rate()
 	 */
-	public function test_get_affiliate_rate_should_return_empty_string_if_invalid_affiliate_id() {
-		$this->assertSame( '', affwp_get_affiliate_rate() );
+	public function test_get_affiliate_rate_with_invalid_affiliate_id_should_default_to_default_rate() {
+		$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
+		$default_type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
+
+		if ( 'percentage' === affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' ) ) {
+			$default_rate = $default_rate / 100;
+		}
+
+		$this->assertEquals( $default_rate, affwp_get_affiliate_rate() );
 	}
 
 	/**
 	 * @covers ::affwp_get_affiliate_rate()
 	 */
-	public function test_get_affiliate_rate_should_return_empty_string_if_invalid_affiliate_object() {
-		$this->assertSame( '', affwp_get_affiliate_rate( new \stdClass() ) );
+	public function test_get_affiliate_rate_with_invalid_affiliate_object_should_default_to_default_rate() {
+		$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
+		$default_type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
+
+		if ( 'percentage' === affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' ) ) {
+			$default_rate = $default_rate / 100;
+		}
+
+		$this->assertEquals( $default_rate, affwp_get_affiliate_rate( new \stdClass() ) );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_rate()
+	 */
+	public function test_get_affiliate_rate_with_invalid_affiliate_id_formatted_true_should_return_formatted_default_rate() {
+		$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
+		$default_type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
+
+		if ( 'percentage' === affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' ) ) {
+			$default_rate = $default_rate / 100;
+		}
+
+		$this->assertSame( affwp_format_rate( $default_rate ), affwp_get_affiliate_rate( 0, true ) );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_rate()
+	 */
+	public function test_get_affiliate_rate_with_invalid_affiliate_object_formatted_true_should_return_formatted_default_rate() {
+		$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
+
+		if ( 'percentage' === affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' ) ) {
+			$default_rate = $default_rate / 100;
+		}
+
+		$this->assertSame( affwp_format_rate( $default_rate ), affwp_get_affiliate_rate( new \stdClass(), true ) );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_rate()
+	 */
+	public function test_get_affiliate_rate_with_invalid_affiliate_id_and_product_rate_should_default_to_product_rate() {
+		$default_type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
+
+		if ( 'percentage' === affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' ) ) {
+			$product_rate = 0.3;
+		}
+
+		$this->assertEquals( $product_rate, affwp_get_affiliate_rate( 0, false, 30 ) );
+	}
+
+	/**
+	 * @covers ::affwp_get_affiliate_rate()
+	 */
+	public function test_get_affiliate_rate_with_invalid_affiliate_object_and_product_rate_should_default_to_product_rate() {
+		$default_type = affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' );
+
+		if ( 'percentage' === affiliate_wp()->settings->get( 'referral_rate_type', 'percentage' ) ) {
+			$product_rate = 0.3;
+		}
+
+		$this->assertEquals( $product_rate, affwp_get_affiliate_rate( new \stdClass(), false, 30 ) );
 	}
 
 	/**

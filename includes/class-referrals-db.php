@@ -254,6 +254,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *     @type int          $offset         Number of referrals to offset in the query. Default 0.
 	 *     @type int|array    $referral_id    Specific referral ID or array of IDs to query for. Default 0 (all).
 	 *     @type int|array    $affiliate_id   Affiliate ID or array of IDs to query referrals for. Default 0 (all).
+	 *     @type int|array    $payout_id      Payout ID or array of IDs to query referrals for. Default 0 (all).
 	 *     @type float|array  $amount {
 	 *         Specific amount to query for or min/max range. If float, can be used with `$amount_compare`.
 	 *         If array, `BETWEEN` is used.
@@ -292,6 +293,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			'number'       => 20,
 			'offset'       => 0,
 			'referral_id'  => 0,
+			'payout_id'    => 0,
 			'affiliate_id' => 0,
 			'amount'       => 0,
 			'amount_compare' => '=',
@@ -336,6 +338,19 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			}
 
 			$where .= "WHERE `affiliate_id` IN( {$affiliate_ids} ) ";
+
+		}
+
+		// Referrals for specific payouts
+		if( ! empty( $args['payout_id'] ) ) {
+
+			if( is_array( $args['payout_id'] ) ) {
+				$payout_ids = implode( ',', array_map( 'intval', $args['payout_id'] ) );
+			} else {
+				$payout_ids = intval( $args['payout_id'] );
+			}
+
+			$where .= "WHERE `payout_id` IN( {$payout_ids} ) ";
 
 		}
 

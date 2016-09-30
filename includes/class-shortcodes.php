@@ -135,8 +135,6 @@ class Affiliate_WP_Shortcodes {
 			return;
 		}
 
-		wp_enqueue_style( 'affwp-forms' );
-
 		// redirect added to shortcode
 		if ( $redirect ) {
 

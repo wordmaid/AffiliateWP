@@ -82,8 +82,9 @@ abstract class Tab {
 	 */
 	public function __construct() {
 		// Deliberately hooked with an anonymous function. Use the 'affwp_reports_tabs' hook to remove tabs.
-		add_filter( 'affwp_reports_tabs', function( $tabs ) {
-			$tabs[ $this->tab_id ] = $this->label;
+		$inst = $this;
+		add_filter( 'affwp_reports_tabs', function( $tabs ) use ( $inst ) {
+			$tabs[ $inst->tab_id ] = $inst->label;
 			return $tabs;
 		} );
 

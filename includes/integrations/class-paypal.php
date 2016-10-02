@@ -36,7 +36,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 
 				var action = $(this).prop( 'action' );
 
-				if( ! action.indexOf( 'paypal.com/cgi-bin/webscr' ) ) {
+				if( '' == action || ! action.indexOf( 'paypal.com/cgi-bin/webscr' ) ) {
 					return;
 				}
 

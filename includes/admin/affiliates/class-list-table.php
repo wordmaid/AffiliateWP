@@ -240,9 +240,9 @@ class AffWP_Affiliates_Table extends List_Table {
 
 		// Main 'Name' link.
 		if ( ! $name ) {
-			$user_name = __( '(user deleted)', 'affiliate-wp' );
+			$affiliate_name = __( '(user deleted)', 'affiliate-wp' );
 		} else {
-			$user_name = $name;
+			$affiliate_name = $name;
 		}
 
 		$value = sprintf( '<a href="%1$s">%2$s</a>',
@@ -252,7 +252,7 @@ class AffWP_Affiliates_Table extends List_Table {
 					'action'       => 'edit_affiliate',
 				) )
 			) ),
-			$user_name
+			$affiliate_name
 		);
 
 		// Reports.

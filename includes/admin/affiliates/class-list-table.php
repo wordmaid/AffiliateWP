@@ -233,15 +233,26 @@ class AffWP_Affiliates_Table extends List_Table {
 		$row_actions  = array();
 		$name         = affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id );
 
-		if( $name ) {
-			$value = sprintf( '<a href="%s">%s</a>', get_edit_user_link( $affiliate->user_id ), $name );
-		} else {
-			$value = __( '(user deleted)', 'affiliate-wp' );
-		}
-
 		$base_query_args = array(
 			'page'         => 'affiliate-wp-affiliates',
 			'affiliate_id' => $affiliate->ID
+		);
+
+		// Main 'Name' link.
+		if ( ! $name ) {
+			$user_name = __( '(user deleted)', 'affiliate-wp' );
+		} else {
+			$user_name = $name;
+		}
+
+		$value = sprintf( '<a href="%1$s">%2$s</a>',
+			esc_url( add_query_arg(
+				array_merge( $base_query_args, array(
+					'affwp_notice' => false,
+					'action'       => 'edit_affiliate',
+				) )
+			) ),
+			$user_name
 		);
 
 		// Reports.
@@ -253,14 +264,14 @@ class AffWP_Affiliates_Table extends List_Table {
 			) )
 		);
 
-		// Edit.
-		$row_actions['edit'] = $this->get_row_action_link(
-			__( 'Edit', 'affiliate-wp' ),
-			array_merge( $base_query_args, array(
-				'affwp_notice' => false,
-				'action'       => 'edit_affiliate',
-			) )
-		);
+		if ( $name ) {
+			// Edit User.
+			$row_actions['edit_user'] = $this->get_row_action_link(
+				__( 'Edit User', 'affiliate-wp' ),
+				array(),
+				array( 'base_uri' => get_edit_user_link( $affiliate->user_id ) )
+			);
+		}
 
 		if ( strtolower( $affiliate->status ) == 'active' ) {
 

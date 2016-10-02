@@ -121,25 +121,29 @@ abstract class List_Table extends \WP_List_Table {
 	 *
 	 * @access public
 	 * @since  1.9
+	 * @since  1.9.3 Added an optional 'base_uri' argument to `$args` for use when adding query args.
 	 *
 	 * @param string $label      Row action link label.
 	 * @param array  $query_args Query arguments.
 	 * @param array  $args {
 	 *     Optional. Additional arguments for building a row action link.
 	 *
-	 *     @type false|string $nonce Whether to nonce the URL. Accepts false (disabled) or a nonce name
-	 *                               to use. Default false.
-	 *     @type string       $class Class attribute value for the link.
+	 *     @type false|string $nonce    Whether to nonce the URL. Accepts false (disabled) or a nonce name
+	 *                                  to use. Default false.
+	 *     @type string       $class    Class attribute value for the link.
+	 *     @type string       $base_uri Base URI to add query args to. Default is the current screen.
 	 *
 	 * }
 	 * @return string Row action link markup.
 	 */
 	public function get_row_action_link( $label, $query_args, $args = array() ) {
 
+		$base_uri = empty( $args['base_uri'] ) ? '' : $args['base_uri'];
+
 		if ( empty( $args['nonce'] ) ) {
-			$url = esc_url( add_query_arg( $query_args ) );
+			$url = esc_url( add_query_arg( $query_args, $base_uri ) );
 		} else {
-			$url = wp_nonce_url( add_query_arg( $query_args ), $args['nonce'] );
+			$url = wp_nonce_url( add_query_arg( $query_args, $base_uri ), $args['nonce'] );
 		}
 
 		$class = empty( $args['class'] ) ? '' : sprintf( ' class="%s"', esc_attr( $args['class'] ) );

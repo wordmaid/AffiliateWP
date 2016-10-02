@@ -413,7 +413,7 @@ function affwp_get_affiliate_rate_type( $affiliate = 0 ) {
 		// Allowed types
 		$types = affwp_get_affiliate_rate_types();
 
-		$affiliate_rate_type = $affiliate->rate_type;
+		$affiliate_rate_type = $affiliate->rate_type();
 
 		if ( $affiliate_rate_type !== $type ) {
 			$type = $affiliate_rate_type;

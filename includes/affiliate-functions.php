@@ -311,7 +311,15 @@ function affwp_get_affiliate_status_label( $affiliate = 0 ) {
  */
 function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_rate = '', $reference = '' ) {
 	// Forward-compat with affiliate objects.
-	$affiliate_id = ( $affiliate instanceof AffWP\Affiliate ) ? $affiliate->ID : $affiliate;
+	if ( is_object( $affiliate ) ) {
+		if ( isset( $affiliate->affiliate_id ) ) {
+			$affiliate_id = $affiliate->affiliate_id;
+		} else {
+			$affiliate_id = 0;
+		}
+	} else {
+		$affiliate_id = $affiliate;
+	}
 
 	// Global referral rate setting, fallback to 20
 	$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );

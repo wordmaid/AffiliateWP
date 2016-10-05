@@ -239,11 +239,7 @@ final class Affiliate extends Base_Object {
 	 * @return int Rate. If empty, defaults to the global referral rate.
 	 */
 	public function rate() {
-		if ( empty( $this->rate ) ) {
-			return affiliate_wp()->settings->get( 'referral_rate', 20 );
-		}
-
-		return $this->rate;
+		return affwp_get_affiliate_rate( $this->ID );
 	}
 
 	/**

@@ -272,10 +272,13 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
 
+		$user_name    = '';
 		$affiliate_id = get_post_meta( $post->ID, 'affwp_discount_affiliate', true );
-		$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
-		$user         = get_userdata( $user_id );
-		$user_name    = $user ? $user->user_login : '';
+		if( $affiliate_id ) {
+			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
+			$user         = get_userdata( $user_id );
+			$user_name    = $user ? $user->user_login : '';
+		}
 		?>
 		<p class="form-field affwp-memberpress-coupon-field">
 			<label for="user_name"><?php _e( 'If you would like to connect this discount to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></label>

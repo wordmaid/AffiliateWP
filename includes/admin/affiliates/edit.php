@@ -58,7 +58,7 @@ $reason       = affwp_get_affiliate_meta( $affiliate->affiliate_id, '_rejection_
 				</th>
 
 				<td>
-					<input class="large-text" type="text" name="affiliate_url" id="affiliate_url" value="<?php echo esc_attr( affwp_get_affiliate_referral_url() ); ?>" disabled="1" />
+					<input class="large-text" type="text" name="affiliate_url" id="affiliate_url" value="<?php echo esc_attr( affwp_get_affiliate_referral_url( array( 'affiliate_id' => $affiliate->affiliate_id ) ) ); ?>" disabled="1" />
 					<p class="description"><?php _e( 'The affiliate&#8217;s referral URL. This is based on global settings.', 'affiliate-wp' ); ?></p>
 				</td>
 

@@ -62,8 +62,10 @@ function affwp_search_users() {
 
 	if ( $found_users ) {
 		foreach( $found_users as $user ) {
+			$label = empty( $user->user_email ) ? $user->user_login : "{$user->user_login} ({$user->user_email})";
+
 			$user_list[] = array(
-				'label'   => $user->user_login . " ({$user->user_email})",
+				'label'   => $label,
 				'value'   => $user->user_login,
 				'user_id' => $user->ID
 			);

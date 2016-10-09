@@ -128,7 +128,7 @@ $payout = affwp_get_payout( absint( $_GET['payout_id'] ) );
 		),
 		'display_args' => array(
 			'hide_table_nav'       => true,
-			'columns_to_hide'      => array( 'actions', 'status' ),
+			'columns_to_hide'      => array( 'status' ),
 			'hide_column_controls' => true,
 		),
 	) );

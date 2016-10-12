@@ -327,6 +327,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 		affwp_admin_scripts();
 
 		$user_name    = '';
+		$user_id      = '';
 		$affiliate_id = get_post_meta( $post->ID, 'affwp_discount_affiliate', true );
 		if( $affiliate_id ) {
 			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
@@ -602,7 +603,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	 * @since   1.9
 	*/
 	public function save_variation_data( $product_id = 0 ) {
-	
+
 		if( ! empty( $_POST['variable_post_id'] ) && is_array( $_POST['variable_post_id'] ) ) {
 
 			foreach( $_POST['variable_post_id'] as $variation_id ) {
@@ -633,7 +634,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			}
 
 		}
-	
+
 	}
 
 	/**

@@ -660,7 +660,7 @@ function affwp_clean_item_cache( $object ) {
 	// Invalidate core object queries.
 	wp_cache_set( 'last_changed', $last_changed, $db_cache_group );
 
-	// Explicitly invalid the campaigns cache.
+	// Explicitly invalidate the campaigns cache.
 	wp_cache_set( 'last_changed', $last_changed, affiliate_wp()->campaigns->cache_group );
 }
 

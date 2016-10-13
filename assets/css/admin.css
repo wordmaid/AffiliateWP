@@ -346,6 +346,33 @@ table.affiliates #unpaid {
 	width: 800px;
 }
 
+/* Batch Processor */
+
+.affwp-progress-bar {
+	position: relative;
+	height: 25px;
+}
+
+.affwp-progress-bar-label {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 300px;
+	margin-left: -150px;
+	height: 25px;
+	margin-top: -9px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.affwp-converter-wrap {
+	max-width: 50%;
+}
+
+.affwp-progress-bar-wrap {
+	display: none;
+}
+
 /* Media Queries */
 @media screen and ( max-width: 1024px ) {
 

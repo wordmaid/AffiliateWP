@@ -70,3 +70,13 @@ function affwp_search_users() {
 	wp_die( json_encode( $user_list ) );
 }
 add_action( 'wp_ajax_affwp_search_users', 'affwp_search_users' );
+
+/**
+ * Handles Ajax for processing a single batch request.
+ *
+ * @since 2.0
+ */
+function affwp_process_batch_request() {
+
+}
+add_action( 'wp_ajax_process_batch_request', 'affwp_process_batch_request' );

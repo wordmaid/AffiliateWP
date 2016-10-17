@@ -71,7 +71,7 @@ $reason       = affwp_get_affiliate_meta( $affiliate->affiliate_id, '_rejection_
 				</th>
 
 				<td>
-					<input class="small-text" type="text" name="user_id" id="user_id" value="<?php echo esc_attr( $affiliate->user_id ); ?>" disabled="1" />
+					<input class="medium-text" type="text" name="user_id" id="user_id" value="<?php echo esc_attr( $affiliate->user_id ); ?>" disabled="1" />
 					<p class="description"><?php _e( 'The affiliate&#8217;s user ID. This cannot be changed.', 'affiliate-wp' ); ?></p>
 				</td>
 

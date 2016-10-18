@@ -223,4 +223,52 @@ jQuery(document).ready(function($) {
 		postboxes.add_postbox_toggles( pagenow );
 	}
 
+	// Batch processor.
+	var	batchContainer = $( '.affwp-batch-processor' ),
+		batchNonce     = batchContainer.data( 'nonce' );
+
+	$( '.affwp-batch-process' ).each( function() {
+
+	} );
+
+	/**
+	 * Processes a single item in the queue.
+	 *
+	 * @since 2.0
+	 *
+	 * @param item
+	 */
+	function processSingleItem( item ) {
+		$.ajax( {
+			type: "POST",
+			url: ajaxurl,
+			data: {
+				action: 'process_single_item',
+				item: item,
+				nonce: batchNonce
+			},
+			success: function( response ) {
+				console.log( response );
+			}
+		} );
+	}
+
+	$( '.affwp-batch-process-btn' ).on( 'click', function( event ) {
+		event.preventDefault();
+
+		// ... Append progress bar.
+
+		// Loop through items.
+		processSingleItem( affwpProcess.items.shift() )
+	} );
+
+	/**
+	 * Finishes up the batch process.
+	 *
+	 * @since 2.0
+	 */
+	function finishProcessing() {
+
+	}
+
 } );

@@ -18,6 +18,16 @@
 	);
 	?>
 
+	<?php
+	/**
+	 * Fires right before displaying the affiliate payouts dashboard table.
+	 *
+	 * @since 1.9.4
+	 *
+	 * @param int $affiliate_id Affiliate ID.
+	 */
+	do_action( 'affwp_payouts_dashboard_before_table', $affiliate_id ); ?>
+
 	<table id="affwp-affiliate-dashboard-payouts" class="affwp-table" aria-describedby="affwp-table-summary">
 		<thead>
 			<tr>
@@ -25,6 +35,15 @@
 				<th class="payout-amount"><?php _e( 'Amount', 'affiliate-wp' ); ?></th>
 				<th class="payout-method"><?php _e( 'Payout Method', 'affiliate-wp' ); ?></th>
 				<th class="payout-status"><?php _e( 'Status', 'affiliate-wp' ); ?></th>
+				<?php
+				/**
+				 * Fires right after displaying the last affiliate payouts dashboard table header.
+				 *
+				 * @since 1.9.4
+				 *
+				 * @param int $affiliate_id Affiliate ID.
+				 */
+				do_action( 'affwp_payouts_dashboard_th' ); ?>
 			</tr>
 		</thead>
 
@@ -45,6 +64,15 @@
 						<td>
 							<?php echo esc_html( affwp_get_payout_status_label( $payout ) ); ?>
 						</td>
+						<?php
+						/**
+						 * Fires right after displaying the last affiliate payouts dashboard table data.
+						 *
+						 * @since 1.9.4
+						 *
+						 * @param object $payout Payout object.
+						 */
+						do_action( 'affwp_payouts_dashboard_td', $payout ); ?>
 					</tr>
 				<?php endforeach; ?>
 
@@ -57,6 +85,16 @@
 			<?php endif; ?>
 		</tbody>
 	</table>
+
+	<?php
+	/**
+	 * Fires right after displaying the affiliate payouts dashboard table.
+	 *
+	 * @since 1.9.4
+	 *
+	 * @param int $affiliate_id Affiliate ID.
+	 */
+	do_action( 'affwp_payouts_dashboard_after_table', $affiliate_id ); ?>
 
 	<?php if ( $pages > 1 ) : ?>
 

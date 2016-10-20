@@ -310,36 +310,40 @@ function affwp_get_affiliate_status_label( $affiliate = 0 ) {
  * @return string Affiliate rate, empty string otherwise.
  */
 function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_rate = '', $reference = '' ) {
+	// Forward-compat with affiliate objects.
+	if ( is_object( $affiliate ) ) {
+		if ( isset( $affiliate->affiliate_id ) ) {
+			$affiliate_id = $affiliate->affiliate_id;
+		} else {
+			$affiliate_id = 0;
+		}
+	} else {
+		$affiliate_id = $affiliate;
+	}
 
 	// Global referral rate setting, fallback to 20
 	$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
 	$default_rate = affwp_abs_number_round( $default_rate );
 
-	// Back-compat for optional $affiliate.
-	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
-		$affiliate_id   = 0;
-		$affiliate_rate = null;
-	} else {
-		$affiliate_id   = $affiliate->ID;
-		$affiliate_rate = $affiliate->rate();
-	}
-
 	// Get product-specific referral rate, fallback to global rate
 	$product_rate = affwp_abs_number_round( $product_rate );
 	$product_rate = ( null !== $product_rate ) ? $product_rate : $default_rate;
+
+	// Get affiliate-specific referral rate
+	$affiliate_rate = affiliate_wp()->affiliates->get_column( 'rate', $affiliate_id );
 
 	// Get rate in order of priority: Affiliate -> Product -> Global
 	$rate = affwp_abs_number_round( $affiliate_rate );
 	$rate = ( null !== $rate ) ? $rate : $product_rate;
 
-	// Get the referral rate type.
+	// Get the referral rate type
 	$type = affwp_get_affiliate_rate_type( $affiliate_id );
 
 	// Format percentage rates
 	$rate = ( 'percentage' === $type ) ? $rate / 100 : $rate;
 
 	/**
-	 * Filters the affiliate rate.
+	 * Filter the affiliate rate
 	 *
 	 * @param  string  $rate
 	 * @param  int     $affiliate_id
@@ -356,7 +360,6 @@ function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_
 	$rate = affwp_format_rate( $rate, $type );
 
 	return $rate;
-
 }
 
 /**
@@ -413,7 +416,7 @@ function affwp_get_affiliate_rate_type( $affiliate = 0 ) {
 		// Allowed types
 		$types = affwp_get_affiliate_rate_types();
 
-		$affiliate_rate_type = $affiliate->rate_type;
+		$affiliate_rate_type = $affiliate->rate_type();
 
 		if ( $affiliate_rate_type !== $type ) {
 			$type = $affiliate_rate_type;
@@ -1013,25 +1016,21 @@ function affwp_add_affiliate( $data = array() ) {
 
 	$user_id = absint( $data['user_id'] );
 
-	if ( ! affiliate_wp()->affiliates->get_by( 'user_id', $user_id ) ) {
+	$args = array(
+		'user_id'       => $user_id,
+		'status'        => $status,
+		'rate'          => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
+		'rate_type'     => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
+		'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : ''
+	);
 
-		$args = array(
-			'user_id'       => $user_id,
-			'status'        => $status,
-			'rate'          => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
-			'rate_type'     => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
-			'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : ''
-		);
+	$affiliate_id = affiliate_wp()->affiliates->add( $args );
 
-		$affiliate_id = affiliate_wp()->affiliates->add( $args );
+	if ( $affiliate_id ) {
 
-		if ( $affiliate_id ) {
+		affwp_set_affiliate_status( $affiliate_id, $status );
 
-			affwp_set_affiliate_status( $affiliate_id, $status );
-
-			return $affiliate_id;
-		}
-
+		return $affiliate_id;
 	}
 
 	return false;

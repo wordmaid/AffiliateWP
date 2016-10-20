@@ -410,7 +410,7 @@ class AffWP_Payouts_Table extends List_Table {
 		 * @param array                   $row_actions Row actions markup.
 		 * @param \AffWP\Affiliate\Payout $payout      Current payout object.
 		 */
-		$row_actions = apply_filters( 'affwp_affiliate_row_actions', $row_actions, $payout );
+		$row_actions = apply_filters( 'affwp_payout_row_actions', $row_actions, $payout );
 
 		return $this->row_actions( $row_actions, true );
 	}

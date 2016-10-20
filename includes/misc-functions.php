@@ -655,8 +655,13 @@ function affwp_clean_item_cache( $object ) {
 	$db_groups      = $Object_Class::get_db_groups();
 	$db_cache_group = isset( $db_groups->secondary ) ? $db_groups->secondary : $db_groups->primary;
 
-	// last_changed for queries.
-	wp_cache_set( 'last_changed', microtime(), $db_cache_group );
+	$last_changed = microtime();
+
+	// Invalidate core object queries.
+	wp_cache_set( 'last_changed', $last_changed, $db_cache_group );
+
+	// Explicitly invalidate the campaigns cache.
+	wp_cache_set( 'last_changed', $last_changed, affiliate_wp()->campaigns->cache_group );
 }
 
 /**

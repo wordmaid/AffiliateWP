@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-09-22 20:23:58+00:00\n"
+"POT-Creation-Date: 2016-10-20 18:23:03+00:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrew Munro, Sumobi <andrew@sumobi.com>\n"
 "Language-Team: Alexander Manfred Poellmann, vendocrat, Helmar Rudolph "
@@ -47,8 +47,7 @@ msgstr ""
 #: includes/admin/affiliates/actions.php:138
 #: includes/admin/affiliates/actions.php:142
 #: includes/admin/class-addon-updater.php:283
-#: includes/admin/class-notices.php:358
-#: includes/admin/creatives/actions.php:16
+#: includes/admin/class-notices.php:358 includes/admin/creatives/actions.php:16
 #: includes/admin/creatives/actions.php:44
 #: includes/admin/creatives/actions.php:48
 #: includes/admin/creatives/actions.php:52
@@ -174,7 +173,7 @@ msgid "The context under which the referral was created (integration)."
 msgstr ""
 
 #: includes/REST/v1/class-referrals-endpoints.php:184
-#: includes/REST/v1/class-visits-endpoints.php:174
+#: includes/REST/v1/class-visits-endpoints.php:183
 msgid "The associated campaign."
 msgstr ""
 
@@ -219,95 +218,99 @@ msgid ""
 "Scope under which the request is made; determines fields present in response."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:151
+#: includes/REST/v1/class-visits-endpoints.php:152
+msgid "The visit ID or array of IDs to query visits for."
+msgstr ""
+
+#: includes/REST/v1/class-visits-endpoints.php:160
 msgid "The affiliate ID or array of IDs to query visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:159
+#: includes/REST/v1/class-visits-endpoints.php:168
 msgid "The referral ID or array of IDs to query visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:167
+#: includes/REST/v1/class-visits-endpoints.php:176
 msgid "The referral status or array of statuses to retrieve visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:182
+#: includes/REST/v1/class-visits-endpoints.php:191
 msgid "Visits table column to order by."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:193
+#: includes/REST/v1/class-visits-endpoints.php:202
 msgid "Use any get_visits() arguments to modify the response."
 msgstr ""
 
-#: includes/abstracts/class-affwp-reports-tab.php:114
+#: includes/abstracts/class-affwp-reports-tab.php:115
 #, fuzzy
 msgid "Date Filters"
 msgstr "Filter"
 
-#: includes/abstracts/class-affwp-reports-tab.php:129
+#: includes/abstracts/class-affwp-reports-tab.php:130
 msgid "Quick Stats"
 msgstr ""
 
-#: includes/abstracts/class-affwp-reports-tab.php:162
+#: includes/abstracts/class-affwp-reports-tab.php:163
 msgid "Trends"
 msgstr ""
 
-#: includes/abstracts/class-affwp-reports-tab.php:320
+#: includes/abstracts/class-affwp-reports-tab.php:325
 msgid "No data for the current date range."
 msgstr ""
 
-#: includes/abstracts/class-affwp-reports-tab.php:365
+#: includes/abstracts/class-affwp-reports-tab.php:370
 #: includes/class-graph.php:335
 msgid "Today"
 msgstr "Heute"
 
-#: includes/abstracts/class-affwp-reports-tab.php:366
+#: includes/abstracts/class-affwp-reports-tab.php:371
 #: includes/class-graph.php:336
 msgid "Yesterday"
 msgstr "Gestern"
 
-#: includes/abstracts/class-affwp-reports-tab.php:367
+#: includes/abstracts/class-affwp-reports-tab.php:372
 #: includes/class-graph.php:337
 msgid "This Week"
 msgstr "Diese Woche"
 
-#: includes/abstracts/class-affwp-reports-tab.php:368
+#: includes/abstracts/class-affwp-reports-tab.php:373
 #: includes/class-graph.php:338
 msgid "Last Week"
 msgstr "Letzte Woche"
 
-#: includes/abstracts/class-affwp-reports-tab.php:369
+#: includes/abstracts/class-affwp-reports-tab.php:374
 #: includes/class-graph.php:339
 msgid "This Month"
 msgstr "Dieser Monat"
 
-#: includes/abstracts/class-affwp-reports-tab.php:370
+#: includes/abstracts/class-affwp-reports-tab.php:375
 #: includes/class-graph.php:340
 msgid "Last Month"
 msgstr "Letzter Monat"
 
-#: includes/abstracts/class-affwp-reports-tab.php:371
+#: includes/abstracts/class-affwp-reports-tab.php:376
 #: includes/class-graph.php:341
 msgid "This Quarter"
 msgstr "Dieses Quartal"
 
-#: includes/abstracts/class-affwp-reports-tab.php:372
+#: includes/abstracts/class-affwp-reports-tab.php:377
 #: includes/class-graph.php:342
 msgid "Last Quarter"
 msgstr "Letztes Quartal"
 
-#: includes/abstracts/class-affwp-reports-tab.php:373
+#: includes/abstracts/class-affwp-reports-tab.php:378
 #: includes/class-graph.php:343
 msgid "This Year"
 msgstr "Dieses Jahr"
 
-#: includes/abstracts/class-affwp-reports-tab.php:374
+#: includes/abstracts/class-affwp-reports-tab.php:379
 #: includes/class-graph.php:344
 msgid "Last Year"
 msgstr "Letztes Jahr"
 
 #. translators: 1: Starting date, 2: Ending date
-#: includes/abstracts/class-affwp-reports-tab.php:384
+#: includes/abstracts/class-affwp-reports-tab.php:389
 msgid "%1$s to %2$s"
 msgstr ""
 
@@ -392,8 +395,7 @@ msgstr "Du hast keine Berechtigung, um Affiliate-Konten zu löschen."
 
 #: includes/admin/affiliates/actions.php:56
 #: includes/admin/affiliates/actions.php:142
-#: includes/admin/class-notices.php:358
-#: includes/admin/creatives/actions.php:48
+#: includes/admin/class-notices.php:358 includes/admin/creatives/actions.php:48
 #: includes/admin/referrals/actions.php:20
 #: includes/admin/referrals/actions.php:51
 #: includes/admin/referrals/actions.php:82
@@ -404,8 +406,8 @@ msgstr "Sicherheitsüberprüfung fehlgeschlagen"
 msgid "No affiliate IDs specified for deletion"
 msgstr "Keine Affiliate-ID zur Löschung angegeben"
 
-#: includes/admin/affiliates/affiliates.php:56
-#: includes/admin/class-menu.php:11 includes/admin/class-menu.php:13
+#: includes/admin/affiliates/affiliates.php:56 includes/admin/class-menu.php:11
+#: includes/admin/class-menu.php:13
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:23
 msgid "Affiliates"
 msgstr "Affiliates"
@@ -479,7 +481,7 @@ msgid "Affiliate ID"
 msgstr "Affiliate ID"
 
 #: includes/admin/affiliates/class-list-table.php:168
-#: includes/admin/affiliates/edit.php:70
+#: includes/admin/affiliates/edit.php:83
 #: includes/admin/affiliates/review.php:34
 #: includes/admin/settings/class-settings.php:449
 #: includes/admin/tools/class-rest-consumers-table.php:200
@@ -501,7 +503,6 @@ msgid "Rate"
 msgstr "Kurs"
 
 #: includes/admin/affiliates/class-list-table.php:171
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:80
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:65
 #: templates/dashboard-tab-stats.php:8
 msgid "Unpaid Referrals"
@@ -525,77 +526,74 @@ msgstr "Besuche"
 #: includes/admin/affiliates/class-list-table.php:174
 #: includes/admin/creatives/class-list-table.php:118
 #: includes/admin/creatives/edit.php:94 includes/admin/creatives/new.php:84
-#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:68
 #: includes/admin/payouts/view.php:85
 #: includes/admin/referrals/class-list-table.php:174
 #: includes/admin/referrals/edit.php:133 includes/admin/referrals/new.php:96
 #: includes/admin/tools/export/class-export-affiliates.php:57
 #: includes/admin/tools/export/class-export-referrals.php:70
-#: templates/dashboard-tab-payouts.php:27
+#: templates/dashboard-tab-payouts.php:37
 #: templates/dashboard-tab-referrals.php:26
 msgid "Status"
 msgstr "Status"
 
-#: includes/admin/affiliates/class-list-table.php:239
-#: includes/admin/affiliates/class-list-table.php:366
+#: includes/admin/affiliates/class-list-table.php:243
+#: includes/admin/affiliates/class-list-table.php:377
 #: includes/admin/payouts/class-list-table.php:272
 msgid "(user deleted)"
 msgstr "(Nutzer gelöscht)"
 
-#: includes/admin/affiliates/class-list-table.php:249
+#: includes/admin/affiliates/class-list-table.php:260
 #: includes/admin/class-menu.php:18
 #: includes/admin/reports/class-reports-admin.php:97
 #: includes/admin/user-profile.php:49
 msgid "Reports"
 msgstr "Berichte"
 
-#: includes/admin/affiliates/class-list-table.php:258
-#: includes/admin/creatives/class-list-table.php:199
-#: includes/admin/referrals/class-list-table.php:374
-#: includes/admin/user-profile.php:51
-msgid "Edit"
-msgstr "Bearbeiten"
+#: includes/admin/affiliates/class-list-table.php:270
+#, fuzzy
+msgid "Edit User"
+msgstr "Verkauf bearbeiten"
 
-#: includes/admin/affiliates/class-list-table.php:269
-#: includes/admin/affiliates/class-list-table.php:476
+#: includes/admin/affiliates/class-list-table.php:280
+#: includes/admin/affiliates/class-list-table.php:487
 #: includes/admin/creatives/class-list-table.php:211
 msgid "Deactivate"
 msgstr "Deaktivieren"
 
-#: includes/admin/affiliates/class-list-table.php:281
+#: includes/admin/affiliates/class-list-table.php:292
 #: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:84
 msgid "Review"
 msgstr "Review"
 
-#: includes/admin/affiliates/class-list-table.php:291
-#: includes/admin/affiliates/class-list-table.php:473
+#: includes/admin/affiliates/class-list-table.php:302
+#: includes/admin/affiliates/class-list-table.php:484
 #: includes/admin/referrals/class-list-table.php:343
 #: includes/admin/referrals/class-list-table.php:479
 msgid "Accept"
 msgstr "Akzeptieren"
 
-#: includes/admin/affiliates/class-list-table.php:301
-#: includes/admin/affiliates/class-list-table.php:474
+#: includes/admin/affiliates/class-list-table.php:312
+#: includes/admin/affiliates/class-list-table.php:485
 #: includes/admin/referrals/class-list-table.php:359
 #: includes/admin/referrals/class-list-table.php:480
 msgid "Reject"
 msgstr "Ablehnen"
 
-#: includes/admin/affiliates/class-list-table.php:313
-#: includes/admin/affiliates/class-list-table.php:475
+#: includes/admin/affiliates/class-list-table.php:324
+#: includes/admin/affiliates/class-list-table.php:486
 #: includes/admin/creatives/class-list-table.php:223
 msgid "Activate"
 msgstr "Aktivieren"
 
-#: includes/admin/affiliates/class-list-table.php:325
-#: includes/admin/affiliates/class-list-table.php:477
+#: includes/admin/affiliates/class-list-table.php:336
+#: includes/admin/affiliates/class-list-table.php:488
 #: includes/admin/creatives/class-list-table.php:235
 #: includes/admin/referrals/class-list-table.php:383
 #: includes/admin/referrals/class-list-table.php:483
 msgid "Delete"
 msgstr "Löschen"
 
-#: includes/admin/affiliates/class-list-table.php:461
+#: includes/admin/affiliates/class-list-table.php:472
 msgid "No affiliates found."
 msgstr "Keine Affiliate-Partner gefunden."
 
@@ -646,8 +644,7 @@ msgid ""
 "edit screen</a>."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:34
-#: includes/admin/affiliates/edit.php:104
+#: includes/admin/affiliates/edit.php:34 includes/admin/affiliates/edit.php:117
 msgid "A link to the user edit screen for this user."
 msgstr ""
 
@@ -657,67 +654,77 @@ msgid "The affiliate&#8217;s ID. This cannot be changed."
 msgstr "Die Affiliate-ID. Diese kann nicht geändert werden."
 
 #: includes/admin/affiliates/edit.php:57
+#, fuzzy
+msgid "Affiliate URL"
+msgstr "Affiliate-Links"
+
+#: includes/admin/affiliates/edit.php:62
+#, fuzzy
+msgid "The affiliate&#8217;s referral URL. This is based on global settings."
+msgstr "Affiliate-Link"
+
+#: includes/admin/affiliates/edit.php:70
 msgid "User ID"
 msgstr "Benutzer-ID"
 
-#: includes/admin/affiliates/edit.php:62
+#: includes/admin/affiliates/edit.php:75
 #, fuzzy
 msgid "The affiliate&#8217;s user ID. This cannot be changed."
 msgstr "Die Affiliate-Benutzer-ID. Diese kann nicht geändert werden."
 
-#: includes/admin/affiliates/edit.php:75
+#: includes/admin/affiliates/edit.php:88
 #, fuzzy
 msgid "The affiliate&#8217;s username. This cannot be changed."
 msgstr "Der Benutzername des Affiliates. Dieser kann nicht geändert werden."
 
-#: includes/admin/affiliates/edit.php:83
+#: includes/admin/affiliates/edit.php:96
 #, fuzzy
 msgid "Registration Date"
 msgstr "Registrierung E-Mail-Inhalt"
 
-#: includes/admin/affiliates/edit.php:88
+#: includes/admin/affiliates/edit.php:101
 #, fuzzy
 msgid "The affiliate&#8217;s registration date. This cannot be changed."
 msgstr "Der Benutzername des Affiliates. Dieser kann nicht geändert werden."
 
-#: includes/admin/affiliates/edit.php:96
+#: includes/admin/affiliates/edit.php:109
 #, fuzzy
 msgid "Website"
 msgstr "Website-URL"
 
-#: includes/admin/affiliates/edit.php:102
+#: includes/admin/affiliates/edit.php:115
 msgid ""
 "The affiliate&#8217;s website. Will be empty if no website is specified. "
 "This can be changed on the <a href=\"%1$s\" alt=\"%2$s\">user edit screen</"
 "a>."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:113 includes/admin/affiliates/new.php:53
+#: includes/admin/affiliates/edit.php:126 includes/admin/affiliates/new.php:53
 #: includes/admin/settings/class-settings.php:465
 msgid "Referral Rate Type"
 msgstr "Provisionsratentyp"
 
-#: includes/admin/affiliates/edit.php:118 includes/admin/affiliates/new.php:58
+#: includes/admin/affiliates/edit.php:131 includes/admin/affiliates/new.php:58
 msgid "Site Default"
 msgstr "Standardwert"
 
-#: includes/admin/affiliates/edit.php:123 includes/admin/affiliates/new.php:63
+#: includes/admin/affiliates/edit.php:136 includes/admin/affiliates/new.php:63
 #, fuzzy
 msgid "The affiliate&#8217;s referral rate type."
 msgstr "Affiliate Partner's Provisionsratentyp"
 
-#: includes/admin/affiliates/edit.php:131 includes/admin/affiliates/new.php:71
+#: includes/admin/affiliates/edit.php:144 includes/admin/affiliates/new.php:71
 #: includes/admin/settings/class-settings.php:471
-#: includes/integrations/class-edd.php:652
+#: includes/integrations/class-edd.php:655
 #: includes/integrations/class-memberpress.php:179
 #: includes/integrations/class-pmp.php:361
-#: includes/integrations/class-woocommerce.php:520
+#: includes/integrations/class-woocommerce.php:524
 #: includes/integrations/class-zippycourses.php:76
 #: includes/integrations/extras/class-exchange-feature.php:31
 msgid "Referral Rate"
 msgstr "Empfehlungsrate"
 
-#: includes/admin/affiliates/edit.php:136 includes/admin/affiliates/new.php:76
+#: includes/admin/affiliates/edit.php:149 includes/admin/affiliates/new.php:76
 #, fuzzy
 msgid ""
 "The affiliate&#8217;s referral rate, such as 20 for 20%. If left blank, the "
@@ -726,11 +733,11 @@ msgstr ""
 "Affiliate-Provisonsrate, beispielsweise 20 für 20%. Wenn leer gelassen, wird "
 "der Standardwert verwendet."
 
-#: includes/admin/affiliates/edit.php:144 templates/register.php:64
+#: includes/admin/affiliates/edit.php:157 templates/register.php:64
 msgid "Account Email"
 msgstr "E-Mail-Konto"
 
-#: includes/admin/affiliates/edit.php:149
+#: includes/admin/affiliates/edit.php:162
 #, fuzzy
 msgid ""
 "The affiliate&#8217;s account email. Updating this will change the email "
@@ -739,14 +746,14 @@ msgstr ""
 "Die Affiliate-E-Mail-Adresse. Eine Aktualisierung wird auch die E-Mail-"
 "Adresse ändern, die auf der Profilseite angezeigt wird."
 
-#: includes/admin/affiliates/edit.php:157 includes/admin/affiliates/new.php:84
+#: includes/admin/affiliates/edit.php:170 includes/admin/affiliates/new.php:84
 #: includes/admin/tools/export/class-export-affiliates.php:50
 #: includes/admin/tools/export/class-export-referrals.php:63
 #: templates/register.php:69
 msgid "Payment Email"
 msgstr "Auszahlungs-E-Mail Adresse"
 
-#: includes/admin/affiliates/edit.php:162 includes/admin/affiliates/new.php:89
+#: includes/admin/affiliates/edit.php:175 includes/admin/affiliates/new.php:89
 #, fuzzy
 msgid ""
 "Affiliate&#8217;s payment email for systems such as PayPal, Moneybookers, or "
@@ -756,12 +763,12 @@ msgstr ""
 "Moneybookers oder andere. Leer lassen, um die E-Mail Adresse des Affiliate "
 "Partners zu verwenden."
 
-#: includes/admin/affiliates/edit.php:171
+#: includes/admin/affiliates/edit.php:184
 #: includes/admin/affiliates/review.php:86
 msgid "Rejection Reason"
 msgstr "Ablehnungsgrund"
 
-#: includes/admin/affiliates/edit.php:189
+#: includes/admin/affiliates/edit.php:202
 msgid "Update Affiliate"
 msgstr "Affiliate aktualisieren"
 
@@ -1139,7 +1146,6 @@ msgstr "Keine Werbeanzeigen-ID zur Löschung angegeben"
 
 #: includes/admin/creatives/class-list-table.php:116
 #: includes/admin/creatives/edit.php:43 includes/admin/creatives/new.php:42
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:67
 #: templates/dashboard-tab-visits.php:25
 msgid "URL"
 msgstr "URL"
@@ -1149,11 +1155,16 @@ msgid "Shortcode"
 msgstr "Shortcode"
 
 #: includes/admin/creatives/class-list-table.php:119
-#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:69
 #: includes/admin/payouts/class-list-table.php:155
 #: includes/admin/referrals/class-list-table.php:173
 msgid "Actions"
 msgstr "Aktionen"
+
+#: includes/admin/creatives/class-list-table.php:199
+#: includes/admin/referrals/class-list-table.php:374
+#: includes/admin/user-profile.php:51
+msgid "Edit"
+msgstr "Bearbeiten"
 
 #: includes/admin/creatives/class-list-table.php:264
 msgid "No creatives found."
@@ -1177,7 +1188,6 @@ msgid "The name of this creative. For your identification only."
 msgstr "Der Name für diese Werbeanzeige. Nur zu Deiner Identifikation."
 
 #: includes/admin/creatives/edit.php:30 includes/admin/creatives/new.php:29
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:71
 #: includes/admin/referrals/class-list-table.php:171
 #: includes/admin/referrals/edit.php:94 includes/admin/referrals/new.php:57
 #: includes/admin/tools/export/class-export-referrals.php:66
@@ -1270,26 +1280,6 @@ msgstr "Keine registrierten Affiliate-Partner"
 msgid "Recent Referral Visits"
 msgstr "Letzte vermittelte Besuche"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:66
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:69
-#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:67
-#: includes/admin/payouts/class-list-table.php:150
-#: includes/admin/payouts/view.php:34
-#: includes/admin/referrals/class-list-table.php:169
-#: includes/admin/referrals/new.php:16
-#: includes/admin/visits/class-list-table.php:105
-#: includes/integrations/class-lifterlms.php:472
-#: includes/integrations/class-memberpress.php:259
-msgid "Affiliate"
-msgstr "Affiliate"
-
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:68
-#: includes/admin/visits/class-list-table.php:108
-#: includes/admin/visits/visits.php:50 templates/dashboard-tab-stats.php:59
-#: templates/dashboard-tab-visits.php:27
-msgid "Converted"
-msgstr "Konvertiert"
-
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:81
 #: templates/dashboard-tab-visits.php:45
 #, fuzzy
@@ -1303,18 +1293,6 @@ msgstr "Noch keine vermittelten Besuche verzeichnet"
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:33
 msgid "Recent Referrals"
 msgstr "Letzten Partner-Verkäufe"
-
-#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:70
-#: includes/admin/payouts/view.php:61
-#: includes/admin/referrals/class-list-table.php:168
-#: includes/admin/referrals/edit.php:65 includes/admin/referrals/new.php:32
-#: includes/admin/tools/export/class-export-referrals-payout.php:62
-#: includes/admin/tools/export/class-export-referrals.php:64
-#: includes/integrations/class-lifterlms.php:467
-#: templates/dashboard-tab-payouts.php:25
-#: templates/dashboard-tab-referrals.php:24
-msgid "Amount"
-msgstr "Anzahl"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:87
 msgid "No referrals recorded yet"
@@ -1336,43 +1314,6 @@ msgstr "Keine Affiliate-Partner Anmeldungen bisher"
 msgid "Totals"
 msgstr "Totals"
 
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:54
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
-#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
-msgid "Paid Earnings"
-msgstr "Ausbezahlte Provisionen"
-
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:55
-msgid "Paid Earnings This Month"
-msgstr "Ausbezahlte Provisionen diesen Monat"
-
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:56
-msgid "Paid Earnings Today"
-msgstr "Bezahlte Einnahmen für Heute"
-
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:81
-msgid "Unpaid Referrals This Month"
-msgstr "Nicht ausgezahlte Verkäufe diesen Monat"
-
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:82
-msgid "Unpaid Referrals Today"
-msgstr "Nicht ausgezahlte Verkäufe Heute"
-
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:105
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:57
-#: templates/dashboard-tab-stats.php:33
-msgid "Unpaid Earnings"
-msgstr "Nicht ausgezahlte Provisionen"
-
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:106
-msgid "Unpaid Earnings This Month"
-msgstr "Nicht ausgezahlte Provisionen diesen Monat"
-
-#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:107
-msgid "Unpaid Earnings Today"
-msgstr "Nicht ausgezahlte Provisionen Heute"
-
 #: includes/admin/payouts/class-list-table.php:130
 #: includes/admin/referrals/class-list-table.php:149
 #: includes/admin/referrals/edit.php:139 includes/admin/referrals/new.php:102
@@ -1390,8 +1331,18 @@ msgstr ""
 msgid "Payout ID"
 msgstr ""
 
+#: includes/admin/payouts/class-list-table.php:150
+#: includes/admin/payouts/view.php:34
+#: includes/admin/referrals/class-list-table.php:169
+#: includes/admin/referrals/new.php:16
+#: includes/admin/visits/class-list-table.php:105
+#: includes/integrations/class-lifterlms.php:472
+#: includes/integrations/class-memberpress.php:259
+msgid "Affiliate"
+msgstr "Affiliate"
+
 #: includes/admin/payouts/class-list-table.php:152
-#: includes/admin/payouts/view.php:73 templates/dashboard-tab-payouts.php:26
+#: includes/admin/payouts/view.php:73 templates/dashboard-tab-payouts.php:36
 #, fuzzy
 msgid "Payout Method"
 msgstr "Werbemethode"
@@ -1430,6 +1381,17 @@ msgstr "Anzahl der Besuche pro Seite:"
 #: includes/admin/payouts/view.php:16
 msgid "Payout: #%d"
 msgstr ""
+
+#: includes/admin/payouts/view.php:61
+#: includes/admin/referrals/class-list-table.php:168
+#: includes/admin/referrals/edit.php:65 includes/admin/referrals/new.php:32
+#: includes/admin/tools/export/class-export-referrals-payout.php:62
+#: includes/admin/tools/export/class-export-referrals.php:64
+#: includes/integrations/class-lifterlms.php:467
+#: templates/dashboard-tab-payouts.php:35
+#: templates/dashboard-tab-referrals.php:24
+msgid "Amount"
+msgstr "Anzahl"
 
 #: includes/admin/payouts/view.php:102
 msgid "Payout Date"
@@ -1472,7 +1434,7 @@ msgstr "Referenz"
 #: includes/admin/tools/export/class-export-referrals.php:71
 #: includes/admin/tools/export/class-export.php:70
 #: includes/admin/visits/class-list-table.php:109
-#: templates/dashboard-tab-payouts.php:24
+#: templates/dashboard-tab-payouts.php:34
 #: templates/dashboard-tab-referrals.php:27
 #: templates/dashboard-tab-visits.php:28
 msgid "Date"
@@ -1501,16 +1463,14 @@ msgid "Apply"
 msgstr "Anwenden"
 
 #: includes/admin/referrals/class-list-table.php:459
-#: includes/admin/referrals/referrals.php:52
-#: includes/admin/tools/tools.php:305 includes/admin/visits/visits.php:44
-#: includes/class-graph.php:390
+#: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:305
+#: includes/admin/visits/visits.php:44 includes/class-graph.php:390
 msgid "From - mm/dd/yyyy"
 msgstr "Von - mm/tt/jjjj"
 
 #: includes/admin/referrals/class-list-table.php:460
-#: includes/admin/referrals/referrals.php:53
-#: includes/admin/tools/tools.php:306 includes/admin/visits/visits.php:45
-#: includes/class-graph.php:392
+#: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:306
+#: includes/admin/visits/visits.php:45 includes/class-graph.php:392
 msgid "To - mm/dd/yyyy"
 msgstr "Bis - mm/tt/jjjj"
 
@@ -1812,35 +1772,35 @@ msgstr "Affiliates exportieren"
 msgid "All Time"
 msgstr ""
 
-#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:68
-#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:130
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:72
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:137
 #, fuzzy
 msgid "Affiliate #%d"
 msgstr "Partner: #%d %s"
 
-#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:72
-#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:81
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:76
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:85
 #, fuzzy
 msgid "Top Earning Affiliate"
 msgstr "Affiliate-Partner bearbeiten"
 
-#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:96
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:100
 #, fuzzy
 msgid "New Affiliates"
 msgstr "Neuer Affiliate-Partner"
 
-#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:134
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:141
 #, fuzzy
 msgid "%d referral"
 msgid_plural "%d referrals"
 msgstr[0] "Verkauf hinzufügen"
 msgstr[1] "Verkauf hinzufügen"
 
-#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:148
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:155
 msgid "Highest Converting Affiliate"
 msgstr ""
 
-#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:173
+#: includes/admin/reports/tabs/class-affiliates-reports-tab.php:180
 #, fuzzy
 msgid "Average Payout"
 msgstr "Empfehlungsrate"
@@ -1884,6 +1844,17 @@ msgstr "Benutzerdefiniert"
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:160
 msgid "Most Active Campaign (%s)"
 msgstr ""
+
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
+#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
+msgid "Paid Earnings"
+msgstr "Ausbezahlte Provisionen"
+
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:57
+#: templates/dashboard-tab-stats.php:33
+msgid "Unpaid Earnings"
+msgstr "Nicht ausgezahlte Provisionen"
 
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:81
 #, fuzzy
@@ -2933,6 +2904,12 @@ msgstr "Referral-ID"
 msgid "IP"
 msgstr "IP"
 
+#: includes/admin/visits/class-list-table.php:108
+#: includes/admin/visits/visits.php:50 templates/dashboard-tab-stats.php:59
+#: templates/dashboard-tab-visits.php:27
+msgid "Converted"
+msgstr "Konvertiert"
+
 #: includes/admin/visits/class-list-table.php:172
 #: templates/dashboard-tab-visits.php:42
 msgid "Direct traffic"
@@ -3042,11 +3019,11 @@ msgstr "Nach Status filtern"
 msgid "Unconverted"
 msgstr "Unkonvertiert"
 
-#: includes/affiliate-functions.php:444
+#: includes/affiliate-functions.php:453
 msgid "Percentage (%)"
 msgstr "Anteil (%)"
 
-#: includes/affiliate-functions.php:445
+#: includes/affiliate-functions.php:454
 msgid "Flat %s"
 msgstr "Pauschal %s"
 
@@ -3336,27 +3313,37 @@ msgstr "Nutzungsbedingungen"
 msgid "Found %s sites. Retrieving stats ..."
 msgstr ""
 
-#: includes/cli/class-command.php:188
+#: includes/cli/class-command.php:190
 #, fuzzy
 msgid "Total Affiliates: %s"
 msgstr "Affiliates exportieren"
 
-#: includes/cli/class-command.php:191
+#: includes/cli/class-command.php:193
+#, fuzzy
+msgid "Total Creatives: %s"
+msgstr "Affiliates exportieren"
+
+#: includes/cli/class-command.php:196
+#, fuzzy
+msgid "Total Payouts: %s"
+msgstr "Summe der Besuche"
+
+#: includes/cli/class-command.php:199
 #, fuzzy
 msgid "Total Referrals: %s"
 msgstr "Summe ausbezahlter Verkäufe"
 
-#: includes/cli/class-command.php:194
+#: includes/cli/class-command.php:202
 #, fuzzy
 msgid "Total Visits: %s"
 msgstr "Summe der Besuche"
 
-#: includes/cli/class-command.php:212
+#: includes/cli/class-command.php:220
 #, fuzzy
 msgid "Are you sure you want to clear the debug log?"
 msgstr "Bist Du sicher, dass Du diese Empfehlung löschen möchtest?"
 
-#: includes/cli/class-command.php:216
+#: includes/cli/class-command.php:224
 msgid "The debug log has been cleared."
 msgstr ""
 
@@ -3375,8 +3362,8 @@ msgstr "Neuer Verkauf E-Mail-Betreff"
 
 #: includes/cli/class-creative-sub-commands.php:181
 #: includes/cli/class-creative-sub-commands.php:185
-#: includes/cli/class-creative-sub-commands.php:216
-#: includes/cli/class-creative-sub-commands.php:220
+#: includes/cli/class-creative-sub-commands.php:226
+#: includes/cli/class-creative-sub-commands.php:230
 msgid "A valid creative ID is required to proceed."
 msgstr ""
 
@@ -3389,16 +3376,16 @@ msgstr "Werbeanzeige erfolgreich hinzugefügt"
 msgid "The creative could not be updated."
 msgstr ""
 
-#: includes/cli/class-creative-sub-commands.php:226
+#: includes/cli/class-creative-sub-commands.php:236
 #, fuzzy
 msgid "The creative was successfully deleted."
 msgstr "Werbeanzeige erfolgreich hinzugefügt"
 
-#: includes/cli/class-creative-sub-commands.php:228
+#: includes/cli/class-creative-sub-commands.php:238
 msgid "The creative could not be deleted."
 msgstr ""
 
-#: includes/cli/class-creative-sub-commands.php:301
+#: includes/cli/class-creative-sub-commands.php:314
 #, fuzzy
 msgid "Number of creatives: %d"
 msgstr "Anzahl von Werbeanzeigen pro Seite:"
@@ -3753,19 +3740,19 @@ msgstr "Kein Grund angegeben"
 msgid "Referral #%d for %s recorded for %s"
 msgstr "Verkauf #%d für %s verzeichnet für %s"
 
-#: includes/integrations/class-edd.php:499
+#: includes/integrations/class-edd.php:502
 #: includes/integrations/class-pmp.php:257
-#: includes/integrations/class-rcp.php:233
-#: includes/integrations/class-woocommerce.php:335
+#: includes/integrations/class-rcp.php:235
+#: includes/integrations/class-woocommerce.php:339
 msgid "Affiliate Discount?"
 msgstr "Affiliate-Rabatt?"
 
-#: includes/integrations/class-edd.php:506
+#: includes/integrations/class-edd.php:509
 #: includes/integrations/class-jigoshop.php:173
-#: includes/integrations/class-memberpress.php:281
+#: includes/integrations/class-memberpress.php:284
 #: includes/integrations/class-pmp.php:264
-#: includes/integrations/class-rcp.php:240
-#: includes/integrations/class-woocommerce.php:341
+#: includes/integrations/class-rcp.php:242
+#: includes/integrations/class-woocommerce.php:345
 msgid ""
 "If you would like to connect this discount to an affiliate, enter the name "
 "of the affiliate it belongs to."
@@ -3773,11 +3760,11 @@ msgstr ""
 "Wenn Du diesen Rabatt einem Affiliate zuweisen möchtest, gib den Namen des "
 "Affiliates ein."
 
-#: includes/integrations/class-edd.php:597
+#: includes/integrations/class-edd.php:600
 msgid "Adjust EDD Commissions"
 msgstr "EDD-Kommissionen anpassen"
 
-#: includes/integrations/class-edd.php:598
+#: includes/integrations/class-edd.php:601
 msgid ""
 "Should AffiliateWP adjust the commission amounts recorded for purchases that "
 "include affiliate referrals? This will subtract the referral amount from the "
@@ -3788,11 +3775,11 @@ msgstr ""
 "Provisionsbetrag vom Basisbetrag zur Kalkulation des "
 "Kommissionsgesamtbetrags abziehen."
 
-#: includes/integrations/class-edd.php:618
+#: includes/integrations/class-edd.php:621
 msgid "Disable Renewal Referrals"
 msgstr "Erneuerungs-Empfehlungen deaktivieren"
 
-#: includes/integrations/class-edd.php:619
+#: includes/integrations/class-edd.php:622
 msgid ""
 "Should AffiliateWP prevent referral commissions from being recorded on "
 "renewal purchases with EDD Software Licensing?"
@@ -3800,12 +3787,12 @@ msgstr ""
 "Soll AffiliateWP verhindern, dass Kommissionen von Erneuerungszahlungen mit "
 "EDD Software Licensing aufgezeichnet werden?"
 
-#: includes/integrations/class-edd.php:624
+#: includes/integrations/class-edd.php:627
 #, fuzzy
 msgid "Disable Referrals on Upgrades"
 msgstr "Affiliate-Empfehlungen für dieses Produkt deaktivieren"
 
-#: includes/integrations/class-edd.php:625
+#: includes/integrations/class-edd.php:628
 #, fuzzy
 msgid ""
 "Should AffiliateWP prevent referral commissions from being recorded on "
@@ -3814,17 +3801,17 @@ msgstr ""
 "Soll AffiliateWP verhindern, dass Kommissionen von Erneuerungszahlungen mit "
 "EDD Software Licensing aufgezeichnet werden?"
 
-#: includes/integrations/class-edd.php:646
+#: includes/integrations/class-edd.php:649
 #: includes/integrations/class-zippycourses.php:70
 msgid "Affiliate Rates:"
 msgstr "Affiliate-Provisionen:"
 
-#: includes/integrations/class-edd.php:659
+#: includes/integrations/class-edd.php:662
 #: includes/integrations/class-zippycourses.php:83
 msgid "Disable referrals on this %s"
 msgstr "Affiliate-Empfehlungen für %s deaktiveren"
 
-#: includes/integrations/class-edd.php:663
+#: includes/integrations/class-edd.php:666
 #: includes/integrations/class-memberpress.php:190
 #: includes/integrations/class-zippycourses.php:87
 msgid ""
@@ -3834,11 +3821,11 @@ msgstr ""
 "Diese Einstellungen werden verwendet, um Affiliate-Einnahmen pro Verkauf zu "
 "berechnen. Bitte leer lassen, um die Standard-Provisionsrate zu verwenden."
 
-#: includes/integrations/class-exchange.php:300
+#: includes/integrations/class-exchange.php:304
 msgid "Affiliate coupon?"
 msgstr "Affiliate-Gutschein?"
 
-#: includes/integrations/class-exchange.php:307
+#: includes/integrations/class-exchange.php:311
 msgid ""
 "If you would like to connect this coupon to an affiliate, enter the name of "
 "the affiliate it belongs to."
@@ -3949,7 +3936,7 @@ msgstr "Provisions-Einstellungen"
 
 #: includes/integrations/class-lifterlms.php:523
 #: includes/integrations/class-pmp.php:370
-#: includes/integrations/class-rcp.php:405
+#: includes/integrations/class-rcp.php:407
 #, fuzzy
 msgid "Disable Referrals"
 msgstr "Provisionen deaktivieren"
@@ -3983,9 +3970,9 @@ msgid "Enter a referral rate for this %s"
 msgstr "Erstellen von Affiliate Empfehlungen für dieses Formular aktivieren"
 
 #: includes/integrations/class-memberpress.php:157
-#: includes/integrations/class-rcp.php:364
-#: includes/integrations/class-rcp.php:395
-#: includes/integrations/class-woocommerce.php:485
+#: includes/integrations/class-rcp.php:366
+#: includes/integrations/class-rcp.php:397
+#: includes/integrations/class-woocommerce.php:489
 msgid "Affiliate Rate"
 msgstr "Affiliate-Provision"
 
@@ -4025,8 +4012,8 @@ msgstr ""
 msgid "Check to disable per-membership referrals."
 msgstr ""
 
-#: includes/integrations/class-rcp.php:368
-#: includes/integrations/class-rcp.php:399
+#: includes/integrations/class-rcp.php:370
+#: includes/integrations/class-rcp.php:401
 msgid ""
 "This rate will be used to calculate affiliate earnings when members "
 "subscribe to this level. Leave blank to use the site default referral rate."
@@ -4035,22 +4022,22 @@ msgstr ""
 "Mitglieder auf diesem Level abonnieren. Lasse das Feld leer, wenn Du die "
 "Seitenvorgabe verwenden willst."
 
-#: includes/integrations/class-rcp.php:410
+#: includes/integrations/class-rcp.php:412
 #, fuzzy
 msgid "Disable referrals on this subscription level."
 msgstr "Affiliate-Empfehlungen für dieses Produkt deaktivieren"
 
 #: includes/integrations/class-woocommerce.php:239
-#: includes/integrations/class-woocommerce.php:436
+#: includes/integrations/class-woocommerce.php:440
 msgid "(Variation ID %d)"
 msgstr ""
 
-#: includes/integrations/class-woocommerce.php:481
+#: includes/integrations/class-woocommerce.php:485
 #, fuzzy
 msgid "Configure affiliate rates for this product"
 msgstr "Affiliate-Empfehlungen für dieses Produkt deaktivieren"
 
-#: includes/integrations/class-woocommerce.php:487
+#: includes/integrations/class-woocommerce.php:491
 #: includes/integrations/extras/class-exchange-feature.php:27
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
@@ -4059,11 +4046,11 @@ msgstr ""
 "Diese Einstellungen werden verwendet, um Affiliate-Einnahme pro Verkauf zu "
 "berechnen. Leer lassen um Standard-Provisionsrate zu verwenden."
 
-#: includes/integrations/class-woocommerce.php:491
+#: includes/integrations/class-woocommerce.php:495
 msgid "Disable referrals"
 msgstr "Provisionen deaktivieren"
 
-#: includes/integrations/class-woocommerce.php:492
+#: includes/integrations/class-woocommerce.php:496
 msgid ""
 "This will prevent orders of this product from generating referral "
 "commissions for affiliates."
@@ -4071,16 +4058,16 @@ msgstr ""
 "Dies verhindert, dass Bestellungen dieses Produkts Affiliate-Kommissionen "
 "generiert."
 
-#: includes/integrations/class-woocommerce.php:518
+#: includes/integrations/class-woocommerce.php:522
 msgid "Configure affiliate rates for this product variation"
 msgstr ""
 
-#: includes/integrations/class-woocommerce.php:521
+#: includes/integrations/class-woocommerce.php:525
 #, fuzzy
 msgid "Referral rate (optional)"
 msgstr "Empfehlungsbeschreibung"
 
-#: includes/integrations/class-woocommerce.php:523
+#: includes/integrations/class-woocommerce.php:527
 #, fuzzy
 msgid "Disable referrals for this product variation"
 msgstr "Affiliate-Empfehlungen für dieses Produkt deaktivieren"
@@ -4335,7 +4322,7 @@ msgstr "Verkaufsdiagramme"
 msgid "Referral Payouts"
 msgstr "Empfehlungsrate"
 
-#: templates/dashboard-tab-payouts.php:54
+#: templates/dashboard-tab-payouts.php:82
 msgid "None of your referrals have been paid out yet."
 msgstr ""
 
@@ -4487,7 +4474,13 @@ msgstr "Anmelden"
 msgid "Lost Password?"
 msgstr "Passwort vergessen?"
 
-#: templates/no-access.php:1
+#: templates/no-access.php:2
+msgid ""
+"To see the Affiliate Area, log in as an existing affiliate, or add your "
+"account as an affiliate."
+msgstr ""
+
+#: templates/no-access.php:4
 msgid "The affiliate area is available only for registered affiliates."
 msgstr "Der Affiliate-Bereich ist nur für registrierte Partner."
 
@@ -4549,6 +4542,9 @@ msgid "Creative ID #%d: %s"
 msgstr "Werbeanzeigen-ID #%d: %s"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-most-valuable.php:74
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:66
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:69
+#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:67
 #, fuzzy
 msgctxt "Affiliate column table header"
 msgid "Affiliate"
@@ -4571,6 +4567,96 @@ msgstr "Verkäufe"
 msgctxt "Visits column table header"
 msgid "Visits"
 msgstr "Besuche"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:67
+#, fuzzy
+msgctxt "URL column table header"
+msgid "URL"
+msgstr "URL"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:68
+#, fuzzy
+msgctxt "Converted column table header"
+msgid "Converted"
+msgstr "Konvertiert"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:70
+#, fuzzy
+msgctxt "Amount column table header"
+msgid "Amount"
+msgstr "Anzahl"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-recent-referrals.php:71
+#, fuzzy
+msgctxt "Description column table header"
+msgid "Description"
+msgstr "Beschreibung"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:68
+#, fuzzy
+msgctxt "Status column table header"
+msgid "Status"
+msgstr "Status"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-registrations.php:69
+#, fuzzy
+msgctxt "Actions column table header"
+msgid "Actions"
+msgstr "Aktionen"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:54
+#, fuzzy
+msgctxt "Paid Earnings column table header"
+msgid "Paid Earnings"
+msgstr "Ausbezahlte Provisionen"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:55
+#, fuzzy
+msgctxt "Paid Earnings This Month column table header"
+msgid "Paid Earnings This Month"
+msgstr "Ausbezahlte Provisionen diesen Monat"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:56
+#, fuzzy
+msgctxt "Paid Earnings Today column table header"
+msgid "Paid Earnings Today"
+msgstr "Bezahlte Einnahmen für Heute"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:80
+#, fuzzy
+msgctxt "Unpaid Referrals column table header"
+msgid "Unpaid Referrals"
+msgstr "Nicht ausgezahlte Verkäufe"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:81
+#, fuzzy
+msgctxt "Unpaid Referrals This Month column table header"
+msgid "Unpaid Referrals This Month"
+msgstr "Nicht ausgezahlte Verkäufe diesen Monat"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:82
+#, fuzzy
+msgctxt "Unpaid Referrals Today column table header"
+msgid "Unpaid Referrals Today"
+msgstr "Nicht ausgezahlte Verkäufe Heute"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:105
+#, fuzzy
+msgctxt "Unpaid Earnings column table header"
+msgid "Unpaid Earnings"
+msgstr "Nicht ausgezahlte Provisionen"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:106
+#, fuzzy
+msgctxt "Unpaid Earnings This Month"
+msgid "Unpaid Earnings This Month"
+msgstr "Nicht ausgezahlte Provisionen diesen Monat"
+
+#: includes/admin/overview/metaboxes/class-metabox-overview-totals.php:107
+#, fuzzy
+msgctxt "Unpaid Earnings Today column table header"
+msgid "Unpaid Earnings Today"
+msgstr "Nicht ausgezahlte Provisionen Heute"
 
 #: includes/admin/payouts/class-list-table.php:129
 #, fuzzy

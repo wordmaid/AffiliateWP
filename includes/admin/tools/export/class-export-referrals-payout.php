@@ -46,7 +46,7 @@ class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export {
 	public function __construct() {
 		$this->referrals = $this->get_referrals_for_export();
 
-		add_action( 'affwp_export_referrals_payout', array( $this, 'generate_payouts' ) );
+		add_action( 'affwp_export_referrals_payout_end', array( $this, 'generate_payouts' ) );
 	}
 
 	/**

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP v1.0.2\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-10-20 18:23:03+00:00\n"
+"POT-Creation-Date: 2016-10-20 23:25:02+00:00\n"
 "PO-Revision-Date: 2015-04-09 10:01-0600\n"
 "Last-Translator: Chris Christoff <chriscct7@gmail.com>\n"
 "Language-Team: \n"
@@ -429,7 +429,7 @@ msgstr "Agregar nuevo"
 #: includes/admin/affiliates/affiliates.php:62
 #: includes/admin/payouts/payouts.php:50
 #: includes/admin/referrals/referrals.php:65
-#: includes/admin/visits/visits.php:38
+#: includes/admin/visits/visits.php:46
 msgid "Search"
 msgstr "Buscar"
 
@@ -437,7 +437,7 @@ msgstr "Buscar"
 #: includes/admin/affiliates/class-list-table.php:146
 #: includes/admin/creatives/class-list-table.php:98
 #: includes/admin/referrals/class-list-table.php:148
-#: includes/admin/visits/visits.php:49
+#: includes/admin/visits/visits.php:57
 msgid "All"
 msgstr "Todo"
 
@@ -509,10 +509,11 @@ msgstr "Usuario"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:169
-#: includes/admin/affiliates/view.php:11
-#: includes/admin/tools/export/class-export-affiliates.php:54
-msgid "Earnings"
-msgstr "Ganancias"
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
+#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
+msgid "Paid Earnings"
+msgstr "Ganancias pagadas"
 
 # @ affiliate-wp
 #: includes/admin/affiliates/class-list-table.php:170
@@ -538,7 +539,7 @@ msgstr "Recomendaciones pagadas"
 #: includes/admin/class-menu.php:16
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:23
 #: includes/admin/tools/export/class-export-affiliates.php:56
-#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:33
+#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:41
 #: templates/dashboard-tab-stats.php:10 templates/dashboard-tab-stats.php:57
 #: templates/dashboard.php:86
 msgid "Visits"
@@ -807,13 +808,23 @@ msgstr ""
 "Moneybookers y otros. Dejar en blanco para utilizar la dirección de correo "
 "del socio."
 
-#: includes/admin/affiliates/edit.php:184
+#: includes/admin/affiliates/edit.php:183
+msgid "Promotion Methods"
+msgstr ""
+
+# @ affiliate-wp
+#: includes/admin/affiliates/edit.php:188
+#, fuzzy
+msgid "Promotion methods entered by the affiliate during registration."
+msgstr "¿Avisar a los administradores cuando haya un nuevo socio?"
+
+#: includes/admin/affiliates/edit.php:197
 #: includes/admin/affiliates/review.php:86
 msgid "Rejection Reason"
 msgstr ""
 
 # @ affiliate-wp
-#: includes/admin/affiliates/edit.php:202
+#: includes/admin/affiliates/edit.php:215
 #, fuzzy
 msgid "Update Affiliate"
 msgstr "Editar socio"
@@ -922,6 +933,12 @@ msgid "Affiliate: #%d %s"
 msgstr "Socio: #%d %s"
 
 # @ affiliate-wp
+#: includes/admin/affiliates/view.php:11
+#: includes/admin/tools/export/class-export-affiliates.php:54
+msgid "Earnings"
+msgstr "Ganancias"
+
+# @ affiliate-wp
 #: includes/admin/affiliates/view.php:18
 msgid "Total earnings"
 msgstr "Ganancias totales"
@@ -976,7 +993,7 @@ msgid ""
 msgstr ""
 
 # @ affiliate-wp
-#: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:25
+#: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:54
 #: includes/admin/referrals/contextual-help.php:37
 #: includes/admin/visits/contextual-help.php:37
 msgid "Overview"
@@ -1597,20 +1614,20 @@ msgstr "Aplicar"
 # @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:459
 #: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:305
-#: includes/admin/visits/visits.php:44 includes/class-graph.php:390
+#: includes/admin/visits/visits.php:52 includes/class-graph.php:390
 msgid "From - mm/dd/yyyy"
 msgstr "De - mm/dd/yyyy"
 
 # @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:460
 #: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:306
-#: includes/admin/visits/visits.php:45 includes/class-graph.php:392
+#: includes/admin/visits/visits.php:53 includes/class-graph.php:392
 msgid "To - mm/dd/yyyy"
 msgstr "Hasta - mm/dd/yyyy"
 
 # @ affiliate-wp
 #: includes/admin/referrals/class-list-table.php:464
-#: includes/admin/visits/visits.php:53 includes/class-graph.php:397
+#: includes/admin/visits/visits.php:61 includes/class-graph.php:397
 msgid "Filter"
 msgstr "Filtro"
 
@@ -2007,13 +2024,6 @@ msgstr "Personalizado"
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:160
 msgid "Most Active Campaign (%s)"
 msgstr ""
-
-# @ affiliate-wp
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
-#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
-msgid "Paid Earnings"
-msgstr "Ganancias pagadas"
 
 # @ affiliate-wp
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:57
@@ -2959,7 +2969,7 @@ msgstr ""
 
 # @ affiliate-wp
 #: includes/admin/tools/tools.php:138 includes/admin/tools/tools.php:302
-#: includes/admin/visits/visits.php:40
+#: includes/admin/visits/visits.php:48
 msgid "Affiliate name"
 msgstr "Nombre del socio"
 
@@ -3213,7 +3223,7 @@ msgstr "IP"
 
 # @ affiliate-wp
 #: includes/admin/visits/class-list-table.php:108
-#: includes/admin/visits/visits.php:50 templates/dashboard-tab-stats.php:59
+#: includes/admin/visits/visits.php:58 templates/dashboard-tab-stats.php:59
 #: templates/dashboard-tab-visits.php:27
 msgid "Converted"
 msgstr "Convertido"
@@ -3317,12 +3327,12 @@ msgstr "Puede teclear la referencia de la recomendación anteponiendo 'ref:'"
 msgid "Number of visits per page:"
 msgstr ""
 
-#: includes/admin/visits/visits.php:47
+#: includes/admin/visits/visits.php:55
 msgid "Filter by status"
 msgstr ""
 
 # @ affiliate-wp
-#: includes/admin/visits/visits.php:51
+#: includes/admin/visits/visits.php:59
 #, fuzzy
 msgid "Unconverted"
 msgstr "Convertido"
@@ -4124,11 +4134,19 @@ msgstr ""
 msgid "The URL the customer landed on that led to a referral being created"
 msgstr ""
 
+#: includes/emails/class-affwp-emails.php:492
+msgid "The name of the campaign associated with the referral (if any)."
+msgstr ""
+
 # @ affiliate-wp
 #: includes/emails/functions.php:121
 #, fuzzy
 msgid "No reason provided"
 msgstr "No se han recibido recomendaciones aún"
+
+#: includes/emails/functions.php:221
+msgid "(no campaign)"
+msgstr ""
 
 # @ affiliate-wp
 #: includes/integrations/class-edd.php:382
@@ -5244,7 +5262,7 @@ msgid "Reports"
 msgstr "Reportes"
 
 # @ affiliate-wp
-#: includes/admin/visits/visits.php:34
+#: includes/admin/visits/visits.php:42
 #, fuzzy
 msgctxt "visits"
 msgid "Reports"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-10-20 18:23:03+00:00\n"
+"POT-Creation-Date: 2016-10-20 23:25:02+00:00\n"
 "PO-Revision-Date: 2015-04-09 10:00-0600\n"
 "Last-Translator: Chris Christoff <chriscct7@gmail.com>\n"
 "Language-Team: \n"
@@ -406,14 +406,14 @@ msgstr "Adauga"
 #: includes/admin/affiliates/affiliates.php:62
 #: includes/admin/payouts/payouts.php:50
 #: includes/admin/referrals/referrals.php:65
-#: includes/admin/visits/visits.php:38
+#: includes/admin/visits/visits.php:46
 msgid "Search"
 msgstr "Cauta"
 
 #: includes/admin/affiliates/class-list-table.php:146
 #: includes/admin/creatives/class-list-table.php:98
 #: includes/admin/referrals/class-list-table.php:148
-#: includes/admin/visits/visits.php:49
+#: includes/admin/visits/visits.php:57
 msgid "All"
 msgstr "Toti"
 
@@ -477,10 +477,11 @@ msgid "Username"
 msgstr "Utilizator"
 
 #: includes/admin/affiliates/class-list-table.php:169
-#: includes/admin/affiliates/view.php:11
-#: includes/admin/tools/export/class-export-affiliates.php:54
-msgid "Earnings"
-msgstr "Castiguri"
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
+#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
+msgid "Paid Earnings"
+msgstr "Castiguri Platite"
 
 #: includes/admin/affiliates/class-list-table.php:170
 #: includes/admin/tools/export/class-export-affiliates.php:52
@@ -502,7 +503,7 @@ msgstr "Referinte Platite"
 #: includes/admin/class-menu.php:16
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:23
 #: includes/admin/tools/export/class-export-affiliates.php:56
-#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:33
+#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:41
 #: templates/dashboard-tab-stats.php:10 templates/dashboard-tab-stats.php:57
 #: templates/dashboard.php:86
 msgid "Visits"
@@ -741,12 +742,21 @@ msgstr ""
 "altii. In caz de necompletare se va folosi adresa de email de utilizator a "
 "afiliatului."
 
-#: includes/admin/affiliates/edit.php:184
+#: includes/admin/affiliates/edit.php:183
+msgid "Promotion Methods"
+msgstr ""
+
+#: includes/admin/affiliates/edit.php:188
+#, fuzzy
+msgid "Promotion methods entered by the affiliate during registration."
+msgstr "Notificare administratori site la inregistrare de afiliat noua?"
+
+#: includes/admin/affiliates/edit.php:197
 #: includes/admin/affiliates/review.php:86
 msgid "Rejection Reason"
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:202
+#: includes/admin/affiliates/edit.php:215
 #, fuzzy
 msgid "Update Affiliate"
 msgstr "Modifica Afiliat"
@@ -840,6 +850,11 @@ msgstr ""
 msgid "Affiliate: #%d %s"
 msgstr "Afiliat: #%d %s"
 
+#: includes/admin/affiliates/view.php:11
+#: includes/admin/tools/export/class-export-affiliates.php:54
+msgid "Earnings"
+msgstr "Castiguri"
+
 #: includes/admin/affiliates/view.php:18
 msgid "Total earnings"
 msgstr "Total castiguri"
@@ -886,7 +901,7 @@ msgid ""
 "\">update now</a>."
 msgstr ""
 
-#: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:25
+#: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:54
 #: includes/admin/referrals/contextual-help.php:37
 #: includes/admin/visits/contextual-help.php:37
 msgid "Overview"
@@ -1434,18 +1449,18 @@ msgstr "Aplica"
 
 #: includes/admin/referrals/class-list-table.php:459
 #: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:305
-#: includes/admin/visits/visits.php:44 includes/class-graph.php:390
+#: includes/admin/visits/visits.php:52 includes/class-graph.php:390
 msgid "From - mm/dd/yyyy"
 msgstr "De la - ll/zz/aaaa"
 
 #: includes/admin/referrals/class-list-table.php:460
 #: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:306
-#: includes/admin/visits/visits.php:45 includes/class-graph.php:392
+#: includes/admin/visits/visits.php:53 includes/class-graph.php:392
 msgid "To - mm/dd/yyyy"
 msgstr "La - ll/zz/aaa"
 
 #: includes/admin/referrals/class-list-table.php:464
-#: includes/admin/visits/visits.php:53 includes/class-graph.php:397
+#: includes/admin/visits/visits.php:61 includes/class-graph.php:397
 msgid "Filter"
 msgstr "Filtru"
 
@@ -1800,12 +1815,6 @@ msgstr "Personalizat"
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:160
 msgid "Most Active Campaign (%s)"
 msgstr ""
-
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
-#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
-msgid "Paid Earnings"
-msgstr "Castiguri Platite"
 
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:57
 #: templates/dashboard-tab-stats.php:33
@@ -2635,7 +2644,7 @@ msgid "Use this tool to recount affiliate statistics."
 msgstr "Foloseste aceasta unealta pentru a recalcula statisticile afiliatului."
 
 #: includes/admin/tools/tools.php:138 includes/admin/tools/tools.php:302
-#: includes/admin/visits/visits.php:40
+#: includes/admin/visits/visits.php:48
 msgid "Affiliate name"
 msgstr "Nume afiliat"
 
@@ -2859,7 +2868,7 @@ msgid "IP"
 msgstr "IP"
 
 #: includes/admin/visits/class-list-table.php:108
-#: includes/admin/visits/visits.php:50 templates/dashboard-tab-stats.php:59
+#: includes/admin/visits/visits.php:58 templates/dashboard-tab-stats.php:59
 #: templates/dashboard-tab-visits.php:27
 msgid "Converted"
 msgstr "Convertit"
@@ -2954,11 +2963,11 @@ msgstr "Poti introduce numarul de ordine al referinte cu prefixul 'ref:'"
 msgid "Number of visits per page:"
 msgstr ""
 
-#: includes/admin/visits/visits.php:47
+#: includes/admin/visits/visits.php:55
 msgid "Filter by status"
 msgstr ""
 
-#: includes/admin/visits/visits.php:51
+#: includes/admin/visits/visits.php:59
 #, fuzzy
 msgid "Unconverted"
 msgstr "Convertit"
@@ -3683,10 +3692,18 @@ msgstr ""
 msgid "The URL the customer landed on that led to a referral being created"
 msgstr ""
 
+#: includes/emails/class-affwp-emails.php:492
+msgid "The name of the campaign associated with the referral (if any)."
+msgstr ""
+
 #: includes/emails/functions.php:121
 #, fuzzy
 msgid "No reason provided"
 msgstr "Nu s-a inregistrat inca nicio referinta"
+
+#: includes/emails/functions.php:221
+msgid "(no campaign)"
+msgstr ""
 
 #: includes/integrations/class-edd.php:382
 #: includes/integrations/class-gravityforms.php:121
@@ -4673,7 +4690,7 @@ msgctxt "referrals"
 msgid "Reports"
 msgstr "Rapoarte"
 
-#: includes/admin/visits/visits.php:34
+#: includes/admin/visits/visits.php:42
 #, fuzzy
 msgctxt "visits"
 msgid "Reports"

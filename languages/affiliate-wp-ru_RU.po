@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-10-20 18:23:03+00:00\n"
+"POT-Creation-Date: 2016-10-20 23:25:02+00:00\n"
 "PO-Revision-Date: 2016-07-21 17:44-0500\n"
 "Last-Translator: Andrew Munro, Sumobi <andrew@sumobi.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
@@ -422,14 +422,14 @@ msgstr "Добавить Нового"
 #: includes/admin/affiliates/affiliates.php:62
 #: includes/admin/payouts/payouts.php:50
 #: includes/admin/referrals/referrals.php:65
-#: includes/admin/visits/visits.php:38
+#: includes/admin/visits/visits.php:46
 msgid "Search"
 msgstr "Поиск"
 
 #: includes/admin/affiliates/class-list-table.php:146
 #: includes/admin/creatives/class-list-table.php:98
 #: includes/admin/referrals/class-list-table.php:148
-#: includes/admin/visits/visits.php:49
+#: includes/admin/visits/visits.php:57
 msgid "All"
 msgstr "Все"
 
@@ -493,10 +493,11 @@ msgid "Username"
 msgstr "Имя пользователя"
 
 #: includes/admin/affiliates/class-list-table.php:169
-#: includes/admin/affiliates/view.php:11
-#: includes/admin/tools/export/class-export-affiliates.php:54
-msgid "Earnings"
-msgstr "Доход"
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
+#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
+msgid "Paid Earnings"
+msgstr "Выплаченный заработок"
 
 #: includes/admin/affiliates/class-list-table.php:170
 #: includes/admin/tools/export/class-export-affiliates.php:52
@@ -518,7 +519,7 @@ msgstr "Оплаченные рефералы"
 #: includes/admin/class-menu.php:16
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:23
 #: includes/admin/tools/export/class-export-affiliates.php:56
-#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:33
+#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:41
 #: templates/dashboard-tab-stats.php:10 templates/dashboard-tab-stats.php:57
 #: templates/dashboard.php:86
 msgid "Visits"
@@ -768,12 +769,22 @@ msgstr ""
 "Емейл Партнера для платежных систем, таких как Paypal, Moneybookers и т.д. "
 "Оставьте пустым, чтобы использовать пользовательский емейл Партнера."
 
-#: includes/admin/affiliates/edit.php:184
+#: includes/admin/affiliates/edit.php:183
+#, fuzzy
+msgid "Promotion Methods"
+msgstr "Метод продвижения"
+
+#: includes/admin/affiliates/edit.php:188
+#, fuzzy
+msgid "Promotion methods entered by the affiliate during registration."
+msgstr "Метод продвижения, выбранный Партнером"
+
+#: includes/admin/affiliates/edit.php:197
 #: includes/admin/affiliates/review.php:86
 msgid "Rejection Reason"
 msgstr "Причина Отказа"
 
-#: includes/admin/affiliates/edit.php:202
+#: includes/admin/affiliates/edit.php:215
 msgid "Update Affiliate"
 msgstr "Обновить данные Партнера"
 
@@ -864,6 +875,11 @@ msgstr "Количество партнеров на страницу:"
 msgid "Affiliate: #%d %s"
 msgstr "Партнер: #%d %s"
 
+#: includes/admin/affiliates/view.php:11
+#: includes/admin/tools/export/class-export-affiliates.php:54
+msgid "Earnings"
+msgstr "Доход"
+
 #: includes/admin/affiliates/view.php:18
 msgid "Total earnings"
 msgstr "Всего заработано"
@@ -915,7 +931,7 @@ msgstr ""
 "\"%2$s\">Просмотреть детали версии %3$s </a> или <a href=\"%4$s\">обновите "
 "сейчас</a>."
 
-#: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:25
+#: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:54
 #: includes/admin/referrals/contextual-help.php:37
 #: includes/admin/visits/contextual-help.php:37
 msgid "Overview"
@@ -1465,18 +1481,18 @@ msgstr "Применить"
 
 #: includes/admin/referrals/class-list-table.php:459
 #: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:305
-#: includes/admin/visits/visits.php:44 includes/class-graph.php:390
+#: includes/admin/visits/visits.php:52 includes/class-graph.php:390
 msgid "From - mm/dd/yyyy"
 msgstr "С - мм/дд/гггг"
 
 #: includes/admin/referrals/class-list-table.php:460
 #: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:306
-#: includes/admin/visits/visits.php:45 includes/class-graph.php:392
+#: includes/admin/visits/visits.php:53 includes/class-graph.php:392
 msgid "To - mm/dd/yyyy"
 msgstr "По - мм/дд/гггг"
 
 #: includes/admin/referrals/class-list-table.php:464
-#: includes/admin/visits/visits.php:53 includes/class-graph.php:397
+#: includes/admin/visits/visits.php:61 includes/class-graph.php:397
 msgid "Filter"
 msgstr "Фильтр"
 
@@ -1834,12 +1850,6 @@ msgstr "Пошлина"
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:160
 msgid "Most Active Campaign (%s)"
 msgstr ""
-
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
-#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
-msgid "Paid Earnings"
-msgstr "Выплаченный заработок"
 
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:57
 #: templates/dashboard-tab-stats.php:33
@@ -2667,7 +2677,7 @@ msgid "Use this tool to recount affiliate statistics."
 msgstr "Используйте этот инструмент, чтобы пересчитать статистику Партнера."
 
 #: includes/admin/tools/tools.php:138 includes/admin/tools/tools.php:302
-#: includes/admin/visits/visits.php:40
+#: includes/admin/visits/visits.php:48
 msgid "Affiliate name"
 msgstr "Имя Партнера"
 
@@ -2884,7 +2894,7 @@ msgid "IP"
 msgstr "IP"
 
 #: includes/admin/visits/class-list-table.php:108
-#: includes/admin/visits/visits.php:50 templates/dashboard-tab-stats.php:59
+#: includes/admin/visits/visits.php:58 templates/dashboard-tab-stats.php:59
 #: templates/dashboard-tab-visits.php:27
 msgid "Converted"
 msgstr "Конвертирован"
@@ -2988,11 +2998,11 @@ msgstr "Вы можете ввести отсылку к рефералу, по�
 msgid "Number of visits per page:"
 msgstr "Количество визитов на страницу:"
 
-#: includes/admin/visits/visits.php:47
+#: includes/admin/visits/visits.php:55
 msgid "Filter by status"
 msgstr "Фильтр по статусу"
 
-#: includes/admin/visits/visits.php:51
+#: includes/admin/visits/visits.php:59
 msgid "Unconverted"
 msgstr "Не конвертирован"
 
@@ -3702,9 +3712,18 @@ msgstr ""
 msgid "The URL the customer landed on that led to a referral being created"
 msgstr ""
 
+#: includes/emails/class-affwp-emails.php:492
+msgid "The name of the campaign associated with the referral (if any)."
+msgstr ""
+
 #: includes/emails/functions.php:121
 msgid "No reason provided"
 msgstr "Причина не указана"
+
+#: includes/emails/functions.php:221
+#, fuzzy
+msgid "(no campaign)"
+msgstr "Кампания"
 
 #: includes/integrations/class-edd.php:382
 #: includes/integrations/class-gravityforms.php:121
@@ -4670,7 +4689,7 @@ msgctxt "referrals"
 msgid "Reports"
 msgstr "Отчеты"
 
-#: includes/admin/visits/visits.php:34
+#: includes/admin/visits/visits.php:42
 #, fuzzy
 msgctxt "visits"
 msgid "Reports"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-10-20 18:23:03+00:00\n"
+"POT-Creation-Date: 2016-10-20 23:25:02+00:00\n"
 "PO-Revision-Date: 2015-04-20 10:40-0600\n"
 "Last-Translator: AffiliateWP <support@affiliatewp.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
@@ -399,14 +399,14 @@ msgstr ""
 #: includes/admin/affiliates/affiliates.php:62
 #: includes/admin/payouts/payouts.php:50
 #: includes/admin/referrals/referrals.php:65
-#: includes/admin/visits/visits.php:38
+#: includes/admin/visits/visits.php:46
 msgid "Search"
 msgstr ""
 
 #: includes/admin/affiliates/class-list-table.php:146
 #: includes/admin/creatives/class-list-table.php:98
 #: includes/admin/referrals/class-list-table.php:148
-#: includes/admin/visits/visits.php:49
+#: includes/admin/visits/visits.php:57
 msgid "All"
 msgstr ""
 
@@ -470,9 +470,10 @@ msgid "Username"
 msgstr ""
 
 #: includes/admin/affiliates/class-list-table.php:169
-#: includes/admin/affiliates/view.php:11
-#: includes/admin/tools/export/class-export-affiliates.php:54
-msgid "Earnings"
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
+#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
+msgid "Paid Earnings"
 msgstr ""
 
 #: includes/admin/affiliates/class-list-table.php:170
@@ -495,7 +496,7 @@ msgstr ""
 #: includes/admin/class-menu.php:16
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:23
 #: includes/admin/tools/export/class-export-affiliates.php:56
-#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:33
+#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:41
 #: templates/dashboard-tab-stats.php:10 templates/dashboard-tab-stats.php:57
 #: templates/dashboard.php:86
 msgid "Visits"
@@ -714,12 +715,20 @@ msgid ""
 "others. Leave blank to use the affiliate&#8217;s user email."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:184
+#: includes/admin/affiliates/edit.php:183
+msgid "Promotion Methods"
+msgstr ""
+
+#: includes/admin/affiliates/edit.php:188
+msgid "Promotion methods entered by the affiliate during registration."
+msgstr ""
+
+#: includes/admin/affiliates/edit.php:197
 #: includes/admin/affiliates/review.php:86
 msgid "Rejection Reason"
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:202
+#: includes/admin/affiliates/edit.php:215
 msgid "Update Affiliate"
 msgstr ""
 
@@ -801,6 +810,11 @@ msgstr ""
 msgid "Affiliate: #%d %s"
 msgstr ""
 
+#: includes/admin/affiliates/view.php:11
+#: includes/admin/tools/export/class-export-affiliates.php:54
+msgid "Earnings"
+msgstr ""
+
 #: includes/admin/affiliates/view.php:18
 msgid "Total earnings"
 msgstr ""
@@ -846,7 +860,7 @@ msgid ""
 "\">update now</a>."
 msgstr ""
 
-#: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:25
+#: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:54
 #: includes/admin/referrals/contextual-help.php:37
 #: includes/admin/visits/contextual-help.php:37
 msgid "Overview"
@@ -1373,18 +1387,18 @@ msgstr ""
 
 #: includes/admin/referrals/class-list-table.php:459
 #: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:305
-#: includes/admin/visits/visits.php:44 includes/class-graph.php:390
+#: includes/admin/visits/visits.php:52 includes/class-graph.php:390
 msgid "From - mm/dd/yyyy"
 msgstr ""
 
 #: includes/admin/referrals/class-list-table.php:460
 #: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:306
-#: includes/admin/visits/visits.php:45 includes/class-graph.php:392
+#: includes/admin/visits/visits.php:53 includes/class-graph.php:392
 msgid "To - mm/dd/yyyy"
 msgstr ""
 
 #: includes/admin/referrals/class-list-table.php:464
-#: includes/admin/visits/visits.php:53 includes/class-graph.php:397
+#: includes/admin/visits/visits.php:61 includes/class-graph.php:397
 msgid "Filter"
 msgstr ""
 
@@ -1692,12 +1706,6 @@ msgstr ""
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:147
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:160
 msgid "Most Active Campaign (%s)"
-msgstr ""
-
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
-#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
-msgid "Paid Earnings"
 msgstr ""
 
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:57
@@ -2440,7 +2448,7 @@ msgid "Use this tool to recount affiliate statistics."
 msgstr ""
 
 #: includes/admin/tools/tools.php:138 includes/admin/tools/tools.php:302
-#: includes/admin/visits/visits.php:40
+#: includes/admin/visits/visits.php:48
 msgid "Affiliate name"
 msgstr ""
 
@@ -2631,7 +2639,7 @@ msgid "IP"
 msgstr ""
 
 #: includes/admin/visits/class-list-table.php:108
-#: includes/admin/visits/visits.php:50 templates/dashboard-tab-stats.php:59
+#: includes/admin/visits/visits.php:58 templates/dashboard-tab-stats.php:59
 #: templates/dashboard-tab-visits.php:27
 msgid "Converted"
 msgstr ""
@@ -2717,11 +2725,11 @@ msgstr ""
 msgid "Number of visits per page:"
 msgstr ""
 
-#: includes/admin/visits/visits.php:47
+#: includes/admin/visits/visits.php:55
 msgid "Filter by status"
 msgstr ""
 
-#: includes/admin/visits/visits.php:51
+#: includes/admin/visits/visits.php:59
 msgid "Unconverted"
 msgstr ""
 
@@ -3365,8 +3373,16 @@ msgstr ""
 msgid "The URL the customer landed on that led to a referral being created"
 msgstr ""
 
+#: includes/emails/class-affwp-emails.php:492
+msgid "The name of the campaign associated with the referral (if any)."
+msgstr ""
+
 #: includes/emails/functions.php:121
 msgid "No reason provided"
+msgstr ""
+
+#: includes/emails/functions.php:221
+msgid "(no campaign)"
 msgstr ""
 
 #: includes/integrations/class-edd.php:382
@@ -4253,7 +4269,7 @@ msgctxt "referrals"
 msgid "Reports"
 msgstr ""
 
-#: includes/admin/visits/visits.php:34
+#: includes/admin/visits/visits.php:42
 msgctxt "visits"
 msgid "Reports"
 msgstr ""

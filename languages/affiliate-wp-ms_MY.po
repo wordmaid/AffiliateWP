@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-10-20 18:23:03+00:00\n"
+"POT-Creation-Date: 2016-10-20 23:25:02+00:00\n"
 "PO-Revision-Date: 2016-05-25 13:52+1200\n"
 "Last-Translator: AffiliateWP Support <support@affiliatewp.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
@@ -424,14 +424,14 @@ msgstr "Tambah Baru"
 #: includes/admin/affiliates/affiliates.php:62
 #: includes/admin/payouts/payouts.php:50
 #: includes/admin/referrals/referrals.php:65
-#: includes/admin/visits/visits.php:38
+#: includes/admin/visits/visits.php:46
 msgid "Search"
 msgstr "Carian"
 
 #: includes/admin/affiliates/class-list-table.php:146
 #: includes/admin/creatives/class-list-table.php:98
 #: includes/admin/referrals/class-list-table.php:148
-#: includes/admin/visits/visits.php:49
+#: includes/admin/visits/visits.php:57
 msgid "All"
 msgstr "Semua"
 
@@ -495,10 +495,11 @@ msgid "Username"
 msgstr "Username"
 
 #: includes/admin/affiliates/class-list-table.php:169
-#: includes/admin/affiliates/view.php:11
-#: includes/admin/tools/export/class-export-affiliates.php:54
-msgid "Earnings"
-msgstr "Pendapatan"
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
+#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
+#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
+msgid "Paid Earnings"
+msgstr "Pendapatan Yang Telah Dibayar"
 
 #: includes/admin/affiliates/class-list-table.php:170
 #: includes/admin/tools/export/class-export-affiliates.php:52
@@ -520,7 +521,7 @@ msgstr "Referral yang telah dibayar"
 #: includes/admin/class-menu.php:16
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:23
 #: includes/admin/tools/export/class-export-affiliates.php:56
-#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:33
+#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:41
 #: templates/dashboard-tab-stats.php:10 templates/dashboard-tab-stats.php:57
 #: templates/dashboard.php:86
 msgid "Visits"
@@ -769,12 +770,22 @@ msgstr ""
 "Emel pembayaran affiliate untuk sistem seperti PayPal, Moneybookers, atau "
 "lain-lain. Biarkan kosong untuk menggunakan emel pengguna affiliate."
 
-#: includes/admin/affiliates/edit.php:184
+#: includes/admin/affiliates/edit.php:183
+#, fuzzy
+msgid "Promotion Methods"
+msgstr "Kaedah Promosi"
+
+#: includes/admin/affiliates/edit.php:188
+#, fuzzy
+msgid "Promotion methods entered by the affiliate during registration."
+msgstr "Kaedah promosi yang digunakan oleh affiliate"
+
+#: includes/admin/affiliates/edit.php:197
 #: includes/admin/affiliates/review.php:86
 msgid "Rejection Reason"
 msgstr "Sebab Penolakan"
 
-#: includes/admin/affiliates/edit.php:202
+#: includes/admin/affiliates/edit.php:215
 msgid "Update Affiliate"
 msgstr "Kemaskini Affiliate"
 
@@ -864,6 +875,11 @@ msgstr "Bilangan affiliates setiap halaman"
 msgid "Affiliate: #%d %s"
 msgstr "Affiliate: #%d %s"
 
+#: includes/admin/affiliates/view.php:11
+#: includes/admin/tools/export/class-export-affiliates.php:54
+msgid "Earnings"
+msgstr "Pendapatan"
+
 #: includes/admin/affiliates/view.php:18
 msgid "Total earnings"
 msgstr "Jumlah pendapatan"
@@ -915,7 +931,7 @@ msgstr ""
 "\"%2$s\">papar maklumat %3$s versi terkini</a> or <a href=\"%4$s\">kemaskini "
 "sekarang</a>."
 
-#: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:25
+#: includes/admin/class-menu.php:12 includes/admin/overview/overview.php:54
 #: includes/admin/referrals/contextual-help.php:37
 #: includes/admin/visits/contextual-help.php:37
 msgid "Overview"
@@ -1469,18 +1485,18 @@ msgstr "Guna"
 
 #: includes/admin/referrals/class-list-table.php:459
 #: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:305
-#: includes/admin/visits/visits.php:44 includes/class-graph.php:390
+#: includes/admin/visits/visits.php:52 includes/class-graph.php:390
 msgid "From - mm/dd/yyyy"
 msgstr "Dari - mm/dd/yyyy"
 
 #: includes/admin/referrals/class-list-table.php:460
 #: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:306
-#: includes/admin/visits/visits.php:45 includes/class-graph.php:392
+#: includes/admin/visits/visits.php:53 includes/class-graph.php:392
 msgid "To - mm/dd/yyyy"
 msgstr "Sehingga - mm/dd/yyyy"
 
 #: includes/admin/referrals/class-list-table.php:464
-#: includes/admin/visits/visits.php:53 includes/class-graph.php:397
+#: includes/admin/visits/visits.php:61 includes/class-graph.php:397
 msgid "Filter"
 msgstr "Tapis"
 
@@ -1835,12 +1851,6 @@ msgstr "Kustom"
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:160
 msgid "Most Active Campaign (%s)"
 msgstr ""
-
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
-#: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
-#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
-msgid "Paid Earnings"
-msgstr "Pendapatan Yang Telah Dibayar"
 
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:57
 #: templates/dashboard-tab-stats.php:33
@@ -2672,7 +2682,7 @@ msgid "Use this tool to recount affiliate statistics."
 msgstr "Sila gunakan tool ini untuk kira semula statistik affiliate."
 
 #: includes/admin/tools/tools.php:138 includes/admin/tools/tools.php:302
-#: includes/admin/visits/visits.php:40
+#: includes/admin/visits/visits.php:48
 msgid "Affiliate name"
 msgstr "Nama affiliate"
 
@@ -2894,7 +2904,7 @@ msgid "IP"
 msgstr "IP"
 
 #: includes/admin/visits/class-list-table.php:108
-#: includes/admin/visits/visits.php:50 templates/dashboard-tab-stats.php:59
+#: includes/admin/visits/visits.php:58 templates/dashboard-tab-stats.php:59
 #: templates/dashboard-tab-visits.php:27
 msgid "Converted"
 msgstr "Telah Ditukar (Converted)"
@@ -2999,11 +3009,11 @@ msgstr "Anda boleh masukkan nombor ID referral dengan awalan 'referral:'"
 msgid "Number of visits per page:"
 msgstr "Bilangan lawatan per halaman:"
 
-#: includes/admin/visits/visits.php:47
+#: includes/admin/visits/visits.php:55
 msgid "Filter by status"
 msgstr "Pilih status"
 
-#: includes/admin/visits/visits.php:51
+#: includes/admin/visits/visits.php:59
 #, fuzzy
 msgid "Unconverted"
 msgstr "Telah Ditukar (Converted)"
@@ -3715,9 +3725,18 @@ msgstr ""
 msgid "The URL the customer landed on that led to a referral being created"
 msgstr ""
 
+#: includes/emails/class-affwp-emails.php:492
+msgid "The name of the campaign associated with the referral (if any)."
+msgstr ""
+
 #: includes/emails/functions.php:121
 msgid "No reason provided"
 msgstr "Tiada sebab diberikan"
+
+#: includes/emails/functions.php:221
+#, fuzzy
+msgid "(no campaign)"
+msgstr "Kempen"
 
 #: includes/integrations/class-edd.php:382
 #: includes/integrations/class-gravityforms.php:121
@@ -4696,7 +4715,7 @@ msgctxt "referrals"
 msgid "Reports"
 msgstr "Laporan"
 
-#: includes/admin/visits/visits.php:34
+#: includes/admin/visits/visits.php:42
 #, fuzzy
 msgctxt "visits"
 msgid "Reports"

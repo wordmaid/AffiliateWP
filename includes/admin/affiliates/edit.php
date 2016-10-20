@@ -8,7 +8,7 @@ $default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
 $default_rate = affwp_abs_number_round( $default_rate );
 $email        = ! empty( $affiliate->payment_email ) ? $affiliate->payment_email : '';
 $reason       = affwp_get_affiliate_meta( $affiliate->affiliate_id, '_rejection_reason', true );
-
+$promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method', true );
 ?>
 <div class="wrap">
 
@@ -173,6 +173,19 @@ $reason       = affwp_get_affiliate_meta( $affiliate->affiliate_id, '_rejection_
 				<td>
 					<input class="regular-text" type="text" name="payment_email" id="payment_email" value="<?php echo esc_attr( $email ); ?>"/>
 					<p class="description"><?php _e( 'Affiliate&#8217;s payment email for systems such as PayPal, Moneybookers, or others. Leave blank to use the affiliate&#8217;s user email.', 'affiliate-wp' ); ?></p>
+				</td>
+
+			</tr>
+
+			<tr class="form-row form-required">
+
+				<th scope="row">
+					<label for="promotion_methods"><?php _e( 'Promotion Methods', 'affiliate-wp' ); ?></label>
+				</th>
+
+				<td>
+					<textarea name="promotion_methods" id="promotion_methods" style="width:50%;" disabled="disabled"><?php echo esc_html( $promotion_method ); ?></textarea>
+					<p class="description"><?php _e( 'Promotion methods entered by the affiliate during registration.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>

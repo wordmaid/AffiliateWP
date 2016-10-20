@@ -134,7 +134,7 @@ add_action( 'wp_enqueue_scripts', 'affwp_frontend_scripts_and_styles' );
 /**
  * Enqueues scripts for use on the front end.
  *
- * @since 1.9.4
+ * @since 1.9.5
  */
 function affwp_enqueue_frontend_scripts() {
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';

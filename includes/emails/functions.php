@@ -207,3 +207,16 @@ function affwp_email_tag_review_url( $affiliate_id = 0 ) {
 function affwp_email_tag_get_landing_page( $affiliate_id = 0, $referral ) {
     return esc_url( affiliate_wp()->visits->get_column_by( 'url', 'visit_id', $referral->visit_id ) );
 }
+
+/**
+ * Gets the campaign (if set) of the referral.
+ *
+ * @since 1.9.4
+ *
+ * @param int             $affiliate_id Affiliate ID.
+ * @param \AffWP\Referral $referral     Referral object.
+ * @return string Referral campaign, or (no campaign) if none.
+ */
+function affwp_email_tag_campaign_name( $affiliate_id = 0, $referral ) {
+	return empty( $referral->campaign ) ? __( '(no campaign)', 'affiliate-wp' ) : esc_html( $referral->campaign );
+}

@@ -26,6 +26,14 @@ function affwp_visits_admin() {
 	$from   = ! empty( $_REQUEST['filter_from'] )   ? $_REQUEST['filter_from']   : '';
 	$to     = ! empty( $_REQUEST['filter_to'] )     ? $_REQUEST['filter_to']     : '';
 	$status = ! empty( $_REQUEST['filter_status'] ) ? $_REQUEST['filter_status'] : '';
+
+	if ( ! empty( $_REQUEST['affiliate'] ) ) {
+		$affiliate_id = absint( $_REQUEST['affiliate'] );
+
+		if ( affwp_get_affiliate( $affiliate_id ) ) {
+			$affiliate_name = affwp_get_affiliate_username( $affiliate_id );
+		}
+	}
 	?>
 	<div class="wrap">
 

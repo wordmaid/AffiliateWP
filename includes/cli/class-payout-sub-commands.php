@@ -29,6 +29,7 @@ class Sub_Commands extends Base {
 		'affiliate_id',
 		'affiliate_email',
 		'referrals',
+		'owner',
 		'payout_method',
 		'status',
 		'date'
@@ -89,6 +90,9 @@ class Sub_Commands extends Base {
 	 * : Minimum total earnings required to generate a payout for an affiliate. Compared as greater than or equal to.
 	 *
 	 * If omitted, minimum earnings required will be 0.
+	 *
+	 * [--owner=<user_id>]
+	 * : User ID to set as the payout owner. If ommitted, the current user will be used.
 	 *
 	 * [--payout_method=<method>]
 	 * : Payout method. Default 'cli'.
@@ -170,6 +174,7 @@ class Sub_Commands extends Base {
 		}
 
 		// Grab flag values.
+		$data['owner']         = Utils\get_flag_value( $assoc_args, 'owner', get_current_user_id() );
 		$data['payout_method'] = Utils\get_flag_value( $assoc_args, 'payout_method', 'cli' );
 
 		if ( empty( $to_pay ) ) {
@@ -202,6 +207,9 @@ class Sub_Commands extends Base {
 	 *
 	 * <payout_id>
 	 * : ID of the payout to update.
+	 *
+	 * [--owner=<user_id>]
+	 * : New payout owner (user ID).
 	 *
 	 * [--payout_method=<method>]
 	 * : New payout method.
@@ -237,6 +245,7 @@ class Sub_Commands extends Base {
 			\WP_CLI::error( __( 'A valid payout ID must be supplied to update a payout', 'affiliate-wp' ) );
 		}
 
+		$owner         = Utils\get_flag_value( $assoc_args, 'owner',         0  );
 		$payout_method = Utils\get_flag_value( $assoc_args, 'payout_method', '' );
 		$status        = Utils\get_flag_value( $assoc_args, 'status',        '' );
 		$amount        = Utils\get_flag_value( $assoc_args, 'amount',        '' );
@@ -244,6 +253,10 @@ class Sub_Commands extends Base {
 		$affiliate     = Utils\get_flag_value( $assoc_args, 'affiliate',     '' );
 
 		$data = array();
+
+		if ( ! empty( $owner ) ) {
+			$data['owner'] = get_user_by( 'id', $owner ) ? absint( $owner ) : $payout->owner;
+		}
 
 		if ( ! empty( $payout_method ) ) {
 			$data['payout_method'] = sanitize_text_field( $payout_method );
@@ -382,6 +395,7 @@ class Sub_Commands extends Base {
 	 * * affiliate_id
 	 * * affiliate_email
 	 * * referrals
+	 * * owner (user_id)
 	 * * payout_method
 	 * * status
 	 * * date

@@ -13,6 +13,14 @@ use AffWP\Tests\UnitTestCase;
 class Tests extends UnitTestCase {
 
 	/**
+	 * User fixture.
+	 *
+	 * @access protected
+	 * @var int
+	 */
+	protected static $user_id = 0;
+
+	/**
 	 * Affiliate fixture.
 	 *
 	 * @access protected
@@ -40,7 +48,11 @@ class Tests extends UnitTestCase {
 	 * Set up fixtures once.
 	 */
 	public static function wpSetUpBeforeClass() {
-		self::$affiliate_id = parent::affwp()->affiliate->create();
+		self::$user_id = parent::affwp()->user->create();
+
+		self::$affiliate_id = parent::affwp()->affiliate->create( array(
+			'user_id' => self::$user_id
+		) );
 
 		self::$referrals = parent::affwp()->referral->create_many( 4, array(
 			'affiliate_id' => self::$affiliate_id,
@@ -142,6 +154,7 @@ class Tests extends UnitTestCase {
 			'affiliate_id'  => '%d',
 			'referrals'     => '%s',
 			'amount'        => '%s',
+			'owner'         => '%d',
 			'payout_method' => '%s',
 			'status'        => '%s',
 			'date'          => '%s',
@@ -572,6 +585,67 @@ class Tests extends UnitTestCase {
 
 		// Clean up.
 		affwp_delete_payout( $five );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
+	 */
+	public function test_get_payouts_owner_with_single_owner_should_return_payouts_only_for_that_owner() {
+		$user_id = $this->factory->user->create();
+
+		wp_set_current_user( $user_id );
+
+		$payouts = $this->factory->payout->create_many( 2, array(
+			'affiliate_id' => self::$affiliate_id,
+			'referrals'    => self::$referrals
+		) );
+
+		$results = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'owner'  => $user_id,
+			'fields' => 'ids',
+		) );
+
+		$this->assertEqualSets( $payouts, $results );
+
+		// Clean up.
+		foreach ( $payouts as $payout ) {
+			affwp_delete_payout( $payout );
+		}
+	}
+
+	/**
+	 * @covers Affiliate_WP_Payouts_DB::get_payouts()
+	 */
+	public function test_get_payouts_owner_with_multiple_owners_should_return_payouts_only_for_those_owners() {
+		wp_set_current_user( self::$user_id );
+
+		$payouts1 = $this->factory->payout->create_many( 2, array(
+			'affiliate_id' => self::$affiliate_id,
+			'referrals'    => self::$referrals
+		) );
+
+		$user_id2 = $this->factory->user->create();
+
+		wp_set_current_user( $user_id2 );
+
+		$payouts2 = $this->factory->payout->create_many( 2, array(
+			'affiliate_id' => self::$affiliate_id,
+			'referrals'    => self::$referrals
+		) );
+
+		$combined_payouts = array_merge( $payouts1, $payouts2 );
+
+		$results = affiliate_wp()->affiliates->payouts->get_payouts( array(
+			'owner'  => array( self::$user_id, $user_id2 ),
+			'fields' => 'ids',
+		) );
+
+		$this->assertEqualSets( $combined_payouts, $results );
+
+		// Clean up.
+		foreach ( $combined_payouts as $payout ) {
+			affwp_delete_payout( $payout );
+		}
 	}
 
 	/**

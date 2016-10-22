@@ -77,6 +77,7 @@ class Endpoints extends Controller {
 		$args['referrals']      = isset( $request['referrals'] )      ? $request['referrals'] : array();
 		$args['amount']         = isset( $request['amount'] )         ? $request['amount'] : 0;
 		$args['amount_compare'] = isset( $request['amount_compare'] ) ? $request['amount'] : '=';
+		$args['owner']          = isset( $request['owner'] )          ? $request['owner'] : 0;
 		$args['payout_method']  = isset( $request['payout_method'] )  ? $request['payout_method'] : '';
 		$args['status']         = isset( $request['status'] )         ? $request['status'] : '';
 		$args['date']           = isset( $request['date'] )           ? $request['date'] : '';
@@ -186,6 +187,13 @@ class Endpoints extends Controller {
 			'validate_callback' => function( $param, $request, $key ) {
 				return in_array( $param, array( '>', '<', '>=', '<=', '=', '!=' ) );
 			},
+		);
+
+		$params['owner'] = array(
+			'description'       => __( 'ID or array of IDs for users who generated payouts. Default empty.', 'affiliate-wp' ),
+			'validate_callback' => function( $param, $request, $key ) {
+				return is_numeric( $param ) || is_array( $param );
+			}
 		);
 
 		$params['status'] = array(

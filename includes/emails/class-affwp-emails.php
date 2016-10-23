@@ -486,7 +486,12 @@ class Affiliate_WP_Emails {
 				'tag'         => 'landing_page',
 				'description' => __( 'The URL the customer landed on that led to a referral being created', 'affiliate-wp' ),
 				'function'    => 'affwp_email_tag_get_landing_page'
-			)
+			),
+			array(
+				'tag'         => 'campaign_name',
+				'description' => __( 'The name of the campaign associated with the referral (if any).', 'affiliate-wp' ),
+				'function'    => 'affwp_email_tag_campaign_name'
+			),
 		);
 
 		return apply_filters( 'affwp_email_tags', $email_tags, $this );

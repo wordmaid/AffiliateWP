@@ -1016,25 +1016,21 @@ function affwp_add_affiliate( $data = array() ) {
 
 	$user_id = absint( $data['user_id'] );
 
-	if ( ! affiliate_wp()->affiliates->get_by( 'user_id', $user_id ) ) {
+	$args = array(
+		'user_id'       => $user_id,
+		'status'        => $status,
+		'rate'          => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
+		'rate_type'     => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
+		'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : ''
+	);
 
-		$args = array(
-			'user_id'       => $user_id,
-			'status'        => $status,
-			'rate'          => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
-			'rate_type'     => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
-			'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : ''
-		);
+	$affiliate_id = affiliate_wp()->affiliates->add( $args );
 
-		$affiliate_id = affiliate_wp()->affiliates->add( $args );
+	if ( $affiliate_id ) {
 
-		if ( $affiliate_id ) {
+		affwp_set_affiliate_status( $affiliate_id, $status );
 
-			affwp_set_affiliate_status( $affiliate_id, $status );
-
-			return $affiliate_id;
-		}
-
+		return $affiliate_id;
 	}
 
 	return false;

@@ -12,7 +12,7 @@
  */
 namespace AffWP\Util\Exporter;
 
-use AffWP\Util\Exporter;
+use AffWP\Util\Exporter\Base as Exporter;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @since 2.0
  */
-class Settings implements Exporter\Base {
+class Settings implements Exporter {
 
 	/**
 	 * Export type.
@@ -86,6 +86,10 @@ class Settings implements Exporter\Base {
 	 * @return void
 	 */
 	public function export() {
+		if ( ! $this->can_export() ) {
+			wp_die( __( 'You do not have permission to export data.', 'affiliate-wp' ), __( 'Error', 'affiliate-wp' ), array( 'response' => 403 ) );
+		}
+
 		$this->headers();
 
 		echo json_encode( $this->get_data() );

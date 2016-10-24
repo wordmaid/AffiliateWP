@@ -8,6 +8,8 @@ namespace AffWP\Util;
  */
 abstract class Batch_Processor {
 
+	public $type = '';
+
 	/**
 	 * Initializes the batch processor.
 	 *
@@ -15,10 +17,19 @@ abstract class Batch_Processor {
 	 * @since  2.0
 	 */
 	public function __construct() {
+		$this->setup();
+
 		add_action( 'wp_enqueue_scripts',          array( $this, 'localize_script' ) );
 		add_action( 'wp_ajax_process_single_item', array( $this, 'process_item'    ) );
 	}
 
+	protected function setup() {
+		if ( isset( $this->export_type ) ) {
+			$this->type = $this->export_type;
+		}
+
+
+	}
 	/**
 	 * Passes defined JS vars to the admin script for batch processing.
 	 *

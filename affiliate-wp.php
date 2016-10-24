@@ -340,6 +340,9 @@ final class Affiliate_WP {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/AFFWP_Plugin_Updater.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-list-table.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-meta-box-base.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-processor.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-base-exporter.php';
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-csv-exporter.php';
 
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/affiliates/actions.php';
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/ajax-actions.php';

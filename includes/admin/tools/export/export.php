@@ -104,20 +104,10 @@ function affwp_process_settings_export() {
 	if( ! current_user_can( 'manage_options' ) )
 		return;
 
-	$settings = array();
-	$settings = get_option( 'affwp_settings' );
+	$settings = new Exporter\Settings();
+	$settings->headers();
+	$settings->export();
 
-	ignore_user_abort( true );
-
-	if ( ! ini_get( 'safe_mode' ) )
-		set_time_limit( 0 );
-
-	nocache_headers();
-	header( 'Content-Type: application/json; charset=utf-8' );
-	header( 'Content-Disposition: attachment; filename=affwp-settings-export-' . date( 'm-d-Y' ) . '.json' );
-	header( "Expires: 0" );
-
-	echo json_encode( $settings );
 	exit;
 }
 add_action( 'affwp_export_settings', 'affwp_process_settings_export' );

@@ -94,7 +94,8 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @param  string      $column Column name. See get_columns().
 	 * @param  int|string  $row_id Row ID.
-	 * @return object|null         Database query result object or null on failure.
+	 * @return object|null|false Database query result object on success, null on failure, or false
+	 *                           if the column is invalid.
 	 */
 	public function get_by( $column, $row_id ) {
 		global $wpdb;
@@ -113,7 +114,8 @@ abstract class Affiliate_WP_DB {
 	 *
 	 * @param  string      $column Column name. See get_columns().
 	 * @param  int|string  $row_id Row ID.
-	 * @return string|null         Database query result (as string), or null on failure
+	 * @return string|null|false Database query result (as string), null on failure, or false
+	 *                           if the column is invalid.
 	 */
 	public function get_column( $column, $row_id ) {
 		global $wpdb;
@@ -133,7 +135,8 @@ abstract class Affiliate_WP_DB {
 	 * @param  string $column       Column name. See get_columns().
 	 * @param  string $column_where Column to match against in the WHERE clause.
 	 * @param  $column_value        Value to match to the column in the WHERE clause.
-	 * @return string|null          Database query result (as string), or null on failure
+	 * @return string|null|false Database query result (as string), null on failure, or false
+	 *                           if the column is invalid.
 	 */
 	public function get_column_by( $column, $column_where, $column_value ) {
 		global $wpdb;

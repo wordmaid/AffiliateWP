@@ -105,7 +105,6 @@ function affwp_process_settings_export() {
 		return;
 
 	$settings = new Exporter\Settings();
-	$settings->headers();
 	$settings->export();
 
 	exit;

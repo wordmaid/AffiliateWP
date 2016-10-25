@@ -601,17 +601,15 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Link the Reference column on the AffWp screen to a LifterLMS Order
+	 * Links the Reference column on the AffWp screen to a LifterLMS order.
 	 *
+	 * @access public
 	 * @since  1.8.3
 	 *
-	 *  @param int   $reference  WP Post ID of the LifterLMS ORder
-	 * @param obj   $referral   object of referral data
-	 *
-	 * @return  html
-	 *
-	 * @access  public
-	*/
+	 * @param int $reference Optional. WP Post ID of the LifterLMS Order. Default 0.
+	 * @param obj $referral  Object of referral data.
+	 * @return string Reference link HTML markup or the reference value.
+	 */
 	public function reference_link( $reference = 0, $referral ) {
 
 		if( empty( $referral->context ) || 'lifterlms' != $referral->context ) {

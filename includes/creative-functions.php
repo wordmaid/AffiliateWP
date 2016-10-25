@@ -90,7 +90,7 @@ function affwp_delete_creative( $creative ) {
 		return false;
 	}
 
-	return affiliate_wp()->creatives->delete( $creative->ID );
+	return affiliate_wp()->creatives->delete( $creative->ID, 'creative' );
 }
 
 /**

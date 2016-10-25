@@ -606,8 +606,8 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	 * @access public
 	 * @since  1.8.3
 	 *
-	 * @param int $reference Optional. WP Post ID of the LifterLMS Order. Default 0.
-	 * @param obj $referral  Object of referral data.
+	 * @param int             $reference Optional. WP Post ID of the LifterLMS Order. Default 0.
+	 * @param \AffWP\Referral $referral  Referral object.
 	 * @return string Reference link HTML markup or the reference value.
 	 */
 	public function reference_link( $reference = 0, $referral ) {

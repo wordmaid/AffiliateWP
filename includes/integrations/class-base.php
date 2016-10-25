@@ -186,8 +186,8 @@ abstract class Affiliate_WP_Base {
 			$this->log( 'Referral retrieved successfully during complete_referral()' );
 		}
 
-		if ( is_object( $referral ) && $referral->status != 'pending' ) {
-			// This referral has already been completed, rejected, or paid
+		if ( is_object( $referral ) && $referral->status != 'pending' && $referral->status != 'rejected' ) {
+			// This referral has already been completed, or paid
 			return false;
 		}
 

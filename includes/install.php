@@ -32,7 +32,7 @@ function affiliate_wp_install() {
 				'post_title'     => __( 'Affiliate Area', 'affiliate-wp' ),
 				'post_content'   => '[affiliate_area]',
 				'post_status'    => 'publish',
-				'post_author'    => 1,
+				'post_author'    => get_current_user_id(),
 				'post_type'      => 'page',
 				'comment_status' => 'closed'
 			)

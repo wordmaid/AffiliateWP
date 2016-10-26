@@ -183,133 +183,171 @@ class Affiliate_WP_Graph {
 	 * @return string
 	 */
 	public function build_graph() {
-
-		$yaxis_count = 1;
-
 		$this->load_scripts();
 
 		ob_start();
 
-?>
-		<script type="text/javascript">
-			var affwp_vars;
-			jQuery( document ).ready( function($) {
-				$.plot(
-					$("#affwp-graph-<?php echo $this->id; ?>"),
-					[
-						<?php foreach( $this->get_data() as $label => $data ) : ?>
-						{
-							label: "<?php echo esc_attr( $label ); ?>",
-							id: "<?php echo sanitize_key( $label ); ?>",
-							// data format is: [ point on x, value on y ]
-							data: [<?php foreach( $data as $point ) { echo '[' . implode( ',', $point ) . '],'; } ?>],
-							points: {
-								show: <?php echo $this->options['points'] ? 'true' : 'false'; ?>,
-							},
-							bars: {
-								show: <?php echo $this->options['bars'] ? 'true' : 'false'; ?>,
-								barWidth: 2,
-								align: 'center'
-							},
-							lines: {
-								show: <?php echo $this->options['lines'] ? 'true' : 'false'; ?>
-							},
-							<?php if( $this->options[ 'multiple_y_axes' ] ) : ?>
-							yaxis: <?php echo $yaxis_count; ?>
-							<?php endif; ?>
-						},
-						<?php $yaxis_count++; endforeach; ?>
-					],
-					{
-						// Options
-						grid: {
-							show: true,
-							aboveData: false,
-							backgroundColor: "<?php echo $this->options[ 'bgcolor' ]; ?>",
-							borderColor: "<?php echo $this->options[ 'bordercolor' ]; ?>",
-							borderWidth: <?php echo absint( $this->options[ 'borderwidth' ] ); ?>,
-							clickable: false,
-							hoverable: true
-						},
-						xaxis: {
-							mode: "<?php echo $this->options['x_mode']; ?>",
-							timeFormat: "<?php echo $this->options['x_mode'] == 'time' ? $this->options['time_format'] : ''; ?>",
-							tickSize: "<?php echo $this->options['x_mode'] == 'time' ? '' : 1; ?>",
-							<?php if( $this->options['x_mode'] != 'time' ) : ?>
-							tickDecimals: <?php echo $this->options['x_decimals']; ?>
-							<?php endif; ?>
-						},
-						yaxis: {
-							position: 'right',
-							min: 0,
-							mode: "<?php echo $this->options['y_mode']; ?>",
-							timeFormat: "<?php echo $this->options['y_mode'] == 'time' ? $this->options['time_format'] : ''; ?>",
-							<?php if( $this->options['y_mode'] != 'time' ) : ?>
-							tickDecimals: <?php echo $this->options['y_decimals']; ?>
-							<?php endif; ?>
-						}
-					}
+		/**
+		 * Filters whether to output the AffiliateWP Graph JS via the enqueued jQuery flot script.
+		 *
+		 * This hook is useful for the scenario in which the 'jquery-flot' script has been
+		 * enqueued in the footer or somewhere other than the default location.
+		 *
+		 * Example:
+		 *
+		 *     add_filter( 'affwp_append_graph_js_to_flot', '__return_true' );
+		 *
+		 * @since 1.9.5
+		 *
+		 * @param bool   $append   Whether to output the Graph JS at the same time as jQuery flot.
+		 *                         Default false.
+		 * @param string $graph_id The current graph ID.
+		 */
+		if ( true === apply_filters( 'affwp_append_graph_js_to_flot', false, $this->id ) ) {
+			if ( function_exists( 'wp_add_inline_script' ) ) {
+				wp_add_inline_script( 'jquery-flot', $this->graph_js() );
+			} else {
+				// Back-compat for < WP 4.5.0.
+				wp_scripts()->add_data( 'jquery-flot', 'after', array(
+					wp_scripts()->get_data( 'jquery-flot', 'after' ),
+					$this->graph_js()
+				) );
+			}
+		} else {
+			printf( '<script type="text/javascript">%s</script>', $this->graph_js() );
+		}
 
-				);
-
-				function affwp_flot_tooltip(x, y, contents) {
-					$('<div id="affwp-flot-tooltip">' + contents + '</div>').css( {
-						position: 'absolute',
-						display: 'none',
-						top: y + 5,
-						left: x + 5,
-						border: '1px solid #fdd',
-						padding: '2px',
-						'background-color': '#fee',
-						opacity: 0.80
-					}).appendTo("body").fadeIn(200);
-				}
-
-				var previousPoint = null;
-				$("#affwp-graph-<?php echo $this->id; ?>").bind("plothover", function (event, pos, item) {
-					$("#x").text(pos.x.toFixed(2));
-					$("#y").text(pos.y.toFixed(2));
-					if (item) {
-						if (previousPoint != item.dataIndex) {
-							previousPoint = item.dataIndex;
-							$("#affwp-flot-tooltip").remove();
-							var x = item.datapoint[0].toFixed(2),
-							y = item.datapoint[1].toFixed(2);
-
-							<?php if( $this->get( 'currency' ) ) : ?>
-								if( affwp_vars.currency_pos == 'before' ) {
-									affwp_flot_tooltip( item.pageX, item.pageY, item.series.label + ' ' + affwp_vars.currency_sign + y );
-								} else {
-									affwp_flot_tooltip( item.pageX, item.pageY, item.series.label + ' ' + y + affwp_vars.currency_sign );
-								}
-							<?php else : ?>
-								affwp_flot_tooltip( item.pageX, item.pageY, item.series.label + ' ' + y );
-							<?php endif; ?>
-						}
-					} else {
-						$("#affwp-flot-tooltip").remove();
-						previousPoint = null;
-					}
-				});
-
-				$( '#affwp-graphs-date-options' ).change( function() {
-					var $this = $(this);
-					if( $this.val() == 'other' ) {
-						$( '#affwp-date-range-options' ).css('display', 'inline-block');
-					} else {
-						$( '#affwp-date-range-options' ).hide();
-					}
-				});
-
-			});
-		</script>
-		<?php
 		if ( false !== $this->get( 'show_controls' ) ) {
 			echo $this->graph_controls();
 		}
+		?><div id="affwp-graph-<?php echo $this->id; ?>" class="affwp-graph" style="height: 300px; width:100%;"></div><?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Retrieves the Graph initialization JS for output inline.
+	 *
+	 * @access public
+	 * @since  1.9.5
+	 *
+	 * @return string Graph JS output.
+	 */
+	public function graph_js() {
+		$yaxis_count = 1;
+
+		ob_start();
 		?>
-		<div id="affwp-graph-<?php echo $this->id; ?>" class="affwp-graph" style="height: 300px; width:100%;"></div>
-<?php
+		var affwp_vars;
+		jQuery( document ).ready( function($) {
+			$.plot(
+				$("#affwp-graph-<?php echo $this->id; ?>"),
+				[
+					<?php foreach( $this->get_data() as $label => $data ) : ?>
+					{
+						label: "<?php echo esc_attr( $label ); ?>",
+						id: "<?php echo sanitize_key( $label ); ?>",
+						// data format is: [ point on x, value on y ]
+						data: [<?php foreach( $data as $point ) { echo '[' . implode( ',', $point ) . '],'; } ?>],
+						points: {
+							show: <?php echo $this->options['points'] ? 'true' : 'false'; ?>,
+						},
+						bars: {
+							show: <?php echo $this->options['bars'] ? 'true' : 'false'; ?>,
+							barWidth: 2,
+							align: 'center'
+						},
+						lines: {
+							show: <?php echo $this->options['lines'] ? 'true' : 'false'; ?>
+						},
+						<?php if( $this->options[ 'multiple_y_axes' ] ) : ?>
+						yaxis: <?php echo $yaxis_count; ?>
+						<?php endif; ?>
+					},
+					<?php $yaxis_count++; endforeach; ?>
+				],
+				{
+					// Options
+					grid: {
+						show: true,
+						aboveData: false,
+						backgroundColor: "<?php echo $this->options[ 'bgcolor' ]; ?>",
+						borderColor: "<?php echo $this->options[ 'bordercolor' ]; ?>",
+						borderWidth: <?php echo absint( $this->options[ 'borderwidth' ] ); ?>,
+						clickable: false,
+						hoverable: true
+					},
+					xaxis: {
+						mode: "<?php echo $this->options['x_mode']; ?>",
+						timeFormat: "<?php echo $this->options['x_mode'] == 'time' ? $this->options['time_format'] : ''; ?>",
+						tickSize: "<?php echo $this->options['x_mode'] == 'time' ? '' : 1; ?>",
+						<?php if( $this->options['x_mode'] != 'time' ) : ?>
+						tickDecimals: <?php echo $this->options['x_decimals']; ?>
+						<?php endif; ?>
+					},
+					yaxis: {
+						position: 'right',
+						min: 0,
+						mode: "<?php echo $this->options['y_mode']; ?>",
+						timeFormat: "<?php echo $this->options['y_mode'] == 'time' ? $this->options['time_format'] : ''; ?>",
+						<?php if( $this->options['y_mode'] != 'time' ) : ?>
+						tickDecimals: <?php echo $this->options['y_decimals']; ?>
+						<?php endif; ?>
+					}
+				}
+
+			);
+
+			function affwp_flot_tooltip(x, y, contents) {
+				$('<div id="affwp-flot-tooltip">' + contents + '</div>').css( {
+					position: 'absolute',
+					display: 'none',
+					top: y + 5,
+					left: x + 5,
+					border: '1px solid #fdd',
+					padding: '2px',
+					'background-color': '#fee',
+					opacity: 0.80
+				}).appendTo("body").fadeIn(200);
+			}
+
+			var previousPoint = null;
+			$("#affwp-graph-<?php echo $this->id; ?>").bind("plothover", function (event, pos, item) {
+				$("#x").text(pos.x.toFixed(2));
+				$("#y").text(pos.y.toFixed(2));
+				if (item) {
+					if (previousPoint != item.dataIndex) {
+						previousPoint = item.dataIndex;
+						$("#affwp-flot-tooltip").remove();
+						var x = item.datapoint[0].toFixed(2),
+							y = item.datapoint[1].toFixed(2);
+
+						<?php if( $this->get( 'currency' ) ) : ?>
+						if( affwp_vars.currency_pos == 'before' ) {
+							affwp_flot_tooltip( item.pageX, item.pageY, item.series.label + ' ' + affwp_vars.currency_sign + y );
+						} else {
+							affwp_flot_tooltip( item.pageX, item.pageY, item.series.label + ' ' + y + affwp_vars.currency_sign );
+						}
+						<?php else : ?>
+						affwp_flot_tooltip( item.pageX, item.pageY, item.series.label + ' ' + y );
+						<?php endif; ?>
+					}
+				} else {
+					$("#affwp-flot-tooltip").remove();
+					previousPoint = null;
+				}
+			});
+
+			$( '#affwp-graphs-date-options' ).change( function() {
+				var $this = $(this);
+				if( $this.val() == 'other' ) {
+					$( '#affwp-date-range-options' ).css('display', 'inline-block');
+				} else {
+					$( '#affwp-date-range-options' ).hide();
+				}
+			});
+
+		});
+		<?php
 		return ob_get_clean();
 	}
 

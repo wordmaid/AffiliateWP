@@ -1244,8 +1244,10 @@ class Affiliate_WP_Settings {
 
 		$status = get_transient( 'affwp_license_check' );
 
+		$request_url = 'https://affiliatewp.com';
+
 		// Run the license check a maximum of once per day
-		if( false === $status ) {
+		if( false === $status && site_url() !== $request_url ) {
 
 			// data to send in our API request
 			$api_params = array(
@@ -1268,7 +1270,7 @@ class Affiliate_WP_Settings {
 			}
 
 			// Call the custom API.
-			$response = wp_remote_post( 'https://affiliatewp.com', array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+			$response = wp_remote_post( $request_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 
 			// make sure the response came back okay
 			if ( is_wp_error( $response ) ) {

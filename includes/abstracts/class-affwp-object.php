@@ -252,7 +252,6 @@ abstract class Base_Object {
 	 * @access public
 	 * @since  1.9
 	 *
-	 * @param mixed $object Object.
 	 * @return array Array version of the given object.
 	 */
 	public function to_array() {

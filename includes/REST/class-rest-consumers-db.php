@@ -282,7 +282,7 @@ class Database extends \Affiliate_WP_DB {
 
 		$add = $this->insert( $args, 'consumer' );
 
-		if ( $add ) {
+		if ( null !== $add ) {
 			/**
 			 * Fires immediately after a new REST consumer has been added.
 			 *

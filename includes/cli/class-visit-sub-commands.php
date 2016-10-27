@@ -164,7 +164,7 @@ class Sub_Commands extends Base {
 
 		$visit_id = affiliate_wp()->visits->add( $data );
 
-		if ( $visit_id ) {
+		if ( null !== $visit_id ) {
 			\WP_CLI::success( __( 'The visit was successfully created.', 'affiliate-wp' ) );
 		} else {
 			\WP_CLI::error( __( 'The visit could not be created.', 'affiliate-wp' ) );

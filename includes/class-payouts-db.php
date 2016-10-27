@@ -196,7 +196,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			$add = $this->insert( $args, 'payout' );
 		}
 
-		if ( $add ) {
+		if ( null !== $add ) {
 			/**
 			 * Fires immediately after a payout has been successfully inserted.
 			 *

@@ -146,7 +146,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		$add  = $this->insert( $args, 'referral' );
 
-		if ( $add ) {
+		if ( null !== $add ) {
 
 			/**
 			 * Fires once a new referral has successfully been inserted into the database.

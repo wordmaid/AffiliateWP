@@ -1,3 +1,4 @@
+/* global affwp_vars */
 jQuery(document).ready( function($) {
 
 	// Remove whitespace from the campaign name.

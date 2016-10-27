@@ -630,7 +630,7 @@ function affwp_affiliate_area_show_tab( $tab = '' ) {
  *
  * @since 1.9
  *
- * @param \AffWP\Base_Object|false $object Base_Object or false if the operation failed.
+ * @param object|false $object Base_Object or false if the operation failed.
  * @return bool True if the item cache was cleaned, false otherwise.
  */
 function affwp_clean_item_cache( $object ) {

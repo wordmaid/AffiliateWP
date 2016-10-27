@@ -552,6 +552,8 @@ class Affiliate_WP_Tracking {
 	 * Set the visit ID
 	 *
 	 * @since 1.0
+	 *
+	 * @param int|false $visit_id Optional. Visit ID. Default 0.
 	 */
 	public function set_visit_id( $visit_id = 0 ) {
 		setcookie( 'affwp_ref_visit_id', $visit_id, strtotime( '+' . $this->get_expiration_time() . ' days' ), COOKIEPATH, COOKIE_DOMAIN );

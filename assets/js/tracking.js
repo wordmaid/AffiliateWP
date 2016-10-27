@@ -1,3 +1,4 @@
+/* global AFFWP, affwp_scripts */
 jQuery(document).ready( function($) {
 
 	var ref_cookie = $.cookie( 'affwp_ref' );

@@ -4,7 +4,8 @@
  * Process the add affiliate request
  *
  * @since 1.2
- * @return void
+ *
+ * @return false|null False if not in the admin or if 'user_id' is not set, otherwise null/void.
  */
 function affwp_process_add_affiliate( $data ) {
 

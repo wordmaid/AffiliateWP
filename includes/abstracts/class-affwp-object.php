@@ -15,6 +15,8 @@ namespace AffWP;
  *
  * @since 1.9
  * @abstract
+ *
+ * @property int $ID Object ID.
  */
 abstract class Base_Object {
 

@@ -124,7 +124,8 @@ add_action( 'affwp_update_affiliate', 'affwp_process_update_affiliate' );
  * Process the affiliate moderation request
  *
  * @since 1.7
- * @return void
+ *
+ * @return false|null False if not in the admin or if 'affiliate_id' is not set, otherwise null/void.
  */
 function affwp_process_affiliate_moderation( $data ) {
 

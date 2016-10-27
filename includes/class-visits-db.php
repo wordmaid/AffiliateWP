@@ -356,7 +356,7 @@ class Affiliate_WP_Visits_DB extends Affiliate_WP_DB {
 	 * @access public
 	 *
 	 * @param array $data Optional. Arguments for adding a new visit. Default empty array.
-	 * @return int ID of the added visit.
+	 * @return int|false ID of the added visit, false on failure to add.
 	 */
 	public function add( $data = array() ) {
 

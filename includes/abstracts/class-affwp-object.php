@@ -36,7 +36,7 @@ abstract class Base_Object {
 	 * @since  1.9
 	 * @static
 	 *
-	 * @param int $object Object ID.
+	 * @param int $object_id Object ID.
 	 * @return object|false Object instance or false.
 	 */
 	public static function get_instance( $object_id ) {

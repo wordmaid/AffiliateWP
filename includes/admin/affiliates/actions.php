@@ -92,7 +92,8 @@ add_action( 'affwp_delete_affiliates', 'affwp_process_affiliate_deletion' );
  * Process the update affiliate request
  *
  * @since 1.2
- * @return void
+ *
+ * @return false|null False if not in the admin or if 'affiliate_id' is not set, otherwise null/void.
  */
 function affwp_process_update_affiliate( $data ) {
 

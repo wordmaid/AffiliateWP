@@ -33,6 +33,7 @@ class Affiliate_WP_Integrations {
 			'wpec'           => 'WP eCommerce',
 			'wp-invoice'     => 'WP-Invoice',
 			'zippycourses'   => 'Zippy Courses',
+            'pms'            => 'Paid Member Subscriptions'
 		) );
 
 	}

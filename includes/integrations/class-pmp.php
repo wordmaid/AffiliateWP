@@ -155,7 +155,12 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 		$order->affiliate_id = $referral->affiliate_id;
 		$amount              = html_entity_decode( affwp_currency_filter( affwp_format_amount( $referral->amount ) ), ENT_QUOTES, 'UTF-8' );
 		$name                = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
-		$note                = sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
+		$note                = sprintf( __( 'Referral #%1$d for %2$s recorded for %3$s (ID: %4$d).', 'affiliate-wp' ),
+			$referral->referral_id,
+			$amount,
+			$name,
+			$referral->affiliate_id
+		);
 
 		if( empty( $order->notes ) ) {
 			$order->notes = $note;

@@ -197,7 +197,12 @@ class Affiliate_WP_Formidable_Pro extends Affiliate_WP_Base {
 		$referral = affiliate_wp()->referrals->get_by( 'reference', $entry_id, $this->context );
 		$amount   = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
 		$name     = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
-		$note     = sprintf( __( 'AffiliateWP: Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
+		$note     = sprintf( __( 'AffiliateWP: Referral #%1$d for %2$s recorded for %3$s (ID: %4$d).', 'affiliate-wp' ),
+			$referral->referral_id,
+			$amount,
+			$name,
+			$referral->affiliate_id
+		);
 
 		$frm_entry_meta->add_entry_meta( $entry_id, 0, '', array( 'comment' => $note, 'user_id' => 0 ) );
 

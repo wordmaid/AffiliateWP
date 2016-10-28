@@ -379,7 +379,12 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 		$affiliate_id = $referral->affiliate_id;
 		$name         = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
 
-		edd_insert_payment_note( $payment_id, sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name ) );
+		edd_insert_payment_note( $payment_id, sprintf( __( 'Referral #%1$d for %2$s recorded for %3$s (ID: %4$d).', 'affiliate-wp' ),
+			$referral->referral_id,
+			$amount,
+			$name,
+			$referral->affiliate_id
+		) );
 
 	}
 

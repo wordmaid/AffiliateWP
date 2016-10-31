@@ -12,7 +12,7 @@ use AffWP\Tests\UnitTestCase;
 class Tests extends UnitTestCase {
 
 	/**
-	 * @covers affwp_get_report_dates()
+	 * @covers ::affwp_get_report_dates()
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_end_of_the_month_utc() {
 
@@ -30,7 +30,7 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_get_report_dates()
+	 * @covers ::affwp_get_report_dates()
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_end_of_the_month_nz() {
 
@@ -44,11 +44,10 @@ class Tests extends UnitTestCase {
 		$this->assertEquals( $dates['day_end'], cal_days_in_month( CAL_GREGORIAN, $dates['m_start'], $dates['year'] ) );
 		$this->assertEquals( $dates['m_end'], date( 'n' ) );
 		$this->assertEquals( $dates['year_end'], date( 'Y' ) );
-
 	}
 
 	/**
-	 * @covers affwp_get_report_dates()
+	 * @covers ::affwp_get_report_dates()
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_beginning_of_the_month_utc() {
 
@@ -62,11 +61,10 @@ class Tests extends UnitTestCase {
 		$this->assertEquals( $dates['day_end'], cal_days_in_month( CAL_GREGORIAN, $dates['m_start'], $dates['year'] ) );
 		$this->assertEquals( $dates['m_end'], date( 'n' ) );
 		$this->assertEquals( $dates['year_end'], date( 'Y' ) );
-
 	}
 
 	/**
-	 * @covers affwp_get_report_dates()
+	 * @covers ::affwp_get_report_dates()
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_beginning_of_the_month_pdt() {
 
@@ -80,11 +78,10 @@ class Tests extends UnitTestCase {
 		$this->assertEquals( $dates['day_end'], cal_days_in_month( CAL_GREGORIAN, $dates['m_start'], $dates['year'] ) );
 		$this->assertEquals( $dates['m_end'], date( 'n' ) );
 		$this->assertEquals( $dates['year_end'], date( 'Y' ) );
-
 	}
 
 	/**
-	 * @covers affwp_get_report_dates()
+	 * @covers ::affwp_get_report_dates()
 	 */
 	public function test_get_report_dates_correct_this_moment_utc() {
 
@@ -99,7 +96,6 @@ class Tests extends UnitTestCase {
 		$this->assertEquals( $dates['day_end'], cal_days_in_month( CAL_GREGORIAN, $dates['m_start'], $dates['year'] ) );
 		$this->assertEquals( $dates['m_end'], date( 'n', $current_time ) );
 		$this->assertEquals( $dates['year_end'], date( 'Y', $current_time ) );
-
 	}
 
 }

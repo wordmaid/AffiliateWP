@@ -13,6 +13,10 @@ class Affiliate_WP_Register {
 
 		add_action( 'affwp_affiliate_register', array( $this, 'process_registration' ) );
 		add_action( 'user_register', array( $this, 'auto_register_user_as_affiliate' ) );
+		add_action( 'user_new_form', array( $this, 'add_as_affiliate' ) );
+		add_action( 'user_register', array( $this, 'process_add_as_affiliate' ) );
+		add_action( 'added_existing_user', array( $this, 'process_add_as_affiliate' ) );
+		add_action( 'admin_footer', array( $this, 'scripts' ) );
 
 	}
 
@@ -64,6 +68,10 @@ class Affiliate_WP_Register {
 				if ( empty( $field ) ) {
 					$this->add_error( $value['error_id'], $value['error_message'] );
 				}
+
+				if( 'affwp_user_url' === $field_name && false === filter_var( $field, FILTER_VALIDATE_URL ) ) {
+					$this->add_error( 'invalud_url', __( 'Please enter a valid website URL', 'affiliate-wp' ) );
+				}
 			}
 
 			if ( username_exists( $data['affwp_user_login'] ) ) {
@@ -76,6 +84,10 @@ class Affiliate_WP_Register {
 				} else {
 					$this->add_error( 'username_invalid', __( 'Invalid username', 'affiliate-wp' ) );
 				}
+			}
+
+			if ( strlen( $data['affwp_user_login'] ) > 60 ) {
+				$this->add_error( 'username_invalid_length', __( 'Invalid username. Must be between 1 and 60 characters.', 'affiliate-wp' ) );
 			}
 
 			if ( is_numeric( $data['affwp_user_login'] ) ) {
@@ -103,7 +115,7 @@ class Affiliate_WP_Register {
 			// Loop through required fields and show error message
 			foreach ( $this->required_fields() as $field_name => $value ) {
 
-				if( ! empty( $value['logged_out'] ) ) {
+				if ( ! empty( $value['logged_out'] ) ) {
 					continue;
 				}
 
@@ -126,7 +138,7 @@ class Affiliate_WP_Register {
 		}
 
 		if ( ! empty( $_POST['affwp_honeypot'] ) ) {
-			$this->add_error( 'spam', __( 'Nice try honey bear, don\'t touch our honey', 'affiliate-wp' ) );
+			$this->add_error( 'spam', __( 'Nice try honey bear, don&#8217;t touch our honey', 'affiliate-wp' ) );
 		}
 
 		if ( affwp_is_affiliate() ) {
@@ -194,7 +206,7 @@ class Affiliate_WP_Register {
 			),
 			'affwp_user_login' 	=> array(
 				'error_id'      => 'empty_username',
-				'error_message' => __( 'Invalid username', 'affiliate-wp' ),
+				'error_message' => __( 'Invalid username. Must be between 1 and 60 characters.', 'affiliate-wp' ),
 				'logged_out'    => true
 			),
 			'affwp_user_url' 	=> array(
@@ -220,19 +232,22 @@ class Affiliate_WP_Register {
 
 		$status = affiliate_wp()->settings->get( 'require_approval' ) ? 'pending' : 'active';
 
-		if ( ! is_user_logged_in() ) {
-
+		if ( ! empty( $_POST['affwp_user_name'] ) ) {
 			$name       = explode( ' ', sanitize_text_field( $_POST['affwp_user_name'] ) );
 			$user_first = $name[0];
 			$user_last  = isset( $name[1] ) ? $name[1] : '';
+		} else {
+			$user_first = '';
+			$user_last  = '';
+		}
+
+		if ( ! is_user_logged_in() ) {
 
 			$args = array(
 				'user_login'    => sanitize_text_field( $_POST['affwp_user_login'] ),
 				'user_email'    => sanitize_text_field( $_POST['affwp_user_email'] ),
 				'user_pass'     => sanitize_text_field( $_POST['affwp_user_pass'] ),
-				'display_name'  => $user_first . ' ' . $user_last,
-				'first_name'    => $user_first,
-				'last_name'     => $user_last
+				'display_name'  => $user_first . ' ' . $user_last
 			);
 
 			$user_id = wp_insert_user( $args );
@@ -244,6 +259,9 @@ class Affiliate_WP_Register {
 			$args    = (array) $user['data'];
 
 		}
+
+		// update first and last name
+		wp_update_user( array( 'ID' => $user_id, 'first_name' => $user_first, 'last_name' => $user_last ) );
 
 		// promotion method
 		$promotion_method = isset( $_POST['affwp_promotion_method'] ) ? sanitize_text_field( $_POST['affwp_promotion_method'] ) : '';
@@ -379,5 +397,124 @@ class Affiliate_WP_Register {
 
 	}
 
+	/**
+	 * Adds an "Add As Affiliate" checkbox to the WordPress "Add New User" screen
+	 * On multisite this will only show when the "Skip Confirmation Email" checkbox is enabled
+	 *
+	 * @since 1.8
+	 * @return void
+	 */
+	public function add_as_affiliate( $context ) {
+
+		if ( affiliate_wp()->settings->get( 'auto_register' ) ) {
+			return;
+		}
+
+		?>
+		<table id="affwp-create-affiliate" class="form-table" style="margin-top:0;">
+			<tr>
+				<th scope="row"><label for="create-affiliate-<?php echo $context; ?>"><?php _e( 'Add as Affiliate',  'affiliate-wp' ); ?></label></th>
+				<td>
+					<label for="create-affiliate-<?php echo $context; ?>"><input type="checkbox" id="create-affiliate-<?php echo $context; ?>" name="affwp_create_affiliate" value="1" /> <?php _e( 'Add the user as an affiliate.', 'affiliate-wp' ); ?></label>
+				</td>
+			</tr>
+			<?php if ( ! affiliate_wp()->emails->is_email_disabled() ) : ?>
+			<tr>
+				<th scope="row"><label for="disable-affiliate-email-<?php echo $context; ?>"><?php _e( 'Disable Affiliate Email',  'affiliate-wp' ); ?></label></th>
+				<td>
+					<label for="disable-affiliate-email-<?php echo $context; ?>"><input type="checkbox" id="disable-affiliate-email-<?php echo $context; ?>" name="disable_affiliate_email" value="1" /> <?php _e( 'Disable the application accepted email sent to the affiliate.', 'affiliate-wp' ); ?></label>
+				</td>
+			</tr>
+			<?php endif; ?>
+		</table>
+		<?php
+	}
+
+	/**
+	 * Adds a new affiliate when the "Add As Affiliate" checkbox is enabled
+	 * Only works when "Skip Confirmation Email" is enabled
+	 *
+	 * @since 1.8
+	 * @return void
+	 */
+	public function process_add_as_affiliate( $user_id = 0 ) {
+
+		if ( affiliate_wp()->settings->get( 'auto_register' ) ) {
+			return;
+		}
+
+		$add_affiliate     = isset( $_POST['affwp_create_affiliate'] ) ? $_POST['affwp_create_affiliate'] : '';
+		$skip_confirmation = isset( $_POST['noconfirmation'] ) ? $_POST['noconfirmation'] : '';
+
+		if ( is_multisite() && ! ( $add_affiliate && $skip_confirmation ) ) {
+			return;
+		} elseif ( ! $add_affiliate ) {
+			return;
+		}
+
+		if ( $add_affiliate && isset( $_POST['disable_affiliate_email'] ) ) {
+			add_filter( 'affwp_notify_on_approval', '__return_false' );
+		}
+
+		// add the affiliate
+		affwp_add_affiliate( array( 'user_id' => $user_id ) );
+
+	}
+
+	/**
+	 * Scripts
+	 *
+	 * @since 1.8
+	 * @return void
+	 */
+	function scripts() {
+
+		if ( affiliate_wp()->settings->get( 'auto_register' ) ) {
+			return;
+		}
+
+		global $pagenow;
+
+		/**
+		 * Javascript for the "Add New User" screen on (multisite only)
+		 */
+		if ( ( ! empty( $pagenow ) && ( 'user-new.php' === $pagenow ) && is_multisite() ) ) : ?>
+
+		<script>
+		jQuery(document).ready(function($) {
+
+			var optionSkipConfirmation = $('input[name="noconfirmation"]');
+
+			// show or hide the add affiliate table based on the "Skip Confirmation" checkbox option
+			optionSkipConfirmation.click( function(e) {
+
+				var tableNoConfirmation = this.closest('table');
+				var tableAddAffiliate = $( tableNoConfirmation ).next('table');
+
+				if ( this.checked ) {
+					tableAddAffiliate.show();
+
+				} else {
+					tableAddAffiliate.hide();
+				}
+
+			});
+
+			var tableNoConfirmation = $( optionSkipConfirmation ).closest('table');
+			var tableAddAffiliate = $( tableNoConfirmation ).next('table');
+
+			if ( optionSkipConfirmation.is(':checked') ) {
+				tableAddAffiliate.show();
+			} else {
+				tableAddAffiliate.hide();
+			}
+
+		});
+
+		</script>
+
+		<?php endif;
+
+	}
 
 }

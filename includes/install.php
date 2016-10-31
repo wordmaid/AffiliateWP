@@ -15,6 +15,7 @@ function affiliate_wp_install() {
 	$affiliate_wp_install->creatives      = new Affiliate_WP_Creatives_DB;
 	$affiliate_wp_install->settings       = new Affiliate_WP_Settings;
 	$affiliate_wp_install->rewrites       = new Affiliate_WP_Rewrites;
+	$affiliate_wp_install->REST           = new Affiliate_WP_REST;
 
 	$affiliate_wp_install->affiliates->create_table();
 	$affiliate_wp_install->affiliate_meta->create_table();
@@ -22,6 +23,8 @@ function affiliate_wp_install() {
 	$affiliate_wp_install->visits->create_table();
 	$affiliate_wp_install->campaigns->create_view();
 	$affiliate_wp_install->creatives->create_table();
+	$affiliate_wp_install->affiliates->payouts->create_table();
+	$affiliate_wp_install->REST->consumers->create_table();
 
 	if ( ! get_option( 'affwp_is_installed' ) ) {
 		$affiliate_area = wp_insert_post(
@@ -29,16 +32,16 @@ function affiliate_wp_install() {
 				'post_title'     => __( 'Affiliate Area', 'affiliate-wp' ),
 				'post_content'   => '[affiliate_area]',
 				'post_status'    => 'publish',
-				'post_author'    => 1,
+				'post_author'    => get_current_user_id(),
 				'post_type'      => 'page',
 				'comment_status' => 'closed'
 			)
 		);
 
-		$options = $affiliate_wp_install->settings->get_all();
-		$options['affiliates_page'] = $affiliate_area;
-		update_option( 'affwp_settings', $options );
-
+		// Update settings.
+		$affiliate_wp_install->settings->set( array(
+			'affiliates_page' => $affiliate_area
+		), $save = true );
 	}
 
 	// 3 equals unchecked
@@ -55,7 +58,7 @@ function affiliate_wp_install() {
 	}
 
 	// Add the transient to redirect
-	set_transient( '_affwp_activation_redirect', true, 30 );
+	set_transient( '_affwp_activation_redirect', true, MINUTE_IN_SECONDS / 2 );
 
 }
 register_activation_hook( AFFILIATEWP_PLUGIN_FILE, 'affiliate_wp_install' );

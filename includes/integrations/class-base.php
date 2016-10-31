@@ -103,7 +103,7 @@ abstract class Affiliate_WP_Base {
 		}
 
 		if ( affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context ) ) {
-			
+
 			if( $this->debug ) {
 				$this->log( sprintf( 'Referral for Reference %s already created', $reference ) );
 			}
@@ -112,7 +112,7 @@ abstract class Affiliate_WP_Base {
 		}
 
 		if ( empty( $amount ) && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
-		
+
 			if( $this->debug ) {
 				$this->log( 'Referral not created due to 0.00 amount.' );
 			}
@@ -149,19 +149,41 @@ abstract class Affiliate_WP_Base {
 	 *
 	 * @access  public
 	 * @since   1.0
-	 * @param   $reference The reference column for the referral to complete per the current context
+	 * @param   $reference|$referral The reference column for the referral to complete per the current context or a complete referral object
 	 * @return  bool
 	 */
-	public function complete_referral( $reference = 0 ) {
+	public function complete_referral( $reference_or_referral = 0 ) {
 
-		if ( empty( $reference ) ) {
+		if ( empty( $reference_or_referral ) ) {
+
+			if( $this->debug ) {
+				$this->log( 'Empty $reference_or_referral parameter given during complete_referral()' );
+			}
+
 			return false;
 		}
 
-		$referral = affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context );
+		if( is_object( $reference_or_referral ) ) {
+
+			$referral = affwp_get_referral( $reference_or_referral );
+
+		} else {
+
+			$referral = affiliate_wp()->referrals->get_by( 'reference', $reference_or_referral, $this->context );
+
+		}
 
 		if ( empty( $referral ) ) {
+
+			if( $this->debug ) {
+				$this->log( 'Referral could not be retrieved during complete_referral(). Value given: ' . print_r( $reference_or_referral, true ) );
+			}
+
 			return false;
+		}
+
+		if( $this->debug ) {
+			$this->log( 'Referral retrieved successfully during complete_referral()' );
 		}
 
 		if ( is_object( $referral ) && $referral->status != 'pending' ) {
@@ -180,7 +202,7 @@ abstract class Affiliate_WP_Base {
 
 		if ( affwp_set_referral_status( $referral->referral_id, 'unpaid' ) ) {
 
-			do_action( 'affwp_complete_referral', $referral->referral_id, $referral, $reference );
+			do_action( 'affwp_complete_referral', $referral->referral_id, $referral, $referral->reference );
 
 			if( $this->debug ) {
 				$this->log( sprintf( 'Referral #%d set to Unpaid successfully', $referral->referral_id ) );
@@ -221,7 +243,7 @@ abstract class Affiliate_WP_Base {
 			return false;
 		}
 
-		if ( affiliate_wp()->referrals->update( $referral->referral_id, array( 'status' => 'rejected' ), '', 'referral' ) ) {
+		if ( affwp_set_referral_status( $referral->referral_id, 'rejected' ) ) {
 
 			if( $this->debug ) {
 				$this->log( sprintf( 'Referral #%d set to Rejected successfully', $referral->referral_id ) );
@@ -295,9 +317,15 @@ abstract class Affiliate_WP_Base {
 	/**
 	 * Retrieves the rate and type for a specific product
 	 *
-	 * @access  public
-	 * @since   1.2
-	 * @return  array
+	 * @since 1.2
+	 * @access public
+	 *
+	 * @param string $base_amount      Optional. Base amount to calculate the referral amount from.
+	 *                                 Default empty.
+	 * @param string|int $reference    Optional. Referral reference (usually the order ID). Default empty.
+	 * @param int        $product_id   Optional. Product ID. Default 0.
+	 * @param int        $affiliate_id Optional. Affiliate ID.
+	 * @return string Referral amount.
 	 */
 	public function calculate_referral_amount( $base_amount = '', $reference = '', $product_id = 0, $affiliate_id = 0 ) {
 
@@ -325,12 +353,27 @@ abstract class Affiliate_WP_Base {
 	*/
 	public function get_product_rate( $product_id = 0, $args = array() ) {
 
+		$args = wp_parse_args( $args, array(
+			'reference'    => '',
+			'affiliate_id' => 0
+		) );
+
 		$affiliate_id = isset( $args['affiliate_id'] ) ? $args['affiliate_id'] : $this->get_affiliate_id( $args['reference'] );
 
 		$rate = get_post_meta( $product_id, '_affwp_' . $this->context . '_product_rate', true );
 
+		/**
+		 * Filters the integration product rate.
+		 *
+		 * @since 1.2
+		 *
+		 * @param float  $rate         Product-level referral rate.
+		 * @param int    $product_id   Product ID.
+		 * @param array  $args         Arguments for retrieving the product rate.
+		 * @param int    $affiliate_id Affilaite ID.
+		 * @param string $context      Order context.
+		 */
 		return apply_filters( 'affwp_get_product_rate', $rate, $product_id, $args, $affiliate_id, $this->context );
-
 	}
 
 	/**
@@ -354,7 +397,7 @@ abstract class Affiliate_WP_Base {
 		if( $this->debug ) {
 
 			$this->logs->log( $message );
-			
+
 		}
 
 	}

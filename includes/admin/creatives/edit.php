@@ -45,7 +45,7 @@ $creative = affwp_get_creative( absint( $_GET['creative_id'] ) );
 
 				<td>
 					<input type="text" name="url" id="url" value="<?php echo esc_url( $creative->url ); ?>" class="regular-text" />
-					<p class="description"><?php _e( 'Where the creative should link to. The affiliate\'s referral ID will be automatically appended.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'Where the creative should link to. The affiliate&#8217;s referral ID will be automatically appended.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>
@@ -57,7 +57,7 @@ $creative = affwp_get_creative( absint( $_GET['creative_id'] ) );
 				</th>
 
 				<td>
-					<input type="text" name="text" id="text" value="<?php echo esc_attr( stripslashes( $creative->text ) ); ?>" class="regular-text" />
+					<input type="text" name="text" id="text" value="<?php echo esc_attr( stripslashes( $creative->text ) ); ?>" class="regular-text" maxlength="255" />
 					<p class="description"><?php _e( 'Text for this creative.', 'affiliate-wp' ); ?></p>
 				</td>
 

@@ -68,10 +68,35 @@ class Affiliate_WP_Shortcodes {
 	 *  @return string
 	 */
 	public function affiliate_login( $atts, $content = null ) {
-		extract( shortcode_atts( array(
+
+		$atts = shortcode_atts(
+			array(
 				'redirect' => '',
-			), $atts, 'affiliate_login' )
+			),
+			$atts,
+			'affiliate_login'
 		);
+
+		$redirect = ! empty( $atts['redirect'] ) ? $atts['redirect'] : '';
+
+		// redirect added to shortcode
+		if ( $redirect ) {
+
+			if ( 'current' === $redirect ) {
+				// redirect to current page
+				$redirect = '';
+			} elseif ( 'referrer' === $redirect && wp_get_referer() ) {
+				// redirect to the page before landing on login page
+				$redirect = wp_get_referer();
+			} else {
+				// redirect to the location entered in the shortcode
+				$redirect = $redirect;
+			}
+
+		} else {
+			// redirect to the affiliate area
+			$redirect = affiliate_wp()->login->get_login_url();
+		}
 
 		if ( ! is_user_logged_in() ) {
 
@@ -91,10 +116,16 @@ class Affiliate_WP_Shortcodes {
 	 *  @return string
 	 */
 	public function affiliate_registration( $atts, $content = null ) {
-		extract( shortcode_atts( array(
+
+		$atts = shortcode_atts(
+			array(
 				'redirect' => '',
-			), $atts, 'affiliate_registration' )
+			),
+			$atts,
+			'affiliate_registration'
 		);
+
+		$redirect = ! empty( $atts['redirect'] ) ? $atts['redirect'] : '';
 
 		if ( ! affiliate_wp()->settings->get( 'allow_affiliate_registration' ) ) {
 			return;
@@ -105,6 +136,25 @@ class Affiliate_WP_Shortcodes {
 		}
 
 		wp_enqueue_style( 'affwp-forms' );
+
+		// redirect added to shortcode
+		if ( $redirect ) {
+
+			if ( 'current' === $redirect ) {
+				// redirect to current page
+				$redirect = '';
+			} elseif ( 'referrer' === $redirect && wp_get_referer() ) {
+				// redirect to the page before landing on login page
+				$redirect = wp_get_referer();
+			} else {
+				// redirect to the location entered in the shortcode
+				$redirect = $redirect;
+			}
+
+		} else {
+			// redirect to the affiliate area
+			$redirect = affiliate_wp()->login->get_login_url();
+		}
 
 		return affiliate_wp()->register->register_form( $redirect );
 
@@ -124,6 +174,7 @@ class Affiliate_WP_Shortcodes {
 				'description' => '',
 				'reference'   => '',
 				'context'     => '',
+				'campaign'    => '',
 				'status'      => ''
 			),
 			$atts,
@@ -163,7 +214,7 @@ class Affiliate_WP_Shortcodes {
 		if ( ! empty( $content ) ) {
 			$base_url = $content;
 		} else {
-			$base_url = ! empty( $atts[ 'url' ] ) ? $atts[ 'url' ] : home_url( '/' );
+			$base_url = ! empty( $atts[ 'url' ] ) ? $atts[ 'url' ] : affiliate_wp()->tracking->get_current_page_url();
 		}
 
 		// pretty URLs

@@ -26,7 +26,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 		add_action( 'wp_trash_post', array( $this, 'revoke_referral_on_delete' ), 10 );
 
 		// coupon code tracking actions and filters
-		add_action( 'it_exchange_basics_coupon_coupon_edit_screen_end_fields', array( $this, 'coupon_edit' ) );
+		add_action( 'it_libraries_loaded', array( $this, 'add_coupon_edit_hooks' ) );
 		add_action( 'it_exchange_basic_coupons_saved_coupon', array( $this, 'store_coupon_affiliate' ), 10, 2 );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
@@ -262,6 +262,23 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 	}
 
 	/**
+	 * Add coupon edit hooks depending on version of Exchange active.
+	 *
+	 * The 'General' tab did not become active until version 1.33
+	 *
+	 * @access public
+	 * @since 1.8
+	 */
+	public function add_coupon_edit_hooks() {
+
+		if ( version_compare( $GLOBALS['it_exchange']['version'], '1.33.0', '>' ) ) {
+			add_action( 'it_exchange_basic_coupons_coupon_edit_tab_general', array( $this, 'coupon_edit' ) );
+		} else {
+			add_action( 'it_exchange_basics_coupon_coupon_edit_screen_end_fields', array( $this, 'coupon_edit' ) );
+		}
+	}
+
+	/**
 	 * Shows the affiliate drop down on the coupon edit / add screens
 	 *
 	 * @access  public
@@ -272,11 +289,15 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
 
+		$user_name    = '';
 		$coupon_id    = ! empty( $_REQUEST['post'] ) ? absint( $_REQUEST['post'] ) : 0;
 		$affiliate_id = get_post_meta( $coupon_id, 'affwp_coupon_affiliate', true );
-		$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
-		$user         = get_userdata( $user_id );
-		$user_name    = $user ? $user->user_login : '';
+		
+		if( $affiliate_id ) {
+			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
+			$user         = get_userdata( $user_id );
+			$user_name    = $user ? $user->user_login : '';
+		}
 ?>
 		<div class="field affwp-coupon">
 			<th scope="row" valign="top">
@@ -286,9 +307,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 				<span class="affwp-ajax-search-wrap">
 					<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 					<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" />
-					<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 				</span>
-				<div id="affwp_user_search_results"></div>
 				<p class="description"><?php _e( 'If you would like to connect this coupon to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></p>
 			</td>
 		</div>

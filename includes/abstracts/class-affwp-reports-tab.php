@@ -258,6 +258,11 @@ abstract class Tab {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-meta-box-base.php';
 		}
 
+		// Only run tile queries for the current tab.
+		if ( ! isset( $_REQUEST['tab'] ) || ( isset( $_REQUEST['tab'] ) && $this->tab_id !== $_REQUEST['tab'] ) ) {
+			return;
+		}
+
 		$this->register_tiles();
 
 		/**

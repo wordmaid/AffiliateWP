@@ -452,7 +452,7 @@ class Affiliate_WP_Graph {
 function affwp_get_report_dates() {
 	$dates = array();
 
-	$current_time = current_time( 'timestamp' );
+	$current_time = current_time( 'timestamp', 1 );
 
 	$dates['date_from']  = ! empty( $_REQUEST['filter_from'] ) ? $_REQUEST['filter_from'] : date( 'j/n/Y', $current_time );
 	$dates['date_to']    = ! empty( $_REQUEST['filter_to'] )   ? $_REQUEST['filter_to']   : date( 'j/n/Y', $current_time );

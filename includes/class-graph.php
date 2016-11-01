@@ -106,39 +106,6 @@ class Affiliate_WP_Graph {
 	}
 
 	/**
-	 * This function wraps WordPress current_time function
-	 * so we can test several time/date situations
-	 *
-	 * @param $type
-	 * @param int $gmt
-	 *
-	 * @return int|string
-	 */
-	public static function current_time( $type, $gmt = 0 ) {
-
-		global $AFFWP_TEST_TIME, $AFFWP_TEST_UTC_OFFSET;
-
-		if ( ! isset( $AFFWP_TEST_TIME ) ) {
-			return current_time( $type, $gmt );
-		}
-
-		if ( isset ( $AFFWP_TEST_UTC_OFFSET ) ) {
-			$offset = $AFFWP_TEST_UTC_OFFSET * HOUR_IN_SECONDS;
-		} else {
-			$offset = get_option( 'gmt_offset' ) * HOUR_IN_SECONDS;
-		}
-
-		switch ( $type ) {
-			case 'mysql':
-				return ( $gmt ) ? gmdate( 'Y-m-d H:i:s', $AFFWP_TEST_TIME ) : gmdate( 'Y-m-d H:i:s', $AFFWP_TEST_TIME + $offset );
-			case 'timestamp':
-				return ( $gmt ) ? $AFFWP_TEST_TIME : $AFFWP_TEST_TIME + $offset;
-			default:
-				return ( $gmt ) ? date( $type, $AFFWP_TEST_TIME ) : date( $type, $AFFWP_TEST_TIME + $offset );
-		}
-	}
-
-	/**
 	 * Set an option
 	 *
 	 * @param $key The option key to set

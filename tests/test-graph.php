@@ -9,10 +9,6 @@ use AffWP\Tests\UnitTestCase;
  * @covers Affiliate_WP_Graph
  * @group graph
  */
-
-
-
-
 class Tests extends UnitTestCase {
 
 	/**
@@ -20,15 +16,9 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_end_of_the_month_utc() {
 
-		global $AFFWP_TEST_TIME, $AFFWP_TEST_UTC_OFFSET;
-
 		date_default_timezone_set( 'UTC' );
 
-		$AFFWP_TEST_TIME       = strtotime( '2016/10/31 23:59 UTC' );
-		$AFFWP_TEST_UTC_OFFSET = 0;
-
-
-		$dates = affwp_get_report_dates();
+		$dates = affwp_get_report_dates( strtotime( '2016/10/31 23:59 UTC' ) );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], 10 );
@@ -44,14 +34,9 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_end_of_the_month_utc_at_beginning_nz() {
 
-		global $AFFWP_TEST_TIME, $AFFWP_TEST_UTC_OFFSET;
-
 		date_default_timezone_set( 'Pacific/Auckland' );
 
-		$AFFWP_TEST_TIME       = strtotime( '2016/10/31 13:00 UTC' );
-		$AFFWP_TEST_UTC_OFFSET = 13;
-
-		$dates = affwp_get_report_dates();
+		$dates = affwp_get_report_dates( strtotime( '2016/10/31 13:00 UTC' ) );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], 11 );
@@ -67,14 +52,9 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_end_of_the_month_in_nz() {
 
-		global $AFFWP_TEST_TIME, $AFFWP_TEST_UTC_OFFSET;
-
 		date_default_timezone_set( 'Pacific/Auckland' );
 
-		$AFFWP_TEST_TIME       = strtotime( '2016/10/31 09:00 UTC' );
-		$AFFWP_TEST_UTC_OFFSET = 13;
-
-		$dates = affwp_get_report_dates();
+		$dates = affwp_get_report_dates( strtotime( '2016/10/31 09:00 UTC' ) );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], 10 );
@@ -90,15 +70,9 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_beginning_of_the_month_utc() {
 
-		global $AFFWP_TEST_TIME, $AFFWP_TEST_UTC_OFFSET;
-
 		date_default_timezone_set( 'UTC' );
 
-		$AFFWP_TEST_TIME       = strtotime( '2016/09/01 00:00 UTC' );
-		$AFFWP_TEST_UTC_OFFSET = 0;
-
-
-		$dates = affwp_get_report_dates();
+		$dates = affwp_get_report_dates( strtotime( '2016/09/01 00:00 UTC' ) );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], 9 );
@@ -114,15 +88,9 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_beginning_of_the_month_utc_at_the_end_in_pdt() {
 
-		global $AFFWP_TEST_TIME, $AFFWP_TEST_UTC_OFFSET;
-
 		date_default_timezone_set( 'America/Los_Angeles' );
 
-		$AFFWP_TEST_TIME       = strtotime( '2016/09/01 00:00 UTC' );
-		$AFFWP_TEST_UTC_OFFSET = - 7;
-
-
-		$dates = affwp_get_report_dates();
+		$dates = affwp_get_report_dates( strtotime( '2016/09/01 00:00 UTC' ) );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], 8 );
@@ -138,15 +106,9 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_get_report_dates_correct_this_month_at_the_beginning_of_the_month_pdt() {
 
-		global $AFFWP_TEST_TIME, $AFFWP_TEST_UTC_OFFSET;
-
 		date_default_timezone_set( 'America/Los_Angeles' );
 
-		$AFFWP_TEST_TIME       = strtotime( '2016/09/01 08:00 UTC' );
-		$AFFWP_TEST_UTC_OFFSET = - 7;
-
-
-		$dates = affwp_get_report_dates();
+		$dates = affwp_get_report_dates( strtotime( '2016/09/01 08:00 UTC' ) );
 
 		$this->assertEquals( $dates['day'], 1 );
 		$this->assertEquals( $dates['m_start'], 9 );
@@ -163,12 +125,10 @@ class Tests extends UnitTestCase {
 	 */
 	public function test_get_report_dates_correct_this_moment() {
 
-		unset( $GLOBALS['AFFWP_TEST_TIME'] );
-		unset( $GLOBALS['AFFWP_TEST_UTC_OFFSET'] );
-
 		date_default_timezone_set( 'UTC' );
 
-		$current_time = current_time( 'timestamp', 1 );
+		$current_time = current_time( 'timestamp', true );
+
 		$dates = affwp_get_report_dates();
 
 		$this->assertEquals( $dates['day'], 1 );

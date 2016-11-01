@@ -447,12 +447,18 @@ class Affiliate_WP_Graph {
  * selected date-range (if any)
  *
  * @since 1.0
- * @return array
+ * @since 1.9.5 Added the `$current_time` parameter for use in testing.
+ *
+ * @param int $current_time Optional. Timestamp to override current_time() with.
+ *                          Intended only for testing purposes. Default null.
+ * @return array Date values used by the Graphs API on the reports screen.
 */
-function affwp_get_report_dates() {
+function affwp_get_report_dates( $current_time = null ) {
 	$dates = array();
 
-	$current_time = Affiliate_WP_Graph::current_time( 'timestamp', 1 );
+	if ( null === $current_time ) {
+		$current_time = current_time( 'timestamp', true );
+	}
 
 	$dates['date_from']  = ! empty( $_REQUEST['filter_from'] ) ? $_REQUEST['filter_from'] : date( 'j/n/Y', $current_time );
 	$dates['date_to']    = ! empty( $_REQUEST['filter_to'] )   ? $_REQUEST['filter_to']   : date( 'j/n/Y', $current_time );

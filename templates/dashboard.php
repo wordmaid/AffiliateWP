@@ -99,7 +99,18 @@
 			</li>
 			<?php endif; ?>
 
-			<?php do_action( 'affwp_affiliate_dashboard_tabs', affwp_get_affiliate_id(), $active_tab ); ?>
+			<?php
+			/**
+			 * Fires immediately after most core Affiliate Area tabs are output (if configured),
+			 * but before the 'Log Out' tab is output (if configured).
+			 *
+			 * @since 0.2
+			 *
+			 * @param int    $affiliate_id ID of the current affiliate.
+			 * @param string $active_tab   Slug of the active tab.
+			 */
+			do_action( 'affwp_affiliate_dashboard_tabs', affwp_get_affiliate_id(), $active_tab );
+			?>
 
 			<?php if ( affiliate_wp()->settings->get( 'logout_link' ) ) : ?>
 			<li class="affwp-affiliate-dashboard-tab">

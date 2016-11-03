@@ -52,6 +52,11 @@ class Affiliate_WP_Admin_Notices {
 
 				// Affiliates.
 				case 'affiliate_added' :
+					if ( ! class_exists( 'Affiliate_WP_Migrate_Users' ) ) {
+						require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-migrate-base.php';
+						require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-migrate-users.php';
+					}
+
 					$migrate          = new Affiliate_WP_Migrate_Users;
 					$total_affiliates = (int) $migrate::get_items_total( 'affwp_migrate_users_total_count' );
 

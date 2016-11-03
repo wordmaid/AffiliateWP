@@ -317,6 +317,8 @@ class Sub_Commands extends Base {
 			}
 		}
 
+		$updated = false;
+
 		if ( ! empty( $data ) ) {
 			$updated = affiliate_wp()->affiliates->payouts->update( $payout->ID, $data, '', 'payout' );
 		} else {

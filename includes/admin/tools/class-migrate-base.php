@@ -75,7 +75,8 @@ class Affiliate_WP_Migrate_Base {
 	 * @return mixed|false The stored data, otherwise false.
 	 */
 	public static function get_items_total( $key ) {
-		self::get_stored_data( $key );
+		$self = new self();
+		return $self->get_stored_data( $key );
 	}
 
 	/**
@@ -129,6 +130,7 @@ class Affiliate_WP_Migrate_Base {
 	 * @param string $key The stored option name to delete.
 	 */
 	public static function clear_items_total( $key ) {
-		self::delete_data( $key );
+		$self = new self();
+		$self->delete_data( $key );
 	}
 }

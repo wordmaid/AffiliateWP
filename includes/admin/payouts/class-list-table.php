@@ -194,7 +194,7 @@ class AffWP_Payouts_Table extends List_Table {
 	 * @param \AffWP\Affiliate\Payout $payout Current payout object.
 	 * @return string Checkbox markup.
 	 */
-	function column_cb( $payout ) {
+	public function column_cb( $payout ) {
 		return '<input type="checkbox" name="payout_id[]" value="' . absint( $payout->ID ) . '" />';
 	}
 
@@ -253,7 +253,7 @@ class AffWP_Payouts_Table extends List_Table {
 	 * @param \AffWP\Affiliate\Payout $payout Current payout object.
 	 * @return string Linked affiliate name and ID.
 	 */
-	function column_affiliate( $payout ) {
+	public function column_affiliate( $payout ) {
 		$url = add_query_arg( array(
 			'page'         => 'affiliate-wp-affiliates',
 			'action'       => 'view_affiliate',
@@ -416,7 +416,7 @@ class AffWP_Payouts_Table extends List_Table {
 	 * @param \AffWP\Affiliate\Payout $payout Current payout object.
 	 * @return string Action links markup.
 	 */
-	function column_actions( $payout ) {
+	public function column_actions( $payout ) {
 
 		$base_query_args = array(
 			'page'      => 'affiliate-wp-payouts',
@@ -493,7 +493,7 @@ class AffWP_Payouts_Table extends List_Table {
 	 * @param string                  $column_name The name of the column.
 	 * @return string Column name.
 	 */
-	function column_default( $payout, $column_name ) {
+	public function column_default( $payout, $column_name ) {
 		$value = isset( $payout->$column_name ) ? $payout->$column_name : '';
 
 		/**
@@ -515,7 +515,7 @@ class AffWP_Payouts_Table extends List_Table {
 	 * @access public
 	 * @since  1.9
 	 */
-	function no_items() {
+	public function no_items() {
 		_e( 'No payouts found.', 'affiliate-wp' );
 	}
 

@@ -63,9 +63,9 @@ class Affiliate_WP_Admin_Notices {
 					$message = sprintf( _n(
 						'%d affiliate was added successfully.',
 						'%d affiliates were added successfully',
-						number_format_i18n( $total_affiliates ),
+						$total_affiliates,
 						'affiliate-wp'
-					) );
+					), number_format_i18n( $total_affiliates ) );
 
 					$migrate::clear_items_total( 'affwp_migrate_users_total_count' );
 

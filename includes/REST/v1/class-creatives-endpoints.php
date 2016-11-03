@@ -110,7 +110,7 @@ class Endpoints extends Controller {
 	 * @access public
 	 *
 	 * @param \WP_REST_Request $request Request arguments.
-	 * @return \AffWP\Creative|\WP_Error Creative object or \WP_Error object if not found.
+	 * @return \WP_REST_Response|\WP_Error Creative object or \WP_Error object if not found.
 	 */
 	public function get_item( $request ) {
 		if ( ! $creative = \affwp_get_creative( $request['id'] ) ) {
@@ -127,9 +127,10 @@ class Endpoints extends Controller {
 	/**
 	 * Retrieves the collection parameters for creatives.
 	 *
-	 * @since 1.9
 	 * @access public
-	 * @return array
+	 * @since  1.9
+	 *
+	 * @return array Collection parameters.
 	 */
 	public function get_collection_params() {
 		$params = parent::get_collection_params();

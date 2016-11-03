@@ -137,7 +137,7 @@ class AffWP_Visits_Table extends List_Table {
 	 *
 	 * @return string Column Name
 	 */
-	function column_default( $visit, $column_name ) {
+	public function column_default( $visit, $column_name ) {
 		switch( $column_name ) {
 			default:
 				$value = isset( $visit->$column_name ) ? $visit->$column_name : '';
@@ -155,7 +155,7 @@ class AffWP_Visits_Table extends List_Table {
 	 * @param array $referral Contains all the data for the checkbox column
 	 * @return string The affiliate
 	 */
-	function column_affiliate( $visit ) {
+	public function column_affiliate( $visit ) {
 		$value = '<a href="' . esc_url( admin_url( 'admin.php?page=affiliate-wp-visits&affiliate=' . $visit->affiliate_id ) ) . '">' . affiliate_wp()->affiliates->get_affiliate_name( $visit->affiliate_id ) . '</a>';
 		return apply_filters( 'affwp_visit_table_affiliate', $value, $visit );
 	}
@@ -168,7 +168,7 @@ class AffWP_Visits_Table extends List_Table {
 	 * @param array $referral Contains all the data for the checkbox column
 	 * @return string Referring URL
 	 */
-	function column_referrer( $visit ) {
+	public function column_referrer( $visit ) {
 		$value = ! empty( $visit->referrer ) ? '<a href="' . esc_url( $visit->referrer ) . '" taret="_blank">' . $visit->referrer . '</a>' : __( 'Direct traffic', 'affiliate-wp' );
 		return apply_filters( 'affwp_visit_table_referrer', $value, $visit );
 	}
@@ -181,7 +181,7 @@ class AffWP_Visits_Table extends List_Table {
 	 * @param array $referral Contains all the data for the checkbox column
 	 * @return string Converted status icon
 	 */
-	function column_converted( $visit ) {
+	public function column_converted( $visit ) {
 		$converted = ! empty( $visit->referral_id ) ? 'yes' : 'no';
 		$value = '<span class="visit-converted ' . $converted . '"><i></i></span>';
 		return apply_filters( 'affwp_visit_table_converted', $value, $visit );
@@ -193,7 +193,7 @@ class AffWP_Visits_Table extends List_Table {
 	 * @since 1.7.2
 	 * @access public
 	 */
-	function no_items() {
+	public function no_items() {
 		_e( 'No visits found.', 'affiliate-wp' );
 	}
 

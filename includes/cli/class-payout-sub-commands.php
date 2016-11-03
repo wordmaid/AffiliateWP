@@ -418,7 +418,7 @@ class Sub_Commands extends Base {
 	 * @param array $args       Top-level arguments.
 	 * @param array $assoc_args Associated arguments (flags).
 	 */
-	public function list_( $_, $assoc_args ) {
+	public function list_( $args, $assoc_args ) {
 		$formatter = $this->get_formatter( $assoc_args );
 
 		$fields = $this->get_fields( $assoc_args );

@@ -147,7 +147,7 @@ class AffWP_Creatives_Table extends List_Table {
 	 *
 	 * @return string Column Name
 	 */
-	function column_default( $creative, $column_name ) {
+	public function column_default( $creative, $column_name ) {
 		switch( $column_name ){
 			default:
 				$value = isset( $creative->$column_name ) ? $creative->$column_name : '';
@@ -164,7 +164,7 @@ class AffWP_Creatives_Table extends List_Table {
 	 * @since 1.2
 	 * @return string URL
 	 */
-	function column_url( $creative ) {
+	public function column_url( $creative ) {
 		return $creative->url;
 	}
 
@@ -175,7 +175,7 @@ class AffWP_Creatives_Table extends List_Table {
 	 * @since 1.2
 	 * @return string Shortcode for creative
 	 */
-	function column_shortcode( $creative ) {
+	public function column_shortcode( $creative ) {
 		return '[affiliate_creative id="' . $creative->creative_id . '"]';
 	}
 
@@ -187,7 +187,7 @@ class AffWP_Creatives_Table extends List_Table {
 	 * @param array $creative Contains all the data for the creative column
 	 * @return string action links
 	 */
-	function column_actions( $creative ) {
+	public function column_actions( $creative ) {
 
 		$base_query_args = array(
 			'page'        => 'affiliate-wp-creatives',
@@ -260,7 +260,7 @@ class AffWP_Creatives_Table extends List_Table {
 	 * @since 1.2
 	 * @access public
 	 */
-	function no_items() {
+	public function no_items() {
 		_e( 'No creatives found.', 'affiliate-wp' );
 	}
 

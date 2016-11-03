@@ -52,8 +52,17 @@ class Affiliate_WP_Admin_Notices {
 
 				// Affiliates.
 				case 'affiliate_added' :
+					$migrate          = new Affiliate_WP_Migrate_Users;
+					$total_affiliates = (int) $migrate::get_items_total( 'affwp_migrate_users_total_count' );
 
-					$message = __( 'Affiliate added successfully', 'affiliate-wp' );
+					$message = sprintf( _n(
+						'%d affiliate was added successfully.',
+						'%d affiliates were added successfully',
+						number_format_i18n( $total_affiliates ),
+						'affiliate-wp'
+					) );
+
+					$migrate::clear_items_total( 'affwp_migrate_users_total_count' );
 
 					break;
 

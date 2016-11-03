@@ -467,7 +467,7 @@ class Sub_Commands extends Base {
 		/** This filter is documented in includes/admin/payouts/payouts.php */
 		$amount = apply_filters( 'affwp_payout_table_amount', $amount, $item );
 
-		$item->amount = html_entity_decode( $amount );
+		$item->amount = floatval( html_entity_decode( $amount ) );
 	}
 
 	/**

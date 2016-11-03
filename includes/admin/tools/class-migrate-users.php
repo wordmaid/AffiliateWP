@@ -191,8 +191,13 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 			return false;
 		}
 
-		return true;
+		if ( ! $current_count = $this->get_stored_data( 'affwp_migrate_users_total_count' ) ) {
+			$current_count = 0;
+		}
 
+		$this->store_data( 'affwp_migrate_users_total_count', $current_count + count( $inserted ) );
+
+		return true;
 	}
 
 	/**

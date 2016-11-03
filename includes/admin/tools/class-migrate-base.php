@@ -46,4 +46,63 @@ class Affiliate_WP_Migrate_Base {
 		exit;
 	}
 
+	/**
+	 * Retrieves stored data by key.
+	 *
+	 * Given a key, get the information from the database directly.
+	 *
+	 * @access private
+	 * @since  1.9.5
+	 *
+	 * @param string $key The stored option key.
+	 * @return mixed|false The stored data, otherwise false.
+	 */
+	private function get_stored_data( $key ) {
+		global $wpdb;
+		$value = $wpdb->get_var( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = '%s'", $key ) );
+
+		return empty( $value ) ? false : maybe_unserialize( $value );
+	}
+
+	/**
+	 * Store some data based on key and value.
+	 *
+	 * @access private
+	 * @since  1.9.5
+	 *
+	 * @param string $key   The option_name.
+	 * @param mixed  $value The value to store.
+	 */
+	private function store_data( $key, $value ) {
+		global $wpdb;
+
+		$value = maybe_serialize( $value );
+
+		$data = array(
+			'option_name'  => $key,
+			'option_value' => $value,
+			'autoload'     => 'no',
+		);
+
+		$formats = array(
+			'%s', '%s', '%s',
+		);
+
+		$wpdb->replace( $wpdb->options, $data, $formats );
+	}
+
+	/**
+	 * Deletes a piece of stored data by key.
+	 *
+	 * @access private
+	 * @since  1.9.5
+	 *
+	 * @param string $key The option_name to delete.
+	 */
+	private function delete_data( $key ) {
+		global $wpdb;
+
+		$wpdb->delete( $wpdb->options, array( 'option_name' => $key ) );
+	}
+
 }

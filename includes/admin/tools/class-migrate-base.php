@@ -85,10 +85,12 @@ class Affiliate_WP_Migrate_Base {
 	 * @access protected
 	 * @since  1.9.5
 	 *
-	 * @param string $key   The option_name.
-	 * @param mixed  $value The value to store.
+	 * @param string $key     The option_name.
+	 * @param mixed  $value   The value to store.
+	 * @param array  $formats Optional. Array of formats to pass for key, value, and autoload.
+	 *                        Default empty (all strings).
 	 */
-	protected function store_data( $key, $value ) {
+	protected function store_data( $key, $value, $formats = array() ) {
 		global $wpdb;
 
 		$value = maybe_serialize( $value );
@@ -99,9 +101,11 @@ class Affiliate_WP_Migrate_Base {
 			'autoload'     => 'no',
 		);
 
-		$formats = array(
-			'%s', '%s', '%s',
-		);
+		if ( empty( $formats ) ) {
+			$formats = array(
+				'%s', '%s', '%s',
+			);
+		}
 
 		$wpdb->replace( $wpdb->options, $data, $formats );
 	}

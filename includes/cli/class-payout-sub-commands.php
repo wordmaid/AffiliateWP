@@ -284,13 +284,13 @@ class Sub_Commands extends Base {
 					if ( empty( $referral->payout_id ) ) {
 						$confirmed[] = $referral_id;
 					} else {
-						\WP_CLI::warning( sprintf( __( "Referral #%d is already associated with payout #%d and has been skipped.", 'affiliate-wp' ),
+						\WP_CLI::warning( sprintf( __( 'Referral #%d is already associated with payout #%d and has been skipped.', 'affiliate-wp' ),
 							$referral_id,
 							$referral->payout_id
 						) );
 					}
 				} else {
-					\WP_CLI::warning( sprintf( __( "Referral #%d is not valid and has been skipped.", 'affiliate-wp' ), $referral_id ) );
+					\WP_CLI::warning( sprintf( __( 'Referral #%d is not valid and has been skipped.', 'affiliate-wp' ), $referral_id ) );
 				}
 			}
 
@@ -324,9 +324,9 @@ class Sub_Commands extends Base {
 		}
 
 		if ( $updated ) {
-			\WP_CLI::success( sprintf( __( "Payout #%d has been updated successfully.", 'affiliate-wp' ), $payout->ID ) );
+			\WP_CLI::success( sprintf( __( 'Payout #%d has been updated successfully.', 'affiliate-wp' ), $payout->ID ) );
 		} else {
-			\WP_CLI::error( sprintf( __( "Payout #%d could not be updated due to an error.", 'affiliate-wp' ), $payout->ID ) );
+			\WP_CLI::error( sprintf( __( 'Payout #%d could not be updated due to an error.', 'affiliate-wp' ), $payout->ID ) );
 		}
 	}
 

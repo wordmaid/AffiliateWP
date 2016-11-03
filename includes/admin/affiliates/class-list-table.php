@@ -209,7 +209,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 *
 	 * @return string Column Name
 	 */
-	function column_default( $affiliate, $column_name ) {
+	public function column_default( $affiliate, $column_name ) {
 		switch( $column_name ){
 
 			default:
@@ -228,7 +228,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @param array $affiliate Contains all the data of the affiliate
 	 * @return string Data shown in the Name column
 	 */
-	function column_name( $affiliate ) {
+	public function column_name( $affiliate ) {
 		$base         = admin_url( 'admin.php?page=affiliate-wp&affiliate_id=' . $affiliate->affiliate_id );
 		$row_actions  = array();
 		$name         = affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id );
@@ -364,7 +364,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @param array $affiliate Contains all the data of the affiliate
 	 * @return string Data shown in the Username column
 	 */
-	function column_username( $affiliate ) {
+	public function column_username( $affiliate ) {
 
 		$row_actions = array();
 		$user_info = get_userdata( $affiliate->user_id );
@@ -389,7 +389,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @param array $affiliate Contains all the data for the checkbox column
 	 * @return string Displays a checkbox
 	 */
-	function column_cb( $affiliate ) {
+	public function column_cb( $affiliate ) {
 		return '<input type="checkbox" name="affiliate_id[]" value="' . absint( $affiliate->affiliate_id ) . '" />';
 	}
 
@@ -401,7 +401,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @param array $affiliate Contains all the data for the earnings column
 	 * @return string earnings link
 	 */
-	function column_earnings( $affiliate ) {
+	public function column_earnings( $affiliate ) {
 		$value = affwp_get_affiliate_earnings( $affiliate->affiliate_id, true );
 		return apply_filters( 'affwp_affiliate_table_earnings', $value, $affiliate );
 	}
@@ -414,7 +414,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @param array $affiliate Contains all the data for the earnings column
 	 * @return string earnings link
 	 */
-	function column_rate( $affiliate ) {
+	public function column_rate( $affiliate ) {
 		$value = affwp_get_affiliate_rate( $affiliate->affiliate_id, true );
 		return apply_filters( 'affwp_affiliate_table_rate', $value, $affiliate );
 	}
@@ -428,7 +428,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @param array $affiliate Contains all the data for the unpaid referrals column
 	 * @return string unpaid referrals link
 	 */
-	function column_unpaid( $affiliate ) {
+	public function column_unpaid( $affiliate ) {
 		$unpaid_count = affiliate_wp()->referrals->unpaid_count( '', $affiliate->affiliate_id );
 
 		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $affiliate->affiliate_id . '&status=unpaid' ) . '">' . $unpaid_count . '</a>';
@@ -444,7 +444,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @param array $affiliate Contains all the data for the referrals column
 	 * @return string referrals link
 	 */
-	function column_referrals( $affiliate ) {
+	public function column_referrals( $affiliate ) {
 		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $affiliate->affiliate_id . '&status=paid' ) . '">' . $affiliate->referrals . '</a>';
 		return apply_filters( 'affwp_affiliate_table_referrals', $value, $affiliate );
 	}
@@ -457,7 +457,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @param array $affiliate Contains all the data for the visits column
 	 * @return string visits link
 	 */
-	function column_visits( $affiliate ) {
+	public function column_visits( $affiliate ) {
 		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-visits&affiliate=' . $affiliate->affiliate_id ) . '">' . affwp_get_affiliate_visit_count( $affiliate->affiliate_id ) . '</a>';
 		return apply_filters( 'affwp_affiliate_table_visits', $value, $affiliate );
 	}
@@ -465,10 +465,10 @@ class AffWP_Affiliates_Table extends List_Table {
 	/**
 	 * Message to be displayed when there are no items
 	 *
-	 * @since 1.7.2
 	 * @access public
+	 * @since  1.7.2
 	 */
-	function no_items() {
+	public function no_items() {
 		_e( 'No affiliates found.', 'affiliate-wp' );
 	}
 

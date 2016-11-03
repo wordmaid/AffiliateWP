@@ -111,7 +111,7 @@ class Affiliate_WP_Migrate_Base {
 	 * @access protected
 	 * @since  1.9.5
 	 *
-	 * @param string $key The option_name to delete.
+	 * @param string $key The stored option name to delete.
 	 */
 	protected function delete_data( $key ) {
 		global $wpdb;
@@ -119,4 +119,16 @@ class Affiliate_WP_Migrate_Base {
 		$wpdb->delete( $wpdb->options, array( 'option_name' => $key ) );
 	}
 
+	/**
+	 * Deletes the total count of migrated items.
+	 *
+	 * @access public
+	 * @since  1.9.5
+	 * @static
+	 *
+	 * @param string $key The stored option name to delete.
+	 */
+	public static function clear_items_total( $key ) {
+		self::delete_data( $key );
+	}
 }

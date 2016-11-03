@@ -65,6 +65,20 @@ class Affiliate_WP_Migrate_Base {
 	}
 
 	/**
+	 * Retrieves the total count of migrated items.
+	 *
+	 * @access public
+	 * @since  1.9.5
+	 * @static
+	 *
+	 * @param string $key The stored option key.
+	 * @return mixed|false The stored data, otherwise false.
+	 */
+	public static function get_items_total( $key ) {
+		self::get_stored_data( $key );
+	}
+
+	/**
 	 * Store some data based on key and value.
 	 *
 	 * @access protected

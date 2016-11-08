@@ -18,8 +18,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 		if ( function_exists( 'LLMS' ) ) {
 
-			// 3.x
-			if ( version_compare( LLMS()->version, '3.0.0', '>=' ) ) {
+			if ( version_compare( LLMS()->version, '3.0.0', '>=' ) ) { // 3.x
 
 				// create a pending referral when a new order is pending
 				add_action( 'lifterlms_new_pending_order', array( $this, 'create_pending_referral_300' ), 10, 1 );
@@ -41,9 +40,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 				// Add affiliate coupon fields
 				add_filter( 'llms_metabox_fields_lifterlms_coupon', array( $this, 'coupon_meta_output' ), 10, 1 ); // 3.x
 
-			}
-			// 2.x
-			else {
+			} else { // 2.x
 
 				// Create a pending referral, and then mark it complete immediately after,
 				// because there's no 'pending' order status in LifterLMS.

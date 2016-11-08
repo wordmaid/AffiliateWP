@@ -151,6 +151,27 @@ class Affiliate_WP_Admin_Notices {
 
 					break;
 
+				case 'affiliates_pro_migrated' :
+
+					if ( ! class_exists( 'Affiliate_WP_Migrate_Affiliates_Pro' ) ) {
+						require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-migrate-base.php';
+						require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-migrate-affiliates-pro.php';
+					}
+
+					$migrate          = new Affiliate_WP_Migrate_Affiliates_Pro;
+					$total_affiliates = (int) $migrate::get_items_total( 'affwp_migrate_affiliates_pro_total_count' );
+
+					$message = sprintf( _n(
+						'%d affiliate from Affiliates Pro was added successfully.',
+						'%d affiliates from Affiliates Pro were added successfully',
+						$total_affiliates,
+						'affiliate-wp'
+					), number_format_i18n( $total_affiliates ) );
+
+					$migrate::clear_items_total( 'affwp_migrate_affiliates_pro_total_count' );
+
+					break;
+
 				case 'stats_recounted' :
 
 					$message = __( 'Affiliate stats have been recounted!', 'affiliate-wp' );

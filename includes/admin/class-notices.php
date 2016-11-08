@@ -141,8 +141,8 @@ class Affiliate_WP_Admin_Notices {
 					$total_affiliates = (int) $migrate::get_items_total( 'affwp_migrate_affiliates_total_count' );
 
 					$message = sprintf( _n(
-						'%d affiliate was added successfully.',
-						'%d affiliates were added successfully',
+						'%d affiliate from WP Affiliate was added successfully.',
+						'%d affiliates from WP Affiliate were added successfully',
 						$total_affiliates,
 						'affiliate-wp'
 					), number_format_i18n( $total_affiliates ) );

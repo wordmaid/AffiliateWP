@@ -488,6 +488,7 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 		affwp_admin_scripts();
 
 		$user_name    = '';
+		$user_id      = 0;
 		$affiliate_id = get_post_meta( $discount_id, 'affwp_discount_affiliate', true );
 		if( $affiliate_id ) {
 			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );

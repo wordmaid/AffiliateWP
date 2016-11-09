@@ -8,7 +8,6 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	 * Setup actions and filters
 	 *
 	 * @since    1.8.3
-	 * @version  ??
 	 *
 	 * @access  public
 	*/
@@ -589,7 +588,6 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	 * but this is still returning an array of arrays, in case it's needed in the future.
 	 *
 	 * @since    1.8.3
-	 * @version  ??
 	 *
 	 * @param  integer|obj   $order_id   WordPress Post ID of the LifterLMS Order or instance of an LLMS_Order
 	 * @return array
@@ -642,7 +640,6 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	 * Output some AffiliateWP data on the LifterLMS Order post edit screen
 	 *
 	 * @since    1.8.3
-	 * @version  ??
 	 *
 	 * @return void
 	 * @access public
@@ -724,7 +721,6 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	 * Allow users to define custom referral rates for the product
 	 *
 	 * @since    1.8.3
-	 * @version  1.9.4?
 	 *
 	 * @param  array  $fields  associate array of llms settings
 	 * @return array

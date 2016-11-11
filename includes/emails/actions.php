@@ -124,8 +124,16 @@ function affwp_notify_on_approval( $affiliate_id = 0, $status = '', $old_status 
 	$args         = array( 'affiliate_id' => $affiliate_id );
 	$subject      = apply_filters( 'affwp_application_accepted_subject', $subject, $args );
 	$message      = apply_filters( 'affwp_application_accepted_email', $message, $args );
+	$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
 
-	if ( apply_filters( 'affwp_notify_on_approval', true ) ) {
+	/**
+	 * Filters whether to notify an affiliate upon approval of their application.
+	 *
+	 * @since 1.6
+	 *
+	 * @param bool $notify Whether to notify the affiliate on upon approval. Default true.
+	 */
+	if ( apply_filters( 'affwp_notify_on_approval', true ) && ! get_user_meta( $user_id, 'affwp_disable_affiliate_email', true ) ) {
 		$emails->send( $email, $subject, $message );
 	}
 

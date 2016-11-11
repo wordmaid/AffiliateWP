@@ -23,7 +23,7 @@ if ( ! is_user_logged_in() && ! empty( $errors ) ) {
 		$payment_email = sanitize_text_field( $_POST['affwp_payment_email'] );
 	}
 
-	$url    = sanitize_text_field( $_POST['affwp_user_url'] );
+	$url    = esc_url( $_POST['affwp_user_url'] );
 	$method = sanitize_text_field( $_POST['affwp_promotion_method'] );
 
 }
@@ -42,7 +42,7 @@ if ( is_user_logged_in() ) {
 
 ?>
 
-<form id="affwp-register-form" class="affwp-form" action="" method="post">
+<form id="affwp-register-form" class="affwp-form" action="" method="post" novalidate="novalidate">
 	<?php do_action( 'affwp_affiliate_register_form_top' ); ?>
 
 	<fieldset>
@@ -72,7 +72,7 @@ if ( is_user_logged_in() ) {
 
 		<p>
 			<label for="affwp-user-url"><?php _e( 'Website URL', 'affiliate-wp' ); ?></label>
-			<input id="affwp-user-url" class="required" type="text" name="affwp_user_url" value="<?php if( ! empty( $url ) ) { echo $url; } ?>" title="<?php esc_attr_e( 'Website URL', 'affiliate-wp' ); ?>" />
+			<input id="affwp-user-url" class="required" type="url" name="affwp_user_url" value="<?php if( ! empty( $url ) ) { echo $url; } ?>" title="<?php esc_attr_e( 'Website URL', 'affiliate-wp' ); ?>" />
 		</p>
 
 		<p>

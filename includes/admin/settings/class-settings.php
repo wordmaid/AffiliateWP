@@ -247,9 +247,7 @@ class Affiliate_WP_Settings {
 
 			// Don't overwrite the global license key.
 			if ( 'license_key' === $key ) {
-				if ( self::global_license_set() && $value !== self::get_license_key() ) {
-					$value = self::get_license_key();
-				}
+				$value = self::get_license_key( $value );
 			}
 
 			// Get the setting type (checkbox, select, etc)
@@ -393,6 +391,8 @@ class Affiliate_WP_Settings {
 		 * @param Affiliate_WP_Settings $this Settings instance.
 		 */
 		do_action( 'affwp_pre_get_registered_settings', $this );
+
+		$emails_tags_list = affwp_get_emails_tags_list();
 
 		$settings = array(
 			/** General Settings */
@@ -583,7 +583,7 @@ class Affiliate_WP_Settings {
 					),
 					'registration_email' => array(
 						'name' => __( 'Registration Email Content', 'affiliate-wp' ),
-						'desc' => __( 'Enter the email to send when a new affiliate registers. HTML is accepted. Available template tags:', 'affiliate-wp' ) . '<br />' . affwp_get_emails_tags_list(),
+						'desc' => __( 'Enter the email to send when a new affiliate registers. HTML is accepted. Available template tags:', 'affiliate-wp' ) . '<br />' . $emails_tags_list,
 						'type' => 'rich_editor',
 						'std' => sprintf( __( 'A new affiliate has registered on your site, %s', 'affiliate-wp' ), home_url() ) . "\n\n" . __( 'Name: ', 'affiliate-wp' ) . "{name}\n\n{website}\n\n{promo_method}"
 					),
@@ -595,7 +595,7 @@ class Affiliate_WP_Settings {
 					),
 					'accepted_email' => array(
 						'name' => __( 'Application Accepted Email Content', 'affiliate-wp' ),
-						'desc' => __( 'Enter the email to send when an application is accepted. HTML is accepted. Available template tags:', 'affiliate-wp' ) . '<br />' . affwp_get_emails_tags_list(),
+						'desc' => __( 'Enter the email to send when an application is accepted. HTML is accepted. Available template tags:', 'affiliate-wp' ) . '<br />' . $emails_tags_list,
 						'type' => 'rich_editor',
 						'std' => __( 'Congratulations {name}!', 'affiliate-wp' ) . "\n\n" . sprintf( __( 'Your affiliate application on %s has been accepted!', 'affiliate-wp' ), home_url() ) . "\n\n" . __( 'Log into your affiliate area at', 'affiliate-wp' ) . ' {login_url}'
 					),
@@ -607,7 +607,7 @@ class Affiliate_WP_Settings {
 					),
 					'referral_email' => array(
 						'name' => __( 'New Referral Email Content', 'affiliate-wp' ),
-						'desc' => __( 'Enter the email to send on new referrals. HTML is accepted. Available template tags:', 'affiliate-wp' ) . '<br />' . affwp_get_emails_tags_list(),
+						'desc' => __( 'Enter the email to send on new referrals. HTML is accepted. Available template tags:', 'affiliate-wp' ) . '<br />' . $emails_tags_list,
 						'type' => 'rich_editor',
 						'std' => __( 'Congratulations {name}!', 'affiliate-wp' ) . "\n\n" . __( 'You have been awarded a new referral of', 'affiliate-wp' ) . ' {amount} ' . sprintf( __( 'on %s!', 'affiliate-wp' ), home_url() ) . "\n\n" . __( 'Log into your affiliate area to view your earnings or disable these notifications:', 'affiliate-wp' ) . ' {login_url}'
 					)
@@ -701,6 +701,8 @@ class Affiliate_WP_Settings {
 			return $email_settings;
 		}
 
+		$emails_tags_list = affwp_get_emails_tags_list();
+
 		$new_email_settings = array(
 			'pending_subject' => array(
 				'name' => __( 'Application Pending Email Subject', 'affiliate-wp' ),
@@ -710,7 +712,7 @@ class Affiliate_WP_Settings {
 			),
 			'pending_email' => array(
 				'name' => __( 'Application Pending Email Content', 'affiliate-wp' ),
-				'desc' => __( 'Enter the email to send when an application is pending. HTML is accepted. Available template tags:', 'affiliate-wp' ) . '<br />' . affwp_get_emails_tags_list(),
+				'desc' => __( 'Enter the email to send when an application is pending. HTML is accepted. Available template tags:', 'affiliate-wp' ) . '<br />' . $emails_tags_list,
 				'type' => 'rich_editor',
 				'std' => __( 'Hi {name}!', 'affiliate-wp' ) . "\n\n" . __( 'Thanks for your recent affiliate registration on {site_name}.', 'affiliate-wp' ) . "\n\n" . __( 'We&#8217;re currently reviewing your affiliate application and will be in touch soon!', 'affiliate-wp' ) . "\n\n"
 			),
@@ -722,7 +724,7 @@ class Affiliate_WP_Settings {
 			),
 			'rejection_email' => array(
 				'name' => __( 'Application Rejection Email Content', 'affiliate-wp' ),
-				'desc' => __( 'Enter the email to send when an application is rejected. HTML is accepted. Available template tags:', 'affiliate-wp' ) . '<br />' . affwp_get_emails_tags_list(),
+				'desc' => __( 'Enter the email to send when an application is rejected. HTML is accepted. Available template tags:', 'affiliate-wp' ) . '<br />' . $emails_tags_list,
 				'type' => 'rich_editor',
 				'std' => __( 'Hi {name},', 'affiliate-wp' ) . "\n\n" . __( 'We regret to inform you that your recent affiliate registration on {site_name} was rejected.', 'affiliate-wp' ) . "\n\n"
 			)
@@ -878,19 +880,13 @@ class Affiliate_WP_Settings {
 	 * @return void
 	 */
 	function license_callback( $args ) {
-
-		if ( isset( $this->options[ $args['id'] ] ) ) {
-			$value = $this->options[ $args['id'] ];
-		} else {
-			$value = isset( $args['std'] ) ? $args['std'] : '';
-		}
-
 		// Must use a 'readonly' attribute over disabled to ensure the value is passed in $_POST.
 		$readonly = $this->is_setting_disabled( $args ) ? __checked_selected_helper( $args['disabled'], true, false, 'readonly' ) : '';
 
-		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
-		$html = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" ' . $readonly . '/>';
-		$license_key = ! empty( $value ) ? $value : false;
+		$license_key = self::get_license_key();
+
+		$size   = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
+		$html   = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $license_key ) ) . '" ' . $readonly . '/>';
 		$status = $this->get( 'license_status' );
 		$status = is_object( $status ) ? $status->license : $status;
 
@@ -1165,7 +1161,7 @@ class Affiliate_WP_Settings {
 		// data to send in our API request
 		$api_params = array(
 			'edd_action'=> 'activate_license',
-			'license' 	=> self::get_license_key( $_POST['affwp_settings']['license_key'] ),
+			'license' 	=> sanitize_text_field( $_POST['affwp_settings']['license_key'] ),
 			'item_name' => 'AffiliateWP',
 			'url'       => home_url()
 		);

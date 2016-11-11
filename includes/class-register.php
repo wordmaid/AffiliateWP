@@ -69,9 +69,10 @@ class Affiliate_WP_Register {
 					$this->add_error( $value['error_id'], $value['error_message'] );
 				}
 
-				if( 'affwp_user_url' === $field_name && false === filter_var( $field, FILTER_VALIDATE_URL ) ) {
-					$this->add_error( 'invalud_url', __( 'Please enter a valid website URL', 'affiliate-wp' ) );
+				if ( 'affwp_user_url' === $field_name && false === filter_var( esc_url( $field ), FILTER_VALIDATE_URL ) ) {
+					$this->add_error( 'invalid_url', __( 'Please enter a valid website URL', 'affiliate-wp' ) );
 				}
+
 			}
 
 			if ( username_exists( $data['affwp_user_login'] ) ) {
@@ -271,7 +272,7 @@ class Affiliate_WP_Register {
 		}
 
 		// website URL
-		$website_url = isset( $_POST['affwp_user_url'] ) ? sanitize_text_field( $_POST['affwp_user_url'] ) : '';
+		$website_url = isset( $_POST['affwp_user_url'] ) ? esc_url( $_POST['affwp_user_url'] ) : '';
 
 		if ( $website_url ) {
 			wp_update_user( array( 'ID' => $user_id, 'user_url' => $website_url ) );

@@ -97,8 +97,6 @@ abstract class Tab {
 		add_action( "affwp_reports_{$this->tab_id}_nav",        array( $this->graph, 'graph_controls' ), 0 );
 		add_action( "affwp_reports_tab_{$this->tab_id}",        array( $this, 'display'               )    );
 		add_action( "affwp_reports_tab_{$this->tab_id}_trends", array( $this, 'display_trends'        )    );
-
-		$this->set_up_tiles();
 	}
 
 	/**
@@ -110,6 +108,8 @@ abstract class Tab {
 	 * @since  1.9
 	 */
 	public function display() {
+
+		$this->set_up_tiles();
 
 		if ( has_action( "affwp_reports_{$this->tab_id}_nav" ) ) : ?>
 			<h3><?php _e( 'Date Filters', 'affiliate-wp' ); ?></h3>
@@ -256,11 +256,6 @@ abstract class Tab {
 	private function set_up_tiles() {
 		if ( ! class_exists( 'AffWP\Admin\Meta_Box' ) ) {
 			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-meta-box-base.php';
-		}
-
-		// Only run tile queries for the current tab.
-		if ( ! isset( $_REQUEST['tab'] ) || ( isset( $_REQUEST['tab'] ) && $this->tab_id !== $_REQUEST['tab'] ) ) {
-			return;
 		}
 
 		$this->register_tiles();

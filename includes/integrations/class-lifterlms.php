@@ -1,32 +1,50 @@
 <?php
-
+/**
+ * LifterLMS integration.
+ *
+ * @since 1.8.3
+ *
+ * @see Affiliate_WP_Base
+ */
 class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
+	/**
+	 * Current order.
+	 *
+	 * @access private
+	 * @since  1.8.3
+	 * @var stdClass
+	 */
 	private $order;
 
 	/**
-	 * Setup actions and filters
+	 * The context for referrals.
 	 *
-	 * @since    1.8.3
+	 * @access public
+	 * @since  1.8.3
+	 */
+	public $context = 'lifterlms';
+
+	/**
+	 * Sets up actions and filters.
 	 *
-	 * @access  public
+	 * @access public
+	 * @since  1.8.3
 	*/
 	public function init() {
-
-		$this->context = 'lifterlms';
 
 		if ( function_exists( 'LLMS' ) ) {
 
 			if ( version_compare( LLMS()->version, '3.0.0', '>=' ) ) { // 3.x
 
-				// create a pending referral when a new order is pending
+				// Create a pending referral when a new order is pending.
 				add_action( 'lifterlms_new_pending_order', array( $this, 'create_pending_referral_300' ), 10, 1 );
 
-				// complete the pending referral on successes
+				// Complete the pending referral on successes.
 				add_action( 'lifterlms_order_status_completed', array( $this, 'complete_pending_referral' ), 10, 1 );
 				add_action( 'lifterlms_order_status_active', array( $this, 'complete_pending_referral' ), 10, 1 );
 
-				// revoke the referral on these statuses
+				// Revoke the referral on these statuses.
 				add_action( 'lifterlms_order_status_refunded', array( $this, 'revoke_referral' ), 10, 1 );
 				add_action( 'lifterlms_order_status_cancelled', array( $this, 'revoke_referral' ), 10, 1 );
 				add_action( 'lifterlms_order_status_expired', array( $this, 'revoke_referral' ), 10, 1 );
@@ -36,20 +54,22 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 				add_filter( 'llms_metabox_fields_lifterlms_course_options', array( $this, 'product_meta_output' ), 77, 1 );
 				add_filter( 'llms_metabox_fields_lifterlms_membership', array( $this, 'product_meta_output' ), 77, 1 );
 
-				// Add affiliate coupon fields
+				// Add affiliate coupon fields.
 				add_filter( 'llms_metabox_fields_lifterlms_coupon', array( $this, 'coupon_meta_output' ), 10, 1 ); // 3.x
 
 			} else { // 2.x
 
-				// Create a pending referral, and then mark it complete immediately after,
-				// because there's no 'pending' order status in LifterLMS.
+				/*
+				 * Create a pending referral, and then mark it complete immediately after,
+				 * because there's no 'pending' order status in LifterLMS.
+				 */
 				add_action( 'lifterlms_order_complete', array( $this, 'create_pending_referral' ), 10, 1 );
 
 				// Add affiliate product fields to LifterLMS courses and memberships.
 				add_filter( 'llms_meta_fields_course_main', array( $this, 'product_meta_output' ), 77, 1 );
 				add_filter( 'llms_meta_fields_llms_membership_settings', array( $this, 'product_meta_output' ), 77, 1 );
 
-				// Add affiliate coupon fields
+				// Add affiliate coupon fields.
 				add_filter( 'llms_meta_fields_coupon', array( $this, 'coupon_meta_output' ), 10, 1 ); // 2.x
 
 			}
@@ -68,18 +88,15 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			add_action( 'lifterlms_after_order_meta_box', array( $this, 'order_meta_output' ) );
 
 		}
-
 	}
 
 	/**
-	 * Mark a pendinr referral as complete upon LifterLMS order success
+	 * Marks a pending referral as complete upon LifterLMS order success.
 	 *
-	 * @since    ??
+	 * @access public
+	 * @since  1.8.3
 	 *
-	 * @param    obj     $order  instance of an LLMS_Order
-	 * @return   void
-	 *
-	 * @access   public
+	 * @param stdClass $order LLMS_Order instance.
 	 */
 	public function complete_pending_referral( $order ) {
 
@@ -95,7 +112,8 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			return;
 		}
 
-		$note = sprintf( __( 'Referral #%d completed', 'affiliate-wp' ), $referral->referral_id );;
+		$note = sprintf( __( 'Referral #%d completed', 'affiliate-wp' ), $referral->referral_id );
+
 		$order->add_note( $note );
 		if ( $this->debug ) {
 			$this->log( $note );
@@ -104,32 +122,30 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Create a pending referral (and mark it complete)
+	 * Creates a pending referral (and marks it complete).
 	 *
 	 * LifterLMS doesn't have a 'pending' order status.
 	 *
+	 * @access public
 	 * @since  1.8.3
 	 *
-	 * @param  int    $order_id WP Post ID of the LifterLMS Order
-	 * @return void
-	 *
-	 * @access public
+	 * @param int $order_id WP Post ID of the LifterLMS Order.
 	 */
 	public function create_pending_referral( $order_id ) {
 
 		$order = $this->get_order( $order_id );
 
 		if ( ! $order ) {
-
 			return;
-
 		}
 
-		// if this was a referral or we have a coupon and a coupon affiliate id
+		// if this was a referral or we have a coupon and a coupon affiliate id.
 		if ( $this->was_referred() || ( $order->coupon_id && $order->coupon_affiliate_id ) ) {
 
-			// if WooCommerce is being use as the LLMS payment method for the order skip referrals for the order
-			// because WooCommerce methods will handle the affiliate stuff
+			/*
+			 * If WooCommerce is being use as the LLMS payment method for the order skip referrals
+			 * for the order because WooCommerce methods will handle the affiliate stuff.
+			 */
 			if ( 'woocommerce' === $order->payment_type ) {
 
 				if ( $this->debug ) {
@@ -139,48 +155,42 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 				return;
 			}
 
-			// if referrals are disabled for the LLMS product, don't create a referral
+			// If referrals are disabled for the LLMS product, don't create a referral.
 			if ( get_post_meta( $order->product_id, '_affwp_disable_referrals', true ) ) {
-
 				return;
 			}
 
-			// check for an existing referral
+			// Check for an existing referral.
 			$existing = affiliate_wp()->referrals->get_by( 'reference', $order_id, $this->context );
 
-			// if an existing referral exists and it is paid or unpaid exit.
+			// If an existing referral exists and it is paid or unpaid exit.
 			if ( $existing && ( 'paid' === $existing->status || 'unpaid' === $existing->status ) ) {
-
 				return;
 			}
 
-			// get the referring affiliate's affiliate id
+			// Get the referring affiliate's affiliate id.
 			$affiliate_id = $this->get_affiliate_id( $order_id );
 
-			// use our coupon affiliate if we have one
+			// Use the coupon affiliate if there is one.
 			if ( false !== $order->coupon_affiliate_id ) {
-
 				$affiliate_id = $order->coupon_affiliate_id;
 			}
 
-			// customers cannot refer themselves
+			// Customers cannot refer themselves.
 			if ( $this->is_affiliate_email( $order->user_data->user_email, $affiliate_id ) ) {
 
 				if( $this->debug ) {
-
 					$this->log( __( 'Referral not created because affiliate\'s own account was used.', 'affiliate-wp' ) );
 				}
-
 				return;
 			}
 
 			$amount = $this->calculate_referral_amount( $order->total, $order->id, $order->product_id, $affiliate_id );
 
-			// Ignore a zero amount referral
+			// Ignore a zero amount referral.
 			if ( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 
 				if ( $this->debug ) {
-
 					$this->log( __( 'Referral not created due to 0.00 amount.', 'affiliate-wp' ) );
 				}
 
@@ -189,13 +199,16 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 
 			$description = apply_filters( 'affwp_llms_get_referral_description', $order->product_title, $order, $affiliate_id );
-			$visit_id = affiliate_wp()->tracking->get_visit_id();
+			$visit_id    = affiliate_wp()->tracking->get_visit_id();
 
-			// Update existing referral if it exists
-			// this isn't currently ever going to happen with LifterLMS but leaving it here for future use
+			/*
+			 * Update existing referral if it exists.
+			 *
+			 * This isn't currently ever going to happen with LifterLMS but leaving it here for future use.
+			 */
 			if ( $existing ) {
 
-				// update the previously created referral
+				// Update the previously created referral.
 				affiliate_wp()->referrals->update_referral( $existing->referral_id, array(
 					'amount'       => $amount,
 					'reference'    => $order->id,
@@ -207,21 +220,20 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 					'context'      => $this->context
 				) );
 
-				// Complete the referral automatically because we don't have a pending status
-				// will update in the future when / if the status becomes available
+				/*
+				 * Complete the referral automatically because we don't have a pending status
+				 * will update in the future when / if the status becomes available
+				 */
 				$this->complete_referral( $order->id );
 
 				if( $this->debug ) {
-
 					$this->log( sprintf( __( 'LifterLMS Referral #%d updated successfully.', 'affiliate-wp' ), $existing->referral_id ) );
 
 				}
 
-			}
-			// No referral exists, so create a new one.
-			else {
+			} else { // No referral exists, so create a new one.
 
-				// create a new referral
+				// Create a new referral.
 				$referral_id = affiliate_wp()->referrals->add( apply_filters( 'affwp_insert_pending_referral', array(
 					'amount'       => $amount,
 					'reference'    => $order->id,
@@ -235,19 +247,19 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 				if ( $referral_id ) {
 
-					// complete referral automatically because we don't have pending status
-					// will update in the future when / if the status becomes available
+					/*
+					 * Complete referral automatically because we don't have pending status
+					 * will update in the future when / if the status becomes available
+					 */
 					$this->complete_referral( $order->id );
 
 					if( $this->debug ) {
-
 						$this->log( sprintf( __( 'Referral #%d created successfully.', 'affiliate-wp' ), $referral_id ) );
 					}
 
 				} else {
 
 					if( $this->debug ) {
-
 						$this->log( __( 'Referral failed to be created.', 'affiliate-wp' ) );
 					}
 				}
@@ -257,52 +269,49 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 
 	/**
-	 * Create a pending referral
-	 * Compatilbe with LifterLMS 3.x & above
+	 * Creates a pending referral.
 	 *
-	 * @since  ??
-	 *
-	 * @param  obj    $order   Instance of LLMS_Order
-	 * @return void
+	 * Compatible with LifterLMS 3.x+.
 	 *
 	 * @access public
+	 * @since  1.8.3
+	 *
+	 * @param stdClass $order LLMS_Order instance.
 	 */
 	public function create_pending_referral_300( $order ) {
 
 		if ( ! $order instanceof LLMS_Order ) {
-
 			return;
-
 		}
 
 		$order_id = $order->get( 'id' );
 		$coupon_affiliate_id = ( $order->has_coupon() ) ? $this->get_order_coupon_affiliate_id( $order->get( 'coupon_id' ) ) : false;
 
-		// if this was a referral or we have a coupon and a coupon affiliate id
+		// If this was a referral or we have a coupon and a coupon affiliate id.
 		if ( $this->was_referred() || $coupon_affiliate_id ) {
 
-			// if referrals are disabled for the LLMS product, don't create a referral
+			// If referrals are disabled for the LLMS product, don't create a referral.
 			if ( get_post_meta( $order->get( 'product_id' ), '_affwp_disable_referrals', true ) ) {
 				return;
 			}
 
-			// check for an existing referral
+			// Check for an existing referral.
 			$existing = affiliate_wp()->referrals->get_by( 'reference', $order_id, $this->context );
 
-			// if an existing referral exists and it is paid or unpaid exit.
+			// If an existing referral exists and it is paid or unpaid exit.
 			if ( $existing && ( 'paid' === $existing->status || 'unpaid' === $existing->status ) ) {
 				return;
 			}
 
-			// get the referring affiliate's affiliate id
+			// Get the referring affiliate's affiliate id.
 			$affiliate_id = $this->get_affiliate_id( $order_id );
 
-			// use our coupon affiliate if we have one
+			// Use our coupon affiliate if we have one.
 			if ( false !== $coupon_affiliate_id ) {
 				$affiliate_id = $coupon_affiliate_id;
 			}
 
-			// customers cannot refer themselves
+			// Customers cannot refer themselves.
 			if ( $this->is_affiliate_email( $order->get( 'billing_email', $affiliate_id ) ) ) {
 
 				if ( $this->debug ) {
@@ -314,11 +323,10 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 			$amount = $this->calculate_referral_amount( $order->get( 'total' ), $order_id, $order->get( 'product_id' ), $affiliate_id );
 
-			// Ignore a zero amount referral
+			// Ignore a zero amount referral.
 			if ( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 
 				if ( $this->debug ) {
-
 					$this->log( __( 'Referral not created due to 0.00 amount.', 'affiliate-wp' ) );
 				}
 
@@ -326,12 +334,12 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			}
 
 			$description = apply_filters( 'affwp_llms_get_referral_description', $order->get( 'product_title' ), $order, $affiliate_id );
-			$visit_id = affiliate_wp()->tracking->get_visit_id();
+			$visit_id    = affiliate_wp()->tracking->get_visit_id();
 
 			// Update existing referral if it exists
 			if ( $existing ) {
 
-				// update the previously created referral
+				// Update the previously created referral.
 				affiliate_wp()->referrals->update_referral( $existing->referral_id, array(
 					'amount'       => $amount,
 					'reference'    => $order_id,
@@ -344,16 +352,16 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 				) );
 
 				$note = sprintf( __( 'Referral #%d updated successfully.', 'affiliate-wp' ), $existing->referral_id );;
+
 				$order->add_note( $note );
+
 				if ( $this->debug ) {
 					$this->log( $note );
 				}
 
-			}
-			// No referral exists, so create a new one.
-			else {
+			} else { // No referral exists, so create a new one.
 
-				// create a new referral
+				// Create a new referral.
 				$referral_id = affiliate_wp()->referrals->add( apply_filters( 'affwp_insert_pending_referral', array(
 					'amount'       => $amount,
 					'reference'    => $order_id,
@@ -368,7 +376,9 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 				if ( $referral_id ) {
 
 					$note = sprintf( __( 'Pending referral #%d created successfully.', 'affiliate-wp' ), $referral_id );;
+
 					$order->add_note( $note );
+
 					if ( $this->debug ) {
 						$this->log( $note );
 					}
@@ -376,7 +386,6 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 				} else {
 
 					if ( $this->debug ) {
-
 						$this->log( __( 'LifterLMS Referral failed to be created.', 'affiliate-wp' ) );
 
 					}
@@ -389,16 +398,15 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 
 	/**
-	 * Add an AffiliateWP Tab to LifterLMS Coupon Admin screen
+	 * Adds an AffiliateWP Tab to LifterLMS Coupon Admin screen.
 	 *
-	 * Allow users to associate a coupon with a specific affiliate
-	 *
-	 * @since  1.8.3
-	 *
-	 * @param  array  $fields  An associate array of LifterLMS settings.
-	 * @return array
+	 * Allow users to associate a coupon with a specific affiliate.
 	 *
 	 * @access public
+	 * @since  1.8.3
+	 *
+	 * @param array $fields An associate array of LifterLMS settings.
+	 * @return array Coupon meta data.
 	 */
 	public function coupon_meta_output( $fields ) {
 
@@ -444,15 +452,13 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 
 	/**
-	 * Save the related coupon fields during coupon post type save actions
-	 *
-	 * @since  1.8.3
-	 *
-	 * @param  int    $post_id WP Post ID of the coupon being saved
-	 * @param  obj    $post    Instance of WP_Post
-	 * @return void
+	 * Saves the related coupon fields during coupon post type save actions.
 	 *
 	 * @access public
+	 * @since  1.8.3
+	 *
+	 * @param int     $post_id Coupon post ID.
+	 * @param WP_Post $post    Post object.
 	 */
 	public function coupon_meta_save( $post_id, $post ) {
 
@@ -463,8 +469,10 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			return;
 		}
 
-		// We need either a username, or a user ID to locate the affiliate.
-		// so don't continue without at least one of them (i guess)
+		/*
+		 * We need either a username, or a user ID to locate the affiliate.
+		 * so don't continue without at least one of them (i guess)
+		 */
 		if ( empty( $_POST['_affwp_affiliate_user_id'] ) && empty( $_POST['_affwp_affiliate_user_name'] ) ) {
 			return;
 		}
@@ -482,8 +490,10 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			$user_id = absint( $_POST['_affwp_affiliate_user_id'] );
 		}
 
-		// Locate an affiliate, looks like this returns null if the
-		// user is not a valid affiliate.
+		/*
+		 * Locate an affiliate, looks like this returns null if the
+		 * user is not a valid affiliate.
+		 */
 		$affiliate_id = affwp_get_affiliate_id( $user_id );
 
 		// $affiliate_id is null if none found so update regardless of the value
@@ -496,17 +506,14 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 
 	/**
-	 * Retrieve order details for an order by id
-	 *
-	 * @since  1.8.3
-	 *
-	 * @param  int     $order_id  WP Post ID of the LifterLMS Order
-	 * @param  boolean $force     If true, will skip the "cached" data
-	 *
-	 * @return mixed              object of order-related data, or false if
-	 *                            no order is found.
+	 * Retrieves order details for an order by ID.
 	 *
 	 * @access private
+	 * @since  1.8.3
+	 *
+	 * @param int  $order_id LifterLMS Order ID.
+	 * @param bool $force    If true, will skip the "cached" data.
+	 * @return mixed Object of order-related data, or false if no order is found.
 	 */
 	private function get_order( $order_id, $force = false ) {
 
@@ -558,12 +565,11 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	/**
 	 * Retrieve the affiliate ID associated with a LifterLMS Coupon
 	 *
+	 * @access private
 	 * @since  1.8.3
 	 *
-	 * @param  int    $coupon_id  WP Post ID of the LifterLMS Coupon
-	 * @return mixed|int|bool     The affiliate id, or false if no affiliate is found
-	 *
-	 * @access private
+	 * @param int $coupon_id LifterLMS Coupon ID.
+	 * @return mixed|int|bool The affiliate id, or false if no affiliate is found.
 	 */
 	private function get_order_coupon_affiliate_id( $coupon_id ) {
 
@@ -581,18 +587,16 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 
 	/**
-	 * Retrive an array of product information to pass to AffiliateWP
-	 * when creating a referral
+	 * Retrives an array of product information to pass to AffiliateWP when creating a referral
 	 *
 	 * LifterLMS doesn't have the ability to purchase multiple products simultaneously,
 	 * but this is still returning an array of arrays, in case it's needed in the future.
 	 *
-	 * @since    1.8.3
-	 *
-	 * @param  integer|obj   $order_id   WordPress Post ID of the LifterLMS Order or instance of an LLMS_Order
-	 * @return array
-	 *
 	 * @access public
+	 * @since  1.8.3
+	 *
+	 * @param int|LLMS_Order $order_id LifterLMS Order ID or LLMS_Order object.
+	 * @return array Products.
 	 */
 	public function get_products( $order_id = 0 ) {
 

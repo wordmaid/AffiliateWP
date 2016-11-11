@@ -14,7 +14,16 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return void
  */
 function affwp_add_ons_admin() {
-	$add_ons_tabs = apply_filters( 'affwp_add_ons_tabs', array( 'pro' => 'Pro', 'official-free' => 'Official Free' ) );
+	/**
+	 * Filters the add-ons tabs.
+	 *
+	 * @param array $tabs Add-ons tabs.
+	 */
+	$add_ons_tabs = (array) apply_filters( 'affwp_add_ons_tabs', array(
+		'pro'           => 'Pro',
+		'official-free' => 'Official Free'
+	) );
+
 	$active_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $add_ons_tabs ) ? $_GET['tab'] : 'pro';
 
 	ob_start();

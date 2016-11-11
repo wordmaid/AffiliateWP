@@ -247,9 +247,7 @@ class Affiliate_WP_Settings {
 
 			// Don't overwrite the global license key.
 			if ( 'license_key' === $key ) {
-				if ( self::global_license_set() && $value !== self::get_license_key() ) {
-					$value = self::get_license_key();
-				}
+				$value = self::get_license_key( $value );
 			}
 
 			// Get the setting type (checkbox, select, etc)
@@ -878,19 +876,13 @@ class Affiliate_WP_Settings {
 	 * @return void
 	 */
 	function license_callback( $args ) {
-
-		if ( isset( $this->options[ $args['id'] ] ) ) {
-			$value = $this->options[ $args['id'] ];
-		} else {
-			$value = isset( $args['std'] ) ? $args['std'] : '';
-		}
-
 		// Must use a 'readonly' attribute over disabled to ensure the value is passed in $_POST.
 		$readonly = $this->is_setting_disabled( $args ) ? __checked_selected_helper( $args['disabled'], true, false, 'readonly' ) : '';
 
-		$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
-		$html = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" ' . $readonly . '/>';
-		$license_key = ! empty( $value ) ? $value : false;
+		$license_key = self::get_license_key();
+
+		$size   = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
+		$html   = '<input type="text" class="' . $size . '-text" id="affwp_settings[' . $args['id'] . ']" name="affwp_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $license_key ) ) . '" ' . $readonly . '/>';
 		$status = $this->get( 'license_status' );
 		$status = is_object( $status ) ? $status->license : $status;
 
@@ -1165,7 +1157,7 @@ class Affiliate_WP_Settings {
 		// data to send in our API request
 		$api_params = array(
 			'edd_action'=> 'activate_license',
-			'license' 	=> self::get_license_key( $_POST['affwp_settings']['license_key'] ),
+			'license' 	=> sanitize_text_field( $_POST['affwp_settings']['license_key'] ),
 			'item_name' => 'AffiliateWP',
 			'url'       => home_url()
 		);

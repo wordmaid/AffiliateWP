@@ -394,16 +394,6 @@ class AffWP_Referrals_Table extends List_Table {
 		/**
 		 * Filters the row actions array for the Referrals list table.
 		 *
-		 * @since 1.9
-		 *
-		 * @param array           $row_actions Row actions array.
-		 * @param \AffWP\Referral $referral    Current referral.
-		 */
-		$row_actions = apply_filters( 'affwp_referral_row_actions', $row_actions, $referral );
-
-		/**
-		 * Filters the row actions array for the Referrals list table.
-		 *
 		 * Retained only for back-compat. Use {@see 'affwp_referral_row_actions'} instead.
 		 *
 		 * @since 1.2
@@ -412,6 +402,16 @@ class AffWP_Referrals_Table extends List_Table {
 		 * @param \AffWP\Referral $referral    Current referral.
 		 */
 		$row_actions = apply_filters( 'affwp_referral_action_links', $row_actions, $referral );
+
+		/**
+		 * Filters the row actions array for the Referrals list table.
+		 *
+		 * @since 1.9
+		 *
+		 * @param array           $row_actions Row actions array.
+		 * @param \AffWP\Referral $referral    Current referral.
+		 */
+		$row_actions = apply_filters( 'affwp_referral_row_actions', $row_actions, $referral );
 
 		return $this->row_actions( $row_actions, true );
 	}

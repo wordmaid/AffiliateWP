@@ -102,21 +102,10 @@ class Reports {
 
 			<h2 class="nav-tab-wrapper">
 				<?php
-				$tabs = $this->get_reports_tabs();
-				foreach ( $tabs as $tab_id => $tab_name ) {
-
-					$tab_url = add_query_arg( array(
-						'settings-updated' => false,
-						'tab'              => $tab_id,
-						'affwp_notice'     => false
-					) );
-
-					$active = $active_tab == $tab_id ? ' nav-tab-active' : '';
-
-					echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
-					echo esc_html( $tab_name );
-					echo '</a>';
-				}
+				affwp_navigation_tabs( $this->get_reports_tabs(), $active_tab, array(
+					'settings-updated' => false,
+					'affwp_notice'     => false
+				) );
 				?>
 			</h2>
 

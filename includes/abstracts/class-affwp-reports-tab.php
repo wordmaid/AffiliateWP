@@ -97,8 +97,6 @@ abstract class Tab {
 		add_action( "affwp_reports_{$this->tab_id}_nav",        array( $this->graph, 'graph_controls' ), 0 );
 		add_action( "affwp_reports_tab_{$this->tab_id}",        array( $this, 'display'               )    );
 		add_action( "affwp_reports_tab_{$this->tab_id}_trends", array( $this, 'display_trends'        )    );
-
-		$this->set_up_tiles();
 	}
 
 	/**
@@ -110,6 +108,8 @@ abstract class Tab {
 	 * @since  1.9
 	 */
 	public function display() {
+
+		$this->set_up_tiles();
 
 		if ( has_action( "affwp_reports_{$this->tab_id}_nav" ) ) : ?>
 			<h3><?php _e( 'Date Filters', 'affiliate-wp' ); ?></h3>

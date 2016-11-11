@@ -131,7 +131,7 @@ function affwp_notify_on_approval( $affiliate_id = 0, $status = '', $old_status 
 	 *
 	 * @since 1.6
 	 *
-	 * @param bool $notify Whether to notify the affiliate on upon approval. Default true.
+	 * @param bool $notify Whether to notify the affiliate upon approval. Default true.
 	 */
 	if ( apply_filters( 'affwp_notify_on_approval', true ) && ! get_user_meta( $user_id, 'affwp_disable_affiliate_email', true ) ) {
 		$emails->send( $email, $subject, $message );

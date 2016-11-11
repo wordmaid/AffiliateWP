@@ -767,6 +767,10 @@ function affwp_get_current_screen() {
 function affwp_navigation_tabs( $tabs, $active_tab, $query_args = array() ) {
 	$tabs = (array) $tabs;
 
+	if ( empty( $tabs ) ) {
+		return;
+	}
+
 	foreach ( $tabs as $tab_id => $tab_name ) {
 		$query_args = array_merge( $query_args, array( 'tab' => $tab_id ) );
 		$tab_url    = add_query_arg( $query_args );

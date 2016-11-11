@@ -120,7 +120,7 @@ class Affiliate_WP_Migrate_WP_Affiliate extends Affiliate_WP_Migrate_Base {
 		delete_option( 'affwp_migrate_direct_affiliates' );
 
 		$redirect = add_query_arg( array(
-			'page'         => 'affiliate-wp',
+			'page'         => 'affiliate-wp-affiliates',
 			'affwp_notice' => 'affiliates_migrated'
 		), admin_url( 'admin.php' ) );
 

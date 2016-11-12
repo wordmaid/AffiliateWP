@@ -263,7 +263,7 @@ class AffWP_Affiliates_Table extends List_Table {
 			) )
 		);
 
-		if ( $name ) {
+		if ( null !== $name ) {
 			// Edit User.
 			$row_actions['edit_user'] = $this->get_row_action_link(
 				__( 'Edit User', 'affiliate-wp' ),

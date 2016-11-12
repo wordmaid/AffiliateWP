@@ -229,9 +229,8 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @return string Data shown in the Name column
 	 */
 	public function column_name( $affiliate ) {
-		$base         = admin_url( 'admin.php?page=affiliate-wp&affiliate_id=' . $affiliate->affiliate_id );
-		$row_actions  = array();
-		$name         = affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id );
+		$row_actions = array();
+		$name        = affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id );
 
 		$base_query_args = array(
 			'page'         => 'affiliate-wp-affiliates',

@@ -512,7 +512,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	 * @since  1.8.3
 	 *
 	 * @param int  $order_id LifterLMS Order ID.
-	 * @param bool $force    If true, will skip the "cached" data.
+	 * @param bool $force    Whether to force skipping the cached data.
 	 * @return mixed Object of order-related data, or false if no order is found.
 	 */
 	private function get_order( $order_id, $force = false ) {
@@ -563,7 +563,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 
 	/**
-	 * Retrieve the affiliate ID associated with a LifterLMS Coupon
+	 * Retrieves the affiliate ID associated with a LifterLMS Coupon.
 	 *
 	 * @access private
 	 * @since  1.8.3
@@ -576,18 +576,15 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 		$affiliate_id = get_post_meta( $coupon_id, '_affwp_affiliate_id', true );
 
 		if ( $affiliate_id && affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
-
 			return $affiliate_id;
-
 		}
 
 		return false;
-
 	}
 
 
 	/**
-	 * Retrives an array of product information to pass to AffiliateWP when creating a referral
+	 * Retrieves an array of product information to pass to AffiliateWP when creating a referral.
 	 *
 	 * LifterLMS doesn't have the ability to purchase multiple products simultaneously,
 	 * but this is still returning an array of arrays, in case it's needed in the future.
@@ -641,12 +638,10 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Output some AffiliateWP data on the LifterLMS Order post edit screen
+	 * Outputs some AffiliateWP data on the LifterLMS Order post edit screen.
 	 *
-	 * @since    1.8.3
-	 *
-	 * @return void
 	 * @access public
+	 * @since  1.8.3
 	 */
 	public function order_meta_output( ) {
 
@@ -719,17 +714,16 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Add an AffiliateWP Tab to LifterLMS Course & Membership Admin screen
+	 * Adds an AffiliateWP Tab to LifterLMS Course & Membership Admin screen.
 	 *
-	 * Allow users to disable referrals for the product
-	 * Allow users to define custom referral rates for the product
-	 *
-	 * @since    1.8.3
-	 *
-	 * @param  array  $fields  associate array of llms settings
-	 * @return array
+	 * Allow users to disable referrals for the product. Allow users to define
+	 * custom referral rates for the product
 	 *
 	 * @access public
+	 * @since  1.8.3
+	 *
+	 * @param array $fields Associative array of LifterLMS settings.
+	 * @return array Product meta fields.
 	 */
 	public function product_meta_output( $fields ) {
 
@@ -790,15 +784,13 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Save the related product fields during course & membership post type save actions
-	 *
-	 * @since  1.8.3
-	 *
-	 * @param  int    $post_id WP Post ID of the coupon being saved
-	 * @param  obj    $post    Instance of WP_Post
-	 * @return void
+	 * Saves the related product fields during course & membership post type save actions.
 	 *
 	 * @access public
+	 * @since  1.8.3
+	 *
+	 * @param int     $post_id Coupon ID.
+	 * @param WP_Post $post    Post object.
 	 */
 	public function product_meta_save( $post_id, $post ) {
 
@@ -829,16 +821,14 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Link the Reference column on the AffWp screen to a LifterLMS Order
+	 * Links the Reference column on the AffWp screen to a LifterLMS Order.
 	 *
+	 * @access public
 	 * @since  1.8.3
 	 *
-	 * @param int   $reference  WP Post ID of the LifterLMS ORder
-	 * @param obj   $referral   object of referral data
-	 *
-	 * @return  html
-	 *
-	 * @access  public
+	 * @param int             $reference Optional. LifterLMS order ID to user for the referencel ink.
+	 * @param \AffWP\Referral $referral  Referral object.
+	 * @return string Reference link HTML markup.
 	*/
 	public function reference_link( $reference = 0, $referral ) {
 
@@ -855,12 +845,10 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 	/**
 	 * Revokes a referral on various orde status changes
 	 *
-	 * @since    ??
+	 * @access public
+	 * @since  1.8.3
 	 *
-	 * @param    obj     $order  instance of an LLMS Order
-	 * @return   void
-	 *
-	 * @access   public
+	 * @param LLMS_Order $order LifterLMS order object.
 	 */
 	public function revoke_referral( $order ) {
 
@@ -890,13 +878,12 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 
 	/**
-	 * Provides static js for the LifterLMS AffiliateWP integration
+	 * Provides static js for the LifterLMS AffiliateWP integration.
 	 *
+	 * @access public
 	 * @since  1.8.3
 	 *
-	 * @return string  Static javascript, specific to the LifterLMS integration.
-	 *
-	 * @access   public
+	 * @return string Static JavaScript, specific to the LifterLMS integration.
 	 */
 	public function inline_js() { ?>
 		<script>

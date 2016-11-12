@@ -233,11 +233,12 @@ class Meta_Box {
 	}
 
 	/**
-	 * Adds the meta box
+	 * Adds the meta box.
 	 *
-	 * @return  A meta box which will display on the specified AffiliateWP admin screen.
-	 * @uses    add_meta_box
-	 * @since   1.9
+	 * @access public
+	 * @since  1.9
+	 *
+	 * @see add_meta_box()
 	 */
 	public function add_meta_box() {
 		add_meta_box(

@@ -259,9 +259,11 @@ class AffWP_AddOn_Updater {
 	 * @uses wp_remote_post()
 	 * @uses is_wp_error()
 	 *
+	 * @access private
+	 *
 	 * @param string $_action The requested action.
-	 * @param array $_data Parameters for the API action.
-	 * @return false||object
+	 * @param array  $_data   Parameters for the API action.
+	 * @return object|false API response, otherwise false.
 	 */
 	private function api_request( $_action, $_data ) {
 

@@ -220,7 +220,6 @@ class AffWP_AddOn_Updater {
 		if ( ! empty( $update_cache->response[ $this->name ] ) && version_compare( $this->version, $update_cache->response[ $this->name ]->new_version, '<' ) ) {
 
 			// build a plugin list row, with update notification
-			$wp_list_table = _get_list_table( 'WP_Plugins_List_Table' );
 			echo '<tr class="plugin-update-tr" id="' . $this->slug . '-update" data-slug="' . $this->slug . '" data-plugin="' . $this->slug . '/' . $this->name . '">';
 			echo '<td colspan="3" class="plugin-update colspanchange">';
 			echo '<div class="update-message notice inline notice-warning notice-alt"><p>';

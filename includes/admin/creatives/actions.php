@@ -4,7 +4,9 @@
  * Process the add creative request
  *
  * @since 1.2
- * @return void
+ *
+ * @param array $data Arguments for adding a creative.
+ * @return false|null False if not in the admin, otherwise null.
  */
 function affwp_process_add_creative( $data ) {
 

@@ -2,7 +2,6 @@
 jQuery(document).ready( function($) {
 
 	var ref_cookie = $.cookie( 'affwp_ref' );
-	var campaign_cookie = $.cookie( 'affwp_campaign' );
 
 	var credit_last = AFFWP.referral_credit_last;
 

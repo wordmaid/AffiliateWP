@@ -14,11 +14,58 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 class AFFWP_Plugin_Updater {
 
-	private $api_url     = '';
-	private $api_data    = array();
-	private $name        = '';
-	private $slug        = '';
-	private $version     = '';
+	/**
+	 * API URL.
+	 *
+	 * @access private
+	 * @since  1.6.5
+	 * @var    string
+	 */
+	private $api_url = '';
+
+	/**
+	 * API Data.
+	 *
+	 * @access private
+	 * @since  1.6.5
+	 * @var    array|null
+	 */
+	private $api_data = array();
+
+	/**
+	 * Plugin basename.
+	 *
+	 * @access private
+	 * @since  1.6.5
+	 * @var    string
+	 */
+	private $name = '';
+
+	/**
+	 * Plugin slug.
+	 *
+	 * @access private
+	 * @since  1.6.5
+	 * @var    string
+	 */
+	private $slug = '';
+
+	/**
+	 * Plugin version.
+	 *
+	 * @access private
+	 * @since  1.6.5
+	 * @var    mixed|string
+	 */
+	private $version = '';
+
+	/**
+	 * Whether to override the WordPress updater.
+	 *
+	 * @access private
+	 * @since  1.6.5
+	 * @var    bool
+	 */
 	private $wp_override = false;
 
 	/**

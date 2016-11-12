@@ -345,7 +345,7 @@ class Affiliate_WP_Upgrades {
 		$_forms = wp_list_pluck( $_forms, 'object_id' );
 		$forms  = array_diff( $forms, $_forms );
 
-		if ( ! $forms ) {
+		if ( empty( $forms ) ) {
 			return;
 		}
 

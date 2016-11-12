@@ -137,12 +137,12 @@ class AffWP_AddOn_Updater {
 	/**
 	 * Updates information on the "View version x.x details" page with custom data.
 	 *
-	 * @uses api_request()
+	 * @see api_request()
 	 *
-	 * @param mixed $_data
-	 * @param string $_action
-	 * @param object $_args
-	 * @return object $_data
+	 * @param false|object|array $_data   The result object or array.
+	 * @param string             $_action The type of information being requested from the Plugin Install API.
+	 * @param object             $_args   Plugin API arguments.
+	 * @return false|object|array Plugins API response.
 	 */
 	function plugins_api_filter( $_data, $_action = '', $_args = null ) {
 		if ( ( $_action != 'plugin_information' ) || !isset( $_args->slug ) || ( $_args->slug != $this->slug ) ) {

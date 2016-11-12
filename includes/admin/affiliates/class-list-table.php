@@ -644,6 +644,8 @@ class AffWP_Affiliates_Table extends List_Table {
 
 		$status = isset( $_GET['status'] ) ? $_GET['status'] : 'any';
 
+		$total_items = 0;
+
 		switch( $status ) {
 			case 'active':
 				$total_items = $this->active_count;
@@ -665,10 +667,9 @@ class AffWP_Affiliates_Table extends List_Table {
 		$this->items = $data;
 
 		$this->set_pagination_args( array(
-				'total_items' => $total_items,
-				'per_page'    => $per_page,
-				'total_pages' => ceil( $total_items / $per_page )
-			)
-		);
+			'total_items' => $total_items,
+			'per_page'    => $per_page,
+			'total_pages' => ceil( $total_items / $per_page )
+		) );
 	}
 }

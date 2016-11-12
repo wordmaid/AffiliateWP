@@ -254,11 +254,13 @@ class Affiliate_WP_Admin_Notices {
 
 				case 'license-expired' :
 
+					$license_key = self::get_license_key();
+
 					$class = 'expired';
 					$message = sprintf(
 						__( 'Your license key expired on %s. Please <a href="%s" target="_blank">renew your license key</a>.', 'affiliate-wp' ),
 						date_i18n( get_option( 'date_format' ), strtotime( $license->expires, current_time( 'timestamp' ) ) ),
-						'https://affiliatewp.com/checkout/?edd_license_key=' . $value . '&utm_campaign=admin&utm_source=licenses&utm_medium=expired'
+						'https://affiliatewp.com/checkout/?edd_license_key=' . $license_key . '&utm_campaign=admin&utm_source=licenses&utm_medium=expired'
 					);
 
 

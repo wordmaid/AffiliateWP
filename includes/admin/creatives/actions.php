@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Process the add creative request
+ * Processes the add creative request.
  *
  * @since 1.2
  *
@@ -67,10 +67,12 @@ function affwp_process_creative_deletion( $data ) {
 add_action( 'affwp_delete_creatives', 'affwp_process_creative_deletion' );
 
 /**
- * Process the add affiliate request
+ * Processes the add affiliate request.
  *
  * @since 1.2
- * @return void
+ *
+ * @param array $data Arguments for updating a creative.
+ * @return false|null False if not in the admin, otherwise null.
  */
 function affwp_process_update_creative( $data ) {
 

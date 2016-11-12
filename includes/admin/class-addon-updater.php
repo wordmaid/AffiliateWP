@@ -61,10 +61,9 @@ class AffWP_AddOn_Updater {
 	 * @uses plugin_basename()
 	 * @uses hook()
 	 *
-	 * @param string $_api_url The URL pointing to the custom API endpoint.
+	 * @param string $_addon_id    The add-on ID.
 	 * @param string $_plugin_file Path to the plugin file.
-	 * @param array $_api_data Optional data to send with API calls.
-	 * @return void
+	 * @param string $_version     Add-on version.
 	 */
 	function __construct( $_addon_id, $_plugin_file, $_version ) {
 		$this->api_url    = 'https://affiliatewp.com';

@@ -32,6 +32,8 @@ class Affiliate_WP_Admin_Notices {
 		}
 
 		$integrations = affiliate_wp()->integrations->get_enabled_integrations();
+		$license      = affiliate_wp()->settings->check_license();
+
 
 		if( empty( $integrations ) && ! get_user_meta( get_current_user_id(), '_affwp_no_integrations_dismissed', true ) ) {
 			echo '<div class="error">';
@@ -358,8 +360,6 @@ class Affiliate_WP_Admin_Notices {
 		if ( ! empty( $message ) ) {
 			echo '<div class="' . esc_attr( $class ) . '"><p>' .  $message  . '</p></div>';
 		}
-
-		$license = affiliate_wp()->settings->check_license();
 
 		if ( ! is_wp_error( $license ) && false === get_transient( 'affwp_license_notice' ) ) {
 

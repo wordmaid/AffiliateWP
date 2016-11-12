@@ -238,7 +238,7 @@ class AffWP_Affiliates_Table extends List_Table {
 		);
 
 		// Main 'Name' link.
-		if ( ! $name ) {
+		if ( null === $name ) {
 			$affiliate_name = __( '(user deleted)', 'affiliate-wp' );
 		} else {
 			$affiliate_name = $name;

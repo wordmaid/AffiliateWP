@@ -44,7 +44,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	/**
 	 * Number of active affiliates found
 	 *
-	 * @var string
+	 * @var int
 	 * @since 1.0
 	 */
 	public $active_count;

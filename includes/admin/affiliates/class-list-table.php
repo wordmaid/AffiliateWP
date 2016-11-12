@@ -356,19 +356,17 @@ class AffWP_Affiliates_Table extends List_Table {
 	}
 
 	/**
-	 * Render the Username Column
+	 * Renders the Username Column.
 	 *
 	 * @access public
 	 * @since 1.8
+	 *
 	 * @param array $affiliate Contains all the data of the affiliate
 	 * @return string Data shown in the Username column
 	 */
 	public function column_username( $affiliate ) {
-
-		$row_actions = array();
 		$user_info = get_userdata( $affiliate->user_id );
-
-		$username = ( $user_info ) ? $user_info->user_login : false;
+		$username  = ( $user_info ) ? $user_info->user_login : false;
 
 		if ( $username ) {
 			$value = $username;

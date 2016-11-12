@@ -23,14 +23,12 @@ function affwp_process_add_affiliate( $data ) {
 
 	$affiliate_id = affwp_add_affiliate( $data );
 
-	if ( $affiliate_id ) {
-
+	if ( false !== $affiliate_id ) {
 		wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-affiliates&affwp_notice=affiliate_added' ) );
-		exit;
 	} else {
 		wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-affiliates&affwp_notice=affiliate_added_failed' ) );
-		exit;
 	}
+	exit;
 
 }
 add_action( 'affwp_add_affiliate', 'affwp_process_add_affiliate' );

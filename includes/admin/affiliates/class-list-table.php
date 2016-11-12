@@ -52,7 +52,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	/**
 	 *  Number of inactive affiliates found
 	 *
-	 * @var string
+	 * @var int
 	 * @since 1.0
 	 */
 	public $inactive_count;
@@ -60,7 +60,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	/**
 	 * Number of pending affiliates found
 	 *
-	 * @var string
+	 * @var int
 	 * @since 1.0
 	 */
 	public $pending_count;
@@ -68,7 +68,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	/**
 	 * Number of rejected affiliates found
 	 *
-	 * @var string
+	 * @var int
 	 * @since 1.0
 	 */
 	public $rejected_count;

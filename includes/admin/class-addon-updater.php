@@ -2,14 +2,58 @@
 
 //set_site_transient( 'update_plugins', null );
 
+/**
+ * Add-on updater class.
+ */
 class AffWP_AddOn_Updater {
 
-	private $api_url    = '';
-	private $api_data   = array();
-	private $addon_id   = '';
-	private $name       = '';
-	private $slug       = '';
-	private $version    = '';
+	/**
+	 * API URL.
+	 *
+	 * @access private
+	 * @var    string
+	 */
+	private $api_url = '';
+
+	/**
+	 * API data.
+	 *
+	 * @access private
+	 * @var    array|null
+	 */
+	private $api_data = array();
+
+	/**
+	 * Add-on ID.
+	 *
+	 * @access private
+	 * @var    string
+	 */
+	private $addon_id = '';
+
+	/**
+	 * Add-on name.
+	 *
+	 * @access private
+	 * @var    string
+	 */
+	private $name = '';
+
+	/**
+	 * Add-on slug.
+	 *
+	 * @access private
+	 * @var    string
+	 */
+	private $slug = '';
+
+	/**
+	 * Add-on version.
+	 *
+	 * @access private
+	 * @var    string
+	 */
+	private $version = '';
 
 	/**
 	 * Class constructor.

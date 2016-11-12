@@ -141,7 +141,7 @@ class AffWP_AddOn_Updater {
 	 *
 	 * @param false|object|array $_data   The result object or array.
 	 * @param string             $_action The type of information being requested from the Plugin Install API.
-	 * @param object             $_args   Plugin API arguments.
+	 * @param object|null        $_args   Plugin API arguments.
 	 * @return false|object|array Plugins API response.
 	 */
 	function plugins_api_filter( $_data, $_action = '', $_args = null ) {

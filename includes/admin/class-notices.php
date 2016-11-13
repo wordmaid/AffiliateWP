@@ -254,7 +254,7 @@ class Affiliate_WP_Admin_Notices {
 
 				case 'license-expired' :
 
-					$license_key = self::get_license_key();
+					$license_key = affiliate_wp()->settings->get_license_key();
 
 					$class = 'expired';
 					$message = sprintf(

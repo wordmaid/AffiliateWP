@@ -700,6 +700,8 @@ class AffWP_Referrals_Table extends List_Table {
 
 		$status = isset( $_GET['status'] ) ? $_GET['status'] : 'any';
 
+		$total_items = 0;
+
 		switch( $status ) {
 			case 'paid':
 				$total_items = $this->paid_count;

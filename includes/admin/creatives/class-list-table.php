@@ -44,16 +44,18 @@ class AffWP_Creatives_Table extends List_Table {
 	/**
 	 * Number of active creatives found
 	 *
-	 * @var string
-	 * @since 1.2
+	 * @access public
+	 * @since  1.2
+	 * @var    int
 	 */
 	public $active_count;
 
 	/**
 	 * Number of inactive creatives found
 	 *
-	 * @var string
-	 * @since 1.2
+	 * @access public
+	 * @since  1.2
+	 * @var    int
 	 */
 	public $inactive_count;
 

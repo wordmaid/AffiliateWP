@@ -606,13 +606,7 @@ class AffWP_Payouts_Table extends List_Table {
 			$args['referrals'] = sanitize_text_field( $_REQUEST['referrals'] );
 		}
 
-		if ( ! empty( $_REQUEST['s'] ) ) {
-
-			$this->is_search = true;
-
-			$search = sanitize_text_field( $_REQUEST['s'] );
-			$args   = $this->parse_search( $search, $args );
-		}
+		$args = $this->parse_search_query( $args );
 
 		$args['search'] = $this->is_search;
 		$args['number'] = $this->get_items_per_page( 'affwp_edit_payouts_per_page', $this->per_page );

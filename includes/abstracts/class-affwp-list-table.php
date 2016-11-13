@@ -251,4 +251,24 @@ abstract class List_Table extends \WP_List_Table {
 
 		return $this->_column_headers;
 	}
+
+	/**
+	 * Parses a list table search query.
+	 *
+	 * @access public
+	 * @since  1.9.5
+	 *
+	 * @param array $args Arguments for retrieving list table data.
+	 * @return array Data arguments modified by search strings.
+	 */
+	public function parse_search_query( $args ) {
+		if ( ! empty( $_REQUEST['s'] ) && method_exists( get_called_class(), 'parse_search' ) ) {
+
+			$this->is_search = true;
+
+			$search = sanitize_text_field( $_REQUEST['s'] );
+			$args   = $this->parse_search( $search, $args );
+		}
+		return $args;
+	}
 }

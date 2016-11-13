@@ -641,13 +641,7 @@ class AffWP_Referrals_Table extends List_Table {
 		$args['order']   = sanitize_text_field( $args['order'] );
 		$args['orderby'] = sanitize_text_field( $args['orderby'] );
 
-		if( ! empty( $_REQUEST['s'] ) ) {
-
-			$this->is_search = true;
-
-			$search = sanitize_text_field( $_REQUEST['s'] );
-			$args   = $this->parse_search( $search, $args );
-		}
+		$args = $this->parse_search_query( $args );
 
 		// Unset is_search once search parsing is complete.
 		$args['search'] = $this->is_search;

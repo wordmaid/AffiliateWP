@@ -199,10 +199,9 @@ class AffWP_Referrals_Table extends List_Table {
 	 * @access public
 	 * @since 1.0
 	 *
-	 * @param array $item Contains all the data of the affiliate
-	 * @param string $column_name The name of the column
-	 *
-	 * @return string Column Name
+	 * @param \AffWP\Referral $referral    Current referral object.
+	 * @param string          $column_name The name of the column
+	 * @return string HTML markup for the give `$column_name` or default markup.
 	 */
 	public function column_default( $referral, $column_name ) {
 		switch( $column_name ) {
@@ -225,24 +224,26 @@ class AffWP_Referrals_Table extends List_Table {
 	}
 
 	/**
-	 * Render the checkbox column
+	 * Renders the checkbox column.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
-	 * @return string Displays a checkbox
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Referral $referral Current referral object.
+	 * @return string HTML markup to display a checkbox.
 	 */
 	public function column_cb( $referral ) {
 		return '<input type="checkbox" name="referral_id[]" value="' . absint( $referral->referral_id ) . '" />';
 	}
 
 	/**
-	 * Render the amount column
+	 * Renders the amount column.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
-	 * @return string Displays the referral amount
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Referral $referral Current referral object.
+	 * @return string HTML markup to display the amount for the current referral.
 	 */
 	public function column_amount( $referral ) {
 		$value = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
@@ -250,12 +251,13 @@ class AffWP_Referrals_Table extends List_Table {
 	}
 
 	/**
-	 * Render the status column
+	 * Renders the status column.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
-	 * @return string Displays the referral status
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Referral $referral Current referral object.
+	 * @return string HTML markup to display the status for the current referral.
 	 */
 	public function column_status( $referral ) {
 		$value ='<span class="affwp-status ' . $referral->status . '"><i></i>' . affwp_get_referral_status_label( $referral ) . '</span>';
@@ -263,12 +265,13 @@ class AffWP_Referrals_Table extends List_Table {
 	}
 
 	/**
-	 * Render the affiliate column
+	 * Renders the affiliate column.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
-	 * @return string The affiliate
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Referral $referral Current referral object.
+	 * @return string HTML markup to display the affiliate for the current referral.
 	 */
 	public function column_affiliate( $referral ) {
 		$value = apply_filters( 'affwp_referral_affiliate_column', '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $referral->affiliate_id ) . '">' . affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id ) . '</a>', $referral );
@@ -276,12 +279,13 @@ class AffWP_Referrals_Table extends List_Table {
 	}
 
 	/**
-	 * Render the reference column
+	 * Renders the reference column.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
-	 * @return string The reference
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Referral $referral Current referral object.
+	 * @return string HTML markup to display the reference value for the current referral.
 	 */
 	public function column_reference( $referral ) {
 		$value = apply_filters( 'affwp_referral_reference_column', $referral->reference, $referral );
@@ -289,12 +293,13 @@ class AffWP_Referrals_Table extends List_Table {
 	}
 
 	/**
-	 * Render the actions column
+	 * Renders the actions column.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the actions column
-	 * @return string The actions HTML
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Referral $referral Current referral object.
+	 * @return string HTML markup to display the actions column for the current referral.
 	 */
 	public function column_actions( $referral ) {
 

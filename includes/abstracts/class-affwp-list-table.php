@@ -34,6 +34,15 @@ abstract class List_Table extends \WP_List_Table {
 	public $display_args = array();
 
 	/**
+	 * Whether the current query is a search query.
+	 *
+	 * @access public
+	 * @since  1.9.5
+	 * @var    bool
+	 */
+	public $is_search = false;
+
+	/**
 	 * Current screen object.
 	 *
 	 * @access public

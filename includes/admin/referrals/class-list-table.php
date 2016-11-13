@@ -613,10 +613,9 @@ class AffWP_Referrals_Table extends List_Table {
 
 		// Non-get_referrals() data arguments.
 		$data = array(
-			'page'      => isset( $_REQUEST['paged'] )        ? absint( $_REQUEST['paged'] ) : 1,
-			'from'      => isset( $_REQUEST['filter_from'] )  ? $_REQUEST['filter_from']     : '',
-			'to'        => isset( $_REQUEST['filter_to'] )    ? $_REQUEST['filter_to']       : '',
-			'is_search' => false,
+			'page' => isset( $_REQUEST['paged'] )        ? absint( $_REQUEST['paged'] ) : 1,
+			'from' => isset( $_REQUEST['filter_from'] )  ? $_REQUEST['filter_from']     : '',
+			'to'   => isset( $_REQUEST['filter_to'] )    ? $_REQUEST['filter_to']       : '',
 		);
 
 		// get_referrals() arguments.
@@ -644,14 +643,14 @@ class AffWP_Referrals_Table extends List_Table {
 
 		if( ! empty( $_REQUEST['s'] ) ) {
 
-			$data['is_search'] = true;
+			$this->is_search = true;
 
 			$search = sanitize_text_field( $_REQUEST['s'] );
 			$args   = $this->parse_search( $search, $args );
 		}
 
 		// Unset is_search once search parsing is complete.
-		$args['search'] = $data['is_search'];
+		$args['search'] = $this->is_search;
 		$args['number'] = $this->get_items_per_page( 'affwp_edit_referrals_per_page', $this->per_page );
 		$args['offset'] = $args['number'] * ( $data['page'] - 1 );
 

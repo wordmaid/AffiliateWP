@@ -611,48 +611,49 @@ class AffWP_Referrals_Table extends List_Table {
 	 */
 	public function referrals_data() {
 
-		$args = array(
-			'page'         => isset( $_REQUEST['paged'] )        ? absint( $_REQUEST['paged'] ) : 1,
-			'status'       => isset( $_REQUEST['status'] )       ? $_REQUEST['status']          : '',
-			'affiliate_id' => isset( $_REQUEST['affiliate_id'] ) ? $_REQUEST['affiliate_id']    : '',
-			'reference'    => isset( $_REQUEST['reference'] )    ? $_REQUEST['reference']       : '',
-			'context'      => isset( $_REQUEST['context'] )      ? $_REQUEST['context']         : '',
-			'campaign'     => isset( $_REQUEST['campaign'] )     ? $_REQUEST['campaign']        : '',
-			'from'         => isset( $_REQUEST['filter_from'] )  ? $_REQUEST['filter_from']     : '',
-			'to'           => isset( $_REQUEST['filter_to'] )    ? $_REQUEST['filter_to']       : '',
-			'order'        => isset( $_REQUEST['order'] )        ? $_REQUEST['order']           : 'DESC',
-			'orderby'      => isset( $_REQUEST['orderby'] )      ? $_REQUEST['orderby']         : 'referral_id',
-			'referral_id'  => '',
-			'is_search'    => false,
+		// Non-get_referrals() data arguments.
+		$data = array(
+			'page'      => isset( $_REQUEST['paged'] )        ? absint( $_REQUEST['paged'] ) : 1,
+			'from'      => isset( $_REQUEST['filter_from'] )  ? $_REQUEST['filter_from']     : '',
+			'to'        => isset( $_REQUEST['filter_to'] )    ? $_REQUEST['filter_to']       : '',
+			'is_search' => false,
 		);
 
-		if( ! empty( $args['from'] ) ) {
-			$args['date']['start'] = $args['from'];
+		// get_referrals() arguments.
+		$args = array(
+			'status'       => isset( $_REQUEST['status'] )       ? $_REQUEST['status']       : '',
+			'affiliate_id' => isset( $_REQUEST['affiliate_id'] ) ? $_REQUEST['affiliate_id'] : '',
+			'reference'    => isset( $_REQUEST['reference'] )    ? $_REQUEST['reference']    : '',
+			'context'      => isset( $_REQUEST['context'] )      ? $_REQUEST['context']      : '',
+			'campaign'     => isset( $_REQUEST['campaign'] )     ? $_REQUEST['campaign']     : '',
+			'order'        => isset( $_REQUEST['order'] )        ? $_REQUEST['order']        : 'DESC',
+			'orderby'      => isset( $_REQUEST['orderby'] )      ? $_REQUEST['orderby']      : 'referral_id',
+			'referral_id'  => '',
+		);
+
+		if( ! empty( $data['from'] ) ) {
+			$args['date']['start'] = $data['from'];
 		}
 
-		if( ! empty( $args['to'] ) ) {
-			$args['date']['end'] = $args['to'] . ' 23:59:59';
+		if( ! empty( $data['to'] ) ) {
+			$args['date']['end'] = $data['to'] . ' 23:59:59';
 		}
-
-		unset( $args['from'], $args['to'] );
 
 		$args['order']   = sanitize_text_field( $args['order'] );
 		$args['orderby'] = sanitize_text_field( $args['orderby'] );
 
 		if( ! empty( $_REQUEST['s'] ) ) {
 
-			$args['is_search'] = true;
+			$data['is_search'] = true;
 
 			$search = sanitize_text_field( $_REQUEST['s'] );
 			$args   = $this->parse_search( $search, $args );
 		}
 
 		// Unset is_search once search parsing is complete.
-		$args['search'] = $args['is_search'];
+		$args['search'] = $data['is_search'];
 		$args['number'] = $this->get_items_per_page( 'affwp_edit_referrals_per_page', $this->per_page );
-		$args['offset'] = $args['number'] * ( $args['page'] - 1 );
-
-		unset( $args['is_search'], $args['page'] );
+		$args['offset'] = $args['number'] * ( $data['page'] - 1 );
 
 		$args = wp_parse_args( $this->query_args, $args );
 

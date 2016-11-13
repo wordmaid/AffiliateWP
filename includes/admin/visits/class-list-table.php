@@ -217,63 +217,74 @@ class AffWP_Visits_Table extends List_Table {
 	 */
 	public function visits_data() {
 
-		$page         = isset( $_GET['paged'] )     ? absint( $_GET['paged'] )                 : 1;
-		$user_id      = isset( $_GET['user_id'] )   ? absint( $_GET['user_id'] )               : false;
-		$referral_id  = isset( $_GET['referral'] )  ? absint( $_GET['referral'] )              : false;
-		$affiliate_id = isset( $_GET['affiliate'] ) ? absint( $_GET['affiliate'] )             : false;
-		$campaign     = isset( $_GET['campaign'] )  ? sanitize_text_field( $_GET['campaign'] ) : false;
-		$order        = isset( $_GET['order'] )     ? $_GET['order']                           : 'DESC';
-		$orderby      = isset( $_GET['orderby'] )   ? $_GET['orderby']                         : 'date';
-		$search       = isset( $_GET['s'] )         ? sanitize_text_field( $_GET['s'] )        : '';
+		$data = array(
+			'page'    => isset( $_REQUEST['paged'] )       ? absint( $_REQUEST['paged'] )   : 1,
+			'user_id' => isset( $_REQUEST['user_id'] )     ? absint( $_REQUEST['user_id'] ) : false,
+			'from'    => isset( $_REQUEST['filter_from'] ) ? $_REQUEST['filter_from']       : '',
+			'to'      => isset( $_REQUEST['filter_to'] )   ? $_REQUEST['filter_to']         : '',
+		);
 
-		$from   = ! empty( $_REQUEST['filter_from'] )   ? $_REQUEST['filter_from']   : '';
-		$to     = ! empty( $_REQUEST['filter_to'] )     ? $_REQUEST['filter_to']     : '';
-		$status = ! empty( $_REQUEST['filter_status'] ) ? $_REQUEST['filter_status'] : '';
+		$args = array(
+			'referral_id'  => isset( $_REQUEST['referral'] )  ? absint( $_REQUEST['referral'] )              : false,
+			'affiliate_id' => isset( $_REQUEST['affiliate'] ) ? absint( $_REQUEST['affiliate'] )             : false,
+			'campaign'     => isset( $_REQUEST['campaign'] )  ? sanitize_text_field( $_REQUEST['campaign'] ) : false,
+			'order'        => isset( $_REQUEST['order'] )     ? $_REQUEST['order']                           : 'DESC',
+			'orderby'      => isset( $_REQUEST['orderby'] )   ? $_REQUEST['orderby']                         : 'date',
+			'search'       => isset( $_REQUEST['s'] )         ? sanitize_text_field( $_REQUEST['s'] )        : '',
+		);
 
-		$date = array();
-		if( ! empty( $from ) ) {
-			$date['start'] = $from;
+		if( ! empty( $data['from'] ) ) {
+			$args['date']['start'] = $data['from'];
 		}
-		if( ! empty( $to ) ) {
-			$date['end']   = $to . ' 23:59:59';
-		}
-
-		if( ! empty( $user_id ) && empty( $affiliate_id ) ) {
-
-			$affiliate_id = affiliate_wp()->affiliates->get_column_by( 'affiliate_id', 'user_id', $user_id );
-
+		if( ! empty( $data['to'] ) ) {
+			$args['date']['end']   = $data['to'] . ' 23:59:59';
 		}
 
-		if ( strpos( $search, 'referral:' ) !== false ) {
-			$referral_id = absint( trim( str_replace( 'referral:', '', $search ) ) );
-			$search      = '';
-		} elseif ( strpos( $search, 'affiliate:' ) !== false ) {
-			$affiliate_id = absint( trim( str_replace( 'affiliate:', '', $search ) ) );
-			$search       = '';
-		} elseif ( strpos( $search, 'campaign:' ) !== false ) {
-			$campaign = trim( str_replace( 'campaign:', '', $search ) );
-			$search   = '';
+		if( ! empty( $data['user_id'] ) && empty( $args['affiliate_id'] ) ) {
+			$args['affiliate_id'] = affiliate_wp()->affiliates->get_column_by( 'affiliate_id', 'user_id', $data['user_id'] );
 		}
 
-		$per_page = $this->get_items_per_page( 'affwp_edit_visits_per_page', $this->per_page );
+		$args = $this->parse_search_query( $args );
 
-		$args = wp_parse_args( $this->query_args, array(
-			'number'          => $this->per_page,
-			'offset'          => $this->per_page * ( $page - 1 ),
-			'affiliate_id'    => $affiliate_id,
-			'referral_id'     => $referral_id,
-			'date'            => $date,
-			'campaign'        => $campaign,
-			'orderby'         => $orderby,
-			'order'           => $order,
-			'search'          => $search,
-			'referral_status' => $status
-		) );
+		if ( ! $this->is_search ) {
+			$args['search'] = '';
+		}
 
-		$this->total_count = affiliate_wp()->visits->count( $args );
+		$args['number'] = $this->get_items_per_page( 'affwp_edit_visits_per_page', $this->per_page );
+		$args['offset'] = $args['number'] * ( $data['page'] -1 );
+
+		$args = wp_parse_args( $this->query_args, $args );
 
 		return affiliate_wp()->visits->get_visits( $args );
+	}
 
+	/**
+	 * Parses search strings.
+	 *
+	 * @access public
+	 * @since  1.9.5
+	 *
+	 * @param string $search Search string.
+	 * @param array  $args   Arguments for retrieving referral data.
+	 * @return array Data arguments modified by search strings.
+	 */
+	public function parse_search( $search, $args ) {
+		if ( strpos( $search, 'referral:' ) !== false ) {
+
+			$args['referral_id'] = absint( trim( str_replace( 'referral:', '', $search ) ) );
+			$this->is_search = false;
+
+		} elseif ( strpos( $search, 'affiliate:' ) !== false ) {
+
+			$args['affiliate_id'] = absint( trim( str_replace( 'affiliate:', '', $search ) ) );
+			$this->is_search = false;
+
+		} elseif ( strpos( $search, 'campaign:' ) !== false ) {
+
+			$args['campaign'] = trim( str_replace( 'campaign:', '', $search ) );
+			$this->is_search = false;
+
+		}
 	}
 
 	/**
@@ -296,11 +307,11 @@ class AffWP_Visits_Table extends List_Table {
 
 		$this->process_bulk_action();
 
-		$data = $this->visits_data();
+		$this->items = $this->visits_data();
 
-		$current_page = $this->get_pagenum();
+		$this->total_count = count( $this->items );
 
-		$this->items = $data;
+		$this->get_pagenum();
 
 		$this->set_pagination_args( array(
 				'total_items' => $this->total_count,

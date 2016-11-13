@@ -649,10 +649,10 @@ class AffWP_Referrals_Table extends List_Table {
 
 		// Unset is_search once search parsing is complete.
 		$args['search'] = $args['is_search'];
-		unset( $args['is_search'] );
-
 		$args['number'] = $this->get_items_per_page( 'affwp_edit_referrals_per_page', $this->per_page );
 		$args['offset'] = $args['number'] * ( $args['page'] - 1 );
+
+		unset( $args['is_search'], $args['page'] );
 
 		$args = wp_parse_args( $this->query_args, $args );
 

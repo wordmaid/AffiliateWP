@@ -626,13 +626,15 @@ class AffWP_Referrals_Table extends List_Table {
 			'is_search'    => false,
 		);
 
-		if( ! empty( $from ) ) {
-			$args['date']['start'] = $from;
+		if( ! empty( $args['from'] ) ) {
+			$args['date']['start'] = $args['from'];
 		}
 
-		if( ! empty( $to ) ) {
-			$args['date']['end'] = $to . ' 23:59:59';;
+		if( ! empty( $args['to'] ) ) {
+			$args['date']['end'] = $args['to'] . ' 23:59:59';
 		}
+
+		unset( $args['from'], $args['to'] );
 
 		$args['order']   = sanitize_text_field( $args['order'] );
 		$args['orderby'] = sanitize_text_field( $args['orderby'] );

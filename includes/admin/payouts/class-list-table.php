@@ -580,83 +580,95 @@ class AffWP_Payouts_Table extends List_Table {
 	 */
 	public function payouts_data() {
 
-		$page    = isset( $_GET['paged'] )   ? absint( $_GET['paged'] )         :           1;
-		$owner   = isset( $_GET['owner'] )   ? absint( $_GET['owner'] )         :           0;
-		$status  = isset( $_GET['status'] )  ? sanitize_key( $_GET['status'] )  :          '';
-		$order   = isset( $_GET['order'] )   ? sanitize_key( $_GET['order'] )   :      'DESC';
-		$orderby = isset( $_GET['orderby'] ) ? sanitize_key( $_GET['orderby'] ) : 'payout_id';
+		$data = array(
+			'page' => isset( $_REQUEST['paged'] ) ? absint( $_REQUEST['paged'] ) : 1,
+		);
 
-		$is_search = false;
+		$args = array(
+			'owner'        => isset( $_REQUEST['owner'] )   ? absint( $_REQUEST['owner'] )         : 0,
+			'status'       => isset( $_REQUEST['status'] )  ? sanitize_key( $_REQUEST['status'] )  : '',
+			'order'        => isset( $_REQUEST['order'] )   ? sanitize_key( $_REQUEST['order'] )   : 'DESC',
+			'orderby'      => isset( $_REQUEST['orderby'] ) ? sanitize_key( $_REQUEST['orderby'] ) : 'payout_id',
+			'payout_id'    => 0,
+			'affiliate_id' => 0,
+			'referrals'    => array(),
+		);
 
-		if ( isset( $_GET['payout_id'] ) ) {
-			$payout_ids = sanitize_text_field( $_GET['payout_id'] );
-		} else {
-			$payout_ids = 0;
+		if ( isset( $_REQUEST['payout_id'] ) ) {
+			$args['payout_id'] = sanitize_text_field( $_REQUEST['payout_id'] );
 		}
 
-		if ( isset( $_GET['affiliate_id'] ) ) {
-			$affiliates = sanitize_text_field( $_GET['affiliate_id'] );
-		} else {
-			$affiliates = 0;
+		if ( isset( $_REQUEST['affiliate_id'] ) ) {
+			$args['affiliate_id'] = sanitize_text_field( $_REQUEST['affiliate_id'] );
 		}
 
-		if ( isset( $_GET['referrals'] ) ) {
-			$referrals = sanitize_text_field( $_GET['referrals'] );
-		} else {
-			$referrals = array();
+		if ( isset( $_REQUEST['referrals'] ) ) {
+			$args['referrals'] = sanitize_text_field( $_REQUEST['referrals'] );
 		}
 
-		if( ! empty( $_GET['s'] ) ) {
+		if ( ! empty( $_REQUEST['s'] ) ) {
 
-			$is_search = true;
+			$this->is_search = true;
 
-			$search = sanitize_text_field( $_GET['s'] );
+			$search = sanitize_text_field( $_REQUEST['s'] );
+			$args   = $this->parse_search( $search, $args );
+		}
 
-			if ( is_numeric( $search ) || preg_match( '/^([0-9]+\,[0-9]+)/', $search, $matches ) ) {
-				// Searching for specific payouts.
-				if ( ! empty( $matches[0] ) ) {
-					$is_search  = false;
-					$payout_ids = array_map( 'absint', explode( ',', $search ) );
-				} else {
-					$payout_ids = absint( $search );
-				}
-			} elseif ( strpos( $search, 'referrals:' ) !== false ) {
-				$referrals = trim( str_replace( array( ' ', 'referrals:' ), '', $search ) );
-				if ( false !== strpos( $referrals, ',' ) ) {
-					$is_search = false;
-					$referrals = array_map( 'absint', explode( ',', $referrals ) );
-				} else {
-					$referrals = absint( $referrals );
-				}
-			} elseif ( strpos( $search, 'affiliate:' ) !== false ) {
-				$affiliates = trim( str_replace( array( ' ', 'affiliate:' ), '', $search ) );
-				if ( false !== strpos( $affiliates, ',' ) ) {
-					$is_search  = false;
-					$affiliates = array_map( 'absint', explode( ',', $affiliates ) );
-				} else {
-					$affiliates = absint( $affiliates );
-				}
+		$args['search'] = $this->is_search;
+		$args['number'] = $this->get_items_per_page( 'affwp_edit_payouts_per_page', $this->per_page );
+		$args['offset'] = $args['number'] * ( $data['page'] - 1 );
+
+		$args = wp_parse_args( $this->query_args, $args );
+
+		return affiliate_wp()->affiliates->payouts->get_payouts( $args );
+	}
+
+	/**
+	 * Parses search strings.
+	 *
+	 * @access public
+	 * @since  1.9.5
+	 *
+	 * @param string $search Search string.
+	 * @param array  $args   Arguments for retrieving payout data.
+	 * @return array Data arguments modified by search strings.
+	 */
+	public function parse_search( $search, $args ) {
+		if ( is_numeric( $search ) || preg_match( '/^([0-9]+\,[0-9]+)/', $search, $matches ) ) {
+
+			// Searching for specific payouts.
+			if ( ! empty( $matches[0] ) ) {
+				$this->is_search   = false;
+				$args['payout_id'] = array_map( 'absint', explode( ',', $search ) );
+			} else {
+				$args['payout_id'] = absint( $search );
+			}
+
+		} elseif ( strpos( $search, 'referrals:' ) !== false ) {
+
+			$referrals = trim( str_replace( array( ' ', 'referrals:' ), '', $search ) );
+
+			if ( false !== strpos( $referrals, ',' ) ) {
+				$this->is_search   = false;
+				$args['referrals'] = array_map( 'absint', explode( ',', $referrals ) );
+			} else {
+				$args['referrals'] = absint( $referrals );
+			}
+
+		} elseif ( strpos( $search, 'affiliate:' ) !== false ) {
+
+			$affiliates = trim( str_replace( array( ' ', 'affiliate:' ), '', $search ) );
+
+			if ( false !== strpos( $affiliates, ',' ) ) {
+				$this->is_search      = false;
+				$args['affiliate_id'] = array_map( 'absint', explode( ',', $affiliates ) );
+			} else {
+				$args['affiliate_id'] = absint( $affiliates );
 			}
 
 		}
 
-		$per_page = $this->get_items_per_page( 'affwp_edit_payouts_per_page', $this->per_page );
-
-		$args = wp_parse_args( $this->query_args, array(
-			'number'       => $per_page,
-			'offset'       => $per_page * ( $page - 1 ),
-			'payout_id'    => $payout_ids,
-			'referrals'    => $referrals,
-			'affiliate_id' => $affiliates,
-			'owner'        => $owner,
-			'status'       => $status,
-			'search'       => $is_search,
-			'orderby'      => $orderby,
-			'order'        => $order
-		) );
-
-		$payouts = affiliate_wp()->affiliates->payouts->get_payouts( $args );
-		return $payouts;
+		return $args;
 	}
 
 	/**
@@ -674,7 +686,7 @@ class AffWP_Payouts_Table extends List_Table {
 
 		$current_page = $this->get_pagenum();
 
-		$status = isset( $_GET['status'] ) ? $_GET['status'] : 'any';
+		$status = isset( $_REQUEST['status'] ) ? $_REQUEST['status'] : 'any';
 
 		switch( $status ) {
 			case 'paid':

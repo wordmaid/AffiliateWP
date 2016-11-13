@@ -383,6 +383,8 @@ class AffWP_Creatives_Table extends List_Table {
 
 		$status = isset( $_GET['status'] ) ? $_GET['status'] : 'any';
 
+		$total_items = 0;
+
 		switch( $status ) {
 			case 'active':
 				$total_items = $this->active_count;

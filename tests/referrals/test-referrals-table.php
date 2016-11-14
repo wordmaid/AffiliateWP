@@ -81,6 +81,81 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \AffWP_Referrals_Table::get_referral_counts()
+	 */
+	public function test_get_referral_counts_should_set_total_count() {
+		$this->list_table->get_referral_counts();
+
+		$this->assertSame( $this->list_table->total_count, count( self::$referrals ) );
+	}
+
+	/**
+	 * @covers \AffWP_Referrals_Table::get_referral_counts()
+	 */
+	public function test_get_referral_counts_should_set_paid_count() {
+		$referrals = $this->factory->referral->create_many( 2, array(
+			'affiliate_id' => self::$affiliate_id,
+			'status'       => 'paid'
+		) );
+
+		$this->list_table->get_referral_counts();
+
+		$this->assertSame( 2, $this->list_table->paid_count );
+
+		// Clean up.
+		foreach ( $referrals as $referral ) {
+			affwp_delete_referral( $referral );
+		}
+	}
+
+	/**
+	 * @covers \AffWP_Referrals_Table::get_referral_counts()
+	 */
+	public function test_get_referral_counts_should_set_unpaid_count() {
+		$referrals = $this->factory->referral->create_many( 2, array(
+			'affiliate_id' => self::$affiliate_id,
+			'status'       => 'unpaid'
+		) );
+
+		$this->list_table->get_referral_counts();
+
+		$this->assertSame( 2, $this->list_table->unpaid_count );
+
+		// Clean up.
+		foreach ( $referrals as $referral ) {
+			affwp_delete_referral( $referral );
+		}
+	}
+
+	/**
+	 * @covers \AffWP_Referrals_Table::get_referral_counts()
+	 */
+	public function test_get_referral_counts_should_set_pending_count() {
+		$this->list_table->get_referral_counts();
+
+		$this->assertSame( 4, $this->list_table->pending_count );
+	}
+
+	/**
+	 * @covers \AffWP_Referrals_Table::get_referral_counts()
+	 */
+	public function test_get_referral_counts_should_set_rejected_count() {
+		$referrals = $this->factory->referral->create_many( 2, array(
+			'affiliate_id' => self::$affiliate_id,
+			'status'       => 'rejected'
+		) );
+
+		$this->list_table->get_referral_counts();
+
+		$this->assertSame( 2, $this->list_table->rejected_count );
+
+		// Clean up.
+		foreach ( $referrals as $referral ) {
+			affwp_delete_referral( $referral );
+		}
+	}
+
+	/**
 	 * @covers \AffWP_Referrals_Table::parse_search()
 	 */
 	public function test_parse_search_invalid_search_should_return_original_arguments() {

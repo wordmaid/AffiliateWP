@@ -13,6 +13,15 @@ use \AffWP\REST\v1\Controller;
 class Endpoints extends Controller {
 
 	/**
+	 * Object type.
+	 *
+	 * @since 1.9.5
+	 * @access public
+	 * @var string
+	 */
+	public $object_type = 'affwp_referral';
+
+	/**
 	 * Route base for referrals.
 	 *
 	 * @since 1.9
@@ -52,6 +61,12 @@ class Endpoints extends Controller {
 			),
 			'permission_callback' => function( $request ) {
 				return current_user_can( 'manage_affiliates' );
+			}
+		) );
+
+		$this->register_field( 'id', array(
+			'get_callback' => function( $object, $field_name, $request, $object_type ) {
+				return $object->ID;
 			}
 		) );
 	}
@@ -105,6 +120,12 @@ class Endpoints extends Controller {
 				'No referrals were found.',
 				array( 'status' => 404 )
 			);
+		} else {
+			$inst = $this;
+			array_map( function( $referral ) use ( $inst, $request ) {
+				$referral = $inst->process_for_output( $referral, $request );
+				return $referral;
+			}, $referrals );
 		}
 
 		return $this->response( $referrals );
@@ -126,6 +147,9 @@ class Endpoints extends Controller {
 				'Invalid referral ID',
 				array( 'status' => 404 )
 			);
+		} else {
+			// Populate extra fields.
+			$referral = $this->process_for_output( $referral, $request );
 		}
 
 		return $this->response( $referral );

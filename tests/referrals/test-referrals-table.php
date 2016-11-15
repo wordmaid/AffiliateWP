@@ -81,6 +81,33 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \AffWP_Referrals_Table::get_columns()
+	 */
+	public function test_get_columns_should_return_default_columns() {
+		$columns = array( 'cb', 'amount', 'affiliate', 'reference', 'description', 'date', 'actions', 'status' );
+
+		$this->assertEqualSets( array_keys( $this->list_table->get_columns() ), $columns );
+	}
+
+	/**
+	 * @covers \AffWP_Referrals_Table::get_sortable_columns()
+	 */
+	public function test_get_sortable_columns_should_return_default_sortable_columns() {
+		$sortable_columns = array( 'amount', 'affiliate', 'date', 'status' );
+
+		$this->assertEqualSets( array_keys( $this->list_table->get_sortable_columns() ), $sortable_columns );
+	}
+
+	/**
+	 * @covers \AffWP_Referrals_Table::get_bulk_actions()
+	 */
+	public function test_get_bulk_actions_should_return_default_bulk_actions() {
+		$bulk_actions = array( 'accept', 'reject', 'mark_as_paid', 'mark_as_unpaid', 'delete' );
+
+		$this->assertEqualSets( array_keys( $this->list_table->get_bulk_actions() ), $bulk_actions );
+	}
+
+	/**
 	 * @covers \AffWP_Referrals_Table::get_referral_counts()
 	 */
 	public function test_get_referral_counts_should_set_total_count() {

@@ -98,7 +98,7 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 
 			foreach( $referrals as $referral ) {
 
-				$data[] = array(
+				$data[] = apply_filters( 'affwp_export_get_data_line', array(
 					'affiliate_id'  => $referral->affiliate_id,
 					'email'         => affwp_get_affiliate_email( $referral->affiliate_id ),
 					'payment_email' => affwp_get_affiliate_payment_email( $referral->affiliate_id ),
@@ -110,7 +110,7 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 					'context'       => $referral->context,
 					'status'        => $referral->status,
 					'date'          => $referral->date
-				);
+				), $referral );
 
 			}
 

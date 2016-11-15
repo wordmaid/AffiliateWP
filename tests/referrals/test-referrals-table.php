@@ -81,6 +81,13 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \AffWP_Referrals_Table::$per_page
+	 */
+	public function test_per_page_default_should_be_30() {
+		$this->assertSame( 30, $this->list_table->per_page );
+	}
+
+	/**
 	 * @covers \AffWP_Referrals_Table::get_columns()
 	 */
 	public function test_get_columns_should_return_default_columns() {

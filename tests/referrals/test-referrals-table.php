@@ -93,7 +93,7 @@ class Tests extends UnitTestCase {
 	public function test_get_columns_should_return_default_columns() {
 		$columns = array( 'cb', 'amount', 'affiliate', 'reference', 'description', 'date', 'actions', 'status' );
 
-		$this->assertEqualSets( array_keys( $this->list_table->get_columns() ), $columns );
+		$this->assertEqualSets( $columns, array_keys( $this->list_table->get_columns() ) );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Tests extends UnitTestCase {
 	public function test_get_sortable_columns_should_return_default_sortable_columns() {
 		$sortable_columns = array( 'amount', 'affiliate', 'date', 'status' );
 
-		$this->assertEqualSets( array_keys( $this->list_table->get_sortable_columns() ), $sortable_columns );
+		$this->assertEqualSets( $sortable_columns, array_keys( $this->list_table->get_sortable_columns() ) );
 	}
 
 	/**
@@ -111,7 +111,7 @@ class Tests extends UnitTestCase {
 	public function test_get_bulk_actions_should_return_default_bulk_actions() {
 		$bulk_actions = array( 'accept', 'reject', 'mark_as_paid', 'mark_as_unpaid', 'delete' );
 
-		$this->assertEqualSets( array_keys( $this->list_table->get_bulk_actions() ), $bulk_actions );
+		$this->assertEqualSets( $bulk_actions, array_keys( $this->list_table->get_bulk_actions() ) );
 	}
 
 	/**
@@ -120,7 +120,7 @@ class Tests extends UnitTestCase {
 	public function test_get_referral_counts_should_set_total_count() {
 		$this->list_table->get_referral_counts();
 
-		$this->assertSame( $this->list_table->total_count, count( self::$referrals ) );
+		$this->assertSame( count( self::$referrals ), $this->list_table->total_count );
 	}
 
 	/**
@@ -195,7 +195,7 @@ class Tests extends UnitTestCase {
 	public function test_parse_search_invalid_search_should_return_original_arguments() {
 		$result = $this->list_table->parse_search( 'foobar', self::$base_search_args );
 
-		$this->assertEqualSets( $result, self::$base_search_args );
+		$this->assertEqualSets( self::$base_search_args, $result );
 	}
 
 	/**
@@ -205,7 +205,7 @@ class Tests extends UnitTestCase {
 		$search = self::$referrals[0];
 		$result = $this->list_table->parse_search( $search, self::$base_search_args );
 
-		$this->assertSame( $result['referral_id'], $search );
+		$this->assertSame( $search, $result['referral_id'] );
 	}
 
 	/**
@@ -224,7 +224,7 @@ class Tests extends UnitTestCase {
 		$search = 'ref:foo';
 		$result = $this->list_table->parse_search( $search, self::$base_search_args );
 
-		$this->assertSame( $result['reference'], 'foo' );
+		$this->assertSame( 'foo', $result['reference'] );
 	}
 
 	/**
@@ -243,7 +243,7 @@ class Tests extends UnitTestCase {
 		$search = 'context:foo';
 		$result = $this->list_table->parse_search( $search, self::$base_search_args );
 
-		$this->assertSame( $result['context'], 'foo' );
+		$this->assertSame( 'foo', $result['context'] );
 	}
 
 	/**
@@ -262,7 +262,7 @@ class Tests extends UnitTestCase {
 		$search = 'affiliate:1';
 		$result = $this->list_table->parse_search( $search, self::$base_search_args );
 
-		$this->assertSame( $result['affiliate_id'], 1 );
+		$this->assertSame( 1, $result['affiliate_id'] );
 	}
 
 	/**
@@ -281,7 +281,7 @@ class Tests extends UnitTestCase {
 		$search = 'campaign:foo';
 		$result = $this->list_table->parse_search( $search, self::$base_search_args );
 
-		$this->assertSame( $result['campaign'], 'foo' );
+		$this->assertSame( 'foo', $result['campaign'] );
 	}
 
 	/**

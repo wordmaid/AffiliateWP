@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-11-12 01:15:59+00:00\n"
+"POT-Creation-Date: 2016-11-15 22:08:30+00:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrew Munro, Sumobi <andrew@sumobi.com>\n"
 "Language-Team: Alexander Manfred Poellmann, vendocrat, Helmar Rudolph "
@@ -70,179 +70,183 @@ msgstr "Benutzer-ID"
 msgid "You do not have permission to %s API keys for this user."
 msgstr "Du hast nicht die Erlaubnis, Daten zu exportieren."
 
-#: includes/REST/v1/class-affiliates-endpoints.php:187
-#: includes/REST/v1/class-referrals-endpoints.php:159
+#: includes/REST/v1/class-affiliates-endpoints.php:217
+#: includes/REST/v1/class-referrals-endpoints.php:183
 msgid "The affiliate ID or array of IDs to query for."
 msgstr ""
 
-#: includes/REST/v1/class-affiliates-endpoints.php:195
+#: includes/REST/v1/class-affiliates-endpoints.php:225
 msgid "The user ID or array of IDs to query payouts for."
 msgstr ""
 
-#: includes/REST/v1/class-affiliates-endpoints.php:203
+#: includes/REST/v1/class-affiliates-endpoints.php:233
 msgid "Affiliate ID or array of IDs to exclude from the query."
 msgstr ""
 
-#: includes/REST/v1/class-affiliates-endpoints.php:210
+#: includes/REST/v1/class-affiliates-endpoints.php:240
 msgid "Terms to search for affiliates. Accepts an affiliate ID or a string."
 msgstr ""
 
-#: includes/REST/v1/class-affiliates-endpoints.php:217
+#: includes/REST/v1/class-affiliates-endpoints.php:247
 msgid ""
 "The affiliate status. Accepts 'active', 'inactive', 'pending', or 'rejected'."
 msgstr ""
 
-#: includes/REST/v1/class-affiliates-endpoints.php:224
+#: includes/REST/v1/class-affiliates-endpoints.php:254
 #, fuzzy
 msgid "Affiliates table column to order by."
 msgstr "Affiliate Plugin Für WordPress"
 
-#: includes/REST/v1/class-affiliates-endpoints.php:231
+#: includes/REST/v1/class-affiliates-endpoints.php:261
 #, fuzzy
 msgid "The date array or string to query affiliate registrations within."
 msgstr "Danke für Deine Registrierung als Affiliate bei {site_name}"
 
-#: includes/REST/v1/class-affiliates-endpoints.php:242
+#: includes/REST/v1/class-affiliates-endpoints.php:272
 msgid "Use any get_affiliates() arguments to modify the response."
 msgstr ""
 
-#: includes/REST/v1/class-creatives-endpoints.php:144
+#: includes/REST/v1/class-creatives-endpoints.php:168
 msgid "The creative ID or array of IDs to query for."
 msgstr ""
 
-#: includes/REST/v1/class-creatives-endpoints.php:152
+#: includes/REST/v1/class-creatives-endpoints.php:176
 msgid "The creative status. Accepts 'active' or 'inactive'."
 msgstr ""
 
-#: includes/REST/v1/class-creatives-endpoints.php:159
+#: includes/REST/v1/class-creatives-endpoints.php:183
 msgid "Creatives table column to order by."
 msgstr ""
 
-#: includes/REST/v1/class-creatives-endpoints.php:170
+#: includes/REST/v1/class-creatives-endpoints.php:194
 msgid "Use any get_creatives() arguments to modify the response."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:156
+#: includes/REST/v1/class-payouts-endpoints.php:180
 msgid "The payout ID or array of IDs to query for."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:164
+#: includes/REST/v1/class-payouts-endpoints.php:188
 msgid "The affiliate ID or array of IDs to query payouts for."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:172
+#: includes/REST/v1/class-payouts-endpoints.php:196
 msgid "Referral ID or array of referral IDs to retrieve payouts for."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:179
+#: includes/REST/v1/class-payouts-endpoints.php:203
 msgid "Payout amount (float) or min/max range (array) to retrieve payouts for."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:186
+#: includes/REST/v1/class-payouts-endpoints.php:210
 msgid ""
 "Comparison operator used with 'amount'. Accepts '>', '<', '>=', '<=', '=', "
 "or '!='."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:193
+#: includes/REST/v1/class-payouts-endpoints.php:217
 msgid "ID or array of IDs for users who generated payouts. Default empty."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:200
+#: includes/REST/v1/class-payouts-endpoints.php:224
 msgid "The payout status. Accepts 'paid' or 'failed'."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:207
+#: includes/REST/v1/class-payouts-endpoints.php:231
 msgid "Payouts table column to order by."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:214
+#: includes/REST/v1/class-payouts-endpoints.php:238
 msgid "The date array or string to query payouts within."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:225
+#: includes/REST/v1/class-payouts-endpoints.php:249
 msgid "Use any get_payouts() arguments to modify the response."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:151
+#: includes/REST/v1/class-referrals-endpoints.php:175
 msgid "The referral ID or array of IDs to query for."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:167
+#: includes/REST/v1/class-referrals-endpoints.php:191
 msgid "Reference information (product ID) for the referral."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:176
+#: includes/REST/v1/class-referrals-endpoints.php:200
 msgid "The context under which the referral was created (integration)."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:184
-#: includes/REST/v1/class-visits-endpoints.php:183
+#: includes/REST/v1/class-referrals-endpoints.php:208
+#: includes/REST/v1/class-visits-endpoints.php:207
 msgid "The associated campaign."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:192
+#: includes/REST/v1/class-referrals-endpoints.php:216
 msgid "The referral status or array of statuses."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:199
+#: includes/REST/v1/class-referrals-endpoints.php:223
 msgid "Referrals table column to order by."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:206
+#: includes/REST/v1/class-referrals-endpoints.php:230
 msgid "A referral ID or the search string to query for referrals with."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:214
+#: includes/REST/v1/class-referrals-endpoints.php:238
 msgid "The date array or string to query referrals within."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:225
+#: includes/REST/v1/class-referrals-endpoints.php:249
 msgid "Use any get_referrals() arguments to modify the response."
 msgstr ""
 
-#: includes/REST/v1/class-rest-controller.php:76
+#: includes/REST/v1/class-rest-controller.php:64
+msgid "object_type must be defined by the extending class: %s"
+msgstr ""
+
+#: includes/REST/v1/class-rest-controller.php:94
 msgid "The number of items to query for. Use -1 for all."
 msgstr ""
 
-#: includes/REST/v1/class-rest-controller.php:83
+#: includes/REST/v1/class-rest-controller.php:101
 msgid "The number of items to offset in the query."
 msgstr ""
 
-#: includes/REST/v1/class-rest-controller.php:90
+#: includes/REST/v1/class-rest-controller.php:108
 msgid "How to order results. Accepts ASC (ascending) or DESC (descending)."
 msgstr ""
 
-#: includes/REST/v1/class-rest-controller.php:96
+#: includes/REST/v1/class-rest-controller.php:114
 msgid "Fields to limit the selection for. Accepts 'ids'. Default '*' for all."
 msgstr ""
 
-#: includes/REST/v1/class-rest-controller.php:128
+#: includes/REST/v1/class-rest-controller.php:146
 msgid ""
 "Scope under which the request is made; determines fields present in response."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:152
+#: includes/REST/v1/class-visits-endpoints.php:176
 msgid "The visit ID or array of IDs to query visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:160
+#: includes/REST/v1/class-visits-endpoints.php:184
 msgid "The affiliate ID or array of IDs to query visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:168
+#: includes/REST/v1/class-visits-endpoints.php:192
 msgid "The referral ID or array of IDs to query visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:176
+#: includes/REST/v1/class-visits-endpoints.php:200
 msgid "The referral status or array of statuses to retrieve visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:191
+#: includes/REST/v1/class-visits-endpoints.php:215
 msgid "Visits table column to order by."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:202
+#: includes/REST/v1/class-visits-endpoints.php:226
 msgid "Use any get_visits() arguments to modify the response."
 msgstr ""
 
@@ -575,14 +579,14 @@ msgstr "Review"
 #: includes/admin/affiliates/class-list-table.php:302
 #: includes/admin/affiliates/class-list-table.php:484
 #: includes/admin/referrals/class-list-table.php:343
-#: includes/admin/referrals/class-list-table.php:479
+#: includes/admin/referrals/class-list-table.php:491
 msgid "Accept"
 msgstr "Akzeptieren"
 
 #: includes/admin/affiliates/class-list-table.php:312
 #: includes/admin/affiliates/class-list-table.php:485
 #: includes/admin/referrals/class-list-table.php:359
-#: includes/admin/referrals/class-list-table.php:480
+#: includes/admin/referrals/class-list-table.php:492
 msgid "Reject"
 msgstr "Ablehnen"
 
@@ -596,7 +600,7 @@ msgstr "Aktivieren"
 #: includes/admin/affiliates/class-list-table.php:488
 #: includes/admin/creatives/class-list-table.php:235
 #: includes/admin/referrals/class-list-table.php:383
-#: includes/admin/referrals/class-list-table.php:483
+#: includes/admin/referrals/class-list-table.php:495
 msgid "Delete"
 msgstr "Löschen"
 
@@ -725,7 +729,7 @@ msgstr "Affiliate Partner's Provisionsratentyp"
 #: includes/integrations/class-edd.php:656
 #: includes/integrations/class-memberpress.php:179
 #: includes/integrations/class-pmp.php:361
-#: includes/integrations/class-woocommerce.php:524
+#: includes/integrations/class-woocommerce.php:540
 #: includes/integrations/class-zippycourses.php:76
 #: includes/integrations/extras/class-exchange-feature.php:31
 msgid "Referral Rate"
@@ -1375,7 +1379,8 @@ msgstr ""
 #: includes/admin/referrals/class-list-table.php:169
 #: includes/admin/referrals/new.php:16
 #: includes/admin/visits/class-list-table.php:105
-#: includes/integrations/class-lifterlms.php:472
+#: includes/integrations/class-lifterlms.php:678
+#: includes/integrations/class-lifterlms.php:704
 #: includes/integrations/class-memberpress.php:259
 msgid "Affiliate"
 msgstr "Affiliate"
@@ -1432,7 +1437,8 @@ msgstr ""
 #: includes/admin/referrals/edit.php:65 includes/admin/referrals/new.php:32
 #: includes/admin/tools/export/class-export-referrals-payout.php:62
 #: includes/admin/tools/export/class-export-referrals.php:64
-#: includes/integrations/class-lifterlms.php:467
+#: includes/integrations/class-lifterlms.php:673
+#: includes/integrations/class-lifterlms.php:700
 #: templates/dashboard-tab-payouts.php:35
 #: templates/dashboard-tab-referrals.php:24
 msgid "Amount"
@@ -1470,7 +1476,8 @@ msgstr "Nicht ausbezahlt"
 #: includes/admin/referrals/class-list-table.php:170
 #: includes/admin/referrals/edit.php:107 includes/admin/referrals/new.php:70
 #: includes/admin/tools/export/class-export-referrals.php:68
-#: includes/integrations/class-lifterlms.php:477
+#: includes/integrations/class-lifterlms.php:683
+#: includes/integrations/class-lifterlms.php:708
 msgid "Reference"
 msgstr "Referenz"
 
@@ -1486,40 +1493,40 @@ msgid "Date"
 msgstr "Datum"
 
 #: includes/admin/referrals/class-list-table.php:311
-#: includes/admin/referrals/class-list-table.php:482
+#: includes/admin/referrals/class-list-table.php:494
 msgid "Mark as Unpaid"
 msgstr "Als unbezahlt markieren"
 
 #: includes/admin/referrals/class-list-table.php:327
-#: includes/admin/referrals/class-list-table.php:481
+#: includes/admin/referrals/class-list-table.php:493
 msgid "Mark as Paid"
 msgstr "Als ausbezahlt markieren"
 
-#: includes/admin/referrals/class-list-table.php:414
+#: includes/admin/referrals/class-list-table.php:426
 msgid "No referrals found."
 msgstr "Keine Verkäufe gefunden."
 
-#: includes/admin/referrals/class-list-table.php:438
+#: includes/admin/referrals/class-list-table.php:450
 msgid "Bulk Actions"
 msgstr "Bulk-Aktionen"
 
-#: includes/admin/referrals/class-list-table.php:450
+#: includes/admin/referrals/class-list-table.php:462
 msgid "Apply"
 msgstr "Anwenden"
 
-#: includes/admin/referrals/class-list-table.php:459
+#: includes/admin/referrals/class-list-table.php:471
 #: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:295
 #: includes/admin/visits/visits.php:52 includes/class-graph.php:408
 msgid "From - mm/dd/yyyy"
 msgstr "Von - mm/tt/jjjj"
 
-#: includes/admin/referrals/class-list-table.php:460
+#: includes/admin/referrals/class-list-table.php:472
 #: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:296
 #: includes/admin/visits/visits.php:53 includes/class-graph.php:410
 msgid "To - mm/dd/yyyy"
 msgstr "Bis - mm/tt/jjjj"
 
-#: includes/admin/referrals/class-list-table.php:464
+#: includes/admin/referrals/class-list-table.php:476
 #: includes/admin/visits/visits.php:61 includes/class-graph.php:415
 msgid "Filter"
 msgstr "Filter"
@@ -3791,16 +3798,16 @@ msgstr "Verkauf #%d für %s verzeichnet für %s"
 #: includes/integrations/class-edd.php:503
 #: includes/integrations/class-pmp.php:257
 #: includes/integrations/class-rcp.php:236
-#: includes/integrations/class-woocommerce.php:339
+#: includes/integrations/class-woocommerce.php:355
 msgid "Affiliate Discount?"
 msgstr "Affiliate-Rabatt?"
 
 #: includes/integrations/class-edd.php:510
 #: includes/integrations/class-jigoshop.php:173
-#: includes/integrations/class-memberpress.php:284
+#: includes/integrations/class-memberpress.php:285
 #: includes/integrations/class-pmp.php:264
 #: includes/integrations/class-rcp.php:243
-#: includes/integrations/class-woocommerce.php:345
+#: includes/integrations/class-woocommerce.php:361
 msgid ""
 "If you would like to connect this discount to an affiliate, enter the name "
 "of the affiliate it belongs to."
@@ -3869,11 +3876,11 @@ msgstr ""
 "Diese Einstellungen werden verwendet, um Affiliate-Einnahmen pro Verkauf zu "
 "berechnen. Bitte leer lassen, um die Standard-Provisionsrate zu verwenden."
 
-#: includes/integrations/class-exchange.php:304
+#: includes/integrations/class-exchange.php:305
 msgid "Affiliate coupon?"
 msgstr "Affiliate-Gutschein?"
 
-#: includes/integrations/class-exchange.php:311
+#: includes/integrations/class-exchange.php:312
 msgid ""
 "If you would like to connect this coupon to an affiliate, enter the name of "
 "the affiliate it belongs to."
@@ -3936,60 +3943,83 @@ msgstr ""
 msgid "Affiliate Data"
 msgstr "Affiliate-Provision"
 
-#: includes/integrations/class-lifterlms.php:81
+#: includes/integrations/class-lifterlms.php:115
+#, fuzzy
+msgid "Referral #%d completed"
+msgstr "Verkauf erfolgreich aktualisiert"
+
+#: includes/integrations/class-lifterlms.php:152
 msgid "Referral not created because WooCommerce was used for payment."
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:117
+#: includes/integrations/class-lifterlms.php:183
+#: includes/integrations/class-lifterlms.php:318
 #, fuzzy
 msgid "Referral not created because affiliate's own account was used."
 msgstr "Nutzerkonto des Affiliates ebenfalls löschen?"
 
-#: includes/integrations/class-lifterlms.php:130
+#: includes/integrations/class-lifterlms.php:194
+#: includes/integrations/class-lifterlms.php:330
 msgid "Referral not created due to 0.00 amount."
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:162
+#: includes/integrations/class-lifterlms.php:230
 #, fuzzy
 msgid "LifterLMS Referral #%d updated successfully."
 msgstr "Verkauf erfolgreich aktualisiert"
 
-#: includes/integrations/class-lifterlms.php:190
+#: includes/integrations/class-lifterlms.php:257
 #, fuzzy
 msgid "Referral #%d created successfully."
 msgstr "Verkauf erfolgreich aktualisiert"
 
-#: includes/integrations/class-lifterlms.php:197
+#: includes/integrations/class-lifterlms.php:263
 #, fuzzy
 msgid "Referral failed to be created."
 msgstr "Neuer Verkauf E-Mail-Betreff"
 
-#: includes/integrations/class-lifterlms.php:238
+#: includes/integrations/class-lifterlms.php:354
+#, fuzzy
+msgid "Referral #%d updated successfully."
+msgstr "Verkauf erfolgreich aktualisiert"
+
+#: includes/integrations/class-lifterlms.php:378
+#, fuzzy
+msgid "Pending referral #%d created successfully."
+msgstr "Verkauf erfolgreich aktualisiert"
+
+#: includes/integrations/class-lifterlms.php:389
+#, fuzzy
+msgid "LifterLMS Referral failed to be created."
+msgstr "Neuer Verkauf E-Mail-Betreff"
+
+#: includes/integrations/class-lifterlms.php:437
 msgid "Search for an affiliate by username or email."
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:246
+#: includes/integrations/class-lifterlms.php:445
 #, fuzzy
 msgid "Affiliate Discount"
 msgstr "Affiliate-Rabatt?"
 
-#: includes/integrations/class-lifterlms.php:247
+#: includes/integrations/class-lifterlms.php:446
 msgid "Connect this coupon with an affiliate."
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:460
+#: includes/integrations/class-lifterlms.php:670
+#: includes/integrations/class-lifterlms.php:696
 #, fuzzy
 msgid "Referral Details"
 msgstr "Provisions-Einstellungen"
 
-#: includes/integrations/class-lifterlms.php:523
+#: includes/integrations/class-lifterlms.php:750
 #: includes/integrations/class-pmp.php:370
 #: includes/integrations/class-rcp.php:408
 #, fuzzy
 msgid "Disable Referrals"
 msgstr "Provisionen deaktivieren"
 
-#: includes/integrations/class-lifterlms.php:524
+#: includes/integrations/class-lifterlms.php:751
 #, fuzzy
 msgid ""
 "Check this box to prevent orders for this %s from generating referral "
@@ -3998,29 +4028,34 @@ msgstr ""
 "Dies verhindert, dass Bestellungen dieses Produkts Affiliate-Kommissionen "
 "generiert."
 
-#: includes/integrations/class-lifterlms.php:532
+#: includes/integrations/class-lifterlms.php:759
 #, fuzzy
 msgid "Enable %s Referral Rate"
 msgstr "Empfehlungsrate"
 
-#: includes/integrations/class-lifterlms.php:533
+#: includes/integrations/class-lifterlms.php:760
 msgid "Check this box to enable %s referral rate overrides"
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:541
+#: includes/integrations/class-lifterlms.php:768
 #, fuzzy
 msgid "%s Referral Rate"
 msgstr "Empfehlungsrate"
 
-#: includes/integrations/class-lifterlms.php:542
+#: includes/integrations/class-lifterlms.php:769
 #, fuzzy
 msgid "Enter a referral rate for this %s"
 msgstr "Erstellen von Affiliate Empfehlungen für dieses Formular aktivieren"
 
+#: includes/integrations/class-lifterlms.php:876
+#, fuzzy
+msgid "Referral #%d rejected"
+msgstr "Empfehlung #%d für %s für %s abgelehnt"
+
 #: includes/integrations/class-memberpress.php:157
 #: includes/integrations/class-rcp.php:367
 #: includes/integrations/class-rcp.php:398
-#: includes/integrations/class-woocommerce.php:489
+#: includes/integrations/class-woocommerce.php:505
 msgid "Affiliate Rate"
 msgstr "Affiliate-Provision"
 
@@ -4076,16 +4111,16 @@ msgid "Disable referrals on this subscription level."
 msgstr "Affiliate-Empfehlungen für dieses Produkt deaktivieren"
 
 #: includes/integrations/class-woocommerce.php:239
-#: includes/integrations/class-woocommerce.php:440
+#: includes/integrations/class-woocommerce.php:456
 msgid "(Variation ID %d)"
 msgstr ""
 
-#: includes/integrations/class-woocommerce.php:485
+#: includes/integrations/class-woocommerce.php:501
 #, fuzzy
 msgid "Configure affiliate rates for this product"
 msgstr "Affiliate-Empfehlungen für dieses Produkt deaktivieren"
 
-#: includes/integrations/class-woocommerce.php:491
+#: includes/integrations/class-woocommerce.php:507
 #: includes/integrations/extras/class-exchange-feature.php:27
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
@@ -4094,11 +4129,11 @@ msgstr ""
 "Diese Einstellungen werden verwendet, um Affiliate-Einnahme pro Verkauf zu "
 "berechnen. Leer lassen um Standard-Provisionsrate zu verwenden."
 
-#: includes/integrations/class-woocommerce.php:495
+#: includes/integrations/class-woocommerce.php:511
 msgid "Disable referrals"
 msgstr "Provisionen deaktivieren"
 
-#: includes/integrations/class-woocommerce.php:496
+#: includes/integrations/class-woocommerce.php:512
 msgid ""
 "This will prevent orders of this product from generating referral "
 "commissions for affiliates."
@@ -4106,16 +4141,16 @@ msgstr ""
 "Dies verhindert, dass Bestellungen dieses Produkts Affiliate-Kommissionen "
 "generiert."
 
-#: includes/integrations/class-woocommerce.php:522
+#: includes/integrations/class-woocommerce.php:538
 msgid "Configure affiliate rates for this product variation"
 msgstr ""
 
-#: includes/integrations/class-woocommerce.php:525
+#: includes/integrations/class-woocommerce.php:541
 #, fuzzy
 msgid "Referral rate (optional)"
 msgstr "Empfehlungsbeschreibung"
 
-#: includes/integrations/class-woocommerce.php:527
+#: includes/integrations/class-woocommerce.php:543
 #, fuzzy
 msgid "Disable referrals for this product variation"
 msgstr "Affiliate-Empfehlungen für dieses Produkt deaktivieren"

@@ -239,12 +239,12 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				$product['name'] .= ' ' . sprintf( __( '(Variation ID %d)', 'affiliate-wp' ), $product['variation_id'] );
 			}
 
-			$products[] = array(
+			$products[] = apply_filters( 'affwp_woocommerce_get_products_line', array(
 				'name'            => $product['name'],
 				'id'              => $product['product_id'],
 				'price'           => $amount,
 				'referral_amount' => $this->calculate_referral_amount( $amount, $order_id, $product['product_id'] )
-			);
+			), $product );
 
 		}
 

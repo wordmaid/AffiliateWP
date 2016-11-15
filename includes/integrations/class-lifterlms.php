@@ -414,11 +414,16 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
-
+		
+		
+		$user_id      = 0;
+		$user_name    = '';
 		$affiliate_id = get_post_meta( $post->ID, '_affwp_affiliate_id', true );
-		$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
-		$user         = get_userdata( $user_id );
-		$user_name    = ( $user ) ? $user->user_login : '';
+		if( $affiliate_id ) {
+			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
+			$user         = get_userdata( $user_id );
+			$user_name    = $user ? $user->user_login : '';
+		}
 
 		$html = '
 			<span class="affwp-ajax-search-wrap">

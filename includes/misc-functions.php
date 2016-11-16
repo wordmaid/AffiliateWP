@@ -917,7 +917,7 @@ function affwp_admin_url( $type, $query_args = array() ) {
  */
 function affwp_admin_link( $type, $label, $attributes = array(), $query_args = array() ) {
 	$attributes = wp_parse_args( $attributes, array(
-		'href' => affwp_admin_url( $type, $query_args )
+		'href' => esc_url( affwp_admin_url( $type, $query_args ) )
 	) );
 
 	$output = '';

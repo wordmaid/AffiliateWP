@@ -234,4 +234,51 @@ class Tests extends UnitTestCase {
 		$this->assertSame( home_url( '?action=logout' ), affwp_get_logout_url() );
 	}
 
+	/**
+	 * @dataProvider _admin_urls
+	 * @covers ::affwp_admin_url()
+	 */
+	public function test_admin_url_types( $expected, $actual ) {
+		$this->assertSame( $expected, $actual );
+	}
+
+
+	/**
+	 * Data provider for admin URLs tests.
+	 */
+	public function _admin_urls() {
+		return array(
+			array( $this->_build_admin_url( '' ),           affwp_admin_url( '' ) ),
+			array( $this->_build_admin_url( 'affiliates' ), affwp_admin_url( 'affiliates' ) ),
+			array( $this->_build_admin_url( 'creatives' ),  affwp_admin_url( 'creatives' ) ),
+			array( $this->_build_admin_url( 'payouts' ),    affwp_admin_url( 'payouts' ) ),
+			array( $this->_build_admin_url( 'referrals' ),  affwp_admin_url( 'referrals' ) ),
+			array( $this->_build_admin_url( 'visits' ),     affwp_admin_url( 'visits' ) ),
+			array( $this->_build_admin_url( 'settings' ),   affwp_admin_url( 'settings' ) ),
+			array( $this->_build_admin_url( 'tools' ),      affwp_admin_url( 'tools' ) ),
+			array( $this->_build_admin_url( 'add-ons' ),    affwp_admin_url( 'add-ons' ) ),
+		);
+	}
+
+	/**
+	 * Helper that builds a simple admin URL.
+	 *
+	 * @param string $type Admin URL type.
+	 * @return string Admin URL.
+	 */
+	protected function _build_admin_url( $type ) {
+		if ( ! empty( $type ) ) {
+			$type = "-{$type}";
+		}
+
+		return 'http://' . WP_TESTS_DOMAIN . "/wp-admin/admin.php?page=affiliate-wp{$type}";
+	}
+
+	/**
+	 * @covers ::affwp_admin_url()
+	 */
+	public function test_admin_url_should_return_affiliate_wp_page_if_invalid_type() {
+		$this->assertSame( 'http://' . WP_TESTS_DOMAIN . '/wp-admin/admin.php?page=affiliate-wp', affwp_admin_url( 'foo' ) );
+	}
+
 }

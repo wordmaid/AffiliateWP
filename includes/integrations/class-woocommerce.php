@@ -239,12 +239,28 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 				$product['name'] .= ' ' . sprintf( __( '(Variation ID %d)', 'affiliate-wp' ), $product['variation_id'] );
 			}
 
-			$products[] = array(
+			/**
+			 * Filters an individual WooCommerce products line as stored in the referral record.
+			 *
+			 * @since 1.9.5
+			 *
+			 * @param array $line {
+			 *     A WooCommerce product data line.
+			 *
+			 *     @type string $name            Product name.
+			 *     @type int    $id              Product ID.
+			 *     @type float  $amount          Product amount.
+			 *     @type float  $referral_amount Referral amount.
+			 * }
+			 * @param array $product  Product data.
+			 * @param int   $order_id Order ID.
+			 */
+			$products[] = apply_filters( 'affwp_woocommerce_get_products_line', array(
 				'name'            => $product['name'],
 				'id'              => $product['product_id'],
 				'price'           => $amount,
 				'referral_amount' => $this->calculate_referral_amount( $amount, $order_id, $product['product_id'] )
-			);
+			), $product, $order_id );
 
 		}
 

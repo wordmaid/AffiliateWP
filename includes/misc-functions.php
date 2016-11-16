@@ -871,18 +871,10 @@ function affwp_enqueue_script( $handle, $context = '' ) {
 function affwp_admin_url( $type, $query_args = array() ) {
 	$page = 'affiliate-wp';
 
-	/**
-	 * Filters the whitelist of AffiliateWP admin URL types for use with affwp_admin_url().
-	 *
-	 * @since 1.9.6
-	 *
-	 * @param array $types Admin URL types. Defaults include 'affiliates', 'creatives', 'payouts',
-	 *                     'referrals', 'visits', 'settings', 'tools', and 'add-ons'.
-	 */
-	$whitelist = apply_filters( 'affwp_admin_url_types', array(
+	$whitelist = array(
 		'affiliates', 'creatives', 'payouts', 'referrals',
 		'visits', 'settings', 'tools', 'add-ons'
-	) );
+	);
 
 	if ( in_array( $type, $whitelist, true ) ) {
 		$page = "affiliate-wp-{$type}";

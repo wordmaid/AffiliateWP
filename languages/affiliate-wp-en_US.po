@@ -4,11 +4,10 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
 <<<<<<< HEAD:languages/affiliate-wp-en_US.po
 "POT-Creation-Date: 2016-10-20 23:25:02+00:00\n"
-"PO-Revision-Date: 2016-11-11 16:23+0100\n"
-=======
+"PO-Revision-Date: 2016-11-11 16:23+0100\n" 
 "POT-Creation-Date: 2016-11-12 01:15:59+00:00\n"
 "PO-Revision-Date: 2015-04-20 10:40-0600\n"
->>>>>>> master:languages/affiliate-wp-en.po
+languages/affiliate-wp-en.po
 "Last-Translator: AffiliateWP <support@affiliatewp.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
 "Language: en_US\n"

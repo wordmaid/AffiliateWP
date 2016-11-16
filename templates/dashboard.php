@@ -101,8 +101,8 @@
 
 			<?php
 			/**
-			 * Fires immediately after most core Affiliate Area tabs are output (if configured),
-			 * but before the 'Log Out' tab is output (if configured).
+			 * Fires immediately after core Affiliate Area tabs are output,
+			 * but before the 'Log Out' tab is output (if enabled).
 			 *
 			 * @since 0.2
 			 *

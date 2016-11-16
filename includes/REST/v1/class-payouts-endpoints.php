@@ -13,6 +13,15 @@ use AffWP\REST\v1\Controller;
 class Endpoints extends Controller {
 
 	/**
+	 * Object type.
+	 *
+	 * @since 1.9.5
+	 * @access public
+	 * @var string
+	 */
+	public $object_type = 'affwp_payout';
+
+	/**
 	 * Route base for payouts.
 	 *
 	 * @access public
@@ -53,6 +62,12 @@ class Endpoints extends Controller {
 			),
 			'permission_callback' => function( $request ) {
 				return current_user_can( 'manage_affiliates' );
+			}
+		) );
+
+		$this->register_field( 'id', array(
+			'get_callback' => function( $object, $field_name, $request, $object_type ) {
+				return $object->ID;
 			}
 		) );
 	}
@@ -109,6 +124,12 @@ class Endpoints extends Controller {
 				'No payouts were found.',
 				array( 'status' => 404 )
 			);
+		} else {
+			$inst = $this;
+			array_map( function( $payout ) use ( $inst, $request ) {
+				$payout = $inst->process_for_output( $payout, $request );
+				return $payout;
+			}, $payouts );
 		}
 
 		return $this->response( $payouts );
@@ -130,6 +151,9 @@ class Endpoints extends Controller {
 				'Invalid payout ID',
 				array( 'status' => 404 )
 			);
+		} else {
+			// Populate extra fields.
+			$payout = $this->process_for_output( $payout, $request );
 		}
 
 		return $this->response( $payout );

@@ -857,3 +857,94 @@ function affwp_enqueue_script( $handle, $context = '' ) {
 		wp_enqueue_script( $handle );
 	}
 }
+
+/**
+ * Generates an AffiliateWP admin URL based on the given type.
+ *
+ * @since 1.9.6
+ *
+ * @param string $type       Type of admin URL. Accepts 'affiliates', 'creatives', 'payouts',
+ *                           'referrals', 'visits', 'settings', 'tools', or 'add-ons'.
+ * @param array  $query_args Optional. Query arguments to append to the admin URL. Default empty array.
+ * @return string Constructed admin URL.
+ */
+function affwp_admin_url( $type, $query_args = array() ) {
+	$page = 'affiliate-wp';
+
+	/**
+	 * Filters the whitelist of AffiliateWP admin URL types for use with affwp_admin_url().
+	 *
+	 * @since 1.9.6
+	 *
+	 * @param array $types Admin URL types. Defaults include 'affiliates', 'creatives', 'payouts',
+	 *                     'referrals', 'visits', 'settings', 'tools', and 'add-ons'.
+	 */
+	$whitelist = apply_filters( 'affwp_admin_url_types', array(
+		'affiliates', 'creatives', 'payouts', 'referrals',
+		'visits', 'settings', 'tools', 'add-ons'
+	) );
+
+	if ( in_array( $type, $whitelist, true ) ) {
+		$page = "affiliate-wp-{$type}";
+	}
+
+	$admin_query_args = array_merge( array( 'page' => $page ), $query_args );
+
+	$url = add_query_arg( $admin_query_args, admin_url( 'admin.php' ) );
+
+	/**
+	 * Filters the AffiliateWP admin URL.
+	 *
+	 * @since 1.9.6
+	 *
+	 * @param string $url        Admin URL.
+	 * @param string $type       Admin URL type.
+	 * @param array  $query_args Query arguments originally passed to affwp_admin_url().
+	 */
+	return apply_filters( 'affwp_admin_url', $url, $type, $query_args );
+}
+
+/**
+ * Generates an AffiliateWP admin link based on the given type.
+ *
+ * @since 1.9.6
+ *
+ * @param string $type       Admin link type.
+ * @param string $label      Link label.
+ * @param array  $attributes Optional. Link attributes as key/value pairs.
+ * @param array  $query_args Optional. Query arguments used to build the admin URL.
+ * @return string HTML markup for the admin link.
+ */
+function affwp_admin_link( $type, $label, $attributes = array(), $query_args = array() ) {
+	$attributes = wp_parse_args( $attributes, array(
+		'href' => affwp_admin_url( $type, $query_args )
+	) );
+
+	$output = '';
+	$i      = 0;
+	$count  = count( $attributes );
+
+	foreach ( $attributes as $attribute => $value ) {
+		$output .= sprintf( '%1$s="%2$s"', $attribute, esc_attr( $value ) );
+
+		if ( ++$i !== $count ) {
+			$output .= ' ';
+		}
+
+	}
+
+	$link = sprintf( '<a %1$s>%2$s</a>', $output, $label );
+
+	/**
+	 * Filters the AffiliateWP admin link output.
+	 *
+	 * @since 1.9.6
+	 *
+	 * @param string $link       HTML markup for the admin link.
+	 * @param string $type       Admin link type.
+	 * @param string $label      Link label.
+	 * @param array  $attributes Link attributes as key/value pairs.
+	 * @param array  $query_args Query arguments used to build the admin URL.
+	 */
+	return apply_filters( 'affwp_admin_link', $link, $type, $label, $attributes, $query_args );
+}

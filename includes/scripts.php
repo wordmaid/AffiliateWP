@@ -142,7 +142,10 @@ function affwp_frontend_scripts_and_styles() {
 	// Always enqueue the 'affwp-forms' stylesheet.
 	affwp_enqueue_style( 'affwp-forms' );
 
-	add_filter( 'affwp_enqueue_script_affwp-recaptcha', 'affwp_is_recaptcha_enabled' );
+	// Enqueue the 'affwp-recaptcha' script if reCAPTCHA is enabled
+	if ( affwp_is_recaptcha_enabled() ) {
+		affwp_enqueue_script( 'affwp-recaptcha' );
+	}
 
 }
 add_action( 'wp_enqueue_scripts', 'affwp_frontend_scripts_and_styles' );

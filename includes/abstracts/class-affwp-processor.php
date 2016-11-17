@@ -20,7 +20,7 @@ abstract class Batch_Processor {
 		$this->setup();
 
 		add_action( 'wp_enqueue_scripts',          array( $this, 'localize_script' ) );
-		add_action( 'wp_ajax_process_single_item', array( $this, 'process_item'    ) );
+		add_action( 'wp_ajax_process_single_step', array( $this, 'process_item'    ) );
 	}
 
 	protected function setup() {
@@ -64,11 +64,11 @@ abstract class Batch_Processor {
 	abstract public function set_items();
 
 	/**
-	 * Handles processing a single item and returning a JSON response to the Ajax script.
+	 * Handles processing a single step and returning a JSON response to the Ajax script.
 	 *
 	 * @access public
 	 * @since  2.0
 	 * @abstract
 	 */
-	abstract public function process_item();
+	abstract public function process_step();
 }

@@ -320,4 +320,35 @@ abstract class Controller {
 
 		return array_merge( $fields, $core_fields );
 	}
+
+	/**
+	 * Adds the schema from additional fields to a schema array.
+	 *
+	 * Back-compat shim for WP_REST_Controller::get_endpoint_args_for_item_schema().
+	 *
+	 * The type of object is inferred from the passed schema.
+	 *
+	 * @access protected
+	 * @since  1.0.0
+	 *
+	 * @param array $schema Schema array.
+	 * @return array Modified Schema array.
+	 */
+	protected function add_additional_fields_schema( $schema ) {
+		$object_type = $this->get_object_type();
+
+		$additional_fields = $this->get_additional_fields( $object_type );
+
+		foreach ( $additional_fields as $field_name => $field_options ) {
+			if ( ! $field_options['schema'] ) {
+				continue;
+			}
+
+			$schema['properties'][ $field_name ] = $field_options['schema'];
+		}
+
+		return $schema;
+	}
+
+
 }

@@ -288,7 +288,8 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
-
+		
+		$user_id      = 0;
 		$user_name    = '';
 		$coupon_id    = ! empty( $_REQUEST['post'] ) ? absint( $_REQUEST['post'] ) : 0;
 		$affiliate_id = get_post_meta( $coupon_id, 'affwp_coupon_affiliate', true );

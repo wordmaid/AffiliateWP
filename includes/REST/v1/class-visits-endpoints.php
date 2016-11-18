@@ -13,6 +13,15 @@ use \AffWP\REST\v1\Controller;
 class Endpoints extends Controller {
 
 	/**
+	 * Object type.
+	 *
+	 * @since 1.9.5
+	 * @access public
+	 * @var string
+	 */
+	public $object_type = 'affwp_visit';
+
+	/**
 	 * Route base for visits.
 	 *
 	 * @since 1.9
@@ -55,6 +64,12 @@ class Endpoints extends Controller {
 				return current_user_can( 'manage_affiliates' );
 			}
 		) );
+
+		$this->register_field( 'id', array(
+			'get_callback' => function( $object, $field_name, $request, $object_type ) {
+				return $object->ID;
+			}
+		) );
 	}
 
 	/**
@@ -64,7 +79,7 @@ class Endpoints extends Controller {
 	 * @access public
 	 *
 	 * @param \WP_REST_Request $request Request arguments.
-	 * @return array|\WP_Error Array of visits, otherwise WP_Error.
+	 * @return \WP_REST_Response|\WP_Error Array of visits, otherwise WP_Error.
 	 */
 	public function get_items( $request ) {
 
@@ -106,6 +121,12 @@ class Endpoints extends Controller {
 				'No visits were found.',
 				array( 'status' => 404 )
 			);
+		} else {
+			$inst = $this;
+			array_map( function( $visit ) use ( $inst, $request ) {
+				$visit = $inst->process_for_output( $visit, $request );
+				return $visit;
+			}, $visits );
 		}
 
 		return $this->response( $visits );
@@ -127,6 +148,9 @@ class Endpoints extends Controller {
 				'Invalid visit ID',
 				array( 'status' => 404 )
 			);
+		} else {
+			// Populate extra fields.
+			$visit = $this->process_for_output( $visit, $request );
 		}
 
 		return $this->response( $visit );

@@ -28,21 +28,7 @@ function affwp_settings_admin() {
 	?>
 	<div class="wrap">
 		<h2 class="nav-tab-wrapper">
-			<?php
-			foreach( affwp_get_settings_tabs() as $tab_id => $tab_name ) {
-
-				$tab_url = add_query_arg( array(
-					'settings-updated' => false,
-					'tab' => $tab_id
-				) );
-
-				$active = $active_tab == $tab_id ? ' nav-tab-active' : '';
-
-				echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
-					echo esc_html( $tab_name );
-				echo '</a>';
-			}
-			?>
+			<?php affwp_navigation_tabs( affwp_get_settings_tabs(), $active_tab, array( 'settings-updated' => false ) ); ?>
 		</h2>
 		<div id="tab_container">
 			<form method="post" action="options.php">

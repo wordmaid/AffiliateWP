@@ -86,6 +86,15 @@ final class Payout extends \AffWP\Base_Object {
 	public $date;
 
 	/**
+	 * ID of the user who generated the payout.
+	 *
+	 * @access public
+	 * @since  1.9.5
+	 * @var    int
+	 */
+	public $owner = 0;
+
+	/**
 	 * Token to use for generating cache keys.
 	 *
 	 * @access public
@@ -132,7 +141,7 @@ final class Payout extends \AffWP\Base_Object {
 	 * @return mixed Sanitized field value.
 	 */
 	public static function sanitize_field( $field, $value ) {
-		if ( in_array( $field, array( 'payout_id', 'affiliate_id', 'ID' ) ) ) {
+		if ( in_array( $field, array( 'payout_id', 'affiliate_id', 'ID', 'owner' ) ) ) {
 			$value = (int) $value;
 		}
 

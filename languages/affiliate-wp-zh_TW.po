@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-10-20 23:25:02+00:00\n"
+"POT-Creation-Date: 2016-11-15 22:08:30+00:00\n"
 "PO-Revision-Date: 2016-07-02 16:32-0500\n"
 "Last-Translator: \n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
@@ -50,7 +50,7 @@ msgstr ""
 #: includes/admin/affiliates/actions.php:138
 #: includes/admin/affiliates/actions.php:142
 #: includes/admin/class-addon-updater.php:283
-#: includes/admin/class-notices.php:358 includes/admin/creatives/actions.php:16
+#: includes/admin/class-notices.php:414 includes/admin/creatives/actions.php:16
 #: includes/admin/creatives/actions.php:44
 #: includes/admin/creatives/actions.php:48
 #: includes/admin/creatives/actions.php:52
@@ -73,175 +73,183 @@ msgstr "用戶ID"
 msgid "You do not have permission to %s API keys for this user."
 msgstr "你沒有權限匯出數據"
 
-#: includes/REST/v1/class-affiliates-endpoints.php:187
-#: includes/REST/v1/class-referrals-endpoints.php:159
+#: includes/REST/v1/class-affiliates-endpoints.php:217
+#: includes/REST/v1/class-referrals-endpoints.php:183
 msgid "The affiliate ID or array of IDs to query for."
 msgstr ""
 
-#: includes/REST/v1/class-affiliates-endpoints.php:195
+#: includes/REST/v1/class-affiliates-endpoints.php:225
 msgid "The user ID or array of IDs to query payouts for."
 msgstr ""
 
-#: includes/REST/v1/class-affiliates-endpoints.php:203
+#: includes/REST/v1/class-affiliates-endpoints.php:233
 msgid "Affiliate ID or array of IDs to exclude from the query."
 msgstr ""
 
-#: includes/REST/v1/class-affiliates-endpoints.php:210
+#: includes/REST/v1/class-affiliates-endpoints.php:240
 msgid "Terms to search for affiliates. Accepts an affiliate ID or a string."
 msgstr ""
 
-#: includes/REST/v1/class-affiliates-endpoints.php:217
+#: includes/REST/v1/class-affiliates-endpoints.php:247
 msgid ""
 "The affiliate status. Accepts 'active', 'inactive', 'pending', or 'rejected'."
 msgstr ""
 
-#: includes/REST/v1/class-affiliates-endpoints.php:224
+#: includes/REST/v1/class-affiliates-endpoints.php:254
 #, fuzzy
 msgid "Affiliates table column to order by."
 msgstr "WordPress 聯盟夥伴外掛"
 
-#: includes/REST/v1/class-affiliates-endpoints.php:231
+#: includes/REST/v1/class-affiliates-endpoints.php:261
 #, fuzzy
 msgid "The date array or string to query affiliate registrations within."
 msgstr "感謝你登記成為 {site_name} 的聯盟夥伴。"
 
-#: includes/REST/v1/class-affiliates-endpoints.php:242
+#: includes/REST/v1/class-affiliates-endpoints.php:272
 msgid "Use any get_affiliates() arguments to modify the response."
 msgstr ""
 
-#: includes/REST/v1/class-creatives-endpoints.php:144
+#: includes/REST/v1/class-creatives-endpoints.php:168
 msgid "The creative ID or array of IDs to query for."
 msgstr ""
 
-#: includes/REST/v1/class-creatives-endpoints.php:152
+#: includes/REST/v1/class-creatives-endpoints.php:176
 msgid "The creative status. Accepts 'active' or 'inactive'."
 msgstr ""
 
-#: includes/REST/v1/class-creatives-endpoints.php:159
+#: includes/REST/v1/class-creatives-endpoints.php:183
 msgid "Creatives table column to order by."
 msgstr ""
 
-#: includes/REST/v1/class-creatives-endpoints.php:170
+#: includes/REST/v1/class-creatives-endpoints.php:194
 msgid "Use any get_creatives() arguments to modify the response."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:155
+#: includes/REST/v1/class-payouts-endpoints.php:180
 msgid "The payout ID or array of IDs to query for."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:163
+#: includes/REST/v1/class-payouts-endpoints.php:188
 msgid "The affiliate ID or array of IDs to query payouts for."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:171
+#: includes/REST/v1/class-payouts-endpoints.php:196
 msgid "Referral ID or array of referral IDs to retrieve payouts for."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:178
+#: includes/REST/v1/class-payouts-endpoints.php:203
 msgid "Payout amount (float) or min/max range (array) to retrieve payouts for."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:185
+#: includes/REST/v1/class-payouts-endpoints.php:210
 msgid ""
 "Comparison operator used with 'amount'. Accepts '>', '<', '>=', '<=', '=', "
 "or '!='."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:192
+#: includes/REST/v1/class-payouts-endpoints.php:217
+msgid "ID or array of IDs for users who generated payouts. Default empty."
+msgstr ""
+
+#: includes/REST/v1/class-payouts-endpoints.php:224
 msgid "The payout status. Accepts 'paid' or 'failed'."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:199
+#: includes/REST/v1/class-payouts-endpoints.php:231
 msgid "Payouts table column to order by."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:206
+#: includes/REST/v1/class-payouts-endpoints.php:238
 msgid "The date array or string to query payouts within."
 msgstr ""
 
-#: includes/REST/v1/class-payouts-endpoints.php:217
+#: includes/REST/v1/class-payouts-endpoints.php:249
 msgid "Use any get_payouts() arguments to modify the response."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:151
+#: includes/REST/v1/class-referrals-endpoints.php:175
 msgid "The referral ID or array of IDs to query for."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:167
+#: includes/REST/v1/class-referrals-endpoints.php:191
 msgid "Reference information (product ID) for the referral."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:176
+#: includes/REST/v1/class-referrals-endpoints.php:200
 msgid "The context under which the referral was created (integration)."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:184
-#: includes/REST/v1/class-visits-endpoints.php:183
+#: includes/REST/v1/class-referrals-endpoints.php:208
+#: includes/REST/v1/class-visits-endpoints.php:207
 msgid "The associated campaign."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:192
+#: includes/REST/v1/class-referrals-endpoints.php:216
 msgid "The referral status or array of statuses."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:199
+#: includes/REST/v1/class-referrals-endpoints.php:223
 msgid "Referrals table column to order by."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:206
+#: includes/REST/v1/class-referrals-endpoints.php:230
 msgid "A referral ID or the search string to query for referrals with."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:214
+#: includes/REST/v1/class-referrals-endpoints.php:238
 msgid "The date array or string to query referrals within."
 msgstr ""
 
-#: includes/REST/v1/class-referrals-endpoints.php:225
+#: includes/REST/v1/class-referrals-endpoints.php:249
 msgid "Use any get_referrals() arguments to modify the response."
 msgstr ""
 
-#: includes/REST/v1/class-rest-controller.php:76
+#: includes/REST/v1/class-rest-controller.php:64
+msgid "object_type must be defined by the extending class: %s"
+msgstr ""
+
+#: includes/REST/v1/class-rest-controller.php:94
 msgid "The number of items to query for. Use -1 for all."
 msgstr ""
 
-#: includes/REST/v1/class-rest-controller.php:83
+#: includes/REST/v1/class-rest-controller.php:101
 msgid "The number of items to offset in the query."
 msgstr ""
 
-#: includes/REST/v1/class-rest-controller.php:90
+#: includes/REST/v1/class-rest-controller.php:108
 msgid "How to order results. Accepts ASC (ascending) or DESC (descending)."
 msgstr ""
 
-#: includes/REST/v1/class-rest-controller.php:96
+#: includes/REST/v1/class-rest-controller.php:114
 msgid "Fields to limit the selection for. Accepts 'ids'. Default '*' for all."
 msgstr ""
 
-#: includes/REST/v1/class-rest-controller.php:128
+#: includes/REST/v1/class-rest-controller.php:146
 msgid ""
 "Scope under which the request is made; determines fields present in response."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:152
+#: includes/REST/v1/class-visits-endpoints.php:176
 msgid "The visit ID or array of IDs to query visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:160
+#: includes/REST/v1/class-visits-endpoints.php:184
 msgid "The affiliate ID or array of IDs to query visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:168
+#: includes/REST/v1/class-visits-endpoints.php:192
 msgid "The referral ID or array of IDs to query visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:176
+#: includes/REST/v1/class-visits-endpoints.php:200
 msgid "The referral status or array of statuses to retrieve visits for."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:191
+#: includes/REST/v1/class-visits-endpoints.php:215
 msgid "Visits table column to order by."
 msgstr ""
 
-#: includes/REST/v1/class-visits-endpoints.php:202
+#: includes/REST/v1/class-visits-endpoints.php:226
 msgid "Use any get_visits() arguments to modify the response."
 msgstr ""
 
@@ -263,52 +271,52 @@ msgid "No data for the current date range."
 msgstr ""
 
 #: includes/abstracts/class-affwp-reports-tab.php:370
-#: includes/class-graph.php:335
+#: includes/class-graph.php:353
 msgid "Today"
 msgstr "今天"
 
 #: includes/abstracts/class-affwp-reports-tab.php:371
-#: includes/class-graph.php:336
+#: includes/class-graph.php:354
 msgid "Yesterday"
 msgstr "昨天"
 
 #: includes/abstracts/class-affwp-reports-tab.php:372
-#: includes/class-graph.php:337
+#: includes/class-graph.php:355
 msgid "This Week"
 msgstr "本週"
 
 #: includes/abstracts/class-affwp-reports-tab.php:373
-#: includes/class-graph.php:338
+#: includes/class-graph.php:356
 msgid "Last Week"
 msgstr "上週"
 
 #: includes/abstracts/class-affwp-reports-tab.php:374
-#: includes/class-graph.php:339
+#: includes/class-graph.php:357
 msgid "This Month"
 msgstr "本月"
 
 #: includes/abstracts/class-affwp-reports-tab.php:375
-#: includes/class-graph.php:340
+#: includes/class-graph.php:358
 msgid "Last Month"
 msgstr "上個月"
 
 #: includes/abstracts/class-affwp-reports-tab.php:376
-#: includes/class-graph.php:341
+#: includes/class-graph.php:359
 msgid "This Quarter"
 msgstr "本季"
 
 #: includes/abstracts/class-affwp-reports-tab.php:377
-#: includes/class-graph.php:342
+#: includes/class-graph.php:360
 msgid "Last Quarter"
 msgstr "上季"
 
 #: includes/abstracts/class-affwp-reports-tab.php:378
-#: includes/class-graph.php:343
+#: includes/class-graph.php:361
 msgid "This Year"
 msgstr "今年"
 
 #: includes/abstracts/class-affwp-reports-tab.php:379
-#: includes/class-graph.php:344
+#: includes/class-graph.php:362
 msgid "Last Year"
 msgstr "去年"
 
@@ -334,15 +342,15 @@ msgstr ""
 msgid "You do not have permission to install plugin updates"
 msgstr "你沒有權限對安裝的外掛程式做更新"
 
-#: includes/admin/add-ons.php:24
+#: includes/admin/add-ons.php:33
 msgid "Add-ons for AffiliateWP"
 msgstr "AffiliateWP附加功能"
 
-#: includes/admin/add-ons.php:26 includes/admin/add-ons.php:59
+#: includes/admin/add-ons.php:35 includes/admin/add-ons.php:53
 msgid "Browse all add-ons"
 msgstr "瀏覽所有附加功能"
 
-#: includes/admin/add-ons.php:29
+#: includes/admin/add-ons.php:38
 msgid ""
 "These add-ons <em><strong>add functionality</strong></em> to your "
 "AffiliateWP-powered site."
@@ -350,7 +358,7 @@ msgstr ""
 "這些附加功能<em><strong>提供更多功能性</strong></em> 到你已經安裝AffiliateWP"
 "的網站。"
 
-#: includes/admin/add-ons.php:51
+#: includes/admin/add-ons.php:45
 msgid ""
 "Pro add-ons are only available with a Professional or Ultimate license. If "
 "you already have one of these licenses, simply <a href=\"%s\">log in to your "
@@ -360,7 +368,7 @@ msgstr ""
 "經有其中一種 licenses, 只要 <a href=\"%s\">登入你的帳號</a> 並下載任何你需要"
 "的附加功能。"
 
-#: includes/admin/add-ons.php:52
+#: includes/admin/add-ons.php:46
 msgid ""
 "If you have a Personal or Plus license, you can easily upgrade from your "
 "account page to <a href=\"%s\">get access to all of these add-ons</a>!"
@@ -368,11 +376,11 @@ msgstr ""
 "如果你已經有Personal或是Plus license, 你能夠很容易的從你的帳號頁面升級和 <a "
 "href=\"%s\">存取這些附加功能</a>!"
 
-#: includes/admin/add-ons.php:54
+#: includes/admin/add-ons.php:48
 msgid "Our official free add-ons are available to all license holders!"
 msgstr "我們官方免費的附加功能是所有型態的license持有人可以使用的!"
 
-#: includes/admin/add-ons.php:95
+#: includes/admin/add-ons.php:89
 msgid ""
 "There was an error retrieving the add-ons list from the server. Please try "
 "again later."
@@ -390,7 +398,7 @@ msgstr "你沒有權限刪除聯盟夥伴"
 
 #: includes/admin/affiliates/actions.php:56
 #: includes/admin/affiliates/actions.php:142
-#: includes/admin/class-notices.php:358 includes/admin/creatives/actions.php:48
+#: includes/admin/class-notices.php:414 includes/admin/creatives/actions.php:48
 #: includes/admin/referrals/actions.php:20
 #: includes/admin/referrals/actions.php:51
 #: includes/admin/referrals/actions.php:82
@@ -431,7 +439,7 @@ msgstr "全部"
 #: includes/admin/affiliates/new.php:41
 #: includes/admin/creatives/class-list-table.php:99
 #: includes/admin/creatives/edit.php:99 includes/admin/creatives/new.php:89
-#: includes/admin/tools/tools.php:281 includes/affiliate-functions.php:273
+#: includes/admin/tools/tools.php:271 includes/affiliate-functions.php:273
 msgid "Active"
 msgstr "啟用"
 
@@ -447,7 +455,7 @@ msgstr "停用"
 #: includes/admin/affiliates/new.php:43
 #: includes/admin/referrals/class-list-table.php:151
 #: includes/admin/referrals/edit.php:140 includes/admin/referrals/new.php:103
-#: includes/admin/tools/tools.php:282 includes/admin/tools/tools.php:311
+#: includes/admin/tools/tools.php:272 includes/admin/tools/tools.php:301
 #: includes/affiliate-functions.php:279 includes/referral-functions.php:65
 msgid "Pending"
 msgstr "擱置"
@@ -455,7 +463,7 @@ msgstr "擱置"
 #: includes/admin/affiliates/class-list-table.php:150
 #: includes/admin/referrals/class-list-table.php:152
 #: includes/admin/referrals/edit.php:141 includes/admin/referrals/new.php:104
-#: includes/admin/tools/tools.php:283 includes/admin/tools/tools.php:312
+#: includes/admin/tools/tools.php:273 includes/admin/tools/tools.php:302
 #: includes/affiliate-functions.php:282 includes/referral-functions.php:64
 msgid "Rejected"
 msgstr "駁回"
@@ -489,7 +497,7 @@ msgstr "用戶名"
 #: includes/admin/affiliates/class-list-table.php:169
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:38
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:49
-#: includes/admin/tools/tools.php:141 templates/dashboard-tab-stats.php:34
+#: includes/admin/tools/tools.php:131 templates/dashboard-tab-stats.php:34
 msgid "Paid Earnings"
 msgstr "已付款的收益"
 
@@ -513,7 +521,7 @@ msgstr "已支付的訂購引薦獎金"
 #: includes/admin/class-menu.php:16
 #: includes/admin/reports/tabs/class-visits-reports-tab.php:23
 #: includes/admin/tools/export/class-export-affiliates.php:56
-#: includes/admin/tools/tools.php:143 includes/admin/visits/visits.php:41
+#: includes/admin/tools/tools.php:133 includes/admin/visits/visits.php:41
 #: templates/dashboard-tab-stats.php:10 templates/dashboard-tab-stats.php:57
 #: templates/dashboard.php:86
 msgid "Visits"
@@ -522,7 +530,7 @@ msgstr "訪問次數"
 #: includes/admin/affiliates/class-list-table.php:174
 #: includes/admin/creatives/class-list-table.php:118
 #: includes/admin/creatives/edit.php:94 includes/admin/creatives/new.php:84
-#: includes/admin/payouts/view.php:85
+#: includes/admin/payouts/view.php:116
 #: includes/admin/referrals/class-list-table.php:174
 #: includes/admin/referrals/edit.php:133 includes/admin/referrals/new.php:96
 #: includes/admin/tools/export/class-export-affiliates.php:57
@@ -534,7 +542,9 @@ msgstr "狀態"
 
 #: includes/admin/affiliates/class-list-table.php:243
 #: includes/admin/affiliates/class-list-table.php:377
-#: includes/admin/payouts/class-list-table.php:272
+#: includes/admin/payouts/class-list-table.php:273
+#: includes/admin/payouts/class-list-table.php:347
+#: includes/admin/payouts/view.php:93
 msgid "(user deleted)"
 msgstr "(使用者已刪除)"
 
@@ -564,14 +574,14 @@ msgstr "評論"
 #: includes/admin/affiliates/class-list-table.php:302
 #: includes/admin/affiliates/class-list-table.php:484
 #: includes/admin/referrals/class-list-table.php:343
-#: includes/admin/referrals/class-list-table.php:479
+#: includes/admin/referrals/class-list-table.php:491
 msgid "Accept"
 msgstr "接受"
 
 #: includes/admin/affiliates/class-list-table.php:312
 #: includes/admin/affiliates/class-list-table.php:485
 #: includes/admin/referrals/class-list-table.php:359
-#: includes/admin/referrals/class-list-table.php:480
+#: includes/admin/referrals/class-list-table.php:492
 msgid "Reject"
 msgstr "拒絕"
 
@@ -585,7 +595,7 @@ msgstr "啟用"
 #: includes/admin/affiliates/class-list-table.php:488
 #: includes/admin/creatives/class-list-table.php:235
 #: includes/admin/referrals/class-list-table.php:383
-#: includes/admin/referrals/class-list-table.php:483
+#: includes/admin/referrals/class-list-table.php:495
 msgid "Delete"
 msgstr "刪除"
 
@@ -707,10 +717,10 @@ msgstr "選擇聯盟夥伴的推薦分潤類型。"
 
 #: includes/admin/affiliates/edit.php:144 includes/admin/affiliates/new.php:71
 #: includes/admin/settings/class-settings.php:471
-#: includes/integrations/class-edd.php:655
+#: includes/integrations/class-edd.php:656
 #: includes/integrations/class-memberpress.php:179
 #: includes/integrations/class-pmp.php:361
-#: includes/integrations/class-woocommerce.php:524
+#: includes/integrations/class-woocommerce.php:540
 #: includes/integrations/class-zippycourses.php:76
 #: includes/integrations/extras/class-exchange-feature.php:31
 msgid "Referral Rate"
@@ -921,7 +931,7 @@ msgstr "總覽"
 #: includes/admin/referrals/referrals.php:37
 #: includes/admin/reports/tabs/class-referrals-reports-tab.php:23
 #: includes/admin/tools/export/class-export-affiliates.php:55
-#: includes/admin/tools/tools.php:142 templates/dashboard-tab-referrals.php:3
+#: includes/admin/tools/tools.php:132 templates/dashboard-tab-referrals.php:3
 #: templates/dashboard.php:74
 msgid "Referrals"
 msgstr "推廣引薦"
@@ -962,159 +972,173 @@ msgstr ""
 "用 AffiliateWP 而沒有任何集成(integrations), 你可以忽視這個訊息。"
 
 #: includes/admin/class-notices.php:46
-#: includes/admin/settings/class-settings.php:283
+#: includes/admin/settings/class-settings.php:281
 msgid "Settings updated."
 msgstr "設定已更新。"
 
-#: includes/admin/class-notices.php:56
-msgid "Affiliate added successfully"
-msgstr "已成功新增聯盟夥伴"
+#: includes/admin/class-notices.php:63
+#, fuzzy
+msgid "%d affiliate was added successfully."
+msgid_plural "%d affiliates were added successfully"
+msgstr[0] "聯盟夥伴更新成功"
 
-#: includes/admin/class-notices.php:62
+#: includes/admin/class-notices.php:76
 #, fuzzy
 msgid "Affiliate wasn&#8217;t added, please try again."
 msgstr "聯盟夥伴並未新增成功，請重試一次。"
 
-#: includes/admin/class-notices.php:69
+#: includes/admin/class-notices.php:83
 msgid "Affiliate updated successfully"
 msgstr "聯盟夥伴更新成功"
 
-#: includes/admin/class-notices.php:71
+#: includes/admin/class-notices.php:85
 msgid "<a href=\"%s\">Back to Affiliates</a>"
 msgstr "<a href=\"%s\">返回聯盟夥伴</a>"
 
-#: includes/admin/class-notices.php:77
+#: includes/admin/class-notices.php:91
 msgid "Affiliate update failed, please try again"
 msgstr "聯盟夥伴更新失敗，請重試一次。"
 
-#: includes/admin/class-notices.php:84
+#: includes/admin/class-notices.php:98
 msgid "Affiliate account(s) deleted successfully"
 msgstr "聯盟夥伴帳號刪除成功"
 
-#: includes/admin/class-notices.php:90
+#: includes/admin/class-notices.php:104
 msgid "Affiliate deletion failed, please try again"
 msgstr "聯盟夥伴刪除失敗，請重試一次。"
 
-#: includes/admin/class-notices.php:97
+#: includes/admin/class-notices.php:111
 msgid "Affiliate account activated"
 msgstr "聯盟夥伴帳號已啟用"
 
-#: includes/admin/class-notices.php:103
+#: includes/admin/class-notices.php:117
 msgid "Affiliate account deactivated"
 msgstr "聯盟夥伴帳號已關閉"
 
-#: includes/admin/class-notices.php:109
+#: includes/admin/class-notices.php:123
 msgid "Affiliate request was accepted"
 msgstr "聯盟夥伴請求已被接受"
 
-#: includes/admin/class-notices.php:115
+#: includes/admin/class-notices.php:129
 msgid "Affiliate request was rejected"
 msgstr "聯盟夥伴請求已被拒絕"
 
-#: includes/admin/class-notices.php:121
+#: includes/admin/class-notices.php:143
+#, fuzzy
+msgid "%d affiliate from WP Affiliate was added successfully."
+msgid_plural "%d affiliates from WP Affiliate were added successfully"
+msgstr[0] "聯盟夥伴更新成功"
+
+#: includes/admin/class-notices.php:164
+#, fuzzy
+msgid "%d affiliate from Affiliates Pro was added successfully."
+msgid_plural "%d affiliates from Affiliates Pro were added successfully"
+msgstr[0] "聯盟夥伴更新成功"
+
+#: includes/admin/class-notices.php:177
 msgid "Affiliate stats have been recounted!"
 msgstr "重新計算聯盟夥伴狀態"
 
-#: includes/admin/class-notices.php:128
+#: includes/admin/class-notices.php:184
 msgid "Referral added successfully"
 msgstr "新增引薦成功"
 
-#: includes/admin/class-notices.php:134
+#: includes/admin/class-notices.php:190
 msgid "Referral updated successfully"
 msgstr "更新引薦成功"
 
-#: includes/admin/class-notices.php:140
+#: includes/admin/class-notices.php:196
 msgid "Referral update failed, please try again"
 msgstr "更新引薦失敗, 請再試一次"
 
-#: includes/admin/class-notices.php:146
+#: includes/admin/class-notices.php:202
 msgid "Referral deleted successfully"
 msgstr "刪除引薦成功"
 
-#: includes/admin/class-notices.php:152
+#: includes/admin/class-notices.php:208
 msgid "Referral deletion failed, please try again"
 msgstr "刪除引薦失敗, 請再試一次"
 
-#: includes/admin/class-notices.php:160
+#: includes/admin/class-notices.php:216
 msgid "Creative updated successfully"
 msgstr "更新推廣素材成功"
 
-#: includes/admin/class-notices.php:162
+#: includes/admin/class-notices.php:218
 msgid "<a href=\"%s\">Back to Creatives</a>"
 msgstr "<a href=\"%s\">返回推廣素材</a>"
 
-#: includes/admin/class-notices.php:168
+#: includes/admin/class-notices.php:224
 msgid "Creative added successfully"
 msgstr "新增推廣素材成功"
 
-#: includes/admin/class-notices.php:174
+#: includes/admin/class-notices.php:230
 msgid "Creative deleted successfully"
 msgstr "刪除推廣素材成功"
 
-#: includes/admin/class-notices.php:180
+#: includes/admin/class-notices.php:236
 msgid "Creative activated"
 msgstr "推廣素材已啟用"
 
-#: includes/admin/class-notices.php:186
+#: includes/admin/class-notices.php:242
 msgid "Creative deactivated"
 msgstr "推廣素材已停用"
 
-#: includes/admin/class-notices.php:193
+#: includes/admin/class-notices.php:249
 msgid "Settings successfully imported"
 msgstr "設定成功匯入"
 
-#: includes/admin/class-notices.php:201
+#: includes/admin/class-notices.php:257
 #, fuzzy
 msgid ""
 "Your license key expired on %s. Please <a href=\"%s\" target=\"_blank"
 "\">renew your license key</a>."
 msgstr "同意我們的 <a href=\"%s\" target=\"_blank\">聯盟夥伴條款</a>"
 
-#: includes/admin/class-notices.php:213
+#: includes/admin/class-notices.php:269
 msgid ""
 "Your license key has been disabled. Please <a href=\"%s\" target=\"_blank"
 "\">contact support</a> for more information."
 msgstr ""
 
-#: includes/admin/class-notices.php:224
+#: includes/admin/class-notices.php:280
 msgid ""
 "Invalid license. Please <a href=\"%s\" target=\"_blank\">visit your account "
 "page</a> and verify it."
 msgstr ""
 
-#: includes/admin/class-notices.php:236
+#: includes/admin/class-notices.php:292
 msgid ""
 "Your %s is not active for this URL. Please <a href=\"%s\" target=\"_blank"
 "\">visit your account page</a> to manage your license key URLs."
 msgstr ""
 
-#: includes/admin/class-notices.php:247
+#: includes/admin/class-notices.php:303
 msgid "This appears to be an invalid license key for %s."
 msgstr ""
 
-#: includes/admin/class-notices.php:256
+#: includes/admin/class-notices.php:312
 msgid ""
 "Your license key has reached its activation limit. <a href=\"%s\">View "
 "possible upgrades</a> now."
 msgstr ""
 
-#: includes/admin/class-notices.php:265
+#: includes/admin/class-notices.php:321
 msgid "The API keys were successfully generated."
 msgstr ""
 
-#: includes/admin/class-notices.php:271
+#: includes/admin/class-notices.php:327
 msgid "The API keys could not be generated."
 msgstr ""
 
-#: includes/admin/class-notices.php:278
+#: includes/admin/class-notices.php:334
 msgid "The API keys were successfully regenerated."
 msgstr ""
 
-#: includes/admin/class-notices.php:284
+#: includes/admin/class-notices.php:340
 msgid "The API keys were successfully revoked."
 msgstr ""
 
-#: includes/admin/class-notices.php:330
+#: includes/admin/class-notices.php:386
 msgid ""
 "Your license key for AffiliateWP has expired. Please renew your license to "
 "re-enable automatic updates."
@@ -1122,7 +1146,7 @@ msgstr ""
 "你的 AffiliateWP license key 已過期。 請Please 更新你的 license 才能再次啟用"
 "自動更新。"
 
-#: includes/admin/class-notices.php:339
+#: includes/admin/class-notices.php:395
 msgid ""
 "Please <a href=\"%s\">enter and activate</a> your license key for "
 "AffiliateWP to enable automatic updates."
@@ -1153,7 +1177,7 @@ msgid "Shortcode"
 msgstr "短碼"
 
 #: includes/admin/creatives/class-list-table.php:119
-#: includes/admin/payouts/class-list-table.php:155
+#: includes/admin/payouts/class-list-table.php:156
 #: includes/admin/referrals/class-list-table.php:173
 msgid "Actions"
 msgstr "操作"
@@ -1306,7 +1330,7 @@ msgstr "總計"
 #: includes/admin/payouts/class-list-table.php:130
 #: includes/admin/referrals/class-list-table.php:149
 #: includes/admin/referrals/edit.php:139 includes/admin/referrals/new.php:102
-#: includes/admin/tools/tools.php:309 includes/referral-functions.php:62
+#: includes/admin/tools/tools.php:299 includes/referral-functions.php:62
 msgid "Paid"
 msgstr "已支付"
 
@@ -1325,33 +1349,40 @@ msgstr ""
 #: includes/admin/referrals/class-list-table.php:169
 #: includes/admin/referrals/new.php:16
 #: includes/admin/visits/class-list-table.php:105
-#: includes/integrations/class-lifterlms.php:472
+#: includes/integrations/class-lifterlms.php:678
+#: includes/integrations/class-lifterlms.php:704
 #: includes/integrations/class-memberpress.php:259
 msgid "Affiliate"
 msgstr "聯盟夥伴"
 
 #: includes/admin/payouts/class-list-table.php:152
-#: includes/admin/payouts/view.php:73 templates/dashboard-tab-payouts.php:36
+#: includes/admin/payouts/view.php:73
+#, fuzzy
+msgid "Generated By"
+msgstr "產生推廣連結"
+
+#: includes/admin/payouts/class-list-table.php:153
+#: includes/admin/payouts/view.php:104 templates/dashboard-tab-payouts.php:36
 #, fuzzy
 msgid "Payout Method"
 msgstr "推銷方式"
 
-#: includes/admin/payouts/class-list-table.php:330
-#: includes/admin/payouts/view.php:77
+#: includes/admin/payouts/class-list-table.php:372
+#: includes/admin/payouts/view.php:108
 msgid "(none)"
 msgstr ""
 
-#: includes/admin/payouts/class-list-table.php:386
+#: includes/admin/payouts/class-list-table.php:428
 #, fuzzy
 msgid "View"
 msgstr "查看%s"
 
-#: includes/admin/payouts/class-list-table.php:396
-#: includes/admin/payouts/class-list-table.php:490
+#: includes/admin/payouts/class-list-table.php:438
+#: includes/admin/payouts/class-list-table.php:532
 msgid "Retry Payment"
 msgstr ""
 
-#: includes/admin/payouts/class-list-table.php:477
+#: includes/admin/payouts/class-list-table.php:519
 #, fuzzy
 msgid "No payouts found."
 msgstr "沒有找到任何造訪資料"
@@ -1376,17 +1407,18 @@ msgstr ""
 #: includes/admin/referrals/edit.php:65 includes/admin/referrals/new.php:32
 #: includes/admin/tools/export/class-export-referrals-payout.php:62
 #: includes/admin/tools/export/class-export-referrals.php:64
-#: includes/integrations/class-lifterlms.php:467
+#: includes/integrations/class-lifterlms.php:673
+#: includes/integrations/class-lifterlms.php:700
 #: templates/dashboard-tab-payouts.php:35
 #: templates/dashboard-tab-referrals.php:24
 msgid "Amount"
 msgstr "總計"
 
-#: includes/admin/payouts/view.php:102
+#: includes/admin/payouts/view.php:133
 msgid "Payout Date"
 msgstr ""
 
-#: includes/admin/payouts/view.php:137
+#: includes/admin/payouts/view.php:168
 #, fuzzy
 msgid "Referrals Paid"
 msgstr "推廣引薦"
@@ -1407,14 +1439,15 @@ msgstr "你沒有管理推廣的權限"
 
 #: includes/admin/referrals/class-list-table.php:150
 #: includes/admin/referrals/edit.php:138 includes/admin/referrals/new.php:101
-#: includes/admin/tools/tools.php:310 includes/referral-functions.php:63
+#: includes/admin/tools/tools.php:300 includes/referral-functions.php:63
 msgid "Unpaid"
 msgstr "未支付"
 
 #: includes/admin/referrals/class-list-table.php:170
 #: includes/admin/referrals/edit.php:107 includes/admin/referrals/new.php:70
 #: includes/admin/tools/export/class-export-referrals.php:68
-#: includes/integrations/class-lifterlms.php:477
+#: includes/integrations/class-lifterlms.php:683
+#: includes/integrations/class-lifterlms.php:708
 msgid "Reference"
 msgstr "參考"
 
@@ -1430,41 +1463,41 @@ msgid "Date"
 msgstr "日期"
 
 #: includes/admin/referrals/class-list-table.php:311
-#: includes/admin/referrals/class-list-table.php:482
+#: includes/admin/referrals/class-list-table.php:494
 msgid "Mark as Unpaid"
 msgstr "標記為未付"
 
 #: includes/admin/referrals/class-list-table.php:327
-#: includes/admin/referrals/class-list-table.php:481
+#: includes/admin/referrals/class-list-table.php:493
 msgid "Mark as Paid"
 msgstr "標記為已付"
 
-#: includes/admin/referrals/class-list-table.php:414
+#: includes/admin/referrals/class-list-table.php:426
 msgid "No referrals found."
 msgstr "沒有推廣的經銷商"
 
-#: includes/admin/referrals/class-list-table.php:438
+#: includes/admin/referrals/class-list-table.php:450
 msgid "Bulk Actions"
 msgstr "批次處理"
 
-#: includes/admin/referrals/class-list-table.php:450
+#: includes/admin/referrals/class-list-table.php:462
 msgid "Apply"
 msgstr "套用"
 
-#: includes/admin/referrals/class-list-table.php:459
-#: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:305
-#: includes/admin/visits/visits.php:52 includes/class-graph.php:390
+#: includes/admin/referrals/class-list-table.php:471
+#: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:295
+#: includes/admin/visits/visits.php:52 includes/class-graph.php:408
 msgid "From - mm/dd/yyyy"
 msgstr "從 - mm/dd/yyyy"
 
-#: includes/admin/referrals/class-list-table.php:460
-#: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:306
-#: includes/admin/visits/visits.php:53 includes/class-graph.php:392
+#: includes/admin/referrals/class-list-table.php:472
+#: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:296
+#: includes/admin/visits/visits.php:53 includes/class-graph.php:410
 msgid "To - mm/dd/yyyy"
 msgstr "到 - mm/dd/yyyy"
 
-#: includes/admin/referrals/class-list-table.php:464
-#: includes/admin/visits/visits.php:61 includes/class-graph.php:397
+#: includes/admin/referrals/class-list-table.php:476
+#: includes/admin/visits/visits.php:61 includes/class-graph.php:415
 msgid "Filter"
 msgstr "篩選"
 
@@ -1701,7 +1734,7 @@ msgstr ""
 msgid "Number of referrals per page:"
 msgstr "每一頁呈現的推廣數量："
 
-#: includes/admin/reports/class-registrations-graph.php:68
+#: includes/admin/reports/class-registrations-graph.php:69
 msgid "Affiliate Registrations"
 msgstr "註冊聯盟夥伴"
 
@@ -1794,7 +1827,7 @@ msgstr ""
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:112
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:148
 #: includes/admin/reports/tabs/class-campaigns-reports-tab.php:161
-#: includes/class-graph.php:345
+#: includes/class-graph.php:363
 msgid "Custom"
 msgstr "自订"
 
@@ -2011,7 +2044,7 @@ msgid "The symbol (usually , or .) to separate decimal points"
 msgstr "符號通常用 , 或 . 來分隔小數點"
 
 #: includes/admin/settings/class-settings.php:535
-#: includes/admin/settings/display-settings.php:74
+#: includes/admin/settings/display-settings.php:60
 msgid "Integrations"
 msgstr "整合"
 
@@ -2164,7 +2197,7 @@ msgid ""
 msgstr "輸入電子郵件主旨，當聯盟夥伴成功推薦並完成購買。"
 
 #: includes/admin/settings/class-settings.php:606
-#: includes/emails/actions.php:239
+#: includes/emails/actions.php:247
 msgid "Referral Awarded!"
 msgstr "推廣獎勵！"
 
@@ -2325,115 +2358,115 @@ msgid ""
 "data when the plugin is deleted."
 msgstr "勾選此設置後，如果你刪除該插件的所有數據，本插件將一併刪除。"
 
-#: includes/admin/settings/class-settings.php:706
+#: includes/admin/settings/class-settings.php:708
 msgid "Application Pending Email Subject"
 msgstr "申請審核中電子郵件主題"
 
-#: includes/admin/settings/class-settings.php:707
+#: includes/admin/settings/class-settings.php:709
 msgid "Enter the subject line for pending affiliate application emails."
 msgstr "為待審核的聯盟夥伴通知郵件輸入主旨"
 
-#: includes/admin/settings/class-settings.php:709
-#: includes/emails/actions.php:157
+#: includes/admin/settings/class-settings.php:711
+#: includes/emails/actions.php:165
 msgid "Your Affiliate Application Is Being Reviewed"
 msgstr "你的聯盟夥伴申請正在審查中"
 
-#: includes/admin/settings/class-settings.php:712
+#: includes/admin/settings/class-settings.php:714
 msgid "Application Pending Email Content"
 msgstr "申請審核中電子郵件內文"
 
-#: includes/admin/settings/class-settings.php:713
+#: includes/admin/settings/class-settings.php:715
 msgid ""
 "Enter the email to send when an application is pending. HTML is accepted. "
 "Available template tags:"
 msgstr ""
 "輸入電子郵件發送內文，當經銷商申請正在審核時。可接受HTML語法。可用的範本標籤:"
 
-#: includes/admin/settings/class-settings.php:715
+#: includes/admin/settings/class-settings.php:717
 msgid "Hi {name}!"
 msgstr "嗨 {name} ！"
 
-#: includes/admin/settings/class-settings.php:715
-#: includes/emails/actions.php:162
+#: includes/admin/settings/class-settings.php:717
+#: includes/emails/actions.php:170
 msgid "Thanks for your recent affiliate registration on {site_name}."
 msgstr "感謝你登記成為 {site_name} 的聯盟夥伴。"
 
-#: includes/admin/settings/class-settings.php:715
-#: includes/emails/actions.php:163
+#: includes/admin/settings/class-settings.php:717
+#: includes/emails/actions.php:171
 #, fuzzy
 msgid ""
 "We&#8217;re currently reviewing your affiliate application and will be in "
 "touch soon!"
 msgstr "我們正在審核你的聯盟夥伴申請，我們將盡快與您聯繫！"
 
-#: includes/admin/settings/class-settings.php:718
+#: includes/admin/settings/class-settings.php:720
 msgid "Application Rejection Email Subject"
 msgstr "拒絕聯盟夥伴申請之電子郵件標題"
 
-#: includes/admin/settings/class-settings.php:719
+#: includes/admin/settings/class-settings.php:721
 msgid "Enter the subject line for rejected affiliate application emails."
 msgstr "為被拒絕的聯盟夥伴通知郵件輸入主旨"
 
-#: includes/admin/settings/class-settings.php:721
-#: includes/emails/actions.php:196
+#: includes/admin/settings/class-settings.php:723
+#: includes/emails/actions.php:204
 msgid "Your Affiliate Application Has Been Rejected"
 msgstr "你的聯盟夥伴申請已經被拒絕"
 
-#: includes/admin/settings/class-settings.php:724
+#: includes/admin/settings/class-settings.php:726
 msgid "Application Rejection Email Content"
 msgstr "拒絕聯盟夥伴申請之電子郵件內容"
 
-#: includes/admin/settings/class-settings.php:725
+#: includes/admin/settings/class-settings.php:727
 msgid ""
 "Enter the email to send when an application is rejected. HTML is accepted. "
 "Available template tags:"
 msgstr ""
 "輸入電子郵件發送內文，當聯盟夥伴申請被拒絕。可接受HTML語法。可用的範本標籤:"
 
-#: includes/admin/settings/class-settings.php:727
+#: includes/admin/settings/class-settings.php:729
 msgid "Hi {name},"
 msgstr "嗨 {name},"
 
-#: includes/admin/settings/class-settings.php:727
-#: includes/emails/actions.php:201
+#: includes/admin/settings/class-settings.php:729
+#: includes/emails/actions.php:209
 msgid ""
 "We regret to inform you that your recent affiliate registration on "
 "{site_name} was rejected."
 msgstr ""
 "我們很遺憾地通知你，你最近在 {site_name} 所登錄的聯盟夥伴申請被拒絕了。"
 
-#: includes/admin/settings/class-settings.php:898
+#: includes/admin/settings/class-settings.php:894
 msgid "Deactivate License"
 msgstr "授權碼停用"
 
-#: includes/admin/settings/class-settings.php:899
+#: includes/admin/settings/class-settings.php:895
 msgid "Your license is valid!"
 msgstr "您的許可證是有效的！"
 
-#: includes/admin/settings/class-settings.php:902
+#: includes/admin/settings/class-settings.php:898
 msgid "Renew Your License"
 msgstr "更新許可證"
 
-#: includes/admin/settings/class-settings.php:903
+#: includes/admin/settings/class-settings.php:899
 msgid ""
 "Your license has expired, renew today to continue getting updates and "
 "support!"
 msgstr "您的許可證過期了，現在更新繼續獲取更新和支援！"
 
-#: includes/admin/settings/class-settings.php:905
+#: includes/admin/settings/class-settings.php:901
 msgid "Activate License"
 msgstr "啟用授權碼"
 
-#: includes/admin/settings/class-settings.php:1004
+#: includes/admin/settings/class-settings.php:1000
 msgid ""
 "The callback function used for the <strong>%s</strong> setting is missing."
 msgstr "回調函數用於<strong>%s</strong> 設定消失了。"
 
-#: includes/admin/settings/class-settings.php:1079
+#: includes/admin/settings/class-settings.php:1075
 msgid "Upload File"
 msgstr "上傳檔案"
 
-#: includes/admin/settings/class-settings.php:1097
+#: includes/admin/settings/class-settings.php:1093
 #, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
@@ -2444,21 +2477,21 @@ msgstr ""
 "請輸入您的許可證密鑰，用於自動更新和獲得技術<a href=“%s” target=“_blank”>支持"
 "</a>."
 
-#: includes/admin/settings/class-settings.php:1117
+#: includes/admin/settings/class-settings.php:1113
 msgid ""
 "Debug mode is globally enabled via <code>AFFILIATE_WP_DEBUG</code> set in "
 "<code>wp-config.php</code>. This setting cannot be modified from this screen."
 msgstr ""
 
-#: includes/admin/settings/display-settings.php:73
+#: includes/admin/settings/display-settings.php:59
 msgid "General"
 msgstr "一般"
 
-#: includes/admin/settings/display-settings.php:75
+#: includes/admin/settings/display-settings.php:61
 msgid "Emails"
 msgstr "電子郵件"
 
-#: includes/admin/settings/display-settings.php:76
+#: includes/admin/settings/display-settings.php:62
 msgid "Misc"
 msgstr "其他項目"
 
@@ -2467,7 +2500,7 @@ msgid "API Key"
 msgstr ""
 
 #: includes/admin/tools/class-rest-consumers-table.php:43
-#: includes/admin/tools/tools.php:78
+#: includes/admin/tools/tools.php:68
 msgid "API Keys"
 msgstr ""
 
@@ -2549,61 +2582,61 @@ msgstr ""
 msgid "Step %d running"
 msgstr "步驟 %d 執行中"
 
-#: includes/admin/tools/tools.php:77
+#: includes/admin/tools/tools.php:67
 msgid "Export / Import"
 msgstr "匯出/匯入"
 
-#: includes/admin/tools/tools.php:79
+#: includes/admin/tools/tools.php:69
 msgid "Recount Stats"
 msgstr "重新統計"
 
-#: includes/admin/tools/tools.php:80
+#: includes/admin/tools/tools.php:70
 msgid "Migration Assistant"
 msgstr "移植助手"
 
-#: includes/admin/tools/tools.php:81
+#: includes/admin/tools/tools.php:71
 msgid "System Info"
 msgstr ""
 
-#: includes/admin/tools/tools.php:84
+#: includes/admin/tools/tools.php:74
 msgid "Debug Assistant"
 msgstr "除錯助手"
 
-#: includes/admin/tools/tools.php:132
+#: includes/admin/tools/tools.php:122
 msgid "Recount Affiliate Stats"
 msgstr "重新統計聯盟夥伴"
 
-#: includes/admin/tools/tools.php:134
+#: includes/admin/tools/tools.php:124
 msgid "Use this tool to recount affiliate statistics."
 msgstr "使用此工具來重新計算聯盟夥伴的統計資料。"
 
-#: includes/admin/tools/tools.php:138 includes/admin/tools/tools.php:302
+#: includes/admin/tools/tools.php:128 includes/admin/tools/tools.php:292
 #: includes/admin/visits/visits.php:48
 msgid "Affiliate name"
 msgstr "聯盟夥伴名稱"
 
-#: includes/admin/tools/tools.php:145
+#: includes/admin/tools/tools.php:135
 #, fuzzy
 msgid ""
 "Enter the name of the affiliate or begin typing to perform a search based on "
 "the affiliate&#8217;s name."
 msgstr "開始輸入聯盟夥伴名稱，用來執行搜尋相關聯的用戶帳號。"
 
-#: includes/admin/tools/tools.php:150
+#: includes/admin/tools/tools.php:140
 msgid "Recount"
 msgstr "重新計算"
 
-#: includes/admin/tools/tools.php:188
+#: includes/admin/tools/tools.php:178
 msgid ""
 "These tools assist in migrating affiliate and referral data from existing "
 "platforms."
 msgstr "這些工具幫助您從現有平台搬移聯盟夥伴及推廣數據。"
 
-#: includes/admin/tools/tools.php:193
+#: includes/admin/tools/tools.php:183
 msgid "User Accounts"
 msgstr "使用者帳號"
 
-#: includes/admin/tools/tools.php:196
+#: includes/admin/tools/tools.php:186
 msgid ""
 "Use this tool to create affiliate accounts for each of your existing "
 "WordPress user accounts that belong to the selected roles below."
@@ -2611,7 +2644,7 @@ msgstr ""
 "使用此工具為你選擇現有的 WordPress 用戶帳戶角色，並為這些用戶創建聯盟夥伴帳"
 "戶。"
 
-#: includes/admin/tools/tools.php:197
+#: includes/admin/tools/tools.php:187
 msgid ""
 "<strong>NOTE:</strong> Users that already have affiliate accounts will be "
 "skipped. Duplicate accounts will not be created."
@@ -2619,15 +2652,15 @@ msgstr ""
 "<strong>注意：</strong>已有網站使用者帳戶的用者將被跳過。將不會創建重複的帳"
 "戶。"
 
-#: includes/admin/tools/tools.php:199
+#: includes/admin/tools/tools.php:189
 msgid "Select User Roles"
 msgstr "選擇使用者角色"
 
-#: includes/admin/tools/tools.php:212
+#: includes/admin/tools/tools.php:202
 msgid "Create Affiliate Accounts for Users"
 msgstr "為使用者新增聯盟夥伴帳號"
 
-#: includes/admin/tools/tools.php:217
+#: includes/admin/tools/tools.php:207
 msgid ""
 "<strong>NOTE:</strong> WordPress 4.4 or newer is required to use the User "
 "Accounts migration tool. <a href=\"%s\" aria-label=\"Update WordPress now"
@@ -2636,20 +2669,20 @@ msgstr ""
 "<strong>注︰</strong>使用使用者帳戶遷移工具需 WordPress 4.4 或更高版本。<a "
 "href=\"%s\" aria-label=\"Update WordPress now\">現在更新 WordPress</a>。"
 
-#: includes/admin/tools/tools.php:219
+#: includes/admin/tools/tools.php:209
 msgid ""
 "<strong>NOTE:</strong> WordPress 4.4 or newer is required to use the User "
 "Accounts migration tool."
 msgstr ""
 "<strong>注︰</strong>使用使用者帳戶遷移工具需 WordPress 4.4 或更高版本。"
 
-#: includes/admin/tools/tools.php:228
+#: includes/admin/tools/tools.php:218
 msgid ""
 "Use this tool to migrate existing affiliate / referral data from Affiliates "
 "Pro to AffiliateWP."
 msgstr "使用這個工具將經銷商/推廣數據從 Affiliates Pro 遷移到 AffiliateWP。"
 
-#: includes/admin/tools/tools.php:229
+#: includes/admin/tools/tools.php:219
 msgid ""
 "<strong>NOTE:</strong> this tool should only ever be used on a fresh "
 "install. If you have already collected affiliate or referral data, do not "
@@ -2658,46 +2691,46 @@ msgstr ""
 "<strong>注意：</strong>這個工具只能使用在全新尚未有聯盟夥伴資料時使用。如果你"
 "已經收集到聯盟夥伴或推廣數據時，請不要使用這個工具。"
 
-#: includes/admin/tools/tools.php:235
+#: includes/admin/tools/tools.php:225
 msgid "Migrate Data from Affiliates Pro"
 msgstr "將數據從Affiliates Pro搬移"
 
-#: includes/admin/tools/tools.php:244
+#: includes/admin/tools/tools.php:234
 msgid ""
 "Use this tool to migrate existing affiliate accounts from WP Affiliate to "
 "AffiliateWP."
 msgstr "使用這個工具，從 WP Affiliate 將現有的經銷商帳戶遷移到AffiliateWP。"
 
-#: includes/admin/tools/tools.php:250
+#: includes/admin/tools/tools.php:240
 msgid "Migrate Data from WP Affiliate"
 msgstr "從 WP Affiliate 搬移數據"
 
-#: includes/admin/tools/tools.php:274
+#: includes/admin/tools/tools.php:264
 msgid "Export Affiliates"
 msgstr "匯出聯盟夥伴"
 
-#: includes/admin/tools/tools.php:276
+#: includes/admin/tools/tools.php:266
 msgid "Export affiliates to a CSV file."
 msgstr "匯出聯盟夥伴CSV檔案"
 
-#: includes/admin/tools/tools.php:280 includes/admin/tools/tools.php:308
+#: includes/admin/tools/tools.php:270 includes/admin/tools/tools.php:298
 msgid "All Statuses"
 msgstr "所有狀態"
 
-#: includes/admin/tools/tools.php:289 includes/admin/tools/tools.php:319
-#: includes/admin/tools/tools.php:333
+#: includes/admin/tools/tools.php:279 includes/admin/tools/tools.php:309
+#: includes/admin/tools/tools.php:323
 msgid "Export"
 msgstr "匯出"
 
-#: includes/admin/tools/tools.php:296
+#: includes/admin/tools/tools.php:286
 msgid "Export Referrals"
 msgstr "匯出推廣"
 
-#: includes/admin/tools/tools.php:298
+#: includes/admin/tools/tools.php:288
 msgid "Export referrals to a CSV file."
 msgstr "匯出推廣到一個CSV檔案"
 
-#: includes/admin/tools/tools.php:314
+#: includes/admin/tools/tools.php:304
 #, fuzzy
 msgid ""
 "To search for an affiliate, enter the affiliate&#8217;s login name, first "
@@ -2705,47 +2738,47 @@ msgid ""
 msgstr ""
 "搜尋你的經銷商，請輸入經銷商的登入名稱、姓或名；保留空白用以匯出所有經銷商。"
 
-#: includes/admin/tools/tools.php:326
+#: includes/admin/tools/tools.php:316
 msgid "Export Settings"
 msgstr "匯出設定"
 
-#: includes/admin/tools/tools.php:328
+#: includes/admin/tools/tools.php:318
 msgid ""
 "Export the AffiliateWP settings for this site as a .json file. This allows "
 "you to easily import the configuration into another site."
 msgstr ""
 "以 .json 格式匯出 AffiliateWP 設定，你可以使用這個檔案匯入至其他的網站。"
 
-#: includes/admin/tools/tools.php:340
+#: includes/admin/tools/tools.php:330
 msgid "Import Settings"
 msgstr "匯入設定"
 
-#: includes/admin/tools/tools.php:342
+#: includes/admin/tools/tools.php:332
 msgid ""
 "Import the AffiliateWP settings from a .json file. This file can be obtained "
 "by exporting the settings on another site using the form above."
 msgstr ""
 "從 .json 檔案輸入 AffiliateWP 設定。你可以從其他網站匯出設定後，再輸入。"
 
-#: includes/admin/tools/tools.php:350
+#: includes/admin/tools/tools.php:340
 msgid "Import"
 msgstr "匯入"
 
-#: includes/admin/tools/tools.php:378
+#: includes/admin/tools/tools.php:368
 msgid ""
 "To copy the system info, click below then press Ctrl + C (PC) or Cmd + C "
 "(Mac)."
 msgstr ""
 
-#: includes/admin/tools/tools.php:433
+#: includes/admin/tools/tools.php:423
 msgid "Debug Log"
 msgstr "除錯記錄"
 
-#: includes/admin/tools/tools.php:436
+#: includes/admin/tools/tools.php:426
 msgid "Use this tool to help debug referral tracking."
 msgstr "使用此工來幫助除錯推廣追蹤"
 
-#: includes/admin/tools/tools.php:438
+#: includes/admin/tools/tools.php:428
 msgid "Clear Debug Log"
 msgstr "清除除錯記錄檔"
 
@@ -2764,6 +2797,14 @@ msgstr "聯盟夥伴行動"
 #: includes/admin/user-profile.php:53 templates/register.php:124
 msgid "Register"
 msgstr "註冊"
+
+#: includes/admin/user-profile.php:62 includes/class-register.php:424
+msgid "Disable Affiliate Email"
+msgstr "禁用聯盟夥伴電子郵件"
+
+#: includes/admin/user-profile.php:64 includes/class-register.php:426
+msgid "Disable the application accepted email sent to the affiliate."
+msgstr "禁用應用程式接受發送給聯盟夥伴的電子郵件。"
 
 #: includes/admin/visits/class-list-table.php:103
 msgid "Landing Page"
@@ -2892,7 +2933,7 @@ msgstr "百分比（%）"
 msgid "Flat %s"
 msgstr "固定 %s"
 
-#: includes/class-login.php:56 includes/class-register.php:85
+#: includes/class-login.php:56 includes/class-register.php:86
 msgid "Invalid username"
 msgstr "無效的帳號名稱"
 
@@ -2900,7 +2941,7 @@ msgstr "無效的帳號名稱"
 msgid "No such user"
 msgstr "沒有這個使用者"
 
-#: includes/class-login.php:70 includes/class-register.php:218
+#: includes/class-login.php:70 includes/class-register.php:219
 msgid "Please enter a password"
 msgstr "請輸入密碼"
 
@@ -2908,19 +2949,19 @@ msgstr "請輸入密碼"
 msgid "Incorrect username or password"
 msgstr "帳戶名稱或密碼不正確"
 
-#: includes/class-referrals-graph.php:147
+#: includes/class-referrals-graph.php:141
 msgid "Unpaid Referral Earnings"
 msgstr "未付款的推廣收益"
 
-#: includes/class-referrals-graph.php:148
+#: includes/class-referrals-graph.php:142
 msgid "Pending Referral Earnings"
 msgstr "待確認的推廣收益"
 
-#: includes/class-referrals-graph.php:149
+#: includes/class-referrals-graph.php:143
 msgid "Rejected Referral Earnings"
 msgstr "駁回的推廣收益"
 
-#: includes/class-referrals-graph.php:150
+#: includes/class-referrals-graph.php:144
 msgid "Paid Referral Earnings"
 msgstr "已付款的推廣收益"
 
@@ -2929,85 +2970,77 @@ msgstr "已付款的推廣收益"
 msgid "Please enter a valid website URL"
 msgstr "請輸入你的網站網址"
 
-#: includes/class-register.php:78
+#: includes/class-register.php:79
 msgid "Username already taken"
 msgstr "這個帳戶名稱已經被使用"
 
-#: includes/class-register.php:83
+#: includes/class-register.php:84
 msgid "Invalid username. Only lowercase letters (a-z) and numbers are allowed"
 msgstr "無效的使用者名稱，僅允許小寫字母（a-z）與數字（0-9）。"
 
-#: includes/class-register.php:90 includes/class-register.php:209
+#: includes/class-register.php:91 includes/class-register.php:210
 msgid "Invalid username. Must be between 1 and 60 characters."
 msgstr ""
 
-#: includes/class-register.php:94
+#: includes/class-register.php:95
 msgid "Invalid username. Usernames must include at least one letter"
 msgstr "不正確使用者名。使用者名必須包含至少一個字母"
 
-#: includes/class-register.php:98
+#: includes/class-register.php:99
 msgid "Email address already taken"
 msgstr "這個電子郵件已經被使用"
 
-#: includes/class-register.php:102
+#: includes/class-register.php:103
 msgid "Invalid email"
 msgstr "無效的電郵地址"
 
-#: includes/class-register.php:106
+#: includes/class-register.php:107
 msgid "Invalid payment email"
 msgstr "無效的收款電子郵件"
 
-#: includes/class-register.php:110
+#: includes/class-register.php:111
 msgid "Passwords do not match"
 msgstr "密碼不相符"
 
-#: includes/class-register.php:133
+#: includes/class-register.php:134
 msgid "Please agree to our terms of use"
 msgstr "請同意我們的聯盟夥伴條款"
 
-#: includes/class-register.php:137
+#: includes/class-register.php:138
 msgid "Please verify that you are not a robot"
 msgstr "你該不會是個機器人吧！請再次確認"
 
-#: includes/class-register.php:141
+#: includes/class-register.php:142
 #, fuzzy
 msgid "Nice try honey bear, don&#8217;t touch our honey"
 msgstr ""
 "Mmmm，都不放棄呀！好棒棒！別再試著破解我們的網站了，不然跟網站管理員聯絡吧！"
 
-#: includes/class-register.php:145
+#: includes/class-register.php:146
 msgid "You are already registered as an affiliate"
 msgstr "你已經成功註冊為聯盟夥伴"
 
-#: includes/class-register.php:204
+#: includes/class-register.php:205
 msgid "Please enter your name"
 msgstr "請輸入您的姓名"
 
-#: includes/class-register.php:214
+#: includes/class-register.php:215
 msgid "Please enter a website URL"
 msgstr "請輸入你的網站網址"
 
-#: includes/class-register.php:416
+#: includes/class-register.php:417
 msgid "Add as Affiliate"
 msgstr "新增聯盟夥伴"
 
-#: includes/class-register.php:418
+#: includes/class-register.php:419
 msgid "Add the user as an affiliate."
 msgstr "將用戶新增為聯盟夥伴"
 
-#: includes/class-register.php:423
-msgid "Disable Affiliate Email"
-msgstr "禁用聯盟夥伴電子郵件"
-
-#: includes/class-register.php:425
-msgid "Disable the application accepted email sent to the affiliate."
-msgstr "禁用應用程式接受發送給聯盟夥伴的電子郵件。"
-
-#: includes/class-visits-graph.php:137
+#: includes/class-visits-graph.php:131
 msgid "Converted Visits"
 msgstr "成功轉換的造訪"
 
-#: includes/class-visits-graph.php:138
+#: includes/class-visits-graph.php:132
 msgid "Unconverted Visits"
 msgstr "未轉換的造訪"
 
@@ -3251,93 +3284,93 @@ msgstr "(這位用戶不會被刪除)"
 msgid "Number of creatives: %d"
 msgstr "每頁顯示廣告素材的數量"
 
-#: includes/cli/class-payout-sub-commands.php:148
+#: includes/cli/class-payout-sub-commands.php:152
 msgid "No referrals were found matching your criteria. Please try again."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:176
+#: includes/cli/class-payout-sub-commands.php:181
 msgid ""
 "No affiliates matched the minimum earnings amount in order to generate a "
 "payout."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:184
+#: includes/cli/class-payout-sub-commands.php:189
 msgid "A payout has been created for Affiliate #%1$d for %2$s."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:189
+#: includes/cli/class-payout-sub-commands.php:194
 msgid "There was a problem generating a payout for Affiliate #%1$d for %2$s."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:233
-#: includes/cli/class-payout-sub-commands.php:237
+#: includes/cli/class-payout-sub-commands.php:241
+#: includes/cli/class-payout-sub-commands.php:245
 msgid "A valid payout ID must be supplied to update a payout"
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:274
+#: includes/cli/class-payout-sub-commands.php:287
 msgid ""
 "Referral #%d is already associated with payout #%d and has been skipped."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:280
+#: includes/cli/class-payout-sub-commands.php:293
 msgid "Referral #%d is not valid and has been skipped."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:285
+#: includes/cli/class-payout-sub-commands.php:298
 #, fuzzy
 msgid "Are you sure you want to overwrite this payout's referrals?"
 msgstr "你確定你要刪除這個推廣獎勵記錄嗎？"
 
-#: includes/cli/class-payout-sub-commands.php:293
+#: includes/cli/class-payout-sub-commands.php:306
 msgid "All values passed via the --referrals argument are invalid."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:299
+#: includes/cli/class-payout-sub-commands.php:312
 #, fuzzy
 msgid ""
 "Are you sure you want to overwrite the affiliate associated with this payout?"
 msgstr "你確定你要刪除這個廣告素材嗎？"
 
-#: includes/cli/class-payout-sub-commands.php:303
+#: includes/cli/class-payout-sub-commands.php:316
 #, fuzzy
 msgid "The supplied affiliate ID or username is invalid and has been ignored."
 msgstr "聯盟夥伴的用戶名稱。這是不能被修改的。"
 
-#: includes/cli/class-payout-sub-commands.php:310
+#: includes/cli/class-payout-sub-commands.php:323
 msgid ""
 "No fields were specified for updating. For more information, see wp help "
 "affwp payout update."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:314
+#: includes/cli/class-payout-sub-commands.php:327
 #, fuzzy
 msgid "Payout #%d has been updated successfully."
 msgstr "更新推廣素材成功"
 
-#: includes/cli/class-payout-sub-commands.php:316
+#: includes/cli/class-payout-sub-commands.php:329
 msgid "Payout #%d could not be updated due to an error."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:341
-#: includes/cli/class-payout-sub-commands.php:345
+#: includes/cli/class-payout-sub-commands.php:354
+#: includes/cli/class-payout-sub-commands.php:358
 msgid "A valid payout ID is required to proceed."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:348
+#: includes/cli/class-payout-sub-commands.php:361
 #, fuzzy
 msgid "Are you sure you want to delete this payout?"
 msgstr "你確定你要刪除這個廣告素材嗎？"
 
-#: includes/cli/class-payout-sub-commands.php:353
+#: includes/cli/class-payout-sub-commands.php:366
 msgid "The payout has been successfully deleted."
 msgstr ""
 
-#: includes/cli/class-payout-sub-commands.php:355
+#: includes/cli/class-payout-sub-commands.php:368
 #, fuzzy
 msgid "The payout could not be deleted."
 msgstr "(這位用戶不會被刪除)"
 
-#: includes/cli/class-payout-sub-commands.php:421
+#: includes/cli/class-payout-sub-commands.php:435
 msgid "Number of payouts: %d"
 msgstr ""
 
@@ -3485,7 +3518,7 @@ msgstr "推廣方法: %s"
 msgid "Review pending applications: %s"
 msgstr "查看待審核的申請: %s"
 
-#: includes/emails/actions.php:118 includes/emails/actions.php:244
+#: includes/emails/actions.php:118 includes/emails/actions.php:252
 msgid "Congratulations %s!"
 msgstr "恭喜 %s!"
 
@@ -3493,19 +3526,19 @@ msgstr "恭喜 %s!"
 msgid "Log into your affiliate area at %s"
 msgstr "登入你的聯盟夥伴頁面 %s"
 
-#: includes/emails/actions.php:161
+#: includes/emails/actions.php:169
 msgid "Hi %s!"
 msgstr "嗨 %s！"
 
-#: includes/emails/actions.php:200
+#: includes/emails/actions.php:208
 msgid "Hi %s,"
 msgstr "嗨 %s，"
 
-#: includes/emails/actions.php:245
+#: includes/emails/actions.php:253
 msgid "You have been awarded a new referral of %s on %s!"
 msgstr "你已經在 %s 上，成功獲得一筆推薦獎金 %s！"
 
-#: includes/emails/actions.php:246
+#: includes/emails/actions.php:254
 msgid ""
 "log into your affiliate area to view your earnings or disable these "
 "notifications: %s"
@@ -3608,29 +3641,29 @@ msgstr "廣告宣傳活動"
 msgid "Referral #%d for %s recorded for %s"
 msgstr "推廣 #%d 的 %s 記錄： %s"
 
-#: includes/integrations/class-edd.php:502
+#: includes/integrations/class-edd.php:503
 #: includes/integrations/class-pmp.php:257
-#: includes/integrations/class-rcp.php:235
-#: includes/integrations/class-woocommerce.php:339
+#: includes/integrations/class-rcp.php:236
+#: includes/integrations/class-woocommerce.php:355
 msgid "Affiliate Discount?"
 msgstr "聯盟夥伴折扣？"
 
-#: includes/integrations/class-edd.php:509
+#: includes/integrations/class-edd.php:510
 #: includes/integrations/class-jigoshop.php:173
-#: includes/integrations/class-memberpress.php:284
+#: includes/integrations/class-memberpress.php:285
 #: includes/integrations/class-pmp.php:264
-#: includes/integrations/class-rcp.php:242
-#: includes/integrations/class-woocommerce.php:345
+#: includes/integrations/class-rcp.php:243
+#: includes/integrations/class-woocommerce.php:361
 msgid ""
 "If you would like to connect this discount to an affiliate, enter the name "
 "of the affiliate it belongs to."
 msgstr "如果你想將此特定折扣碼跟聯盟夥伴綁定，請輸入聯盟夥伴的名稱"
 
-#: includes/integrations/class-edd.php:600
+#: includes/integrations/class-edd.php:601
 msgid "Adjust EDD Commissions"
 msgstr "調整 EDD 佣金"
 
-#: includes/integrations/class-edd.php:601
+#: includes/integrations/class-edd.php:602
 msgid ""
 "Should AffiliateWP adjust the commission amounts recorded for purchases that "
 "include affiliate referrals? This will subtract the referral amount from the "
@@ -3639,39 +3672,39 @@ msgstr ""
 "AffiliateWP 應調整聯盟夥伴佣金總額，包含聯盟夥伴的推廣購買記錄嗎？這將會扣除"
 "推廣佣金並重新計算佣金總額。"
 
-#: includes/integrations/class-edd.php:621
+#: includes/integrations/class-edd.php:622
 msgid "Disable Renewal Referrals"
 msgstr "關閉更新推廣"
 
-#: includes/integrations/class-edd.php:622
+#: includes/integrations/class-edd.php:623
 msgid ""
 "Should AffiliateWP prevent referral commissions from being recorded on "
 "renewal purchases with EDD Software Licensing?"
 msgstr "在重新使用EDD軟體授權購買食, AffiliateWP 應該防止推薦佣金被記錄嗎?"
 
-#: includes/integrations/class-edd.php:627
+#: includes/integrations/class-edd.php:628
 #, fuzzy
 msgid "Disable Referrals on Upgrades"
 msgstr "停用這個產品的推廣獎勵"
 
-#: includes/integrations/class-edd.php:628
+#: includes/integrations/class-edd.php:629
 #, fuzzy
 msgid ""
 "Should AffiliateWP prevent referral commissions from being recorded on "
 "license upgrade purchases with EDD Software Licensing?"
 msgstr "在重新使用EDD軟體授權購買食, AffiliateWP 應該防止推薦佣金被記錄嗎?"
 
-#: includes/integrations/class-edd.php:649
+#: includes/integrations/class-edd.php:650
 #: includes/integrations/class-zippycourses.php:70
 msgid "Affiliate Rates:"
 msgstr "聯盟夥伴分潤率："
 
-#: includes/integrations/class-edd.php:662
+#: includes/integrations/class-edd.php:663
 #: includes/integrations/class-zippycourses.php:83
 msgid "Disable referrals on this %s"
 msgstr "禁用推廣在 %s 上面"
 
-#: includes/integrations/class-edd.php:666
+#: includes/integrations/class-edd.php:667
 #: includes/integrations/class-memberpress.php:190
 #: includes/integrations/class-zippycourses.php:87
 msgid ""
@@ -3679,11 +3712,11 @@ msgid ""
 "blank to use the site default referral rate."
 msgstr "這些設定將用於計算每個聯盟夥伴的收益。保留空白則使用網站預設分潤率。"
 
-#: includes/integrations/class-exchange.php:304
+#: includes/integrations/class-exchange.php:305
 msgid "Affiliate coupon?"
 msgstr "使用聯盟夥伴優惠券嗎?"
 
-#: includes/integrations/class-exchange.php:311
+#: includes/integrations/class-exchange.php:312
 msgid ""
 "If you would like to connect this coupon to an affiliate, enter the name of "
 "the affiliate it belongs to."
@@ -3743,87 +3776,115 @@ msgstr ""
 msgid "Affiliate Data"
 msgstr "聯盟夥伴資料"
 
-#: includes/integrations/class-lifterlms.php:81
+#: includes/integrations/class-lifterlms.php:115
+#, fuzzy
+msgid "Referral #%d completed"
+msgstr "更新引薦成功"
+
+#: includes/integrations/class-lifterlms.php:152
 msgid "Referral not created because WooCommerce was used for payment."
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:117
+#: includes/integrations/class-lifterlms.php:183
+#: includes/integrations/class-lifterlms.php:318
 msgid "Referral not created because affiliate's own account was used."
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:130
+#: includes/integrations/class-lifterlms.php:194
+#: includes/integrations/class-lifterlms.php:330
 msgid "Referral not created due to 0.00 amount."
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:162
+#: includes/integrations/class-lifterlms.php:230
 #, fuzzy
 msgid "LifterLMS Referral #%d updated successfully."
 msgstr "更新引薦成功"
 
-#: includes/integrations/class-lifterlms.php:190
+#: includes/integrations/class-lifterlms.php:257
 #, fuzzy
 msgid "Referral #%d created successfully."
 msgstr "更新引薦成功"
 
-#: includes/integrations/class-lifterlms.php:197
+#: includes/integrations/class-lifterlms.php:263
 #, fuzzy
 msgid "Referral failed to be created."
 msgstr "得到新的推廣獎勵電子郵件主題"
 
-#: includes/integrations/class-lifterlms.php:238
+#: includes/integrations/class-lifterlms.php:354
+#, fuzzy
+msgid "Referral #%d updated successfully."
+msgstr "更新引薦成功"
+
+#: includes/integrations/class-lifterlms.php:378
+#, fuzzy
+msgid "Pending referral #%d created successfully."
+msgstr "更新引薦成功"
+
+#: includes/integrations/class-lifterlms.php:389
+#, fuzzy
+msgid "LifterLMS Referral failed to be created."
+msgstr "得到新的推廣獎勵電子郵件主題"
+
+#: includes/integrations/class-lifterlms.php:437
 msgid "Search for an affiliate by username or email."
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:246
+#: includes/integrations/class-lifterlms.php:445
 #, fuzzy
 msgid "Affiliate Discount"
 msgstr "聯盟夥伴折扣？"
 
-#: includes/integrations/class-lifterlms.php:247
+#: includes/integrations/class-lifterlms.php:446
 msgid "Connect this coupon with an affiliate."
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:460
+#: includes/integrations/class-lifterlms.php:670
+#: includes/integrations/class-lifterlms.php:696
 #, fuzzy
 msgid "Referral Details"
 msgstr "推廣設定"
 
-#: includes/integrations/class-lifterlms.php:523
+#: includes/integrations/class-lifterlms.php:750
 #: includes/integrations/class-pmp.php:370
-#: includes/integrations/class-rcp.php:407
+#: includes/integrations/class-rcp.php:408
 msgid "Disable Referrals"
 msgstr "關閉推廣"
 
-#: includes/integrations/class-lifterlms.php:524
+#: includes/integrations/class-lifterlms.php:751
 #, fuzzy
 msgid ""
 "Check this box to prevent orders for this %s from generating referral "
 "commissions for affiliates."
 msgstr "這將防止這種產品從聯盟夥伴產生推廣佣金。"
 
-#: includes/integrations/class-lifterlms.php:532
+#: includes/integrations/class-lifterlms.php:759
 #, fuzzy
 msgid "Enable %s Referral Rate"
 msgstr "推薦分潤率"
 
-#: includes/integrations/class-lifterlms.php:533
+#: includes/integrations/class-lifterlms.php:760
 msgid "Check this box to enable %s referral rate overrides"
 msgstr ""
 
-#: includes/integrations/class-lifterlms.php:541
+#: includes/integrations/class-lifterlms.php:768
 #, fuzzy
 msgid "%s Referral Rate"
 msgstr "推薦分潤率"
 
-#: includes/integrations/class-lifterlms.php:542
+#: includes/integrations/class-lifterlms.php:769
 #, fuzzy
 msgid "Enter a referral rate for this %s"
 msgstr "啟用這個表單的聯盟推廣"
 
+#: includes/integrations/class-lifterlms.php:876
+#, fuzzy
+msgid "Referral #%d rejected"
+msgstr "已被拒絕：推廣 #%d for %s for %s "
+
 #: includes/integrations/class-memberpress.php:157
-#: includes/integrations/class-rcp.php:366
-#: includes/integrations/class-rcp.php:397
-#: includes/integrations/class-woocommerce.php:489
+#: includes/integrations/class-rcp.php:367
+#: includes/integrations/class-rcp.php:398
+#: includes/integrations/class-woocommerce.php:505
 msgid "Affiliate Rate"
 msgstr "聯盟夥伴分潤率"
 
@@ -3862,55 +3923,55 @@ msgstr ""
 msgid "Check to disable per-membership referrals."
 msgstr "檢查關閉個別成員推薦。"
 
-#: includes/integrations/class-rcp.php:370
-#: includes/integrations/class-rcp.php:401
+#: includes/integrations/class-rcp.php:371
+#: includes/integrations/class-rcp.php:402
 msgid ""
 "This rate will be used to calculate affiliate earnings when members "
 "subscribe to this level. Leave blank to use the site default referral rate."
 msgstr "此選項用來計算聯盟夥伴的佣金。保留空白則表示使用預設分潤率。"
 
-#: includes/integrations/class-rcp.php:412
+#: includes/integrations/class-rcp.php:413
 #, fuzzy
 msgid "Disable referrals on this subscription level."
 msgstr "停用這個產品的推廣獎勵"
 
 #: includes/integrations/class-woocommerce.php:239
-#: includes/integrations/class-woocommerce.php:440
+#: includes/integrations/class-woocommerce.php:456
 msgid "(Variation ID %d)"
 msgstr ""
 
-#: includes/integrations/class-woocommerce.php:485
+#: includes/integrations/class-woocommerce.php:501
 #, fuzzy
 msgid "Configure affiliate rates for this product"
 msgstr "停用這個產品的推廣獎勵"
 
-#: includes/integrations/class-woocommerce.php:491
+#: includes/integrations/class-woocommerce.php:507
 #: includes/integrations/extras/class-exchange-feature.php:27
 msgid ""
 "These settings will be used to calculate affiliate earnings per-sale. Leave "
 "blank to use default affiliate rates."
 msgstr "此選項可以單獨設置商品推廣佣金比例。留空使用預設。"
 
-#: includes/integrations/class-woocommerce.php:495
+#: includes/integrations/class-woocommerce.php:511
 msgid "Disable referrals"
 msgstr "關閉推廣"
 
-#: includes/integrations/class-woocommerce.php:496
+#: includes/integrations/class-woocommerce.php:512
 msgid ""
 "This will prevent orders of this product from generating referral "
 "commissions for affiliates."
 msgstr "這將防止這種產品從聯盟夥伴產生推廣佣金。"
 
-#: includes/integrations/class-woocommerce.php:522
+#: includes/integrations/class-woocommerce.php:538
 msgid "Configure affiliate rates for this product variation"
 msgstr ""
 
-#: includes/integrations/class-woocommerce.php:525
+#: includes/integrations/class-woocommerce.php:541
 #, fuzzy
 msgid "Referral rate (optional)"
 msgstr "推廣說明"
 
-#: includes/integrations/class-woocommerce.php:527
+#: includes/integrations/class-woocommerce.php:543
 #, fuzzy
 msgid "Disable referrals for this product variation"
 msgstr "停用這個產品的推廣獎勵"
@@ -4032,106 +4093,110 @@ msgid "Japanese Yen"
 msgstr "日圓"
 
 #: includes/misc-functions.php:50
+msgid "Kazakhstani Tenge"
+msgstr ""
+
+#: includes/misc-functions.php:51
 msgid "Lao Kip"
 msgstr "老撾基普"
 
-#: includes/misc-functions.php:51
+#: includes/misc-functions.php:52
 msgid "Malaysian Ringgits"
 msgstr "馬來西亞林吉特"
 
-#: includes/misc-functions.php:52
+#: includes/misc-functions.php:53
 msgid "Mexican Peso"
 msgstr "墨西哥披索"
 
-#: includes/misc-functions.php:53
+#: includes/misc-functions.php:54
 msgid "Nepali Rupee"
 msgstr "尼泊爾盧比"
 
-#: includes/misc-functions.php:54
+#: includes/misc-functions.php:55
 msgid "Nigerian Naira"
 msgstr "奈及利亞奈拉"
 
-#: includes/misc-functions.php:55
+#: includes/misc-functions.php:56
 msgid "Norwegian Krone"
 msgstr "挪威克朗"
 
-#: includes/misc-functions.php:56
+#: includes/misc-functions.php:57
 msgid "New Zealand Dollar"
 msgstr "紐西蘭元"
 
-#: includes/misc-functions.php:57
+#: includes/misc-functions.php:58
 msgid "Paraguayan Guaraní"
 msgstr "巴拉圭瓜拉尼"
 
-#: includes/misc-functions.php:58
+#: includes/misc-functions.php:59
 msgid "Philippine Pesos"
 msgstr "菲律賓披索"
 
-#: includes/misc-functions.php:59
+#: includes/misc-functions.php:60
 msgid "Polish Zloty"
 msgstr "波蘭茲羅提"
 
-#: includes/misc-functions.php:60
+#: includes/misc-functions.php:61
 msgid "Pounds Sterling"
 msgstr "英鎊"
 
-#: includes/misc-functions.php:61
+#: includes/misc-functions.php:62
 msgid "Romanian Leu"
 msgstr "羅馬尼亞列伊"
 
-#: includes/misc-functions.php:62
+#: includes/misc-functions.php:63
 msgid "Russian Ruble"
 msgstr "俄羅斯盧布"
 
-#: includes/misc-functions.php:63
+#: includes/misc-functions.php:64
 msgid "Saudi Arabian Riyal"
 msgstr ""
 
-#: includes/misc-functions.php:64
+#: includes/misc-functions.php:65
 msgid "Singapore Dollar"
 msgstr "新加坡幣"
 
-#: includes/misc-functions.php:65
+#: includes/misc-functions.php:66
 msgid "South African Rand"
 msgstr "南非蘭特"
 
-#: includes/misc-functions.php:66
+#: includes/misc-functions.php:67
 msgid "South Korean Won"
 msgstr "韓圓"
 
-#: includes/misc-functions.php:67
+#: includes/misc-functions.php:68
 msgid "Swedish Krona"
 msgstr "瑞典克朗"
 
-#: includes/misc-functions.php:68
+#: includes/misc-functions.php:69
 msgid "Swiss Franc"
 msgstr "瑞士法郎"
 
-#: includes/misc-functions.php:69
+#: includes/misc-functions.php:70
 msgid "Taiwan New Dollars"
 msgstr "新台幣"
 
-#: includes/misc-functions.php:70
+#: includes/misc-functions.php:71
 msgid "Thai Baht"
 msgstr "泰銖"
 
-#: includes/misc-functions.php:71
+#: includes/misc-functions.php:72
 msgid "Tunisian Dinar"
 msgstr ""
 
-#: includes/misc-functions.php:72
+#: includes/misc-functions.php:73
 msgid "Turkish Lira"
 msgstr "新土耳其里拉"
 
-#: includes/misc-functions.php:73
+#: includes/misc-functions.php:74
 msgid "United Arab Emirates Dirham"
 msgstr "阿拉伯聯合大公國迪拉姆"
 
-#: includes/misc-functions.php:74
+#: includes/misc-functions.php:75
 msgid "Ukrainian Hryvnia"
 msgstr ""
 
-#: includes/misc-functions.php:75
+#: includes/misc-functions.php:76
 msgid "Vietnamese Dong"
 msgstr "越南盾"
 
@@ -4141,7 +4206,7 @@ msgid ""
 "will be marked as Paid."
 msgstr "你確定你想產出付款文件嗎？所有的推廣獎勵都將標記為已支付。"
 
-#: includes/scripts.php:129
+#: includes/scripts.php:128
 #, fuzzy
 msgid "Please enter a valid URL for this site"
 msgstr "請輸入你的網站網址"
@@ -4290,7 +4355,7 @@ msgstr "聯盟夥伴網址"
 msgid "Graphs"
 msgstr "圖表"
 
-#: templates/dashboard.php:104
+#: templates/dashboard.php:117
 msgid "Log out"
 msgstr ""
 
@@ -4368,7 +4433,7 @@ msgctxt "Integrations"
 msgid "Dismiss Notice"
 msgstr "撤銷通知"
 
-#: includes/admin/class-notices.php:331 includes/admin/class-notices.php:340
+#: includes/admin/class-notices.php:387 includes/admin/class-notices.php:396
 msgctxt "License"
 msgid "Dismiss Notice"
 msgstr "撤銷通知"
@@ -4507,13 +4572,13 @@ msgctxt "payout"
 msgid "Amount"
 msgstr "總計"
 
-#: includes/admin/payouts/class-list-table.php:153
+#: includes/admin/payouts/class-list-table.php:154
 #, fuzzy
 msgctxt "payout"
 msgid "Status"
 msgstr "狀態"
 
-#: includes/admin/payouts/class-list-table.php:154
+#: includes/admin/payouts/class-list-table.php:155
 #, fuzzy
 msgctxt "payout"
 msgid "Date"
@@ -4531,6 +4596,19 @@ msgctxt "payout"
 msgid "Paid"
 msgstr "已支付"
 
+#: includes/admin/payouts/class-list-table.php:333
+#: includes/admin/payouts/view.php:79
+msgctxt "payout owner"
+msgid "(none)"
+msgstr ""
+
+#: includes/admin/payouts/class-list-table.php:341
+#: includes/admin/payouts/view.php:87
+#, fuzzy
+msgctxt "payout owner ID"
+msgid "(User ID: %d)"
+msgstr "用戶ID"
+
 #: includes/admin/referrals/referrals.php:39
 #, fuzzy
 msgctxt "referrals"
@@ -4543,13 +4621,13 @@ msgctxt "visits"
 msgid "Reports"
 msgstr "報表"
 
-#: includes/class-graph.php:389
+#: includes/class-graph.php:407
 #, fuzzy
 msgctxt "date filter"
 msgid "From"
 msgstr "寄件人"
 
-#: includes/class-graph.php:391
+#: includes/class-graph.php:409
 #, fuzzy
 msgctxt "date filter"
 msgid "To"
@@ -4617,6 +4695,9 @@ msgstr ""
 msgctxt "direct traffic"
 msgid "Direct"
 msgstr "直接流量"
+
+#~ msgid "Affiliate added successfully"
+#~ msgstr "已成功新增聯盟夥伴"
 
 #, fuzzy
 #~ msgid "What&#8217;s new in AffiliateWP"

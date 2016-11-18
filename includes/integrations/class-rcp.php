@@ -221,6 +221,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 		affwp_admin_scripts();
 
 		$user_name    = '';
+		$user_id      = 0;
 		$affiliate_id = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM $wpdb->usermeta WHERE meta_key = %s", 'affwp_discount_rcp_' . $discount_id ) );
 		if( $affiliate_id ) {
 			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );

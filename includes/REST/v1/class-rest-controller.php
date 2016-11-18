@@ -350,5 +350,4 @@ abstract class Controller {
 		return $schema;
 	}
 
-
 }

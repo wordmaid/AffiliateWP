@@ -13,6 +13,15 @@ use AffWP\REST\v1\Controller;
 class Endpoints extends Controller {
 
 	/**
+	 * Object type.
+	 *
+	 * @since 1.9.5
+	 * @access public
+	 * @var string
+	 */
+	public $object_type = 'affwp_payout';
+
+	/**
 	 * Route base for payouts.
 	 *
 	 * @access public
@@ -55,6 +64,12 @@ class Endpoints extends Controller {
 				return current_user_can( 'manage_affiliates' );
 			}
 		) );
+
+		$this->register_field( 'id', array(
+			'get_callback' => function( $object, $field_name, $request, $object_type ) {
+				return $object->ID;
+			}
+		) );
 	}
 
 	/**
@@ -70,13 +85,14 @@ class Endpoints extends Controller {
 
 		$args = array();
 
-		$args['number']         = isset( $request['number'] )         ? $request['number'] : 0;
+		$args['number']         = isset( $request['number'] )         ? $request['number'] : 20;
 		$args['offset']         = isset( $request['offset'] )         ? $request['offset'] : 0;
 		$args['payout_id']      = isset( $request['payout_id'] )      ? $request['payout_id'] : 0;
 		$args['affiliate_id']   = isset( $request['affiliate_id'] )   ? $request['affiliate_id'] : 0;
 		$args['referrals']      = isset( $request['referrals'] )      ? $request['referrals'] : array();
 		$args['amount']         = isset( $request['amount'] )         ? $request['amount'] : 0;
 		$args['amount_compare'] = isset( $request['amount_compare'] ) ? $request['amount'] : '=';
+		$args['owner']          = isset( $request['owner'] )          ? $request['owner'] : 0;
 		$args['payout_method']  = isset( $request['payout_method'] )  ? $request['payout_method'] : '';
 		$args['status']         = isset( $request['status'] )         ? $request['status'] : '';
 		$args['date']           = isset( $request['date'] )           ? $request['date'] : '';
@@ -108,6 +124,12 @@ class Endpoints extends Controller {
 				'No payouts were found.',
 				array( 'status' => 404 )
 			);
+		} else {
+			$inst = $this;
+			array_map( function( $payout ) use ( $inst, $request ) {
+				$payout = $inst->process_for_output( $payout, $request );
+				return $payout;
+			}, $payouts );
 		}
 
 		return $this->response( $payouts );
@@ -129,6 +151,9 @@ class Endpoints extends Controller {
 				'Invalid payout ID',
 				array( 'status' => 404 )
 			);
+		} else {
+			// Populate extra fields.
+			$payout = $this->process_for_output( $payout, $request );
 		}
 
 		return $this->response( $payout );
@@ -186,6 +211,13 @@ class Endpoints extends Controller {
 			'validate_callback' => function( $param, $request, $key ) {
 				return in_array( $param, array( '>', '<', '>=', '<=', '=', '!=' ) );
 			},
+		);
+
+		$params['owner'] = array(
+			'description'       => __( 'ID or array of IDs for users who generated payouts. Default empty.', 'affiliate-wp' ),
+			'validate_callback' => function( $param, $request, $key ) {
+				return is_numeric( $param ) || is_array( $param );
+			}
 		);
 
 		$params['status'] = array(

@@ -13,6 +13,15 @@ use AffWP\REST\v1\Controller;
 class Endpoints extends Controller {
 
 	/**
+	 * Object type.
+	 *
+	 * @since 1.9.5
+	 * @access public
+	 * @var string
+	 */
+	public $object_type = 'affwp_affiliate';
+
+	/**
 	 * Route base for affiliates.
 	 *
 	 * @since 1.9
@@ -54,10 +63,21 @@ class Endpoints extends Controller {
 					'validate_callback' => function( $param, $request, $key ) {
 						return is_string( $param );
 					}
-				)
+				),
+				'meta' => array(
+					'validate_callback' => function( $param, $request, $key ) {
+						return is_string( $param );
+					}
+				),
 			),
 			'permission_callback' => function( $request ) {
 				return current_user_can( 'manage_affiliates' );
+			}
+		) );
+
+		$this->register_field( 'id', array(
+			'get_callback' => function( $object, $field_name, $request, $object_type ) {
+				return $object->ID;
 			}
 		) );
 	}
@@ -75,7 +95,7 @@ class Endpoints extends Controller {
 
 		$args = array();
 
-		$args['number']       = isset( $request['number'] )       ? $request['number'] : 0;
+		$args['number']       = isset( $request['number'] )       ? $request['number'] : 20;
 		$args['offset']       = isset( $request['offset'] )       ? $request['offset'] : 0;
 		$args['exclude']      = isset( $request['exclude'] )      ? $request['exclude'] : array();
 		$args['affiliate_id'] = isset( $request['affiliate_id'] ) ? $request['affiliate_id'] : 0;
@@ -91,6 +111,7 @@ class Endpoints extends Controller {
 		}
 
 		$args['user'] = $user = ! empty( $request['user'] );
+		$args['meta'] = $meta = ! empty( $request['meta'] );
 
 		/**
 		 * Filters the query arguments used to retrieve affiliates in a REST request.
@@ -112,8 +133,8 @@ class Endpoints extends Controller {
 			);
 		} else {
 			$inst = $this;
-			array_map( function( $affiliate ) use ( $user, $inst ) {
-				$affiliate = $inst->process_for_output( $affiliate, $user );
+			array_map( function( $affiliate ) use ( $user, $meta, $inst, $request ) {
+				$affiliate = $inst->process_for_output( $affiliate, $request, $user, $meta );
 				return $affiliate;
 			}, $affiliates );
 		}
@@ -139,8 +160,10 @@ class Endpoints extends Controller {
 			);
 		} else {
 			$user = $request->get_param( 'user' );
+			$meta = $request->get_param( 'meta' );
+
 			// Populate extra fields and return.
-			$affiliate = $this->process_for_output( $affiliate, $user );
+			$affiliate = $this->process_for_output( $affiliate, $request, $user, $meta );
 		}
 
 		return $this->response( $affiliate );
@@ -152,19 +175,26 @@ class Endpoints extends Controller {
 	 * Populates non-public properties with derived values.
 	 *
 	 * @since 1.9
+	 * @since 1.9.5 Added the `$meta` and `$request` parameters.
 	 * @access protected
 	 *
 	 * @param \AffWP\Affiliate $affiliate Affiliate object.
+	 * @param \WP_REST_Request $request   Full details about the request.
 	 * @param bool             $user      Optional. Whether to lazy load the user object. Default false.
+	 * @param bool             $meta      Optional. Whether to lazy load the affiliate meta. Default false.
 	 * @return \AffWP\Affiliate Affiliate object.
 	 */
-	protected function process_for_output( $affiliate, $user = false ) {
+	protected function process_for_output( $affiliate, $request, $user = false, $meta = false ) {
 
 		if ( true == $user ) {
 			$affiliate->user = $affiliate->get_user();
 		}
 
-		return $affiliate;
+		if ( true == $meta ) {
+			$affiliate->meta = $affiliate->get_meta();
+		}
+
+		return parent::process_for_output( $affiliate, $request );
 	}
 
 	/**

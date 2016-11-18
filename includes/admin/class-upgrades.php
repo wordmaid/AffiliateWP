@@ -79,6 +79,10 @@ class Affiliate_WP_Upgrades {
 			$this->v19_upgrade();
 		}
 
+		if ( version_compare( $version, '1.9.5', '<' ) ) {
+			$this->v195_upgrade();
+		}
+
 		// Inconsistency between current and saved version.
 		if ( version_compare( $version, AFFILIATEWP_VERSION, '<>' ) ) {
 			$this->upgraded = true;
@@ -415,6 +419,22 @@ class Affiliate_WP_Upgrades {
 
 		@affiliate_wp()->REST->consumers->create_table();
 		$this->log( 'Upgrade: The API consumers table creation process for 1.9 has completed' );
+
+		$this->upgraded = true;
+	}
+
+	/**
+	 * Performs database upgrades for version 1.9.5.
+	 *
+	 * @since 1.9.5
+	 * @access private
+	 */
+	private function v195_upgrade() {
+		@affiliate_wp()->affiliates->payouts->create_table();
+		$this->log( 'Upgrade: The Payouts table upgrade for 1.9.5 has completed.' );
+
+		wp_cache_set( 'last_changed', microtime(), 'payouts' );
+		$this->log( 'Upgrade: The Payouts cache has been invalidated following the 1.9.5 upgrade routine.' );
 
 		$this->upgraded = true;
 	}

@@ -573,7 +573,7 @@ function affwp_delete_affiliate( $affiliate, $delete_data = false ) {
 		delete_user_meta( $affiliate->user_id, 'affwp_promotion_method' );
 	}
 
-	$deleted = affiliate_wp()->affiliates->delete( $affiliate_id );
+	$deleted = affiliate_wp()->affiliates->delete( $affiliate_id, 'affiliate' );
 
 	if( $deleted ) {
 

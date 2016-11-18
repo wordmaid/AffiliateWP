@@ -82,6 +82,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			'affiliate_id'  => '%d',
 			'referrals'     => '%s',
 			'amount'        => '%s',
+			'owner'         => '%d',
 			'payout_method' => '%s',
 			'status'        => '%s',
 			'date'          => '%s',
@@ -97,6 +98,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 	public function get_column_defaults() {
 		return array(
 			'payout_id' => 0,
+			'owner'     => 0,
 			'status'    => 'paid',
 			'date'      => date( 'Y-m-d H:i:s' ),
 		);
@@ -114,6 +116,8 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 	 *     @type int        $affiliate_id  Affiliate ID the payout should be associated with.
 	 *     @type array      $referrals     Referral ID or array of IDs to associate the payout with.
 	 *     @type float      $amount        Payout amount.
+	 *     @type int        $owner         ID of the user who generated the payout. Default is the ID
+	 *                                     of the current user.
 	 *     @type string     $payout_method Payout method.
 	 *     @type string     $status        Payout status. Will be 'paid' unless there's a problem.
 	 *     @type int|string $date          Date string or timestamp for when the payout was created.
@@ -127,6 +131,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			'referrals'     => array(),
 			'amount'        => 0,
 			'payout_method' => '',
+			'owner'         => get_current_user_id(),
 			'status'        => 'paid',
 		) );
 
@@ -315,6 +320,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 	 *         @type string $start Start date to retrieve payouts for.
 	 *         @type string $end   End date to retrieve payouts for.
 	 *     }
+	 *     @type int|array    $owner          ID or array of IDs for users who generated payouts. Default empty.
 	 *     @type string       $status         Payout status. Default is 'paid' unless there's a problem.
 	 *     @type string       $order          How to order returned payout results. Accepts 'ASC' or 'DESC'.
 	 *                                        Default 'DESC'.
@@ -337,6 +343,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			'amount'         => 0,
 			'amount_compare' => '=',
 			'payout_method'  => '',
+			'owner'          => '',
 			'status'         => 'paid',
 			'date'           => '',
 			'order'          => 'DESC',
@@ -450,6 +457,21 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			$payment_method = esc_sql( $args['payout_method'] );
 
 			$where .= "`payout_method` = '" . $payout_method . "' ";
+		}
+
+		// Owners.
+		if ( ! empty( $args['owner'] ) ) {
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
+			if ( is_array( $args['owner'] ) ) {
+				$owners = implode( ',', array_map( 'intval', $args['owner'] ) );
+			} else {
+				$owners = intval( $args['owner'] );
+			}
+
+			$owners = esc_sql( $owners );
+
+			$where .= "`owner` IN( {$owners} ) ";
 		}
 
 		// Status.
@@ -640,6 +662,7 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			affiliate_id bigint(20) NOT NULL,
 			referrals mediumtext NOT NULL,
 			amount mediumtext NOT NULL,
+			owner bigint(20) NOT NULL,
 			payout_method tinytext NOT NULL,
 			status tinytext NOT NULL,
 			date datetime NOT NULL,

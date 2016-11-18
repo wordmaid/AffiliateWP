@@ -13,6 +13,15 @@ use \AffWP\REST\v1\Controller;
 class Endpoints extends Controller {
 
 	/**
+	 * Object type.
+	 *
+	 * @since 1.9.5
+	 * @access public
+	 * @var string
+	 */
+	public $object_type = 'affwp_referral';
+
+	/**
 	 * Route base for referrals.
 	 *
 	 * @since 1.9
@@ -54,6 +63,12 @@ class Endpoints extends Controller {
 				return current_user_can( 'manage_affiliates' );
 			}
 		) );
+
+		$this->register_field( 'id', array(
+			'get_callback' => function( $object, $field_name, $request, $object_type ) {
+				return $object->ID;
+			}
+		) );
 	}
 
 	/**
@@ -69,18 +84,18 @@ class Endpoints extends Controller {
 
 		$args = array();
 
-		$args['number']       = isset( $request['number'] ) ? $request['number'] : -1;
-		$args['offset']       = $request['offset'];
-		$args['referral_id']  = $request['referral_id'];
-		$args['affiliate_id'] = $request['affiliate_id'];
-		$args['reference']    = $request['reference'];
-		$args['context']      = $request['ref_context'];
-		$args['campaign']     = $request['campaign'];
-		$args['status']       = $request['status'];
-		$args['orderby']      = $request['orderby'];
-		$args['order']        = isset( $request['order'] ) ? $request['order'] : 'ASC';
-		$args['search']       = $request['search'];
-		$args['date']         = $request['date'];
+		$args['number']       = isset( $request['number'] )       ? $request['number'] : 20;
+		$args['offset']       = isset( $request['offset'] )       ? $request['offset'] : 0;
+		$args['referral_id']  = isset( $request['referral_id'] )  ? $request['referral_id'] : 0;
+		$args['affiliate_id'] = isset( $request['affiliate_id'] ) ? $request['affiliate_id'] : 0;
+		$args['reference']    = isset( $request['reference'] )    ? $request['reference'] : '';
+		$args['context']      = isset( $request['ref_context'] )  ? $request['ref_context'] : '';
+		$args['campaign']     = isset( $request['campaign'] )     ? $request['campaign'] : '';
+		$args['status']       = isset( $request['status'] )       ? $request['status'] : '';
+		$args['orderby']      = isset( $request['orderby'] )      ? $request['orderby'] : '';
+		$args['order']        = isset( $request['order'] )        ? $request['order'] : 'ASC';
+		$args['search']       = isset( $request['search'] )       ? $request['search'] : false;
+		$args['date']         = isset( $request['date'] )         ? $request['date'] : '';
 
 		if ( is_array( $request['filter'] ) ) {
 			$args = array_merge( $args, $request['filter'] );
@@ -105,6 +120,12 @@ class Endpoints extends Controller {
 				'No referrals were found.',
 				array( 'status' => 404 )
 			);
+		} else {
+			$inst = $this;
+			array_map( function( $referral ) use ( $inst, $request ) {
+				$referral = $inst->process_for_output( $referral, $request );
+				return $referral;
+			}, $referrals );
 		}
 
 		return $this->response( $referrals );
@@ -126,6 +147,9 @@ class Endpoints extends Controller {
 				'Invalid referral ID',
 				array( 'status' => 404 )
 			);
+		} else {
+			// Populate extra fields.
+			$referral = $this->process_for_output( $referral, $request );
 		}
 
 		return $this->response( $referral );

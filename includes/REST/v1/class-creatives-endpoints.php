@@ -13,6 +13,15 @@ use \AffWP\REST\v1\Controller;
 class Endpoints extends Controller {
 
 	/**
+	 * Object type.
+	 *
+	 * @since 1.9.5
+	 * @access public
+	 * @var string
+	 */
+	public $object_type = 'affwp_creative';
+
+	/**
 	 * Route base for creatives.
 	 *
 	 * @since 1.9
@@ -52,6 +61,12 @@ class Endpoints extends Controller {
 				return current_user_can( 'manage_affiliates' );
 			}
 		) );
+
+		$this->register_field( 'id', array(
+			'get_callback' => function( $object, $field_name, $request, $object_type ) {
+				return $object->ID;
+			}
+		) );
 	}
 
 	/**
@@ -67,7 +82,7 @@ class Endpoints extends Controller {
 
 		$args = array();
 
-		$args['number']       = isset( $request['number'] )       ? $request['number'] : 0;
+		$args['number']       = isset( $request['number'] )       ? $request['number'] : 20;
 		$args['offset']       = isset( $request['offset'] )       ? $request['offset'] : 0;
 		$args['creative_id']  = isset( $request['creative_id'] )  ? $request['creative_id'] : 0;
 		$args['status']       = isset( $request['status'] )       ? $request['status'] : '';
@@ -98,6 +113,12 @@ class Endpoints extends Controller {
 				'No creatives were found.',
 				array( 'status' => 404 )
 			);
+		} else {
+			$inst = $this;
+			array_map( function( $creative ) use ( $inst, $request ) {
+				$creative = $inst->process_for_output( $creative, $request );
+				return $creative;
+			}, $creatives );
 		}
 
 		return $this->response( $creatives );
@@ -119,6 +140,9 @@ class Endpoints extends Controller {
 				'Invalid creative ID',
 				array( 'status' => 404 )
 			);
+		} else {
+			// Populate extra fields.
+			$creative = $this->process_for_output( $creative, $request );
 		}
 
 		return $this->response( $creative );

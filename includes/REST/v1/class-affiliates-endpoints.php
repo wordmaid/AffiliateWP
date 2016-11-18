@@ -294,88 +294,72 @@ class Endpoints extends Controller {
 				'affiliate_id' => array(
 					'description' => __( 'The unique affiliate ID.', 'affiliate-wp' ),
 					'type'        => 'integer',
-					'readonly'    => true,
 				),
 				'user_id'         => array(
 					'description' => __( 'ID for the user account associated with the affiliate.', 'affiliate-wp' ),
 					'type'        => 'integer',
-					'readonly'    => true,
 				),
 				'rate'            => array(
 					'description' => __( 'The affiliate rate.', 'affiliate-wp' ),
 					'type'        => 'string',
-					'readonly'    => true,
 					'properties'  => array(
 						'raw'       => array(
 							'description' => __( 'The affiliate rate, as it exists in the database', 'affiliate-wp' ),
 							'type'        => 'string',
-							'readonly'    => true,
 						),
 						'inherited' => array(
 							'description' => __( 'The affiliate rate, as inherited from global settings.', 'affiliate-wp' ),
 							'type'        => 'string',
-							'readonly'    => true,
 						),
 					),
 				),
 				'rate_type'       => array(
 					'description' => __( 'The affiliate rate type', 'affiliate-wp' ),
 					'type'        => 'string',
-					'readonly'    => true,
 					'properties'  => array(
 						'raw'       => array(
 							'description' => __( 'The affiliate rate type, as it exists in the database', 'affiliate-wp' ),
 							'type'        => 'string',
-							'readonly'    => true,
 						),
 						'inherited' => array(
 							'description' => __( 'The affiliate rate type, as inherited from global settings.', 'affiliate-wp' ),
 							'type'        => 'string',
-							'readonly'    => true,
 						),
 					),
 				),
 				'payment_email'   => array(
 					'description' => __( 'The affiliate payment email address.', 'affiliate-wp' ),
 					'type'        => 'string',
-					'readonly'    => true,
 					'properties'  => array(
 						'raw'       => array(
 							'description' => __( 'The affiliate payment email address, as it exists in the database', 'affiliate-wp' ),
 							'type'        => 'string',
-							'readonly'    => true,
 						),
 						'inherited' => array(
 							'description' => __( 'The affiliate payment email address, as inherited from the user email address.', 'affiliate-wp' ),
 							'type'        => 'string',
-							'readonly'    => true,
 						)
 					),
 				),
 				'status'          => array(
 					'description' => __( 'The affiliate status.', 'affiliate-wp' ),
 					'type'        => 'string',
-					'readonly'    => true,
 				),
 				'earnings'        => array(
 					'description' => __( 'Affiliate earnings.', 'affiliate-wp' ),
 					'type'        => 'float',
-					'readonly'    => true,
 				),
 				'referrals'       => array(
 					'description' => __( 'The number of referrals associated with the affiliate.', 'affiliate-wp' ),
 					'type'        => 'integer',
-					'readonly'    => true,
 				),
 				'visits'          => array(
 					'description' => __( 'The number of visits associated with the affiliate.', 'affiliate-wp' ),
 					'type'        => 'integer',
-					'readonly'    => true,
 				),
 				'date_registered' => array(
 					'description' => __( 'The date the affiliate was registered.', 'affiliate-wp' ),
 					'type'        => 'string',
-					'readonly'    => true,
 				),
 			),
 		);

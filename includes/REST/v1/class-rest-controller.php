@@ -187,11 +187,11 @@ abstract class Controller {
 				$endpoint_args[ $field_id ]['description'] = $params['description'];
 			}
 
-			if ( WP_REST_Server::CREATABLE === $method && isset( $params['default'] ) ) {
+			if ( \WP_REST_Server::CREATABLE === $method && isset( $params['default'] ) ) {
 				$endpoint_args[ $field_id ]['default'] = $params['default'];
 			}
 
-			if ( WP_REST_Server::CREATABLE === $method && ! empty( $params['required'] ) ) {
+			if ( \WP_REST_Server::CREATABLE === $method && ! empty( $params['required'] ) ) {
 				$endpoint_args[ $field_id ]['required'] = true;
 			}
 
@@ -205,7 +205,7 @@ abstract class Controller {
 			if ( isset( $params['arg_options'] ) ) {
 
 				// Only use required / default from arg_options on CREATABLE endpoints.
-				if ( WP_REST_Server::CREATABLE !== $method ) {
+				if ( \WP_REST_Server::CREATABLE !== $method ) {
 					$params['arg_options'] = array_diff_key( $params['arg_options'], array( 'required' => '', 'default' => '' ) );
 				}
 

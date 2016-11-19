@@ -178,10 +178,13 @@ abstract class Controller {
 				continue;
 			}
 
-			$endpoint_args[ $field_id ] = array(
-				'validate_callback' => 'rest_validate_request_arg',
-				'sanitize_callback' => 'rest_sanitize_request_arg',
-			);
+			if ( isset( $params['validate_callback'] ) ) {
+				$endpoint_args[ $field_id ]['validate_callback'] = $params['validate_callback'];
+			}
+
+			if ( isset( $params['sanitize_callback'] ) ) {
+				$endpoint_args[ $field_id ]['sanitize_callback'] = $params['sanitize_callback'];
+			}
 
 			if ( isset( $params['description'] ) ) {
 				$endpoint_args[ $field_id ]['description'] = $params['description'];

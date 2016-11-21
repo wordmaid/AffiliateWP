@@ -134,6 +134,12 @@ class Affiliate_WP_Capabilities {
 				$caps[] = 'manage_payouts';
 				break;
 
+			case 'view_payout':
+				$payout = affwp_get_payout( $args[0] );
+
+				$caps[] = $payout ? 'manage_payouts' : 'do_not_allow';
+				break;
+
 			case 'add_referral':
 				$caps[] = 'manage_referrals';
 				break;

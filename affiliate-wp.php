@@ -203,6 +203,15 @@ final class Affiliate_WP {
 	public $REST;
 
 	/**
+	 * The capabilities class instance variable.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    Affiliate_WP_Capabilities
+	 */
+	public $capabilities;
+
+	/**
 	 * Main Affiliate_WP Instance
 	 *
 	 * Insures that only one instance of Affiliate_WP exists in memory at any one
@@ -456,6 +465,7 @@ final class Affiliate_WP {
 		self::$instance->creative       = new Affiliate_WP_Creatives;
 		self::$instance->rewrites       = new Affiliate_WP_Rewrites;
 		self::$instance->REST           = new Affiliate_WP_REST;
+		self::$instance->capabilities   = new Affiliate_WP_Capabilities;
 
 		self::$instance->updater();
 	}

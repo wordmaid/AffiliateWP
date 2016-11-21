@@ -327,6 +327,11 @@ class Endpoints extends Controller {
 						),
 					),
 				),
+				'account_email'   => array(
+					'description' => __( 'The affiliate account email. Synced with the associated user account.', 'affiliatewp-rest-api' ),
+					'type'        => 'string',
+					'readonly'    => true,
+				),
 				'payment_email'   => array(
 					'description' => __( 'The affiliate payment email address.', 'affiliate-wp' ),
 					'type'        => 'string',

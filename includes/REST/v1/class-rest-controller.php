@@ -158,7 +158,7 @@ abstract class Controller {
 	 * Back-compat shim for WP_REST_Controller::get_endpoint_args_for_item_schema().
 	 *
 	 * @access public
-	 * @since  1.0.0
+	 * @since  2.0
 	 *
 	 * @param string $method Optional. HTTP method of the request. The arguments for `CREATABLE` requests are
 	 *                       checked for required values and may fall-back to a given default, this is not done
@@ -332,7 +332,7 @@ abstract class Controller {
 	 * The type of object is inferred from the passed schema.
 	 *
 	 * @access protected
-	 * @since  1.0.0
+	 * @since  2.0
 	 *
 	 * @param array $schema Schema array.
 	 * @return array Modified Schema array.

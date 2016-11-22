@@ -236,6 +236,12 @@ function affwp_set_affiliate_status( $affiliate, $status = '' ) {
 
 	$old_status = $affiliate->status;
 
+	/**
+	 * Fires just prior to update the affiliate status.
+	 *
+	 * @param  string $status     The new affiliate status. Optional.
+	 * @param  string $old_status The old affiliate status.
+	 */
 	do_action( 'affwp_set_affiliate_status', $affiliate->ID, $status, $old_status );
 
 	if ( affiliate_wp()->affiliates->update( $affiliate->ID, array( 'status' => $status ), '', 'affiliate' ) ) {
@@ -577,6 +583,11 @@ function affwp_delete_affiliate( $affiliate, $delete_data = false ) {
 
 	if( $deleted ) {
 
+		/**
+		 * Fires when an affiliate is deleted.
+		 * @param  int   $affiliate_id The affiliate ID.
+		 * @param  array $delete_data  The affiliate data being deleted.
+		 */
 		do_action( 'affwp_affiliate_deleted', $affiliate_id, $delete_data );
 
 	}

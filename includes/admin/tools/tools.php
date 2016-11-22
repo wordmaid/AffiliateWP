@@ -47,7 +47,12 @@ function affwp_tools_admin() {
 			?>
 		</h2>
 		<div id="tab_container">
-			<?php do_action( 'affwp_tools_tab_' . $active_tab ); ?>
+			<?php
+
+			/**
+			 * Fires in the Tools screen tab
+			 */
+			do_action( 'affwp_tools_tab_' . $active_tab ); ?>
 		</div><!-- #tab_container-->
 	</div><!-- .wrap -->
 	<?php

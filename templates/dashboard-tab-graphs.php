@@ -9,6 +9,16 @@
 	$graph->display();
 	?>
 
-	<?php do_action( 'affwp_affiliate_dashboard_after_graphs', affwp_get_affiliate_id() ); ?>
+	<?php
+
+    $affiliate_id = affwp_get_affiliate_id();
+
+    /**
+     *  Fires after dashboard graphs within the affiliate area graphs template.
+     *
+     * @param  $affiliate_id Affiliate ID of the currently logged-in affiliate.
+     */
+    do_action( 'affwp_affiliate_dashboard_after_graphs', $affiliate_id );
+    ?>
 
 </div>

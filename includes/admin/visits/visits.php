@@ -41,7 +41,14 @@ function affwp_visits_admin() {
 			<?php _e( 'Visits', 'affiliate-wp' ); ?>
 			<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'affiliate-wp-reports', 'tab' => 'visits' ) ) ); ?>" class="page-title-action"><?php _ex( 'Reports', 'visits', 'affiliate-wp' ); ?></a>
 		</h1>
-		<?php do_action( 'affwp_affiliates_page_top' ); ?>
+		<?php
+		/**
+		 * Fires at the top of the Visits admin screen (outside the form element).
+		 */
+		do_action( 'affwp_visits_page_top' );
+
+		?>
+
 		<form id="affwp-visits-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp' ); ?>">
 			<?php $visits_table->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-affiliates' ); ?>
 			<span class="affwp-ajax-search-wrap">
@@ -62,7 +69,14 @@ function affwp_visits_admin() {
 			<?php $visits_table->views() ?>
 			<?php $visits_table->display() ?>
 		</form>
-		<?php do_action( 'affwp_affiliates_page_bottom' ); ?>
+		<?php
+
+		/**
+		 * Fires at the bottom of the Visits admin screen.
+		 */
+		do_action( 'affwp_visits_page_bottom' );
+
+		?>
 	</div>
 <?php
 

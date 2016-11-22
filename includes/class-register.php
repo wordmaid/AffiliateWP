@@ -56,6 +56,9 @@ class Affiliate_WP_Register {
 			return;
 		}
 
+		/**
+		 * Fires immediately prior to processing an affiliate registration form.
+		 */
 		do_action( 'affwp_pre_process_register_form' );
 
 		if ( ! is_user_logged_in() ) {
@@ -146,6 +149,9 @@ class Affiliate_WP_Register {
 			$this->add_error( 'already_registered', __( 'You are already registered as an affiliate', 'affiliate-wp' ) );
 		}
 
+		/**
+		 * Fires after processing an affiliate registration form.
+		 */
 		do_action( 'affwp_process_register_form' );
 
 		// only log the user in if there are no errors
@@ -292,13 +298,24 @@ class Affiliate_WP_Register {
 		// Retrieve affiliate ID. Resolves issues with caching on some hosts, such as GoDaddy
 		$affiliate_id = affwp_get_affiliate_id( $user_id );
 
+		/**
+		 *  Fires immediately after registering a user.
+		 *
+		 * @param  int    $affiliate_id Affiliate ID.
+		 * @param  string $status       Affiliate status.
+		 * @param  array  $args         Data arguments used when registering the user.
+		 */
 		do_action( 'affwp_register_user', $affiliate_id, $status, $args );
 	}
 
 	/**
-	 * Log the user in
+	 * Logs the user in.
 	 *
 	 * @since 1.0
+	 *
+	 * @param  $user_id    The user ID.
+	 * @param  $user_login The `user_login` for the user.
+	 * @param  $remember   Whether or not the browser should remember the user login.
 	 */
 	private function log_user_in( $user_id = 0, $user_login = '', $remember = false ) {
 
@@ -308,6 +325,14 @@ class Affiliate_WP_Register {
 
 		wp_set_auth_cookie( $user_id, $remember );
 		wp_set_current_user( $user_id, $user_login );
+
+		/**
+		 * The `wp_login` action is fired here to maintain compatibility and stability of
+		 * any WordPress core features, plugins, or themes hooking onto it.
+		 *
+		 * @param  string   $user_login The `user_login` for the user.
+		 * @param  stdClass $user       The user object.
+		 */
 		do_action( 'wp_login', $user_login, $user );
 
 	}
@@ -315,8 +340,10 @@ class Affiliate_WP_Register {
 	/**
 	 * Register a user as an affiliate during user registration
 	 *
-	 * @since 1.1
+	 * @since  1.1
 	 * @return bool
+	 *
+	 * @param  $user_id The user ID.
 	 */
 	public function auto_register_user_as_affiliate( $user_id = 0 ) {
 
@@ -342,9 +369,10 @@ class Affiliate_WP_Register {
 		 * Fires after a new user has been auto-registered as an affiliate
 		 *
 		 * @since  1.7
-		 * @param  int    $affiliate_id
-		 * @param  string $status
-		 * @param  array  $args
+		 *
+		 * @param  int    $affiliate_id Affiliate ID.
+		 * @param  string $status       The affiliate status.
+		 * @param  array  $args         Affiliate data.
 		 */
 		do_action( 'affwp_auto_register_user', $affiliate_id, $status, $args );
 

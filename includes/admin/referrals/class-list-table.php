@@ -457,6 +457,9 @@ class AffWP_Referrals_Table extends List_Table {
 
 		echo "</select>\n";
 
+		/**
+		 * Fires at the bottom of the referral bulk-actions admin screen (inside the form element).
+		 */
 		do_action( 'affwp_referral_bulk_actions' );
 
 		submit_button( __( 'Apply', 'affiliate-wp' ), 'action', false, false, array( 'id' => "doaction$two" ) );
@@ -471,6 +474,9 @@ class AffWP_Referrals_Table extends List_Table {
 			echo "<input type='text' class='affwp-datepicker' autocomplete='off' name='filter_from' placeholder='" . __( 'From - mm/dd/yyyy', 'affiliate-wp' ) . "' value='" . $from . "'/>";
 			echo "<input type='text' class='affwp-datepicker' autocomplete='off' name='filter_to' placeholder='" . __( 'To - mm/dd/yyyy', 'affiliate-wp' ) . "' value='" . $to . "'/>&nbsp;";
 
+			/**
+			 * Fires in the admin referrals screen, inside the search filters form area, prior to the submit button.
+			 */
 			do_action( 'affwp_referral_filters' );
 
 			submit_button( __( 'Filter', 'affiliate-wp' ), 'action', false, false );
@@ -556,6 +562,11 @@ class AffWP_Referrals_Table extends List_Table {
 				affwp_set_referral_status( $id, 'unpaid' );
 			}
 
+			/**
+			 * Fires after a referral bulk action is performed.
+			 *
+			 * @param  The ID of the object.
+			 */
 			do_action( 'affwp_referrals_do_bulk_action_' . $this->current_action(), $id );
 
 		}

@@ -57,7 +57,16 @@ function affwp_affiliates_admin() {
 				<a href="<?php echo esc_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'add_affiliate' ) ) ); ?>" class="page-title-action"><?php _e( 'Add New', 'affiliate-wp' ); ?></a>
 				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'affiliate-wp-reports', 'tab' => 'affiliates' ) ) ); ?>" class="page-title-action"><?php _ex( 'Reports', 'affiliates', 'affiliate-wp' ); ?></a>
 			</h1>
-			<?php do_action( 'affwp_affiliates_page_top' ); ?>
+			<?php
+
+			/**
+			 * Fires at the top of the admin affiliates page.
+			 *
+			 * Use this hook to add content to this section of AffiliateWP.
+			 */
+			do_action( 'affwp_affiliates_page_top' );
+
+			?>
 			<form id="affwp-affiliates-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp' ); ?>">
 				<?php $affiliates_table->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-affiliates' ); ?>
 
@@ -66,7 +75,16 @@ function affwp_affiliates_admin() {
 				<?php $affiliates_table->views() ?>
 				<?php $affiliates_table->display() ?>
 			</form>
-			<?php do_action( 'affwp_affiliates_page_bottom' ); ?>
+			<?php
+
+			/**
+			 * Fires at the bottom of the admin affiliates page.
+			 *
+			 * Use this hook to add content to this section of AffiliateWP.
+			 */
+			do_action( 'affwp_affiliates_page_bottom' );
+
+			?>
 		</div>
 <?php
 

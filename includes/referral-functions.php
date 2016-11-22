@@ -117,6 +117,13 @@ function affwp_set_referral_status( $referral, $new_status = '' ) {
 			// Update the visit ID that spawned this referral
 			affiliate_wp()->visits->update( $referral->visit_id, array( 'referral_id' => $referral->ID ), '', 'visit' );
 
+			/**
+			 * Fires when a referral is marked as accepted.
+			 *
+			 * @param int      $referral->affiliate_id Affiliate ID.
+			 * @param stdClass $referral               The referral object.
+			 *
+			 */
 			do_action( 'affwp_referral_accepted', $referral->affiliate_id, $referral );
 
 		} elseif( 'paid' != $new_status && 'paid' == $old_status ) {
@@ -167,7 +174,7 @@ function affwp_set_referral_status( $referral, $new_status = '' ) {
  * @return int|bool 0|false if no referral was added, referral ID if it was successfully added.
  */
 function affwp_add_referral( $data = array() ) {
-	
+
 	if ( empty( $data['user_id'] ) && empty( $data['affiliate_id'] ) ) {
 		return 0;
 	}

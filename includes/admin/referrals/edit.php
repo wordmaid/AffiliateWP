@@ -17,7 +17,13 @@ $payout_link = add_query_arg( array(
 
 	<form method="post" id="affwp_edit_referral">
 
-		<?php do_action( 'affwp_edit_referral_top', $referral ); ?>
+		<?php
+		/**
+		 * Fires at the top of the edit-referral admin screen.
+		 *
+		 * @param $referral The referral object.
+		 */
+		do_action( 'affwp_edit_referral_top', $referral ); ?>
 
 		<table class="form-table">
 
@@ -151,7 +157,14 @@ $payout_link = add_query_arg( array(
 
 		</table>
 
-		<?php do_action( 'affwp_edit_referral_bottom', $referral ); ?>
+		<?php
+
+		/**
+		 * Fires at the bottom of the edit-referral admin screen (inside the form element).
+		 *
+		 * @param $referral The referral object.
+		 */
+		do_action( 'affwp_edit_referral_bottom', $referral ); ?>
 
 		<?php echo wp_nonce_field( 'affwp_edit_referral_nonce', 'affwp_edit_referral_nonce' ); ?>
 		<input type="hidden" name="referral_id" value="<?php echo absint( $referral->referral_id ); ?>" />

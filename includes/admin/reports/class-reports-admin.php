@@ -98,7 +98,14 @@ class Reports {
 				<?php echo $manage_button; ?>
 			</h1>
 
-			<?php do_action( 'affwp_reports_page_top' ); ?>
+			<?php
+
+			/**
+			 * Fires at the top of the admin reports page screen.
+			 */
+			do_action( 'affwp_reports_page_top' );
+
+			?>
 
 			<h2 class="nav-tab-wrapper">
 				<?php
@@ -109,14 +116,34 @@ class Reports {
 				?>
 			</h2>
 
+			<?php
 
-			<?php do_action( 'affwp_reports_page_middle' ); ?>
+			/**
+			 * Fires in the middle of the admin reports page screen.
+			 */
+			do_action( 'affwp_reports_page_middle' );
+
+			?>
 
 			<div id="tab_container">
-				<?php do_action( 'affwp_reports_tab_' . $active_tab ); ?>
+
+				<?php
+				/**
+				 * Fires inside the tab container element of the currently-active admin reports screen tab.
+				 */
+				do_action( 'affwp_reports_tab_' . $active_tab );
+				?>
+
 			</div><!-- #tab_container-->
 
-			<?php do_action( 'affwp_reports_page_bottom' ); ?>
+			<?php
+
+			/**
+			 * Fires at the bottom of the admin reports page screen.
+			 */
+			do_action( 'affwp_reports_page_bottom' );
+
+			?>
 
 		</div>
 		<?php

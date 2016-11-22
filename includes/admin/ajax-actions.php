@@ -12,6 +12,11 @@ function affwp_search_users() {
 
 	$search_query = htmlentities2( trim( $_REQUEST['term'] ) );
 
+	/**
+	 * Fires immediately prior to an AffiliateWP user search query.
+	 *
+	 * @param  $search_query The user search query.
+	 */
 	do_action( 'affwp_pre_search_users', $search_query );
 
 	$args = array(

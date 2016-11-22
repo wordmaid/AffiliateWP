@@ -31,7 +31,16 @@ $deleting_only_self = ( 1 == $to_delete_count && $deleting_self ) ? true : false
 
 	<form method="post" id="affwp_delete_affiliate">
 
-		<?php do_action( 'affwp_delete_affiliate_top', $to_delete ); ?>
+		<?php
+
+		/**
+		 * Fires at the top of the delete affiliate admin screen.
+		 *
+		 * @param  $to_delete Affiliate ID to delete.
+		 */
+		do_action( 'affwp_delete_affiliate_top', $to_delete );
+
+		?>
 
 		<p><?php echo _n(
 			'You have specified the following affiliate for deletion:',
@@ -83,7 +92,16 @@ $deleting_only_self = ( 1 == $to_delete_count && $deleting_self ) ? true : false
 			</p>
 		<?php endif; ?>
 
-		<?php do_action( 'affwp_delete_affiliate_bottom', $to_delete ); ?>
+		<?php
+
+		/**
+		 * Fires at the bottom of the delete affiliate admin screen.
+		 *
+		 * @param  $to_delete Affiliate ID to delete.
+		 */
+		do_action( 'affwp_delete_affiliate_bottom', $to_delete );
+
+		?>
 
 		<input type="hidden" name="affwp_action" value="delete_affiliates" />
 		<?php echo wp_nonce_field( 'affwp_delete_affiliates_nonce', 'affwp_delete_affiliates_nonce' ); ?>

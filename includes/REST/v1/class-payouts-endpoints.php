@@ -251,4 +251,59 @@ class Endpoints extends Controller {
 
 		return $params;
 	}
+
+	/**
+	 * Retrieves the schema for a single payout, conforming to JSON Schema.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @return array Item schema data.
+	 */
+	public function get_item_schema() {
+
+		$schema = array(
+			'$schema'    => 'http://json-schema.org/schema#',
+			'title'      => $this->get_object_type(),
+			'type'       => 'object',
+			// Base properties for every affiliate.
+			'properties' => array(
+				'payout_id'     => array(
+					'description' => __( 'The unique payout ID.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'affiliate_id'  => array(
+					'description' => __( 'The affiliate ID associated with the payout.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'owner'         => array(
+					'description' => __( 'ID of the user who generated the payout.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'referrals'     => array(
+					'description' => __( 'The number of referrals associated with the affiliate.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'amount'        => array(
+					'description' => __( 'Total referrals amount for the payout.', 'affiliate-wp' ),
+					'type'        => 'float',
+				),
+				'payout_method' => array(
+					'description' => __( 'Method used to process the payout.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'status'        => array(
+					'description' => __( 'The affiliate status.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'date'          => array(
+					'description' => __( 'The date the payout was generated.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+			),
+		);
+
+		return $this->add_additional_fields_schema( $schema );
+	}
+
 }

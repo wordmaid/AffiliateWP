@@ -488,6 +488,17 @@ final class Affiliate_WP {
 	}
 
 	/**
+	 * Check WordPress version is at least $version.
+	 *
+	 * @since  1.9.6
+	 * @param  string  $version WP version string to compare.
+	 * @return bool             Result of comparison check.
+	 */
+	public static function compare_wp_version( $version ) {
+		return version_compare( get_bloginfo( 'version' ), $version, '>=' );
+	}
+
+	/**
 	 * Loads the plugin language files
 	 *
 	 * @access public
@@ -502,11 +513,9 @@ final class Affiliate_WP {
 
 		// Traditional WordPress plugin locale filter
 
-		global $wp_version;
-
 		$get_locale = get_locale();
 
-		if ( $wp_version >= 4.7 ) {
+		if ( $this->compare_wp_version( 4.7 ) ) {
 			$get_locale = get_user_locale();
 		}
 

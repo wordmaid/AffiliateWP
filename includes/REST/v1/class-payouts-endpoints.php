@@ -282,7 +282,10 @@ class Endpoints extends Controller {
 				),
 				'referrals'     => array(
 					'description' => __( 'The number of referrals associated with the affiliate.', 'affiliate-wp' ),
-					'type'        => 'integer',
+					'type'        => 'array',
+					'items'       => array(
+						'type' => 'integer',
+					),
 				),
 				'amount'        => array(
 					'description' => __( 'Total referrals amount for the payout.', 'affiliate-wp' ),

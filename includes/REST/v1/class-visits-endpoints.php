@@ -228,4 +228,59 @@ class Endpoints extends Controller {
 
 		return $params;
 	}
+
+	/**
+	 * Retrieves the schema for a single visit, conforming to JSON Schema.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @return array Item schema data.
+	 */
+	public function get_item_schema() {
+
+		$schema = array(
+			'$schema'    => 'http://json-schema.org/schema#',
+			'title'      => $this->get_object_type(),
+			'type'       => 'object',
+			// Base properties for every affiliate.
+			'properties' => array(
+				'visit_id'     => array(
+					'description' => __( 'The unique visit ID.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'affiliate_id' => array(
+					'description' => __( 'ID for the affiliate account associated with the visit.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'referral_id'  => array(
+					'description' => __( 'ID for the referral associated with the visit.', 'affiliate-wp' ),
+					'type'        => 'integer',
+				),
+				'url'          => array(
+					'description' => __( 'The visit URL.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'referrer'     => array(
+					'description' => __( 'Visit referrer.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'campaign'     => array(
+					'description' => __( 'Campaign associated with the visit.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'ip'           => array(
+					'description' => __( 'Visitor IP address.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+				'date'         => array(
+					'description' => __( 'The date the visit was generated.', 'affiliate-wp' ),
+					'type'        => 'string',
+				),
+			),
+		);
+
+		return $this->add_additional_fields_schema( $schema );
+	}
+
 }

@@ -253,7 +253,7 @@ class Endpoints extends Controller {
 	}
 
 	/**
-	 * Retrieves the schema for a single affiliate, conforming to JSON Schema.
+	 * Retrieves the schema for a single referral, conforming to JSON Schema.
 	 *
 	 * @access public
 	 * @since  2.0

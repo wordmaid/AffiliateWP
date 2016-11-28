@@ -266,7 +266,7 @@ class Endpoints extends Controller {
 			'$schema'    => 'http://json-schema.org/schema#',
 			'title'      => $this->get_object_type(),
 			'type'       => 'object',
-			// Base properties for every affiliate.
+			// Base properties for every payout.
 			'properties' => array(
 				'payout_id'     => array(
 					'description' => __( 'The unique payout ID.', 'affiliate-wp' ),
@@ -296,7 +296,7 @@ class Endpoints extends Controller {
 					'type'        => 'string',
 				),
 				'status'        => array(
-					'description' => __( 'The affiliate status.', 'affiliate-wp' ),
+					'description' => __( 'The payout status.', 'affiliate-wp' ),
 					'type'        => 'string',
 				),
 				'date'          => array(

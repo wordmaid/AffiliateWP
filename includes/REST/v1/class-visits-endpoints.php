@@ -243,7 +243,7 @@ class Endpoints extends Controller {
 			'$schema'    => 'http://json-schema.org/schema#',
 			'title'      => $this->get_object_type(),
 			'type'       => 'object',
-			// Base properties for every affiliate.
+			// Base properties for every visit.
 			'properties' => array(
 				'visit_id'     => array(
 					'description' => __( 'The unique visit ID.', 'affiliate-wp' ),

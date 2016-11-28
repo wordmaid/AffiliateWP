@@ -266,7 +266,7 @@ class Endpoints extends Controller {
 			'$schema'    => 'http://json-schema.org/schema#',
 			'title'      => $this->get_object_type(),
 			'type'       => 'object',
-			// Base properties for every affiliate.
+			// Base properties for every referral.
 			'properties' => array(
 				'referral_id'  => array(
 					'description' => __( 'The unique referral ID.', 'affiliate-wp' ),
@@ -313,7 +313,7 @@ class Endpoints extends Controller {
 					'type'        => 'string',
 				),
 				'products'     => array(
-					'description' => __( 'Products associated with the referral', 'affiliate-wp' ),
+					'description' => __( 'Products associated with the referral.', 'affiliate-wp' ),
 					'type'        => 'string',
 				),
 				'date'         => array(

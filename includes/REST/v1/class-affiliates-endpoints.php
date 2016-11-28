@@ -355,7 +355,7 @@ class Endpoints extends Controller {
 					'type'        => 'float',
 				),
 				'referrals'       => array(
-					'description' => __( 'The number of referrals associated with the affiliate.', 'affiliate-wp' ),
+					'description' => __( 'The number of paid referrals associated with the affiliate.', 'affiliate-wp' ),
 					'type'        => 'integer',
 				),
 				'visits'          => array(

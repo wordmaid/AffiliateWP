@@ -301,7 +301,7 @@ class Endpoints extends Controller {
 				),
 				'rate'            => array(
 					'description' => __( 'The affiliate rate.', 'affiliate-wp' ),
-					'type'        => 'string',
+					'type'        => 'object',
 					'properties'  => array(
 						'raw'       => array(
 							'description' => __( 'The affiliate rate, as it exists in the database', 'affiliate-wp' ),
@@ -315,7 +315,7 @@ class Endpoints extends Controller {
 				),
 				'rate_type'       => array(
 					'description' => __( 'The affiliate rate type', 'affiliate-wp' ),
-					'type'        => 'string',
+					'type'        => 'object',
 					'properties'  => array(
 						'raw'       => array(
 							'description' => __( 'The affiliate rate type, as it exists in the database', 'affiliate-wp' ),
@@ -334,7 +334,7 @@ class Endpoints extends Controller {
 				),
 				'payment_email'   => array(
 					'description' => __( 'The affiliate payment email address.', 'affiliate-wp' ),
-					'type'        => 'string',
+					'type'        => 'object',
 					'properties'  => array(
 						'raw'       => array(
 							'description' => __( 'The affiliate payment email address, as it exists in the database', 'affiliate-wp' ),

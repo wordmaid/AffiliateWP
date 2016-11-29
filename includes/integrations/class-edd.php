@@ -362,7 +362,7 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Insert payment note
+	 * Insert payment note when referral is created
 	 *
 	 * @access  public
 	 * @since   1.3.1
@@ -379,7 +379,22 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 		$affiliate_id = $referral->affiliate_id;
 		$name         = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
 
-		edd_insert_payment_note( $payment_id, sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name ) );
+		$this->add_order_note( $payment_id, sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name ) );
+
+	}
+
+	/**
+	 * Adds a note to the order associated with the referral
+	 *
+	 * @access  public
+	 * @param   $payment_id int    The ID of the payment record to add a note to
+	 * @param   $note       string The note to add
+	 * @since   2.0
+	 * @return  bool
+	*/
+	public function add_order_note( $payment_id = 0, $note = '' ) {
+
+		return edd_insert_payment_note( $payment_id, $note );
 
 	}
 
@@ -414,7 +429,11 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 			return;
 		}
 
-		$this->reject_referral( $payment_id );
+		$referral = affiliate_wp()->referrals->get_by( 'reference', $payment_id, $this->context );
+
+		if( $referral && $this->reject_referral( $payment_id ) ) {
+			$this->add_order_note( $payment_id, sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id ) );
+		}
 
 	}
 
@@ -430,7 +449,11 @@ class Affiliate_WP_EDD extends Affiliate_WP_Base {
 			return;
 		}
 
-		$this->reject_referral( $payment_id );
+		$referral = affiliate_wp()->referrals->get_by( 'reference', $payment_id, $this->context );
+
+		if( $referral && $this->reject_referral( $payment_id ) ) {
+			$this->add_order_note( $payment_id, sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id ) );
+		}
 
 	}
 

@@ -388,6 +388,19 @@ abstract class Affiliate_WP_Base {
 	}
 
 	/**
+	 * Adds a note to the order associated with the referral
+	 *
+	 * @access  public
+	 * @param   $order_id int    The ID of the payment record to add a note to
+	 * @param   $note     string The note to add
+	 * @since   2.0
+	 * @return  bool
+	*/
+	public function add_order_note( $order_id = 0, $note = '' ) {
+		return false; // Must be handled in integration-specific classes
+	}
+
+	/**
 	 * Write log message
 	 *
 	 * @since 1.8

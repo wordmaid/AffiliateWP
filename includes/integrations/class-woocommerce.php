@@ -193,7 +193,7 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 					$amount = affwp_currency_filter( affwp_format_amount( $amount ) );
 					$name   = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
 
-					$this->order->add_order_note( sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral_id, $amount, $name ) );
+					$this->add_order_note( $order_id, sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral_id, $amount, $name ) );
 
 				} else {
 
@@ -269,6 +269,29 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 	}
 
 	/**
+	 * Adds a note to the order associated with the referral
+	 *
+	 * @access  public
+	 * @param   $order_id int    The ID of the order record to add a note to
+	 * @param   $note     string The note to add
+	 * @since   2.0
+	 * @return  bool
+	*/
+	public function add_order_note( $order_id = 0, $note = '' ) {
+
+		$order = $this->order;
+
+		if( empty( $this->order ) || $this->order->ID !== $order_id ) {
+
+			$order = new WC_Order( $order_id );
+
+		}
+
+		return $order->add_order_note( $note );
+
+	}
+
+	/**
 	 * Marks a referral as complete when payment is completed.
 	 *
 	 * @since 1.0
@@ -306,7 +329,11 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 			return;
 		}
 
-		$this->reject_referral( $order_id );
+		$referral = affiliate_wp()->referrals->get_by( 'reference', $order_id, $this->context );
+
+		if( $referral && $this->reject_referral( $order_id ) ) {
+			$this->add_order_note( $order_id, sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id ) );
+		}
 
 	}
 

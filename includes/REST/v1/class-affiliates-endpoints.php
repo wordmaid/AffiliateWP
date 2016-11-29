@@ -45,7 +45,7 @@ class Endpoints extends Controller {
 			'args'     => $this->get_collection_params(),
 			'permission_callback' => function( $request ) {
 				return current_user_can( 'manage_affiliates' );
-			}
+			},
 		) );
 
 		// /affiliates/ID
@@ -53,18 +53,14 @@ class Endpoints extends Controller {
 			'methods'  => \WP_REST_Server::READABLE,
 			'callback' => array( $this, 'get_item' ),
 			'args'     => array(
-				'id' => array(
-					'required'          => true,
-					'validate_callback' => function( $param, $request, $key ) {
-						return is_numeric( $param );
-					}
-				),
 				'user' => array(
+					'description'       => __( 'Whether to include a modified user object in the response.', 'affiliate-wp' ),
 					'validate_callback' => function( $param, $request, $key ) {
 						return is_string( $param );
 					}
 				),
 				'meta' => array(
+					'description'       => __( 'Whether to include the affiliate meta in the response.', 'affiliate-wp' ),
 					'validate_callback' => function( $param, $request, $key ) {
 						return is_string( $param );
 					}
@@ -72,7 +68,7 @@ class Endpoints extends Controller {
 			),
 			'permission_callback' => function( $request ) {
 				return current_user_can( 'manage_affiliates' );
-			}
+			},
 		) );
 
 		$this->register_field( 'id', array(

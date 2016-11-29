@@ -86,7 +86,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 					}
 
 					if ( ! affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
-						
+
 						if( $this->debug ) {
 							$this->log( 'Referral not created because affiliate is invalid.' );
 						}
@@ -208,7 +208,11 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 
 		if( 'refunded' == $transaction->get_status() && 'paid' == $old_status ) {
 
-			$this->reject_referral( $transaction->ID );
+			$referral = affiliate_wp()->referrals->get_by( 'reference', $transaction->ID, $this->context );
+
+			if( $referral && $this->reject_referral( $transaction->ID ) ) {
+				$this->add_order_note( $transaction->ID, sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id ) );
+			}
 
 		}
 
@@ -222,8 +226,11 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 
 		if( 'voided' == $transaction->get_status() ) {
 
-			$this->reject_referral( $transaction->ID );
+			$referral = affiliate_wp()->referrals->get_by( 'reference', $transaction->ID, $this->context );
 
+			if( $referral && $this->reject_referral( $transaction->ID ) ) {
+				$this->add_order_note( $transaction->ID, sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id ) );
+			}
 		}
 
 	}
@@ -244,7 +251,11 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 			return;
 		}
 
-		$this->reject_referral( $transaction_id );
+		$referral = affiliate_wp()->referrals->get_by( 'reference', $transaction_id, $this->context );
+
+		if( $referral && $this->reject_referral( $transaction_id ) ) {
+			$this->add_order_note( $transaction_id, sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id ) );
+		}
 
 	}
 
@@ -288,12 +299,12 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
-		
+
 		$user_id      = 0;
 		$user_name    = '';
 		$coupon_id    = ! empty( $_REQUEST['post'] ) ? absint( $_REQUEST['post'] ) : 0;
 		$affiliate_id = get_post_meta( $coupon_id, 'affwp_coupon_affiliate', true );
-		
+
 		if( $affiliate_id ) {
 			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
 			$user         = get_userdata( $user_id );

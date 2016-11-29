@@ -103,6 +103,21 @@ class Affiliate_WP_Gravity_Forms extends Affiliate_WP_Base {
 	}
 
 	/**
+	 * Adds a note to the order associated with the referral
+	 *
+	 * @access  public
+	 * @param   $entry_id int    The ID of the entry record to add a note to
+	 * @param   $note     string The note to add
+	 * @since   2.0
+	 * @return  bool
+	*/
+	public function add_order_note( $entry_id = 0, $note = '' ) {
+
+		return GFFormsModel::add_note( $entry_id, 0, 'AffiliateWP', $note );
+
+	}
+
+	/**
 	 * Mark referral as complete
 	 *
 	 * @access public
@@ -120,7 +135,7 @@ class Affiliate_WP_Gravity_Forms extends Affiliate_WP_Base {
 		$name     = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
 		$note     = sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
 
-		GFFormsModel::add_note( $entry["id"], 0, 'AffiliateWP', $note );
+		$this->add_order_note( $entry["id"], $note );
 
 	}
 
@@ -142,7 +157,7 @@ class Affiliate_WP_Gravity_Forms extends Affiliate_WP_Base {
 		$name     = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
 		$note     = sprintf( __( 'Referral #%d for %s for %s rejected', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
 
-		GFFormsModel::add_note( $entry["id"], 0, 'AffiliateWP', $note );
+		$this->add_order_note( $entry["id"], $note );
 
 	}
 

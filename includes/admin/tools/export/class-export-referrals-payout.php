@@ -144,7 +144,21 @@ class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export {
 
 		}
 
+		/**
+		 * Export data
+		 *
+		 * @param $data array The export data.
+		 */
 		$data = apply_filters( 'affwp_export_get_data', $data );
+
+		/**
+		 * Export data for specific export types (referrals, affiliates, etc)
+		 *
+		 * This dynamic filter is formatted with the export type appended. For this export, it is:
+		 *     `affwp_export_get_data_referrals_payout`
+		 *
+		 * @param $data array The export data, specific to the export type
+		 */
 		$data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
 
 		return $data;

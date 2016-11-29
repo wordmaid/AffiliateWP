@@ -174,6 +174,12 @@ class AffWP_Affiliates_Table extends List_Table {
 			'status'       => __( 'Status', 'affiliate-wp' ),
 		);
 
+		/**
+		 * Affiliate table columns
+		 *
+		 * @param function $this->prepare_columns() Column preparation method.
+		 * @param array    $columns                 The columns for this list table.
+		 */
 		return apply_filters( 'affwp_affiliate_table_columns', $this->prepare_columns( $columns ) );
 	}
 
@@ -186,15 +192,15 @@ class AffWP_Affiliates_Table extends List_Table {
 	 */
 	public function get_sortable_columns() {
 		return array(
-			'name'         => array( 'name', false ),
+			'name'         => array( 'name',         false ),
 			'affiliate_id' => array( 'affiliate_id', false ),
-			'username'     => array( 'username', false ),
-			'earnings'     => array( 'earnings', false ),
-			'rate'         => array( 'rate', false ),
-			'unpaid'       => array( 'unpaid', false ),
-			'referrals'    => array( 'referrals', false ),
-			'visits'       => array( 'visits', false ),
-			'status'       => array( 'status', false ),
+			'username'     => array( 'username',     false ),
+			'earnings'     => array( 'earnings',     false ),
+			'rate'         => array( 'rate',         false ),
+			'unpaid'       => array( 'unpaid',       false ),
+			'referrals'    => array( 'referrals',    false ),
+			'visits'       => array( 'visits',       false ),
+			'status'       => array( 'status',       false )
 		);
 	}
 
@@ -217,6 +223,16 @@ class AffWP_Affiliates_Table extends List_Table {
 				break;
 		}
 
+		/**
+		 * The default value for each column.
+		 *
+		 * This dynamic filter is appended with a suffix of the column name, for example:
+		 *
+		 *     `affwp_affiliate_table_referrals`
+		 *
+		 * @param string $value The column data.
+		 *
+		 */
 		return apply_filters( 'affwp_affiliate_table_' . $column_name, $value );
 	}
 
@@ -361,8 +377,8 @@ class AffWP_Affiliates_Table extends List_Table {
 	 *
 	 * @access public
 	 * @since 1.8
-	 * @param array $affiliate Contains all the data of the affiliate
-	 * @return string Data shown in the Username column
+	 * @param array $affiliate Contains all the data of the affiliate.
+	 * @return string Data shown in the Username column.
 	 */
 	function column_username( $affiliate ) {
 
@@ -377,6 +393,12 @@ class AffWP_Affiliates_Table extends List_Table {
 			$value = __( '(user deleted)', 'affiliate-wp' );
 		}
 
+		/**
+		 * The username column data.
+		 *
+		 * @param string $value     Data shown in the Username column.
+		 * @param array  $affiliate Contains all the data of the affiliate.
+		 */
 		return apply_filters( 'affwp_affiliate_table_username', $value, $affiliate );
 
 	}
@@ -403,6 +425,12 @@ class AffWP_Affiliates_Table extends List_Table {
 	 */
 	function column_earnings( $affiliate ) {
 		$value = affwp_get_affiliate_earnings( $affiliate->affiliate_id, true );
+		/**
+		 * The earnings column data.
+		 *
+		 * @param string $value     Data shown in the Earnings column.
+		 * @param array  $affiliate Contains all the data of the affiliate.
+		 */
 		return apply_filters( 'affwp_affiliate_table_earnings', $value, $affiliate );
 	}
 
@@ -416,6 +444,12 @@ class AffWP_Affiliates_Table extends List_Table {
 	 */
 	function column_rate( $affiliate ) {
 		$value = affwp_get_affiliate_rate( $affiliate->affiliate_id, true );
+		/**
+		 * The rate column data.
+		 *
+		 * @param string $value     Data shown in the Rate column.
+		 * @param array  $affiliate Contains all the data of the affiliate.
+		 */
 		return apply_filters( 'affwp_affiliate_table_rate', $value, $affiliate );
 	}
 
@@ -432,6 +466,13 @@ class AffWP_Affiliates_Table extends List_Table {
 		$unpaid_count = affiliate_wp()->referrals->unpaid_count( '', $affiliate->affiliate_id );
 
 		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $affiliate->affiliate_id . '&status=unpaid' ) . '">' . $unpaid_count . '</a>';
+		/**
+		 * The unpaid referrals column data.
+		 *
+		 * @since 1.7.5
+		 * @param string $value     Data shown in the Unpaid column.
+		 * @param array  $affiliate Contains all the data of the affiliate.
+		 */
 		return apply_filters( 'affwp_affiliate_table_unpaid', $value, $affiliate );
 	}
 
@@ -446,6 +487,12 @@ class AffWP_Affiliates_Table extends List_Table {
 	 */
 	function column_referrals( $affiliate ) {
 		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $affiliate->affiliate_id . '&status=paid' ) . '">' . $affiliate->referrals . '</a>';
+		/**
+		 * The referrals column data.
+		 *
+		 * @param string $value     Data shown in the Referrals column.
+		 * @param array  $affiliate Contains all the data of the affiliate.
+		 */
 		return apply_filters( 'affwp_affiliate_table_referrals', $value, $affiliate );
 	}
 
@@ -459,6 +506,12 @@ class AffWP_Affiliates_Table extends List_Table {
 	 */
 	function column_visits( $affiliate ) {
 		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-visits&affiliate=' . $affiliate->affiliate_id ) . '">' . affwp_get_affiliate_visit_count( $affiliate->affiliate_id ) . '</a>';
+		/**
+		 * The username visits data.
+		 *
+		 * @param string $value     Data shown in the Visits column.
+		 * @param array  $affiliate Contains all the data of the affiliate.
+		 */
 		return apply_filters( 'affwp_affiliate_table_visits', $value, $affiliate );
 	}
 
@@ -488,6 +541,11 @@ class AffWP_Affiliates_Table extends List_Table {
 			'delete'     => __( 'Delete', 'affiliate-wp' )
 		);
 
+		/**
+		 * Bulk actions to return in the affiliates list table.
+		 *
+		 * @param array  $actions  Bulk actions.
+		 */
 		return apply_filters( 'affwp_affiliates_bulk_actions', $actions );
 	}
 

@@ -61,5 +61,10 @@ function affwp_get_settings_tabs() {
 	$tabs['emails']       = __( 'Emails', 'affiliate-wp' );
 	$tabs['misc']         = __( 'Misc', 'affiliate-wp' );
 
+	/**
+	 * Settings tabs
+	 *
+	 * @param array $tabs The AffiliateWP settings tabs.
+	 */
 	return apply_filters( 'affwp_settings_tabs', $tabs );
 }

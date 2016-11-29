@@ -174,6 +174,12 @@ class AffWP_Referrals_Table extends List_Table {
 			'status'      => __( 'Status', 'affiliate-wp' ),
 		);
 
+		/**
+		 * Referral table columns
+		 *
+		 * @param function $this->prepare_columns() Column preparation method.
+		 * @param array    $columns                 The columns for this list table.
+		 */
 		return apply_filters( 'affwp_referral_table_columns', $this->prepare_columns( $columns ) );
 	}
 
@@ -213,6 +219,12 @@ class AffWP_Referrals_Table extends List_Table {
 
 			case 'description' :
 				$value = wp_trim_words( $referral->description, 10 );
+				/**
+				 * The referral description column data.
+				 *
+				 * @param string $value                 Data shown in the Description column.
+				 * @param array  $referral->description The referral description.
+				 */
 				$value = (string) apply_filters( 'affwp_referral_description_column', $value, $referral->description );
 				break;
 
@@ -221,6 +233,17 @@ class AffWP_Referrals_Table extends List_Table {
 				break;
 		}
 
+		/**
+		 * The default value for each column.
+		 *
+		 * This dynamic filter is appended with a suffix of the column name, for example:
+		 *
+		 *     `affwp_referral_table_description`
+		 *
+		 * @param string $value    Column data to show.
+		 * @param array  $referral Referral data.
+		 *
+		 */
 		return apply_filters( 'affwp_referral_table_' . $column_name, $value, $referral );
 	}
 
@@ -228,8 +251,8 @@ class AffWP_Referrals_Table extends List_Table {
 	 * Render the checkbox column
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
+	 * @since  1.0
+	 * @param  array $referral Contains all the data for the checkbox column
 	 * @return string Displays a checkbox
 	 */
 	public function column_cb( $referral ) {
@@ -246,6 +269,12 @@ class AffWP_Referrals_Table extends List_Table {
 	 */
 	public function column_amount( $referral ) {
 		$value = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
+		/**
+		 * The referral amount column data.
+		 *
+		 * @param string           $value    Data shown in the Amount column.
+		 * @param \AffWP\Referral  $referral The referral data.
+		 */
 		return apply_filters( 'affwp_referral_table_amount', $value, $referral );
 	}
 
@@ -259,6 +288,12 @@ class AffWP_Referrals_Table extends List_Table {
 	 */
 	public function column_status( $referral ) {
 		$value ='<span class="affwp-status ' . $referral->status . '"><i></i>' . affwp_get_referral_status_label( $referral ) . '</span>';
+		/**
+		 * The referral status column data.
+		 *
+		 * @param string           $value    Data shown in the Status column.
+		 * @param \AffWP\Referral  $referral The referral data.
+		 */
 		return apply_filters( 'affwp_referral_table_status', $value, $referral );
 	}
 
@@ -271,7 +306,20 @@ class AffWP_Referrals_Table extends List_Table {
 	 * @return string The affiliate
 	 */
 	public function column_affiliate( $referral ) {
+		/**
+		 * The referring affiliate column data.
+		 *
+		 * You'll also need to specify the wrapping html for this value (defaults to an anchor to the referral admin screen for this referral).
+		 *
+		 * @param mixed  $referral->affiliate_id The referring affiliate ID.
+		 */
 		$value = apply_filters( 'affwp_referral_affiliate_column', '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $referral->affiliate_id ) . '">' . affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id ) . '</a>', $referral );
+		/**
+		 * The referring affiliate column data.
+		 *
+		 * @param string           $value    Data shown in the Affiliate column.
+		 * @param \AffWP\Referral  $referral The referral data.
+		 */
 		return apply_filters( 'affwp_referral_table_affiliate', $value, $referral );
 	}
 
@@ -285,6 +333,12 @@ class AffWP_Referrals_Table extends List_Table {
 	 */
 	public function column_reference( $referral ) {
 		$value = apply_filters( 'affwp_referral_reference_column', $referral->reference, $referral );
+		/**
+		 * The referral reference column data.
+		 *
+		 * @param string           $value    Data shown in the Reference column.
+		 * @param \AffWP\Referral  $referral The referral data.
+		 */
 		return apply_filters( 'affwp_referral_table_reference', $value, $referral );
 	}
 
@@ -501,6 +555,11 @@ class AffWP_Referrals_Table extends List_Table {
 			'delete'         => __( 'Delete', 'affiliate-wp' ),
 		);
 
+		/**
+		 * Referral bulk actions array.
+		 *
+		 * @param  $actions List of bulk actions.
+		 */
 		return apply_filters( 'affwp_referrals_bulk_actions', $actions );
 	}
 

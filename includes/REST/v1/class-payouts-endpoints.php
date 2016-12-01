@@ -40,9 +40,9 @@ class Endpoints extends Controller {
 
 		// /payouts/
 		register_rest_route( $this->namespace, '/' . $this->rest_base, array(
-			'methods'  => \WP_REST_Server::READABLE,
-			'callback' => array( $this, 'get_items' ),
-			'args'     => $this->get_collection_params(),
+			'methods'             => \WP_REST_Server::READABLE,
+			'callback'            => array( $this, 'get_items' ),
+			'args'                => $this->get_collection_params(),
 			'permission_callback' => function( $request ) {
 				return current_user_can( 'manage_affiliates' );
 			}
@@ -50,16 +50,8 @@ class Endpoints extends Controller {
 
 		// /payouts/ID
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>\d+)', array(
-			'methods'  => \WP_REST_Server::READABLE,
-			'callback' => array( $this, 'get_item' ),
-			'args'     => array(
-				'id' => array(
-					'required'          => true,
-					'validate_callback' => function( $param, $request, $key ) {
-						return is_numeric( $param );
-					}
-				)
-			),
+			'methods'             => \WP_REST_Server::READABLE,
+			'callback'            => array( $this, 'get_item' ),
 			'permission_callback' => function( $request ) {
 				return current_user_can( 'manage_affiliates' );
 			}

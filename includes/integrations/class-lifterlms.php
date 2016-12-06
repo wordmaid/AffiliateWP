@@ -114,7 +114,8 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 		$note = sprintf( __( 'Referral #%d completed', 'affiliate-wp' ), $referral->referral_id );
 
-		$order->add_note( $note );
+		$this->add_order_note( $order->get( 'id' ), $note );
+
 		if ( $this->debug ) {
 			$this->log( $note );
 		}
@@ -138,6 +139,8 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 		if ( ! $order ) {
 			return;
 		}
+
+		$this->order = $order;
 
 		// if this was a referral or we have a coupon and a coupon affiliate id.
 		if ( $this->was_referred() || ( $order->coupon_id && $order->coupon_affiliate_id ) ) {
@@ -284,6 +287,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			return;
 		}
 
+		$this->order = $order;
 		$order_id = $order->get( 'id' );
 		$coupon_affiliate_id = ( $order->has_coupon() ) ? $this->get_order_coupon_affiliate_id( $order->get( 'coupon_id' ) ) : false;
 
@@ -353,7 +357,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 				$note = sprintf( __( 'Referral #%d updated successfully.', 'affiliate-wp' ), $existing->referral_id );;
 
-				$order->add_note( $note );
+				$this->add_order_note( $order_id, $note );
 
 				if ( $this->debug ) {
 					$this->log( $note );
@@ -377,7 +381,7 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 					$note = sprintf( __( 'Pending referral #%d created successfully.', 'affiliate-wp' ), $referral_id );;
 
-					$order->add_note( $note );
+					$this->add_order_note( $order_id, $note );
 
 					if ( $this->debug ) {
 						$this->log( $note );
@@ -396,6 +400,28 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 	}
 
+	/**
+	 * Adds a note to the order associated with the referral
+	 *
+	 * @access  public
+	 * @param   $order_id int    The ID of the order record to add a note to
+	 * @param   $note     string The note to add
+	 * @since   2.0
+	 * @return  bool
+	*/
+	public function add_order_note( $order_id = 0, $note = '' ) {
+
+		$order = $this->order;
+
+		if( empty( $this->order ) || ! $order instanceof LLMS_Order || $order_id != $order->get( 'id' ) ) {
+
+			$order = new LLMS_Order( $order_id );
+
+		}
+
+		return $order->add_note( $note );
+
+	}
 
 	/**
 	 * Adds an AffiliateWP Tab to LifterLMS Coupon Admin screen.
@@ -414,8 +440,8 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
-		
-		
+
+
 		$user_id      = 0;
 		$user_name    = '';
 		$affiliate_id = get_post_meta( $post->ID, '_affwp_affiliate_id', true );
@@ -865,16 +891,18 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 			return;
 		}
 
-		$this->reject_referral( $order->get( 'id' ) );
+		$order_id = $order->get( 'id' );
 
-		$referral = affiliate_wp()->referrals->get_by( 'reference', $order->get( 'id' ), $this->context );
+		$this->reject_referral( $order_id );
+
+		$referral = affiliate_wp()->referrals->get_by( 'reference', $order_id, $this->context );
 
 		if ( ! $referral ) {
 			return;
 		}
 
 		$note = sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id );
-		$order->add_note( $note );
+		$this->add_order_note( $order_id, $note );
 		if ( $this->debug ) {
 			$this->log( $note );
 		}

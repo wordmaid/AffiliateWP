@@ -179,6 +179,23 @@ class Affiliate_WP_Formidable_Pro extends Affiliate_WP_Base {
 	}
 
 	/**
+	 * Adds a note to the order associated with the referral
+	 *
+	 * @access  public
+	 * @param   $entry_id int    The ID of the entry record to add a note to
+	 * @param   $note     string The note to add
+	 * @since   2.0
+	 * @return  bool
+	*/
+	public function add_order_note( $entry_id = 0, $note = '' ) {
+
+		global $frm_entry_meta;
+
+		return $frm_entry_meta->add_entry_meta( $entry_id, 0, '', array( 'comment' => $note, 'user_id' => 0 ) );
+
+	}
+
+	/**
 	 * Update referral status and add note to Formidable Pro entry
 	 *
 	 * @since 1.6
@@ -190,8 +207,6 @@ class Affiliate_WP_Formidable_Pro extends Affiliate_WP_Base {
 	 */
 	public function mark_referral_complete( $entry_id, $form_id ) {
 
-		global $frm_entry_meta;
-
 		$this->complete_referral( $entry_id );
 
 		$referral = affiliate_wp()->referrals->get_by( 'reference', $entry_id, $this->context );
@@ -199,7 +214,7 @@ class Affiliate_WP_Formidable_Pro extends Affiliate_WP_Base {
 		$name     = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
 		$note     = sprintf( __( 'AffiliateWP: Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
 
-		$frm_entry_meta->add_entry_meta( $entry_id, 0, '', array( 'comment' => $note, 'user_id' => 0 ) );
+		$this->add_order_note( $entry_id, $note );
 
 	}
 
@@ -215,7 +230,9 @@ class Affiliate_WP_Formidable_Pro extends Affiliate_WP_Base {
 	 */
 	public function revoke_referral_on_refund( $entry_id, $form_id ) {
 
-		global $frm_entry_meta;
+		if( ! affiliate_wp()->settings->get( 'revoke_on_refund' ) ) {
+			return;
+		}
 
 		$this->reject_referral( $entry_id );
 
@@ -224,7 +241,7 @@ class Affiliate_WP_Formidable_Pro extends Affiliate_WP_Base {
 		$name     = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
 		$note     = sprintf( __( 'AffiliateWP: Referral #%d for %s for %s rejected', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
 
-		$frm_entry_meta->add_entry_meta( $entry_id, 0, '', array( 'comment' => $note, 'user_id' => 0 ) );
+		$this->add_order_note( $entry_id, $note );
 
 	}
 

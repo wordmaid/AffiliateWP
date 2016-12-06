@@ -29,7 +29,9 @@ class Affiliate_WP_Jigoshop extends Affiliate_WP_Base {
 		// Actions
 		add_action( 'jigoshop_new_order', array( $this, 'add_pending_referral' ), 10, 1 ); // Referral added when order is made.
 		add_action( 'jigoshop_order_status_completed', array( $this, 'mark_referral_complete' ), 10 ); // Referral is marked complete when order is completed.
+		add_action( 'order_status_completed', array( $this, 'mark_referral_complete' ), 10 ); // Referral is marked complete when order is completed.
 		add_action( 'jigoshop_order_status_completed_to_refunded', array( $this, 'revoke_referral_on_refund' ), 10 ); // Referral is revoked when order has been refunded.
+		add_action( 'order_status_completed_to_refunded', array( $this, 'revoke_referral_on_refund' ), 10 ); // Referral is revoked when order has been refunded.
 		add_action( 'add_meta_boxes', array( $this, 'add_coupon_meta_box' ) );
 		add_action( 'jigoshop_process_shop_coupon_meta', array( $this, 'store_discount_affiliate' ), 1, 2 );
 
@@ -91,9 +93,32 @@ class Affiliate_WP_Jigoshop extends Affiliate_WP_Base {
 			$amount   = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
 			$name     = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
 
-			$this->order->add_order_note( sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name ) );
+			$this->add_order_note( sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name ) );
 
 		}
+
+	}
+
+	/**
+	 * Adds a note to the order associated with the referral
+	 *
+	 * @access  public
+	 * @param   $order_id int    The ID of the order record to add a note to
+	 * @param   $note     string The note to add
+	 * @since   2.0
+	 * @return  bool
+	*/
+	public function add_order_note( $order_id = 0, $note = '' ) {
+
+		$order = $this->order;
+
+		if( empty( $this->order ) || $this->order->ID !== $order_id ) {
+
+			$order = new jigoshop_order( $order_id );
+
+		}
+
+		return $order->add_order_note( $note );
 
 	}
 
@@ -121,7 +146,11 @@ class Affiliate_WP_Jigoshop extends Affiliate_WP_Base {
 			return;
 		}
 
-		$this->reject_referral( $order_id );
+		$referral = affiliate_wp()->referrals->get_by( 'reference', $order_id, $this->context );
+
+		if( $referral && $this->reject_referral( $order_id ) ) {
+			$this->add_order_note( $order_id, sprintf( __( 'Referral #%d rejected.', 'affiliate-wp' ), $referral->referral_id ) );
+		}
 
 	}
 

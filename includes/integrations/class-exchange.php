@@ -187,6 +187,40 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 
 	}
 
+	/**
+	 * Adds a note to the order associated with the referral
+	 *
+	 * @access  public
+	 * @param   $transaction_id int    The transaction ID of the record to add a note to
+	 * @param   $note           string The note to add
+	 * @since   2.0
+	 * @return  bool
+	*/
+	public function add_order_note( $transaction_id, $note = '' ) {
+
+		if( ! class_exists( 'IT_Exchange_Txn_Activity_Builder' ) ) {
+			return false;
+		}
+
+		$transaction = it_exchange_get_transaction( $transaction_id );
+
+		$builder = new IT_Exchange_Txn_Activity_Builder( $transaction, 'note' );
+		$builder->set_description( $note );
+		$builder->set_public( false );
+
+		if ( is_user_logged_in() ) {
+			$actor = new IT_Exchange_Txn_Activity_User_Actor( wp_get_current_user() );
+		} elseif ( ( $wh = it_exchange_doing_webhook() ) && ( $addon = it_exchange_get_addon( $wh ) ) ) {
+			$actor = new IT_Exchange_Txn_Activity_Gateway_Actor( $addon );
+		} else {
+			$actor = new IT_Exchange_Txn_Activity_Site_Actor();
+		}
+
+		$builder->set_actor( $actor );
+		return $builder->build( it_exchange_get_txn_activity_factory() );
+
+	}
+
 	public function mark_referral_complete( $transaction, $old_status, $old_status_cleared, $new_status ) {
 
 		$new_status         = it_exchange_get_transaction_status( $transaction->ID );
@@ -211,7 +245,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 			$referral = affiliate_wp()->referrals->get_by( 'reference', $transaction->ID, $this->context );
 
 			if( $referral && $this->reject_referral( $transaction->ID ) ) {
-				$this->add_order_note( $transaction->ID, sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id ) );
+				$this->add_order_note( $transaction->ID, sprintf( __( 'Referral #%d rejected.', 'affiliate-wp' ), $referral->referral_id ) );
 			}
 
 		}
@@ -229,7 +263,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 			$referral = affiliate_wp()->referrals->get_by( 'reference', $transaction->ID, $this->context );
 
 			if( $referral && $this->reject_referral( $transaction->ID ) ) {
-				$this->add_order_note( $transaction->ID, sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id ) );
+				$this->add_order_note( $transaction->ID, sprintf( __( 'Referral #%d rejected.', 'affiliate-wp' ), $referral->referral_id ) );
 			}
 		}
 
@@ -254,7 +288,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 		$referral = affiliate_wp()->referrals->get_by( 'reference', $transaction_id, $this->context );
 
 		if( $referral && $this->reject_referral( $transaction_id ) ) {
-			$this->add_order_note( $transaction_id, sprintf( __( 'Referral #%d rejected', 'affiliate-wp' ), $referral->referral_id ) );
+			$this->add_order_note( $transaction_id, sprintf( __( 'Referral #%d rejected.', 'affiliate-wp' ), $referral->referral_id ) );
 		}
 
 	}

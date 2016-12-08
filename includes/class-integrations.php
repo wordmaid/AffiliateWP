@@ -11,6 +11,7 @@ class Affiliate_WP_Integrations {
 	public function get_integrations() {
 
 		return apply_filters( 'affwp_integrations', array(
+			'contactform7'   => 'Contact Form 7',
 			'edd'            => 'Easy Digital Downloads',
 			'formidablepro'  => 'Formidable Pro',
 			'gravityforms'   => 'Gravity Forms',

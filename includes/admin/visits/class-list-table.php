@@ -109,6 +109,13 @@ class AffWP_Visits_Table extends List_Table {
 			'date'         => __( 'Date', 'affiliate-wp' ),
 		);
 
+		/**
+		 * Visit list table columns.
+		 *
+		 * AffWP\Admin\List_Table instance
+		 *
+		 * @param $columns List table columns.
+		 */
 		return apply_filters( 'affwp_visit_table_columns', $this->prepare_columns( $columns ) );
 	}
 
@@ -144,6 +151,12 @@ class AffWP_Visits_Table extends List_Table {
 				break;
 		}
 
+		/**
+		 * Visit list table default column name.
+		 *
+		 * @param $value The name of the column
+		 * @param $visit All the data of the visit.
+		 */
 		return apply_filters( 'affwp_visit_table_' . $column_name, $value, $visit );
 	}
 
@@ -152,11 +165,17 @@ class AffWP_Visits_Table extends List_Table {
 	 *
 	 * @access public
 	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
+	 * @param array   $visit Contains all the data for the affiliate column
 	 * @return string The affiliate
 	 */
 	function column_affiliate( $visit ) {
 		$value = '<a href="' . esc_url( admin_url( 'admin.php?page=affiliate-wp-visits&affiliate=' . $visit->affiliate_id ) ) . '">' . affiliate_wp()->affiliates->get_affiliate_name( $visit->affiliate_id ) . '</a>';
+		/**
+		 * The affiliate column of the visits list table.
+		 *
+		 * @param $value The value of the affiliate column in the visits list table.
+		 * @param $visit Visit data.
+		 */
 		return apply_filters( 'affwp_visit_table_affiliate', $value, $visit );
 	}
 
@@ -170,6 +189,12 @@ class AffWP_Visits_Table extends List_Table {
 	 */
 	function column_referrer( $visit ) {
 		$value = ! empty( $visit->referrer ) ? '<a href="' . esc_url( $visit->referrer ) . '" taret="_blank">' . $visit->referrer . '</a>' : __( 'Direct traffic', 'affiliate-wp' );
+		/**
+		 * The referrer column of the visits list table.
+		 *
+		 * @param $value The value of the referrer column in the visits list table.
+		 * @param $visit Visit data.
+		 */
 		return apply_filters( 'affwp_visit_table_referrer', $value, $visit );
 	}
 
@@ -178,12 +203,18 @@ class AffWP_Visits_Table extends List_Table {
 	 *
 	 * @access public
 	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
-	 * @return string Converted status icon
+	 * @param array $visit Contains all the data for the converted column.
+	 * @return string Converted status icon.
 	 */
 	function column_converted( $visit ) {
 		$converted = ! empty( $visit->referral_id ) ? 'yes' : 'no';
 		$value = '<span class="visit-converted ' . $converted . '"><i></i></span>';
+		/**
+		 * The converted column of the visits list table.
+		 *
+		 * @param $value The value of the converted column in the visits list table.
+		 * @param $visit Visit data.
+		 */
 		return apply_filters( 'affwp_visit_table_converted', $value, $visit );
 	}
 

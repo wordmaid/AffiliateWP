@@ -86,6 +86,15 @@ class Affiliate_WP_Export {
 	 */
 	public function get_csv_cols() {
 		$cols = $this->csv_cols();
+		/**
+		 * The available CSV export columns for this export.
+		 *
+		 * This dynamic filter is appended with he export type string, for example:
+		 *
+		 *     `affwp_export_csv_cols_affiliates`
+		 *
+		 * @param $cols The export columns available.
+		 */
 		return apply_filters( 'affwp_export_csv_cols_' . $this->export_type, $cols );
 	}
 

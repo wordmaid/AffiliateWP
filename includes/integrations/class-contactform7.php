@@ -27,6 +27,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		// Save CF7 AffWP setting
 		add_action('wpcf7_save_contact_form', array( $this, 'save_settings' ) );
+		// add_action('save_post', array( $this, 'save_settings' ) );
 
 		add_filter( 'wpcf7_before_send_mail', array( $this, 'add_pending_referral' ), 9, 2 );
 
@@ -47,7 +48,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 */
 	public function include_cf7_functions() {
 		if( class_exists( 'WPCF7' ) ) {
-			require_once ( AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/extras/contact-form-7-functions.php' );
+			require_once ( AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/extras/contactform7-functions.php' );
 		}
 	}
 
@@ -73,6 +74,22 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 	/**
+	 * Show a notice if Flamingo is not installed and active.
+	 *
+	 * @since  2.0
+	 *
+	 * @return [type]  [description]
+	 */
+	public function flamingo_required_notice() {
+		$notice  = '<div class="affwp-notices">';
+		$notice .= sprintf( __( 'AffiliateWP: The AffiliateWP Contact Form 7 integration requires the <a href="%s">Flamingo Contact Form 7 add-on</a> to be installed and active. Please install it to continue.', 'affiliate-wp' ),
+			esc_url( 'https://wordpress.org/plugins/flamingo' )
+		);
+
+		$notice .= '</div>';
+	}
+
+	/**
 	 * Check for the CF7 Flamingo addon
 	 *
 	 * @since  2.0
@@ -92,21 +109,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		return false;
 	}
 
-	/**
-	 * Show a notice if Flamingo is not installed and active.
-	 *
-	 * @since  2.0
-	 *
-	 * @return [type]  [description]
-	 */
-	public function flamingo_required_notice() {
-		$notice  = '<div class="affwp-notices">';
-		$notice .= sprintf( __( 'AffiliateWP: The AffiliateWP Contact Form 7 integration requires the <a href="%s">Flamingo Contact Form 7 add-on</a> to be installed and active. Please install it to continue.', 'affiliate-wp' ),
-			esc_url( 'https://wordpress.org/plugins/flamingo' )
-		);
-
-		$notice .= '</div>';
-	}
 
 	/**
 	 * Load settings tab content
@@ -132,13 +134,16 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		$post_id = intval( $_GET['post'] );
 
 
-		$enabled = get_post_meta( $post_id, "_cf7_affwp_enabled", true );
+		$affwp_cf7_enabled = get_post_meta( $post_id, "_affwp_cf7_enabled", true );
 
-		if ( $enabled ) {
-			$checked = 'checked';
+		if ( $affwp_cf7_enabled ) {
+		error_log( 'enabled it is!');
+			$checked = "checked";
 		} else {
-			$checked = '';
+			$checked = "";
 		}
+
+		error_log( 'enabled is: ' . $affwp_cf7_enabled);
 
 		// Check for PayPal extension (plugin slug: `contact-form-7-paypal-add-on`).
 		$name    = get_post_meta( $post_id, "_cf7pp_name",        true );
@@ -159,14 +164,15 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			</h3>
 			<div class="inside">
 
-			<div class="mail-field">
-				<input name="enabled" value="<?php echo $enabled; ?>" type="checkbox" checked="<?php echo $checked; ?>">
-				<label><?php _e( 'Enable referrals for this form', 'affiliate-wp' ); ?></label>
-			</div>
+				<div class="affwp-cf7-enabled">
+					<input name="affwp_cf7_enabled_field" type="checkbox" <?php
+					$current = 1;
+					checked( get_post_meta( $post_id, "_affwp_cf7_enabled", true ), $current, 1 ); ?>
+					<label><?php _e( 'Enable referrals for this form', 'affiliate-wp' ); ?></label>
+				</div>
 
-			<input type="hidden" name="email" value="2">
-			<input type="hidden" name="post" value="<?php echo $post_id; ?>">
-
+				<input type="hidden" name="email" value="2">
+				<input type="hidden" name="post" value="<?php echo $post_id; ?>">
 		</form>
 	</div>
 	</div>
@@ -178,21 +184,22 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 *
 	 * @since  2.0
 	 *
-	 * @param  [type]  $cf7 CF7 form instance.
+	 * @param  array  $contact_form  CF7 form data.
 	 *
 	 * @return void
 	 */
-	public function save_settings( $cf7 ) {
+	public function save_settings( $contact_form ) {
 
-		$post_id = sanitize_text_field( $_POST['post'] );
+		$post_id = sanitize_text_field( $_GET['post'] );
 
-		if ( ! empty( $_POST['enabled'] ) ) {
-			$enabled = sanitize_text_field( $_POST['enabled'] );
+		if ( isset( $_POST['affwp_cf7_enabled_field'] ) ) {
 
-			update_post_meta( $post_id, "_cf7_affwp_enabled", $enabled );
+			$affwp_cf7_enabled = $_POST['affwp_cf7_enabled_field'];
+
+			// $post_id, $meta_key, $meta_value, $prev_value
+			update_post_meta( $post_id, "_affwp_cf7_enabled", true );
 		} else {
-			// Referrals not enabled for this form.
-			update_post_meta( $post_id, "_cf7_affwp_enabled", 0 );
+			update_post_meta( $post_id, "_affwp_cf7_enabled", false );
 		}
 	}
 
@@ -210,13 +217,10 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		// The Contact Form 7 form ID
 		$form_id = $contact_form->id();
 
-		// Check for required for submission meta
-		// error_log( print_r( $contact_form, true) );
-		error_log( print_r( $form_id, true) );
 		return;
 
 		// Flamingo post ID
-		$entry_id = $contact_form[id];
+		// $entry_id = $contact_form[id];
 
 
 		if ( $this->was_referred() ) {

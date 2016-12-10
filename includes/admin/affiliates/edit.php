@@ -1,14 +1,15 @@
 <?php
-$affiliate    = affwp_get_affiliate( absint( $_GET['affiliate_id'] ) );
-$user_info    = get_userdata( $affiliate->user_id );
-$rate_type    = ! empty( $affiliate->rate_type ) ? $affiliate->rate_type : '';
-$rate         = isset( $affiliate->rate ) ? $affiliate->rate : null;
-$rate         = affwp_abs_number_round( $affiliate->rate );
-$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
-$default_rate = affwp_abs_number_round( $default_rate );
-$email        = ! empty( $affiliate->payment_email ) ? $affiliate->payment_email : '';
-$reason       = affwp_get_affiliate_meta( $affiliate->affiliate_id, '_rejection_reason', true );
+$affiliate        = affwp_get_affiliate( absint( $_GET['affiliate_id'] ) );
+$user_info        = get_userdata( $affiliate->user_id );
+$rate_type        = ! empty( $affiliate->rate_type ) ? $affiliate->rate_type : '';
+$rate             = isset( $affiliate->rate ) ? $affiliate->rate : null;
+$rate             = affwp_abs_number_round( $affiliate->rate );
+$default_rate     = affiliate_wp()->settings->get( 'referral_rate', 20 );
+$default_rate     = affwp_abs_number_round( $default_rate );
+$email            = ! empty( $affiliate->payment_email ) ? $affiliate->payment_email : '';
+$reason           = affwp_get_affiliate_meta( $affiliate->affiliate_id, '_rejection_reason', true );
 $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method', true );
+$notes            = affwp_get_affiliate_meta( $affiliate->affiliate_id, 'notes', true );
 ?>
 <div class="wrap">
 
@@ -186,6 +187,19 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 				<td>
 					<textarea name="promotion_methods" id="promotion_methods" style="width:50%;" disabled="disabled"><?php echo esc_html( $promotion_method ); ?></textarea>
 					<p class="description"><?php _e( 'Promotion methods entered by the affiliate during registration.', 'affiliate-wp' ); ?></p>
+				</td>
+
+			</tr>
+
+			<tr class="form-row">
+
+				<th scope="row">
+					<label for="notes"><?php _e( 'Affiliate Notes', 'affiliate-wp' ); ?></label>
+				</th>
+
+				<td>
+					<textarea name="notes" rows="10" cols="50" id="notes" class="large-text"><?php echo esc_html( $notes ); ?></textarea>
+					<p class="description"><?php _e( 'Enter any notes for this affiliate. Notes are only visible to the admin.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>

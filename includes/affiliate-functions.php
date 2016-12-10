@@ -1064,6 +1064,7 @@ function affwp_update_affiliate( $data = array() ) {
 	$args['rate_type']     = ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '';
 	$args['status']        = ! empty( $data['status'] ) ? sanitize_text_field( $data['status'] ) : $affiliate->status;
 	$args['user_id']       = $user_id;
+	$args['notes']         = ! empty( $data['notes' ] ) ? sanitize_text_field( $data['notes'] ) : '';
 
 	/**
 	 * Fires immediately before data for the current affiliate is updated.
@@ -1089,10 +1090,20 @@ function affwp_update_affiliate( $data = array() ) {
 	do_action( 'affwp_updated_affiliate', affwp_get_affiliate( $affiliate ), $updated );
 
 	if ( $updated ) {
+
 		// Update affiliate's account email
 		if ( wp_update_user( array( 'ID' => $user_id, 'user_email' => $args['account_email'] ) ) ) {
+
+			// Add or delete affiliate notes
+			if ( $args['notes'] ) {
+				affwp_update_affiliate_meta( $affiliate_id, 'notes', $args['notes'] );
+			} else {
+				affwp_delete_affiliate_meta( $affiliate_id, 'notes' );
+			}
+
 			return true;
 		}
+
 	}
 	return false;
 }

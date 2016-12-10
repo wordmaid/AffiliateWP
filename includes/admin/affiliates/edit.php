@@ -184,7 +184,7 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 				</th>
 
 				<td>
-					<textarea name="promotion_methods" id="promotion_methods" style="width:50%;" disabled="disabled"><?php echo esc_html( $promotion_method ); ?></textarea>
+					<textarea name="promotion_methods" rows="5" cols="50" id="promotion_methods" class="large-text" disabled="disabled"><?php echo esc_html( $promotion_method ); ?></textarea>
 					<p class="description"><?php _e( 'Promotion methods entered by the affiliate during registration.', 'affiliate-wp' ); ?></p>
 				</td>
 

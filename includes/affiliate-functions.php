@@ -1064,7 +1064,7 @@ function affwp_update_affiliate( $data = array() ) {
 	$args['rate_type']     = ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '';
 	$args['status']        = ! empty( $data['status'] ) ? sanitize_text_field( $data['status'] ) : $affiliate->status;
 	$args['user_id']       = $user_id;
-	$args['notes']         = ! empty( $data['notes' ] ) ? sanitize_text_field( $data['notes'] ) : '';
+	$args['notes']         = ! empty( $data['notes' ] ) ? wp_kses_post( $data['notes'] ) : '';
 
 	/**
 	 * Fires immediately before data for the current affiliate is updated.

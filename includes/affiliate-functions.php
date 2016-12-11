@@ -1021,7 +1021,8 @@ function affwp_add_affiliate( $data = array() ) {
 		'status'        => $status,
 		'rate'          => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
 		'rate_type'     => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
-		'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : ''
+		'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : '',
+		'notes'         => ! empty( $data['notes' ] ) ? wp_kses_post( $data['notes'] ) : ''
 	);
 
 	$affiliate_id = affiliate_wp()->affiliates->add( $args );

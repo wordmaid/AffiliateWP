@@ -40,17 +40,17 @@ add_action( 'affwp_add_affiliate', 'affwp_process_add_affiliate' );
  * @since 2.0
  * @return void
  */
-function affwp_process_add_affiliate_meta( $affiliate_id ) {
+function affwp_process_add_affiliate_meta( $affiliate_id, $args ) {
 
-	// add notes against affiliate
-	$notes = ! empty( $_POST['notes'] ) ? wp_kses_post( $_POST['notes'] ) : '';
+		// add notes against affiliate
+		$notes = ! empty( $args['notes'] ) ? wp_kses_post( $args['notes'] ) : '';
 
-	if ( $notes ) {
-		affwp_update_affiliate_meta( $affiliate_id, 'notes', $notes );
-	}
+		if ( $notes ) {
+			affwp_update_affiliate_meta( $affiliate_id, 'notes', $notes );
+		}
 
 }
-add_action( 'affwp_insert_affiliate', 'affwp_process_add_affiliate_meta' );
+add_action( 'affwp_insert_affiliate', 'affwp_process_add_affiliate_meta', 10, 2 );
 
 /**
  * Process affiliate deletion requests

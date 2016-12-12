@@ -84,7 +84,7 @@ class Affiliate_WP_Upgrades {
 		}
 
 		if ( version_caompare( $version, '2.0', '<' ) ) {
-//			$this->v20_upgrade();
+			$this->v20_upgrade();
 		}
 
 		// Inconsistency between current and saved version.

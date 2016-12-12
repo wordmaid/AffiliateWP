@@ -22,6 +22,7 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 				<th><?php _e( 'Total pending referrals', 'affiliate-wp' ); ?></th>
 				<th><?php _e( 'Total rejected referrals', 'affiliate-wp' ); ?></th>
 				<th><?php _e( 'Total visits', 'affiliate-wp' ); ?></th>
+				<th><?php _e( 'Conversion rate', 'affiliate-wp' ); ?></th>
 				<?php do_action( 'affwp_view_affiliate_report_table_header', $affiliate_id ); ?>
 			</tr>
 
@@ -37,6 +38,7 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 				<td><?php echo affiliate_wp()->referrals->count( array( 'affiliate_id' => $affiliate_id, 'status' => 'pending' ) ); ?></td>
 				<td><?php echo affiliate_wp()->referrals->count( array( 'affiliate_id' => $affiliate_id, 'status' => 'rejected' ) ); ?></td>
 				<td><?php echo affwp_get_affiliate_visit_count( $affiliate_id ); ?></td>
+				<td><?php echo affwp_get_affiliate_conversion_rate( $affiliate_id ); ?></td>
 				<?php do_action( 'affwp_view_affiliate_report_table_row', $affiliate_id ); ?>
 			</tr>
 

@@ -220,6 +220,37 @@ abstract class Controller {
 	}
 
 	/**
+	 * Retrieves the item's schema, conforming to JSON Schema.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @return array Item schema data.
+	 */
+	public function get_item_schema() {
+		return $this->add_additional_fields_schema( array() );
+	}
+
+	/**
+	 * Retrieves the item's schema for display / public consumption purposes.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @return array Public item schema data.
+	 */
+	public function get_public_item_schema() {
+
+		$schema = $this->get_item_schema();
+
+		foreach ( $schema['properties'] as &$property ) {
+			unset( $property['arg_options'] );
+		}
+
+		return $schema;
+	}
+
+	/**
 	 * Retrieves the object type for the current endpoints.
 	 *
 	 * @since 1.9.5
@@ -338,7 +369,12 @@ abstract class Controller {
 	 * @return array Modified Schema array.
 	 */
 	protected function add_additional_fields_schema( $schema ) {
-		$object_type = $this->get_object_type();
+		if ( empty( $schema['title'] ) ) {
+			return $schema;
+		}
+
+		// Can't use $this->get_object_type otherwise we cause an inf loop.
+		$object_type = $schema['title'];
 
 		$additional_fields = $this->get_additional_fields( $object_type );
 

@@ -243,7 +243,7 @@ function affwp_delete_referral( $referral ) {
 
 	}
 
-	if( affiliate_wp()->referrals->delete( $referral->ID ) ) {
+	if( affiliate_wp()->referrals->delete( $referral->ID, 'referral' ) ) {
 
 		/**
 		 * Fires immediately after a referral has been deleted.

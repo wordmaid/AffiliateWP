@@ -1,4 +1,8 @@
 <?php
+namespace AffWP\Visit\Database;
+
+use AffWP\Tests\UnitTestCase;
+
 /**
  * Tests for Affiliate_WP_Visits_DB class
  *
@@ -6,7 +10,7 @@
  * @group database
  * @group visits
  */
-class Visits_DB_Tests extends WP_UnitTestCase {
+class Tests extends UnitTestCase {
 
 	/**
 	 * Test affiliates.
@@ -14,7 +18,7 @@ class Visits_DB_Tests extends WP_UnitTestCase {
 	 * @access public
 	 * @var array
 	 */
-	public $affiliates = array();
+	public static $affiliates = array();
 
 	/**
 	 * Test visits.
@@ -22,60 +26,83 @@ class Visits_DB_Tests extends WP_UnitTestCase {
 	 * @access public
 	 * @var array
 	 */
-	public $visits = array();
+	public static $visits = array();
 
 	/**
-	 * Tear down.
+	 * Set up fixtures once.
 	 */
-	public function tearDown() {
-		// Reset fixtures.
-		$this->affiliates = array();
-		$this->visits = array();
-
-		parent::tearDown();
+	public static function wpSetUpBeforeClass() {
+		self::$affiliates = parent::affwp()->affiliate->create_many( 4 );
+		self::$visits = parent::affwp()->visit->create_many( 4 );
 	}
 
 	/**
 	 * @covers Affiliate_WP_Visits_DB::get_visits()
 	 */
 	public function test_get_visits_should_return_array_of_Visit_objects_if_not_count_query() {
-		$this->_set_up_visits( 4 );
-
 		$results = affiliate_wp()->visits->get_visits();
 
 		// Check a random visit.
-		$this->assertInstanceOf( 'AffWP\Visit', $results[ rand( 0, 3 ) ] );
+		$this->assertInstanceOf( 'AffWP\Visit', $results[0] );
 	}
 
 	/**
 	 * @covers Affiliate_WP_Visits_DB::get_visits()
 	 */
 	public function test_get_visits_should_turn_integer_if_count_query() {
-		$this->_set_up_visits( 4 );
-
 		$results = affiliate_wp()->visits->get_visits( array(), $count = true );
 
 		$this->assertTrue( is_numeric( $results ) );
 	}
 
 	/**
-	 * Helper to set up a user, an affiliate, and visits.
-	 *
-	 * @since 1.9
-	 * @access public
-	 *
-	 * @param int   $count      Optional. Number of visits to create. Default 3.
-	 * @param array $visit_args Optional. Arguments for adding visits. Default empty array.
+	 * @covers Affiliate_WP_Visits_DB::get_visits()
 	 */
-	public function _set_up_visits( $count = 3, $visit_args = array() ) {
-		$this->affiliates[] = affwp_add_affiliate( array(
-			'user_id' => $this->factory()->user->create()
+	public function test_get_visits_fields_ids_should_return_an_array_of_ids_only() {
+		$results = affiliate_wp()->visits->get_visits( array(
+			'fields' => 'ids'
 		) );
 
-		for ( $i = 1; $i <= $count; $i++ ) {
-			$this->visits[] = affiliate_wp()->visits->add( array(
-				'affiliate_id' => $this->affiliates[0]
-			) );
-		}
+		$this->assertEqualSets( self::$visits, $results );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 */
+	public function test_get_visits_invalid_fields_arg_should_return_regular_Visit_object_results() {
+		$visits = array_map( 'affwp_get_visit', self::$visits );
+
+		$results = affiliate_wp()->visits->get_visits( array(
+			'fields' => 'foo'
+		) );
+
+		$this->assertEqualSets( $visits, $results );
+
+	}
+
+	/**
+	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 */
+	public function test_get_visits_with_singular_visit_id_should_return_that_visit() {
+		$results = affiliate_wp()->visits->get_visits( array(
+			'visit_id' => self::$visits[0],
+			'fields'   => 'ids',
+		) );
+
+		$this->assertSame( self::$visits[0], $results[0] );
+	}
+
+	/**
+	 * @covers Affiliate_WP_Visits_DB::get_visits()
+	 */
+	public function test_get_visits_with_multiple_visits_should_return_only_those_visits() {
+		$visits = array( self::$visits[1], self::$visits[3] );
+
+		$results = affiliate_wp()->visits->get_visits( array(
+			'visit_id' => $visits,
+			'fields'   => 'ids',
+		) );
+
+		$this->assertEqualSets( $visits, $results );
 	}
 }

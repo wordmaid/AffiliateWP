@@ -1,26 +1,29 @@
 <?php
-use AffWP\Creative as Creative;
+namespace AffWP\Creative\Object;
+
+use AffWP\Tests\UnitTestCase;
+use AffWP\Creative;
 
 /**
  * Tests for AffWP\Creative
  *
  * @covers AffWP\Creative
- * @covers AffWP\Object
+ * @covers AffWP\Base_Object
  *
  * @group creatives
  * @group objects
  */
-class AffWP_Creative_Tests extends WP_UnitTestCase {
+class Tests extends UnitTestCase {
 
 	/**
-	 * @covers AffWP\Object::get_instance()
+	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_invalid_creative_id_should_return_false() {
 		$this->assertFalse( Creative::get_instance( 0 ) );
 	}
 
 	/**
-	 * @covers AffWP\Object::get_instance()
+	 * @covers AffWP\Base_Object::get_instance()
 	 */
 	public function test_get_instance_with_creative_id_should_return_Creative_object() {
 		$creative_id = affiliate_wp()->creatives->add();

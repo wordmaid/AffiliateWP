@@ -1,6 +1,20 @@
 <?php
 
+/**
+ * Class Affiliate_WP_DB_Affiliates
+ *
+ * @property-read \AffWP\Affiliate\REST\v1\Endpoints $REST Affiliates REST endpoints.
+ */
 class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
+
+	/**
+	 * The payouts class instance variable.
+	 *
+	 * @access public
+	 * @since  1.9
+	 * @var    Affiliate_WP_Payouts_DB
+	 */
+	public $payouts;
 
 	/**
 	 * Cache group for queries.
@@ -8,29 +22,29 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 * @internal DO NOT change. This is used externally both as a cache group and shortcut
 	 *           for accessing db class instances via affiliate_wp()->{$cache_group}->*.
 	 *
-	 * @since 1.9
 	 * @access public
-	 * @var string
+	 * @since  1.9
+	 * @var    string
 	 */
 	public $cache_group = 'affiliates';
 
 	/**
 	 * Object type to query for.
 	 *
-	 * @since 1.9
 	 * @access public
-	 * @var string
+	 * @since  1.9
+	 * @var    string
 	 */
 	public $query_object_type = 'AffWP\Affiliate';
 
 	/**
 	 * Get things started
 	 *
-	 * @access  public
-	 * @since   1.0
+	 * @access public
+	 * @since  1.0
 	*/
 	public function __construct() {
-		global $wpdb;
+		global $wpdb, $wp_version;
 
 		if( defined( 'AFFILIATE_WP_NETWORK_WIDE' ) && AFFILIATE_WP_NETWORK_WIDE ) {
 			// Allows a single affiliate table for the whole network
@@ -40,18 +54,25 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		}
 		$this->primary_key = 'affiliate_id';
 		$this->version     = '1.1';
+
+		$this->payouts = new Affiliate_WP_Payouts_DB;
+
+		// REST endpoints.
+		if ( version_compare( $wp_version, '4.4', '>=' ) ) {
+			$this->REST = new \AffWP\Affiliate\REST\v1\Endpoints;
+		}
 	}
 
 	/**
 	 * Retrieves an affiliate object.
 	 *
-	 * @since 1.9
 	 * @access public
+	 * @since  1.9
 	 *
 	 * @see Affiliate_WP_DB::get_core_object()
 	 *
-	 * @param int|object|AffWP\Affiliate $affiliate Affiliate ID or object.
-	 * @return AffWP\Affiliate|null Affiliate object, null otherwise.
+	 * @param int|AffWP\Affiliate $affiliate Affiliate ID or object.
+	 * @return AffWP\Affiliate|false Affiliate object, otherwise false.
 	 */
 	public function get_object( $affiliate ) {
 		return $this->get_core_object( $affiliate, $this->query_object_type );
@@ -60,8 +81,8 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	/**
 	 * Get table columns and date types
 	 *
-	 * @access  public
-	 * @since   1.0
+	 * @access public
+	 * @since  1.0
 	*/
 	public function get_columns() {
 		return array(
@@ -81,8 +102,8 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	/**
 	 * Get default column values
 	 *
-	 * @access  public
-	 * @since   1.0
+	 * @access public
+	 * @since  1.0
 	*/
 	public function get_column_defaults() {
 		return array(
@@ -93,16 +114,17 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	/**
 	 * Retrieve affiliates from the database
 	 *
-	 * @since 1.0
-	 * @since 1.8 The `$affiliate_id` argument was added. `$orderby` now accepts referral statuses.
-	 *            and 'username'.
 	 * @access public
+	 * @since  1.0
+	 * @since  1.8 The `$affiliate_id` argument was added. `$orderby` now accepts referral statuses.
+	 *             and 'username'.
 	 *
 	 * @param array $args {
 	 *     Optional. Arguments for querying affiliates. Default empty array.
 	 *
 	 *     @type int       $number       Number of affiliates to query for. Default 20.
 	 *     @type int       $offset       Number of affiliates to offset the query for. Default 0.
+	 *     @type int|array $exclude      Affiliate ID or array of IDs to explicitly exclude.
 	 *     @type int|array $user_id      User ID or array of user IDs that correspond to the affiliate user.
 	 *     @type int|array $affiliate_id Affiliate ID or array of affiliate IDs to retrieve.
 	 *     @type string    $status       Affiliate status. Default empty.
@@ -111,9 +133,10 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	 *     @type string    $orderby      Affiliates table column to order results by. Also accepts 'paid',
 	 *                                   'unpaid', 'rejected', or 'pending' referral statuses, 'name'
 	 *                                   (user display_name), or 'username' (user user_login). Default 'affiliate_id'.
+	 *     @type string    $fields       Specific fields to retrieve. Accepts 'ids' or '*' (all). Default '*'.
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
-	 * @return array Array of affiliate objects (if found).
+	 * @return array|int Array of affiliate objects (if found), int if `$count` is true.
 	 */
 	public function get_affiliates( $args = array(), $count = false ) {
 		global $wpdb;
@@ -121,11 +144,13 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		$defaults = array(
 			'number'       => 20,
 			'offset'       => 0,
+			'exclude'      => array(),
 			'user_id'      => 0,
 			'affiliate_id' => 0,
 			'status'       => '',
 			'order'        => 'DESC',
-			'orderby'      => 'affiliate_id'
+			'orderby'      => 'affiliate_id',
+			'fields'       => '',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -140,6 +165,18 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		}
 
 		$where = '';
+
+		if ( ! empty( $args['exclude'] ) ) {
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
+			if ( is_array( $args['exclude'] ) ) {
+				$exclude = implode( ',', array_map( 'intval', $args['exclude'] ) );
+			} else {
+				$exclude = intval( $args['exclude'] );
+			}
+
+			$where .= "`affiliate_id` NOT IN( {$exclude} )";
+		}
 
 		// affiliates for specific users
 		if ( ! empty( $args['user_id'] ) ) {
@@ -282,6 +319,11 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 				$orderby = 'earnings+0';
 				break;
 
+			case 'referrals':
+				// Referrals.
+				$orderby = 'referrals+0';
+				break;
+
 			case 'paid':
 			case 'unpaid':
 			case 'rejected':
@@ -305,6 +347,16 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		$args['orderby'] = $orderby;
 		$args['order']   = $order;
 
+		$fields = "*";
+
+		if ( ! empty( $args['fields'] ) ) {
+			if ( 'ids' === $args['fields'] ) {
+				$fields = "$this->primary_key";
+			} elseif ( array_key_exists( $args['fields'], $this->get_columns() ) ) {
+				$fields = $args['fields'];
+			}
+		}
+
 		$key = ( true === $count ) ? md5( 'affwp_affiliates_count' . serialize( $args ) ) : md5( 'affwp_affiliates_' . serialize( $args ) );
 
 		$last_changed = wp_cache_get( 'last_changed', $this->cache_group );
@@ -318,26 +370,9 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 		if ( false === $results ) {
 
-			if ( true === $count ) {
+			$clauses = compact( 'fields', 'join', 'where', 'orderby', 'order', 'count' );
 
-				$results = absint( $wpdb->get_var( "SELECT COUNT({$this->primary_key}) FROM {$this->table_name} {$where};" ) );
-
-			} else {
-
-				$results = $wpdb->get_results(
-					$wpdb->prepare(
-						"SELECT * FROM {$this->table_name} {$join} {$where} ORDER BY {$orderby} {$order} LIMIT %d, %d;",
-						absint( $args['offset'] ),
-						absint( $args['number'] )
-					)
-				);
-
-			}
-		}
-
-		// Convert to AffWP\Affiliate objects.
-		if ( is_array( $results ) ) {
-			$results = array_map( 'affwp_get_affiliate', $results );
+			$results = $this->get_results( $clauses, $args, 'affwp_get_affiliate' );
 		}
 
 		wp_cache_add( $cache_key, $results, $this->cache_group, HOUR_IN_SECONDS );
@@ -347,10 +382,13 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	}
 
 	/**
-	 * Return the number of results found for a given query
+	 * Retrieves the number of results found for a given query.
 	 *
-	 * @param  array  $args
-	 * @return int
+	 * @access public
+	 * @since  1.0
+	 *
+	 * @param array $args Optional. Any valid get_affiliates() arguments. Default empty array.
+	 * @return int Number of affiliates found for the given arguments.
 	 */
 	public function count( $args = array() ) {
 		return $this->get_affiliates( $args, true );
@@ -359,18 +397,25 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	/**
 	 * Retrieve the name of the affiliate
 	 *
-	 * @access  public
-	 * @since   1.0
+	 * @access public
+	 * @since  1.0
+	 *
+	 * @param int|\AffWP\Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+	 * @return string|null Affiliate name on success, otherwise null.
 	*/
-	public function get_affiliate_name( $affiliate_id = 0 ) {
+	public function get_affiliate_name( $affiliate = 0 ) {
 		global $wpdb;
 
-		$cache_key = 'affwp_affiliate_name_' . $affiliate_id;
+		if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+			return;
+		}
+
+		$cache_key = "affwp_affiliate_name_{$affiliate->ID}";
 
 		$name = wp_cache_get( $cache_key, 'affiliates' );
 
 		if( false === $name ) {
-			$name = $wpdb->get_var( $wpdb->prepare( "SELECT u.display_name FROM {$wpdb->users} u INNER JOIN {$this->table_name} a ON u.ID = a.user_id WHERE a.affiliate_id = %d;", $affiliate_id ) );
+			$name = $wpdb->get_var( $wpdb->prepare( "SELECT u.display_name FROM {$wpdb->users} u INNER JOIN {$this->table_name} a ON u.ID = a.user_id WHERE a.affiliate_id = %d;", $affiliate->ID ) );
 			wp_cache_set( $cache_key, $name, 'affiliates', HOUR_IN_SECONDS );
 		}
 
@@ -378,22 +423,24 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	}
 
 	/**
-	 * Checks if an affiliate exists
+	 * Checks if an affiliate exists.
 	 *
-	 * @access  public
-	 * @since   1.0
+	 * @access public
+	 * @since  1.0
+	 *
+	 * @param int|\AffWP\Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+	 * @return bool True if the affiliate exists, otherwise false.
 	*/
-	public function affiliate_exists( $affiliate_id = 0 ) {
-
+	public function affiliate_exists( $affiliate = 0 ) {
 		global $wpdb;
 
-		if( empty( $affiliate_id ) ) {
+		if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
 			return false;
 		}
 
-		$affiliate = $wpdb->query( $wpdb->prepare( "SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $affiliate_id ) );
+		$exists = $wpdb->query( $wpdb->prepare( "SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $affiliate->ID ) );
 
-		return ! empty( $affiliate );
+		return ! empty( $exists );
 	}
 
 	/**
@@ -447,8 +494,8 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 	/**
 	 * Create the table
 	 *
-	 * @access  public
-	 * @since   1.0
+	 * @access public
+	 * @since  1.0
 	*/
 	public function create_table() {
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

@@ -95,7 +95,10 @@ function affwp_get_affiliate_name( $affiliate = 0 ) {
 		return '';
 	}
 
-	$user_info    = get_userdata( $affiliate->user_id );
+	if ( ! $user_info = get_userdata( $affiliate->user_id ) ) {
+		return '';
+	}
+
 	$first_name   = esc_html( $user_info->first_name );
 	$last_name    = esc_html( $user_info->last_name );
 
@@ -307,8 +310,16 @@ function affwp_get_affiliate_status_label( $affiliate = 0 ) {
  * @return string Affiliate rate, empty string otherwise.
  */
 function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_rate = '', $reference = '' ) {
-
-	$affiliate = affwp_get_affiliate( $affiliate );
+	// Forward-compat with affiliate objects.
+	if ( is_object( $affiliate ) ) {
+		if ( isset( $affiliate->affiliate_id ) ) {
+			$affiliate_id = $affiliate->affiliate_id;
+		} else {
+			$affiliate_id = 0;
+		}
+	} else {
+		$affiliate_id = $affiliate;
+	}
 
 	// Global referral rate setting, fallback to 20
 	$default_rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
@@ -318,25 +329,27 @@ function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_
 	$product_rate = affwp_abs_number_round( $product_rate );
 	$product_rate = ( null !== $product_rate ) ? $product_rate : $default_rate;
 
-	// Get rate in order of priority: Affiliate -> Product -> Global
-	$rate = affwp_abs_number_round( $affiliate->rate );
+	// Get affiliate-specific referral rate
+	$affiliate_rate = affiliate_wp()->affiliates->get_column( 'rate', $affiliate_id );
 
+	// Get rate in order of priority: Affiliate -> Product -> Global
+	$rate = affwp_abs_number_round( $affiliate_rate );
 	$rate = ( null !== $rate ) ? $rate : $product_rate;
 
-	// Get the referral rate type.
-	$type = $affiliate->rate_type;
+	// Get the referral rate type
+	$type = affwp_get_affiliate_rate_type( $affiliate_id );
 
 	// Format percentage rates
 	$rate = ( 'percentage' === $type ) ? $rate / 100 : $rate;
 
 	/**
-	 * Filters the affiliate rate.
+	 * Filter the affiliate rate
 	 *
 	 * @param  string  $rate
 	 * @param  int     $affiliate_id
 	 * @param  string  $type
 	 */
-	$rate = (string) apply_filters( 'affwp_get_affiliate_rate', $rate, $affiliate->ID, $type, $reference );
+	$rate = (string) apply_filters( 'affwp_get_affiliate_rate', $rate, $affiliate_id, $type, $reference );
 
 	// Return rate now if formatting is not required
 	if ( ! $formatted ) {
@@ -344,24 +357,9 @@ function affwp_get_affiliate_rate( $affiliate = 0, $formatted = false, $product_
 	}
 
 	// Format the rate based on the type
-	switch ( $type ) {
-
-		case 'percentage' :
-
-			$rate = affwp_abs_number_round( $rate * 100 ) . '%';
-
-			break;
-
-		case 'flat' :
-
-			$rate = affwp_currency_filter( $rate );
-
-			break;
-
-	}
+	$rate = affwp_format_rate( $rate, $type );
 
 	return $rate;
-
 }
 
 /**
@@ -418,7 +416,7 @@ function affwp_get_affiliate_rate_type( $affiliate = 0 ) {
 		// Allowed types
 		$types = affwp_get_affiliate_rate_types();
 
-		$affiliate_rate_type = $affiliate->rate_type;
+		$affiliate_rate_type = $affiliate->rate_type();
 
 		if ( $affiliate_rate_type !== $type ) {
 			$type = $affiliate_rate_type;
@@ -507,7 +505,7 @@ function affwp_get_affiliate_payment_email( $affiliate = 0 ) {
 		return false;
 	}
 
-	return $affiliate->payment_email;
+	return $affiliate->payment_email();
 }
 
 /**
@@ -575,7 +573,7 @@ function affwp_delete_affiliate( $affiliate, $delete_data = false ) {
 		delete_user_meta( $affiliate->user_id, 'affwp_promotion_method' );
 	}
 
-	$deleted = affiliate_wp()->affiliates->delete( $affiliate_id );
+	$deleted = affiliate_wp()->affiliates->delete( $affiliate_id, 'affiliate' );
 
 	if( $deleted ) {
 
@@ -613,7 +611,7 @@ function affwp_get_affiliate_earnings( $affiliate, $formatted = false ) {
 
 	if ( $formatted ) {
 
-		$earnings = affwp_currency_filter( $earnings );
+		$earnings = affwp_currency_filter( affwp_format_amount( $earnings ) );
 
 	}
 
@@ -655,7 +653,7 @@ function affwp_get_affiliate_unpaid_earnings( $affiliate, $formatted = false ) {
 
 	if ( $formatted ) {
 
-		$earnings = affwp_currency_filter( $earnings );
+		$earnings = affwp_currency_filter( affwp_format_amount( $earnings ) );
 
 	}
 
@@ -1018,25 +1016,21 @@ function affwp_add_affiliate( $data = array() ) {
 
 	$user_id = absint( $data['user_id'] );
 
-	if ( ! affiliate_wp()->affiliates->get_by( 'user_id', $user_id ) ) {
+	$args = array(
+		'user_id'       => $user_id,
+		'status'        => $status,
+		'rate'          => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
+		'rate_type'     => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
+		'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : ''
+	);
 
-		$args = array(
-			'user_id'       => $user_id,
-			'status'        => $status,
-			'rate'          => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
-			'rate_type'     => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
-			'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : ''
-		);
+	$affiliate_id = affiliate_wp()->affiliates->add( $args );
 
-		$affiliate_id = affiliate_wp()->affiliates->add( $args );
+	if ( $affiliate_id ) {
 
-		if ( $affiliate_id ) {
+		affwp_set_affiliate_status( $affiliate_id, $status );
 
-			affwp_set_affiliate_status( $affiliate_id, $status );
-
-			return $affiliate_id;
-		}
-
+		return $affiliate_id;
 	}
 
 	return false;
@@ -1047,6 +1041,7 @@ function affwp_add_affiliate( $data = array() ) {
  * Updates an affiliate.
  *
  * @since 1.0
+ * @since 1.9 Support was added for updating an affiliate's status.
  *
  * @todo Document `$data` as a hash notation
  *
@@ -1067,6 +1062,7 @@ function affwp_update_affiliate( $data = array() ) {
 	$args['payment_email'] = ! empty( $data['payment_email' ] ) && is_email( $data['payment_email' ] ) ? sanitize_text_field( $data['payment_email'] ) : '';
 	$args['rate']          = ( isset( $data['rate' ] ) && '' !== $data['rate' ] )                      ? sanitize_text_field( $data['rate'] )          : '';
 	$args['rate_type']     = ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '';
+	$args['status']        = ! empty( $data['status'] ) ? sanitize_text_field( $data['status'] ) : $affiliate->status;
 	$args['user_id']       = $user_id;
 
 	/**
@@ -1318,7 +1314,7 @@ function affwp_get_affiliate_area_page_url( $tab = '' ) {
 	$affiliate_area_page_url = get_permalink( $affiliate_area_page_id );
 
 	if ( ! empty( $tab )
-		&& in_array( $tab, array( 'urls', 'stats', 'graphs', 'referrals', 'visits', 'creatives', 'settings' ) )
+		&& in_array( $tab, array( 'urls', 'stats', 'graphs', 'referrals', 'payouts', 'visits', 'creatives', 'settings' ) )
 	) {
 		$affiliate_area_page_url = add_query_arg( array( 'tab' => $tab ), $affiliate_area_page_url );
 	}
@@ -1354,7 +1350,7 @@ function affwp_get_active_affiliate_area_tab() {
 	 */
 	$tabs = apply_filters( 'affwp_affiliate_area_tabs', array(
 		'urls', 'stats', 'graphs', 'referrals',
-		'visits', 'creatives', 'settings'
+		'payouts', 'visits', 'creatives', 'settings'
 	) );
 
 	// If the tab can't be shown, remove it from play.
@@ -1373,4 +1369,32 @@ function affwp_get_active_affiliate_area_tab() {
 	}
 
 	return $active_tab;
+}
+
+/**
+ * Retrieves an array of payouts for the given affiliate.
+ *
+ * @since 1.9
+ *
+ * @param int|\AffWP\Affiliate $affiliate Optional. Affiliate ID or object. Default is the current affiliate.
+ * @return array|false Array of payout objects for the given affiliate, otherwise false.
+ */
+function affwp_get_affiliate_payouts( $affiliate = 0 ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		return false;
+	}
+
+	$payouts = affiliate_wp()->affiliates->payouts->get_payouts( array(
+		'affilate_id' => $affiliate->ID,
+	) );
+
+	/**
+	 * Filters the list of payouts associated with an affiliate.
+	 *
+	 * @since 1.9
+	 *
+	 * @param array $payouts      The affiliate's payouts.
+	 * @param int   $affiliate_id Affiliate ID.
+	 */
+	return apply_filters( 'affwp_get_affiliate_payouts', $payouts, $affiliate->ID );
 }

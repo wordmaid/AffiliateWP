@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * The Affiliate_WP_Tracking class.
+ *
+ * This class defines all primary methods by which
+ * AffiliateWP tracks referral activity.
+ *
+ * @since  1.0
+ * @uses   Affiliate_WP_Logging  Logs activity.
+ */
 class Affiliate_WP_Tracking {
 
 	private $referral_var;
@@ -96,9 +104,10 @@ class Affiliate_WP_Tracking {
 		$defaults = array(
 			'amount'      => '',
 			'description' => '',
+			'reference'   => '',
 			'context'     => '',
 			'campaign'    => '',
-			'reference'   => ''
+			'status'      => ''
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -129,7 +138,7 @@ class Affiliate_WP_Tracking {
 			$args['campaign'] = sanitize_text_field( $_REQUEST['campaign'] );
 		}
 
-		$md5 = md5( $args['amount'] . $args['description'] . $args['reference'] . $args['context'] . $args['status'] );
+		$md5 = md5( $args['amount'] . $args['description'] . $args['reference'] . $args['context'] . $args['status'] . $args['campaign'] );
 
 ?>
 		<script type="text/javascript">
@@ -260,10 +269,10 @@ class Affiliate_WP_Tracking {
 				$this->log( sprintf( 'Valid affiliate ID, %d, in track_conversion()', $affiliate_id ) );
 			}
 
-			$md5 = md5( $_POST['amount'] . $_POST['description'] . $_POST['reference'] . $_POST['context'] . $_POST['status'] );
+			$md5 = md5( $_POST['amount'] . $_POST['description'] . $_POST['reference'] . $_POST['context'] . $_POST['status'] . $_POST['campaign'] );
 
 			if( $md5 !== $_POST['md5'] ) {
-				
+
 				if( $this->debug ) {
 					$this->log( sprintf( 'Invalid MD5 in track_conversion(). Needed: %s. Posted: %s', $md5, $_POST['md5'] ) );
 				}
@@ -424,8 +433,11 @@ class Affiliate_WP_Tracking {
 			$path = ! empty( $_SERVER['REQUEST_URI' ] ) ? $_SERVER['REQUEST_URI' ] : '';
 
 			if( false !== strpos( $path, $this->get_referral_var() . '/' ) ) {
-				$pieces = explode( '/', $path );
+
+				$pieces = explode( '/', str_replace( '?', '/', $path ) );
+				$pieces = array_map( 'sanitize_key', $pieces );
 				$key    = array_search( $this->get_referral_var(), $pieces );
+
 				if( $key ) {
 
 					$key += 1;
@@ -460,6 +472,7 @@ class Affiliate_WP_Tracking {
 
 		return $affiliate_id;
 	}
+
 
 	/**
 	 * Get the referral campaign
@@ -678,11 +691,11 @@ class Affiliate_WP_Tracking {
 	/**
 	 * Get the current page URL
 	 *
-	 * @since 1.0
+	 * @since  1.0
 	 * @global $post
 	 * @return string $page_url Current page URL
 	 */
-	function get_current_page_url() {
+	public function get_current_page_url() {
 		global $post;
 
 		if ( is_front_page() ) {
@@ -691,19 +704,7 @@ class Affiliate_WP_Tracking {
 
 		} else {
 
-			$page_url = 'http';
-
-			if ( isset( $_SERVER["HTTPS"] ) && $_SERVER["HTTPS"] == "on" ) {
-				$page_url .= "s";
-			}
-
-			$page_url .= "://";
-
-			if ( $_SERVER["SERVER_PORT"] != "80" ) {
-				$page_url .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-			} else {
-				$page_url .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-			}
+			$page_url = set_url_scheme( 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] );
 
 		}
 
@@ -746,9 +747,9 @@ class Affiliate_WP_Tracking {
 		if( $this->debug ) {
 
 			$this->logs->log( $message );
-			
+
 		}
-		
+
 	}
 
 	/**

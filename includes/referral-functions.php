@@ -317,44 +317,66 @@ function affwp_count_referrals( $affiliate_id = 0, $status = array(), $date = ar
 }
 
 /**
- * Retrieve an array of banned URLs
+ * Retrieves an array of banned URLs.
  *
- * @since 1.7.5
+ * @since 2.0
+ *
  * @return array The array of banned URLs
  */
 function affwp_get_banned_urls() {
 	$urls = affiliate_wp()->settings->get( 'referral_url_blacklist', array() );
-	$urls = array_map( 'trim', explode( "\n", $urls ) );
-	$urls = array_unique( $urls );
-	$urls = array_map( 'sanitize_text_field', $urls );
 
+	if ( ! empty( $urls ) ) {
+		$urls = array_map( 'trim', explode( "\n", $urls ) );
+		$urls = array_unique( $urls );
+		$urls = array_map( 'sanitize_text_field', $urls );
+	}
+
+	/**
+	 * Filters the list of banned URLs.
+	 *
+	 * @since 2.0
+	 *
+	 * @param array $url Banned URLs.
+	 */
 	return apply_filters( 'affwp_get_banned_urls', $urls );
 }
 
 /**
  * Determines if a URL is banned
  *
- * @since 1.7.5
- * @return bool True if banned, false otherwise
+ * @since 2.0
+ *
+ * @param string $url Optional. The URL to check against the black list. Default empty.
+ * @return bool True if banned, otherwise false.
  */
 function affwp_is_url_banned( $url = '' ) {
 	if( empty( $url ) ) {
-		$ret = false;
+		$banned = false;
 	}
 
 	$banned_urls = affwp_get_banned_urls();
 
 	if( ! is_array( $banned_urls ) || empty( $banned_urls ) ) {
-		$ret = false;
+		$banned = false;
 	}
 
 	foreach( $banned_urls as $banned_url ) {
-		$ret = ( stristr( trim( $url ), $banned_url ) ? true : false );
 
-		if( true === $ret ) {
+		$banned = ( stristr( trim( $url ), $banned_url ) ? true : false );
+
+		if ( true === $banned ) {
 			break;
 		}
 	}
 
-	return apply_filters( 'affwp_is_url_banned', $ret, $url );
+	/**
+	 * Filters whether the given URL is considered 'banned'.
+	 *
+	 * @since 2.0
+	 *
+	 * @param bool   $banned Whether the given URL is banned.
+	 * @param string $url    The URL check for ban status.
+	 */
+	return apply_filters( 'affwp_is_url_banned', $banned, $url );
 }

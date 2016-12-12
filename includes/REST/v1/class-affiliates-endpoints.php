@@ -40,35 +40,41 @@ class Endpoints extends Controller {
 
 		// /affiliates/
 		register_rest_route( $this->namespace, '/' . $this->rest_base, array(
-			'methods'  => \WP_REST_Server::READABLE,
-			'callback' => array( $this, 'get_items' ),
-			'args'     => $this->get_collection_params(),
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_affiliates' );
-			},
+			array(
+				'methods'  => \WP_REST_Server::READABLE,
+				'callback' => array( $this, 'get_items' ),
+				'args'     => $this->get_collection_params(),
+				'permission_callback' => function( $request ) {
+					return current_user_can( 'manage_affiliates' );
+				},
+			),
+			'schema' => array( $this, 'get_public_item_schema' ),
 		) );
 
 		// /affiliates/ID
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>\d+)', array(
-			'methods'  => \WP_REST_Server::READABLE,
-			'callback' => array( $this, 'get_item' ),
-			'args'     => array(
-				'user' => array(
-					'description'       => __( 'Whether to include a modified user object in the response.', 'affiliate-wp' ),
-					'validate_callback' => function( $param, $request, $key ) {
-						return is_string( $param );
-					}
+			array(
+				'methods'  => \WP_REST_Server::READABLE,
+				'callback' => array( $this, 'get_item' ),
+				'args'     => array(
+					'user' => array(
+						'description'       => __( 'Whether to include a modified user object in the response.', 'affiliate-wp' ),
+						'validate_callback' => function( $param, $request, $key ) {
+							return is_string( $param );
+						}
+					),
+					'meta' => array(
+						'description'       => __( 'Whether to include the affiliate meta in the response.', 'affiliate-wp' ),
+						'validate_callback' => function( $param, $request, $key ) {
+							return is_string( $param );
+						}
+					),
 				),
-				'meta' => array(
-					'description'       => __( 'Whether to include the affiliate meta in the response.', 'affiliate-wp' ),
-					'validate_callback' => function( $param, $request, $key ) {
-						return is_string( $param );
-					}
-				),
+				'permission_callback' => function( $request ) {
+					return current_user_can( 'manage_affiliates' );
+				},
 			),
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_affiliates' );
-			},
+			'schema' => array( $this, 'get_public_item_schema' ),
 		) );
 
 		$this->register_field( 'id', array(

@@ -56,6 +56,7 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export implements Expor
 			'earnings'        => __( 'Earnings', 'affiliate-wp' ),
 			'referrals'       => __( 'Referrals', 'affiliate-wp' ),
 			'visits'          => __( 'Visits', 'affiliate-wp' ),
+			'conversion_rate' => __( 'Conversion Rate', 'affiliate-wp' ),
 			'status'          => __( 'Status', 'affiliate-wp' ),
 			'date_registered' => __( 'Date Registered', 'affiliate-wp' )
 		);
@@ -94,6 +95,7 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export implements Expor
 					'earnings'        => $affiliate->earnings,
 					'referrals'       => $affiliate->referrals,
 					'visits'          => $affiliate->visits,
+					'conversion_rate' => affwp_get_affiliate_conversion_rate( $affiliate->affiliate_id ),
 					'status'          => $affiliate->status,
 					'date_registered' => $affiliate->date_registered,
 				);

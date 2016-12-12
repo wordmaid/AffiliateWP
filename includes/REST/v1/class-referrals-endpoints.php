@@ -39,21 +39,27 @@ class Endpoints extends Controller {
 	public function register_routes() {
 		// /referrals/
 		register_rest_route( $this->namespace, '/' . $this->rest_base, array(
-			'methods'             => \WP_REST_Server::READABLE,
-			'callback'            => array( $this, 'get_items' ),
-			'args'                => $this->get_collection_params(),
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_affiliates' );
-			}
+			array(
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_items' ),
+				'args'                => $this->get_collection_params(),
+				'permission_callback' => function( $request ) {
+					return current_user_can( 'manage_referrals' );
+				}
+			),
+			'schema' => array( $this, 'get_public_item_schema' ),
 		) );
 
 		// /referrals/ID
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>\d+)', array(
-			'methods'             => \WP_REST_Server::READABLE,
-			'callback'            => array( $this, 'get_item' ),
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_affiliates' );
-			}
+			array(
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_item' ),
+				'permission_callback' => function( $request ) {
+					return current_user_can( 'manage_referrals' );
+				}
+			),
+			'schema' => array( $this, 'get_public_item_schema' ),
 		) );
 
 		$this->register_field( 'id', array(

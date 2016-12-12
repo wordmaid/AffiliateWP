@@ -83,7 +83,7 @@ class Affiliate_WP_Upgrades {
 			$this->v195_upgrade();
 		}
 
-		if ( version_caompare( $version, '2.0', '<' ) ) {
+		if ( version_compare( $version, '2.0', '<' ) ) {
 			$this->v20_upgrade();
 		}
 

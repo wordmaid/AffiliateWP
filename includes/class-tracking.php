@@ -209,24 +209,27 @@ class Affiliate_WP_Tracking {
 
 		$affiliate_id = isset( $_POST['affiliate'] ) ? absint( $_POST['affiliate'] ) : '';
 		$is_valid     = $this->is_valid_affiliate( $affiliate_id );
+		$referrer     = isset( $_POST['referrer'] ) ? sanitize_text_field( $_POST['referrer'] ) : '';
 
 		if ( ! empty( $affiliate_id ) && $is_valid ) {
 
-			if( ! affwp_is_url_banned( sanitize_text_field( $_POST['referrer'] ) ) ) {
+			if( ! affwp_is_url_banned( $referrer ) ) {
 				// Store the visit in the DB
 				$visit_id = affiliate_wp()->visits->add( array(
 					'affiliate_id' => $affiliate_id,
 					'ip'           => $this->get_ip(),
 					'url'          => sanitize_text_field( $_POST['url'] ),
 					'campaign'     => ! empty( $_POST['campaign'] ) ? sanitize_text_field( $_POST['campaign'] ) : '',
-					'referrer'     => sanitize_text_field( $_POST['referrer'] )
+					'referrer'     => $referrer,
 				) );
 
 				if( $this->debug ) {
 					$this->log( sprintf( 'Visit #%d recorded for affiliate #%d in track_visit()', $visit_id, $affiliate_id ) );
 				}
 
-				echo $visit_id; exit;
+				echo $visit_id;
+
+				exit;
 			} else {
 				die( '-2' );
 			}

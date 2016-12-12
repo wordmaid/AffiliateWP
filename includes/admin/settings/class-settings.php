@@ -525,7 +525,23 @@ class Affiliate_WP_Settings {
 						'type' => 'text',
 						'size' => 'small',
 						'std' => '.'
-					)
+					),
+					'form_settings' => array(
+						'name' => '<strong>' . __( 'Affiliate Form Settings', 'affiliate-wp' ) . '</strong>',
+						'type' => 'header'
+					),
+					'affiliate_area_forms' => array(
+						'name' => __( 'Affiliate Area Forms', 'affiliate-wp' ),
+						'desc' => __( 'Select which forms to show on the Affiliate Area page.', 'affiliate-wp' ),
+						'type' => 'select',
+						'options' => array(
+							'both'         => __( 'Affiliate Registration and Affiliate Login Forms', 'affiliate-wp' ),
+							'registration' => __( 'Affiliate Registration Form Only', 'affiliate-wp' ),
+							'login'        => __( 'Affiliate Login Form Only', 'affiliate-wp' ),
+							'none'         => __( 'None', 'affiliate-wp' )
+
+						)
+					),
 				)
 			),
 			/** Integration Settings */
@@ -1286,7 +1302,7 @@ class Affiliate_WP_Settings {
 			if( ! empty( $api_params['site_data'] ) ) {
 
 				update_option( 'affwp_last_checkin', current_time( 'timestamp' ) );
-	
+
 			}
 
 			$status = $license_data->license;

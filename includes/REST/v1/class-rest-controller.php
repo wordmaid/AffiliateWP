@@ -341,7 +341,7 @@ abstract class Controller {
 		if ( method_exists( '\WP_REST_Controller', 'get_additional_fields' ) ) {
 			global $wp_rest_additional_fields;
 
-			if ( $wp_rest_additional_fields[ $object_type ] ) {
+			if ( isset( $wp_rest_additional_fields[ $object_type ] ) ) {
 				$core_fields = $wp_rest_additional_fields[ $object_type ];
 			}
 		}

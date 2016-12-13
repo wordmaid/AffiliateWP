@@ -144,7 +144,10 @@ class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export {
 
 		}
 
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data', $data );
+
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
 
 		return $data;

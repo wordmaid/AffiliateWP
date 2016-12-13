@@ -222,6 +222,17 @@ class Affiliate_WP_Settings {
 		$tab      = isset( $referrer['tab'] ) ? $referrer['tab'] : 'general';
 
 		$input = $input ? $input : array();
+
+		/**
+		 * Filters the input value for the AffiliateWP settings tab.
+		 *
+		 * This filter is appended with the tab name, followed by the string `_sanitize`, for example:
+		 *
+		 *     `affwp_settings_misc_sanitize`
+		 *     `affwp_settings_integrations_sanitize`
+		 *
+		 * @param mixed $input The settings tab content to sanitize.
+		 */
 		$input = apply_filters( 'affwp_settings_' . $tab . '_sanitize', $input );
 
 		// Ensure a value is always passed for every checkbox
@@ -263,11 +274,26 @@ class Affiliate_WP_Settings {
 
 				}
 
-				// Field type specific filter
+				/**
+				 * Filters the sanitized value for a setting of a given type.
+				 *
+				 * This filter is appended with the setting type (checkbox, select, etc), for example:
+				 *
+				 *     `affwp_settings_sanitize_checkbox`
+				 *     `affwp_settings_sanitize_select`
+				 *
+				 * @param array  $value The input array and settings key defined within.
+				 * @param string $key   The settings key.
+				 */
 				$input[ $key ] = apply_filters( 'affwp_settings_sanitize_' . $type, $input[ $key ], $key );
 			}
 
-			// General filter
+			/**
+			 * General setting sanitization filter
+			 *
+			 * @param array  $input[ $key ] The input array and settings key defined within.
+			 * @param string $key           The settings key.
+			 */
 			$input[ $key ] = apply_filters( 'affwp_settings_sanitize', $input[ $key ], $key );
 
 			// Now remove the filter
@@ -395,7 +421,11 @@ class Affiliate_WP_Settings {
 		$emails_tags_list = affwp_get_emails_tags_list();
 
 		$settings = array(
-			/** General Settings */
+			/**
+			 * Filters the default "General" settings.
+			 *
+			 * @param array $settings General settings.
+			 */
 			'general' => apply_filters( 'affwp_settings_general',
 				array(
 					'license' => array(
@@ -443,6 +473,11 @@ class Affiliate_WP_Settings {
 						'name' => __( 'Default Referral Format', 'affiliate-wp' ),
 						'desc' => sprintf( __( 'Show referral URLs to affiliates with either their affiliate ID or Username appended.<br/> For example: <strong>%s or %s</strong>.', 'affiliate-wp' ), esc_url( add_query_arg( affiliate_wp()->tracking->get_referral_var(), '1', home_url( '/' ) ) ), esc_url( add_query_arg( affiliate_wp()->tracking->get_referral_var(), $username, home_url( '/' ) ) ) ),
 						'type' => 'select',
+						/**
+						 * The referral format (such as ID or Username)
+						 *
+						 * @param array The available referring formats.
+						 */
 						'options' => apply_filters( 'affwp_settings_referral_format',
 							array(
 								'id'       => __( 'ID', 'affiliate-wp' ),
@@ -529,6 +564,12 @@ class Affiliate_WP_Settings {
 				)
 			),
 			/** Integration Settings */
+
+			/**
+			 * Filters the default integration settings.
+			 *
+			 * @param array $integrations The enabled integrations. Defaults to `affiliate_wp()->integrations->get_integrations()`.
+			 */
 			'integrations' => apply_filters( 'affwp_settings_integrations',
 				array(
 					'integrations' => array(
@@ -540,6 +581,12 @@ class Affiliate_WP_Settings {
 				)
 			),
 			/** Email Settings */
+
+			/**
+			 * Filters the default "Email" settings.
+			 *
+			 * @param array $settings Array of email settings.
+			 */
 			'emails' => apply_filters( 'affwp_settings_emails',
 				array(
 					'disable_all_emails' => array(
@@ -614,6 +661,12 @@ class Affiliate_WP_Settings {
 				)
 			),
 			/** Misc Settings */
+
+			/**
+			 * Filters the default "Misc" settings.
+			 *
+			 * @param array $settings Array of misc settings.
+			 */
 			'misc' => apply_filters( 'affwp_settings_misc',
 				array(
 					'allow_affiliate_registration' => array(
@@ -685,6 +738,11 @@ class Affiliate_WP_Settings {
 			)
 		);
 
+		/**
+		 * Filters the entire default settings array.
+		 *
+		 * @param array $settings Array of default settings.
+		 */
 		return apply_filters( 'affwp_settings', $settings );
 	}
 
@@ -1253,6 +1311,11 @@ class Affiliate_WP_Settings {
 				'url'       => home_url()
 			);
 
+			/**
+			 * Filters whether to send site data.
+			 *
+			 * @param bool $send Whether to send site data. Default true.
+			 */
 			if( apply_filters( 'affwp_send_site_data', true ) ) {
 
 				// Send checkins once per week
@@ -1286,7 +1349,7 @@ class Affiliate_WP_Settings {
 			if( ! empty( $api_params['site_data'] ) ) {
 
 				update_option( 'affwp_last_checkin', current_time( 'timestamp' ) );
-	
+
 			}
 
 			$status = $license_data->license;

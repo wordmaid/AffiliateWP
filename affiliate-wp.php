@@ -508,6 +508,12 @@ final class Affiliate_WP {
 
 		// Set filter for plugin's languages directory
 		$lang_dir = dirname( plugin_basename( AFFILIATEWP_PLUGIN_FILE ) ) . '/languages/';
+
+		/**
+		 * Filters the languages directory path to use for AffiliateWP.
+		 *
+		 * @param string $lang_dir The languages directory path.
+		 */
 		$lang_dir = apply_filters( 'aff_wp_languages_directory', $lang_dir );
 
 		// Traditional WordPress plugin locale filter
@@ -526,8 +532,8 @@ final class Affiliate_WP {
 		 * @var $get_locale The locale to use. Uses get_user_locale()` in WordPress 4.7 or greater,
 		 *                  otherwise uses `get_locale()`.
 		 */
-		$locale        = apply_filters( 'plugin_locale', $get_locale, 'affiliate-wp' );
-		$mofile        = sprintf( '%1$s-%2$s.mo', 'affiliate-wp', $locale );
+		$locale = apply_filters( 'plugin_locale', $get_locale, 'affiliate-wp' );
+		$mofile = sprintf( '%1$s-%2$s.mo', 'affiliate-wp', $locale );
 
 		// Setup paths to current locale file
 		$mofile_local  = $lang_dir . $mofile;

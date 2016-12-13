@@ -16,10 +16,9 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 		/**
 		 * Fires at the top of the review-affiliate admin screen, just inside of the form element.
 		 *
-		 * @param  $affiliate Affiliate object.
+		 * @param \AffWP\Affiliate $affiliate Affiliate object.
 		 */
 		do_action( 'affwp_review_affiliate_top', $affiliate );
-
 		?>
 
 		<table class="form-table">
@@ -105,23 +104,20 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 			/**
 			 * Fires at the end of the review-affiliate admin screen, prior to the closing table element tag.
 			 *
-			 * @param  $affiliate Affiliate object.
+			 * @param \AffWP\Affiliate $affiliate Affiliate object.
 			 */
 			do_action( 'affwp_review_affiliate_end', $affiliate );
-
-			 ?>
+			?>
 
 		</table>
 
 		<?php
-
 		/**
 		 * Fires at the bottom of the review-affiliate admin screen, just prior to the submit button.
 		 *
-		 * @param  $affiliate Affiliate object.
+		 * @param \AffWP\Affiliate $affiliate Affiliate object.
 		 */
 		do_action( 'affwp_review_affiliate_bottom', $affiliate );
-
 		?>
 
 		<?php wp_nonce_field( 'affwp_moderate_affiliates_nonce', 'affwp_moderate_affiliates_nonce' ); ?>

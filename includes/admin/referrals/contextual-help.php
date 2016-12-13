@@ -72,7 +72,7 @@ function affwp_referrals_contextual_help() {
 	/**
 	 * Fires in the contextual help area of the referral admin screen.
 	 *
-	 * @param  $screen The current screen.
+	 * @param string $screen The current screen.
 	 */
 	do_action( 'affwp_referrals_contextual_help', $screen );
 }

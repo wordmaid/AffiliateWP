@@ -492,7 +492,7 @@ class AffWP_Referrals_Table extends List_Table {
 	}
 
 	/**
-	 * Message to be displayed when there are no items
+	 * Renders the message to be displayed when there are no referrals.
 	 *
 	 * @since 1.7.2
 	 * @access public
@@ -502,11 +502,14 @@ class AffWP_Referrals_Table extends List_Table {
 	}
 
 	/**
-	 * Outputs the reporting views
+	 * Outputs the reporting views.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @return void
+	 * @since  1.0
+	 *
+	 * @param string $which Optional. Whether the bulk actions are being displayed at
+	 *                      the top or bottom of the list table. Accepts either 'top'
+	 *                      or bottom. Default empty.
 	 */
 	public function bulk_actions( $which = '' ) {
 
@@ -533,9 +536,13 @@ class AffWP_Referrals_Table extends List_Table {
 		echo "</select>\n";
 
 		/**
-		 * Fires at the bottom of the referral bulk-actions admin screen (inside the form element).
+		 * Fires at the top and bottom of the referral bulk-actions admin screen
+		 * (inside the form element).
+		 *
+		 * @param string $which Indicator for whether the bulk actions were rendered at the 'top'
+		 *                      or 'bottom' of the referrals list table.
 		 */
-		do_action( 'affwp_referral_bulk_actions' );
+		do_action( 'affwp_referral_bulk_actions', $which );
 
 		submit_button( __( 'Apply', 'affiliate-wp' ), 'action', false, false, array( 'id' => "doaction$two" ) );
 		echo "\n";
@@ -561,11 +568,12 @@ class AffWP_Referrals_Table extends List_Table {
 	}
 
 	/**
-	 * Retrieve the bulk actions
+	 * Retrieves the bulk actions.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @return array $actions Array of the bulk actions
+	 * @since  1.0
+	 *
+	 * @return array $actions The array of bulk actions.
 	 */
 	public function get_bulk_actions() {
 		$actions = array(
@@ -577,19 +585,18 @@ class AffWP_Referrals_Table extends List_Table {
 		);
 
 		/**
-		 * Referral bulk actions array.
+		 * Filters the bulk actions array for the referrals list table.
 		 *
-		 * @param  $actions List of bulk actions.
+		 * @param array $actions List of bulk actions.
 		 */
 		return apply_filters( 'affwp_referrals_bulk_actions', $actions );
 	}
 
 	/**
-	 * Process the bulk actions
+	 * Processes bulk actions for the referrals list table.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @return void
+	 * @since  1.0
 	 */
 	public function process_bulk_action() {
 
@@ -645,20 +652,21 @@ class AffWP_Referrals_Table extends List_Table {
 			/**
 			 * Fires after a referral bulk action is performed.
 			 *
-			 * @param  The ID of the object.
+			 * The dynamic portion of the hook name, `$this->current_action()` refers
+			 * to the current bulk action being performed.
+			 *
+			 * @param int $id The ID of the object.
 			 */
 			do_action( 'affwp_referrals_do_bulk_action_' . $this->current_action(), $id );
-
 		}
 
 	}
 
 	/**
-	 * Retrieve the discount code counts
+	 * Retrieves the discount code counts.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @return void
+	 * @since  1.0
 	 */
 	public function get_referral_counts() {
 

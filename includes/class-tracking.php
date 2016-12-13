@@ -383,8 +383,10 @@ class Affiliate_WP_Tracking {
 		$is_valid     = $this->is_valid_affiliate( $affiliate_id );
 		$visit_id     = $this->get_visit_id();
 
-		if( $is_valid && ! $visit_id ) {
-			if( ( ! empty( $_SERVER['HTTP_REFERER'] ) && ! affwp_is_url_banned( sanitize_text_field( $_POST['referrer'] ) ) ) || empty( $_SERVER['HTTP_REFERER'] ) ) {
+		if ( $is_valid && ! $visit_id ) {
+			if ( ( ! empty( $_SERVER['HTTP_REFERER'] ) && ! affwp_is_url_banned( sanitize_text_field( $_SERVER['HTTP_REFERER'] ) ) )
+				|| empty( $_SERVER['HTTP_REFERER'] )
+			) {
 
 				$this->set_affiliate_id( $affiliate_id );
 

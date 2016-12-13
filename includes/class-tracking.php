@@ -230,7 +230,13 @@ class Affiliate_WP_Tracking {
 				echo $visit_id;
 
 				exit;
+
 			} else {
+
+				if ( $this->debug ) {
+					$this->log( sprintf( '"%s" is a banned URL. A visit was not recorded.', $referrer ) );
+				}
+
 				die( '-2' );
 			}
 

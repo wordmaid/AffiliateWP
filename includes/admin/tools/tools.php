@@ -72,10 +72,13 @@ function affwp_get_tools_tabs() {
 
 	$tabs['recount']       = __( 'Recount Stats', 'affiliate-wp' );
 	$tabs['migration']     = __( 'Migration Assistant', 'affiliate-wp' );
-	$tabs['system_info']   = __( 'System Info', 'affiliate-wp' );
+
+	if ( current_user_can( 'manage_affiliate_options' ) ) {
+		$tabs['system_info'] = __( 'System Info', 'affiliate-wp' );
+	}
 
 	if( affiliate_wp()->settings->get( 'debug_mode', false ) ) {
-		$tabs['debug']     = __( 'Debug Assistant', 'affiliate-wp' );
+		$tabs['debug'] = __( 'Debug Assistant', 'affiliate-wp' );
 	}
 
 	/**

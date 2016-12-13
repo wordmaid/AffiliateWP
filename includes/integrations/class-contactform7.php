@@ -27,9 +27,11 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		// Save CF7 AffWP setting
 		add_action('wpcf7_save_contact_form', array( $this, 'save_settings' ) );
-		// add_action('save_post', array( $this, 'save_settings' ) );
 
-		add_filter( 'wpcf7_before_send_mail', array( $this, 'add_pending_referral' ), 9, 2 );
+		add_filter( 'publish_flamingo_inbound', array( $this, 'add_pending_referral' ), 10, 2 );
+
+		// Add CF7 menu page
+		add_action( 'admin_menu', array( $this, 'cf7_menu_page', 20 ) );
 
 		// Mark referral complete
 		// add_action( 'todo', array( $this, 'mark_referral_complete' ), 10, 2 );
@@ -50,6 +52,28 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		if( class_exists( 'WPCF7' ) ) {
 			require_once ( AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/extras/contactform7-functions.php' );
 		}
+	}
+
+	public function get_enabled_forms() {
+
+		$enabled = array();
+
+		return apply_filters( 'affwp_cf7_enabled_forms', $enabled );
+	}
+
+	public function cf7_menu_page() {
+		$addnew = add_submenu_page(
+			'wpcf7',
+			__( 'AffiliateWP Settings', 'affiliate-wp' ),
+			__( 'AffiliateWP Settings', 'affiliate-wp' ),
+			'wpcf7_edit_contact_forms',
+			'cf7pp_admin_table',
+			array( $this, 'settings' )
+		);
+	}
+
+	public function settings() {
+		echo 'ewrgwergerg';
 	}
 
 	/**
@@ -127,57 +151,34 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			return;
 		}
 
-		if ( isset( $_GET['post'] ) ) {
-			$post_id = $_GET['post'];
-		}
+		$post_id = sanitize_text_field( $_GET['post'] );
 
-		$post_id = intval( $_GET['post'] );
+		$affwp_enabled = get_post_meta( $post_id, "_cf7_affwp_enabled", true );
 
-
-		$affwp_cf7_enabled = get_post_meta( $post_id, "_affwp_cf7_enabled", true );
-
-		if ( $affwp_cf7_enabled ) {
-		error_log( 'enabled it is!');
-			$checked = "checked";
-		} else {
-			$checked = "";
-		}
-
-		error_log( 'enabled is: ' . $affwp_cf7_enabled);
+		if ($affwp_enabled == "1") { $checked = "CHECKED"; } else { $checked = ""; }
 
 		// Check for PayPal extension (plugin slug: `contact-form-7-paypal-add-on`).
-		$name    = get_post_meta( $post_id, "_cf7pp_name",        true );
-		$price   = get_post_meta( $post_id, "_cf7pp_price",       true );
-		$id      = get_post_meta( $post_id, "_cf7pp_id",          true );
-		$email   = get_post_meta( $post_id, "_cf7pp_email",       true );
 
 		// Check for PayPal extension (plugin slug: `contact-form-7-paypal-extension`).
 		// todo
-		?>
 
-		<form>
-			<div id="additional_settings-sortables" class="meta-box-sortables ui-sortable"><div id="additionalsettingsdiv" class="postbox">
-			<div class="handlediv" title="<?php _e( 'Click to toggle', 'affiliate-wp' ); ?>">
-			</div>
-			<h3 class="hndle ui-sortable-handle">
-				<span><?php _e( 'AffiliateWP Settings', 'affiliate-wp' ); ?></span>
-			</h3>
-			<div class="inside">
+		$admin_table_output = "<div id='additional_settings-sortables' class='meta-box-sortables ui-sortable'><div id='additionalsettingsdiv' class='postbox'>";
+		$admin_table_output .= "<div class='handlediv' title='Click to toggle'><br></div><h3 class='hndle ui-sortable-handle'><span>AffiliateWP Settings</span></h3>";
+		$admin_table_output .= "<div class='inside'>";
 
-				<div class="affwp-cf7-enabled">
-					<input name="affwp_cf7_enabled_field" type="checkbox" <?php
-					$current = 1;
-					checked( get_post_meta( $post_id, "_affwp_cf7_enabled", true ), $current, 1 ); ?>
-					<label><?php _e( 'Enable referrals for this form', 'affiliate-wp' ); ?></label>
-				</div>
+		$admin_table_output .= "<div class='affwp-enabled'>";
+		$admin_table_output .= "<input name='affwp_enabled' value='1' type='checkbox'" . checked($checked, 1) . " />";
+		$admin_table_output .= "<label>Enable AffiliateWP on this form</label>";
+		$admin_table_output .= "</div>";
 
-				<input type="hidden" name="email" value="2">
-				<input type="hidden" name="post" value="<?php echo $post_id; ?>">
-		</form>
-	</div>
-	</div>
-	</div>
-<?php }
+
+		$admin_table_output .= "</td></tr></table></form>";
+		$admin_table_output .= "</div>";
+		$admin_table_output .= "</div>";
+		$admin_table_output .= "</div>";
+
+		echo $admin_table_output;
+	}
 
 	/**
 	 * Save contact form settings
@@ -190,17 +191,32 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 */
 	public function save_settings( $contact_form ) {
 
-		$post_id = sanitize_text_field( $_GET['post'] );
+		$post_id = sanitize_text_field($_POST['post'] );
 
-		if ( isset( $_POST['affwp_cf7_enabled_field'] ) ) {
+		// error_log(print_r($contact_form, true));
 
-			$affwp_cf7_enabled = $_POST['affwp_cf7_enabled_field'];
+		// wpcf7_form_hidden_fields filter
 
-			// $post_id, $meta_key, $meta_value, $prev_value
-			update_post_meta( $post_id, "_affwp_cf7_enabled", true );
-		} else {
-			update_post_meta( $post_id, "_affwp_cf7_enabled", false );
-		}
+		error_log(print_r($_POST, true));
+
+		// if ( "1" == $_POST['affwp_enabled'] ) {
+		// 	$affwp_enabled = sanitize_text_field( $_POST['affwp_enabled'] );
+		// 	update_post_meta( $post_id, "_cf7_affwp_enabled", $affwp_enabled );
+		// } else {
+		// 	update_post_meta( $post_id, "_cf7_affwp_enabled", 0 );
+		// }
+
+
+		add_query_arg(
+			array(
+				'page' => 'wpcf7',
+				'post' => $post_id,
+				'affwp_enabled' => '1',
+			),
+			get_admin_url()
+		);
+
+
 	}
 
 	/**
@@ -212,15 +228,15 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * @param int $form_id
 	 * @param int $form_id
 	 */
-	public function add_pending_referral( $contact_form ) {
+	public function add_pending_referral( $cf7 ) {
+
+		global $postid;
 
 		// The Contact Form 7 form ID
-		$form_id = $contact_form->id();
+		$postid = $cf7->id();
 
-		return;
-
-		// Flamingo post ID
-		// $entry_id = $contact_form[id];
+		$paypal_enabled = get_post_meta( $postid, "_cf7pp_enable", true);
+		// $email = get_post_meta( $postid, "_cf7pp_email", true);
 
 
 		if ( $this->was_referred() ) {

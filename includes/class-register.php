@@ -299,11 +299,11 @@ class Affiliate_WP_Register {
 		$affiliate_id = affwp_get_affiliate_id( $user_id );
 
 		/**
-		 *  Fires immediately after registering a user.
+		 * Fires immediately after registering a user.
 		 *
-		 * @param  int    $affiliate_id Affiliate ID.
-		 * @param  string $status       Affiliate status.
-		 * @param  array  $args         Data arguments used when registering the user.
+		 * @param int    $affiliate_id Affiliate ID.
+		 * @param string $status       Affiliate status.
+		 * @param array  $args         Data arguments used when registering the user.
 		 */
 		do_action( 'affwp_register_user', $affiliate_id, $status, $args );
 	}
@@ -366,13 +366,13 @@ class Affiliate_WP_Register {
 		$args   = (array) $user['data'];
 
 		/**
-		 * Fires after a new user has been auto-registered as an affiliate
+		 * Fires immediately after a new user has been auto-registered as an affiliate
 		 *
 		 * @since  1.7
 		 *
-		 * @param  int    $affiliate_id Affiliate ID.
-		 * @param  string $status       The affiliate status.
-		 * @param  array  $args         Affiliate data.
+		 * @param int    $affiliate_id Affiliate ID.
+		 * @param string $status       The affiliate status.
+		 * @param array  $args         Affiliate data.
 		 */
 		do_action( 'affwp_auto_register_user', $affiliate_id, $status, $args );
 

@@ -9,7 +9,7 @@
 	/**
 	 * Fires just prior to the affiliate Dashboard URLs tab content, in the affiliate area.
 	 *
-	 * @param $affiliate_id Affiliate ID of the currently logged-in affiliate.
+	 * @param int $affiliate_id Affiliate ID of the currently logged-in affiliate.
 	 */
 	do_action( 'affwp_affiliate_dashboard_urls_top', $affiliate_id ); ?>
 

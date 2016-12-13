@@ -205,9 +205,9 @@ abstract class Affiliate_WP_Base {
 			/**
 			 * Fires when completing a referral.
 			 *
-			 * @param  stdClass $referral            The referral object.
-			 * @param  string   $referral->reference The referral reference.
-			 *
+			 * @param int             $referral_id The referral ID.
+			 * @param \AffWP\Referral $referral    The referral object.
+			 * @param string          $reference   The referral reference.
 			 */
 			do_action( 'affwp_complete_referral', $referral->referral_id, $referral, $referral->reference );
 

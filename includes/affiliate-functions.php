@@ -584,9 +584,10 @@ function affwp_delete_affiliate( $affiliate, $delete_data = false ) {
 	if( $deleted ) {
 
 		/**
-		 * Fires when an affiliate is deleted.
-		 * @param  int   $affiliate_id The affiliate ID.
-		 * @param  array $delete_data  The affiliate data being deleted.
+		 * Fires immediately after an affiliate is deleted.
+		 *
+		 * @param int  $affiliate_id The affiliate ID.
+		 * @param bool $delete_data  Whether the user data was also flagged for deletion.
 		 */
 		do_action( 'affwp_affiliate_deleted', $affiliate_id, $delete_data );
 

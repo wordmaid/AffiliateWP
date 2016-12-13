@@ -484,7 +484,7 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 
 		if ( $add ) {
 			/**
-			 * Fires just prior to an affiliate being added to the database.
+			 * Fires immediately after an affiliate has been added to the database.
 			 *
 			 * @param array $add The affiliate data being added.
 			 */

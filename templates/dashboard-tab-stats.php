@@ -29,7 +29,7 @@
 	/**
 	 * Fires immediately after stats counts in the affiliate area.
      *
-  	 * @param $affiliate_id Affiliate ID of the currently logged-in affiliate.
+  	 * @param int $affiliate_id Affiliate ID of the currently logged-in affiliate.
 	 */
 	do_action( 'affwp_affiliate_dashboard_after_counts', $affiliate_id );
 	?>
@@ -62,7 +62,7 @@
 	/**
 	 * Fires immediately after earnings stats in the affiliate area.
      *
-  	 * @param $affiliate_id Affiliate ID of the currently logged-in affiliate.
+  	 * @param int $affiliate_id Affiliate ID of the currently logged-in affiliate.
 	 */
 	do_action( 'affwp_affiliate_dashboard_after_earnings', $affiliate_id );
 	?>
@@ -107,7 +107,7 @@
 	/**
 	 * Fires immediately after campaign stats in the affiliate area.
      *
-  	 * @param $affiliate_id Affiliate ID of the currently logged-in affiliate.
+  	 * @param int $affiliate_id Affiliate ID of the currently logged-in affiliate.
 	 */
 	do_action( 'affwp_affiliate_dashboard_after_campaign_stats', $affiliate_id );
 	?>

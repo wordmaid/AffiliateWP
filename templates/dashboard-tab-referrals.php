@@ -57,7 +57,7 @@
 						/**
 						 * Fires within the table data of the dashboard referrals template.
 						 *
-						 * @param stdClass $referral Referral object.
+						 * @param \AffWP\Referral $referral Referral object.
 						 */
 						do_action( 'affwp_referrals_dashboard_td', $referral ); ?>
 					</tr>
@@ -80,7 +80,7 @@
 	/**
 	 * Fires after the data table within the affiliate area referrals template.
 	 *
-	 * @param   $affiliate_id  Affiliate ID.
+	 * @param int $affiliate_id Affiliate ID.
 	 */
 	do_action( 'affwp_referrals_dashboard_after_table', $affiliate_id );
 	?>

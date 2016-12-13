@@ -33,7 +33,7 @@ function affwp_visits_screen_options() {
 	/**
 	 * Fires in the screen options area of the Visits admin screen.
 	 *
-	 * @param  $screen The current screen.
+	 * @param string $screen The current screen.
 	 */
 	do_action( 'affwp_visits_screen_options', $screen );
 

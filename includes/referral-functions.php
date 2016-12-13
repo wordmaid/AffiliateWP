@@ -120,9 +120,8 @@ function affwp_set_referral_status( $referral, $new_status = '' ) {
 			/**
 			 * Fires when a referral is marked as accepted.
 			 *
-			 * @param int      $referral->affiliate_id Affiliate ID.
-			 * @param stdClass $referral               The referral object.
-			 *
+			 * @param int             $affiliate_id Referral affiliate ID.
+			 * @param \AffWP\Referral $referral     The referral object.
 			 */
 			do_action( 'affwp_referral_accepted', $referral->affiliate_id, $referral );
 

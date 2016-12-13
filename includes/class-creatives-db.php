@@ -247,7 +247,7 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 
 		if ( $add ) {
 			/**
-			 * Fires just prior to a creative being added to the database.
+			 * Fires immediately after a creative has been added to the database.
 			 *
 			 * @param array $add The creative data being added.
 			 */

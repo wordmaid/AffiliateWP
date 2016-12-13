@@ -2,7 +2,52 @@
 
 class Affiliate_WP_Migrate_Base {
 
-	public function __construct() { }
+	/**
+	 * Whether debug mode is enabled.
+	 *
+	 * @access  public
+	 * @since   1.8.8
+	 * @var     bool
+	 */
+	public $debug;
+
+	/**
+	 * Logging class object
+	 *
+	 * @access  public
+	 * @since   1.8.8
+	 * @var     Affiliate_WP_Logging
+	 */
+	public $logs;
+
+	/**
+	 * Instantiates the migration script.
+	 *
+	 * @access public
+	 * @since  2.0
+	 */
+	public function __construct() {
+		$this->debug = (bool) affiliate_wp()->settings->get( 'debug_mode', false );
+
+		if( $this->debug ) {
+			$this->logs = new Affiliate_WP_Logging;
+		}
+	}
+
+	/**
+	 * Writes a log message.
+	 *
+	 * @access public
+	 * @since  1.8.8
+	 *
+	 * @param string $message Optional. Message to log. Default empty.
+	 */
+	public function log( $message = '' ) {
+
+		if ( $this->debug ) {
+			$this->logs->log( $message );
+		}
+	}
 
 	public function process( $step = 1, $part = '' ) {
 

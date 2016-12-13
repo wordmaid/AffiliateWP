@@ -104,7 +104,10 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export implements Expor
 
 		}
 
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data', $data );
+
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
 
 		return $data;

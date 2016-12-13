@@ -300,7 +300,12 @@ jQuery(document).ready(function($) {
 
 				if ( ! submitButton.hasClass( 'button-disabled' ) ) {
 
-					var data = $(this).serialize();
+					var atts = $( this ).data();
+
+					var data = {
+						nonce: atts.nonce,
+						action: atts.batch_id
+					};
 
 					submitButton.addClass( 'button-disabled' );
 					$(this).find('.notice-wrap').remove();
@@ -329,8 +334,8 @@ jQuery(document).ready(function($) {
 				type: 'POST',
 				url: ajaxurl,
 				data: {
-					form: data,
-					action: 'process_single_step',
+					nonce: data.nonce,
+					action: data.action,
 					step: step,
 				},
 				dataType: "json",
@@ -338,10 +343,10 @@ jQuery(document).ready(function($) {
 					if( 'done' == response.step || response.error || response.success ) {
 
 						// We need to get the actual in progress form, not all forms on the page
-						var export_form    = $('.affwp-export-form').find('.affwp-batch-progress').parent().parent();
-						var notice_wrap    = export_form.find('.notice-wrap');
+						var batch_form  = $('.affwp-batch-form').find('.affwp-batch-progress').parent().parent();
+						var notice_wrap = batch_form.find('.notice-wrap');
 
-						export_form.find('.button-disabled').removeClass('button-disabled');
+						batch_form.find('.button-disabled').removeClass('button-disabled');
 
 						if ( response.error ) {
 

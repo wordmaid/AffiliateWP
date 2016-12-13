@@ -110,13 +110,13 @@ class AffWP_Visits_Table extends List_Table {
 		);
 
 		/**
-		 * Visit list table columns.
+		 * Filters the visits list table columns.
 		 *
-		 * AffWP\Admin\List_Table instance
-		 *
-		 * @param $columns List table columns.
+		 * @param function                $prepared_columns Prepared columns.
+		 * @param array                   $columns          The columns for this list table.
+		 * @param \AffWP_Affiliates_Table $this             List table instance.
 		 */
-		return apply_filters( 'affwp_visit_table_columns', $this->prepare_columns( $columns ) );
+		return apply_filters( 'affwp_visit_table_columns', $this->prepare_columns( $columns ), $columns, $this );
 	}
 
 	/**
@@ -134,14 +134,13 @@ class AffWP_Visits_Table extends List_Table {
 	}
 
 	/**
-	 * This function renders most of the columns in the list table.
+	 * Renders most of the columns in the list table.
 	 *
 	 * @access public
-	 * @since 1.0
+	 * @since  1.0
 	 *
-	 * @param array $item Contains all the data of the visit
-	 * @param string $column_name The name of the column
-	 *
+	 * @param \AffWP\Visit $visit       The current visit object.
+	 * @param string       $column_name The name of the column
 	 * @return string Column Name
 	 */
 	function column_default( $visit, $column_name ) {
@@ -152,99 +151,105 @@ class AffWP_Visits_Table extends List_Table {
 		}
 
 		/**
-		 * Visit list table default column name.
+		 * Filters the default column value for the visits list table.
 		 *
-		 * @param $value The name of the column
-		 * @param $visit All the data of the visit.
+		 * The dynamic portion of the hook name, `$column_name`, refers to the column name.
+		 *
+		 * @param mixed        $value The name of the column
+		 * @param \AffWP\Visit $visit All the data of the visit.
 		 */
 		return apply_filters( 'affwp_visit_table_' . $column_name, $value, $visit );
 	}
 
 	/**
-	 * Render the affiliate column
+	 * Render the affiliate column in the visits list table.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array   $visit Contains all the data for the affiliate column
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Visit $visit The current visit object.
 	 * @return string The affiliate
 	 */
 	function column_affiliate( $visit ) {
 		$value = '<a href="' . esc_url( admin_url( 'admin.php?page=affiliate-wp-visits&affiliate=' . $visit->affiliate_id ) ) . '">' . affiliate_wp()->affiliates->get_affiliate_name( $visit->affiliate_id ) . '</a>';
+
 		/**
-		 * The affiliate column of the visits list table.
+		 * Filters the affiliate column of the visits list table.
 		 *
-		 * @param $value The value of the affiliate column in the visits list table.
-		 * @param $visit Visit data.
+		 * @param string       $value The value of the affiliate column in the visits list table.
+		 * @param \AffWP\Visit $visit The current visit object.
 		 */
 		return apply_filters( 'affwp_visit_table_affiliate', $value, $visit );
 	}
 
 	/**
-	 * Render the referrer column
+	 * Renders the referrer column in the visits list table.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $referral Contains all the data for the checkbox column
-	 * @return string Referring URL
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Visit $visit The current visit object.
+	 * @return string Referring URL.
 	 */
 	function column_referrer( $visit ) {
 		$value = ! empty( $visit->referrer ) ? '<a href="' . esc_url( $visit->referrer ) . '" taret="_blank">' . $visit->referrer . '</a>' : __( 'Direct traffic', 'affiliate-wp' );
+
 		/**
-		 * The referrer column of the visits list table.
+		 * Filters the referrer column of the visits list table.
 		 *
-		 * @param $value The value of the referrer column in the visits list table.
-		 * @param $visit Visit data.
+		 * @param string       $value The value of the referrer column in the visits list table.
+		 * @param \AffWP\Visit $visit Visit data.
 		 */
 		return apply_filters( 'affwp_visit_table_referrer', $value, $visit );
 	}
 
 	/**
-	 * Render the converted column
+	 * Renders the converted column in the visits list table.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param array $visit Contains all the data for the converted column.
+	 * @since  1.0
+	 *
+	 * @param \AffWP\Visit $visit The current visit object.
 	 * @return string Converted status icon.
 	 */
 	function column_converted( $visit ) {
 		$converted = ! empty( $visit->referral_id ) ? 'yes' : 'no';
 		$value = '<span class="visit-converted ' . $converted . '"><i></i></span>';
+
 		/**
-		 * The converted column of the visits list table.
+		 * Filters the converted column of the visits list table.
 		 *
-		 * @param $value The value of the converted column in the visits list table.
-		 * @param $visit Visit data.
+		 * @param string       $value The value of the converted column in the visits list table.
+		 * @param \AffWP\Visit $visit The current visit object.
 		 */
 		return apply_filters( 'affwp_visit_table_converted', $value, $visit );
 	}
 
 	/**
-	 * Message to be displayed when there are no items
+	 * Renders the message to be displayed when there are no visits.
 	 *
-	 * @since 1.7.2
 	 * @access public
+	 * @since  1.7.2
 	 */
 	function no_items() {
 		_e( 'No visits found.', 'affiliate-wp' );
 	}
 
 	/**
-	 * Process the bulk actions
+	 * Processes the bulk actions.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @return void
+	 * @since  1.0
 	 */
-	public function process_bulk_action() {
-
-	}
+	public function process_bulk_action() {}
 
 	/**
-	 * Retrieve all the data for all the Affiliates
+	 * Retrieves all the data for all the affiliates.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @return array $visits_data Array of all the data for the Affiliates
+	 * @since  1.0
+	 *
+	 * @return array Array of all the data for the visits.
 	 */
 	public function visits_data() {
 

@@ -175,12 +175,13 @@ class AffWP_Referrals_Table extends List_Table {
 		);
 
 		/**
-		 * Referral table columns
+		 * Filters the referrals list table columns.
 		 *
-		 * @param function $this->prepare_columns() Column preparation method.
-		 * @param array    $columns                 The columns for this list table.
+		 * @param function               $prepared_columns Prepared columns.
+		 * @param array                  $columns          The columns for this list table.
+		 * @param \AffWP_Referrals_Table $this             List table instance.
 		 */
-		return apply_filters( 'affwp_referral_table_columns', $this->prepare_columns( $columns ) );
+		return apply_filters( 'affwp_referral_table_columns', $this->prepare_columns( $columns ), $columns, $this );
 	}
 
 	/**
@@ -219,11 +220,12 @@ class AffWP_Referrals_Table extends List_Table {
 
 			case 'description' :
 				$value = wp_trim_words( $referral->description, 10 );
+
 				/**
-				 * The referral description column data.
+				 * Filters the referral description column data in the referrals list table.
 				 *
-				 * @param string $value                 Data shown in the Description column.
-				 * @param array  $referral->description The referral description.
+				 * @param string $value       Data shown in the Description column.
+				 * @param array  $description The referral description.
 				 */
 				$value = (string) apply_filters( 'affwp_referral_description_column', $value, $referral->description );
 				break;
@@ -234,7 +236,7 @@ class AffWP_Referrals_Table extends List_Table {
 		}
 
 		/**
-		 * The default value for each column.
+		 * Filters the default value for each column in the referrals list table.
 		 *
 		 * This dynamic filter is appended with a suffix of the column name, for example:
 		 *

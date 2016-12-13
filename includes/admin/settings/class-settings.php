@@ -222,16 +222,16 @@ class Affiliate_WP_Settings {
 		$tab      = isset( $referrer['tab'] ) ? $referrer['tab'] : 'general';
 
 		$input = $input ? $input : array();
+
 		/**
-		 * Sanitizes the specified AffiliateWP settings tab.
+		 * Filters the input value for the AffiliateWP settings tab.
 		 *
 		 * This filter is appended with the tab name, followed by the string `_sanitize`, for example:
 		 *
 		 *     `affwp_settings_misc_sanitize`
 		 *     `affwp_settings_integrations_sanitize`
 		 *
-		 * @param  $input The settings tab content to sanitize.
-		 *
+		 * @param mixed $input The settings tab content to sanitize.
 		 */
 		$input = apply_filters( 'affwp_settings_' . $tab . '_sanitize', $input );
 
@@ -275,15 +275,15 @@ class Affiliate_WP_Settings {
 				}
 
 				/**
-				 * Field type specific filter
+				 * Filters the sanitized value for a setting of a given type.
 				 *
 				 * This filter is appended with the setting type (checkbox, select, etc), for example:
 				 *
 				 *     `affwp_settings_sanitize_checkbox`
 				 *     `affwp_settings_sanitize_select`
 				 *
-				 * @param array  $input[ $key ] The input array and settings key defined within.
-				 * @param string $key           The settings key.
+				 * @param array  $value The input array and settings key defined within.
+				 * @param string $key   The settings key.
 				 */
 				$input[ $key ] = apply_filters( 'affwp_settings_sanitize_' . $type, $input[ $key ], $key );
 			}
@@ -421,7 +421,11 @@ class Affiliate_WP_Settings {
 		$emails_tags_list = affwp_get_emails_tags_list();
 
 		$settings = array(
-			/** General Settings */
+			/**
+			 * Filters the default "General" settings.
+			 *
+			 * @param array $settings General settings.
+			 */
 			'general' => apply_filters( 'affwp_settings_general',
 				array(
 					'license' => array(
@@ -562,9 +566,9 @@ class Affiliate_WP_Settings {
 			/** Integration Settings */
 
 			/**
-			 * Defines the AffiliateWP integrations which are enabled.
+			 * Filters the default integration settings.
 			 *
-			 * @param array The integrations enabled. Defaults to: `affiliate_wp()->integrations->get_integrations()`
+			 * @param array $integrations The enabled integrations. Defaults to `affiliate_wp()->integrations->get_integrations()`.
 			 */
 			'integrations' => apply_filters( 'affwp_settings_integrations',
 				array(
@@ -579,9 +583,9 @@ class Affiliate_WP_Settings {
 			/** Email Settings */
 
 			/**
-			 * Email settings
+			 * Filters the default "Email" settings.
 			 *
-			 * @param array Array of email settings.
+			 * @param array $settings Array of email settings.
 			 */
 			'emails' => apply_filters( 'affwp_settings_emails',
 				array(
@@ -659,9 +663,9 @@ class Affiliate_WP_Settings {
 			/** Misc Settings */
 
 			/**
-			 * Misc settings
+			 * Filters the default "Misc" settings.
 			 *
-			 * @param array Array of misc settings.
+			 * @param array $settings Array of misc settings.
 			 */
 			'misc' => apply_filters( 'affwp_settings_misc',
 				array(
@@ -735,9 +739,9 @@ class Affiliate_WP_Settings {
 		);
 
 		/**
-		 * Affiliate settings
+		 * Filters the entire default settings array.
 		 *
-		 * @param array $settings Array of AffiliateWP settings.
+		 * @param array $settings Array of default settings.
 		 */
 		return apply_filters( 'affwp_settings', $settings );
 	}
@@ -1308,9 +1312,9 @@ class Affiliate_WP_Settings {
 			);
 
 			/**
-			 * Sends site data.
+			 * Filters whether to send site data.
 			 *
-			 * @param bool Whether to send site data. Defaults to true.
+			 * @param bool $send Whether to send site data. Default true.
 			 */
 			if( apply_filters( 'affwp_send_site_data', true ) ) {
 

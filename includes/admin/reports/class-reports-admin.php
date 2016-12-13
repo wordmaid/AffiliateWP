@@ -99,12 +99,10 @@ class Reports {
 			</h1>
 
 			<?php
-
 			/**
 			 * Fires at the top of the admin reports page screen.
 			 */
 			do_action( 'affwp_reports_page_top' );
-
 			?>
 
 			<h2 class="nav-tab-wrapper">
@@ -117,12 +115,10 @@ class Reports {
 			</h2>
 
 			<?php
-
 			/**
 			 * Fires in the middle of the admin reports page screen.
 			 */
 			do_action( 'affwp_reports_page_middle' );
-
 			?>
 
 			<div id="tab_container">
@@ -130,6 +126,8 @@ class Reports {
 				<?php
 				/**
 				 * Fires inside the tab container element of the currently-active admin reports screen tab.
+				 *
+				 * The dynamic portion of the hook name, `$active_tab`, refers to the active reports tab.
 				 */
 				do_action( 'affwp_reports_tab_' . $active_tab );
 				?>
@@ -137,12 +135,10 @@ class Reports {
 			</div><!-- #tab_container-->
 
 			<?php
-
 			/**
 			 * Fires at the bottom of the admin reports page screen.
 			 */
 			do_action( 'affwp_reports_page_bottom' );
-
 			?>
 
 		</div>

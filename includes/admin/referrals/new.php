@@ -5,11 +5,11 @@
 	<form method="post" id="affwp_add_referral">
 
 		<?php
-
 		/**
 		 * Fires at the top of the new-referral admin screen.
 		 */
-		do_action( 'affwp_new_referral_top' ); ?>
+		do_action( 'affwp_new_referral_top' );
+		?>
 
 		<p><?php _e( 'Use this screen to manually create a new referral record for an affiliate.', 'affiliate-wp' ); ?></p>
 
@@ -116,12 +116,10 @@
 		</table>
 
 		<?php
-
 		/**
 		 * Fires at the bottom of the new-referral admin screen.
 		 */
 		do_action( 'affwp_new_referral_bottom' );
-
 		?>
 
 		<?php echo wp_nonce_field( 'affwp_add_referral_nonce', 'affwp_add_referral_nonce' ); ?>

@@ -76,14 +76,12 @@ function affwp_affiliates_admin() {
 				<?php $affiliates_table->display() ?>
 			</form>
 			<?php
-
 			/**
 			 * Fires at the bottom of the admin affiliates page.
 			 *
 			 * Use this hook to add content to this section of AffiliateWP.
 			 */
 			do_action( 'affwp_affiliates_page_bottom' );
-
 			?>
 		</div>
 <?php

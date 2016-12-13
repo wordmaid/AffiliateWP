@@ -510,9 +510,9 @@ final class Affiliate_WP {
 		$lang_dir = dirname( plugin_basename( AFFILIATEWP_PLUGIN_FILE ) ) . '/languages/';
 
 		/**
-		 * Defines the languages directory path to use for AffiliateWP.
+		 * Filters the languages directory path to use for AffiliateWP.
 		 *
-		 * @var $lang_dir The languages directory path.
+		 * @param string $lang_dir The languages directory path.
 		 */
 		$lang_dir = apply_filters( 'aff_wp_languages_directory', $lang_dir );
 

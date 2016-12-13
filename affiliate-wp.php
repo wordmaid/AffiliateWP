@@ -476,7 +476,7 @@ final class Affiliate_WP {
 		self::$instance->rewrites       = new Affiliate_WP_Rewrites;
 		self::$instance->REST           = new Affiliate_WP_REST;
 		self::$instance->capabilities   = new Affiliate_WP_Capabilities;
-		self::$instance->util           = new Affiliate_WP_Utilities;
+		self::$instance->utils          = new Affiliate_WP_Utilities;
 
 		self::$instance->updater();
 	}

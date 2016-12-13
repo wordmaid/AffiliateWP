@@ -142,21 +142,10 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 
 		}
 
-		/**
-		 * Filters the referrals export data.
-		 *
-		 * @param $data array The referrals export data.
-		 */
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data', $data );
 
-		/**
-		 * Filters the export data for specific export types (referrals, affiliates, etc)
-		 *
-		 * This dynamic filter is formatted with the export type appended, For this export, it is:
-		 *     `affwp_export_get_data_referrals`
-		 *
-		 * @param $data array The export data, specific to the export type
-		 */
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
 
 		return $data;

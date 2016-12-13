@@ -17,13 +17,13 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 	<form method="post" id="affwp_edit_affiliate">
 
 		<?php
-
 		/**
 		 * Fires at the top of the edit-affiliate admin screen, just inside of the form element.
 		 *
-		 * @param  $affiliate The affiliate object being edited.
+		 * @param \AffWP\Affiliate $affiliate The affiliate object being edited.
 		 */
-		do_action( 'affwp_edit_affiliate_top', $affiliate ); ?>
+		do_action( 'affwp_edit_affiliate_top', $affiliate );
+		?>
 
 		<table class="form-table">
 
@@ -212,27 +212,23 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 			<?php endif; ?>
 
 			<?php
-
 			/**
 			 * Fires at the end of the edit-affiliate admin screen form area, below form fields.
 			 *
-			 * @param  $affiliate The affiliate object being edited.
+			 * @param \AffWP\Affiliate $affiliate The affiliate object being edited.
 			 */
 			do_action( 'affwp_edit_affiliate_end', $affiliate );
-
 			?>
 
 		</table>
 
 		<?php
-
 		/**
 		 * Fires at the bottom of the edit-affiliate admin screen, just before the submit button.
 		 *
-		 * @param  $affiliate The affiliate object being edited.
+		 * @param \AffWP\Affiliate $affiliate The affiliate object being edited.
 		 */
 		do_action( 'affwp_edit_affiliate_bottom', $affiliate );
-
 		?>
 
 		<input type="hidden" name="affwp_action" value="update_affiliate" />

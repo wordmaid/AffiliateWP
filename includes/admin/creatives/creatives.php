@@ -44,12 +44,10 @@ function affwp_creatives_admin() {
 				<a href="<?php echo esc_url( add_query_arg( array( 'affwp_notice' => false, 'action' => 'add_creative' ) ) ); ?>" class="add-new-h2"><?php _e( 'Add New', 'affiliate-wp' ); ?></a>
 			</h2>
 			<?php
-
 			/**
 			 * Fires at the top of the creatives admin screen.
 			 */
 			do_action( 'affwp_creatives_page_top' );
-
 			?>
 
 			<form id="affwp-creatives-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-creatives' ); ?>">
@@ -65,7 +63,6 @@ function affwp_creatives_admin() {
 			 * Fires at the bottom of the creatives admin screen.
 			 */
 			do_action( 'affwp_creatives_page_bottom' );
-
 			?>
 		</div>
 

@@ -15,10 +15,9 @@ if ( ! empty( $_GET['creative_id'] ) && is_array( $_GET['creative_id'] ) ) {
 		/**
 		 * Fires at the top of the delete-creatives admin screen.
 		 *
-		 * @param $to_delete The ID of the creative.
+		 * @param int $to_delete The ID of the creative.
 		 */
 		do_action( 'affwp_delete_creative_top', $to_delete );
-
 		?>
 
 		<p><?php _e( 'Are you sure you want to delete this creative?', 'affiliate-wp' ); ?></p>
@@ -34,14 +33,12 @@ if ( ! empty( $_GET['creative_id'] ) && is_array( $_GET['creative_id'] ) ) {
 		</ul>
 
 		<?php
-
 		/**
 		 * Fires at the bottom of the delete-creatives admin screen.
 		 *
-		 * @param $to_delete The ID of the creative.
+		 * @param int $to_delete The ID of the creative.
 		 */
 		do_action( 'affwp_delete_creative_bottom', $to_delete );
-
 		?>
 
 		<input type="hidden" name="affwp_action" value="delete_creatives" />

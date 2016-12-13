@@ -7,13 +7,11 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 	<h2><?php printf( __( 'Affiliate: #%d %s', 'affiliate-wp' ), $affiliate_id, affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id ) ); ?></h2>
 
 	<?php
-
 	/**
 	 * Fires at the top of the view-affiliate report admin screen.
 	 */
 	do_action( 'affwp_view_affiliate_report_top' );
-
-	 ?>
+	?>
 
 	<h3><?php _e( 'Earnings', 'affiliate-wp' ); ?></h3>
 
@@ -34,7 +32,7 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 				/**
 				 * Fires in the view-affiliate-report screens table element header.
 				 *
-				 * @param  $affiliate_id Affiliate ID.
+				 * @param int $affiliate_id Affiliate ID.
 				 */
 				do_action( 'affwp_view_affiliate_report_table_header', $affiliate_id );
 				?>
@@ -57,7 +55,7 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 				/**
 				 * Fires at the bottom of view-affiliate-report screens table element rows.
 				 *
-				 * @param  $affiliate_id Affiliate ID.
+				 * @param int $affiliate_id Affiliate ID.
 				 */
 				do_action( 'affwp_view_affiliate_report_table_row', $affiliate_id );
 				?>
@@ -91,7 +89,6 @@ $affiliate_id = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] )
 	<?php $payouts_table->display(); ?>
 
 	<?php
-
 	/**
 	 * Fires at the bottom of view-affiliate-report screens.
 	 */

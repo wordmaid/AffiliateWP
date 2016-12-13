@@ -175,7 +175,7 @@ class AffWP_Affiliates_Table extends List_Table {
 		);
 
 		/**
-		 * Filters the Affiliate list table columns.
+		 * Filters the affiliate list table columns.
 		 *
 		 * @param function                $prepared_columns Prepared columns.
 		 * @param array                   $columns          The columns for this list table.

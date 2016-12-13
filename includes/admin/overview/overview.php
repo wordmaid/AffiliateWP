@@ -54,11 +54,11 @@ function affwp_affiliates_dashboard() {
 		<h2><?php _e( 'Overview', 'affiliate-wp' ); ?></h2>
 
 		<?php
-
 		/**
 		 * Fires at the top of the Overview page, in the area used for Overview meta-boxes.
 		 */
-		do_action( 'affwp_overview_meta_boxes' ); ?>
+		do_action( 'affwp_overview_meta_boxes' );
+		?>
 
 		<div id="affwp-dashboard-widgets-wrap">
 			<div id="dashboard-widgets" class="metabox-holder">
@@ -79,12 +79,10 @@ function affwp_affiliates_dashboard() {
 		</div>
 
 		<?php
-
 		/**
 		 * Fires at the bottom of the Overview admin screen.
 		 */
 		do_action( 'affwp_overview_bottom' );
-
 		?>
 
 	</div>

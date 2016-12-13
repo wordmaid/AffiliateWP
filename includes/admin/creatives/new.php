@@ -5,12 +5,10 @@
 	<form method="post" id="affwp_add_creative">
 
 		<?php
-
 		/**
 		 * Fires at the top of the new-creative admin screen.
 		 */
 		do_action( 'affwp_new_creative_top' );
-
 		?>
 
 		<p><?php printf( __( 'Use this screen to add a new creative, such as a text link or image banner.', 'affiliate-wp' ), admin_url( 'user-new.php' ) ); ?></p>
@@ -105,12 +103,10 @@
 		</table>
 
 		<?php
-
 		/**
 		 * Fires at the bottom of the new-creative admin screen.
 		 */
 		do_action( 'affwp_new_creative_bottom' );
-
 		?>
 
 		<input type="hidden" name="affwp_action" value="add_creative" />

@@ -55,6 +55,7 @@ function affwp_get_currencies() {
 		'NGN' => __( 'Nigerian Naira', 'affiliate-wp' ),
 		'NOK' => __( 'Norwegian Krone', 'affiliate-wp' ),
 		'NZD' => __( 'New Zealand Dollar', 'affiliate-wp' ),
+		'PKR' => __( 'Pakistani Rupee', 'affiliate-wp' ),
 		'PYG' => __( 'Paraguayan Guaraní', 'affiliate-wp' ),
 		'PHP' => __( 'Philippine Pesos', 'affiliate-wp' ),
 		'PLN' => __( 'Polish Zloty', 'affiliate-wp' ),
@@ -279,6 +280,9 @@ function affwp_currency_filter( $amount ) {
 				break;
 			case "KRW" :
 				$formatted = '&#8361;' . $amount;
+				break;
+			case "PKR" :
+				$formatted = '&#8360;' . $amount;
 				break;
 			default :
 			    $formatted = $currency . ' ' . $amount;

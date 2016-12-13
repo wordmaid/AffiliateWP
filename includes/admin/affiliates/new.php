@@ -9,12 +9,10 @@ $default_rate = affwp_abs_number_round( $default_rate );
 	<form method="post" id="affwp_add_affiliate">
 
 		<?php
-
 		/**
 		 * Fires at the top of the new-affiliate admin screen, just inside of the form element.
 		 */
 		do_action( 'affwp_new_affiliate_top' );
-
 		?>
 
 		<p><?php printf( __( 'Use this form to register a new affiliate. Each affiliate is tied directly to a user account, so if the user account for the affiliate does not yet exist, <a href="%s" target="_blank">create one</a>.', 'affiliate-wp' ), admin_url( 'user-new.php' ) ); ?></p>
@@ -114,25 +112,19 @@ $default_rate = affwp_abs_number_round( $default_rate );
 			</tr>
 
 			<?php
-
 			/**
 			 * Fires at the end of the new-affiliate admin screen form area, below form fields.
-			 *
 			 */
 			do_action( 'affwp_new_affiliate_end' );
-
 			?>
 
 		</table>
 
 		<?php
-
 		/**
 		 * Fires at the bottom of the new-affiliate admin screen, prior to the submit button.
-		 *
 		 */
 		do_action( 'affwp_new_affiliate_bottom' );
-
 		?>
 
 		<input type="hidden" name="affwp_action" value="add_affiliate" />

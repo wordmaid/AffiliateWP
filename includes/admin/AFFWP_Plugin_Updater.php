@@ -211,6 +211,12 @@ class AFFWP_Plugin_Updater {
 				);
 			}
 
+			/**
+			 * Fires within the in-plugin update message.
+			 *
+			 * @param  $plugin       The plugin for which an update notice is being shown.
+			 * @param  $version_info The plugin version.
+			 */
 			do_action( "in_plugin_update_message-{$file}", $plugin, $version_info );
 
 			echo '</p></div></td></tr>';

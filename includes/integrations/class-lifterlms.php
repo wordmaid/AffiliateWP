@@ -414,8 +414,8 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
-		
-		
+
+
 		$user_id      = 0;
 		$user_name    = '';
 		$affiliate_id = get_post_meta( $post->ID, '_affwp_affiliate_id', true );
@@ -504,6 +504,12 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 		// $affiliate_id is null if none found so update regardless of the value
 		update_post_meta( $post_id, '_affwp_affiliate_id', $affiliate_id );
 
+		/**
+		 * Fires when processing LifterLMS coupon meta within the LifterLMS integration.
+		 *
+		 * @param int      $post_id The post ID.
+		 * @param stdClass $post    The post object.
+		 */
 		do_action( 'affwp_lifterlms_process_llms_coupon_meta', $post_id, $post );
 
 	}

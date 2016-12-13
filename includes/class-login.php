@@ -50,6 +50,9 @@ class Affiliate_WP_Login {
 			return;
 		}
 
+		/**
+		 * Fires immediately prior to processing the affiliate login form.
+		 */
 		do_action( 'affwp_pre_process_login_form' );
 
 		if ( empty( $data['affwp_user_login'] ) ) {
@@ -84,6 +87,9 @@ class Affiliate_WP_Login {
 
 		}
 
+		/**
+		 * Fires immediately after processing an affiliate login form.
+		 */
 		do_action( 'affwp_process_login_form' );
 
 
@@ -122,6 +128,10 @@ class Affiliate_WP_Login {
 
 		wp_set_auth_cookie( $user_id, $remember );
 		wp_set_current_user( $user_id, $user_login );
+		/**
+		 * The `wp_login` action is fired here to maintain compatibility and stability of
+		 * any WordPress core features, plugins, or themes hooking onto it.
+		 */
 		do_action( 'wp_login', $user_login, $user );
 
 	}

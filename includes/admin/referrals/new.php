@@ -1,10 +1,15 @@
 <div class="wrap">
 
 	<h2><?php _e( 'New Referral', 'affiliate-wp' ); ?></h2>
-	
+
 	<form method="post" id="affwp_add_referral">
 
-		<?php do_action( 'affwp_new_referral_top' ); ?>
+		<?php
+		/**
+		 * Fires at the top of the new-referral admin screen.
+		 */
+		do_action( 'affwp_new_referral_top' );
+		?>
 
 		<p><?php _e( 'Use this screen to manually create a new referral record for an affiliate.', 'affiliate-wp' ); ?></p>
 
@@ -110,7 +115,12 @@
 
 		</table>
 
-		<?php do_action( 'affwp_new_referral_bottom' ); ?>
+		<?php
+		/**
+		 * Fires at the bottom of the new-referral admin screen.
+		 */
+		do_action( 'affwp_new_referral_bottom' );
+		?>
 
 		<?php echo wp_nonce_field( 'affwp_add_referral_nonce', 'affwp_add_referral_nonce' ); ?>
 		<input type="hidden" name="affwp_action" value="add_referral" />

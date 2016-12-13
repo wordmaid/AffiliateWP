@@ -246,6 +246,11 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 		$add = $this->insert( $args, 'creative' );
 
 		if ( $add ) {
+			/**
+			 * Fires immediately after a creative has been added to the database.
+			 *
+			 * @param array $add The creative data being added.
+			 */
 			do_action( 'affwp_insert_creative', $add );
 			return $add;
 		}

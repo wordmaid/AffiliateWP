@@ -8,12 +8,12 @@ module.exports = {
 		files: [
 			{
 				expand: true,
-				cwd: '<%= pkg.directories.js %>',
+				cwd: 'assets/js',
 				src: [
 					'*.js',
 					'!*.min.js'
 				],
-				dest: '<%= pkg.directories.js %>',
+				dest: 'assets/js',
 				ext: '.min.js',
 				extDot: 'last'
 			}

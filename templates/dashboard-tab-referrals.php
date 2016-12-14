@@ -16,7 +16,17 @@
 	);
 	?>
 
-	<?php do_action( 'affwp_referrals_dashboard_before_table', affwp_get_affiliate_id() ); ?>
+	<?php
+
+	$affiliate_id = affwp_get_affiliate_id();
+
+	/**
+	 * Fires before the referrals dashbaord data able within the referrals template.
+	 *
+	 * @param int $affiliate_id Affiliate ID.
+	 */
+	do_action( 'affwp_referrals_dashboard_before_table', $affiliate_id );
+	?>
 
 	<table id="affwp-affiliate-dashboard-referrals" class="affwp-table">
 		<thead>
@@ -25,7 +35,12 @@
 				<th class="referral-description"><?php _e( 'Description', 'affiliate-wp' ); ?></th>
 				<th class="referral-status"><?php _e( 'Status', 'affiliate-wp' ); ?></th>
 				<th class="referral-date"><?php _e( 'Date', 'affiliate-wp' ); ?></th>
-				<?php do_action( 'affwp_referrals_dashboard_th' ); ?>
+				<?php
+				/**
+				 * Fires in the dashboard referrals template, within the table header element.
+				 */
+				do_action( 'affwp_referrals_dashboard_th' );
+				?>
 			</tr>
 		</thead>
 
@@ -38,7 +53,13 @@
 						<td class="referral-description"><?php echo wp_kses_post( nl2br( $referral->description ) ); ?></td>
 						<td class="referral-status <?php echo $referral->status; ?>"><?php echo affwp_get_referral_status_label( $referral ); ?></td>
 						<td class="referral-date"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $referral->date ) ); ?></td>
-						<?php do_action( 'affwp_referrals_dashboard_td', $referral ); ?>
+						<?php
+						/**
+						 * Fires within the table data of the dashboard referrals template.
+						 *
+						 * @param \AffWP\Referral $referral Referral object.
+						 */
+						do_action( 'affwp_referrals_dashboard_td', $referral ); ?>
 					</tr>
 				<?php endforeach; ?>
 
@@ -52,7 +73,17 @@
 		</tbody>
 	</table>
 
-	<?php do_action( 'affwp_referrals_dashboard_after_table', affwp_get_affiliate_id() ); ?>
+	<?php
+
+	$affiliate_id = affwp_get_affiliate_id() ;
+
+	/**
+	 * Fires after the data table within the affiliate area referrals template.
+	 *
+	 * @param int $affiliate_id Affiliate ID.
+	 */
+	do_action( 'affwp_referrals_dashboard_after_table', $affiliate_id );
+	?>
 
 	<?php if ( $pages > 1 ) : ?>
 

@@ -1,10 +1,15 @@
 <?php
+namespace AffWP\Misc\Functions;
+
+use AffWP\Tests\UnitTestCase;
+
 /**
  * Tests for includes/misc-functions.php
  *
+ * @group misc
  * @group functions
  */
-class Misc_Functions_Tests extends WP_UnitTestCase {
+class Tests extends UnitTestCase {
 
 	/**
 	 * Amount.
@@ -25,7 +30,7 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_format_amount()
+	 * @covers ::affwp_format_amount()
 	 */
 	public function test_format_amount_floatval_remains_floatval_with_comma_thousands_seperator() {
 		affiliate_wp()->settings->set( array(
@@ -42,7 +47,7 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_get_currency()
+	 * @covers ::affwp_get_currency()
 	 */
 	public function test_get_currency_should_default_to_USD() {
 		$currency = affwp_get_currency();
@@ -51,7 +56,7 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_get_currency()
+	 * @covers ::affwp_get_currency()
 	 */
 	public function test_get_currency_modified_should_return_new_currency() {
 		$new = 'CZK';
@@ -64,7 +69,7 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_get_currency()
+	 * @covers ::affwp_get_currency()
 	 */
 	public function test_get_currency_filtered_should_return_filtered_currency() {
 		$currency = affwp_get_currency();
@@ -82,7 +87,7 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_get_decimal_count()
+	 * @covers ::affwp_get_decimal_count()
 	 */
 	public function test_get_decimal_count_default_should_be_2() {
 		$count = affwp_get_decimal_count();
@@ -91,7 +96,7 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_get_decimal_count()
+	 * @covers ::affwp_get_decimal_count()
 	 */
 	public function test_filtered_get_decimal_count_should_return_filtered() {
 		add_filter( 'affwp_decimal_count', function() {
@@ -101,11 +106,13 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 		$count = affwp_get_decimal_count();
 
 		$this->assertEquals( 3, $count );
+
+		remove_all_filters( 'affwp_decimal_count' );
 	}
 
 	/**
 	 * @dataProvider _make_url_human_readable_dp
-	 * @covers affwp_make_url_human_readable()
+	 * @covers ::affwp_make_url_human_readable()
 	 */
 	public function test_make_url_human_readable( $ugly, $human ) {
 		$this->assertEquals( $human, affwp_make_url_human_readable( $ugly ) );
@@ -129,6 +136,102 @@ class Misc_Functions_Tests extends WP_UnitTestCase {
 			array( 'http://www.example.com/blog/?s=My+query', '../blog/?s=My+query' ),
 			array( 'http://www.example.com/blog/?privateVar=stuff', '../blog/' )
 		);
+	}
+
+	/**
+	 * @covers ::affwp_format_rate()
+	 */
+	public function test_format_rate_should_format_percentage_as_percentage() {
+		$this->assertSame( '20%', affwp_format_rate( 0.2 ) );
+	}
+
+	/**
+	 * @covers ::affwp_format_rate()
+	 */
+	public function test_format_rate_should_format_non_percentage_as_flat() {
+		$this->assertSame( '&#36;20', affwp_format_rate( 20, 'flat' ) );
+	}
+
+	/*
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_commas() {
+		$this->assertSame( '20000.20', affwp_sanitize_amount( '20,000.20' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_spaces() {
+		$this->assertSame( '20000.20', affwp_sanitize_amount( '20 000.20' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_default_to_two_decimals() {
+		$this->assertSame( '20.20', affwp_sanitize_amount( '20.2' ) );
+		$this->assertSame( '25.42', affwp_sanitize_amount( '25.42221112993' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_currency_symols() {
+		$this->assertSame( '20.20', affwp_sanitize_amount( '$20.2' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_remove_currency_symbols_and_default_to_two_decimals() {
+		$this->assertSame( '10.00', affwp_sanitize_amount( '£10') );
+		$this->assertSame( '20.20', affwp_sanitize_amount( '₱20.2' ) );
+	}
+
+	/**
+	 * @covers ::affwp_sanitize_amount
+	 */
+	public function test_sanitize_amount_should_handle_nonstandard_thousands_and_decimal_separators() {
+		affiliate_wp()->settings->set( array(
+			'thousands_separator' => '.',
+			'decimal_separator' => ','
+		) );
+
+		$this->assertSame( '10000.00', affwp_sanitize_amount( '10.000,00' ) );
+		$this->assertSame( '10.00', affwp_sanitize_amount( '10,00' ) );
+
+		// Clean up.
+		affiliate_wp()->settings->set( array(
+			'thousands_separator' => ',',
+			'decimal_separator' => '.'
+		) );
+
+	}
+
+	/**
+	 * @covers ::affwp_get_logout_url
+	 */
+	public function test_affwp_get_logout_url() {
+		$this->assertSame( wp_logout_url( get_permalink() ), affwp_get_logout_url() );
+	}
+
+	/**
+	 * @covers ::affwp_get_logout_url
+	 */
+	public function test_affwp_get_logout_url_with_empty_filter() {
+		add_filter( 'affwp_logout_url', '__return_empty_string' );
+		$this->assertSame('', affwp_get_logout_url() );
+	}
+
+	/**
+	 * @covers ::affwp_get_logout_url
+	 */
+	public function test_affwp_get_logout_url_with_custom_url() {
+		add_filter( 'affwp_logout_url', function() {
+			return home_url( '?action=logout' );
+		} );
+		$this->assertSame( home_url( '?action=logout' ), affwp_get_logout_url() );
 	}
 
 }

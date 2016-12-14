@@ -8,9 +8,14 @@ $default_rate = affwp_abs_number_round( $default_rate );
 
 	<form method="post" id="affwp_add_affiliate">
 
-		<?php do_action( 'affwp_new_affiliate_top' ); ?>
+		<?php
+		/**
+		 * Fires at the top of the new-affiliate admin screen, just inside of the form element.
+		 */
+		do_action( 'affwp_new_affiliate_top' );
+		?>
 
-		<p><?php printf( __( 'Use this screen to register a new affiliate. Each affiliate is tied directly to a user account, so if the user account for the affiliate does not yet exist, <a href="%s" target="_blank">create one</a>.', 'affiliate-wp' ), admin_url( 'user-new.php' ) ); ?></p>
+		<p><?php printf( __( 'Use this form to register a new affiliate. Each affiliate is tied directly to a user account, so if the user account for the affiliate does not yet exist, <a href="%s" target="_blank">create one</a>.', 'affiliate-wp' ), admin_url( 'user-new.php' ) ); ?></p>
 
 		<table class="form-table">
 
@@ -42,7 +47,7 @@ $default_rate = affwp_abs_number_round( $default_rate );
 						<option value="inactive"><?php _e( 'Inactive', 'affiliate-wp' ); ?></option>
 						<option value="pending"><?php _e( 'Pending', 'affiliate-wp' ); ?></option>
 					</select>
-					<p class="description"><?php _e( 'The status assigned to the affiliate\'s account.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'The status assigned to the affiliate&#8217;s account.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>
@@ -60,7 +65,7 @@ $default_rate = affwp_abs_number_round( $default_rate );
 							<option value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $type ); ?></option>
 						<?php endforeach; ?>
 					</select>
-					<p class="description"><?php _e( 'The affiliate\'s referral rate type.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'The affiliate&#8217;s referral rate type.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>
@@ -73,7 +78,7 @@ $default_rate = affwp_abs_number_round( $default_rate );
 
 				<td>
 					<input class="small-text" type="number" name="rate" id="rate" step="0.01" min="0" max="999999" placeholder="<?php echo esc_attr( $default_rate ); ?>" />
-					<p class="description"><?php _e( 'The affiliate\'s referral rate, such as 20 for 20%. If left blank, the site default will be used.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'The affiliate&#8217;s referral rate, such as 20 for 20%. If left blank, the site default will be used.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>
@@ -86,7 +91,7 @@ $default_rate = affwp_abs_number_round( $default_rate );
 
 				<td>
 					<input class="regular-text" type="text" name="payment_email" id="payment_email" />
-					<p class="description"><?php _e( 'Affiliate\'s payment email for systems such as PayPal, Moneybookers, or others. Leave blank to use the affiliate\'s user email.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'Affiliate&#8217;s payment email for systems such as PayPal, Moneybookers, or others. Leave blank to use the affiliate&#8217;s user email.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>
@@ -106,11 +111,21 @@ $default_rate = affwp_abs_number_round( $default_rate );
 
 			</tr>
 
-			<?php do_action( 'affwp_new_affiliate_end' ); ?>
+			<?php
+			/**
+			 * Fires at the end of the new-affiliate admin screen form area, below form fields.
+			 */
+			do_action( 'affwp_new_affiliate_end' );
+			?>
 
 		</table>
 
-		<?php do_action( 'affwp_new_affiliate_bottom' ); ?>
+		<?php
+		/**
+		 * Fires at the bottom of the new-affiliate admin screen, prior to the submit button.
+		 */
+		do_action( 'affwp_new_affiliate_bottom' );
+		?>
 
 		<input type="hidden" name="affwp_action" value="add_affiliate" />
 

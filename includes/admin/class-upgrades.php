@@ -2,12 +2,38 @@
 
 class Affiliate_WP_Upgrades {
 
+	/**
+	 * Whether debug mode is enabled.
+	 *
+	 * @since 1.8.6
+	 * @access private
+	 * @var bool
+	 */
+	private $debug;
+
+	/**
+	 * Affiliate_WP_Logging instance.
+	 *
+	 * @since 1.8.6
+	 * @access private
+	 * @var Affiliate_WP_Logging
+	 */
+	private $logs;
+
 	private $upgraded = false;
 
 	public function __construct() {
 
 		add_action( 'admin_init', array( $this, 'init' ), -9999 );
 
+		$settings = new Affiliate_WP_Settings;
+		$this->debug = (bool) $settings->get( 'debug_mode', false );
+
+		if ( $this->debug ) {
+			require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-logging.php';
+
+			$this->logs = new Affiliate_WP_Logging;
+		}
 	}
 
 	public function init() {
@@ -49,6 +75,18 @@ class Affiliate_WP_Upgrades {
 			$this->v1714_upgrades();
 		}
 
+		if ( version_compare( $version, '1.9', '<' ) ) {
+			$this->v19_upgrade();
+		}
+
+		if ( version_compare( $version, '1.9.5', '<' ) ) {
+			$this->v195_upgrade();
+		}
+
+		if ( version_compare( $version, '2.0', '<' ) ) {
+			$this->v20_upgrade();
+		}
+
 		// Inconsistency between current and saved version.
 		if ( version_compare( $version, AFFILIATEWP_VERSION, '<>' ) ) {
 			$this->upgraded = true;
@@ -60,6 +98,20 @@ class Affiliate_WP_Upgrades {
 			update_option( 'affwp_version', AFFILIATEWP_VERSION );
 		}
 
+	}
+
+	/**
+	 * Writes a log message.
+	 *
+	 * @access private
+	 * @since 1.8.6
+	 *
+	 * @param string $message Optional. Message to log.
+	 */
+	private function log( $message = '' ) {
+		if ( $this->debug ) {
+			$this->logs->log( $message );
+		}
 	}
 
 	/**
@@ -354,6 +406,52 @@ class Affiliate_WP_Upgrades {
 
 		$this->upgraded = true;
 
+	}
+
+	/**
+	 * Performs database upgrades for version 1.9.
+	 *
+	 * @since 1.9
+	 * @access private
+	 */
+	private function v19_upgrade() {
+		@affiliate_wp()->referrals->create_table();
+		$this->log( 'Upgrade: The Referrals table upgrade for 1.9 has completed.' );
+
+		@affiliate_wp()->affiliates->payouts->create_table();
+		$this->log( 'Upgrade: The Payouts table creation process for 1.9 has completed.' );
+
+		@affiliate_wp()->REST->consumers->create_table();
+		$this->log( 'Upgrade: The API consumers table creation process for 1.9 has completed' );
+
+		$this->upgraded = true;
+	}
+
+	/**
+	 * Performs database upgrades for version 1.9.5.
+	 *
+	 * @since 1.9.5
+	 * @access private
+	 */
+	private function v195_upgrade() {
+		@affiliate_wp()->affiliates->payouts->create_table();
+		$this->log( 'Upgrade: The Payouts table upgrade for 1.9.5 has completed.' );
+
+		wp_cache_set( 'last_changed', microtime(), 'payouts' );
+		$this->log( 'Upgrade: The Payouts cache has been invalidated following the 1.9.5 upgrade routine.' );
+
+		$this->upgraded = true;
+	}
+
+	/**
+	 * Performs database upgrades for version 2.0.
+	 *
+	 * @since 2.0
+	 * @access private
+	 */
+	private function v20_upgrade() {
+		@affiliate_wp()->capabilities->add_caps();
+		$this->log( 'Upgrade: Core capabilities have been upgraded.' );
 	}
 
 }

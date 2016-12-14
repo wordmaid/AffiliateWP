@@ -1,9 +1,23 @@
 <?php
+namespace AffWP\Visit;
 
-class Visit_Tests extends WP_UnitTestCase {
+use AffWP\Tests\UnitTestCase;
 
-	function test_get_visits() {
-		$this->assertFalse( false );
+/**
+ * Visit tests
+ *
+ * @group visits
+ */
+class Visit_Tests extends UnitTestCase {
+
+	protected $domain;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->reset__SERVER();
+
+		$this->domain = 'http://' . WP_TESTS_DOMAIN;
 	}
 
 	function test_long_campaign() {
@@ -11,7 +25,7 @@ class Visit_Tests extends WP_UnitTestCase {
 		// The 2 should get trimmed off as it is the 51st character
 		$campaign = '111111111111111111111111111111111111111111111111112';
 		$visit_id = affiliate_wp()->visits->add( array( 'campaign' => $campaign, 'affiliate_id' => 1 ) );
-		$visit    = affiliate_wp()->visits->get( $visit_id );
+		$visit    = affiliate_wp()->visits->get_object( $visit_id );
 
 		$this->assertEquals( 50, strlen( $visit->campaign ) );
 		$this->assertEquals( '11111111111111111111111111111111111111111111111111', $visit->campaign );
@@ -36,76 +50,87 @@ class Visit_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers affwp_delete_visit()
+	 * @covers Affiliate_WP_Tracking::get_current_page_url()
 	 */
-	public function test_delete_visit_with_invalid_visit_id_should_return_false() {
-		$this->assertFalse( affwp_delete_visit( 0 ) );
-	}
-
-	/**
-	 * @covers affwp_delete_visit()
-	 */
-	public function test_delete_visit_with_valid_visit_id_should_return_true() {
-		$visit_id = affiliate_wp()->visits->add( array(
-			'affiliate_id' => 1
+	public function test_get_current_page_url_should_return_non_front_page_url_if_not_front_page() {
+		$page_id = $this->factory->post->create( array(
+			'post_type' => 'page'
 		) );
 
-		$this->assertTrue( affwp_delete_visit( $visit_id ) );
+		$page_url = $this->mock_page_url( $page_id );
+
+		$current_page = affiliate_wp()->tracking->get_current_page_url();
+
+		$this->assertSame( $page_url, $current_page );
 	}
 
 	/**
-	 * @covers affwp_delete_visit()
+	 * @covers Affiliate_WP_Tracking::get_current_page_url()
 	 */
-	public function test_delete_visit_with_invalid_visit_object_should_return_false() {
-		$this->assertFalse( affwp_delete_visit( new stdClass() ) );
-	}
+	public function test_get_current_page_url_should_respect_ssl_for_non_front_page_url() {
+		$_SERVER['HTTPS'] = 'on';
 
-	/**
-	 * @covers affwp_delete_visit()
-	 */
-	public function test_delete_visit_with_valid_visit_object_should_return_true() {
-		$visit_id = affiliate_wp()->visits->add( array(
-			'affiliate_id' => 1
+		$page_id = $this->factory->post->create( array(
+			'post_type' => 'page'
 		) );
 
-		$visit = affiliate_wp()->visits->get( $visit_id );
+		$page_url = $this->mock_page_url( $page_id );
 
-		$this->assertTrue( affwp_delete_visit( $visit ) );
+		$current_page = affiliate_wp()->tracking->get_current_page_url();
+
+		$this->assertSame( true, is_ssl() );
+		$this->assertSame( $page_url, $current_page );
 	}
 
 	/**
-	 * @covers affwp_delete_visit()
+	 * @covers Affiliate_WP_Tracking::get_current_page_url()
 	 */
-	public function test_delete_visit_with_non_object_non_numeric_should_return_false() {
-		$this->assertFalse( affwp_delete_visit( 'foo' ) );
-	}
+	public function test_get_current_page_url_should_respect_ssl_for_non_front_page_and_not_contain_port() {
+		$_SERVER['HTTPS'] = 'on';
 
-	/**
-	 * @covers affwp_delete_visit()
-	 */
-	public function test_delete_visit_should_decrease_affiliate_visits_count() {
-		$affiliate_id = affiliate_wp()->affiliates->add( array(
-			'user_id' => $this->factory->user->create()
+		$page_id = $this->factory->post->create( array(
+			'post_type' => 'page'
 		) );
 
-		$visit_ids = array();
+		$page_url = $this->mock_page_url( $page_id );
 
-		for ( $i = 0; $i <= 2; $i++ ) {
-			$visit_ids[] = affiliate_wp()->visits->add( array(
-				'affiliate_id' => $affiliate_id
-			) );
-		}
+		$current_page = affiliate_wp()->tracking->get_current_page_url();
 
-		$this->assertEquals( 3, affwp_get_affiliate_visit_count( $affiliate_id ) );
+		$this->assertSame( true, is_ssl() );
+		$this->assertFalse( strpos( $current_page, ':443' ) );
+	}
 
-		// 3 becomes 2.
-		affwp_delete_visit( $visit_ids[0] );
 
-		$this->assertEquals( 2, affwp_get_affiliate_visit_count( $affiliate_id ) );
+	/**
+	 * Utility method to reset $_SERVER values.
+	 *
+	 * @since 1.8.6
+	 */
+	protected function reset__SERVER() {
+		$_SERVER['HTTP_HOST']       = WP_TESTS_DOMAIN;
+		$_SERVER['REMOTE_ADDR']     = '127.0.0.1';
+		$_SERVER['REQUEST_METHOD']  = 'GET';
+		$_SERVER['REQUEST_URI']     = '';
+		$_SERVER['SERVER_NAME']     = WP_TESTS_DOMAIN;
+		$_SERVER['SERVER_PORT']     = '80';
+		$_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
 
-		// 2 becomes 1.
-		affwp_delete_visit( $visit_ids[1] );
+		unset( $_SERVER['HTTP_REFERER'] );
+		unset( $_SERVER['HTTPS'] );
+	}
 
-		$this->assertEquals( 1, affwp_get_affiliate_visit_count( $affiliate_id ) );
+	/**
+	 * Utility method to mock a page URL.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param int $page_id Page ID.
+	 * @return string Mocked page permalink.
+	 */
+	protected function mock_page_url( $page_id ) {
+		$request_uri = $_SERVER['REQUEST_URI'];
+		$_SERVER['REQUEST_URI'] = add_query_arg( 'page_id', $page_id, $request_uri );
+
+		return set_url_scheme( $this->domain . $_SERVER['REQUEST_URI'] );
 	}
 }

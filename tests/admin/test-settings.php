@@ -1,10 +1,14 @@
 <?php
+namespace AffWP\Settings;
+
+use AffWP\Tests\UnitTestCase;
+
 /**
  * Tests for Affiliate_WP_Settings
  *
  * @covers Affiliate_WP_Settings
  */
-class Afilliate_Settings_Tests extends WP_UnitTestCase {
+class Tests extends UnitTestCase {
 
 	/**
 	 * Settings instance.
@@ -20,7 +24,9 @@ class Afilliate_Settings_Tests extends WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->settings = new Affiliate_WP_Settings();
+		$this->settings = new \Affiliate_WP_Settings();
+
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 	}
 
 	/**
@@ -55,4 +61,23 @@ class Afilliate_Settings_Tests extends WP_UnitTestCase {
 		$this->assertSame( $actual['affiliates_page'], $affiliates_area );
 	}
 
+	/**
+	 * @covers Affiliate_WP_Settings::is_setting_disabled()
+	 */
+	public function test_is_setting_disabled() {
+		// Default should be false.
+		$this->assertFalse( $this->settings->get( 'debug_mode' ) );
+
+		// Define and reset $settings.
+		define( 'AFFILIATE_WP_DEBUG', true );
+		$this->settings = new \Affiliate_WP_Settings();
+
+		// Constant should override the value.
+		$this->assertTrue( $this->settings->get( 'debug_mode' ) );
+
+		$registered_settings = $this->settings->get_registered_settings();
+		$args = array_merge( $registered_settings['misc']['debug_mode'], array( 'id' => 'debug_mode' ) );
+
+		$this->assertTrue( $this->settings->is_setting_disabled( $args ) );
+	}
 }

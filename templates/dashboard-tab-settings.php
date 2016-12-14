@@ -20,7 +20,17 @@ $payment_email = affwp_get_affiliate_payment_email( $affiliate_id, $user_email )
 			<label for="affwp-referral-notifications"><?php _e( 'Enable New Referral Notifications', 'affiliate-wp' ); ?></label>
 		</div>
 
-		<?php do_action( 'affwp_affiliate_dashboard_before_submit', $affiliate_id, affwp_get_affiliate_user_id( $affiliate_id ) ); ?>
+		<?php
+
+		$affiliate_user_id = affwp_get_affiliate_user_id( $affiliate_id );
+
+		/**
+		 * Fires immediately prior to the profile submit button in the affiliate area.
+		 *
+		 * @param $affiliate_id       Affiliate ID.
+		 * @param $affiliate_user_id  The user of the currently logged-in affiliate.
+		 */
+		do_action( 'affwp_affiliate_dashboard_before_submit', $affiliate_id, $affiliate_user_id ); ?>
 
 		<div class="affwp-save-profile-wrap">
 			<input type="hidden" name="affwp_action" value="update_profile_settings" />

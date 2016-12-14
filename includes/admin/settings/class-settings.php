@@ -1296,7 +1296,7 @@ class Affiliate_WP_Settings {
 			return; // Don't fire when saving settings
 		}
 
-		$license = get_transient( 'affwp_license_check' );
+		$status = get_transient( 'affwp_license_check' );
 
 		$request_url = 'https://affiliatewp.com';
 
@@ -1340,7 +1340,7 @@ class Affiliate_WP_Settings {
 				return false;
 			}
 
-			$license = json_decode( wp_remote_retrieve_body( $response ) );
+			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
 			$this->save( array( 'license_status' => $license_data ) );
 
@@ -1356,19 +1356,12 @@ class Affiliate_WP_Settings {
 
 		}
 
-		return $license;
+		return $status;
 
 	}
 
 	public function is_license_valid() {
-		
-		$ret     = false;
-		$license = $this->check_license();
-		if( is_object( $license ) && $license->license == 'valid' ) {
-			$ret = true;
-		}
-
-		return $ret;
+		return $this->check_license() == 'valid';
 	}
 
 	public function is_license_pro_or_ultimate() {

@@ -307,6 +307,8 @@ jQuery(document).ready(function($) {
 						action: atts.batch_id
 					};
 
+					// Fire off Ajax request to confirm the batch and retrieve the method.
+
 					submitButton.addClass( 'button-disabled' );
 					$(this).find('.notice-wrap').remove();
 					$(this).append( '<div class="notice-wrap"><span class="spinner is-active"></span><div class="affwp-batch-progress"><div></div></div></div>' );

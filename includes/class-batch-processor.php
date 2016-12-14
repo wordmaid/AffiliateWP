@@ -25,6 +25,8 @@ class Batch_Processor {
 	 */
 	public function __construct() {
 
+		$this->register_core_processes();
+
 		/**
 		 * Fires during instantiation of the batch processing script.
 		 *
@@ -36,30 +38,82 @@ class Batch_Processor {
 	}
 
 	/**
+	 * Registers core batch processes.
+	 *
+	 * @access protected
+	 * @since  2.0
+	 */
+	protected function register_core_processes() {
+		//
+		// Migrations
+		//
+
+		// User Migration.
+		$this->register_process( 'migrate-users', array(
+			'class' => 'Affiliate_WP_Migrate_Users',
+		) );
+
+		// WP Affiliate Migration.
+		$this->register_process( 'migrate-wp-affiliate', array(
+			'class' => 'Affiliate_WP_Migrate_WP_Affiliate',
+		) );
+
+		// Affiliates Pro Migration.
+		$this->register_process( 'migrate-affiliates-pro', array(
+			'class' => 'Affiliate_WP_Migrate_Affiliates_Pro',
+		) );
+
+		//
+		// Exporters
+		//
+
+		// Export Settings.
+		$this->register_process( 'export-settings', array(
+			'class' => 'AffWP\Util\Exporter\Settings',
+		) );
+
+		// Export Affiliates.
+		$this->register_process( 'export-affiliates', array(
+			'class' => 'Affiliate_WP_Affiliate_Export',
+		) );
+
+		// Export Referrals.
+		$this->register_process( 'export-referrals', array(
+			'class' => 'Affiliate_WP_Referral_Export',
+		) );
+
+		// Export Referrals Payout.
+		$this->register_process( 'export-referrals-payout', array(
+			'class' => 'Affiliate_WP_Referral_Payout_Export',
+		) );
+
+		//
+		// Importers
+		//
+
+		// Import Settings.
+		$this->register_process( 'import-settings', array(
+			'class' => 'non-existent (yet)',
+		) );
+	}
+
+	/**
 	 * Registers a new batch process.
 	 *
 	 * @access public
 	 * @since  2.0
 	 *
-	 * @param array $process_args {
+	 * @param string $batch_id     Unique batch process ID.
+	 * @param array  $process_args {
 	 *     Arguments for registering a new batch process.
 	 *
-	 * @type string $batch_id Unique batch process ID.
-	 * @type string $class    Batch processor class to use.
-	 * @type string $step_method Optional. Step method to use via `$class`.
-	 *
+	 *     @type string $class    Batch processor class to use.
+	 *     @type string $step_method Optional. Step method to use via `$class`.
 	 * }
-	 *
-	 * @return \WP_Error
+	 * @return \WP_Error|true True on successful registration, otherwise a WP_Error object.
 	 */
-	public function register_process( $process_args ) {
-		$process_args = wp_parse_args( $process_args,  array_fill_keys( array(
-			'batch_id', 'class', 'step_method'
-		), '' ) );
-
-		if ( empty( $process_args['batch_id'] ) ) {
-			return new \WP_Error( 'invalid_batch_id', __( 'A batch ID must be specified.', 'affiliate-wp' ) );
-		}
+	public function register_process( $batch_id, $process_args ) {
+		$process_args = wp_parse_args( $process_args,  array_fill_keys( array( 'class', 'step_method' ), '' ) );
 
 		if ( empty( $process_args['class'] ) ) {
 			return new \WP_Error( 'invalid_batch_class', __( 'A batch process class must be specified', 'affiliate-wp' ) );
@@ -71,7 +125,7 @@ class Batch_Processor {
 			$process_args['step_method'] = 'step_forward';
 		}
 
-		$this->add_process( $process_args['batch_id'], $process_args['class'], $process_args['step_method'] );
+		return $this->add_process( $batch_id, $process_args['class'], $process_args['step_method'] );
 	}
 
 	/**
@@ -83,12 +137,14 @@ class Batch_Processor {
 	 * @param int    $batch_id    Batch process ID.
 	 * @param string $class       Class the batch processor should instantiate.
 	 * @param string $step_method Step method the batch processor should use.
+	 * @return true Always true.
 	 */
 	private function add_process( $batch_id, $class, $step_method ) {
 		$this->batch_ids[ $batch_id ] = array(
 			'class'       => $class,
 			'step_method' => $step_method
 		);
+		return true;
 	}
 
 	/**

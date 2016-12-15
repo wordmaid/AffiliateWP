@@ -103,7 +103,7 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 				 *
 				 * @since 1.9.5
 				 *
-				 * @param array           $line {
+				 * @param array           $referral_data {
 				 *     Single line of exported referral data
 				 *
 				 *     @type int    $affiliate_id  Affiliate ID.

@@ -15,7 +15,7 @@ function affwp_process_settings_import() {
 	if( ! wp_verify_nonce( $_POST['affwp_import_nonce'], 'affwp_import_nonce' ) )
 		return;
 
-	if( ! current_user_can( 'manage_options' ) )
+	if( ! current_user_can( 'manage_affiliate_options' ) )
 		return;
 
 	$extension = end( explode( '.', $_FILES['import_file']['name'] ) );

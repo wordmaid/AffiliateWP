@@ -101,7 +101,7 @@ function affwp_process_settings_export() {
 	if( ! wp_verify_nonce( $_POST['affwp_export_nonce'], 'affwp_export_nonce' ) )
 		return;
 
-	if( ! current_user_can( 'manage_options' ) )
+	if( ! current_user_can( 'manage_affiliate_options' ) )
 		return;
 
 	$settings = new Exporter\Settings();

@@ -1,5 +1,5 @@
 <?php
-use \AffWP\Util\Importer;
+use \AffWP\Utils\Importer;
 
 /**
  * Process a settings import from a json file

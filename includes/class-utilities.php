@@ -11,7 +11,7 @@ class Affiliate_WP_Utilities {
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @var    \AffWP\Util\Batch_Processor\Init
+	 * @var    \AffWP\Utils\Batch_Processor\Init
 	 */
 	public $batch;
 
@@ -43,6 +43,6 @@ class Affiliate_WP_Utilities {
 	 * @since  2.0
 	 */
 	public function setup_objects() {
-		$this->batch = new AffWP\Util\Batch_Processor\Init;
+		$this->batch = new AffWP\Utils\Batch_Processor\Init;
 	}
 }

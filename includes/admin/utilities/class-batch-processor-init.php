@@ -1,5 +1,5 @@
 <?php
-namespace AffWP\Util\Batch_Processor;
+namespace AffWP\Utils\Batch_Processor;
 
 /**
  * Batch processor initialization class.
@@ -70,7 +70,7 @@ class Init {
 
 		// Export Settings.
 		$this->register_process( 'export-settings', array(
-			'class' => 'AffWP\Util\Exporter\Settings',
+			'class' => 'AffWP\Utils\Exporter\Settings',
 		) );
 
 		// Export Affiliates.

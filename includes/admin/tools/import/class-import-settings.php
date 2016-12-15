@@ -8,9 +8,9 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       2.0
  */
-namespace AffWP\Util\Importer;
+namespace AffWP\Utils\Importer;
 
-use AffWP\Util\Importer\Base as Importer;
+use AffWP\Utils\Importer\Base as Importer;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;

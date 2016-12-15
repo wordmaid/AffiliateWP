@@ -1,5 +1,5 @@
 <?php
-namespace AffWP\Util\Importer;
+namespace AffWP\Utils\Importer;
 
 /**
  * Promise for structuring importers.

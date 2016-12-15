@@ -1,5 +1,5 @@
 <?php
-namespace AffWP\Util\Exporter;
+namespace AffWP\Utils\Exporter;
 
 /**
  * Promise for structuring exporters.

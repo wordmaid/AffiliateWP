@@ -1,5 +1,5 @@
 <?php
-namespace AffWP\Util\Batch_Processor;
+namespace AffWP\Utils\Batch_Processor;
 
 /**
  * Base batch processor.

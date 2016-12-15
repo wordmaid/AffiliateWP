@@ -1,7 +1,7 @@
 <?php
-namespace AffWP\Util\Exporter;
+namespace AffWP\Utils\Exporter;
 
-use AffWP\Util\Exporter;
+use AffWP\Utils\Exporter;
 
 /**
  * Promise for structuring CSV exporters.

@@ -30,7 +30,7 @@ abstract class Base {
 	abstract public function init( $data = null );
 
 	/**
-	 * Logic to run prior to the next step in the process.
+	 * Defines logic to execute prior to the next step in the process.
 	 *
 	 * @access public
 	 * @since  2.0
@@ -62,7 +62,7 @@ abstract class Base {
 	abstract public function process_step( $step );
 
 	/**
-	 * Logic to run following the next step in the process.
+	 * Defines logic to execute following the next step in the process.
 	 *
 	 * @access public
 	 * @since  2.0
@@ -71,7 +71,7 @@ abstract class Base {
 	abstract public function after_process_step();
 
 	/**
-	 * Logic to run once batch processing is complete.
+	 * Defines logic to execute once batch processing is complete.
 	 *
 	 * @access public
 	 * @since  2.0

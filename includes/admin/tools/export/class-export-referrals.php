@@ -126,7 +126,7 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 					'payment_email' => affwp_get_affiliate_payment_email( $referral->affiliate_id ),
 					'amount'        => $referral->amount,
 					'currency'      => $referral->currency,
-					'description'   => str_replace(',', "\r\n", $referral->description),
+					'description'   => addslashes( preg_replace( "/\"/","'", $referral->description ) ),
 					'campaign'      => $referral->campaign,
 					'reference'     => $referral->reference,
 					'context'       => $referral->context,

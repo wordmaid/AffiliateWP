@@ -10,7 +10,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 	 */
 	public function init() {
 
-		$this->context = 'paypal'; 
+		$this->context = 'paypal';
 
 		add_action( 'wp_footer', array( $this, 'scripts' ) );
 		add_action( 'wp_ajax_affwp_maybe_insert_paypal_referral', array( $this, 'maybe_insert_referral' ) );
@@ -137,7 +137,8 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 			'subscr_payment',
 			'express_checkout',
 			'recurring_payment',
-			'subscr_payment'
+			'subscr_payment',
+
 		);
 
 		if( ! in_array( $ipn_data['txn_type'], $to_process ) ) {
@@ -267,11 +268,26 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 
 			}
 
+		} elseif ( 'refunded' === strtolower( $ipn_data['payment_status'] ) || 'reversed' === strtolower( $ipn_data['payment_status'] ) ) {
+
+			if( ! affiliate_wp()->settings->get( 'revoke_on_refund' ) ) {
+
+				if ( $this->debug ) {
+
+					$this->log( 'Referral not rejected because revoke on refund is not enabled' );
+
+				}
+
+				return;
+			}
+
+			$this->reject_referral( $referral->reference );
+
 		} else {
 
 			if ( $this->debug ) {
 
-				$this->log( 'Payment status in IPN data not Complete' );
+				$this->log( 'Payment status in IPN data not Complete, Refunded, or Reversed' );
 
 			}
 

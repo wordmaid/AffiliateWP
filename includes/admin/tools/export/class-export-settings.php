@@ -1,14 +1,12 @@
 <?php
 /**
- * Export Class
- *
- * This is the base class for all export methods. Each data export type (referrals, affiliates, visits) extends this class.
+ * Export Settings Class.
  *
  * @package     AffiliateWP
  * @subpackage  Admin/Export
- * @copyright   Copyright (c) 2014, Pippin Williamson
+ * @copyright   Copyright (c) 2016, Pippin Williamson
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.0
+ * @since       2.0
  */
 namespace AffWP\Util\Exporter;
 

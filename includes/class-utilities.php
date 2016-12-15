@@ -33,7 +33,7 @@ class Affiliate_WP_Utilities {
 	 * @since  2.0
 	 */
 	public function includes() {
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/utilities/class-batch-processor-init.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-processor-init.php';
 	}
 
 	/**

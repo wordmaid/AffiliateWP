@@ -127,9 +127,9 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export implements Export
 				$data[] = apply_filters( 'affwp_referral_export_get_data_line', array(
 					'affiliate_id'  => $referral->affiliate_id,
 					'email'         => affwp_get_affiliate_email( $referral->affiliate_id ),
-					'name'          => affwp_get_affiliate_name( $affiliate->affiliate_id ),
+					'name'          => affwp_get_affiliate_name( $referral->affiliate_id ),
 					'payment_email' => affwp_get_affiliate_payment_email( $referral->affiliate_id ),
-					'username'      => affwp_get_affiliate_login( $affiliate->affiliate_id ),
+					'username'      => affwp_get_affiliate_login( $referral->affiliate_id ),
 					'amount'        => $referral->amount,
 					'currency'      => $referral->currency,
 					'description'   => str_replace(',', "\r\n", $referral->description),

@@ -87,6 +87,12 @@ add_action( 'wp_ajax_affwp_search_users', 'affwp_search_users' );
  * @since 2.0
  */
 function affwp_process_batch_request() {
+	// Nonce check.
 
+	if ( ! isset( $_REQUEST['batch_id'] )
+		|| isset( $_REQUEST['batch_id'] ) && false === affiliate_wp()->utils->batch->get( $_REQUEST['batch_id'] )
+	) {
+		wp_send_json_error();
+	}
 }
 add_action( 'wp_ajax_process_batch_request', 'affwp_process_batch_request' );

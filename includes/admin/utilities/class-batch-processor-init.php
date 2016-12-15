@@ -1,6 +1,11 @@
 <?php
 namespace AffWP\Utils\Batch_Processor;
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Batch processor initialization class.
  *

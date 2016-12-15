@@ -1,6 +1,11 @@
 <?php
 namespace AffWP\Utils\Exporter;
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Promise for structuring exporters.
  *

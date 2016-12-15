@@ -13,7 +13,9 @@ namespace AffWP\Utils\Importer;
 use AffWP\Utils\Importer\Base as Importer;
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Implements an importer for AffiliateWP settings.

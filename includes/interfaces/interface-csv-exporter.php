@@ -3,6 +3,11 @@ namespace AffWP\Utils\Exporter;
 
 use AffWP\Utils\Exporter;
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Promise for structuring CSV exporters.
  *

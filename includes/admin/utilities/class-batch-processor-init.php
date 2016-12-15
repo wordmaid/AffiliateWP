@@ -1,12 +1,12 @@
 <?php
-namespace AffWP\Util;
+namespace AffWP\Util\Batch_Processor;
 
 /**
- * Batch processing utility class.
+ * Batch processor initialization class.
  *
  * @since 2.0
  */
-class Batch_Processor {
+class Init {
 
 	/**
 	 * Batches processes ID registry.
@@ -50,7 +50,8 @@ class Batch_Processor {
 
 		// User Migration.
 		$this->register_process( 'migrate-users', array(
-			'class' => 'Affiliate_WP_Migrate_Users',
+			'class'       => 'Affiliate_WP_Migrate_Users',
+			'step_method' => 'do_users',
 		) );
 
 		// WP Affiliate Migration.

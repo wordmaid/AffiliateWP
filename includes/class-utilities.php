@@ -11,7 +11,7 @@ class Affiliate_WP_Utilities {
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @var    \AffWP\Util\Batch_Processor
+	 * @var    \AffWP\Util\Batch_Processor\Init
 	 */
 	public $batch;
 
@@ -33,7 +33,7 @@ class Affiliate_WP_Utilities {
 	 * @since  2.0
 	 */
 	public function includes() {
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-batch-processor.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/utilities/class-batch-processor-init.php';
 	}
 
 	/**
@@ -43,6 +43,6 @@ class Affiliate_WP_Utilities {
 	 * @since  2.0
 	 */
 	public function setup_objects() {
-		$this->batch = new AffWP\Util\Batch_Processor;
+		$this->batch = new AffWP\Util\Batch_Processor\Init;
 	}
 }

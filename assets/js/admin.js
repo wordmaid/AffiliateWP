@@ -1,5 +1,62 @@
 jQuery(document).ready(function($) {
-    // Settings uploader
+
+	/*
+	var handler = StripeCheckout.configure({
+		key: 'pk_MjUEnZc8f1CNoADra328x2x9GV83U',
+		image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+		locale: 'auto',
+		token: function(token) {
+			// You can access the token ID with `token.id`.
+			// Get the token ID to your server-side code for use.
+		}
+	});
+
+	document.getElementById('affwp-upgrade-link').addEventListener('click', function(e) {
+		// Open Checkout with further options:
+		handler.open({
+			name: 'AffiliateWP',
+			description: 'License Upgrade',
+			amount: 2000
+		});
+		e.preventDefault();
+	});
+
+	// Close Checkout on page navigation:
+	window.addEventListener('popstate', function() {
+		handler.close();
+	});
+	*/
+
+	$('body').on('click', '.affwp-install-add-on', function(e) {
+
+		e.preventDefault();
+		var button = $(this);
+		
+		button.addClass('disabled').parent().append( '<span class="spinner is-active"></span>' );
+
+		$.ajax({
+			type: "POST",
+			data: {
+				action: 'affwp_install_add_on',
+				url: $(this).attr('href'),
+				name: $(this).data('name')
+			},
+			url: ajaxurl,
+			success: function (response) {
+				console.log( response );
+				
+				button.removeClass( 'disabled' ).parent().find( '.spinner' ).remove();
+			}
+
+		}).fail(function (response) {
+			if ( window.console && window.console.log ) {
+				console.log( response );
+			}
+		});
+
+	});
+
+	// Settings uploader
 	var file_frame;
 	window.formfield = '';
 
@@ -137,18 +194,18 @@ jQuery(document).ready(function($) {
 		});
 
 		file_frame.on( 'menu:render:default', function(view) {
-	        // Store our views in an object.
-	        var views = {};
+			// Store our views in an object.
+			var views = {};
 
-	        // Unset default menu items
-	        view.unset('library-separator');
-	        view.unset('gallery');
-	        view.unset('featured-image');
-	        view.unset('embed');
+			// Unset default menu items
+			view.unset('library-separator');
+			view.unset('gallery');
+			view.unset('featured-image');
+			view.unset('embed');
 
-	        // Initialize the views in our view object.
-	        view.set(views);
-	    });
+			// Initialize the views in our view object.
+			view.set(views);
+		});
 
 		// When an image is selected, run a callback.
 		file_frame.on( 'select', function() {
@@ -183,7 +240,7 @@ jQuery(document).ready(function($) {
 
 	function maybe_activate_migrate_users_button() {
 		var checked = $('#affiliate-wp-migrate-user-accounts input:checkbox:checked' ).length,
-		    $button = $('#affiliate-wp-migrate-user-accounts input[type=submit]');
+			$button = $('#affiliate-wp-migrate-user-accounts input[type=submit]');
 
 		if ( checked > 0 ) {
 			$button.prop( 'disabled', false );

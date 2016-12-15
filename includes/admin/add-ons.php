@@ -6,6 +6,9 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+include_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
+
 /**
  * Add-ons Page
  *
@@ -52,7 +55,6 @@ function affwp_add_ons_admin() {
 			<?php
 
 			$add_ons = affwp_add_ons_get_feed( $active_tab );
-
 			if( empty( $add_ons['error'] ) ) {
 
 				foreach( $add_ons as $add_on ) {
@@ -71,10 +73,17 @@ function affwp_add_ons_admin() {
 							echo '<img class="wp-post-image" src="' . esc_url( $add_on->info->thumbnail ) . '"/>';
 						echo '</a>';
 						echo '<p>' . $add_on->info->excerpt . '</p>';
-						echo '<a href="' . esc_url( $url ) . '" class="button-secondary" target="_blank">' . __( 'Get this add-on', 'affiliate-wp' ) . '</a>';
+						echo '<a href="' . esc_url( $url ) . '" class="button-secondary" target="_blank">' . __( 'Learn more', 'affiliate-wp' ) . '</a>';
 
-						if( ! affwp_has_pro_add_on_access() ) {
+						if( ! affwp_has_pro_add_on_access() && 'pro' == $active_tab ) {
 							echo '<a href="#" class="alignright button-primary affwp-upgrade">' . __( 'Upgrade for access', 'affiliate-wp' ) . '</a>';
+						} else if( 'official-free' == $active_tab || ( affwp_has_pro_add_on_access() && 'pro' == $active_tab ) ) {
+							if( ! empty( $add_on->files[0]->file ) ) {
+
+								$install_url = $add_on->files[0]->file;
+								echo '<a href="' . esc_url( $install_url ) . '" class="alignright button-primary affwp-upgrade affwp-install-add-on" data-name="' . esc_attr( $add_on->info->title ) . '">' . __( 'Install now', 'affiliate-wp' ) . '</a>';
+							
+							}
 						}
 
 					echo '</div>';
@@ -84,6 +93,7 @@ function affwp_add_ons_admin() {
 			} else {
 				echo '<p>' . $response['error'] . '</p>';
 			}
+			echo '<pre>'; print_r( $add_ons ); echo '</pre>';
 			?>
 			<div class="affwp-add-ons-footer">
 				<a href="https://affiliatewp.com/addons/?utm_source=plugin-add-ons-page&utm_medium=plugin&utm_campaign=AffiliateWP%20Add-ons%20Page&utm_content=All%20Add-ons" class="button-primary" title="<?php _e( 'Browse all add-ons', 'affiliate-wp' ); ?>" target="_blank"><?php _e( 'Browse all add-ons', 'affiliate-wp' ); ?></a>
@@ -107,26 +117,7 @@ function affwp_add_ons_get_feed( $tab = 'pro' ) {
 
 	if ( false === $add_ons ) {
 
-		switch( $tab ) {
-
-			case 'pro' :
-
-				$category = 'pro-add-ons';
-				break;
-
-			case 'official-free' :
-
-				$category = 'official-free';
-				break;
-		}
-
-
-		$url = 'https://affiliatewp.com/edd-api/v2/products/?category=' . $category;
-
-		if ( 'pro' !== $tab ) {
-			$url = add_query_arg( array( 'display' => $tab ), $url );
-		}
-
+		$url  = 'https://affiliatewp.com/edd-api/v2/products/?number=100&category=' . $tab;
 		$feed = wp_remote_get( esc_url_raw( $url ), array( 'sslverify' => false ) );
 
 		if ( ! is_wp_error( $feed ) ) {
@@ -161,4 +152,51 @@ function affwp_sanitize_json_add_on_feed_item( $add_on ) {
 
 function affwp_has_pro_add_on_access() {
 	return affiliate_wp()->settings->is_license_pro_or_ultimate();
+}
+
+function affwp_process_add_on_install() {
+
+	$status  = array();
+	$url     = sanitize_text_field( $_POST['url'] );
+	$name    = sanitize_text_field( $_POST['name'] );
+	$result  = affwp_install_add_on( $url );
+
+	if ( is_wp_error( $result ) ) {
+		$status['errorCode']    = $result->get_error_code();
+		$status['errorMessage'] = $result->get_error_message();
+		wp_send_json_error( $status );
+	}
+
+	$status['data'] = $result;
+
+	wp_send_json_success( $status );
+
+}
+add_action( 'wp_ajax_affwp_install_add_on', 'affwp_process_add_on_install' );
+
+function affwp_install_add_on( $download_url = '' ) {
+
+	if( ! current_user_can( 'install_plugins' ) ) {
+		return new WP_Error( 'no_permission', __( 'You do not have permission to install add-ons' ) );
+	}
+
+	if( empty( $download_url ) ) {
+		return new WP_Error( 'missing_download', __( 'No download URL was provided' ) );
+	}
+
+	if( ! class_exists( 'Plugin_Upgrader' ) ) {
+		return new WP_Error( 'wp_46', __( 'Installing add-ons directly requires WordPress 4.6 or later' ) );
+	}
+
+	$args = array( 
+		'title'  => __( 'Installing add-on', 'affiliate-wp' ),
+		'url'    => admin_url( 'admin.php?page=affiliate-wp-add-ons' ),
+		'type'   => 'web',
+		'nonce'  => 'plugin-upload',
+	);
+
+	$skin     = new WP_Ajax_Upgrader_Skin();
+	$upgrader = new Plugin_Upgrader( $skin );
+	return $upgrader->install( $download_url );
+
 }

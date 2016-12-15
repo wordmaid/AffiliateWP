@@ -32,6 +32,7 @@ function affwp_is_admin_page() {
 		'affiliate-wp-settings',
 		'affwp-getting-started',
 		'affwp-what-is-new',
+		'affiliate-wp-add-ons',
 		'affwp-credits'
 	);
 
@@ -55,6 +56,7 @@ function affwp_admin_scripts() {
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 	wp_enqueue_script( 'affwp-admin', AFFILIATEWP_PLUGIN_URL . 'assets/js/admin' . $suffix . '.js', array( 'jquery', 'jquery-ui-autocomplete'  ), AFFILIATEWP_VERSION );
+	wp_enqueue_script( 'affwp-stripe', 'https://checkout.stripe.com/checkout.js' );
 	wp_localize_script( 'affwp-admin', 'affwp_vars', array(
 		'post_id'                 => isset( $post->ID ) ? $post->ID : null,
 		'affwp_version'           => AFFILIATEWP_VERSION,

@@ -107,7 +107,7 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export implements Export
 				 *
 				 * @since 1.9.5
 				 *
-				 * @param array           $line {
+				 * @param array           $referral_data {
 				 *     Single line of exported referral data
 				 *
 				 *     @type int    $affiliate_id  Affiliate ID.
@@ -124,7 +124,7 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export implements Export
 				 * }
 				 * @param \AffWP\Referral $referral Referral object.
 				 */
-				$data[] = apply_filters( 'affwp_referral_export_get_data_line', array(
+				$referral_data = apply_filters( 'affwp_referral_export_get_data_line', array(
 					'affiliate_id'  => $referral->affiliate_id,
 					'email'         => affwp_get_affiliate_email( $referral->affiliate_id ),
 					'name'          => affwp_get_affiliate_name( $referral->affiliate_id ),
@@ -132,7 +132,7 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export implements Export
 					'username'      => affwp_get_affiliate_login( $referral->affiliate_id ),
 					'amount'        => $referral->amount,
 					'currency'      => $referral->currency,
-					'description'   => str_replace(',', "\r\n", $referral->description),
+					'description'   => $referral->description,
 					'campaign'      => $referral->campaign,
 					'reference'     => $referral->reference,
 					'context'       => $referral->context,
@@ -140,6 +140,12 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export implements Export
 					'date'          => $referral->date
 				), $referral );
 
+				// Add slashing.
+				$data[] = array_map( function( $column ) {
+					return addslashes( preg_replace( "/\"/","'", $column ) );
+				}, $referral_data );
+
+				unset( $referral_data );
 			}
 
 		}

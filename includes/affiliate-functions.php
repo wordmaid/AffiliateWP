@@ -1372,7 +1372,7 @@ function affwp_get_active_affiliate_area_tab() {
 		}
 	}
 
-	if ( in_array( $active_tab, $tabs ) ) {
+	if ( $active_tab && in_array( $active_tab, $tabs ) ) {
 		$active_tab = $active_tab;
 	} elseif ( ! empty( $tabs ) ) {
 		$active_tab = reset( $tabs );

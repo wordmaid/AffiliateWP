@@ -112,11 +112,12 @@ class AffWP_Creatives_Table extends List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'name'       => __( 'Name', 'affiliate-wp' ),
-			'url'        => __( 'URL', 'affiliate-wp' ),
-			'shortcode'  => __( 'Shortcode', 'affiliate-wp' ),
-			'status'     => __( 'Status', 'affiliate-wp' ),
-			'actions'    => __( 'Actions', 'affiliate-wp' ),
+			'name'      => __( 'Name', 'affiliate-wp' ),
+			'url'       => __( 'URL', 'affiliate-wp' ),
+			'shortcode' => __( 'Shortcode', 'affiliate-wp' ),
+			'status'    => __( 'Status', 'affiliate-wp' ),
+			'image'     => __( 'Image', 'affiliate-wp' ),
+			'actions'   => __( 'Actions', 'affiliate-wp' ),
 		);
 
 		return $this->prepare_columns( $columns );
@@ -166,6 +167,25 @@ class AffWP_Creatives_Table extends List_Table {
 	 */
 	function column_url( $creative ) {
 		return $creative->url;
+	}
+
+	/**
+	 * Render the image column
+	 *
+	 * @access public
+	 * @since 2.0
+	 * @return string image src of creative
+	 */
+	function column_image( $creative ) {
+		global $wpdb;
+
+		// Get the creative's attachment ID based on the image URL
+		$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid = '%s';", $creative->image ) );
+
+		// Get the attachment ID
+		$attachment_id = $attachment ? (int) $attachment[0] : null;
+
+		return wp_get_attachment_image( $attachment_id, 'thumbnail' );
 	}
 
 	/**

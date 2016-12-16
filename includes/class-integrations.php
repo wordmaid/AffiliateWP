@@ -24,6 +24,7 @@ class Affiliate_WP_Integrations {
 			'optimizemember' => 'OptimizeMember',
 			'paypal'         => 'PayPal',
 			'pmp'            => 'Paid Memberships Pro',
+			'pms'            => 'Paid Member Subscriptions',
 			'rcp'            => 'Restrict Content Pro',
 			's2member'       => 's2Member',
 			'shopp'	         => 'Shopp',

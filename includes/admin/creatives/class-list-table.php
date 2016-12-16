@@ -116,7 +116,7 @@ class AffWP_Creatives_Table extends List_Table {
 			'url'       => __( 'URL', 'affiliate-wp' ),
 			'shortcode' => __( 'Shortcode', 'affiliate-wp' ),
 			'status'    => __( 'Status', 'affiliate-wp' ),
-			'image'     => __( 'Image', 'affiliate-wp' ),
+			'image'     => __( 'Image Preview', 'affiliate-wp' ),
 			'actions'   => __( 'Actions', 'affiliate-wp' ),
 		);
 

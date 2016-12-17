@@ -198,7 +198,7 @@ function affwp_migration_tab() {
 					<?php if ( $tool_is_compatible ) : ?>
 						<p><?php _e( 'Use this tool to create affiliate accounts for each of your existing WordPress user accounts that belong to the selected roles below.', 'affiliate-wp' ); ?></p>
 						<p><?php _e( '<strong>NOTE:</strong> Users that already have affiliate accounts will be skipped. Duplicate accounts will not be created.', 'affiliate-wp' ); ?></p>
-						<form method="get" id="affiliate-wp-migrate-user-accounts">
+						<form method="post" id="affiliate-wp-migrate-user-accounts" class="affwp-batch-form" data-batch_id="migrate-users">
 							<h4><span><?php _e( 'Select User Roles', 'affiliate-wp' ); ?></span></h4>
 							<?php foreach ( $roles as $role => $data ) : ?>
 								<?php $has_users = ! empty( $data['count'] ); ?>
@@ -208,9 +208,6 @@ function affwp_migration_tab() {
 								</label>
 								<br>
 							<?php endforeach; ?>
-							<input type="hidden" name="type" value="users"/>
-							<input type="hidden" name="part" value="affiliates"/>
-							<input type="hidden" name="page" value="affiliate-wp-migrate"/>
 							<p>
 								<input type="submit" value="<?php _e( 'Create Affiliate Accounts for Users', 'affiliate-wp' ); ?>" class="button" />
 							</p>

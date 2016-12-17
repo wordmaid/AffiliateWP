@@ -66,8 +66,7 @@ class Init {
 
 		// User Migration.
 		$this->register_process( 'migrate-users', array(
-			'class'       => 'Affiliate_WP_Migrate_Users',
-			'step_method' => 'do_users',
+			'class' => 'AffWP\Utils\Batch_Processor\Migrate_Users',
 		) );
 
 		// WP Affiliate Migration.

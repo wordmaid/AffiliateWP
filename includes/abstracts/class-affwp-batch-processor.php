@@ -25,18 +25,16 @@ abstract class Base {
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @abstract
 	 */
-	abstract public function init( $data = null );
+	public function init( $data = null ) {}
 
 	/**
 	 * Defines logic to execute prior to the next step in the process.
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @abstract
 	 */
-	abstract public function before_process_step();
+	public function before_process_step() {}
 
 	/**
 	 * Instantiates the batch processor.
@@ -66,9 +64,8 @@ abstract class Base {
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @abstract
 	 */
-	abstract public function after_process_step();
+	public function after_process_step() {}
 
 	/**
 	 * Defines logic to execute once batch processing is complete.

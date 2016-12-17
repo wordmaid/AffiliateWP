@@ -291,30 +291,52 @@ jQuery(document).ready(function($) {
 		 */
 		submit : function() {
 
-			var self = this;
+			var	self = this,
+				form = $( '.affwp-batch-form' );
 
-			$( document.body ).on( 'submit', '.affwp-batch-form', function( event ) {
+			form.on( 'submit', function( event ) {
 				event.preventDefault();
 
-				var submitButton = $(this).find( 'input[type="submit"]' );
+				var submitButton = $(this).find( 'input[type="submit"]' ),
+					$this        = $(this);
 
 				if ( ! submitButton.hasClass( 'button-disabled' ) ) {
 
-					var atts = $( this ).data();
-
-					var data = {
-						nonce: atts.nonce,
-						action: atts.batch_id
-					};
+					var	atts       = $( this ).data(),
+						formData   = form.serializeAssoc(),
+						stepData;
 
 					// Fire off Ajax request to confirm the batch and retrieve the method.
+					$.ajax( {
+						type: 'POST',
+						url: ajaxurl,
+						data: {
+							nonce: atts.nonce,
+							batch_id: atts.batch_id,
+							action: 'process_batch_request',
+							data: formData
+						},
+						dataType: "json",
+						success: function( response ) {
+							if ( response.success ) {
+								stepData = response.data;
+console.log( stepData );
+								// Disable the button.
+								// submitButton.addClass( 'button-disabled' );
+								$this.find('.notice-wrap').remove();
 
-					submitButton.addClass( 'button-disabled' );
-					$(this).find('.notice-wrap').remove();
-					$(this).append( '<div class="notice-wrap"><span class="spinner is-active"></span><div class="affwp-batch-progress"><div></div></div></div>' );
+								// Add the progress bar.
+								$this.append( '<div class="notice-wrap"><span class="spinner is-active"></span><div class="affwp-batch-progress"><div></div></div></div>' );
 
-					// start the process
-					self.process_step( 1, data, self );
+								// Start the process
+								self.process_step( 1, stepData, self );
+
+							} else {
+								console.log( response );
+							}
+						}
+					} );
+
 				}
 
 			} );
@@ -325,19 +347,18 @@ jQuery(document).ready(function($) {
 		 *
 		 * @since 2.0
 		 *
-		 * @param {integer}  step       Step in the process.
-		 * @param {string[]} data       Data to pass for the current step.
-		 * @param {string}   data.nonce Nonce for the request.
-		 * @param {object}   self       Instance.
+		 * @param {integer} step     Step in the process.
+		 * @param {string}  stepData Step data relevant to the current batch process.
+		 * @param {object}  self     Instance.
 		 */
-		process_step : function( step, data, self ) {
+		process_step : function( step, stepData, self ) {
 
 			$.ajax({
 				type: 'POST',
 				url: ajaxurl,
 				data: {
-					nonce: data.nonce,
-					action: data.action,
+					nonce: stepData.nonce,
+					action: stepData.action,
 					step: step,
 				},
 				dataType: "json",
@@ -366,14 +387,15 @@ jQuery(document).ready(function($) {
 							window.location = response.url;
 
 						}
-
 					} else {
+						console.log( 'hit' );
 						$('.affwp-batch-progress div').animate({
 							width: response.percentage + '%',
 						}, 50, function() {
 							// Animation complete.
 						});
-						self.process_step( parseInt( response.step ), data, self );
+
+						self.process_step( parseInt( response.step ), stepData, self );
 					}
 
 				}
@@ -394,4 +416,86 @@ jQuery(document).ready(function($) {
 	};
 	AffWP_Batch.init();
 
+	$.extend({
+		isArray: function (arr){
+			if (typeof arr == 'object'){
+				if (arr.constructor == Array){
+					return true;
+				}
+			}
+			return false;
+		},
+		arrayMerge: function (){
+			var a = {};
+			var n = 0;
+			var argv = $.arrayMerge.arguments;
+			for (var i = 0; i < argv.length; i++){
+				if ($.isArray(argv[i])){
+					for (var j = 0; j < argv[i].length; j++){
+						a[n++] = argv[i][j];
+					}
+					a = $.makeArray(a);
+				} else {
+					for (var k in argv[i]){
+						if (isNaN(k)){
+							var v = argv[i][k];
+							if (typeof v == 'object' && a[k]){
+								v = $.arrayMerge(a[k], v);
+							}
+							a[k] = v;
+						} else {
+							a[n++] = argv[i][k];
+						}
+					}
+				}
+			}
+			return a;
+		},
+		count: function (arr){
+			if ($.isArray(arr)){
+				return arr.length;
+			} else {
+				var n = 0;
+				for (var k in arr){
+					if (!isNaN(k)){
+						n++;
+					}
+				}
+				return n;
+			}
+		},
+	});
+
+	$.fn.extend({
+		serializeAssoc: function (){
+			var o = {
+				aa: {},
+				add: function (name, value){
+					var tmp = name.match(/^(.*)\[([^\]]*)\]$/);
+					if (tmp){
+						var v = {};
+						if (tmp[2])
+							v[tmp[2]] = value;
+						else
+							v[$.count(v)] = value;
+						this.add(tmp[1], v);
+					}
+					else if (typeof value == 'object'){
+						if (typeof this.aa[name] != 'object'){
+							this.aa[name] = {};
+						}
+						this.aa[name] = $.arrayMerge(this.aa[name], value);
+					}
+					else {
+						this.aa[name] = value;
+					}
+				}
+			};
+			var a = $(this).serializeArray();
+			for (var i = 0; i < a.length; i++){
+				o.add(a[i].name, a[i].value);
+			}
+			return o.aa;
+		}
+	});
 } );

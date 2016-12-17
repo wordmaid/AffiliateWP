@@ -6,6 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! class_exists( 'AffWP\Utils\Batch_Processor\Base' ) ) {
+	require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-batch-processor.php';
+}
+
 /**
  * Implements a batch processor for migrating existing users to affiliate accounts.
  *
@@ -36,18 +40,31 @@ class Migrate_Users extends Base {
 	public $roles = array();
 
 	/**
+	 * Initializes values needed following instantiation.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @param null|array $data Optional. Form data. Default null.
+	 */
+	public function init( $data = null ) {
+		if ( null !== $data && isset( $data['roles'] ) ) {
+			$this->roles = $data['roles'];
+		}
+	}
+
+	/**
 	 * Executes a single step in the batch process.
 	 *
 	 * @access public
 	 * @since  2.0
 	 *
 	 * @param int|string $step Step number or 'done'.
-	 * @return bool False if there is an error, otherwise true.
+	 * @return int|string Next step number or 'done'.
 	 */
 	public function process_step( $step ) {
 		if ( ! $this->roles ) {
-
-			return false;
+			return 'done';
 		}
 
 		$affiliate_user_ids = get_transient( 'affwp_migrate_users_user_ids' );
@@ -74,7 +91,7 @@ class Migrate_Users extends Base {
 		$users = get_users( $args );
 
 		if ( empty( $users ) ) {
-			return false;
+			return 'done';
 		}
 
 		$inserted = array();
@@ -93,7 +110,7 @@ class Migrate_Users extends Base {
 		}
 
 		if ( ! $inserted ) {
-			return false;
+			return 'done';
 		}
 
 		if ( ! $current_count = affiliate_wp()->utils->batch->get_stored_data( 'affwp_migrate_users_total_count' ) ) {
@@ -104,8 +121,9 @@ class Migrate_Users extends Base {
 
 		affiliate_wp()->utils->batch->store_data( 'affwp_migrate_users_total_count', $current_count, array( '%s', '%d', '%s' ) );
 
-		return true;
+		$step++;
 
+		return $step;
 	}
 
 	/**

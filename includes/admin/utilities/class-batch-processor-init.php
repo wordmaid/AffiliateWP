@@ -30,6 +30,7 @@ class Init {
 	 */
 	public function __construct() {
 
+		$this->includes();
 		$this->register_core_processes();
 
 		/**
@@ -40,6 +41,16 @@ class Init {
 		 * @since 2.0
 		 */
 		do_action( 'affwp_batch_processor_init', 9999 );
+	}
+
+	/**
+	 * Brings in core process files.
+	 *
+	 * @access public
+	 * @since  2.0
+	 */
+	public function includes() {
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-migrate-users.php';
 	}
 
 	/**
@@ -128,7 +139,7 @@ class Init {
 		if ( ! method_exists( $process_args['class'], $process_args['step_method'] )
 			|| empty( $process_args['step_method'] )
 		) {
-			$process_args['step_method'] = 'step_forward';
+			$process_args['step_method'] = 'process_step';
 		}
 
 		return $this->add_process( $batch_id, $process_args['class'], $process_args['step_method'] );
@@ -175,7 +186,7 @@ class Init {
 	 * @return array|false Array of attributes for the batch process if registered, otherwise false.
 	 */
 	public function get( $batch_id ) {
-		if ( in_array( $batch_id, $this->batch_ids, true ) ) {
+		if ( array_key_exists( $batch_id, $this->batch_ids ) ) {
 			return $this->batch_ids[ $batch_id ];
 		}
 		return false;

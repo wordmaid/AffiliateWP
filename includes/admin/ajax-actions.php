@@ -118,7 +118,6 @@ function affwp_process_batch_request() {
 	$response['nonce']  = wp_create_nonce( "{$batch_id}_step_nonce" );
 	$response['action'] = "{$batch_id}_process_step";
 
-	log_it( $response['action'] );
 	wp_send_json_success( $response );
 }
 add_action( 'wp_ajax_process_batch_request', 'affwp_process_batch_request' );

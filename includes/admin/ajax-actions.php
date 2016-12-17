@@ -89,10 +89,36 @@ add_action( 'wp_ajax_affwp_search_users', 'affwp_search_users' );
 function affwp_process_batch_request() {
 	// Nonce check.
 
-	if ( ! isset( $_REQUEST['batch_id'] )
-		|| isset( $_REQUEST['batch_id'] ) && false === affiliate_wp()->utils->batch->get( $_REQUEST['batch_id'] )
-	) {
+	if ( ! isset( $_REQUEST['batch_id'] ) ) {
+		wp_send_json_error();
+	} else {
+		$batch_id = sanitize_key( $_REQUEST['batch_id'] );
+	}
+
+	if ( $batch_id && false === $batch = affiliate_wp()->utils->batch->get( $batch_id ) ) {
 		wp_send_json_error();
 	}
+
+	// At this point, there's a valid batch process, so instantiate it.
+	$process = new $batch['class'];
+
+	// Build the response.
+	$response = array();
+
+	// Pass any data to the instance.
+	if ( isset( $_REQUEST['data'] ) ) {
+		$response = $_REQUEST['data'];
+
+		// Pass the data to the process instance.
+		if ( method_exists( $batch['class'], 'init' ) ) {
+			$process->init( $response );
+		}
+	}
+
+	$response['nonce']  = wp_create_nonce( "{$batch_id}_step_nonce" );
+	$response['action'] = "{$batch_id}_process_step";
+
+	log_it( $response['action'] );
+	wp_send_json_success( $response );
 }
 add_action( 'wp_ajax_process_batch_request', 'affwp_process_batch_request' );

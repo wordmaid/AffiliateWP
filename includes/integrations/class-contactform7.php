@@ -49,9 +49,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * @since   2.0
 	 */
 	public function include_cf7_functions() {
-		if( class_exists( 'WPCF7' ) ) {
-			require_once ( AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/extras/contactform7-functions.php' );
-		}
+		require_once ( AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/extras/contactform7-functions.php' );
 	}
 
 	public function get_enabled_forms() {

@@ -17,7 +17,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		$this->context = 'contactform7';
 
 		// Misc AffWP CF7 functions
-		add_action( 'wpcf7_admin_init', array( $this, 'include_cf7_functions' ) );
+		$this->include_cf7_functions();
 
 		// CF7 settings
 		add_filter( 'wpcf7_editor_panels', array( $this, 'register_settings' ) );

@@ -13,9 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 2.0
  *
- * @see \AffWP\Utils\Batch_Process\Base
+ * @see \AffWP\Utils\Batch_Process\With_PreFetch
  */
-class Migrate_Users implements Batch_Process\Base {
+class Migrate_Users implements Batch_Process\With_PreFetch {
 
 	/**
 	 * Batch process ID.

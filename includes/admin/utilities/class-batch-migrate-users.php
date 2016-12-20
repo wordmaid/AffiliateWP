@@ -8,18 +8,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'AffWP\Utils\Batch_Processor\Base' ) ) {
-	require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-batch-process.php';
-}
-
 /**
  * Implements a batch processor for migrating existing users to affiliate accounts.
  *
  * @since 2.0
  *
- * @see \AffWP\Utils\Batch_Processor\Base
+ * @see \AffWP\Utils\Batch_Process\Base
  */
-class Migrate_Users extends Batch_Process\Base {
+class Migrate_Users implements Batch_Process\Base {
 
 	/**
 	 * Batch process ID.

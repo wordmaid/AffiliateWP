@@ -50,6 +50,8 @@ class Registry {
 	 * @since  2.0
 	 */
 	public function includes() {
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-batch-process.php';
+
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-migrate-users.php';
 	}
 

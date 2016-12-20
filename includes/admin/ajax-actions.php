@@ -87,40 +87,60 @@ add_action( 'wp_ajax_affwp_search_users', 'affwp_search_users' );
  * @since 2.0
  */
 function affwp_process_batch_request() {
+	// Batch ID.
 	if ( ! isset( $_REQUEST['batch_id'] ) ) {
-		wp_send_json_error();
+		wp_send_json_error( array( 'step' => 'done' ) );
 	} else {
 		$batch_id = sanitize_key( $_REQUEST['batch_id'] );
 	}
 
-	// Nonce check.
+	// Nonce.
 	if ( ! isset( $_REQUEST['nonce'] )
 	     || ( isset( $_REQUEST['nonce'] ) && false === wp_verify_nonce( $_REQUEST['nonce'], "{$batch_id}_step_nonce") )
 	) {
-		wp_send_json_error();
+		wp_send_json_error( array( 'step' => 'done' ) );
 	}
 
 	// Attempt to retrieve the batch attributes from memory.
-	if ( $batch_id && false === $batch = affiliate_wp()->utils->data->get( $batch_id ) ) {
-		wp_send_json_error();
+	if ( $batch_id && false === $batch = affiliate_wp()->utils->batch->get( $batch_id ) ) {
+		wp_send_json_error( array( 'step' => 'done' ) );
 	}
 
-	// Build the response.
-	$response = array();
+	$class = isset( $batch['class'] ) ? sanitize_text_field( $batch['class'] ) : '';
 
-	// Pass any data to the instance.
-	if ( isset( $_REQUEST['data'] ) ) {
-		$response = $_REQUEST['data'];
-
-		// Pass the data to the process instance.
-		if ( method_exists( $batch['class'], 'init' ) ) {
-			$process->init( $response );
-		}
+	if ( empty( $class ) || ! class_exists( $class ) ) {
+		wp_send_json_error( array( 'step' => 'done' ) );
 	}
 
-	$response['nonce']  = wp_create_nonce( "{$batch_id}_step_nonce" );
-	$response['action'] = "{$batch_id}_process_step";
+	// TODO: sanitize
+	$step = $_REQUEST['step'];
 
-	wp_send_json_success( $response );
+	/**
+	 * Instantiate the batch class.
+	 *
+	 * @var \AffWP\Utils\Batch_Process\Base $process
+	 */
+	$process = new $class;
+
+	// Initialize any data needed to process a step.
+	$data = isset( $_REQUEST['form'] ) ? $_REQUEST['form'] : array();
+	$process->init( $data );
+
+	// Handle pre-fetching data.
+	$process->pre_fetch();
+
+	/** @var int|string|\WP_Error $step */
+	$step = $process->process_step( $step );
+
+	if ( is_wp_error( $step ) ) {
+		wp_send_json_error( array( 'message' => $step->get_error_message() ) );
+	} elseif ( 'done' === $step ) {
+		$process->finish();
+
+		wp_send_json_success( array( 'step' => $step ) );
+	} else {
+		wp_send_json_error( array( 'step' => $step ) );
+	}
+
 }
 add_action( 'wp_ajax_process_batch_request', 'affwp_process_batch_request' );

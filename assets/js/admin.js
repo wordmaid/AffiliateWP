@@ -349,7 +349,7 @@ jQuery(document).ready(function($) {
 					console.log( response );
 
 
-					if( 'done' == response.data.step || response.error || response.success ) {
+					if( 'done' == response.data.step || response.data.error || response.success ) {
 
 						// We need to get the actual in progress form, not all forms on the page
 						var batch_form  = $('.affwp-batch-form').find('.affwp-batch-progress').parent().parent();
@@ -357,14 +357,14 @@ jQuery(document).ready(function($) {
 
 						batch_form.find('.button-disabled').removeClass('button-disabled');
 
-						if ( response.error ) {
+						if ( response.data.error ) {
 
-							var error_message = response.message;
+							var error_message = response.data.message;
 							notice_wrap.html('<div class="updated error"><p>' + error_message + '</p></div>');
 
 						} else if ( response.success ) {
 
-							var success_message = response.message;
+							var success_message = response.data.message;
 							notice_wrap.html('<div id="affwp-batch-success" class="updated notice is-dismissible"><p>' + success_message + '<span class="notice-dismiss"></span></p></div>');
 
 						} else {

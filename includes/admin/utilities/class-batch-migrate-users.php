@@ -71,15 +71,15 @@ class Migrate_Users extends Batch_Process\Base {
 	 * @since  2.0
 	 */
 	public function pre_fetch() {
-		$this->affiliate_user_ids = get_transient( 'affwp_migrate_users_user_ids' );
+		$affiliate_user_ids = affiliate_wp()->utils->data->get( 'affwp_migrate_users_user_ids' );
 
-		if ( false === $this->affiliate_user_ids ) {
-			$this->affiliate_user_ids = affiliate_wp()->affiliates->get_affiliates( array(
+		if ( false === $affiliate_user_ids ) {
+			$affiliate_user_ids = affiliate_wp()->affiliates->get_affiliates( array(
 				'number' => -1,
 				'fields' => 'user_id',
 			) );
 
-			set_transient( 'affwp_migrate_users_user_ids', $this->affiliate_user_ids, 10 * MINUTE_IN_SECONDS );
+			affiliate_wp()->utils->data->write( 'affwp_migrate_users_user_ids', $affiliate_user_ids );
 		}
 	}
 
@@ -102,17 +102,19 @@ class Migrate_Users extends Batch_Process\Base {
 	 * @since  2.0
 	 *
 	 * @param int|string $step Step number or 'done'.
-	 * @return int|string Next step number or 'done'.
+	 * @return int|string|\WP_Error Next step number, 'done', or a WP_Error object.
 	 */
 	public function process_step( $step ) {
 		if ( ! $this->roles ) {
-			return 'done';
+			return new \WP_Error( 'no_roles_found', __( 'No user roles were selected for migration.', 'affiliate-wp' ) );
 		}
+
+		$current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count' );
 
 		$args = array(
 			'number'     => 100,
 			'offset'     => ( $step - 1 ) * 100,
-			'exclude'    => $this->affiliate_user_ids,
+			'exclude'    => affiliate_wp()->utils->data->get( 'affwp_migrate_users_user_ids', array() ),
 			'orderby'    => 'ID',
 			'order'      => 'ASC',
 			'role__in'   => $this->roles,
@@ -140,11 +142,7 @@ class Migrate_Users extends Batch_Process\Base {
 
 		}
 
-		if ( ! $inserted ) {
-			return 'done';
-		}
-
-		if ( ! $current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count' ) ) {
+		if ( false === $current_count ) {
 			$current_count = 0;
 		}
 
@@ -152,7 +150,9 @@ class Migrate_Users extends Batch_Process\Base {
 
 		affiliate_wp()->utils->data->write( 'affwp_migrate_users_total_count', $current_count, array( '%s', '%d', '%s' ) );
 
-		return $step++;
+		$step++;
+
+		return $step;
 	}
 
 	/**
@@ -190,6 +190,7 @@ class Migrate_Users extends Batch_Process\Base {
 	 */
 	public function finish() {
 		// Clean up.
-		delete_transient( 'affwp_migrate_users_user_ids' );
+		affiliate_wp()->utils->data->delete( 'affwp_migrate_users_user_ids' );
+		affiliate_wp()->utils->data->delete( 'affwp_migrate_users_total_count' );
 	}
 }

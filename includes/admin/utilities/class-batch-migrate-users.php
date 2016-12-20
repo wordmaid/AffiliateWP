@@ -109,7 +109,7 @@ class Migrate_Users extends Batch_Process\Base {
 			return new \WP_Error( 'no_roles_found', __( 'No user roles were selected for migration.', 'affiliate-wp' ) );
 		}
 
-		$current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count' );
+		$current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count', 0 );
 
 		$args = array(
 			'number'     => 100,
@@ -140,10 +140,6 @@ class Migrate_Users extends Batch_Process\Base {
 
 			$inserted[] = affiliate_wp()->affiliates->insert( $args, 'affiliate' );
 
-		}
-
-		if ( false === $current_count ) {
-			$current_count = 0;
 		}
 
 		$current_count = $current_count + count( $inserted );

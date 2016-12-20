@@ -297,45 +297,23 @@ jQuery(document).ready(function($) {
 			form.on( 'submit', function( event ) {
 				event.preventDefault();
 
-				var submitButton = $(this).find( 'input[type="submit"]' ),
-					$this        = $(this);
+				var submitButton = $(this).find( 'input[type="submit"]' );
 
 				if ( ! submitButton.hasClass( 'button-disabled' ) ) {
 
-					var	atts       = $( this ).data(),
-						formData   = form.serializeAssoc(),
-						stepData;
+					var	atts = $( this ).data(),
+						data = form.serializeAssoc();
 
-					// Fire off Ajax request to confirm the batch and retrieve the method.
-					$.ajax( {
-						type: 'POST',
-						url: ajaxurl,
-						data: {
-							nonce: atts.nonce,
-							batch_id: atts.batch_id,
-							action: 'process_batch_request',
-							data: formData
-						},
-						dataType: "json",
-						success: function( response ) {
-							if ( response.success ) {
-								stepData = response.data;
-console.log( stepData );
-								// Disable the button.
-								// submitButton.addClass( 'button-disabled' );
-								$this.find('.notice-wrap').remove();
+					// Disable the button.
+					submitButton.addClass( 'button-disabled' );
 
-								// Add the progress bar.
-								$this.append( '<div class="notice-wrap"><span class="spinner is-active"></span><div class="affwp-batch-progress"><div></div></div></div>' );
+					$( this ).find('.notice-wrap').remove();
 
-								// Start the process
-								self.process_step( 1, stepData, self );
+					// Add the progress bar.
+					$( this ).append( '<div class="notice-wrap"><span class="spinner is-active"></span><div class="affwp-batch-progress"><div></div></div></div>' );
 
-							} else {
-								console.log( response );
-							}
-						}
-					} );
+					// Start the process.
+					self.process_step( 1, data, self );
 
 				}
 
@@ -347,18 +325,19 @@ console.log( stepData );
 		 *
 		 * @since 2.0
 		 *
-		 * @param {integer} step     Step in the process.
-		 * @param {string}  stepData Step data relevant to the current batch process.
-		 * @param {object}  self     Instance.
+		 * @param {integer}  step Step in the process.
+		 * @param {string[]} data Form data.
+		 * @param {object}   self Instance.
 		 */
-		process_step : function( step, stepData, self ) {
+		process_step : function( step, data, self ) {
 
 			$.ajax({
 				type: 'POST',
 				url: ajaxurl,
 				data: {
-					nonce: stepData.nonce,
-					action: stepData.action,
+					action: 'process_batch_request',
+					nonce: data.nonce,
+					form: data,
 					step: step,
 				},
 				dataType: "json",
@@ -395,7 +374,7 @@ console.log( stepData );
 							// Animation complete.
 						});
 
-						self.process_step( parseInt( response.step ), stepData, self );
+						self.process_step( parseInt( response.step ), data, self );
 					}
 
 				}

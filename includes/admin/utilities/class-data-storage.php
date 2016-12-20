@@ -17,12 +17,18 @@ class Data_Storage {
 	 * @access public
 	 * @since  2.0
 	 *
-	 * @param string $key The stored option key.
-	 * @return mixed|false The stored data, otherwise false.
+	 * @param string     $key     The stored option key.
+	 * @param null|mixed $default Optional. A default value to retrieve should `$value` be empty.
+	 *                            Default null.
+	 * @return mixed|false The stored data, value of `$default` if not null, otherwise false.
 	 */
-	public function get( $key ) {
+	public function get( $key, $default = null ) {
 		global $wpdb;
 		$value = $wpdb->get_var( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = '%s'", $key ) );
+
+		if ( empty( $value ) && ! is_null( $default ) ) {
+			$value = $default;
+		}
 
 		return empty( $value ) ? false : maybe_unserialize( $value );
 	}

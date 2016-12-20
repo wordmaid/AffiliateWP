@@ -1,4 +1,6 @@
 <?php
+use AffWP\Utils;
+
 /**
  * Utilities class for AffiliateWP.
  *
@@ -14,6 +16,15 @@ class Affiliate_WP_Utilities {
 	 * @var    \AffWP\Utils\Batch_Processor\Init
 	 */
 	public $batch;
+
+	/**
+	 * Temporary storage class instance variable.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    \AffWP\Utils\Storage\Init
+	 */
+	public $storage;
 
 	/**
 	 * Instantiates the utilities class.
@@ -34,6 +45,7 @@ class Affiliate_WP_Utilities {
 	 */
 	public function includes() {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-processor-init.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-temp-storage-init.php';
 	}
 
 	/**
@@ -43,6 +55,7 @@ class Affiliate_WP_Utilities {
 	 * @since  2.0
 	 */
 	public function setup_objects() {
-		$this->batch = new AffWP\Utils\Batch_Processor\Init;
+		$this->batch   = new Utils\Batch_Processor\Init;
+		$this->storage = new Utils\Storage\Init;
 	}
 }

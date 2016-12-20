@@ -346,8 +346,6 @@ jQuery(document).ready(function($) {
 				},
 				dataType: "json",
 				success: function( response ) {
-					console.log( response );
-
 
 					if( 'done' == response.data.step || response.data.error || response.success ) {
 

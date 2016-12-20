@@ -1,8 +1,8 @@
 <?php
-namespace AffWP\Utils\Batch_Processor;
+namespace AffWP\Utils\Batch_Process;
 
 /**
- * Base batch processor.
+ * Base process for batch processing.
  *
  * @since 2.0
  * @abstract
@@ -29,24 +29,12 @@ abstract class Base {
 	public function init( $data = null ) {}
 
 	/**
-	 * Defines logic to execute prior to the next step in the process.
+	 * Pre-fetches data to speed up processing.
 	 *
 	 * @access public
 	 * @since  2.0
 	 */
-	public function before_process_step() {}
-
-	/**
-	 * Instantiates the batch processor.
-	 *
-	 * @access public
-	 * @since  2.0
-	 */
-	public function __construct() {
-		if ( null !== $this->batch_id ) {
-			add_action( "wp_ajax_{$this->batch_id}_process_step", array( $this, 'process_step' ) );
-		}
-	}
+	public function pre_fetch() {}
 
 	/**
 	 * Processes a single step (batch).

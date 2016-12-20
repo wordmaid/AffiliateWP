@@ -1,5 +1,7 @@
 <?php
-namespace AffWP\Utils\Batch_Processor;
+namespace AffWP\Utils\Batch_Process;
+
+use AffWP\Utils\Batch_Process;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -7,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'AffWP\Utils\Batch_Processor\Base' ) ) {
-	require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-batch-processor.php';
+	require_once AFFILIATEWP_PLUGIN_DIR . 'includes/abstracts/class-affwp-batch-process.php';
 }
 
 /**
@@ -17,7 +19,7 @@ if ( ! class_exists( 'AffWP\Utils\Batch_Processor\Base' ) ) {
  *
  * @see \AffWP\Utils\Batch_Processor\Base
  */
-class Migrate_Users extends Base {
+class Migrate_Users extends Batch_Process\Base {
 
 	/**
 	 * Batch process ID.

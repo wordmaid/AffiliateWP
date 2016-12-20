@@ -1,5 +1,5 @@
 <?php
-namespace AffWP\Utils\Batch_Processor;
+namespace AffWP\Utils\Batch_Process;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -7,11 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Batch processor initialization class.
+ * Implements a batch process registry class.
  *
  * @since 2.0
  */
-class Init {
+class Registry {
 
 	/**
 	 * Batches processes ID registry.
@@ -40,7 +40,7 @@ class Init {
 		 *
 		 * @since 2.0
 		 */
-		do_action( 'affwp_batch_processor_init', 9999 );
+		do_action( 'affwp_batch_process_init', 9999 );
 	}
 
 	/**
@@ -66,7 +66,7 @@ class Init {
 
 		// User Migration.
 		$this->register_process( 'migrate-users', array(
-			'class' => 'AffWP\Utils\Batch_Processor\Migrate_Users',
+			'class' => 'AffWP\Utils\Batch_Process\Migrate_Users',
 		) );
 
 		// WP Affiliate Migration.

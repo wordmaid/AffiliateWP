@@ -9,11 +9,11 @@ use AffWP\Utils;
 class Affiliate_WP_Utilities {
 
 	/**
-	 * Batch processor class instance variable.
+	 * Batch process registry class instance variable.
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @var    \AffWP\Utils\Batch_Processor\Init
+	 * @var    \AffWP\Utils\Batch_Process\Registry
 	 */
 	public $batch;
 
@@ -44,7 +44,7 @@ class Affiliate_WP_Utilities {
 	 * @since  2.0
 	 */
 	public function includes() {
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-processor-init.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-process-registry.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-data-storage.php';
 	}
 
@@ -55,7 +55,7 @@ class Affiliate_WP_Utilities {
 	 * @since  2.0
 	 */
 	public function setup_objects() {
-		$this->batch = new Utils\Batch_Processor\Init;
+		$this->batch = new Utils\Batch_Process\Registry;
 		$this->data  = new Utils\Data_Storage;
 	}
 }

@@ -37,6 +37,17 @@ abstract class Base {
 	public function pre_fetch() {}
 
 	/**
+	 * Determines if the current user can perform the current batch process.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @abstract
+	 *
+	 * @return bool True if the current user has the needed capability, otherwise false.
+	 */
+	abstract public function can_process();
+
+	/**
 	 * Processes a single step (batch).
 	 *
 	 * @access public

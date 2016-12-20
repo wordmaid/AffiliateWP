@@ -42,6 +42,15 @@ class Migrate_Users extends Batch_Process\Base {
 	public $roles = array();
 
 	/**
+	 * IDs for existing affiliate users (to skip).
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    array
+	 */
+	public $affiliate_user_ids = array();
+
+	/**
 	 * Initializes values needed following instantiation.
 	 *
 	 * @access public
@@ -50,9 +59,40 @@ class Migrate_Users extends Batch_Process\Base {
 	 * @param null|array $data Optional. Form data. Default null.
 	 */
 	public function init( $data = null ) {
-		if ( null !== $data && isset( $data['roles'] ) ) {
+		if ( null !== $data && ! empty( $data['roles'] ) ) {
 			$this->roles = $data['roles'];
 		}
+	}
+
+	/**
+	 * Handles pre-fetching user IDs for accounts in migration.
+	 *
+	 * @access public
+	 * @since  2.0
+	 */
+	public function pre_fetch() {
+		$this->affiliate_user_ids = get_transient( 'affwp_migrate_users_user_ids' );
+
+		if ( false === $this->affiliate_user_ids ) {
+			$this->affiliate_user_ids = affiliate_wp()->affiliates->get_affiliates( array(
+				'number' => -1,
+				'fields' => 'user_id',
+			) );
+
+			set_transient( 'affwp_migrate_users_user_ids', $this->affiliate_user_ids, 10 * MINUTE_IN_SECONDS );
+		}
+	}
+
+	/**
+	 * Determines if the current user can run the user migration script.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @return bool True if the user has permission, otherwise false.
+	 */
+	public function can_process() {
+		return current_user_can( 'manage_affiliates' );
 	}
 
 	/**
@@ -69,21 +109,10 @@ class Migrate_Users extends Batch_Process\Base {
 			return 'done';
 		}
 
-		$affiliate_user_ids = get_transient( 'affwp_migrate_users_user_ids' );
-
-		if ( false === $affiliate_user_ids ) {
-			$affiliate_user_ids = affiliate_wp()->affiliates->get_affiliates( array(
-				'number' => -1,
-				'fields' => 'user_id',
-			) );
-
-			set_transient( 'affwp_migrate_users_user_ids', $affiliate_user_ids, 10 * MINUTE_IN_SECONDS );
-		}
-
 		$args = array(
 			'number'     => 100,
 			'offset'     => ( $step - 1 ) * 100,
-			'exclude'    => $affiliate_user_ids,
+			'exclude'    => $this->affiliate_user_ids,
 			'orderby'    => 'ID',
 			'order'      => 'ASC',
 			'role__in'   => $this->roles,

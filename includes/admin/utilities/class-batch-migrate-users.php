@@ -81,6 +81,21 @@ class Migrate_Users extends Batch_Process\Base {
 
 			affiliate_wp()->utils->data->write( 'affwp_migrate_users_user_ids', $affiliate_user_ids );
 		}
+
+		$total_to_migrate = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count' );
+
+		if ( false === $total_to_migrate ) {
+			$users = get_users( array(
+				'fields'   => 'ids',
+				'role__in' => $this->roles,
+				'number'   => -1,
+				'exclude'  => $affiliate_user_ids,
+			) );
+
+			$total_to_migrate = count( $users );
+
+			affiliate_wp()->utils->data->write( 'affwp_migrate_users_total_count', $total_to_migrate, array( '%s', '%d', '%s' ) );
+		}
 	}
 
 	/**

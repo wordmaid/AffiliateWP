@@ -73,7 +73,7 @@ jQuery(document).ready(function($) {
 
 	// datepicker
 	if( $('.affwp-datepicker').length ) {
-		$('.affwp-datepicker').datepicker();
+		$('.affwp-datepicker').datepicker({dateFormat: 'mm/dd/yy'});
 	}
 
 	// Ajax user search.

@@ -42,6 +42,15 @@ class Migrate_Users extends Batch_Process\Base {
 	public $roles = array();
 
 	/**
+	 * Number of users to migrate per step.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    int
+	 */
+	public $step_number = 100;
+
+	/**
 	 * IDs for existing affiliate users (to skip).
 	 *
 	 * @access public
@@ -127,8 +136,8 @@ class Migrate_Users extends Batch_Process\Base {
 		$current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_current_count', 0 );
 
 		$args = array(
-			'number'     => 100,
-			'offset'     => ( $step - 1 ) * 100,
+			'number'     => $this->step_number,
+			'offset'     => ( $step - 1 ) * $this->step_number,
 			'exclude'    => affiliate_wp()->utils->data->get( 'affwp_migrate_users_user_ids', array() ),
 			'orderby'    => 'ID',
 			'order'      => 'ASC',
@@ -182,7 +191,7 @@ class Migrate_Users extends Batch_Process\Base {
 		$total = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count', 0 );
 
 		if ( $total > 0 ) {
-			$percentage = ( ( 50 * $step ) / $total ) * 100;
+			$percentage = ( ( $this->step_number * $step ) / $total ) * 100;
 		}
 
 		if ( $percentage > 100 ) {

@@ -152,9 +152,7 @@ class Migrate_Users extends Batch_Process\Base {
 
 		affiliate_wp()->utils->data->write( 'affwp_migrate_users_total_count', $current_count, array( '%s', '%d', '%s' ) );
 
-		$step++;
-
-		return $step;
+		return $step++;
 	}
 
 	/**

@@ -145,8 +145,9 @@ function affwp_process_batch_request() {
 		if ( 'done' === $step ) {
 			$process->finish();
 
-			$data['status'] = 'done';
+			$data['done'] = true;
 		} else {
+			$data['done'] = false;
 			$data['percentage'] = $percentage;
 		}
 

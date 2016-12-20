@@ -347,7 +347,7 @@ jQuery(document).ready(function($) {
 				dataType: "json",
 				success: function( response ) {
 
-					if( 'done' == response.data.step || response.data.error || response.success ) {
+					if( response.data.done || response.data.error ) {
 
 						// We need to get the actual in progress form, not all forms on the page
 						var batch_form  = $('.affwp-batch-form').find('.affwp-batch-progress').parent().parent();
@@ -360,7 +360,7 @@ jQuery(document).ready(function($) {
 							var error_message = response.data.message;
 							notice_wrap.html('<div class="updated error"><p>' + error_message + '</p></div>');
 
-						} else if ( response.success ) {
+						} else if ( response.data.done ) {
 
 							var success_message = response.data.message;
 							notice_wrap.html('<div id="affwp-batch-success" class="updated notice is-dismissible"><p>' + success_message + '<span class="notice-dismiss"></span></p></div>');
@@ -372,7 +372,6 @@ jQuery(document).ready(function($) {
 
 						}
 					} else {
-						console.log( 'hit' );
 						$('.affwp-batch-progress div').animate({
 							width: response.data.percentage + '%',
 						}, 50, function() {

@@ -188,10 +188,11 @@ class Migrate_Users extends Batch_Process\Base {
 
 		$percentage = 0;
 
-		$total = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count', 0 );
+		$current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_current_count', 0 );
+		$total_count   = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count', 0 );
 
-		if ( $total > 0 ) {
-			$percentage = ( ( $this->step_number * $step ) / $total ) * 100;
+		if ( $total_count > 0 ) {
+			$percentage = ( $current_count / $total_count ) * 100;
 		}
 
 		if ( $percentage > 100 ) {

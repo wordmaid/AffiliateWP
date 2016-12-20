@@ -301,8 +301,11 @@ jQuery(document).ready(function($) {
 
 				if ( ! submitButton.hasClass( 'button-disabled' ) ) {
 
-					var	atts = $( this ).data(),
-						data = form.serializeAssoc();
+					var data = {
+						batch_id: $( this ).data( 'batch_id' ),
+						nonce: $( this ).data( 'nonce' ),
+						form: form.serializeAssoc(),
+					};
 
 					// Disable the button.
 					submitButton.addClass( 'button-disabled' );
@@ -335,14 +338,18 @@ jQuery(document).ready(function($) {
 				type: 'POST',
 				url: ajaxurl,
 				data: {
+					batch_id: data.batch_id,
 					action: 'process_batch_request',
 					nonce: data.nonce,
-					form: data,
-					step: step,
+					form: data.form,
+					step: step
 				},
 				dataType: "json",
 				success: function( response ) {
-					if( 'done' == response.step || response.error || response.success ) {
+					console.log( response );
+
+
+					if( 'done' == response.data.step || response.error || response.success ) {
 
 						// We need to get the actual in progress form, not all forms on the page
 						var batch_form  = $('.affwp-batch-form').find('.affwp-batch-progress').parent().parent();
@@ -363,18 +370,18 @@ jQuery(document).ready(function($) {
 						} else {
 
 							notice_wrap.remove();
-							window.location = response.url;
+							// window.location = response.url;
 
 						}
 					} else {
 						console.log( 'hit' );
 						$('.affwp-batch-progress div').animate({
-							width: response.percentage + '%',
+							width: response.data.percentage + '%',
 						}, 50, function() {
 							// Animation complete.
 						});
 
-						self.process_step( parseInt( response.step ), data, self );
+						self.process_step( parseInt( response.data.step ), data, self );
 					}
 
 				}

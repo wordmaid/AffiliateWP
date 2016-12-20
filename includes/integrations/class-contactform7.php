@@ -23,7 +23,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		$this->context = 'contactform7';
 
-		$this->supported_gateways = $this->supported_gateways();
+		$this->supported_gateways = $this->get_supported_gateways();
 
 		// Misc AffWP CF7 functions
 		$this->include_cf7_functions();

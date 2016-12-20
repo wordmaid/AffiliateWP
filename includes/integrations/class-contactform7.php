@@ -349,10 +349,11 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			return 'paypal_2';
 
 		} else {
-			// TODO: Define generic payment gateway support functionality
 
 			// Bail, since neither of the PayPal payment
 			// gateways are configured for this form ID.
+
+			// TODO: Define generic payment gateway support functionality
 			return false;
 		}
 
@@ -391,7 +392,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 */
 	public function settings_tab_content( $cf7 ) {
 
-		// Check for Flamingo (plugin slug: `flamingo`).
+		// Check for Flamingo
 		if ( ! $this->has_flamingo() ) {
 			echo $this->flamingo_required_notice();
 			return;
@@ -401,41 +402,46 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		$referral_rate = get_post_meta( $post_id, 'referral_rate', true );
 
-		// Check for PayPal extension (plugin slug: `contact-form-7-paypal-add-on`)
-		$paypal_addon_1_enabled = $this->get_form_active_gateway( $post_id );
+		// Check for active CF7 payment gateway for this form
+		// (either `contact-form-7-paypal-add-on` or `contact-form-7-paypal-extension`).
+		$gateway = $this->get_form_active_gateway( $post_id );
 
-		// Check for PayPal extension (plugin slug: `contact-form-7-paypal-extension`)
-		$paypal_addon_2_enabled = $this->paypal_addon_2_enabled( $post_id );
 
 		// Form label message
 		$label_message = __( 'Specify a custom referral rate for this form (optional)', 'affiliate-wp' );
-?>
-		<div id='additional_settings-sortables' class='meta-box-sortables ui-sortable'>
 
-			<div id='additionalsettingsdiv' class='postbox'>
+		// $output  = "<form method='post' action='" . esc_url( admin_url( 'admin.php?page=wpcf7&tab=4' ) ) . "'>";
+		$output = "";
+		$output .= "<form>";
+		$output = "<div id='additional_settings-sortables' class='meta-box-sortables ui-sortable'>";
 
-				<div class='handlediv' title='<?php _e( 'Click to toggle', 'affiliate-wp', 'Title for an element which toggles the Contact Form 7 integration settings page tab.' ); ?>'>
-					<br>
-				</div>
+		$output .= "<div id='additionalsettingsdiv' class='postbox'>";
 
-				<h3 class='hndle ui-sortable-handle'>
-					<span><?php _e( 'AffiliateWP Settings', 'affiliate-wp', 'Contact Form 7 settings tab label.' ); ?></span>
-				</h3>
+		$output .= "<div class='handlediv' title='" . __( 'Click to toggle', 'affiliate-wp', 'Title for an element which toggles the Contact Form 7 integration settings page tab.' ) . "'>";
 
-				<div class='inside'>
+		$output .= "</div>";
 
-					<div class='affwp-enabled'>
-						<input name='affwp_enabled' value='1' type='checkbox'" . checked($checked, 1) . " />
-						<label><?php echo $label_message ?></label>
-					</div>
+		$output .= "<h3 class='hndle ui-sortable-handle'>";
+		$output .= "<span>";
+		$output .= __( 'AffiliateWP Settings', 'affiliate-wp', 'Contact Form 7 settings tab label.' );
+		$output .= "</span>";
+		$output .= "</h3>";
+
+		$output .= "<div class='inside'>";
+
+		$output .= "<div class='affwp-referral-rate'>";
+		$output .= "<input name='referral_rate' value='" . get_post_meta( $post_id, 'referral_rate', true ) . "' type='text' />";
+		$output .= "<label>" . $label_message . "</label>";
+		$output .= "</div>";
 
 
-					<!-- </td></tr></table></form> -->
-				</div>
-			</div>
-		</div><!--/affwp settings-->
+		$output .= "</td></tr></table>";
+		$output .= "</form>";
+		$output .= "</div>";
+		$output .= "</div>";
+		$output .= "</div><!--/affwp settings-->";
 
-<?php
+		echo $output;
 	}
 
 	/**
@@ -453,14 +459,14 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		// wpcf7_form_hidden_fields filter
 
-		// error_log(print_r($_POST, true));
+		error_log(print_r( $_POST, true) );
 
-		// if ( $_POST['referral_rate'] ) {
-		// 	$affwp_enabled = sanitize_text_field( $_POST['referral_rate'] );
-		// 	update_post_meta( $post_id, "referral_rate", $referral_rate );
-		// } else {
-		// 	update_post_meta( $post_id, "referral_rate", 0 );
-		// }
+		if ( $_POST['referral_rate'] ) {
+			$referral_rate = sanitize_text_field( $_POST['referral_rate'] );
+			update_post_meta( $post_id, "referral_rate", $referral_rate );
+		} else {
+			update_post_meta( $post_id, "referral_rate", 0 );
+		}
 	}
 
 	/**

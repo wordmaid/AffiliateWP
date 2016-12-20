@@ -1,7 +1,13 @@
 <?php
-namespace AffWP\Utils\Storage;
+namespace AffWP\Utils;
 
-class Init {
+/**
+ * Initializes a temporary data storage engine used by core in various capacities.
+ *
+ * @since 2.0
+ * @access private
+ */
+class Data_Storage {
 
 	/**
 	 * Retrieves stored data by key.
@@ -9,7 +15,7 @@ class Init {
 	 * Given a key, get the information from the database directly.
 	 *
 	 * @access public
-	 * @since  1.9.5
+	 * @since  2.0
 	 *
 	 * @param string $key The stored option key.
 	 * @return mixed|false The stored data, otherwise false.
@@ -25,7 +31,7 @@ class Init {
 	 * Write some data based on key and value.
 	 *
 	 * @access public
-	 * @since  1.9.5
+	 * @since  2.0
 	 *
 	 * @param string $key     The option_name.
 	 * @param mixed  $value   The value to store.
@@ -56,7 +62,7 @@ class Init {
 	 * Deletes a piece of stored data by key.
 	 *
 	 * @access public
-	 * @since  1.9.5
+	 * @since  2.0
 	 *
 	 * @param string $key The stored option name to delete.
 	 */

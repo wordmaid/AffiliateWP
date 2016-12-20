@@ -22,7 +22,7 @@ class Affiliate_WP_Utilities {
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @var    \AffWP\Utils\Storage\Init
+	 * @var    \AffWP\Utils\Data_Storage
 	 */
 	public $storage;
 
@@ -56,6 +56,6 @@ class Affiliate_WP_Utilities {
 	 */
 	public function setup_objects() {
 		$this->batch   = new Utils\Batch_Processor\Init;
-		$this->storage = new Utils\Storage\Init;
+		$this->storage = new Utils\Data_Storage;
 	}
 }

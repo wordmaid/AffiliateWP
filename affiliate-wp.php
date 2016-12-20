@@ -5,11 +5,7 @@
  * Description: Affiliate Plugin for WordPress
  * Author: AffiliateWP, LLC
  * Author URI: https://affiliatewp.com
-<<<<<<< HEAD
  * Version: 2.0
-=======
- * Version: 1.9.6
->>>>>>> master
  * Text Domain: affiliate-wp
  * Domain Path: languages
  *
@@ -28,11 +24,7 @@
  * @package AffiliateWP
  * @category Core
  * @author Pippin Williamson
-<<<<<<< HEAD
  * @version 2.0
-=======
- * @version 1.9.6
->>>>>>> master
  */
 
 // Exit if accessed directly

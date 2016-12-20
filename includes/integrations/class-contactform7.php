@@ -463,6 +463,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		if ( $_POST['referral_rate'] ) {
 			$referral_rate = sanitize_text_field( $_POST['referral_rate'] );
+			$referral_rate = affwp_format_amount( absint( $referral_rate ) );
 			update_post_meta( $post_id, "referral_rate", $referral_rate );
 		} else {
 			update_post_meta( $post_id, "referral_rate", 0 );

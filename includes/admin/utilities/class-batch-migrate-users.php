@@ -113,13 +113,13 @@ class Migrate_Users extends Base {
 			return 'done';
 		}
 
-		if ( ! $current_count = affiliate_wp()->utils->storage->get( 'affwp_migrate_users_total_count' ) ) {
+		if ( ! $current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count' ) ) {
 			$current_count = 0;
 		}
 
 		$current_count = $current_count + count( $inserted );
 
-		affiliate_wp()->utils->storage->write( 'affwp_migrate_users_total_count', $current_count, array( '%s', '%d', '%s' ) );
+		affiliate_wp()->utils->data->write( 'affwp_migrate_users_total_count', $current_count, array( '%s', '%d', '%s' ) );
 
 		$step++;
 
@@ -137,7 +137,7 @@ class Migrate_Users extends Base {
 	 * @return mixed|false The stored data, otherwise false.
 	 */
 	public static function get_items_total( $key ) {
-		return affiliate_wp()->utils->storage->get( $key );
+		return affiliate_wp()->utils->data->get( $key );
 	}
 
 	/**
@@ -150,7 +150,7 @@ class Migrate_Users extends Base {
 	 * @param string $key The stored option name to delete.
 	 */
 	public static function clear_items_total( $key ) {
-		affiliate_wp()->utils->storage->delete( $key );
+		affiliate_wp()->utils->data->delete( $key );
 	}
 
 	/**

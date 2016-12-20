@@ -98,15 +98,15 @@ class Affiliate_WP_Migrate_Base {
 	 *
 	 * @access protected
 	 * @since  1.9.5
-	 * @deprecated 2.0 Use affiliate_wp()->utils->storage->get() instead.
+	 * @deprecated 2.0 Use affiliate_wp()->utils->data->get() instead.
 	 *
 	 * @param string $key The stored option key.
 	 * @return mixed|false The stored data, otherwise false.
 	 */
 	protected function get_stored_data( $key ) {
-		_deprecated_function( __METHOD__, '2.0', 'affiliate_wp()->utils->storage->get()' );
+		_deprecated_function( __METHOD__, '2.0', 'affiliate_wp()->utils->data->get()' );
 
-		return affiliate_wp()->utils->storage->get( $key );
+		return affiliate_wp()->utils->data->get( $key );
 	}
 
 	/**
@@ -120,7 +120,7 @@ class Affiliate_WP_Migrate_Base {
 	 * @return mixed|false The stored data, otherwise false.
 	 */
 	public static function get_items_total( $key ) {
-		return affiliate_wp()->utils->storage->get( $key );
+		return affiliate_wp()->utils->data->get( $key );
 	}
 
 	/**
@@ -128,7 +128,7 @@ class Affiliate_WP_Migrate_Base {
 	 *
 	 * @access protected
 	 * @since  1.9.5
-	 * @deprecated 2.0 Use affiliate_wp()->utils->storage->write() instead.
+	 * @deprecated 2.0 Use affiliate_wp()->utils->data->write() instead.
 	 *
 	 * @param string $key     The option_name.
 	 * @param mixed  $value   The value to store.
@@ -136,9 +136,9 @@ class Affiliate_WP_Migrate_Base {
 	 *                        Default empty (all strings).
 	 */
 	protected function store_data( $key, $value, $formats = array() ) {
-		_deprecated_function( __METHOD__, '2.0', 'affiliate_wp()->utils->storage->write()' );
+		_deprecated_function( __METHOD__, '2.0', 'affiliate_wp()->utils->data->write()' );
 
-		affiliate_wp()->utils->storage->write( $key, $value, $formats );
+		affiliate_wp()->utils->data->write( $key, $value, $formats );
 	}
 
 	/**
@@ -146,14 +146,14 @@ class Affiliate_WP_Migrate_Base {
 	 *
 	 * @access protected
 	 * @since  1.9.5
-	 * @deprecated 2.0 Use affiliate_wp()->utils->storage->delete() instead.
+	 * @deprecated 2.0 Use affiliate_wp()->utils->data->delete() instead.
 	 *
 	 * @param string $key The stored option name to delete.
 	 */
 	protected function delete_data( $key ) {
-		_deprecated_function( __METHOD__, '2.0', 'affiliate_wp()->utils->storage->delete()' );
+		_deprecated_function( __METHOD__, '2.0', 'affiliate_wp()->utils->data->delete()' );
 
-		affiliate_wp()->utils->storage->delete( $key );
+		affiliate_wp()->utils->data->delete( $key );
 	}
 
 	/**

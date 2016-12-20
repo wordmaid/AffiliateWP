@@ -18,13 +18,13 @@ class Affiliate_WP_Utilities {
 	public $batch;
 
 	/**
-	 * Temporary storage class instance variable.
+	 * Temporary data storage class instance variable.
 	 *
 	 * @access public
 	 * @since  2.0
 	 * @var    \AffWP\Utils\Data_Storage
 	 */
-	public $storage;
+	public $data;
 
 	/**
 	 * Instantiates the utilities class.
@@ -45,7 +45,7 @@ class Affiliate_WP_Utilities {
 	 */
 	public function includes() {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-processor-init.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-temp-storage-init.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-data-storage.php';
 	}
 
 	/**
@@ -55,7 +55,7 @@ class Affiliate_WP_Utilities {
 	 * @since  2.0
 	 */
 	public function setup_objects() {
-		$this->batch   = new Utils\Batch_Processor\Init;
-		$this->storage = new Utils\Data_Storage;
+		$this->batch = new Utils\Batch_Processor\Init;
+		$this->data  = new Utils\Data_Storage;
 	}
 }

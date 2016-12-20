@@ -167,6 +167,28 @@ class Migrate_Users extends Batch_Process\Base {
 	}
 
 	/**
+	 * Retrieves the calculated completion percentage.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @param int|string $step Current step.
+	 * @return int Percentage completed.
+	 */
+	public function get_percentage_complete( $step ) {
+
+		$percentage = 0;
+
+		$total = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count', 0 );
+
+		if ( $total > 0 ) {
+			$percentage = ( $step / $total ) * 100;
+		}
+
+		return $percentage;
+	}
+
+	/**
 	 * Retrieves the total count of migrated items.
 	 *
 	 * @access public

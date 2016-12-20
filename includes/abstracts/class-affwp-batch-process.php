@@ -59,6 +59,18 @@ abstract class Base {
 	abstract public function process_step( $step );
 
 	/**
+	 * Retrieves the calculated completion percentage.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @abstract
+	 *
+	 * @param int|string $step Current step.
+	 * @return int Percentage completed.
+	 */
+	abstract public function get_percentage_complete( $step );
+
+	/**
 	 * Defines logic to execute following the next step in the process.
 	 *
 	 * @access public

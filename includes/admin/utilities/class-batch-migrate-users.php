@@ -33,7 +33,7 @@ class Migrate_Users extends Batch_Process\Base {
 	/**
 	 * Roles to migrate found users from.
 	 *
-	 * Should be set following instantiation via __get().
+	 * Should be set following instantiation via __set().
 	 *
 	 * @access public
 	 * @since  2.0

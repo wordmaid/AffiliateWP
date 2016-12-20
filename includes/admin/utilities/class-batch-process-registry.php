@@ -69,48 +69,48 @@ class Registry {
 			'class' => 'AffWP\Utils\Batch_Process\Migrate_Users',
 		) );
 
-		// WP Affiliate Migration.
-		$this->register_process( 'migrate-wp-affiliate', array(
-			'class' => 'Affiliate_WP_Migrate_WP_Affiliate',
-		) );
-
-		// Affiliates Pro Migration.
-		$this->register_process( 'migrate-affiliates-pro', array(
-			'class' => 'Affiliate_WP_Migrate_Affiliates_Pro',
-		) );
+//		// WP Affiliate Migration.
+//		$this->register_process( 'migrate-wp-affiliate', array(
+//			'class' => 'Affiliate_WP_Migrate_WP_Affiliate',
+//		) );
+//
+//		// Affiliates Pro Migration.
+//		$this->register_process( 'migrate-affiliates-pro', array(
+//			'class' => 'Affiliate_WP_Migrate_Affiliates_Pro',
+//		) );
 
 		//
 		// Exporters
 		//
 
-		// Export Settings.
-		$this->register_process( 'export-settings', array(
-			'class' => 'AffWP\Utils\Exporter\Settings',
-		) );
-
-		// Export Affiliates.
-		$this->register_process( 'export-affiliates', array(
-			'class' => 'Affiliate_WP_Affiliate_Export',
-		) );
-
-		// Export Referrals.
-		$this->register_process( 'export-referrals', array(
-			'class' => 'Affiliate_WP_Referral_Export',
-		) );
-
-		// Export Referrals Payout.
-		$this->register_process( 'export-referrals-payout', array(
-			'class' => 'Affiliate_WP_Referral_Payout_Export',
-		) );
+//		// Export Settings.
+//		$this->register_process( 'export-settings', array(
+//			'class' => 'AffWP\Utils\Exporter\Settings',
+//		) );
+//
+//		// Export Affiliates.
+//		$this->register_process( 'export-affiliates', array(
+//			'class' => 'Affiliate_WP_Affiliate_Export',
+//		) );
+//
+//		// Export Referrals.
+//		$this->register_process( 'export-referrals', array(
+//			'class' => 'Affiliate_WP_Referral_Export',
+//		) );
+//
+//		// Export Referrals Payout.
+//		$this->register_process( 'export-referrals-payout', array(
+//			'class' => 'Affiliate_WP_Referral_Payout_Export',
+//		) );
 
 		//
 		// Importers
 		//
 
-		// Import Settings.
-		$this->register_process( 'import-settings', array(
-			'class' => 'non-existent (yet)',
-		) );
+//		// Import Settings.
+//		$this->register_process( 'import-settings', array(
+//			'class' => 'non-existent (yet)',
+//		) );
 	}
 
 	/**

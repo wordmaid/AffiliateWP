@@ -132,14 +132,25 @@ function affwp_process_batch_request() {
 	/** @var int|string|\WP_Error $step */
 	$step = $process->process_step( $step );
 
-	if ( is_wp_error( $step ) ) {
-		wp_send_json_error( array( 'message' => $step->get_error_message() ) );
-	} elseif ( 'done' === $step ) {
-		$process->finish();
+	$percentage = $process->get_percentage_complete( $step );
 
-		wp_send_json_success( array( 'step' => $step ) );
+	if ( is_wp_error( $step ) ) {
+		wp_send_json_error( $step );
 	} else {
-		wp_send_json_error( array( 'step' => $step ) );
+		$data = array(
+			'step' => $step
+		);
+
+		// Finish and set the status flag if done.
+		if ( 'done' === $step ) {
+			$process->finish();
+
+			$data['status'] = 'done';
+		} else {
+			$data['percentage'] = $percentage;
+		}
+
+		wp_send_json_success( $data );
 	}
 
 }

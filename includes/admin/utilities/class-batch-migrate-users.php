@@ -233,33 +233,6 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 	}
 
 	/**
-	 * Retrieves the total count of migrated items.
-	 *
-	 * @access public
-	 * @since  2.0
-	 * @static
-	 *
-	 * @param string $key The stored option key.
-	 * @return mixed|false The stored data, otherwise false.
-	 */
-	public static function get_items_total( $key ) {
-		return affiliate_wp()->utils->data->get( $key );
-	}
-
-	/**
-	 * Deletes the total count of migrated items.
-	 *
-	 * @access public
-	 * @since  2.0
-	 * @static
-	 *
-	 * @param string $key The stored option name to delete.
-	 */
-	public static function clear_items_total( $key ) {
-		affiliate_wp()->utils->data->delete( $key );
-	}
-
-	/**
 	 * Defines logic to execute after the batch processing is complete.
 	 *
 	 * @access public

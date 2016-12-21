@@ -92,6 +92,33 @@ class Affiliate_WP_Migrate_Base {
 	}
 
 	/**
+	 * Retrieves the total count of migrated items.
+	 *
+	 * @access public
+	 * @since  1.9.5
+	 * @static
+	 *
+	 * @param string $key The stored option key.
+	 * @return mixed|false The stored data, otherwise false.
+	 */
+	public static function get_items_total( $key ) {
+		return affiliate_wp()->utils->data->get( $key );
+	}
+
+	/**
+	 * Deletes the total count of migrated items.
+	 *
+	 * @access public
+	 * @since  1.9.5
+	 * @static
+	 *
+	 * @param string $key The stored option name to delete.
+	 */
+	public static function clear_items_total( $key ) {
+		affiliate_wp()->utils->data->delete( $key );
+	}
+
+	/**
 	 * Retrieves stored data by key.
 	 *
 	 * Given a key, get the information from the database directly.
@@ -106,20 +133,6 @@ class Affiliate_WP_Migrate_Base {
 	protected function get_stored_data( $key ) {
 		_deprecated_function( __METHOD__, '2.0', 'affiliate_wp()->utils->data->get()' );
 
-		return affiliate_wp()->utils->data->get( $key );
-	}
-
-	/**
-	 * Retrieves the total count of migrated items.
-	 *
-	 * @access public
-	 * @since  1.9.5
-	 * @static
-	 *
-	 * @param string $key The stored option key.
-	 * @return mixed|false The stored data, otherwise false.
-	 */
-	public static function get_items_total( $key ) {
 		return affiliate_wp()->utils->data->get( $key );
 	}
 
@@ -156,17 +169,4 @@ class Affiliate_WP_Migrate_Base {
 		affiliate_wp()->utils->data->delete( $key );
 	}
 
-	/**
-	 * Deletes the total count of migrated items.
-	 *
-	 * @access public
-	 * @since  1.9.5
-	 * @static
-	 *
-	 * @param string $key The stored option name to delete.
-	 */
-	public static function clear_items_total( $key ) {
-		$self = new self();
-		$self->delete_data( $key );
-	}
 }

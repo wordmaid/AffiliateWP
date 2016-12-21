@@ -139,12 +139,12 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 			return false;
 		}
 
-		if ( ! $current_count = $this->get_stored_data( 'affwp_migrate_users_current_count' ) ) {
+		if ( ! $current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_current_count' ) ) {
 			$current_count = 0;
 		}
 		$current_count = $current_count + count( $inserted );
 
-		$this->store_data( 'affwp_migrate_users_current_count', $current_count, array( '%s', '%d', '%s' ) );
+		affiliate_wp()->utils->data->write( 'affwp_migrate_users_current_count', $current_count, array( '%s', '%d', '%s' ) );
 
 		return true;
 	}

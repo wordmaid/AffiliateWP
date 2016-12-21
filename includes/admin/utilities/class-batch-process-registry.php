@@ -86,11 +86,6 @@ class Registry {
 		// Exporters
 		//
 
-//		// Export Settings.
-//		$this->register_process( 'export-settings', array(
-//			'class' => 'AffWP\Utils\Exporter\Settings',
-//		) );
-//
 //		// Export Affiliates.
 //		$this->register_process( 'export-affiliates', array(
 //			'class' => 'Affiliate_WP_Affiliate_Export',
@@ -106,14 +101,6 @@ class Registry {
 //			'class' => 'Affiliate_WP_Referral_Payout_Export',
 //		) );
 
-		//
-		// Importers
-		//
-
-//		// Import Settings.
-//		$this->register_process( 'import-settings', array(
-//			'class' => 'non-existent (yet)',
-//		) );
 	}
 
 	/**

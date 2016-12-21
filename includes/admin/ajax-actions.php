@@ -158,10 +158,8 @@ function affwp_process_batch_request() {
 			$response_data['done'] = true;
 			$response_data['message'] = $process->get_message( 'done' );
 
-			// Once all calculations have finished, run pre-fetch cleanup.
-			if ( $using_prefetch ) {
-				$process->finish();
-			}
+			// Once all calculations have finished, run cleanup.
+			$process->finish();
 		} else {
 			$response_data['done'] = false;
 			$response_data['percentage'] = $percentage;

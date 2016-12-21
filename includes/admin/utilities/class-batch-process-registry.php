@@ -36,11 +36,11 @@ class Registry {
 		/**
 		 * Fires during instantiation of the batch processing script.
 		 *
-		 * Processes not registered before priority 9999 will be ignored.
-		 *
 		 * @since 2.0
+		 *
+		 * @param \AffWP\Utils\Batch_Process\Registry $this Registry instance.
 		 */
-		do_action( 'affwp_batch_process_init', 9999 );
+		do_action( 'affwp_batch_process_init', $this );
 	}
 
 	/**

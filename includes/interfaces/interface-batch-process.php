@@ -40,13 +40,4 @@ Interface Base {
 	 */
 	public function get_percentage_complete( $step );
 
-	/**
-	 * Defines logic to execute once batch processing is complete.
-	 *
-	 * @access public
-	 * @since  2.0
-	 * @abstract
-	 */
-	public function finish();
-
 }

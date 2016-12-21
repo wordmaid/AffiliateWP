@@ -122,12 +122,16 @@ function affwp_process_batch_request() {
 	 */
 	$process = new $class;
 
-	// Initialize any data needed to process a step.
-	$data = isset( $_REQUEST['form'] ) ? $_REQUEST['form'] : array();
-	$process->init( $data );
+	$using_prefetch = ( $process instanceof \AffWP\Utils\Batch_Process\With_PreFetch );
 
 	// Handle pre-fetching data.
-	$process->pre_fetch();
+	if ( $using_prefetch ) {
+		// Initialize any data needed to process a step.
+		$data = isset( $_REQUEST['form'] ) ? $_REQUEST['form'] : array();
+
+		$process->init( $data );
+		$process->pre_fetch();
+	}
 
 	/** @var int|string|\WP_Error $step */
 	$step = $process->process_step( $step );
@@ -137,21 +141,21 @@ function affwp_process_batch_request() {
 	if ( is_wp_error( $step ) ) {
 		wp_send_json_error( $step );
 	} else {
-		$data = array(
-			'step' => $step
-		);
+		$response_data = array( 'step' => $step );
 
 		// Finish and set the status flag if done.
 		if ( 'done' === $step ) {
-			$process->finish();
+			if ( $using_prefetch ) {
+				$process->finish();
+			}
 
-			$data['done'] = true;
+			$response_data['done'] = true;
 		} else {
-			$data['done'] = false;
-			$data['percentage'] = $percentage;
+			$response_data['done'] = false;
+			$response_data['percentage'] = $percentage;
 		}
 
-		wp_send_json_success( $data );
+		wp_send_json_success( $response_data );
 	}
 
 }

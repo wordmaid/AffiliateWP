@@ -27,4 +27,14 @@ interface With_PreFetch extends Base {
 	 * @since  2.0
 	 */
 	public function pre_fetch();
+
+	/**
+	 * Defines logic to execute once batch processing is complete.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @abstract
+	 */
+	public function finish();
+
 }

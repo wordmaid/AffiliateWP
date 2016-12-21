@@ -89,7 +89,9 @@ add_action( 'wp_ajax_affwp_search_users', 'affwp_search_users' );
 function affwp_process_batch_request() {
 	// Batch ID.
 	if ( ! isset( $_REQUEST['batch_id'] ) ) {
-		wp_send_json_error( array( 'step' => 'done' ) );
+		wp_send_json_error( array(
+			'error' => __( 'A batch process ID must be present to continue.', 'affiliate-wp' )
+		) );
 	} else {
 		$batch_id = sanitize_key( $_REQUEST['batch_id'] );
 	}
@@ -98,22 +100,30 @@ function affwp_process_batch_request() {
 	if ( ! isset( $_REQUEST['nonce'] )
 	     || ( isset( $_REQUEST['nonce'] ) && false === wp_verify_nonce( $_REQUEST['nonce'], "{$batch_id}_step_nonce") )
 	) {
-		wp_send_json_error( array( 'step' => 'done' ) );
+		wp_send_json_error( array(
+			'error' => __( 'You do not have permission to initiate this request. Contact an administrator for more information.', 'affiliate-wp' )
+		) );
 	}
 
 	// Attempt to retrieve the batch attributes from memory.
 	if ( $batch_id && false === $batch = affiliate_wp()->utils->batch->get( $batch_id ) ) {
-		wp_send_json_error( array( 'step' => 'done' ) );
+		wp_send_json_error( array(
+			'error' => sprintf( __( '%s is an invalid batch process ID.', 'affiliate-wp' ), esc_html( $_REQUEST['batch_id'] ) )
+		) );
 	}
 
 	$class = isset( $batch['class'] ) ? sanitize_text_field( $batch['class'] ) : '';
 
 	if ( empty( $class ) || ! class_exists( $class ) ) {
-		wp_send_json_error( array( 'step' => 'done' ) );
+		wp_send_json_error( array(
+			'error' => sprintf( __( '%1$s is an invalid handler for the %2$s batch process. Please try again.', 'affiliate-wp' ),
+				"<code>{$class}</code>",
+				"<code>{$batch_id}</code>"
+			)
+		) );
 	}
 
-	// TODO: sanitize
-	$step = $_REQUEST['step'];
+	$step = sanitize_text_field( $_REQUEST['step'] );
 
 	/**
 	 * Instantiate the batch class.
@@ -145,11 +155,13 @@ function affwp_process_batch_request() {
 
 		// Finish and set the status flag if done.
 		if ( 'done' === $step ) {
+			$response_data['done'] = true;
+			$response_data['message'] = $process->get_message( 'done' );
+
+			// Once all calculations have finished, run pre-fetch cleanup.
 			if ( $using_prefetch ) {
 				$process->finish();
 			}
-
-			$response_data['done'] = true;
 		} else {
 			$response_data['done'] = false;
 			$response_data['percentage'] = $percentage;

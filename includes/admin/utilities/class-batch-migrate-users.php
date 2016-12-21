@@ -199,6 +199,40 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 	}
 
 	/**
+	 * Retrieves a message for the given code.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @param string $code Message code.
+	 * @return string Message.
+	 */
+	public function get_message( $code ) {
+
+		switch( $code ) {
+
+			case 'done':
+				$final_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_current_count', 0 );
+
+				$message = sprintf(
+					_n(
+						'%d affiliate was added successfully.',
+						'%d affiliates were added successfully.',
+						$final_count,
+						'affiliate-wp'
+					), number_format_i18n( $final_count )
+				);
+				break;
+
+			default:
+				$message = '';
+				break;
+		}
+
+		return $message;
+	}
+
+	/**
 	 * Retrieves the total count of migrated items.
 	 *
 	 * @access public

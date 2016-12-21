@@ -357,18 +357,15 @@ jQuery(document).ready(function($) {
 
 						if ( response.data.error ) {
 
-							var error_message = response.data.message;
-							notice_wrap.html('<div class="updated error"><p>' + error_message + '</p></div>');
+							notice_wrap.html('<div class="updated error"><p>' + response.data.error + '</p></div>');
 
 						} else if ( response.data.done ) {
 
-							var success_message = response.data.message;
-							notice_wrap.html('<div id="affwp-batch-success" class="updated notice is-dismissible"><p>' + success_message + '<span class="notice-dismiss"></span></p></div>');
+							notice_wrap.html('<div id="affwp-batch-success" class="updated notice is-dismissible"><p>' + response.data.message + '<span class="notice-dismiss"></span></p></div>');
 
 						} else {
 
 							notice_wrap.remove();
-							// window.location = response.url;
 
 						}
 					} else {

@@ -40,4 +40,15 @@ Interface Base {
 	 */
 	public function get_percentage_complete( $step );
 
+	/**
+	 * Retrieves a message based on the given message code.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @param string $code Message code.
+	 * @return string Message.
+	 */
+	public function get_message( $code );
+
 }

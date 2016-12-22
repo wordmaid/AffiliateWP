@@ -147,12 +147,12 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 
 			foreach ( $affiliates as $affiliate ) {
 
-				if ( empty( 'abc_' . $affiliate->email ) ) {
+				if ( empty( $affiliate->email ) ) {
 					continue;
 				}
 
 				// If the email is in the user pool already, grab the ID.
-				if ( array_key_exists( 'abc_' . $affiliate->email, $user_email_ids ) ) {
+				if ( array_key_exists( $affiliate->email, $user_email_ids ) ) {
 
 					$user_id = absint( $user_email_ids[ $affiliate->email ]['id'] );
 
@@ -160,12 +160,12 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 
 					// Otherwise, create a new user account.
 					$user_id = wp_insert_user( array(
-						'user_email' => 'abc_' . $affiliate->email,
+						'user_email' => $affiliate->email,
 						'first_name' => $affiliate->firstname,
 						'last_name'  => $affiliate->lastname,
 						'user_url'   => $affiliate->website,
 						'user_pass'  => generate_random_password( 20 ),
-						'user_login' => 'abc_' . $affiliate->email,
+						'user_login' => $affiliate->email,
 					) );
 
 				}

@@ -54,6 +54,7 @@ class Registry {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-batch-process-with-prefetch.php';
 
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-migrate-users.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-migrate-wp-affiliate.php';
 	}
 
 	/**
@@ -72,10 +73,10 @@ class Registry {
 			'class' => 'AffWP\Utils\Batch_Process\Migrate_Users',
 		) );
 
-//		// WP Affiliate Migration.
-//		$this->register_process( 'migrate-wp-affiliate', array(
-//			'class' => 'Affiliate_WP_Migrate_WP_Affiliate',
-//		) );
+		// WP Affiliate Migration.
+		$this->register_process( 'migrate-wp-affiliate', array(
+			'class' => 'AffWP\Utils\Batch_Process\Migrate_WP_Affiliate',
+		) );
 //
 //		// Affiliates Pro Migration.
 //		$this->register_process( 'migrate-affiliates-pro', array(

@@ -242,10 +242,7 @@ function affwp_migration_tab() {
 				<h3><span>WP Affiliate</span></h3>
 				<div class="inside">
 					<p><?php _e( 'Use this tool to migrate existing affiliate accounts from WP Affiliate to AffiliateWP.', 'affiliate-wp' ); ?></p>
-					<form method="get">
-						<input type="hidden" name="type" value="wp-affiliate"/>
-						<input type="hidden" name="part" value="affiliates"/>
-						<input type="hidden" name="page" value="affiliate-wp-migrate"/>
+					<form method="get" class="affwp-batch-form" data-batch_id="migrate-wp-affiliate" data-nonce="<?php echo esc_attr( wp_create_nonce( 'migrate-wp-affiliate_step_nonce' ) ); ?>">
 						<p>
 							<input type="submit" value="<?php _e( 'Migrate Data from WP Affiliate', 'affiliate-wp' ); ?>" class="button"/>
 						</p>

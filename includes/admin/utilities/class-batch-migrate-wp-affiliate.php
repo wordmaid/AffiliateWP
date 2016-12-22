@@ -76,8 +76,6 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 			affiliate_wp()->utils->data->write( "{$this->batch_id}_user_ids", $affiliate_user_ids );
 		}
 
-//		log_it( $affiliate_user_ids );
-
 		// Existing user emails and IDs
 		$existing_users = affiliate_wp()->utils->data->get( "{$this->batch_id}_user_email_ids" );
 
@@ -220,8 +218,7 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 
 		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
 		$total_count   = affiliate_wp()->utils->data->get( "{$this->batch_id}_total_count", 0 );
-log_it( $current_count );
-log_it( $total_count );
+
 		if ( $total_count > 0 ) {
 			$percentage = ( $current_count / $total_count ) * 100;
 		}

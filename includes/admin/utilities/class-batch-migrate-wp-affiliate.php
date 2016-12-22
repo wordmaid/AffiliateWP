@@ -136,7 +136,7 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 
 		$inserted = array();
 
-		if ( empty( $affiliate ) ) {
+		if ( empty( $affiliates ) ) {
 			return 'done';
 		}
 

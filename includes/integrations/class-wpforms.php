@@ -50,7 +50,12 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
         if ( ! $this->was_referred() && empty( $this->affiliate_id ) ) {
 			return;
 		}
-        
+
+        // prevent referral creation unless referrals enabled for this form
+        if ( ! $form_data['settings']['affwp_allow_referrals'] ) {
+			return;
+		}
+
         // get referral total
         $total          = wpforms_get_total_payment( $fields );
         $referral_total = $this->calculate_referral_amount( $total, $entry_id );

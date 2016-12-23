@@ -13,6 +13,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 		$this->context = 'wpforms';
 
         add_action( 'wpforms_process_complete', array( $this, 'add_pending_referral' ), 10, 4 );
+        add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 
 	}
 
@@ -55,6 +56,23 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 		$this->complete_referral( $entry_id );
 	}
 
+    /**
+	 * Sets up the reference link in the Referrals table
+	 *
+	 * @access  public
+	 * @since   2.0
+	*/
+	public function reference_link( $reference = 0, $referral ) {
+
+		if ( empty( $referral->context ) || 'wpforms' != $referral->context ) {
+			return $reference;
+		}
+
+		$url = admin_url( 'admin.php?page=wpforms-entries&view=details&entry_id=' . $reference );
+
+		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
+        
+	}
 
 }
 new Affiliate_WP_WPForms;

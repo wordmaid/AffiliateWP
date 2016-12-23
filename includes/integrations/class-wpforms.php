@@ -13,9 +13,30 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 		$this->context = 'wpforms';
 
         add_action( 'wpforms_process_complete', array( $this, 'add_pending_referral' ), 10, 4 );
+        add_action( 'wpforms_form_settings_general', array( $this, 'add_settings' ) );
+
         add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 
 	}
+
+    /**
+	 * Register the form-specific settings
+	 *
+	 * @since  2.0
+	 * @return void
+	 */
+    function add_settings() {
+
+        //  Enable affiliate referral creation for this form
+        wpforms_panel_field(
+			'checkbox',
+			'settings',
+			'affwp_allow_referrals',
+			$instance->form_data,
+			__( 'Allow referrals', 'wpforms' )
+		);
+
+    }
 
     /**
 	 * Records a pending referral when a pending payment is created
@@ -25,15 +46,17 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 	*/
 	public function add_pending_referral( $fields, $entry, $form_data, $entry_id ) {
 
+        // Return if the customer was not referred or the affiliate ID is empty
         if ( ! $this->was_referred() && empty( $this->affiliate_id ) ) {
 			return;
 		}
-
+        
         // get referral total
         $total          = wpforms_get_total_payment( $fields );
         $referral_total = $this->calculate_referral_amount( $total, $entry_id );
 
         // get description
+
         $description = $form_data['settings']['form_title'];
 
         // insert a pending referral
@@ -71,7 +94,6 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 		$url = admin_url( 'admin.php?page=wpforms-entries&view=details&entry_id=' . $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
-        
 	}
 
 }

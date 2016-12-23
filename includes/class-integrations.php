@@ -32,6 +32,7 @@ class Affiliate_WP_Integrations {
 			'woocommerce'    => 'WooCommerce',
 			'wpeasycart'     => 'WP EasyCart',
 			'wpec'           => 'WP eCommerce',
+			'wpforms'        => 'WPForms',
 			'wp-invoice'     => 'WP-Invoice',
 			'zippycourses'   => 'Zippy Courses',
 		) );

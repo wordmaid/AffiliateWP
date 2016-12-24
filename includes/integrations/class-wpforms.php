@@ -46,12 +46,14 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 	*/
 	public function add_pending_referral( $fields, $entry, $form_data, $entry_id ) {
 
+        $affiliate_id = $this->affiliate_id;
+
         // Return if the customer was not referred or the affiliate ID is empty
-        if ( ! $this->was_referred() && empty( $this->affiliate_id ) ) {
+        if ( ! $this->was_referred() && empty( $affiliate_id ) ) {
 			return;
 		}
 
-        // prevent referral creation unless referrals enabled for this form
+        // prevent referral creation unless referrals enabled for the form
         if ( ! $form_data['settings']['affwp_allow_referrals'] ) {
 			return;
 		}
@@ -67,7 +69,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
         }
 
         // Customers cannot refer themselves
-        if ( $this->is_affiliate_email( $customer_email, $this->affiliate_id ) ) {
+        if ( $this->is_affiliate_email( $customer_email, $affiliate_id ) ) {
 
             if ( $this->debug ) {
                 $this->log( 'Referral not created because affiliate\'s own account was used.' );
@@ -80,9 +82,13 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
         $total          = wpforms_get_total_payment( $fields );
         $referral_total = $this->calculate_referral_amount( $total, $entry_id );
 
-        // get description
-
+        // use form title as description
         $description = $form_data['settings']['form_title'];
+
+        // use products purchased as description
+        if ( $this->get_product_description( $fields ) ) {
+            $description = $this->get_product_description( $fields );
+        }
 
         // insert a pending referral
         $referral_id = $this->insert_pending_referral( $referral_total, $entry_id, $description );
@@ -119,6 +125,45 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 		$url = admin_url( 'admin.php?page=wpforms-entries&view=details&entry_id=' . $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
+	}
+
+    /**
+     * Builds an array of all the products purchased in the form
+     *
+     * @access  public
+     * @since   2.0
+     */
+    public function get_product_description( $fields = array() ) {
+
+        $description = array();
+
+        // get the customer email
+        foreach ( $fields as $field ) {
+
+            // single items
+            if ( $field['type'] === 'payment-single' ) {
+                $description[] = $field['name'];
+            }
+
+            // multiple items
+            if ( $field['type'] === 'payment-multiple' ) {
+                $description[] = $field['name'] . ' | ' . $field['value_choice'];
+            }
+
+        }
+
+        return implode( ', ', $description );
+
+    }
+
+    /**
+	 * Revoke referral on refund
+	 *
+	 * @access public
+     * @since 2.0
+	 */
+	public function revoke_referral_on_refund() {
+
 	}
 
 }

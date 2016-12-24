@@ -56,6 +56,26 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 			return;
 		}
 
+        $customer_email = '';
+
+        // get the customer email
+        foreach ( $fields as $field ) {
+            if ( $field['type'] === 'email' ) {
+                $customer_email = $field['value'];
+                break;
+            }
+        }
+
+        // Customers cannot refer themselves
+        if ( $this->is_affiliate_email( $customer_email, $this->affiliate_id ) ) {
+
+            if ( $this->debug ) {
+                $this->log( 'Referral not created because affiliate\'s own account was used.' );
+            }
+
+            return false;
+        }
+
         // get referral total
         $total          = wpforms_get_total_payment( $fields );
         $referral_total = $this->calculate_referral_amount( $total, $entry_id );

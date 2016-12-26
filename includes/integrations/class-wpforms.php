@@ -12,10 +12,9 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 
 		$this->context = 'wpforms';
 
-        add_action( 'wpforms_process_complete', array( $this, 'add_pending_referral' ), 10, 4 );
-        add_action( 'wpforms_form_settings_general', array( $this, 'add_settings' ) );
-
-        add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
+		add_action( 'wpforms_process_complete', array( $this, 'add_pending_referral' ), 10, 4 );
+		add_action( 'wpforms_form_settings_general', array( $this, 'add_settings' ) );
+		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 
 	}
 
@@ -27,8 +26,8 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 	 */
     function add_settings() {
 
-        //  Enable affiliate referral creation for this form
-        wpforms_panel_field(
+		//  Enable affiliate referral creation for this form
+		wpforms_panel_field(
 			'checkbox',
 			'settings',
 			'affwp_allow_referrals',

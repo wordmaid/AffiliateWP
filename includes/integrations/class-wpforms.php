@@ -24,7 +24,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 	 * @since  2.0
 	 * @return void
 	 */
-    function add_settings() {
+	public function add_settings() {
 
 		//  Enable affiliate referral creation for this form
 		wpforms_panel_field(
@@ -35,7 +35,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 			__( 'Allow referrals', 'wpforms' )
 		);
 
-    }
+	}
 
 	/**
 	 * Records a pending referral when a pending payment is created
@@ -132,28 +132,28 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 	 * @access  public
 	 * @since   2.0
 	*/
-    public function get_product_description( $fields = array() ) {
+	public function get_product_description( $fields = array() ) {
 
-        $description = array();
+		$description = array();
 
-        // get the customer email
-        foreach ( $fields as $field ) {
+		// get the customer email
+		foreach ( $fields as $field ) {
 
-            // single items
-            if ( $field['type'] === 'payment-single' ) {
-                $description[] = $field['name'];
-            }
+			// single items
+			if ( $field['type'] === 'payment-single' ) {
+				$description[] = $field['name'];
+			}
 
-            // multiple items
-            if ( $field['type'] === 'payment-multiple' ) {
-                $description[] = $field['name'] . ' | ' . $field['value_choice'];
-            }
+			// multiple items
+			if ( $field['type'] === 'payment-multiple' ) {
+				$description[] = $field['name'] . ' | ' . $field['value_choice'];
+			}
 
-        }
+		}
 
-        return implode( ', ', $description );
+		return implode( ', ', $description );
 
-    }
+	}
 
 	/**
 	 * Revoke referral on refund

@@ -18,7 +18,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 
 	}
 
-    /**
+	/**
 	 * Register the form-specific settings
 	 *
 	 * @since  2.0
@@ -37,7 +37,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 
     }
 
-    /**
+	/**
 	 * Records a pending referral when a pending payment is created
 	 *
 	 * @access  public
@@ -45,61 +45,61 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 	*/
 	public function add_pending_referral( $fields, $entry, $form_data, $entry_id ) {
 
-        $affiliate_id = $this->affiliate_id;
+		$affiliate_id = $this->affiliate_id;
 
-        // Return if the customer was not referred or the affiliate ID is empty
-        if ( ! $this->was_referred() && empty( $affiliate_id ) ) {
+		// Return if the customer was not referred or the affiliate ID is empty
+		if ( ! $this->was_referred() && empty( $affiliate_id ) ) {
 			return;
 		}
 
-        // prevent referral creation unless referrals enabled for the form
-        if ( ! $form_data['settings']['affwp_allow_referrals'] ) {
+		// prevent referral creation unless referrals enabled for the form
+		if ( ! $form_data['settings']['affwp_allow_referrals'] ) {
 			return;
 		}
 
-        $customer_email = '';
+		$customer_email = '';
 
-        // get the customer email
-        foreach ( $fields as $field ) {
-            if ( $field['type'] === 'email' ) {
-                $customer_email = $field['value'];
-                break;
-            }
-        }
+		// get the customer email
+		foreach ( $fields as $field ) {
+			if ( $field['type'] === 'email' ) {
+				$customer_email = $field['value'];
+				break;
+			}
+		}
 
-        // Customers cannot refer themselves
-        if ( $this->is_affiliate_email( $customer_email, $affiliate_id ) ) {
+		// Customers cannot refer themselves
+		if ( $this->is_affiliate_email( $customer_email, $affiliate_id ) ) {
 
-            if ( $this->debug ) {
-                $this->log( 'Referral not created because affiliate\'s own account was used.' );
-            }
+			if ( $this->debug ) {
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
+			}
 
-            return false;
-        }
+			return false;
+		}
 
-        // get referral total
-        $total          = wpforms_get_total_payment( $fields );
-        $referral_total = $this->calculate_referral_amount( $total, $entry_id );
+		// get referral total
+		$total          = wpforms_get_total_payment( $fields );
+		$referral_total = $this->calculate_referral_amount( $total, $entry_id );
 
-        // use form title as description
-        $description = $form_data['settings']['form_title'];
+		// use form title as description
+		$description = $form_data['settings']['form_title'];
 
-        // use products purchased as description
-        if ( $this->get_product_description( $fields ) ) {
-            $description = $this->get_product_description( $fields );
-        }
+		// use products purchased as description
+		if ( $this->get_product_description( $fields ) ) {
+			$description = $this->get_product_description( $fields );
+		}
 
-        // insert a pending referral
-        $referral_id = $this->insert_pending_referral( $referral_total, $entry_id, $description );
+		// insert a pending referral
+		$referral_id = $this->insert_pending_referral( $referral_total, $entry_id, $description );
 
-        // set the referral to "unpaid" if there's no total
-        if ( empty( $referral_total ) ) {
+		// set the referral to "unpaid" if there's no total
+		if ( empty( $referral_total ) ) {
 			$this->mark_referral_complete( $entry_id );
 		}
 
 	}
 
-    /**
+	/**
 	 * Sets a referral to unpaid when payment is completed
 	 *
 	 * @access  public
@@ -109,7 +109,7 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 		$this->complete_referral( $entry_id );
 	}
 
-    /**
+	/**
 	 * Sets up the reference link in the Referrals table
 	 *
 	 * @access  public
@@ -126,12 +126,12 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 	}
 
-    /**
-     * Builds an array of all the products purchased in the form
-     *
-     * @access  public
-     * @since   2.0
-     */
+	/**
+	 * Builds an array of all the products purchased in the form
+	 *
+	 * @access  public
+	 * @since   2.0
+	*/
     public function get_product_description( $fields = array() ) {
 
         $description = array();
@@ -155,12 +155,12 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 
     }
 
-    /**
+	/**
 	 * Revoke referral on refund
 	 *
 	 * @access public
-     * @since 2.0
-	 */
+	 * @since 2.0
+	*/
 	public function revoke_referral_on_refund() {
 
 	}

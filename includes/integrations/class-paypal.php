@@ -199,19 +199,6 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 			die( 'Missing visit or referral data' );
 		}
 
-		if( 'pending' !== $referral->status ) {
-
-			if( $this->debug ) {
-
-				$this->log( 'Referral has status other than Pending during process_ipn()' );
-
-			}
-
-			die( 'Referral not pending' );
-		}
-
-		$visit->set( 'referral_id', $referral->ID, true );
-
 		if( $this->debug ) {
 
 			$this->log( 'Referral ID (' . $referral->ID . ') successfully retrieved during process_ipn()' );
@@ -219,6 +206,19 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 		}
 
 		if( 'completed' === strtolower( $ipn_data['payment_status'] ) ) {
+
+			if( 'pending' !== $referral->status ) {
+
+				if( $this->debug ) {
+
+					$this->log( 'Referral has status other than Pending during process_ipn()' );
+
+				}
+
+				die( 'Referral not pending' );
+			}
+
+			$visit->set( 'referral_id', $referral->ID, true );
 
 			$reference   = sanitize_text_field( $ipn_data['txn_id'] );
 			$description = ! empty( $ipn_data['item_name'] ) ? sanitize_text_field( $ipn_data['item_name'] ) : sanitize_text_field( $ipn_data['payer_email'] );

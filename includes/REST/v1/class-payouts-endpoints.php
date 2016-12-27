@@ -45,7 +45,7 @@ class Endpoints extends Controller {
 				'callback'            => array( $this, 'get_items' ),
 				'args'                => $this->get_collection_params(),
 				'permission_callback' => function( $request ) {
-					return current_user_can( 'manage_affiliates' );
+					return current_user_can( 'manage_payouts' );
 				}
 			),
 			'schema' => array( $this, 'get_public_item_schema' ),
@@ -57,7 +57,7 @@ class Endpoints extends Controller {
 				'methods'             => \WP_REST_Server::READABLE,
 				'callback'            => array( $this, 'get_item' ),
 				'permission_callback' => function( $request ) {
-					return current_user_can( 'manage_affiliates' );
+					return current_user_can( 'manage_payouts' );
 				}
 			),
 			'schema' => array( $this, 'get_public_item_schema' ),

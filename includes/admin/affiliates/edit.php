@@ -120,7 +120,7 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 						<option value="inactive" <?php selected( $affiliate->status, 'inactive' ); ?>><?php _e( 'Inactive', 'affiliate-wp' ); ?></option>
 						<option value="pending" <?php selected( $affiliate->status, 'pending' ); ?>><?php _e( 'Pending', 'affiliate-wp' ); ?></option>
 					</select>
-					<p class="description"><?php _e( 'The status assigned to the affiliate&#8217;s account.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'The status assigned to the affiliate&#8217;s account. Updating the status could trigger account related events, such as email notifications.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>

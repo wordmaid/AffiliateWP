@@ -37,11 +37,11 @@ function affwp_visits_contextual_help() {
 		'title'	    => __( 'Overview', 'affiliate-wp' ),
 		'content'	=>
 			'<p>' . __( "This screen provides access to your site&#8217;s visit history.", 'affiliate-wp' ) . '</p>' .
-			'<p>' . __( "<strong>Landing Page</strong>: this is the page on your site that the visitor first landed on. It is the URL that the affiliate link pointed to.", 'affiliate-wp' ) . '</p>' . 
-			'<p>' . __( "<strong>Referring URL</strong>: this is the source URL of the affiliate link. It is the web page that the visitor found a link to your site on.", 'affiliate-wp' ) . '</p>' . 
-			'<p>' . __( "<strong>Affiliate</strong>: this the affiliate that the visit was attributed to.", 'affiliate-wp' ) . '</p>' . 
-			'<p>' . __( "<strong>Referral ID</strong>: this is the ID of the referral that was created from this visit, if any.", 'affiliate-wp' ) . '</p>' . 
-			'<p>' . __( "<strong>IP</strong>: this is the IP address of the visitor.", 'affiliate-wp' ) . '</p>' . 
+			'<p>' . __( "<strong>Landing Page</strong>: this is the page on your site that the visitor first landed on. It is the URL that the affiliate link pointed to.", 'affiliate-wp' ) . '</p>' .
+			'<p>' . __( "<strong>Referring URL</strong>: this is the source URL of the affiliate link. It is the web page that the visitor found a link to your site on.", 'affiliate-wp' ) . '</p>' .
+			'<p>' . __( "<strong>Affiliate</strong>: this the affiliate that the visit was attributed to.", 'affiliate-wp' ) . '</p>' .
+			'<p>' . __( "<strong>Referral ID</strong>: this is the ID of the referral that was created from this visit, if any.", 'affiliate-wp' ) . '</p>' .
+			'<p>' . __( "<strong>IP</strong>: this is the IP address of the visitor.", 'affiliate-wp' ) . '</p>' .
 			'<p>' . __( "<strong>Converted</strong>: this is a Yes / No status for whether the visit turned into a successful converstion.", 'affiliate-wp' ) . '</p>'
 	) );
 
@@ -60,6 +60,11 @@ function affwp_visits_contextual_help() {
 			</ul>'
 	) );
 
+	/**
+	 * Fires in the contextual-help area of the Visits admin screen.
+	 *
+	 * @param string $screen The current screen.
+	 */
 	do_action( 'affwp_visits_contextual_help', $screen );
 }
 add_action( 'load-affiliates_page_affiliate-wp-visits', 'affwp_visits_contextual_help' );

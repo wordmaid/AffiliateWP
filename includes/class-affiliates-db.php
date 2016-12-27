@@ -483,8 +483,16 @@ class Affiliate_WP_DB_Affiliates extends Affiliate_WP_DB {
 		$add = $this->insert( $args, 'affiliate' );
 
 		if ( $add ) {
+
+			/**
+			 * Fires immediately after an affiliate has been added to the database.
+			 *
+			 * @param array $add The affiliate data being added.
+       * @param array args The arguments passed to the insert method.
+			 */
 			do_action( 'affwp_insert_affiliate', $add, $args );
-			return $add;
+
+      return $add;
 		}
 
 		return false;

@@ -17,7 +17,14 @@ $notes            = affwp_get_affiliate_meta( $affiliate->affiliate_id, 'notes',
 
 	<form method="post" id="affwp_edit_affiliate">
 
-		<?php do_action( 'affwp_edit_affiliate_top', $affiliate ); ?>
+		<?php
+		/**
+		 * Fires at the top of the edit-affiliate admin screen, just inside of the form element.
+		 *
+		 * @param \AffWP\Affiliate $affiliate The affiliate object being edited.
+		 */
+		do_action( 'affwp_edit_affiliate_top', $affiliate );
+		?>
 
 		<table class="form-table">
 
@@ -185,7 +192,7 @@ $notes            = affwp_get_affiliate_meta( $affiliate->affiliate_id, 'notes',
 				</th>
 
 				<td>
-					<textarea name="promotion_methods" id="promotion_methods" style="width:50%;" disabled="disabled"><?php echo esc_html( $promotion_method ); ?></textarea>
+					<textarea name="promotion_methods" rows="5" cols="50" id="promotion_methods" class="large-text" disabled="disabled"><?php echo esc_html( $promotion_method ); ?></textarea>
 					<p class="description"><?php _e( 'Promotion methods entered by the affiliate during registration.', 'affiliate-wp' ); ?></p>
 				</td>
 
@@ -218,11 +225,25 @@ $notes            = affwp_get_affiliate_meta( $affiliate->affiliate_id, 'notes',
 				</tr>
 			<?php endif; ?>
 
-			<?php do_action( 'affwp_edit_affiliate_end', $affiliate ); ?>
+			<?php
+			/**
+			 * Fires at the end of the edit-affiliate admin screen form area, below form fields.
+			 *
+			 * @param \AffWP\Affiliate $affiliate The affiliate object being edited.
+			 */
+			do_action( 'affwp_edit_affiliate_end', $affiliate );
+			?>
 
 		</table>
 
-		<?php do_action( 'affwp_edit_affiliate_bottom', $affiliate ); ?>
+		<?php
+		/**
+		 * Fires at the bottom of the edit-affiliate admin screen, just before the submit button.
+		 *
+		 * @param \AffWP\Affiliate $affiliate The affiliate object being edited.
+		 */
+		do_action( 'affwp_edit_affiliate_bottom', $affiliate );
+		?>
 
 		<input type="hidden" name="affwp_action" value="update_affiliate" />
 

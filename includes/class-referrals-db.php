@@ -178,6 +178,11 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			return false;
 		}
 
+		// Bail early if there's nothing to update.
+		if ( empty( $data ) ) {
+			return true;
+		}
+
 		if( isset( $data['amount'] ) ) {
 			$data['amount'] = affwp_sanitize_amount( $data['amount'] );
 		}

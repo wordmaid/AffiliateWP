@@ -5,7 +5,7 @@
  * Description: Affiliate Plugin for WordPress
  * Author: AffiliateWP, LLC
  * Author URI: https://affiliatewp.com
- * Version: 1.9.5.1
+ * Version: 2.0
  * Text Domain: affiliate-wp
  * Domain Path: languages
  *
@@ -24,7 +24,7 @@
  * @package AffiliateWP
  * @category Core
  * @author Pippin Williamson
- * @version 1.9.5.1
+ * @version 2.0
  */
 
 // Exit if accessed directly
@@ -56,7 +56,7 @@ final class Affiliate_WP {
 	 * @since  1.0
 	 * @var    string
 	 */
-	private $version = '1.9.5.1';
+	private $version = '2.0';
 
 	/**
 	 * The affiliates DB instance variable.
@@ -201,6 +201,15 @@ final class Affiliate_WP {
 	 * @var    Affiliate_WP_REST
 	 */
 	public $REST;
+
+	/**
+	 * The capabilities class instance variable.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    Affiliate_WP_Capabilities
+	 */
+	public $capabilities;
 
 	/**
 	 * Main Affiliate_WP Instance
@@ -456,6 +465,7 @@ final class Affiliate_WP {
 		self::$instance->creative       = new Affiliate_WP_Creatives;
 		self::$instance->rewrites       = new Affiliate_WP_Rewrites;
 		self::$instance->REST           = new Affiliate_WP_REST;
+		self::$instance->capabilities   = new Affiliate_WP_Capabilities;
 
 		self::$instance->updater();
 	}
@@ -498,6 +508,12 @@ final class Affiliate_WP {
 
 		// Set filter for plugin's languages directory
 		$lang_dir = dirname( plugin_basename( AFFILIATEWP_PLUGIN_FILE ) ) . '/languages/';
+
+		/**
+		 * Filters the languages directory path to use for AffiliateWP.
+		 *
+		 * @param string $lang_dir The languages directory path.
+		 */
 		$lang_dir = apply_filters( 'aff_wp_languages_directory', $lang_dir );
 
 		// Traditional WordPress plugin locale filter
@@ -516,8 +532,8 @@ final class Affiliate_WP {
 		 * @var $get_locale The locale to use. Uses get_user_locale()` in WordPress 4.7 or greater,
 		 *                  otherwise uses `get_locale()`.
 		 */
-		$locale        = apply_filters( 'plugin_locale', $get_locale, 'affiliate-wp' );
-		$mofile        = sprintf( '%1$s-%2$s.mo', 'affiliate-wp', $locale );
+		$locale = apply_filters( 'plugin_locale', $get_locale, 'affiliate-wp' );
+		$mofile = sprintf( '%1$s-%2$s.mo', 'affiliate-wp', $locale );
 
 		// Setup paths to current locale file
 		$mofile_local  = $lang_dir . $mofile;

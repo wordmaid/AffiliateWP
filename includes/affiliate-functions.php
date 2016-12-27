@@ -1009,6 +1009,7 @@ function affwp_get_affiliate_campaigns( $affiliate = 0 ) {
  *     @type int    $referrals       Number of affiliate referrals.
  *     @type int    $visits          Number of visits.
  *     @type int    $user_id         User ID used to correspond to the affiliate.
+ *     @type string $notes           Notes about the affiliate for use by administrators.
  * }
  * @return int|false The ID for the newly-added affiliate, otherwise false.
  */

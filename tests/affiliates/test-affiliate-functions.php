@@ -1408,7 +1408,7 @@ class Tests extends UnitTestCase {
 			'notes'   => 'These are test notes'
 		) );
 
-		$this->assertEquals( 'These are test notes', affwp_get_affiliate_meta( $affiliate_id, 'notes' ) );
+		$this->assertEquals( 'These are test notes', affwp_get_affiliate_meta( $affiliate_id, 'notes', true ) );
 	}
 
 	/**
@@ -1455,7 +1455,7 @@ class Tests extends UnitTestCase {
 		) );
 
 		$this->assertTrue( $updated );
-		$this->assertEquals( 'These are test notes', affwp_get_affiliate_meta( $affiliate_id, 'notes' ) );
+		$this->assertEquals( 'These are test notes', affwp_get_affiliate_meta( $affiliate_id, 'notes' ), true );
 	}
 
 	/**

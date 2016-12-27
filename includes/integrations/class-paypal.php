@@ -304,7 +304,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 
 		$verified = false;
 		$endpoint = array_key_exists( 'test_ipn', $post_data ) ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr';
-		$args     = array_merge( array( 'cmd' => '_notify-validate' ),  $post_data );
+		$args     = array_map( 'stripslashes', array_merge( array( 'cmd' => '_notify-validate' ),  $post_data ) );
 
 		if( $this->debug ) {
 

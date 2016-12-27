@@ -137,8 +137,6 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 			'subscr_payment',
 			'express_checkout',
 			'recurring_payment',
-			'subscr_payment',
-
 		);
 
 		if( ! in_array( $ipn_data['txn_type'], $to_process ) ) {

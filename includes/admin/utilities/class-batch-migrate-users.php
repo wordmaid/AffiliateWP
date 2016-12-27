@@ -47,15 +47,6 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 	public $step_number = 100;
 
 	/**
-	 * IDs for existing affiliate users (to skip).
-	 *
-	 * @access public
-	 * @since  2.0
-	 * @var    array
-	 */
-	public $affiliate_user_ids = array();
-
-	/**
 	 * Initializes values needed following instantiation.
 	 *
 	 * @access public

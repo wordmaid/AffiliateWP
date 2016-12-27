@@ -1401,6 +1401,19 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_add_affiliate()
 	 */
+	public function test_add_affiliate_with_notes() {
+		
+		$affiliate_id = affwp_add_affiliate( array(
+			'user_id' => $this->factory->user->create(),
+			'notes'   => 'These are test notes'
+		) );
+
+		$this->assertEquals( 'These are test notes', affwp_get_affiliate_meta( $affiliate_id, 'notes' ) );
+	}
+
+	/**
+	 * @covers ::affwp_add_affiliate()
+	 */
 	public function test_add_affiliate_for_user_already_an_affiliate_should_return_false() {
 		$this->assertFalse( affwp_add_affiliate( self::$users[0] ) );
 	}

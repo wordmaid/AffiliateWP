@@ -139,7 +139,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 			'recurring_payment',
 		);
 
-		if( ! in_array( $ipn_data['txn_type'], $to_process ) ) {
+		if( ! empty( $ipn_data['txn_type'] ) && ! in_array( $ipn_data['txn_type'], $to_process ) ) {
 			return;
 		}
 

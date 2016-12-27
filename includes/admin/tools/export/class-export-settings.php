@@ -10,7 +10,7 @@
  */
 namespace AffWP\Utils\Exporter;
 
-use AffWP\Utils\Exporter\Base as Exporter;
+use AffWP\Utils\Exporter;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -19,8 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Implements an exporter for AffiliateWP settings.
  *
  * @since 2.0
+ *
+ * @see \AffWP\Utils\Exporter\Base
  */
-class Settings implements Exporter {
+class Settings implements Exporter\Base {
 
 	/**
 	 * Export type.

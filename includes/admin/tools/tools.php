@@ -278,7 +278,7 @@ function affwp_export_import_tab() {
 				<h3><span><?php _e( 'Export Affiliates', 'affiliate-wp' ); ?></span></h3>
 				<div class="inside">
 					<p><?php _e( 'Export affiliates to a CSV file.', 'affiliate-wp' ); ?></p>
-					<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-tools&tab=export_import' ); ?>">
+					<form method="post" enctype="multipart/form-data" class="affwp-batch-form" data-batch_id="export-affiliates" data-nonce="<?php echo esc_attr( wp_create_nonce( 'export-affiliates_step_nonce' ) ); ?>">
 						<p>
 							<select name="status" id="status">
 								<option value="0"><?php _e( 'All Statuses', 'affiliate-wp' ); ?></option>
@@ -288,8 +288,6 @@ function affwp_export_import_tab() {
 							</select>
 						</p>
 						<p>
-							<input type="hidden" name="affwp_action" value="export_affiliates" />
-							<?php wp_nonce_field( 'affwp_export_affiliates_nonce', 'affwp_export_affiliates_nonce' ); ?>
 							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'submit', false ); ?>
 						</p>
 					</form>

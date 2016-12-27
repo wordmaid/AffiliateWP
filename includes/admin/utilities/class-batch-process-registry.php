@@ -87,11 +87,11 @@ class Registry {
 		// Exporters
 		//
 
-//		// Export Affiliates.
-//		$this->register_process( 'export-affiliates', array(
-//			'class' => 'Affiliate_WP_Affiliate_Export',
-//		) );
-//
+		// Export Affiliates.
+		$this->register_process( 'export-affiliates', array(
+			'class' => '\AffWP\Utils\Batch_Process\Export_Affiliates',
+		) );
+
 //		// Export Referrals.
 //		$this->register_process( 'export-referrals', array(
 //			'class' => 'Affiliate_WP_Referral_Export',

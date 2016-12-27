@@ -120,7 +120,14 @@ class AffWP_Creatives_Table extends List_Table {
 			'actions'   => __( 'Actions', 'affiliate-wp' ),
 		);
 
-		return $this->prepare_columns( $columns );
+		/**
+		 * Filters the creatives list table columns.
+		 *
+		 * @param function               $prepared_columns Prepared columns.
+		 * @param array                  $columns          The columns for this list table.
+		 * @param \AffWP_Creatives_Table $this             List table instance.
+		 */
+		return apply_filters( 'affwp_creative_table_columns', $this->prepare_columns( $columns ), $columns, $this );
 	}
 
 	/**

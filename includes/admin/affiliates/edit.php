@@ -111,6 +111,11 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 
 				<td>
 					<select name="status" id="status">
+
+						<?php if ( 'rejected' === $affiliate->status ) : ?>
+							<option value="rejected" <?php selected( $affiliate->status, 'rejected' ); ?>><?php _e( 'Rejected', 'affiliate-wp' ); ?></option>
+						<?php endif; ?>
+
 						<option value="active" <?php selected( $affiliate->status, 'active' ); ?>><?php _e( 'Active', 'affiliate-wp' ); ?></option>
 						<option value="inactive" <?php selected( $affiliate->status, 'inactive' ); ?>><?php _e( 'Inactive', 'affiliate-wp' ); ?></option>
 						<option value="pending" <?php selected( $affiliate->status, 'pending' ); ?>><?php _e( 'Pending', 'affiliate-wp' ); ?></option>

@@ -1431,6 +1431,21 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::affwp_update_affiliate()
+	 */
+	public function test_update_affiliate_with_notes() {
+		$affiliate_id = $this->factory->affiliate->create();
+
+		$updated = affwp_update_affiliate( array(
+			'affiliate_id'  => $affiliate_id,
+			'notes'         => 'These are test notes'
+		) );
+
+		$this->assertTrue( $updated );
+		$this->assertEquals( 'These are test notes', affwp_get_affiliate_meta( $affiliate_id, 'notes' ) );
+	}
+
+	/**
 	 * @covers ::affwp_update_profile_settings()
 	 */
 	public function test_update_profile_settings_with_no_logged_in_user_should_return_false() {

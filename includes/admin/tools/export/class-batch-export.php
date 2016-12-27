@@ -1,6 +1,10 @@
 <?php
 namespace AffWP\Utils\Batch_Process;
 
+if ( ! class_exists( '\Affiliate_WP_Export' ) ) {
+	require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-export.php';
+}
+
 /**
  * Implements the base batch exporter as an intermediary between a batch process
  * and the base exporter class.

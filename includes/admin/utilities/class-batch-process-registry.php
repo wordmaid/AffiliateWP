@@ -50,11 +50,22 @@ class Registry {
 	 * @since  2.0
 	 */
 	public function includes() {
+		// Batch processing bootstrap.
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-batch-process.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-batch-process-with-prefetch.php';
 
+		// Exporters bootstrap.
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-base-exporter.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-csv-exporter.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-csv.php';
+
+		// Migration scripts.
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-migrate-users.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-migrate-wp-affiliate.php';
+
+		// Exporters.
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-affiliates.php';
 	}
 
 	/**

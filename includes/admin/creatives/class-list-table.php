@@ -180,10 +180,7 @@ class AffWP_Creatives_Table extends List_Table {
 		global $wpdb;
 
 		// Get the creative's attachment ID based on the image URL
-		$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid = '%s';", $creative->image ) );
-
-		// Get the attachment ID
-		$attachment_id = $attachment ? (int) $attachment[0] : null;
+		$attachment_id = attachment_url_to_postid( $creative->image );
 
 		return wp_get_attachment_image( $attachment_id, 'thumbnail' );
 	}

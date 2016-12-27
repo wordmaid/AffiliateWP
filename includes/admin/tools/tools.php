@@ -70,13 +70,20 @@ function affwp_get_tools_tabs() {
 
 	$tabs                  = array();
 	$tabs['export_import'] = __( 'Export / Import', 'affiliate-wp' );
-	$tabs['api_keys']      = __( 'API Keys', 'affiliate-wp' );
+
+	if ( current_user_can( 'manage_consumers' ) ) {
+		$tabs['api_keys'] = __( 'API Keys', 'affiliate-wp' );
+	}
+
 	$tabs['recount']       = __( 'Recount Stats', 'affiliate-wp' );
 	$tabs['migration']     = __( 'Migration Assistant', 'affiliate-wp' );
-	$tabs['system_info']   = __( 'System Info', 'affiliate-wp' );
+
+	if ( current_user_can( 'manage_affiliate_options' ) ) {
+		$tabs['system_info'] = __( 'System Info', 'affiliate-wp' );
+	}
 
 	if( affiliate_wp()->settings->get( 'debug_mode', false ) ) {
-		$tabs['debug']     = __( 'Debug Assistant', 'affiliate-wp' );
+		$tabs['debug'] = __( 'Debug Assistant', 'affiliate-wp' );
 	}
 
 	/**
@@ -473,6 +480,10 @@ add_action( 'admin_init', 'affwp_clear_debug_log' );
  * @since 1.9
  */
 function affwp_rest_api_keys_tab() {
+	if ( ! current_user_can( 'manage_consumers' ) ) {
+		return;
+	}
+
 	$keys_table = new \AffWP\REST\Admin\Consumers_Table;
 	$keys_table->prepare_items();
 

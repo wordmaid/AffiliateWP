@@ -67,7 +67,7 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 	 * @since  2.0
 	 */
 	public function pre_fetch() {
-		$affiliate_user_ids = affiliate_wp()->utils->data->get( 'affwp_migrate_users_user_ids' );
+		$affiliate_user_ids = affiliate_wp()->utils->data->get( "{$this->batch_id}_user_ids" );
 
 		if ( false === $affiliate_user_ids ) {
 			$affiliate_user_ids = affiliate_wp()->affiliates->get_affiliates( array(
@@ -75,10 +75,10 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 				'fields' => 'user_id',
 			) );
 
-			affiliate_wp()->utils->data->write( 'affwp_migrate_users_user_ids', $affiliate_user_ids );
+			affiliate_wp()->utils->data->write( "{$this->batch_id}_user_ids", $affiliate_user_ids );
 		}
 
-		$total_to_migrate = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count' );
+		$total_to_migrate = affiliate_wp()->utils->data->get( "{$this->batch_id}_total_count" );
 
 		if ( false === $total_to_migrate ) {
 			$users = get_users( array(
@@ -90,7 +90,7 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 
 			$total_to_migrate = count( $users );
 
-			affiliate_wp()->utils->data->write( 'affwp_migrate_users_total_count', $total_to_migrate, array( '%s', '%d', '%s' ) );
+			affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", $total_to_migrate, array( '%s', '%d', '%s' ) );
 		}
 	}
 
@@ -120,12 +120,12 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 			return new \WP_Error( 'no_roles_found', __( 'No user roles were selected for migration.', 'affiliate-wp' ) );
 		}
 
-		$current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_current_count', 0 );
+		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
 
 		$args = array(
 			'number'     => $this->step_number,
 			'offset'     => ( $step - 1 ) * $this->step_number,
-			'exclude'    => affiliate_wp()->utils->data->get( 'affwp_migrate_users_user_ids', array() ),
+			'exclude'    => affiliate_wp()->utils->data->get( "{$this->batch_id}_user_ids", array() ),
 			'orderby'    => 'ID',
 			'order'      => 'ASC',
 			'role__in'   => $this->roles,
@@ -155,7 +155,7 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 
 		$current_count = $current_count + count( $inserted );
 
-		affiliate_wp()->utils->data->write( 'affwp_migrate_users_current_count', $current_count, array( '%s', '%d', '%s' ) );
+		affiliate_wp()->utils->data->write( "{$this->batch_id}_current_count", $current_count, array( '%s', '%d', '%s' ) );
 
 		$step++;
 
@@ -175,8 +175,8 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 
 		$percentage = 0;
 
-		$current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_current_count', 0 );
-		$total_count   = affiliate_wp()->utils->data->get( 'affwp_migrate_users_total_count', 0 );
+		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
+		$total_count   = affiliate_wp()->utils->data->get( "{$this->batch_id}_total_count", 0 );
 
 		if ( $total_count > 0 ) {
 			$percentage = ( $current_count / $total_count ) * 100;
@@ -203,7 +203,7 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 		switch( $code ) {
 
 			case 'done':
-				$final_count = affiliate_wp()->utils->data->get( 'affwp_migrate_users_current_count', 0 );
+				$final_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
 
 				$message = sprintf(
 					_n(
@@ -231,8 +231,8 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 	 */
 	public function finish() {
 		// Clean up.
-		affiliate_wp()->utils->data->delete( 'affwp_migrate_users_user_ids' );
-		affiliate_wp()->utils->data->delete( 'affwp_migrate_users_total_count' );
-		affiliate_wp()->utils->data->delete( 'affwp_migrate_users_current_count' );
+		affiliate_wp()->utils->data->delete( "{$this->batch_id}_user_ids" );
+		affiliate_wp()->utils->data->delete( "{$this->batch_id}_total_count" );
+		affiliate_wp()->utils->data->delete( "{$this->batch_id}_current_count" );
 	}
 }

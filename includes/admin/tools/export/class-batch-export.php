@@ -16,6 +16,15 @@ if ( ! class_exists( '\Affiliate_WP_Export' ) ) {
 class Export extends \Affiliate_WP_Export {
 
 	/**
+	 * Batch process ID.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    string
+	 */
+	public $batch_id;
+
+	/**
 	 * The file the export data will be stored in.
 	 *
 	 * @access private
@@ -68,6 +77,15 @@ class Export extends \Affiliate_WP_Export {
 	 * @var    bool
 	 */
 	public $is_empty = false;
+
+	/**
+	 * Number of items to process per step.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    int
+	 */
+	public $step_number = 100;
 
 	/**
 	 * Sets up the batch export.

@@ -164,21 +164,13 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	 * @param int|string $step Step in the process. Accepts either a step number or 'done'.
 	 */
 	public function process_step( $step ) {
+		// Nonce.
 
-	}
+		$data = $this->get_data( $step );
 
-	/**
-	 * Retrieves the calculated completion percentage.
-	 *
-	 * @access public
-	 * @since  2.0
-	 * @abstract
-	 *
-	 * @param int|string $step Current step.
-	 * @return int Percentage completed.
-	 */
-	public function get_percentage_complete( $step ) {
-
+		if ( empty( $data ) ) {
+			return 'done';
+		}
 	}
 
 	/**

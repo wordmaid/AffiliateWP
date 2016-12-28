@@ -1402,13 +1402,18 @@ class Tests extends UnitTestCase {
 	 * @covers ::affwp_add_affiliate()
 	 */
 	public function test_add_affiliate_with_notes() {
-		
+
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/affiliates/actions.php';
+
 		$affiliate_id = affwp_add_affiliate( array(
 			'user_id' => $this->factory->user->create(),
 			'notes'   => 'These are test notes'
 		) );
 
 		$this->assertSame( 'These are test notes', affwp_get_affiliate_meta( $affiliate_id, 'notes', true ) );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
 	}
 
 	/**

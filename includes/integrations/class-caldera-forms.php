@@ -44,6 +44,9 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 		// use form title as description
 		$description = $form['name'];
 
+		// insert a pending referral
+		$referral_id = $this->insert_pending_referral( $referral_total, $entry_id, $description );
+
 	}
 
 	/**

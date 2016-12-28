@@ -27,11 +27,11 @@ class Export extends \Affiliate_WP_Export {
 	/**
 	 * The file the export data will be stored in.
 	 *
-	 * @access private
+	 * @access protected
 	 * @since  2.0
 	 * @var    resource
 	 */
-	private $file;
+	protected $file;
 
 	/**
 	 * The name of the file the export data will be stored in.

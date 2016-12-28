@@ -31,6 +31,11 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 			return;
 		}
 
+		// Prevent referral creation unless referrals enabled for the form
+		if ( ! $form['affwp_allow_referrals'] ) {
+			return;
+		}
+
 	}
 
 	/**

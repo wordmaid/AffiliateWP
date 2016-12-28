@@ -115,7 +115,7 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 
 		$args = array(
 			'status' => $this->status,
-			'number' => $this->step_number,
+			'number' => $this->per_step,
 			'offset' => $this->get_offset( $step )
 		);
 

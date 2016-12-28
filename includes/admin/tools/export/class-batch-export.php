@@ -85,7 +85,7 @@ class Export extends \Affiliate_WP_Export {
 	 * @since  2.0
 	 * @var    int
 	 */
-	public $step_number = 100;
+	public $per_step = 100;
 
 	/**
 	 * Sets up the batch export.
@@ -182,7 +182,7 @@ class Export extends \Affiliate_WP_Export {
 	 * @return int Number of items to offset.
 	 */
 	public function get_offset( $step ) {
-		return ( $step - 1 ) * $this->step_number;
+		return ( $step - 1 ) * $this->per_step;
 	}
 
 	/**

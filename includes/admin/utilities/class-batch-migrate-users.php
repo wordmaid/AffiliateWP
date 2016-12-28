@@ -44,7 +44,7 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 	 * @since  2.0
 	 * @var    int
 	 */
-	public $step_number = 100;
+	public $per_step = 100;
 
 	/**
 	 * Initializes values needed following instantiation.
@@ -123,8 +123,8 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
 
 		$args = array(
-			'number'     => $this->step_number,
-			'offset'     => ( $step - 1 ) * $this->step_number,
+			'number'     => $this->per_step,
+			'offset'     => ( $step - 1 ) * $this->per_step,
 			'exclude'    => affiliate_wp()->utils->data->get( "{$this->batch_id}_user_ids", array() ),
 			'orderby'    => 'ID',
 			'order'      => 'ASC',

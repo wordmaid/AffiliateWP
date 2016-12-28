@@ -56,7 +56,6 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 			</fieldset>
 		</div>
 
-
 		<?php
 	}
 

@@ -33,7 +33,7 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 	 * @since  2.0
 	 * @var    int
 	 */
-	public $step_number = 100;
+	public $per_step = 100;
 
 	/**
 	 * Determines if the current user can run the user migration script.
@@ -126,11 +126,11 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 	public function process_step( $step ) {
 		global $wpdb;
 
-		$offset     = ( $step - 1 ) * $this->step_number;
+		$offset     = ( $step - 1 ) * $this->per_step;
 		$affiliates = $wpdb->get_results(
 			$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}affiliates_tbl LIMIT %d, %d;",
 				$offset,
-				$this->step_number
+				$this->per_step
 			)
 		);
 

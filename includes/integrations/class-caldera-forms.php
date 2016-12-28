@@ -24,6 +24,13 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	*/
 	public function add_pending_referral( $form, $referrer, $process_id ) {
 
+		$affiliate_id = $this->affiliate_id;
+
+		// Return if the customer was not referred or the affiliate ID is empty
+		if ( ! $this->was_referred() && empty( $affiliate_id ) ) {
+			return;
+		}
+
 	}
 
 }

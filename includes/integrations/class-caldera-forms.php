@@ -12,8 +12,9 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 
 		$this->context = 'caldera-forms';
 
-		add_action( 'caldera_forms_submit_complete', array( $this, 'add_pending_referral' ), 10, 3 );
+		add_action( 'caldera_forms_entry_saved', array( $this, 'add_pending_referral' ), 10, 3 );
 		add_action( 'caldera_forms_general_settings_panel', array( $this, 'add_settings' ) );
+
 	}
 
 	/**
@@ -22,7 +23,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	 * @access  public
 	 * @since   2.0
 	*/
-	public function add_pending_referral( $form, $referrer, $process_id ) {
+	public function add_pending_referral( $entry_id, $new_entry, $form ) {
 
 		$affiliate_id = $this->affiliate_id;
 
@@ -36,7 +37,36 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 			return;
 		}
 
+		// get referral total
+		$total          = $this->get_total( $form );
+		$referral_total = $this->calculate_referral_amount( $total, $entry_id );
+
 	}
+
+	/**
+	 * Get calculation field total
+	 *
+	 * @since 2.0
+	 */
+	public function get_total( $form ) {
+
+		$fields = $form['fields'];
+
+		foreach ( $fields as $field ) {
+			if ( $field['type'] === 'calculation' ) {
+				$field_id = $field['ID'];
+				break;
+			}
+		}
+
+		if ( isset( $field_id ) ) {
+			return (int) $_POST[$field_id];
+		}
+
+		return false;
+
+	}
+
 
 	/**
 	 * Register the form-specific settings

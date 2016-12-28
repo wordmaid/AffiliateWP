@@ -13,7 +13,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 		$this->context = 'caldera-forms';
 
 		add_action( 'caldera_forms_submit_complete', array( $this, 'add_pending_referral' ), 10, 3 );
-
+		add_action( 'caldera_forms_general_settings_panel', array( $this, 'add_settings' ) );
 	}
 
 	/**
@@ -32,6 +32,17 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 		}
 
 	}
+
+	/**
+	 * Register the form-specific settings
+	 *
+	 * @since  2.0
+	 * @return void
+	 */
+	public function add_settings( $element ) {
+
+	}
+
 
 }
 new Affiliate_WP_Caldera_Forms;

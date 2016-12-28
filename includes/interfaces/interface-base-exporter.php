@@ -39,9 +39,10 @@ interface Base {
 	 * @access public
 	 * @since  2.0
 	 *
+	 * @param int $step Current step.
 	 * @return array[] Multi-dimensional array of data for export.
 	 */
-	public function get_data();
+	public function get_data( $step = 1 );
 
 	/**
 	 * Performs the export process.

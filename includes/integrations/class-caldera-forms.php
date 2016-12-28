@@ -41,6 +41,9 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 		$total          = $this->get_total( $form );
 		$referral_total = $this->calculate_referral_amount( $total, $entry_id );
 
+		// use form title as description
+		$description = $form['name'];
+
 	}
 
 	/**

@@ -40,9 +40,25 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	 * @return void
 	 */
 	public function add_settings( $element ) {
+		?>
 
+		<div class="caldera-config-group">
+			<fieldset>
+				<legend>
+					<?php esc_html_e( 'Allow Referrals', 'affiliate-wp' ); ?>
+				</legend>
+				<div class="caldera-config-field">
+					<label for="affwp-allow-referrals">
+						<input id="affwp-allow-referrals" type="checkbox" class="field-config" name="config[affwp_allow_referrals]" value="1" <?php if ( ! empty( $element[ 'affwp_allow_referrals' ] ) ){ ?>checked="checked"<?php } ?>>
+						<?php esc_html_e( 'Enable affiliate referral creation for this form', 'affiliate-wp' ); ?>
+					</label>
+				</div>
+			</fieldset>
+		</div>
+
+
+		<?php
 	}
-
 
 }
 new Affiliate_WP_Caldera_Forms;

@@ -64,13 +64,15 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export implements Expor
 	}
 
 	/**
-	 * Get the data being exported
+	 * Retrieves the data being exported.
 	 *
 	 * @access public
-	 * @since 1.3
+	 * @since  1.3
+	 *
+	 * @param int $step Optional. Current step. Default 1.
 	 * @return array $data Data for Export
 	 */
-	public function get_data() {
+	public function get_data( $step = 1 ) {
 
 		$args = array(
 			'status' => $this->status,

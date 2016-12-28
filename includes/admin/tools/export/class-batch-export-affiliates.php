@@ -108,13 +108,15 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	 * @access public
 	 * @since  2.0
 	 *
+	 * @param int $step Step number. 'done' should be handled prior to calling this method.
 	 * @return array Data for a single step of the export.
 	 */
-	public function get_data() {
+	public function get_data( $step ) {
 
 		$args = array(
 			'status' => $this->status,
-			'number' => -1
+			'number' => $this->step_number,
+			'offset' => $this->get_offset( $step )
 		);
 
 		$data       = array();

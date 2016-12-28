@@ -154,4 +154,44 @@ class Export extends \Affiliate_WP_Export {
 		@file_put_contents( $this->file, $file );
 	}
 
+	/**
+	 * Calculates and retrieves the offset for the current step.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @param int $step Step number.
+	 * @return int Number of items to offset.
+	 */
+	public function get_offset( $step ) {
+		return ( $step - 1 ) * $this->step_number;
+	}
+
+	/**
+	 * Retrieves the calculated completion percentage.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @param int|string $step Current step.
+	 * @return int Percentage completed.
+	 */
+	public function get_percentage_complete( $step ) {
+
+		$percentage = 0;
+
+		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
+		$total_count   = affiliate_wp()->utils->data->get( "{$this->batch_id}_total_count", 0 );
+
+		if ( $total_count > 0 ) {
+			$percentage = ( $current_count / $total_count ) * 100;
+		}
+
+		if ( $percentage > 100 ) {
+			$percentage = 100;
+		}
+
+		return $percentage;
+	}
+
 }

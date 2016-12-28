@@ -1,7 +1,7 @@
 <?php
 namespace AffWP\Utils\Batch_Process\Export;
 
-use AffWP\Utils\Batch_Process;
+use AffWP\Utils\Batch_Process as Batch;
 use AffWP\Utils\Exporter;
 
 /**
@@ -12,7 +12,7 @@ use AffWP\Utils\Exporter;
  * @see \AffWP\Utils\Batch_Process\Export
  * @see \AffWP\Utils\Exporter\CSV
  */
-class CSV extends Batch_Process\Export implements Exporter\CSV {
+class CSV extends Batch\Export implements Exporter\CSV {
 
 	/**
 	 * The export file type, e.g. '.csv'.

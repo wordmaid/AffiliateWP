@@ -1,7 +1,7 @@
 <?php
 namespace AffWP\Utils\Batch_Process;
 
-use AffWP\Utils\Batch_Process;
+use AffWP\Utils\Batch_Process as Batch;
 
 /**
  * Implements a batch processor for migrating existing users to affiliate accounts.
@@ -11,7 +11,7 @@ use AffWP\Utils\Batch_Process;
  * @see \AffWP\Utils\Batch_Process\Export\CSV
  * @see \AffWP\Utils\Batch_Process\With_PreFetch
  */
-class Export_Affiliates extends Batch_Process\Export\CSV implements Batch_Process\With_PreFetch {
+class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch {
 
 	/**
 	 * Batch process ID.

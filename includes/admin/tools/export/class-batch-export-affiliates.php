@@ -65,7 +65,18 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	 * @since  2.0
 	 */
 	public function pre_fetch() {
+		$total_to_export = $this->get_total_count();
 
+		if ( false === $total_to_export  ) {
+			$args = array(
+				'fields' => 'ids',
+				'status' => $this->status,
+			);
+
+			$total_to_export = affiliate_wp()->affiliates->get_affiliates( $args, true );
+
+			affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", $total_to_export );
+		}
 	}
 
 	/**
@@ -198,7 +209,8 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	 * @abstract
 	 */
 	public function finish() {
-
+		affiliate_wp()->utils->data->delete( "{$this->batch_id}_current_count" );
+		affiliate_wp()->utils->data->delete( "{$this->batch_id}_total_count" );
 	}
 
 }

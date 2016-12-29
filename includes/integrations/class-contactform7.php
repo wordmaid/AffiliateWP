@@ -154,7 +154,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 */
 	public function register_settings_tab( $tabs = array() ) {
 
-		$tabs['contactform7'] = __( 'Contact Form 7', 'affiliatewp-zapier' );
+		$tabs['contactform7'] = __( 'Contact Form 7', 'affiliate-wp' );
 
 		return $tabs;
 	}
@@ -174,7 +174,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		$settings[ 'contactform7' ] = array(
 			'affwp_cf7_enable_all_forms' => array(
-				'name' => __( 'Enable referrals on all Contact Form 7 forms', 'affiliatewp-zapier' ),
+				'name' => __( 'Enable referrals on all Contact Form 7 forms', 'affiliate-wp' ),
 				'desc' => sprintf( __( 'Check this box to enable referrals on all Contact Form 7 forms.<ul><li>%3$s Once enabled, referrals will be generated for all valid Contact Form 7 forms.</li><li>%2$s <a href="%1$s" target="_blank">Documentation for this integration</a></li></ul>', 'affiliate-wp' ),
 					/**
 					 * The Contact Form 7 Help Scout docs url displayed within plugin settings.
@@ -190,7 +190,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 				'type' => 'checkbox'
 			),
 			'affwp_cf7_enable_specific_forms' => array(
-				'name' => '<strong>' . __( 'Enable referrals for specific Contact Form 7 forms', 'affiliatewp-zapier' ) . '</strong>',
+				'name' => '<strong>' . __( 'Enable referrals for specific Contact Form 7 forms', 'affiliate-wp' ) . '</strong>',
 				'type' => 'multicheck',
 				'options' => $this->all_forms_multicheck_render()
 			)

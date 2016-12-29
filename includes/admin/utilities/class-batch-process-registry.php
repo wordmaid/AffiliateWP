@@ -95,7 +95,7 @@ class Registry {
 
 		// Export Affiliates.
 		$this->register_process( 'export-affiliates', array(
-			'class' => '\AffWP\Utils\Batch_Process\Export_Affiliates',
+			'class' => 'AffWP\Utils\Batch_Process\Export_Affiliates',
 			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-affiliates.php',
 		) );
 

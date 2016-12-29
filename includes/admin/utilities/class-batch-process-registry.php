@@ -133,7 +133,7 @@ class Registry {
 			return new \WP_Error( 'invalid_batch_class', __( 'A batch process class must be specified', 'affiliate-wp' ) );
 		}
 
-		if ( empty( $process_args['file'] || 0 !== validate_file( $process_args['file'] ) ) ) {
+		if ( empty( $process_args['file'] ) || 0 !== validate_file( $process_args['file'] ) ) {
 			return new \WP_Error( 'invalid_batch_class_file', __( 'An invalid class handler file has been supplied.', 'affiliate-wp' ) );
 		}
 

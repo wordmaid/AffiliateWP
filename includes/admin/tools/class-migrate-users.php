@@ -144,7 +144,7 @@ class Affiliate_WP_Migrate_Users extends Affiliate_WP_Migrate_Base {
 		}
 		$current_count = $current_count + count( $inserted );
 
-		affiliate_wp()->utils->data->write( 'affwp_migrate_users_current_count', $current_count, array( '%s', '%d', '%s' ) );
+		affiliate_wp()->utils->data->write( 'affwp_migrate_users_current_count', $current_count );
 
 		return true;
 	}

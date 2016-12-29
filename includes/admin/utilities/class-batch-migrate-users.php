@@ -90,7 +90,7 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 
 			$total_to_migrate = count( $users );
 
-			affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", $total_to_migrate, array( '%s', '%d', '%s' ) );
+			affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", $total_to_migrate );
 		}
 	}
 
@@ -155,7 +155,7 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 
 		$current_count = $current_count + count( $inserted );
 
-		affiliate_wp()->utils->data->write( "{$this->batch_id}_current_count", $current_count, array( '%s', '%d', '%s' ) );
+		affiliate_wp()->utils->data->write( "{$this->batch_id}_current_count", $current_count );
 
 		$step++;
 

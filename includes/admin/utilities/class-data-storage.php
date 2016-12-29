@@ -39,12 +39,10 @@ class Data_Storage {
 	 * @access public
 	 * @since  2.0
 	 *
-	 * @param string $key     The option_name.
-	 * @param mixed  $value   The value to store.
-	 * @param array  $formats Optional. Array of formats to pass for key, value, and autoload.
-	 *                        Default empty (all strings).
+	 * @param string $key   The option_name.
+	 * @param mixed  $value The value to store.
 	 */
-	public function write( $key, $value, $formats = array() ) {
+	public function write( $key, $value ) {
 		global $wpdb;
 
 		$value = maybe_serialize( $value );
@@ -55,13 +53,38 @@ class Data_Storage {
 			'autoload'     => 'no',
 		);
 
-		if ( empty( $formats ) ) {
-			$formats = array(
-				'%s', '%s', '%s',
-			);
-		}
+		$formats = $this->get_data_format( $value );
 
 		$wpdb->replace( $wpdb->options, $data, $formats );
+	}
+
+	/**
+	 * Derives the formats array based on the type of $value.
+	 *
+	 * @access protected
+	 * @since  2.0
+	 *
+	 * @param mixed $value Value to store.
+	 * @return array Formats array. First and last values will always be string ('%s').
+	 */
+	protected function get_data_format( $value ) {
+
+		switch( gettype( $value ) ) {
+			case 'integer':
+				$formats = array( '%s', '%d', '%s' );
+				break;
+
+			case 'double':
+				$formats = array( '%s', '%f', '%s' );
+				break;
+
+			default:
+			case 'string':
+				$formats = array( '%s', '%s', '%s' );
+				break;
+		}
+
+		return $formats;
 	}
 
 	/**

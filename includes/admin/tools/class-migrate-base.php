@@ -151,7 +151,7 @@ class Affiliate_WP_Migrate_Base {
 	protected function store_data( $key, $value, $formats = array() ) {
 		_deprecated_function( __METHOD__, '2.0', 'affiliate_wp()->utils->data->write()' );
 
-		affiliate_wp()->utils->data->write( $key, $value, $formats );
+		affiliate_wp()->utils->data->write( $key, $value );
 	}
 
 	/**

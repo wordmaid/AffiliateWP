@@ -98,7 +98,7 @@ class Affiliate_WP_Migrate_WP_Affiliate extends Affiliate_WP_Migrate_Base {
 			}
 			$current_count = $current_count + count( $inserted );
 
-			affiliate_wp()->utils->data->write( 'affwp_migrate_affiliates_total_count', $current_count, array( '%s', '%d', '%s' ) );
+			affiliate_wp()->utils->data->write( 'affwp_migrate_affiliates_total_count', $current_count );
 
 			return true;
 

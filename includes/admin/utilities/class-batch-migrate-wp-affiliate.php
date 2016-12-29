@@ -109,7 +109,7 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 
 			$total_to_migrate = $wpdb->get_var( "SELECT COUNT(refid) FROM {$wpdb->prefix}affiliates_tbl;" );
 
-			affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", absint( $total_to_migrate ), array( '%s', '%d', '%s' ) );
+			affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", absint( $total_to_migrate ) );
 		}
 
 	}
@@ -198,7 +198,7 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 
 		$current_count += count( $inserted );
 
-		affiliate_wp()->utils->data->write( "{$this->batch_id}_current_count", $current_count, array( '%s', '%d', '%s' ) );
+		affiliate_wp()->utils->data->write( "{$this->batch_id}_current_count", $current_count );
 
 		return ++$step;
 	}

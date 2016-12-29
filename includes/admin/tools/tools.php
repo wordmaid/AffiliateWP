@@ -491,3 +491,31 @@ function affwp_rest_api_keys_tab() {
 	$keys_table->display();
 }
 add_action( 'affwp_tools_tab_api_keys', 'affwp_rest_api_keys_tab' );
+
+/**
+ * Processes a batch export download request.
+ *
+ * @since 2.0
+ */
+function affwp_process_batch_export_download() {
+	if( ! wp_verify_nonce( $_REQUEST['nonce'], 'affwp-batch-export' ) ) {
+		wp_die(
+			__( 'Nonce verification failed', 'affiliate-wp' ),
+			__( 'Error', 'affiliate-wp' ),
+			array( 'response' => 403 )
+		);
+	}
+
+	if ( empty( $_REQUEST['class'] ) || ( ! empty( $_REQUEST['class'] ) && ! class_exists( $_REQUEST['class'] ) ) ) {
+		wp_die(
+			__( 'Invalid batch export class.', 'affiliate-wp' ),
+			__( 'Error', 'affiliate-wp' ),
+			array( 'response' => 403 )
+		);
+	}
+
+	$export = new $_REQUEST['class'];
+	$export->export();
+
+}
+add_action( 'affwp_download_batch_export', 'affwp_process_batch_export_download' );

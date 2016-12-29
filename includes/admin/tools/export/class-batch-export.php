@@ -158,6 +158,26 @@ class Export extends \Affiliate_WP_Export {
 	}
 
 	/**
+	 * Initiate the export file download.
+	 *
+	 * @access public
+	 * @since  2.0
+	 */
+	public function export() {
+
+		// Set headers.
+		$this->headers();
+
+		$file = $this->get_file();
+
+		@unlink( $this->file );
+
+		echo $file;
+
+		wp_die();
+	}
+
+	/**
 	 * Appends data to the export file.
 	 *
 	 * @access protected

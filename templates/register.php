@@ -121,7 +121,9 @@ if ( is_user_logged_in() ) {
 			</p>
 		<?php endif; ?>
 
-		<?php if ( affwp_is_recaptcha_enabled() ) : ?>
+		<?php if ( affwp_is_recaptcha_enabled() ) :
+			affwp_enqueue_script( 'affwp-recaptcha' ); ?>
+
 			<div class="g-recaptcha" data-sitekey="<?php echo esc_attr( affiliate_wp()->settings->get( 'recaptcha_site_key' ) ); ?>"></div>
 
 			<p>

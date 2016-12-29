@@ -118,6 +118,34 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	}
 
 	/**
+	 * Processes a single step (batch).
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @param int|string $step Step in the process. Accepts either a step number or 'done'.
+	 */
+	public function process_step( $step ) {
+		if ( is_null( $this->status ) ) {
+			return new \WP_Error( 'no_status_found', __( 'No valid affiliate status was selected for export.', 'affiliate-wp' ) );
+		}
+
+		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
+
+		$data = $this->get_data( $step );
+
+		if ( empty( $data ) ) {
+			return 'done';
+		}
+
+		$current_count += count( $data );
+
+		$this->set_current_count( $current_count );
+
+		return ++$step;
+	}
+
+	/**
 	 * Retrieves the affiliate export data for a single step in the process.
 	 *
 	 * @access public
@@ -168,24 +196,6 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 		$data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
 
 		return $data;
-	}
-
-	/**
-	 * Processes a single step (batch).
-	 *
-	 * @access public
-	 * @since  2.0
-	 *
-	 * @param int|string $step Step in the process. Accepts either a step number or 'done'.
-	 */
-	public function process_step( $step ) {
-		// Nonce.
-
-		$data = $this->get_data( $step );
-
-		if ( empty( $data ) ) {
-			return 'done';
-		}
 	}
 
 	/**

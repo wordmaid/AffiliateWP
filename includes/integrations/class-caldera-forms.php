@@ -14,7 +14,9 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 
 		add_action( 'caldera_forms_entry_saved', array( $this, 'add_pending_referral' ), 10, 3 );
 		add_action( 'caldera_forms_general_settings_panel', array( $this, 'add_settings' ) );
+
 		add_action( 'cf_stripe_post_successful_charge', array( $this, 'complete_payment_stripe' ), 10, 4 );
+		add_action( 'cf_braintree_success', array( $this, 'complete_payment_braintree' ), 10, 6 );
 
 	}
 
@@ -81,7 +83,21 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 
 		$this->mark_referral_complete( $entry_id );
 	}
-	
+
+	/**
+	 * Mark referral as "unpaid" when the payment is successful in Braintree
+	 *
+	 * @access public
+	 * @since 2.0
+	 */
+	public function complete_payment_braintree( $result, $order_id, $transaction, $config, $form, $proccesid ) {
+
+		$submission_data = Caldera_Forms::get_instance()->get_submission_data( $form );
+		$entry_id        = $submission_data['_entry_id'];
+
+		$this->mark_referral_complete( $entry_id );
+	}
+
 	/**
 	 * Sets a referral to unpaid when payment is completed
 	 *

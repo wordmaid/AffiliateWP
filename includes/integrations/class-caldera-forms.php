@@ -19,20 +19,6 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Mark referral as "unpaid" when the payment is successful in Stripe
-	 *
-	 * @access public
-	 * @since 2.0
-	 */
-	public function complete_payment_stripe( $return_charge, $transdata, $config, $form ) {
-
-		$submission_data = Caldera_Forms::get_instance()->get_submission_data( $form );
-		$entry_id        = $submission_data['_entry_id'];
-
-		$this->mark_referral_complete( $entry_id );
-	}
-
-	/**
 	 * Records a pending referral
 	 *
 	 * @access  public
@@ -82,6 +68,20 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 
 	}
 
+	/**
+	 * Mark referral as "unpaid" when the payment is successful in Stripe
+	 *
+	 * @access public
+	 * @since 2.0
+	 */
+	public function complete_payment_stripe( $return_charge, $transdata, $config, $form ) {
+
+		$submission_data = Caldera_Forms::get_instance()->get_submission_data( $form );
+		$entry_id        = $submission_data['_entry_id'];
+
+		$this->mark_referral_complete( $entry_id );
+	}
+	
 	/**
 	 * Sets a referral to unpaid when payment is completed
 	 *

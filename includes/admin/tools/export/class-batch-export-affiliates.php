@@ -179,17 +179,17 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 			foreach( $affiliates as $affiliate ) {
 
 				$data[] = array(
-					'affiliate_id'    => $affiliate->affiliate_id,
-					'email'           => affwp_get_affiliate_email( $affiliate->affiliate_id ),
-					'name'            => affwp_get_affiliate_name( $affiliate->affiliate_id ),
-					'payment_email'   => affwp_get_affiliate_payment_email( $affiliate->affiliate_id ),
-					'username'        => affwp_get_affiliate_login( $affiliate->affiliate_id ),
-					'rate'            => affwp_get_affiliate_rate( $affiliate->affiliate_id ),
-					'rate_type'       => affwp_get_affiliate_rate_type( $affiliate->affiliate_id ),
+					'affiliate_id'    => $affiliate->ID,
+					'email'           => affwp_get_affiliate_email( $affiliate->ID ),
+					'name'            => affwp_get_affiliate_name( $affiliate->ID ),
+					'payment_email'   => affwp_get_affiliate_payment_email( $affiliate->ID ),
+					'username'        => affwp_get_affiliate_login( $affiliate->ID ),
+					'rate'            => affwp_get_affiliate_rate( $affiliate->ID ),
+					'rate_type'       => affwp_get_affiliate_rate_type( $affiliate->ID ),
 					'earnings'        => $affiliate->earnings,
 					'referrals'       => $affiliate->referrals,
 					'visits'          => $affiliate->visits,
-					'conversion_rate' => affwp_get_affiliate_conversion_rate( $affiliate->affiliate_id ),
+					'conversion_rate' => affwp_get_affiliate_conversion_rate( $affiliate->ID ),
 					'status'          => $affiliate->status,
 					'date_registered' => $affiliate->date_registered,
 				);

@@ -98,7 +98,7 @@ class Export extends \Affiliate_WP_Export {
 	public function __construct( $step = 1 ) {
 
 		$upload_dir     = wp_upload_dir();
-		$this->filename = 'affwp-' . $this->export_type . $this->filetype;
+		$this->filename = 'affiliate-wp-export-' . $this->export_type . '-' . date( 'm-d-Y' ) . $this->filetype;
 		$this->file     = trailingslashit( $upload_dir['basedir'] ) . $this->filename;
 
 		if ( ! is_writeable( $upload_dir['basedir'] ) ) {
@@ -123,7 +123,7 @@ class Export extends \Affiliate_WP_Export {
 
 		nocache_headers();
 		header( 'Content-Type: text/csv; charset=utf-8' );
-		header( 'Content-Disposition: attachment; filename=affiliate-wp-export-' . $this->export_type . '-' . date( 'm-d-Y' ) . $this->filetype );
+		header( 'Content-Disposition: attachment; filename=' . $this->filename );
 		header( "Expires: 0" );
 	}
 

@@ -20,7 +20,7 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	 * @since  2.0
 	 * @var    string
 	 */
-	public $batch_id = 'export_affiliates';
+	public $batch_id = 'export-affiliates';
 
 	/**
 	 * Export type.

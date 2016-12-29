@@ -210,6 +210,27 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	 */
 	public function get_message( $code ) {
 
+		switch( $code ) {
+
+			case 'done':
+				$final_count = $this->get_current_count();
+
+				$message = sprintf(
+					_n(
+						'%s affiliate was successfully exported.',
+						'%s affiliates were successfully exported.',
+						$final_count,
+						'affiliate-wp'
+					), number_format_i18n( $final_count )
+				);
+				break;
+
+			default:
+				$message = '';
+				break;
+		}
+
+		return $message;
 	}
 
 	/**

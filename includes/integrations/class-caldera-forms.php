@@ -37,8 +37,21 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 			return;
 		}
 
+		// get customer email
+		$customer_email = $this->get_field_value( 'email', $form );
+
+		// Customers cannot refer themselves
+		if ( $this->is_affiliate_email( $customer_email, $affiliate_id ) ) {
+
+			if ( $this->debug ) {
+				$this->log( 'Referral not created because affiliate\'s own account was used.' );
+			}
+
+			return false;
+		}
+
 		// get referral total
-		$total          = $this->get_total( $form );
+		$total          = $this->get_field_value( 'calculation', $form );
 		$referral_total = $this->calculate_referral_amount( $total, $entry_id );
 
 		// use form title as description
@@ -69,25 +82,24 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	 *
 	 * @since 2.0
 	 */
-	public function get_total( $form ) {
+	public function get_field_value( $type = '', $form ) {
 
-		$fields = $form['fields'];
+		$fields          = $form['fields'];
+		$submission_data = Caldera_Forms::get_instance()->get_submission_data( $form );
 
 		foreach ( $fields as $field ) {
-			if ( $field['type'] === 'calculation' ) {
+			if ( $field['type'] === $type ) {
 				$field_id = $field['ID'];
-				break;
 			}
 		}
 
 		if ( isset( $field_id ) ) {
-			return (int) $_POST[$field_id];
+			return $submission_data[$field_id];
 		}
 
 		return false;
 
 	}
-
 
 	/**
 	 * Register the form-specific settings

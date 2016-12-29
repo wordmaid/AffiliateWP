@@ -1009,6 +1009,7 @@ function affwp_get_affiliate_campaigns( $affiliate = 0 ) {
  *     @type int    $referrals       Number of affiliate referrals.
  *     @type int    $visits          Number of visits.
  *     @type int    $user_id         User ID used to correspond to the affiliate.
+ *     @type string $notes           Notes about the affiliate for use by administrators.
  * }
  * @return int|false The ID for the newly-added affiliate, otherwise false.
  */
@@ -1033,7 +1034,8 @@ function affwp_add_affiliate( $data = array() ) {
 		'status'        => $status,
 		'rate'          => ! empty( $data['rate'] ) ? sanitize_text_field( $data['rate'] ) : '',
 		'rate_type'     => ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '',
-		'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : ''
+		'payment_email' => ! empty( $data['payment_email'] ) ? sanitize_text_field( $data['payment_email'] ) : '',
+		'notes'         => ! empty( $data['notes' ] ) ? wp_kses_post( $data['notes'] ) : ''
 	);
 
 	$affiliate_id = affiliate_wp()->affiliates->add( $args );
@@ -1076,6 +1078,7 @@ function affwp_update_affiliate( $data = array() ) {
 	$args['rate_type']     = ! empty( $data['rate_type' ] ) ? sanitize_text_field( $data['rate_type'] ) : '';
 	$args['status']        = ! empty( $data['status'] ) ? sanitize_text_field( $data['status'] ) : $affiliate->status;
 	$args['user_id']       = $user_id;
+	$args['notes']         = ! empty( $data['notes' ] ) ? wp_kses_post( $data['notes'] ) : '';
 
 	/**
 	 * Fires immediately before data for the current affiliate is updated.
@@ -1101,10 +1104,20 @@ function affwp_update_affiliate( $data = array() ) {
 	do_action( 'affwp_updated_affiliate', affwp_get_affiliate( $affiliate ), $updated );
 
 	if ( $updated ) {
+
 		// Update affiliate's account email
 		if ( wp_update_user( array( 'ID' => $user_id, 'user_email' => $args['account_email'] ) ) ) {
+
+			// Add or delete affiliate notes
+			if ( $args['notes'] ) {
+				affwp_update_affiliate_meta( $affiliate_id, 'notes', $args['notes'] );
+			} else {
+				affwp_delete_affiliate_meta( $affiliate_id, 'notes' );
+			}
+
 			return true;
 		}
+
 	}
 	return false;
 }

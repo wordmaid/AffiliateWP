@@ -1401,6 +1401,24 @@ class Tests extends UnitTestCase {
 	/**
 	 * @covers ::affwp_add_affiliate()
 	 */
+	public function test_add_affiliate_with_notes() {
+
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/affiliates/actions.php';
+
+		$affiliate_id = affwp_add_affiliate( array(
+			'user_id' => $this->factory->user->create(),
+			'notes'   => 'These are test notes'
+		) );
+
+		$this->assertSame( 'These are test notes', affwp_get_affiliate_meta( $affiliate_id, 'notes', true ) );
+
+		// Clean up.
+		affwp_delete_affiliate( $affiliate_id );
+	}
+
+	/**
+	 * @covers ::affwp_add_affiliate()
+	 */
 	public function test_add_affiliate_for_user_already_an_affiliate_should_return_false() {
 		$this->assertFalse( affwp_add_affiliate( self::$users[0] ) );
 	}
@@ -1428,6 +1446,21 @@ class Tests extends UnitTestCase {
 
 		// Clean up.
 		affwp_delete_affiliate( $affiliate_id );
+	}
+
+	/**
+	 * @covers ::affwp_update_affiliate()
+	 */
+	public function test_update_affiliate_with_notes() {
+		$affiliate_id = $this->factory->affiliate->create();
+
+		$updated = affwp_update_affiliate( array(
+			'affiliate_id'  => $affiliate_id,
+			'notes'         => 'These are test notes'
+		) );
+
+		$this->assertTrue( $updated );
+		$this->assertSame( 'These are test notes', affwp_get_affiliate_meta( $affiliate_id, 'notes', true ) );
 	}
 
 	/**

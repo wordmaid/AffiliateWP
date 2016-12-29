@@ -53,7 +53,7 @@ class Data_Storage {
 			'autoload'     => 'no',
 		);
 
-		$formats = $this->get_data_format( $value );
+		$formats = $this->get_data_formats( $value );
 
 		$wpdb->replace( $wpdb->options, $data, $formats );
 	}
@@ -67,7 +67,7 @@ class Data_Storage {
 	 * @param mixed $value Value to store.
 	 * @return array Formats array. First and last values will always be string ('%s').
 	 */
-	protected function get_data_format( $value ) {
+	protected function get_data_formats( $value ) {
 
 		switch( gettype( $value ) ) {
 			case 'integer':

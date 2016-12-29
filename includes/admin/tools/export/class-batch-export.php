@@ -198,8 +198,8 @@ class Export extends \Affiliate_WP_Export {
 
 		$percentage = 0;
 
-		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
-		$total_count   = affiliate_wp()->utils->data->get( "{$this->batch_id}_total_count", 0 );
+		$current_count = $this->get_current_count();
+		$total_count   = $this->get_total_count();
 
 		if ( $total_count > 0 ) {
 			$percentage = ( $current_count / $total_count ) * 100;
@@ -210,6 +210,58 @@ class Export extends \Affiliate_WP_Export {
 		}
 
 		return $percentage;
+	}
+
+	/**
+	 * Retrieves the current, stored count of processed items.
+	 *
+	 * @access protected
+	 * @since  2.0
+	 *
+	 * @see get_percentage_complete()
+	 *
+	 * @return int Current number of processed items. Default 0.
+	 */
+	protected function get_current_count() {
+		return affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
+	}
+
+	/**
+	 * Sets the current count of processed items.
+	 *
+	 * @access protected
+	 * @since  2.0
+	 *
+	 * @param int $count Number of processed items.
+	 */
+	protected function set_current_count( $count ) {
+		affiliate_wp()->utils->data->write( "{$this->batch_id}_current_count", $count );
+	}
+
+	/**
+	 * Retrieves the total, stored count of items to process.
+	 *
+	 * @access protected
+	 * @since  2.0
+	 *
+	 * @see get_percentage_complete()
+	 *
+	 * @return int Current number of processed items. Default 0.
+	 */
+	protected function get_total_count() {
+		return affiliate_wp()->utils->data->get( "{$this->batch_id}_total_count", 0 );
+	}
+
+	/**
+	 * Sets the total count of items to process.
+	 *
+	 * @access protected
+	 * @since  2.0
+	 *
+	 * @param int $count Number of items to process.
+	 */
+	protected function set_total_count( $count ) {
+		affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", $count );
 	}
 
 }

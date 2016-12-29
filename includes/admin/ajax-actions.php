@@ -112,7 +112,16 @@ function affwp_process_batch_request() {
 		) );
 	}
 
-	$class = isset( $batch['class'] ) ? sanitize_text_field( $batch['class'] ) : '';
+	$class      = isset( $batch['class'] ) ? sanitize_text_field( $batch['class'] ) : '';
+	$class_file = isset( $batch['file'] ) ? $batch['file'] : '';
+
+	if ( empty( $class_file ) ) {
+		wp_send_json_error( array(
+			'error' => sprintf( __( 'An invalid file path is registered for the %1$s batch process handler.', 'affiliate-wp' ), "<code>{$batch_id}</code>" )
+		) );
+	} else {
+		require_once $class_file;
+	}
 
 	if ( empty( $class ) || ! class_exists( $class ) ) {
 		wp_send_json_error( array(

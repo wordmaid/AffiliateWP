@@ -506,7 +506,17 @@ function affwp_process_batch_export_download() {
 		);
 	}
 
-	if ( empty( $_REQUEST['class'] ) || ( ! empty( $_REQUEST['class'] ) && ! class_exists( $_REQUEST['class'] ) ) ) {
+	if ( empty( $_REQUEST['batch_id'] ) || false === $batch = affiliate_wp()->utils->batch->get( $_REQUEST['batch_id'] ) ) {
+		wp_die(
+			__( 'Invalid batch ID.', 'affiliate-wp' ),
+			__( 'Error', 'affiliate-wp' ),
+			array( 'response' => 403 )
+		);
+	}
+
+	require_once $batch['file'];
+
+	if ( empty( $batch['class'] ) || ( ! empty( $batch['class'] ) && ! class_exists( $batch['class'] ) ) ) {
 		wp_die(
 			__( 'Invalid batch export class.', 'affiliate-wp' ),
 			__( 'Error', 'affiliate-wp' ),
@@ -514,7 +524,7 @@ function affwp_process_batch_export_download() {
 		);
 	}
 
-	$export = new $_REQUEST['class'];
+	$export = new $batch['class'];
 	$export->export();
 
 }

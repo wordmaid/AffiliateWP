@@ -59,13 +59,6 @@ class Registry {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-csv-exporter.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-csv.php';
-
-		// Migration scripts.
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-migrate-users.php';
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-migrate-wp-affiliate.php';
-
-		// Exporters.
-		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-affiliates.php';
 	}
 
 	/**
@@ -82,11 +75,13 @@ class Registry {
 		// User Migration.
 		$this->register_process( 'migrate-users', array(
 			'class' => 'AffWP\Utils\Batch_Process\Migrate_Users',
+			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-migrate-users.php',
 		) );
 
 		// WP Affiliate Migration.
 		$this->register_process( 'migrate-wp-affiliate', array(
 			'class' => 'AffWP\Utils\Batch_Process\Migrate_WP_Affiliate',
+			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-migrate-wp-affiliate.php',
 		) );
 //
 //		// Affiliates Pro Migration.
@@ -101,6 +96,7 @@ class Registry {
 		// Export Affiliates.
 		$this->register_process( 'export-affiliates', array(
 			'class' => '\AffWP\Utils\Batch_Process\Export_Affiliates',
+			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-affiliates.php',
 		) );
 
 //		// Export Referrals.
@@ -131,10 +127,14 @@ class Registry {
 	 * @return \WP_Error|true True on successful registration, otherwise a WP_Error object.
 	 */
 	public function register_process( $batch_id, $process_args ) {
-		$process_args = wp_parse_args( $process_args,  array_fill_keys( array( 'class', 'step_method' ), '' ) );
+		$process_args = wp_parse_args( $process_args,  array_fill_keys( array( 'class', 'file', 'step_method' ), '' ) );
 
 		if ( empty( $process_args['class'] ) ) {
 			return new \WP_Error( 'invalid_batch_class', __( 'A batch process class must be specified', 'affiliate-wp' ) );
+		}
+
+		if ( empty( $process_args['file'] || 0 !== validate_file( $process_args['file'] ) ) ) {
+			return new \WP_Error( 'invalid_batch_class_file', __( 'An invalid class handler file has been supplied.', 'affiliate-wp' ) );
 		}
 
 		if ( ! method_exists( $process_args['class'], $process_args['step_method'] )
@@ -143,7 +143,7 @@ class Registry {
 			$process_args['step_method'] = 'process_step';
 		}
 
-		return $this->add_process( $batch_id, $process_args['class'], $process_args['step_method'] );
+		return $this->add_process( $batch_id, $process_args );
 	}
 
 	/**
@@ -152,16 +152,21 @@ class Registry {
 	 * @access public
 	 * @since  2.0
 	 *
-	 * @param int    $batch_id    Batch process ID.
-	 * @param string $class       Class the batch processor should instantiate.
-	 * @param string $step_method Step method the batch processor should use.
+	 * @param int    $batch_id   Batch process ID.
+	 * @param array  $attributes {
+	 *     Batch attributes.
+	 *
+	 *     @type string $class       Batch process handler class.
+	 *     @type string $file        Batch process handler class file.
+	 *     @type string $step_method Optional. Step method to use other than process_step().
+	 * }
 	 * @return true Always true.
 	 */
-	private function add_process( $batch_id, $class, $step_method ) {
-		$this->batch_ids[ $batch_id ] = array(
-			'class'       => $class,
-			'step_method' => $step_method
-		);
+	private function add_process( $batch_id, $attributes ) {
+		foreach ( $attributes as $attribute => $value ) {
+			$this->batch_ids[ $batch_id ][ $attribute ] = $value;
+		}
+
 		return true;
 	}
 

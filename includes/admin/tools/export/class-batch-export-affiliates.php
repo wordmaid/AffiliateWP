@@ -75,7 +75,7 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 
 			$total_to_export = affiliate_wp()->affiliates->get_affiliates( $args, true );
 
-			affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", $total_to_export );
+			$this->set_total_count( $total_to_export );
 		}
 	}
 
@@ -130,7 +130,7 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 			return new \WP_Error( 'no_status_found', __( 'No valid affiliate status was selected for export.', 'affiliate-wp' ) );
 		}
 
-		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
+		$current_count = $this->get_current_count();
 
 		$data = $this->get_data( $step );
 
@@ -147,9 +147,7 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 
 		$this->csv_rows_out();
 
-		$current_count += count( $data );
-
-		$this->set_current_count( $current_count );
+		$this->set_current_count( absint( $current_count ) + count( $data ) );
 
 		return ++$step;
 	}

@@ -36,7 +36,11 @@ class CSV extends Batch\Export implements Exporter\CSV {
 
 		parent::csv_cols_out();
 
-		return ob_get_clean();
+		$csv_cols_out = ob_get_clean();
+
+		$this->stash_step_data( $csv_cols_out );
+
+		return $csv_cols_out;
 	}
 
 	/**
@@ -52,7 +56,11 @@ class CSV extends Batch\Export implements Exporter\CSV {
 
 		parent::csv_rows_out();
 
-		return ob_get_clean();
+		$csv_rows_out = ob_get_clean();
+
+		$this->stash_step_data( $csv_rows_out );
+
+		return $csv_rows_out;
 	}
 
 	/**

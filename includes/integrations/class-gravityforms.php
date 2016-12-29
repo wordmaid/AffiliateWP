@@ -268,11 +268,7 @@ class Affiliate_WP_Gravity_Forms extends Affiliate_WP_Base {
 			}
 		}
 
-		if ( $emails ) {
-			return $emails;
-		}
-
-		return false;
+		return $emails;
 
 	}
 

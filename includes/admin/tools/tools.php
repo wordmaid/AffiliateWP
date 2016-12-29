@@ -381,7 +381,7 @@ function affwp_system_info_tab() {
 			<?php echo affwp_tools_system_info_report(); ?>
 		</textarea>
 		<p class="submit">
-			<input type="hidden" name="affwp-action" value="download_sysinfo" />
+			<input type="hidden" name="affwp_action" value="download_sysinfo" />
 			<?php submit_button( 'Download System Info File', 'primary', 'affwp-download-sysinfo', false ); ?>
 		</p>
 	</form>

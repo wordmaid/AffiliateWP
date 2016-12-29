@@ -174,7 +174,7 @@ class Export extends \Affiliate_WP_Export {
 
 		echo $file;
 
-		wp_die();
+		die();
 	}
 
 	/**

@@ -138,6 +138,15 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 			return 'done';
 		}
 
+		if ( $step < 2 ) {
+
+			// Make sure we start with a fresh file on step 1.
+			@unlink( $this->file );
+			$this->csv_cols_out();
+		}
+
+		$this->csv_rows_out();
+
 		$current_count += count( $data );
 
 		$this->set_current_count( $current_count );

@@ -140,7 +140,7 @@ class Affiliate_WP_Export {
 			)
 		);
 
-		return $this->prepare_data( $data );
+		return $data;
 	}
 
 	/**
@@ -182,7 +182,7 @@ class Affiliate_WP_Export {
 	 * @return void
 	 */
 	public function csv_rows_out() {
-		$data = $this->get_data();
+		$data = $this->prepare_data( $this->get_data() );
 
 		$cols = $this->get_csv_cols();
 

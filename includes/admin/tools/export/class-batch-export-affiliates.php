@@ -196,11 +196,11 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 
 		}
 
-		return $this->prepare_data( $data );
+		return $data;
 	}
 
 	/**
-	 * Retrieves a message based on the given message code.
+	 * Retrieves a message for the given code.
 	 *
 	 * @access public
 	 * @since  2.0

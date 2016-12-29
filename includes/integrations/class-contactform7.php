@@ -63,12 +63,23 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		// // Save CF7 AffWP settings
 		// add_action('wpcf7_save_contact_form', array( $this, 'save_settings' ) );
 
-		// Remove the default action priority for paypal1
+
+		/**
+		 * paypal1
+		 */
+
+		// Add PayPal meta prior to any Flamingo post creation or PayPal redirect.
+		add_action( 'wpcf7_submit', array( $this, 'add_paypal_meta' ), 1, 2 );
+
+		// Process paypal1 redirect after generating a Flamingo Inbound post
 		remove_action( 'wpcf7_mail_sent', 'cf7pp_after_send_mail' );
 		add_action( 'wpcf7_submit', 'cf7pp_after_send_mail', 20 );
 
+		// Temporarily overrides Falmingo cpt creation.
+		// Adjust default Flamingo Inbound priority to occur prior to the paypal1 redirect.
 		remove_action( 'wpcf7_submit', 'wpcf7_flamingo_submit' );
-		add_action( 'wpcf7_submit', 'wpcf7_flamingo_submit', 10, 2 );
+		add_action( 'wpcf7_submit', 'affwp_wpcf7_flamingo_submit', 10, 2 );
+
 
 		/**
 		 * Referral generation hooks
@@ -149,7 +160,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Add our settings
+	 * Adds AffiliateWP integration settings
 	 *
 	 * @access public
 	 * @since  2.0
@@ -273,7 +284,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 *
 	 * @since  2.0
 	 *
-	 * @return $enabled  [description]
+	 * @return $enabled  The enabled forms
 	 */
 	public function get_enabled_forms() {
 		$enabled = array();
@@ -327,7 +338,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	public function has_flamingo() {
 
 		/**
-		 * `flamingo` stores CF7 entries in the `flamingo_inbound` cpt,
+		 * The `flamingo` plugin stores CF7 entries in the `flamingo_inbound` cpt,
 		 * via the `Flamingo_Inbound_Message` class.
 		 */
 		if ( post_type_exists( 'flamingo_inbound' ) && class_exists( 'Flamingo_Inbound_Message' ) ) {
@@ -340,7 +351,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	/**
 	 * Checks for a custom form referral rate, and returns that if defined.
 	 *
-	 * @since  [since
+	 * @since  2.0
 	 *
 	 * @param  mixed  $form_id  The CF7 form ID.
 	 * @return mixed  $form_id  If a custom rate is found, it is returned. Otherwise, a boolean false is returned.
@@ -349,6 +360,9 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		if ( ! $form_id ) {
 			return false;
 		}
+
+		// TODO
+		// Get custom rate meta
 	}
 
 	/**
@@ -368,7 +382,8 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		// First paypal add-on
 		$paypal_1 = get_post_meta( $form_id, '_cf7_pp_enable', true );
 
-		// Second paypal add-on - TODO
+		// TODO
+		// Second paypal add-on
 		$paypal_2 = get_post_meta( $form_id, 'paypal_2', true );
 
 		$supported = $this->get_supported_gateways();
@@ -517,13 +532,52 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 	}
 
+
+	/**
+	 * Adds PayPal add-on meta to the form object.
+	 *
+	 * @param stdClass  $contactform The contact form data.
+	 * @return stdClass $contactform The modified contact form data.
+	 * @since 2.0
+	 *
+	 */
+	public function add_paypal_meta( $contactform ) {
+
+		$form_id = $contactform->id();
+
+		update_post_meta( $form_id, 'affwp_cf7_form_id', $form_id );
+
+		$enabled     = get_post_meta( $form_id, '_cf7pp_enable', true );
+		$email       = get_post_meta( $form_id, '_cf7pp_email',  true );
+		$amount      = get_post_meta( $form_id, '_cf7pp_price',  true );
+		$description = get_post_meta( $form_id, '_cf7pp_name',   true );
+		$sku         = get_post_meta( $form_id, '_cf7pp_id',     true );
+
+		// Temporarily cast object and add referral data.
+		$contactform = (object) array_merge(
+			(array) $contactform, array(
+				'affwp_paypal_enabled'       => $enabled,
+				'affwp_customer_email'       => $email,
+				'affwp_purchase_amount'      => $amount,
+				'affwp_referral_description' => $description,
+				'affwp_product_sku'          => $sku
+			)
+		);
+
+		// update_post_meta( $form_id, 'affwp_paypal_enabled', false );
+		// update_post_meta( $form_id, 'affwp_customer_email', false );
+		// update_post_meta( $form_id, 'affwp_form_amount',    false );
+
+		return $contactform;
+	}
+
 	/**
 	 * Creates a `flamingo_inbound` post on successful return to the
 	 * specified CF7 form success URL.
 	 *
 	 * Supported CF7 integrations: `contact-form-7-paypal-add-on`, `contact-form-7-paypal-extension`.
 	 *
-	 * @since  [since]
+	 * @since  2.0
 	 *
 	 * @param  CF7 form entry object  $form [description]
 	 *
@@ -537,10 +591,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			'',
 			home_url( $wp->request )
 		);
-
-		if ( ! $this->server_globals_buffer_cmp( $current_url ) ) {
-			return false;
-		}
 
 		if ( ! $current_url || ! get_option( 'cf7pp_options' ) ) {
 			return false;
@@ -582,28 +632,47 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			return false;
 		}
 
-		$entry_id = absint( $post_id );
-		$sub_url = get_post_meta( $post_id, 'url', true );
+		if ( ! get_post_type( $post_id ) == 'flamingo_inbound' ) {
+			return false;
+		}
 
-		$post            = get_post( $entry_id );
-
-		error_log(print_r($post, true));
-		return;
+		$sub_url  = get_post_meta( $post_id, 'url', true );
+		$post     = get_post( $post_id );
 
 		if ( $this->was_referred() ) {
 
-			$post            = get_post( $entry_id );
-			// $description     = $post->
-			$purchase_amount = floatval( $frm_entry_meta->get_entry_meta_by_field( $entry_id, $form->options['affiliatewp']['purchase_amount_field'] ) );
+			$post            = get_post( $post_id );
+			$description     = get_post_meta( $post_id, 'affwp_referral_description', true );
+			$purchase_amount = floatval( get_post_meta( $post_id, 'affwp_purchase_amount', true ) );
 
-			$referral_total = $this->calculate_referral_amount( $purchase_amount, $entry_id );
+			$referral_total = $this->calculate_referral_amount( $purchase_amount, $post_id );
 
-			$this->insert_pending_referral( $referral_total, $entry_id, $description );
+			$this->insert_pending_referral( $referral_total, $post_id, $description );
 
 			if ( empty( $referral_total ) ) {
-				$this->mark_referral_complete( $entry_id, $form_id );
+				$this->mark_referral_complete( $post_id );
 			}
 		}
+	}
+
+	/**
+	 * Update referral status and add note to Contact Form 7 Flamingo entry
+	 *
+	 * @since 2.0
+	 *
+	 * @param int $post_id
+	 */
+	public function mark_referral_complete( $post_id ) {
+
+		$this->complete_referral( $post_id );
+
+		$referral    = affiliate_wp()->referrals->get_by( 'reference', $post_id, $this->context );
+		$amount      = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
+		$name        = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
+		$description = sprintf( __( 'AffiliateWP: Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
+
+		// TODO - add Flamingo post meta and make AffiliateWP data visible
+		// in admin.php?page=flamingo_inbound single post screen.
 
 	}
 
@@ -613,45 +682,17 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * @since 2.0
 	 *
 	 *
-	 * @param int $entry_id
-	 * @param int $form_id
+	 * @param int $post_id
 	 */
-	public function mark_referral_complete( $entry_id, $form_id ) {
+	public function revoke_referral_on_refund( $post_id ) {
 
-		$entry_id =
+		$this->reject_referral( $post_id );
 
-		$this->complete_referral( $entry_id );
+		$referral        = affiliate_wp()->referrals->get_by( 'reference', $post_id, $this->context );
+		$amount          = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
+		$name            = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
+		$description     = sprintf( __( 'AffiliateWP: Referral #%d for %s for %s rejected', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
 
-		$referral = affiliate_wp()->referrals->get_by( 'reference', $entry_id, $this->context );
-		$amount   = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
-		$name     = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
-		$note     = sprintf( __( 'AffiliateWP: Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
-
-		$frm_entry_meta->add_entry_meta( $entry_id, 0, '', array( 'comment' => $note, 'user_id' => 0 ) );
-
-	}
-
-	/**
-	 * Update referral status and add note to Contact Form 7 Flamingo entry
-	 *
-	 * @since 2.0
-	 *
-	 *
-	 * @param int $entry_id
-	 * @param int $form_id
-	 */
-	public function revoke_referral_on_refund( $entry_id, $form_id ) {
-
-		global $frm_entry_meta;
-
-		$this->reject_referral( $entry_id );
-
-		$referral = affiliate_wp()->referrals->get_by( 'reference', $entry_id, $this->context );
-		$amount   = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
-		$name     = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
-		$note     = sprintf( __( 'AffiliateWP: Referral #%d for %s for %s rejected', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
-
-		$frm_entry_meta->add_entry_meta( $entry_id, 0, '', array( 'comment' => $note, 'user_id' => 0 ) );
 
 	}
 
@@ -668,13 +709,13 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 */
 	public function reference_link( $reference = 0, $referral ) {
 
-		if ( empty( $referral->context ) || 'formidablepro' != $referral->context ) {
+		if ( empty( $referral->context ) || 'contactform7' != $referral->context ) {
 
 			return $reference;
 
 		}
 
-		$url = admin_url( 'admin.php?page=formidable-entries&frm_action=show&id=' . $reference );
+		$url = admin_url( 'admin.php?page=flamingo_inbound&action=edit&post=' . $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 

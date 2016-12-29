@@ -140,6 +140,19 @@ class Affiliate_WP_Export {
 			)
 		);
 
+		return $this->prepare_data( $data );
+	}
+
+	/**
+	 * Prepares a batch of data for export.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @param array $data Export data.
+	 * @return array Filtered export data.
+	 */
+	public function prepare_data( $data ) {
 		/**
 		 * Filters the export data.
 		 *

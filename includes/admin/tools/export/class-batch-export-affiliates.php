@@ -198,13 +198,7 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 
 		}
 
-		/** This filter is documented in includes/admin/tools/export/class-export.php */
-		$data = apply_filters( 'affwp_export_get_data', $data );
-
-		/** This filter is documented in includes/admin/tools/export/class-export.php */
-		$data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
-
-		return $data;
+		return $this->prepare_data( $data );
 	}
 
 	/**

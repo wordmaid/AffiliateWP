@@ -24,6 +24,39 @@ class CSV extends Batch\Export implements Exporter\CSV {
 	public $filetype = '.csv';
 
 	/**
+	 * Processes a single step (batch).
+	 *
+	 * @access public
+	 * @since  2.0
+	 */
+	public function process_step() {
+
+		$current_count = $this->get_current_count();
+
+		if ( $step < 2 ) {
+
+			// Make sure we start with a fresh file on step 1.
+			@unlink( $this->file );
+			$this->csv_cols_out();
+		}
+
+		$rows = $this->csv_rows_out();
+
+		if ( empty( $rows ) ) {
+			// If empty and the first step, it's an empty export.
+			if ( $this->step < 2 ) {
+				$this->is_empty = true;
+			}
+
+			return 'done';
+		}
+
+		$this->set_current_count( ++$current_count );
+
+		return ++$this->step;
+	}
+
+	/**
 	 * Retrieves and stores the CSV columns for the current step.
 	 *
 	 * @access public

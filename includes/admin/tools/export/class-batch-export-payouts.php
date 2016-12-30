@@ -281,8 +281,8 @@ class Generate_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 	 * @abstract
 	 */
 	public function finish() {
-		affiliate_wp()->utils->data->delete( "{$this->batch_id}_current_count" );
-		affiliate_wp()->utils->data->delete( "{$this->batch_id}_total_count" );
+		$this->delete_counts();
+
 		affiliate_wp()->utils->data->delete( "{$this->batch_id}_compiled_data" );
 	}
 

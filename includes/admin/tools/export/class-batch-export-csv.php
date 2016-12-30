@@ -33,7 +33,7 @@ class CSV extends Batch\Export implements Exporter\CSV {
 
 		$current_count = $this->get_current_count();
 
-		if ( $step < 2 ) {
+		if ( $this->step < 2 ) {
 
 			// Make sure we start with a fresh file on step 1.
 			@unlink( $this->file );

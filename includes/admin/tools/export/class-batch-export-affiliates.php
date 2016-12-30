@@ -116,26 +116,7 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 			return new \WP_Error( 'no_status_found', __( 'No valid affiliate status was selected for export.', 'affiliate-wp' ) );
 		}
 
-		$current_count = $this->get_current_count();
-
-		$data = $this->get_data();
-
-		if ( empty( $data ) ) {
-			return 'done';
-		}
-
-		if ( $this->step < 2 ) {
-
-			// Make sure we start with a fresh file on step 1.
-			@unlink( $this->file );
-			$this->csv_cols_out();
-		}
-
-		$this->csv_rows_out();
-
-		$this->set_current_count( absint( $current_count ) + count( $data ) );
-
-		return ++$this->step;
+		return parent::process_step();
 	}
 
 	/**

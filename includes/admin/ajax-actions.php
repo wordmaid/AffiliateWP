@@ -155,9 +155,7 @@ function affwp_process_batch_request() {
 	}
 
 	/** @var int|string|\WP_Error $step */
-	$step = $process->process_step( $step );
-
-	$percentage = $process->get_percentage_complete( $step );
+	$step = $process->process_step();
 
 	if ( is_wp_error( $step ) ) {
 		wp_send_json_error( $step );

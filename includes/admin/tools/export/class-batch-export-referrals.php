@@ -167,31 +167,7 @@ class Export_Referrals extends Batch\Export\CSV implements Batch\With_PreFetch {
 			return new \WP_Error( 'no_status_found', __( 'No valid referral status was selected for export.', 'affiliate-wp' ) );
 		}
 
-		$current_count = $this->get_current_count();
-
-		$data = $this->get_data( $step );
-
-		if ( empty( $data ) ) {
-			// If empty and the first step, it's an empty export.
-			if ( $step < 2 ) {
-				$this->is_empty = true;
-			}
-
-			return 'done';
-		}
-
-		if ( $step < 2 ) {
-
-			// Make sure we start with a fresh file on step 1.
-			@unlink( $this->file );
-			$this->csv_cols_out();
-		}
-
-		$this->csv_rows_out();
-
-		$this->set_current_count( absint( $current_count ) + count( $data ) );
-
-		return ++$step;
+		return parent::process_step();
 	}
 
 	/**

@@ -208,19 +208,15 @@ class Generate_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 	public function get_data() {
 		$offset = $this->get_offset();
 
-log_it( $offset );
-log_it( $this->step );
-log_it( $step );
 		$payouts       = affiliate_wp()->utils->data->get( "{$this->batch_id}_compiled_data", array() );
 		$affiliate_ids = array_keys( $payouts );
-log_it( $affiliate_ids );
 
 		if ( isset( $affiliate_ids[ $offset ] ) ) {
 			$affiliate_id = $affiliate_ids[ $offset ];
 		} else {
 			$affiliate_id = 0;
 		}
-log_it( $affiliate_id );
+
 		// Grab the next affiliate in the list.
 		$data = array();
 
@@ -240,7 +236,6 @@ log_it( $affiliate_id );
 			) );
 		}
 
-log_it( $data );
 		return $data;
 	}
 

@@ -28,6 +28,15 @@ class Affiliate_WP_Export {
 	public $export_type = 'default';
 
 	/**
+	 * Capability needed to perform the current export.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    string
+	 */
+	public $capability = 'export_affiliate_data';
+
+	/**
 	 * Can we export?
 	 *
 	 * @access public
@@ -40,7 +49,7 @@ class Affiliate_WP_Export {
 		 *
 		 * @param string $capability Capability needed to perform an export.
 		 */
-		return (bool) current_user_can( apply_filters( 'affwp_export_capability', 'export_affiliate_data' ) );
+		return (bool) current_user_can( apply_filters( 'affwp_export_capability', $this->capability ) );
 	}
 
 	/**

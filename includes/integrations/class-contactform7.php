@@ -6,12 +6,11 @@
  * This integration provides support for four total plugins:
  *
  * - `contact-form-7`
- * - `flamingo`
  * - `contact-form-7-paypal-add-on`
  * - `contact-form-7-paypal-extension`
  *
- * - Plugins `contact-form-7` and `flamingo` are required for use of either paypal add-on.
- * - Plugins `contact-form-7`, `flamingo`, and one of the above-noted PayPal add-ons are required for the integration to log referrals.
+ * - Plugins `contact-form-7` are required for use of either paypal add-on.
+ * - Plugins `contact-form-7` and one of the above-noted PayPal add-ons are required.
  *
  * For brevity, within this class:
  *
@@ -68,25 +67,19 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		 * paypal1
 		 */
 
-		// Add PayPal meta prior to any Flamingo post creation or PayPal redirect.
+		// Add PayPal meta to the contact form submision object.
 		add_action( 'wpcf7_submit', array( $this, 'add_paypal_meta' ), 1, 2 );
+
+		// Add pending referral
+		add_filter( 'wpcf7_submit', array( $this, 'add_pending_referral' ), 10, 2 );
 
 		// Process paypal1 redirect after generating a Flamingo Inbound post
 		remove_action( 'wpcf7_mail_sent', 'cf7pp_after_send_mail' );
 		add_action( 'wpcf7_submit', 'cf7pp_after_send_mail', 20 );
 
-		// Temporarily overrides Falmingo cpt creation.
-		// Adjust default Flamingo Inbound priority to occur prior to the paypal1 redirect.
-		remove_action( 'wpcf7_submit', 'wpcf7_flamingo_submit' );
-		add_action( 'wpcf7_submit', 'affwp_wpcf7_flamingo_submit', 10, 2 );
-
-
 		/**
 		 * Referral generation hooks
 		 */
-
-		// Add pending referral
-		add_filter( 'publish_flamingo_inbound', array( $this, 'add_pending_referral' ), 10, 2 );
 
 		// Mark referral complete
 		// add_action( 'todo', array( $this, 'mark_referral_complete' ), 10, 2 );
@@ -206,7 +199,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 *
 	 * - `enable_all`: Whether all CF7 forms have referral tracking enabled.
 	 * - `enabled_forms`: Array defining which CF7 forms have AffiliateWP referral tracking enabled, specified by form ID.
-	 * - `has_flamingo`: Whether the `flamingo` CF7 add-on is installed and active.
 	 * - `has_paypal_1`: Whether the first PayPal add-on, `contact-form7-paypal-add-on`, is installed and active.
 	 * - `has_paypal_2`: Whether the second PayPal add-on, `contact-form7-paypal-extension`, is installed and active.
 	 *
@@ -223,7 +215,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			$options = array(
 				'enable_all'    => false,
 				'enabled_forms' => $enabled,
-				'has_flamingo'  => false,
 				'has_paypal_1'  => false,
 				'has_paypal_2'  => false
 			);
@@ -294,23 +285,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Show a notice if Flamingo is not installed and active.
-	 *
-	 * @since  2.0
-	 *
-	 * @return mixed $notice The notice.
-	 */
-	public function flamingo_required_notice() {
-		$notice  = '<div class="affwp-notices">';
-		$notice .= sprintf( __( 'AffiliateWP: The AffiliateWP Contact Form 7 integration requires the <a href="%s">Flamingo Contact Form 7 add-on</a> to be installed and active. Please install it to continue.', 'affiliate-wp' ),
-			esc_url( 'https://wordpress.org/plugins/flamingo' )
-		);
-		$notice .= '</div>';
-
-		return $notice;
-	}
-
-	/**
 	 * Payment gateway notice, shown if a valid CF7 payment gateway add-on is not installed and active.
 	 *
 	 * @since  2.0
@@ -326,26 +300,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		$notice .= '</div>';
 
 		return $notice;
-	}
-
-	/**
-	 * Check for the CF7 Flamingo add-on
-	 *
-	 * @since  2.0
-	 *
-	 * @return bool True if the plugin `flamingo` is installed and active, otherwise false.
-	 */
-	public function has_flamingo() {
-
-		/**
-		 * The `flamingo` plugin stores CF7 entries in the `flamingo_inbound` cpt,
-		 * via the `Flamingo_Inbound_Message` class.
-		 */
-		if ( post_type_exists( 'flamingo_inbound' ) && class_exists( 'Flamingo_Inbound_Message' ) ) {
-			return true;
-		}
-
-		return false;
 	}
 
 	/**
@@ -441,12 +395,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * @return void
 	 */
 	public function settings_tab_content( $cf7 ) {
-
-		// Check for Flamingo
-		if ( ! $this->has_flamingo() ) {
-			echo $this->flamingo_required_notice();
-			return;
-		}
 
 		$post_id = sanitize_text_field( $_GET['post'] );
 
@@ -564,57 +512,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			)
 		);
 
-		// update_post_meta( $form_id, 'affwp_paypal_enabled', false );
-		// update_post_meta( $form_id, 'affwp_customer_email', false );
-		// update_post_meta( $form_id, 'affwp_form_amount',    false );
-
 		return $contactform;
-	}
-
-	/**
-	 * Creates a `flamingo_inbound` post on successful return to the
-	 * specified CF7 form success URL.
-	 *
-	 * Supported CF7 integrations: `contact-form-7-paypal-add-on`, `contact-form-7-paypal-extension`.
-	 *
-	 * @since  2.0
-	 *
-	 * @param  CF7 form entry object  $form [description]
-	 *
-	 * @return mixed Flamingo_inbound post object if a valid CF7 entry is provided, otherwise boolean false.
-	 */
-	public function create_flamingo_inbound_post() {
-		global $wp;
-
-		$current_url = add_query_arg(
-			$wp->query_string,
-			'',
-			home_url( $wp->request )
-		);
-
-		if ( ! $current_url || ! get_option( 'cf7pp_options' ) ) {
-			return false;
-		}
-
-		$paypal_options = get_option( 'cf7pp_options' );
-		$success_url    = esc_url( $paypal_options['return'] );
-		$cancel_url     = esc_url( $paypal_options['cancel'] );
-
-		if ( $success_url === $current_url ) {
-
-			$this->add_pending_referral( $post_id );
-
-		} elseif ( $cancel_url === $current_url ) {
-			// TODO define zero/unconverted referral
-		} else {
-			return false;
-		}
-
-
-		$referer = $this->get_referer();
-
-
-		return false;
 	}
 
 	/**
@@ -629,10 +527,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	public function add_pending_referral( $post_id ) {
 
 		if ( ! $post_id ) {
-			return false;
-		}
-
-		if ( ! get_post_type( $post_id ) == 'flamingo_inbound' ) {
 			return false;
 		}
 
@@ -670,10 +564,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		$amount      = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
 		$name        = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
 		$description = sprintf( __( 'AffiliateWP: Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
-
-		// TODO - add Flamingo post meta and make AffiliateWP data visible
-		// in admin.php?page=flamingo_inbound single post screen.
-
 	}
 
 	/**
@@ -712,10 +602,9 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		if ( empty( $referral->context ) || 'contactform7' != $referral->context ) {
 
 			return $reference;
-
 		}
 
-		$url = admin_url( 'admin.php?page=flamingo_inbound&action=edit&post=' . $reference );
+		$url = admin_url( 'admin.php?page=wpcf7&action=edit&post=' . $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 

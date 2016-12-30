@@ -51,7 +51,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	        'description' => 'Create a referral in AffiliateWP',
 	        'author_url'  => 'https://affiliatewp.com',
 			'icon'        => AFFILIATEWP_PLUGIN_URL . 'assets/images/logo-affwp.svg',
-	        'template'    => AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/extras/caldera-forms-config.php'
+			'template'    => AFFILIATEWP_PLUGIN_DIR . 'includes/integrations/extras/caldera-forms-config.php'
 	    );
 
 	    new AffiliateWP_Caldera_Forms_Processor( $config, $this->fields(), 'affwp' );
@@ -168,7 +168,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	 */
 	public function complete_payment_stripe( $return_charge, $transdata, $config, $form ) {
 
-		$submission_data = Caldera_Forms::get_instance()->get_submission_data( $form );
+		$submission_data = Caldera_Forms::get_submission_data( $form );
 		$entry_id        = $submission_data['_entry_id'];
 
 		$this->mark_referral_complete( $entry_id );
@@ -182,7 +182,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	 */
 	public function complete_payment_braintree( $result, $order_id, $transaction, $config, $form, $proccesid ) {
 
-		$submission_data = Caldera_Forms::get_instance()->get_submission_data( $form );
+		$submission_data = Caldera_Forms::get_submission_data( $form );
 		$entry_id        = $submission_data['_entry_id'];
 
 		$this->mark_referral_complete( $entry_id );
@@ -207,7 +207,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	public function get_field_value( $type = '', $form ) {
 
 		$fields          = $form['fields'];
-		$submission_data = Caldera_Forms::get_instance()->get_submission_data( $form );
+		$submission_data = Caldera_Forms::get_submission_data( $form );
 
 		foreach ( $fields as $field ) {
 			if ( $field['type'] === $type ) {

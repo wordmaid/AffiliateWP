@@ -4,7 +4,7 @@ namespace AffWP\Utils\Batch_Process;
 use AffWP\Utils\Batch_Process as Batch;
 
 /**
- * Implements a batch processor for migrating existing users to affiliate accounts.
+ * Implements a batch processor for exporting affiliate accounts based on status to a CSV file.
  *
  * @since 2.0
  *

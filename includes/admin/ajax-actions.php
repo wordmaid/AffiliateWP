@@ -134,12 +134,14 @@ function affwp_process_batch_request() {
 
 	$step = sanitize_text_field( $_REQUEST['step'] );
 
+	$is_exporter = method_exists( $class, 'can_export' );
+
 	/**
 	 * Instantiate the batch class.
 	 *
-	 * @var \AffWP\Utils\Batch_Process\Base $process
+	 * @var \AffWP\Utils\Batch_Process\Export|\AffWP\Utils\Batch_Process\Base $process
 	 */
-	$process = new $class;
+	$process = new $class( $step );
 
 	$using_prefetch = ( $process instanceof \AffWP\Utils\Batch_Process\With_PreFetch );
 
@@ -168,7 +170,7 @@ function affwp_process_batch_request() {
 			$response_data['message'] = $process->get_message( 'done' );
 
 			// If this is an export class and not an empty export, send the download URL.
-			if ( method_exists( $process, 'can_export' ) ) {
+			if ( $is_exporter ) {
 
 				if ( ! $process->is_empty ) {
 					$args = array(
@@ -187,7 +189,7 @@ function affwp_process_batch_request() {
 			$process->finish();
 		} else {
 			$response_data['done'] = false;
-			$response_data['percentage'] = $percentage;
+			$response_data['percentage'] = $process->get_percentage_complete();
 		}
 
 		wp_send_json_success( $response_data );

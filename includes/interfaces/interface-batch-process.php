@@ -23,22 +23,18 @@ Interface Base {
 	 *
 	 * @access public
 	 * @since  2.0
-	 *
-	 * @param int|string $step Step in the process. Accepts either a step number or 'done'.
 	 */
-	public function process_step( $step );
+	public function process_step();
 
 	/**
 	 * Retrieves the calculated completion percentage.
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @abstract
 	 *
-	 * @param int|string $step Current step.
 	 * @return int Percentage completed.
 	 */
-	public function get_percentage_complete( $step );
+	public function get_percentage_complete();
 
 	/**
 	 * Retrieves a message based on the given message code.
@@ -56,7 +52,6 @@ Interface Base {
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @abstract
 	 */
 	public function finish();
 

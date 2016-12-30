@@ -167,17 +167,20 @@ function affwp_process_batch_request() {
 			$response_data['done'] = true;
 			$response_data['message'] = $process->get_message( 'done' );
 
-			// If this is an export class, send the download URL.
+			// If this is an export class and not an empty export, send the download URL.
 			if ( method_exists( $process, 'can_export' ) ) {
-				$args = array(
-					'step'         => $step,
-					'page'         => 'affiliate-wp-tools',
-					'nonce'        => wp_create_nonce( 'affwp-batch-export' ),
-					'batch_id'     => $batch_id,
-					'affwp_action' => 'download_batch_export',
-				);
 
-				$response_data['url'] = add_query_arg( $args, admin_url( 'admin.php' ) );
+				if ( ! $process->is_empty ) {
+					$args = array(
+						'step'         => $step,
+						'page'         => 'affiliate-wp-tools',
+						'nonce'        => wp_create_nonce( 'affwp-batch-export' ),
+						'batch_id'     => $batch_id,
+						'affwp_action' => 'download_batch_export',
+					);
+
+					$response_data['url'] = add_query_arg( $args, admin_url( 'admin.php' ) );
+				}
 			}
 
 			// Once all calculations have finished, run cleanup.

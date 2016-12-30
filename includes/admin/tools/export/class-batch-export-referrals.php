@@ -4,7 +4,7 @@ namespace AffWP\Utils\Batch_Process;
 use AffWP\Utils\Batch_Process as Batch;
 
 /**
- * Implements a batch processor for exporting affiliate accounts based on status to a CSV file.
+ * Implements a batch processor for exporting referrals based on status to a CSV file.
  *
  * @since 2.0
  *
@@ -194,7 +194,7 @@ class Export_Referrals extends Batch\Export\CSV implements Batch\With_PreFetch {
 	}
 
 	/**
-	 * Retrieves the affiliate export data for a single step in the process.
+	 * Retrieves the referral export data for a single step in the process.
 	 *
 	 * @access public
 	 * @since  2.0
@@ -221,28 +221,7 @@ class Export_Referrals extends Batch\Export\CSV implements Batch\With_PreFetch {
 
 			foreach( $referrals as $referral ) {
 
-				/**
-				 * Filters an individual line of referral data to be exported.
-				 *
-				 * @since 1.9.5
-				 *
-				 * @param array           $referral_data {
-				 *     Single line of exported referral data
-				 *
-				 *     @type int    $affiliate_id  Affiliate ID.
-				 *     @type string $email         Affiliate email.
-				 *     @type string $payment_email Affiliate payment email.
-				 *     @type float  $amount        Referral amount.
-				 *     @type string $currency      Referral currency.
-				 *     @type string $description   Referral description.
-				 *     @type string $campaign      Campaign.
-				 *     @type string $reference     Referral reference.
-				 *     @type string $context       Context the referral was created under, e.g. 'woocommerce'.
-				 *     @type string $status        Referral status.
-				 *     @type string $date          Referral date.
-				 * }
-				 * @param \AffWP\Referral $referral Referral object.
-				 */
+				/** This filter is documented in includes/admin/tools/export/class-export-referrals.php */
 				$referral_data = apply_filters( 'affwp_referral_export_get_data_line', array(
 					'affiliate_id'  => $referral->affiliate_id,
 					'email'         => affwp_get_affiliate_email( $referral->affiliate_id ),

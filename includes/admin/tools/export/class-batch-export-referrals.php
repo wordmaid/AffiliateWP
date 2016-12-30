@@ -115,10 +115,11 @@ class Export_Referrals extends Batch\Export\CSV implements Batch\With_PreFetch {
 
 		if ( false === $total_to_export  ) {
 			$args = array(
+				'number'       => -1,
 				'fields'       => 'ids',
 				'status'       => $this->status,
 				'date'         => $this->date,
-				'affiliate_id' => $this->affiliate_id
+				'affiliate_id' => $this->affiliate_id,
 			);
 
 			$total_to_export = affiliate_wp()->referrals->get_referrals( $args, true );

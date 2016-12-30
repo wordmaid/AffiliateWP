@@ -1,7 +1,8 @@
 <?php
 namespace AffWP\Utils\Batch_Process;
 
-use AffWP\Utils\Batch_Process;
+use AffWP\Utils;
+use AffWP\Utils\Batch_Process as Batch;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,9 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 2.0
  *
+ * @see \AffWP\Utils\Batch_Process
  * @see \AffWP\Utils\Batch_Process\With_PreFetch
  */
-class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
+class Migrate_WP_Affiliate extends Utils\Batch_Process implements Batch\With_PreFetch {
 
 	/**
 	 * Batch process ID.
@@ -34,18 +36,6 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 	 * @var    int
 	 */
 	public $per_step = 100;
-
-	/**
-	 * Determines if the current user can run the user migration script.
-	 *
-	 * @access public
-	 * @since  2.0
-	 *
-	 * @return bool True if the user has permission, otherwise false.
-	 */
-	public function can_process() {
-		return current_user_can( 'manage_affiliates' );
-	}
 
 	/**
 	 * Initializes values needed following instantiation (unused).
@@ -101,7 +91,7 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 		affiliate_wp()->utils->data->write( "{$this->batch_id}_user_email_ids", $emails_ids );
 
 		// Total number of WP Affiliate accounts to migrate.
-		$total_to_migrate = affiliate_wp()->utils->data->get( "{$this->batch_id}_total_count", 0 );
+		$total_to_migrate = $this->get_total_count();
 
 		if ( false === $total_to_migrate ) {
 
@@ -109,7 +99,7 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 
 			$total_to_migrate = $wpdb->get_var( "SELECT COUNT(refid) FROM {$wpdb->prefix}affiliates_tbl;" );
 
-			affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", absint( $total_to_migrate ) );
+			$this->set_total_count( absint( $total_to_migrate ) );
 		}
 
 	}
@@ -120,16 +110,14 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 	 * @access public
 	 * @since  2.0
 	 *
-	 * @param int|string $step Step number or 'done'.
 	 * @return int|string|\WP_Error Next step number, 'done', or a WP_Error object.
 	 */
-	public function process_step( $step ) {
+	public function process_step() {
 		global $wpdb;
 
-		$offset     = ( $step - 1 ) * $this->per_step;
 		$affiliates = $wpdb->get_results(
 			$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}affiliates_tbl LIMIT %d, %d;",
-				$offset,
+				$this->get_offset(),
 				$this->per_step
 			)
 		);
@@ -194,40 +182,11 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 				}
 			}
 		}
-		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
+		$current_count = $this->get_current_count();
 
-		$current_count += count( $inserted );
-
-		affiliate_wp()->utils->data->write( "{$this->batch_id}_current_count", $current_count );
+		$this->set_current_count( $current_count + count( $inserted ) );
 
 		return ++$step;
-	}
-
-	/**
-	 * Retrieves the calculated completion percentage.
-	 *
-	 * @access public
-	 * @since  2.0
-	 *
-	 * @param int|string $step Current step.
-	 * @return int Percentage completed.
-	 */
-	public function get_percentage_complete( $step ) {
-
-		$percentage = 0;
-
-		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
-		$total_count   = affiliate_wp()->utils->data->get( "{$this->batch_id}_total_count", 0 );
-
-		if ( $total_count > 0 ) {
-			$percentage = ( $current_count / $total_count ) * 100;
-		}
-
-		if ( $percentage > 100 ) {
-			$percentage = 100;
-		}
-
-		return $percentage;
 	}
 
 	/**
@@ -244,12 +203,12 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 		switch( $code ) {
 
 			case 'done':
-				$final_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
+				$final_count = $this->get_current_count();
 
 				$message = sprintf(
 					_n(
-						'%d affiliate was successfully converted.',
-						'%d affiliates were successfully converted.',
+						'%s affiliate was successfully converted.',
+						'%s affiliates were successfully converted.',
 						$final_count,
 						'affiliate-wp'
 					), number_format_i18n( $final_count )
@@ -277,8 +236,7 @@ class Migrate_WP_Affiliate implements Batch_Process\With_PreFetch {
 		affiliate_wp()->utils->data->delete( "{$this->batch_id}_user_ids" );
 		affiliate_wp()->utils->data->delete( "{$this->batch_id}_user_email_ids" );
 
-		affiliate_wp()->utils->data->delete( "{$this->batch_id}_total_count" );
-		affiliate_wp()->utils->data->delete( "{$this->batch_id}_current_count" );
+		$this->delete_counts();
 	}
 
 }

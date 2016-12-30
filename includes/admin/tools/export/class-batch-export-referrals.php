@@ -38,7 +38,7 @@ class Export_Referrals extends Batch\Export\CSV implements Batch\With_PreFetch {
 	 * @since  2.0
 	 * @var    string
 	 */
-	public $capability = 'export_affiliate_data';
+	public $capability = 'export_referral_data';
 
 	/**
 	 * ID of affiliate to export referrals for.

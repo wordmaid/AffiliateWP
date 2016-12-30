@@ -57,12 +57,11 @@ function affwp_referrals_admin() {
 				do_action( 'affwp_referrals_page_buttons' );
 				?>
 
-				<form id="affwp-referrals-export-form" style="display:none;" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-referrals' ); ?>" method="post">
+				<form id="affwp-referrals-export-form" style="display:none;" class="affwp-batch-form" data-batch_id="generate-payouts" data-nonce="<?php echo esc_attr( wp_create_nonce( 'generate-payouts_step_nonce' ) ); ?>">
 					<p>
 						<input type="text" class="affwp-datepicker" autocomplete="off" name="from" placeholder="<?php _e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
 						<input type="text" class="affwp-datepicker" autocomplete="off" name="to" placeholder="<?php _e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
 						<input type="text" class="affwp-text" name="minimum" placeholder="<?php esc_attr_e( 'Minimum amount', 'affiliate-wp' ); ?>"/>
-						<input type="hidden" name="affwp_action" value="generate_referral_payout"/>
 						<?php
 						/**
 						 * Fires just prior to the Generate CSV File button in the referrals list table

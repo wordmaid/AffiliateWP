@@ -106,10 +106,11 @@ class Registry {
 			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-referrals.php',
 		) );
 
-//		// Export Referrals Payout.
-//		$this->register_process( 'export-referrals-payout', array(
-//			'class' => 'Affiliate_WP_Referral_Payout_Export',
-//		) );
+		// Generate Payout Log.
+		$this->register_process( 'generate-payouts', array(
+			'class' => 'AffWP\Utils\Batch_Process\Generate_Payouts',
+			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-payouts.php',
+		) );
 
 	}
 

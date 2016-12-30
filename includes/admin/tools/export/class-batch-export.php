@@ -124,6 +124,18 @@ class Export extends \Affiliate_WP_Export {
 	}
 
 	/**
+	 * Determines if the current user can perform the current export.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @return bool True if the current user has the needed capability, otherwise false.
+	 */
+	public function can_process() {
+		return $this->can_export();
+	}
+
+	/**
 	 * Sets the export headers.
 	 *
 	 * @access public

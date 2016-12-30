@@ -106,18 +106,6 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	}
 
 	/**
-	 * Determines if the current user can perform an affiliates export.
-	 *
-	 * @access public
-	 * @since  2.0
-	 *
-	 * @return bool True if the current user has the needed capability, otherwise false.
-	 */
-	public function can_process() {
-		return $this->can_export();
-	}
-
-	/**
 	 * Processes a single step (batch).
 	 *
 	 * @access public

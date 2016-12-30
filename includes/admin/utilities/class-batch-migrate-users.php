@@ -1,7 +1,8 @@
 <?php
 namespace AffWP\Utils\Batch_Process;
 
-use AffWP\Utils\Batch_Process;
+use AffWP\Utils;
+use AffWP\Utils\Batch_Process as Batch;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,9 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 2.0
  *
+ * @see \AffWP\Utils\Batch_Process
  * @see \AffWP\Utils\Batch_Process\With_PreFetch
  */
-class Migrate_Users implements Batch_Process\With_PreFetch {
+class Migrate_Users extends Utils\Batch_Process implements Batch\With_PreFetch {
 
 	/**
 	 * Batch process ID.
@@ -78,7 +80,7 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 			affiliate_wp()->utils->data->write( "{$this->batch_id}_user_ids", $affiliate_user_ids );
 		}
 
-		$total_to_migrate = affiliate_wp()->utils->data->get( "{$this->batch_id}_total_count" );
+		$total_to_migrate = $this->get_total_count();
 
 		if ( false === $total_to_migrate ) {
 			$users = get_users( array(
@@ -90,20 +92,8 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 
 			$total_to_migrate = count( $users );
 
-			affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", $total_to_migrate );
+			$this->set_total_count( $total_to_migrate );
 		}
-	}
-
-	/**
-	 * Determines if the current user can run the user migration script.
-	 *
-	 * @access public
-	 * @since  2.0
-	 *
-	 * @return bool True if the user has permission, otherwise false.
-	 */
-	public function can_process() {
-		return current_user_can( 'manage_affiliates' );
 	}
 
 	/**
@@ -112,19 +102,18 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 	 * @access public
 	 * @since  2.0
 	 *
-	 * @param int|string $step Step number or 'done'.
 	 * @return int|string|\WP_Error Next step number, 'done', or a WP_Error object.
 	 */
-	public function process_step( $step ) {
+	public function process_step() {
 		if ( ! $this->roles ) {
 			return new \WP_Error( 'no_roles_found', __( 'No user roles were selected for migration.', 'affiliate-wp' ) );
 		}
 
-		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
+		$current_count = $this->get_current_count();
 
 		$args = array(
 			'number'     => $this->per_step,
-			'offset'     => ( $step - 1 ) * $this->per_step,
+			'offset'     => $this->get_offset(),
 			'exclude'    => affiliate_wp()->utils->data->get( "{$this->batch_id}_user_ids", array() ),
 			'orderby'    => 'ID',
 			'order'      => 'ASC',
@@ -153,40 +142,9 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 
 		}
 
-		$current_count = $current_count + count( $inserted );
+		$this->set_current_count( absint( $current_count ) + count( $inserted ) );
 
-		affiliate_wp()->utils->data->write( "{$this->batch_id}_current_count", $current_count );
-
-		$step++;
-
-		return $step;
-	}
-
-	/**
-	 * Retrieves the calculated completion percentage.
-	 *
-	 * @access public
-	 * @since  2.0
-	 *
-	 * @param int|string $step Current step.
-	 * @return int Percentage completed.
-	 */
-	public function get_percentage_complete( $step ) {
-
-		$percentage = 0;
-
-		$current_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
-		$total_count   = affiliate_wp()->utils->data->get( "{$this->batch_id}_total_count", 0 );
-
-		if ( $total_count > 0 ) {
-			$percentage = ( $current_count / $total_count ) * 100;
-		}
-
-		if ( $percentage > 100 ) {
-			$percentage = 100;
-		}
-
-		return $percentage;
+		return ++$step;
 	}
 
 	/**
@@ -203,12 +161,12 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 		switch( $code ) {
 
 			case 'done':
-				$final_count = affiliate_wp()->utils->data->get( "{$this->batch_id}_current_count", 0 );
+				$final_count = $this->get_current_count();
 
 				$message = sprintf(
 					_n(
-						'%d affiliate was added successfully.',
-						'%d affiliates were added successfully.',
+						'%s affiliate was added successfully.',
+						'%s affiliates were added successfully.',
 						$final_count,
 						'affiliate-wp'
 					), number_format_i18n( $final_count )
@@ -232,7 +190,7 @@ class Migrate_Users implements Batch_Process\With_PreFetch {
 	public function finish() {
 		// Clean up.
 		affiliate_wp()->utils->data->delete( "{$this->batch_id}_user_ids" );
-		affiliate_wp()->utils->data->delete( "{$this->batch_id}_total_count" );
-		affiliate_wp()->utils->data->delete( "{$this->batch_id}_current_count" );
+
+		$this->delete_counts();
 	}
 }

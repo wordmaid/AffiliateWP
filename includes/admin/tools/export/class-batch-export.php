@@ -108,19 +108,21 @@ class Export extends \Affiliate_WP_Export {
 		$this->step = $step;
 		$this->done = false;
 
-		/**
-		 * Filters the number of items to process per step for the given export type.
-		 *
-		 * The dynamic portion of the hook name, `$this->export_type` refers to the export
-		 * type defined in each sub-class.
-		 *
-		 * @since 2.0
-		 *
-		 * @param int                               $per_step The number of items to process
-		 *                                                    for each step. Default 100.
-		 * @param \AffWP\Utils\Batch_Process\Export $this     Exporter instance.
-		 */
-		$this->per_step = apply_filters( "affwp_export_per_step_{$this->export_type}", 100, $this );
+		if ( has_filter( "affwp_export_per_step_{$this->export_type}" ) ) {
+			/**
+			 * Filters the number of items to process per step for the given export type.
+			 *
+			 * The dynamic portion of the hook name, `$this->export_type` refers to the export
+			 * type defined in each sub-class.
+			 *
+			 * @since 2.0
+			 *
+			 * @param int                               $per_step The number of items to process
+			 *                                                    for each step. Default 100.
+			 * @param \AffWP\Utils\Batch_Process\Export $this     Exporter instance.
+			 */
+			$this->per_step = apply_filters( "affwp_export_per_step_{$this->export_type}", $this->per_step, $this );
+		}
 	}
 
 	/**

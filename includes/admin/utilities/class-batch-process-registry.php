@@ -51,6 +51,7 @@ class Registry {
 	 */
 	public function includes() {
 		// Batch processing bootstrap.
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-process.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-batch-process.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-batch-process-with-prefetch.php';
 

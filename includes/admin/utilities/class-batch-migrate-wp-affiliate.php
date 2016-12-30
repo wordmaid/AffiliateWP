@@ -186,7 +186,7 @@ class Migrate_WP_Affiliate extends Utils\Batch_Process implements Batch\With_Pre
 
 		$this->set_current_count( $current_count + count( $inserted ) );
 
-		return ++$step;
+		return ++$this->step;
 	}
 
 	/**

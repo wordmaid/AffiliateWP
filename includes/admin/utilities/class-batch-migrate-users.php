@@ -144,7 +144,7 @@ class Migrate_Users extends Utils\Batch_Process implements Batch\With_PreFetch {
 
 		$this->set_current_count( absint( $current_count ) + count( $inserted ) );
 
-		return ++$step;
+		return ++$this->step;
 	}
 
 	/**

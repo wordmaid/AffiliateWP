@@ -95,7 +95,7 @@ class Export extends \Affiliate_WP_Export {
 	 *
 	 * @param int|string $step Step number or 'done'.
 	 */
-	public function __construct( $step = 1 ) {
+	public function __construct( $step ) {
 
 		$upload_dir     = wp_upload_dir();
 		$this->filename = 'affiliate-wp-export-' . $this->export_type . '-' . date( 'm-d-Y' ) . $this->filetype;
@@ -224,11 +224,10 @@ class Export extends \Affiliate_WP_Export {
 	 * @access public
 	 * @since  2.0
 	 *
-	 * @param int $step Step number.
 	 * @return int Number of items to offset.
 	 */
-	public function get_offset( $step ) {
-		return ( $step - 1 ) * $this->per_step;
+	public function get_offset() {
+		return ( $this->step - 1 ) * $this->per_step;
 	}
 
 	/**
@@ -237,10 +236,9 @@ class Export extends \Affiliate_WP_Export {
 	 * @access public
 	 * @since  2.0
 	 *
-	 * @param int|string $step Current step.
 	 * @return int Percentage completed.
 	 */
-	public function get_percentage_complete( $step ) {
+	public function get_percentage_complete() {
 
 		$percentage = 0;
 

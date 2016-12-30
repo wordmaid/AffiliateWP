@@ -110,23 +110,21 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	 *
 	 * @access public
 	 * @since  2.0
-	 *
-	 * @param int|string $step Step in the process. Accepts either a step number or 'done'.
 	 */
-	public function process_step( $step ) {
+	public function process_step() {
 		if ( is_null( $this->status ) ) {
 			return new \WP_Error( 'no_status_found', __( 'No valid affiliate status was selected for export.', 'affiliate-wp' ) );
 		}
 
 		$current_count = $this->get_current_count();
 
-		$data = $this->get_data( $step );
+		$data = $this->get_data();
 
 		if ( empty( $data ) ) {
 			return 'done';
 		}
 
-		if ( $step < 2 ) {
+		if ( $this->step < 2 ) {
 
 			// Make sure we start with a fresh file on step 1.
 			@unlink( $this->file );
@@ -137,7 +135,7 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 
 		$this->set_current_count( absint( $current_count ) + count( $data ) );
 
-		return ++$step;
+		return ++$this->step;
 	}
 
 	/**
@@ -146,15 +144,14 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	 * @access public
 	 * @since  2.0
 	 *
-	 * @param int $step Optional. Step number. 'done' should be handled prior to calling this method. Default 1.
 	 * @return array Data for a single step of the export.
 	 */
-	public function get_data( $step = 1 ) {
+	public function get_data() {
 
 		$args = array(
 			'status' => $this->status,
 			'number' => $this->per_step,
-			'offset' => $this->get_offset( $step )
+			'offset' => $this->get_offset(),
 		);
 
 		$data       = array();
@@ -226,11 +223,9 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 	 *
 	 * @access public
 	 * @since  2.0
-	 * @abstract
 	 */
 	public function finish() {
-		affiliate_wp()->utils->data->delete( "{$this->batch_id}_current_count" );
-		affiliate_wp()->utils->data->delete( "{$this->batch_id}_total_count" );
+		$this->delete_counts();
 	}
 
 }

@@ -310,4 +310,15 @@ class Export extends \Affiliate_WP_Export {
 		affiliate_wp()->utils->data->write( "{$this->batch_id}_total_count", $count );
 	}
 
+	/**
+	 * Deletes the stored current and total counts of processed items.
+	 *
+	 * @access protected
+	 * @since  2.0
+	 */
+	protected function delete_counts() {
+		affiliate_wp()->utils->data->delete( "{$this->batch_id}_current_count" );
+		affiliate_wp()->utils->data->delete( "{$this->batch_id}_total_count" );
+	}
+
 }

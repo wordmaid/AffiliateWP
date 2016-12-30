@@ -47,7 +47,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 
 	    $config = array(
 	        'name'        => 'AffiliateWP',
-	        'author'      => 'AffiliateWP',
+	        'author'      => 'AffiliateWP, LLC',
 	        'description' => 'Create a referral in AffiliateWP',
 	        'author_url'  => 'https://affiliatewp.com',
 			'icon'        => AFFILIATEWP_PLUGIN_URL . 'assets/images/logo-affwp.svg',

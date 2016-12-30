@@ -96,6 +96,19 @@ $default_rate = affwp_abs_number_round( $default_rate );
 
 			</tr>
 
+			<tr class="form-row">
+
+				<th scope="row">
+					<label for="notes"><?php _e( 'Affiliate Notes', 'affiliate-wp' ); ?></label>
+				</th>
+
+				<td>
+					<textarea name="notes" rows="5" cols="50" id="notes" class="large-text"></textarea>
+					<p class="description"><?php _e( 'Enter any notes for this affiliate. Notes are only visible to the admin.', 'affiliate-wp' ); ?></p>
+				</td>
+
+			</tr>
+
 			<tr class="form-row" id="affwp-welcome-email-row">
 
 				<th scope="row">

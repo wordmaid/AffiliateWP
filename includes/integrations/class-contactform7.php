@@ -516,47 +516,69 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Add referral when form is submitted
+	 * Adds a referral when a form is submitted.
 	 *
 	 * @since 2.0
 	 *
-	 * @param int $post_id Flamingo post ID
-	 * @param int $form_id
-	 * @param int $form_id
+	 * @param object $contactform CF7 form submission object.
+	 * @param object $result      Submitted CF7 form submission data.
 	 */
-	public function add_pending_referral( $post_id ) {
+	public function add_pending_referral( $contactform, $result ) {
 
-		if ( ! $post_id ) {
+		$form_id = absint( $contactform->id() );
+
+		if ( ! $form_id ) {
 			return false;
 		}
 
-		$sub_url  = get_post_meta( $post_id, 'url', true );
-		$post     = get_post( $post_id );
+		$form    = get_post( $form_id );
+		$paypal1 = get_post_meta( $form_id, '_cf7pp_enable', true );
+		$paypal2 = false;
+
+		// Bail if neither PayPal add-on is active and enabled.
+		if ( false === $paypal1 && false === $paypal2 ) {
+			return false;
+		}
 
 		if ( $this->was_referred() ) {
 
-			$post            = get_post( $post_id );
-			$description     = get_post_meta( $post_id, 'affwp_referral_description', true );
-			$purchase_amount = floatval( get_post_meta( $post_id, 'affwp_purchase_amount', true ) );
+			$context = 'contactform7';
 
-			$referral_total = $this->calculate_referral_amount( $purchase_amount, $post_id );
+			if ( 1 === $paypal1 || 1 == $paypal1 || '1' == $paypal1 ) {
 
-			$this->insert_pending_referral( $referral_total, $post_id, $description );
+				$reference       = get_post_meta( $form_id, 'affwp_cf7_form_id',               true );
+				$description     = get_post_meta( $form_id, 'affwp_referral_description',      true );
+				$purchase_amount = floatval( get_post_meta( $form_id, 'affwp_purchase_amount', true ) );
+
+				$referral_total  = $this->calculate_referral_amount( $purchase_amount, $form_id );
+			} elseif ( $paypal2 ) {
+				$reference       = get_post_meta( $form_id, 'affwp_cf7_form_id',               true );
+				$description     = get_post_meta( $form_id, 'affwp_referral_description',      true );
+				$purchase_amount = floatval( get_post_meta( $form_id, 'affwp_purchase_amount', true ) );
+
+				$referral_total  = $this->calculate_referral_amount( $purchase_amount, $form_id );
+			} else {
+				return false;
+			}
+
+
+			$this->insert_pending_referral( $referral_total, $form_id, $description );
 
 			if ( empty( $referral_total ) ) {
-				$this->mark_referral_complete( $post_id );
+				$this->mark_referral_complete( $form_id );
 			}
 		}
 	}
 
 	/**
-	 * Update referral status and add note to Contact Form 7 Flamingo entry
+	 * Updates the referral status when a PayPal refund or transaction completion occurs,
+	 * via the success or cancel pages provided in the PayPal add-ons.
 	 *
 	 * @since 2.0
 	 *
-	 * @param int $post_id
+	 * @param int $referral_id The referral ID.
 	 */
-	public function mark_referral_complete( $post_id ) {
+	public function mark_referral_complete( $referral_id ) {
 
 		$this->complete_referral( $post_id );
 
@@ -567,14 +589,14 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Update referral status and add note to Contact Form 7 Flamingo entry
+	 * Update referral status. Fires when the cancel page url is hit from a PayPal transaction.
 	 *
 	 * @since 2.0
 	 *
 	 *
-	 * @param int $post_id
+	 * @param int $referral_id The referral ID.
 	 */
-	public function revoke_referral_on_refund( $post_id ) {
+	public function revoke_referral_on_refund( $referral_id ) {
 
 		$this->reject_referral( $post_id );
 
@@ -582,8 +604,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		$amount          = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
 		$name            = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
 		$description     = sprintf( __( 'AffiliateWP: Referral #%d for %s for %s rejected', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
-
-
 	}
 
 	/**

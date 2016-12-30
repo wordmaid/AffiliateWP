@@ -1,6 +1,6 @@
 <?php
 
-$integration  = new Affiliate_WP_Caldera_Forms;
+$integration = new Affiliate_WP_Caldera_Forms;
 
 /**
  * This file is the processor panel in Caldera Forms settings.

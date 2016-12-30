@@ -298,7 +298,7 @@ function affwp_export_import_tab() {
 				<h3><span><?php _e( 'Export Referrals', 'affiliate-wp' ); ?></span></h3>
 				<div class="inside">
 					<p><?php _e( 'Export referrals to a CSV file.', 'affiliate-wp' ); ?></p>
-					<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-tools&tab=export_import' ); ?>">
+					<form method="post" enctype="multipart/form-data" class="affwp-batch-form" data-batch_id="export-referrals" data-nonce="<?php echo esc_attr( wp_create_nonce( 'export-referrals_step_nonce' ) ); ?>">
 						<p>
 							<span class="affwp-ajax-search-wrap">
 								<input type="text" name="user_name" id="user_name" class="affwp-user-search" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
@@ -316,8 +316,6 @@ function affwp_export_import_tab() {
 							<div class="description"><?php _e( 'To search for an affiliate, enter the affiliate&#8217;s login name, first name, or last name. Leave blank to export referrals for all affiliates.', 'affiliate-wp' ); ?></div>
 						</p>
 						<p>
-							<input type="hidden" name="affwp_action" value="export_referrals" />
-							<?php wp_nonce_field( 'affwp_export_referrals_nonce', 'affwp_export_referrals_nonce' ); ?>
 							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'submit', false ); ?>
 						</p>
 					</form>

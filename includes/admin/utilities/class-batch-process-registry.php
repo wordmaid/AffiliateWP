@@ -99,11 +99,12 @@ class Registry {
 			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-affiliates.php',
 		) );
 
-//		// Export Referrals.
-//		$this->register_process( 'export-referrals', array(
-//			'class' => 'Affiliate_WP_Referral_Export',
-//		) );
-//
+		// Export Referrals.
+		$this->register_process( 'export-referrals', array(
+			'class' => 'AffWP\Utils\Batch_Process\Export_Referrals',
+			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-referrals.php',
+		) );
+
 //		// Export Referrals Payout.
 //		$this->register_process( 'export-referrals-payout', array(
 //			'class' => 'Affiliate_WP_Referral_Payout_Export',

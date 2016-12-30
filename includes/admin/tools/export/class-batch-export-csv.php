@@ -32,15 +32,19 @@ class CSV extends Batch\Export implements Exporter\CSV {
 	 * @return string Column data.
 	 */
 	public function csv_cols_out() {
-		ob_start();
+		$col_data = '';
+		$cols = $this->get_csv_cols();
+		$i = 1;
+		foreach( $cols as $col_id => $column ) {
+			$col_data .= '"' . addslashes( $column ) . '"';
+			$col_data .= $i == count( $cols ) ? '' : ',';
+			$i++;
+		}
+		$col_data .= "\r\n";
 
-		parent::csv_cols_out();
+		$this->stash_step_data( $col_data );
 
-		$csv_cols_out = ob_get_clean();
-
-		$this->stash_step_data( $csv_cols_out );
-
-		return $csv_cols_out;
+		return $col_data;
 	}
 
 	/**
@@ -52,15 +56,32 @@ class CSV extends Batch\Export implements Exporter\CSV {
 	 * @return string Rows data.
 	 */
 	public function csv_rows_out() {
-		ob_start();
+		$row_data = '';
+		$data     = $this->get_data();
+		$cols     = $this->get_csv_cols();
 
-		parent::csv_rows_out();
+		if( $data ) {
 
-		$csv_rows_out = ob_get_clean();
+			// Output each row
+			foreach ( $data as $row ) {
+				$i = 1;
+				foreach ( $row as $col_id => $column ) {
+					// Make sure the column is valid
+					if ( array_key_exists( $col_id, $cols ) ) {
+						$row_data .= '"' . addslashes( preg_replace( "/\"/","'", $column ) ) . '"';
+						$row_data .= $i == count( $cols ) ? '' : ',';
+						$i++;
+					}
+				}
+				$row_data .= "\r\n";
+			}
 
-		$this->stash_step_data( $csv_rows_out );
+			$this->stash_step_data( $row_data );
 
-		return $csv_rows_out;
+			return $row_data;
+		}
+
+		return false;
 	}
 
 	/**

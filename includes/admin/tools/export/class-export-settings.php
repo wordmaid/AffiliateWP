@@ -36,16 +36,13 @@ class Settings implements Exporter\Base {
 	public $export_type = 'settings';
 
 	/**
-	 * Whether the current user can export settings.
+	 * Capability needed to perform the current export.
 	 *
 	 * @access public
 	 * @since  2.0
-	 *
-	 * @return bool Whether the current user can initiate an export.
+	 * @var    string
 	 */
-	public function can_export() {
-		return current_user_can( 'manage_options' );
-	}
+	public $capability = 'manage_affiliate_options';
 
 	/**
 	 * Handles sending the appropriate headers for exporting settings.

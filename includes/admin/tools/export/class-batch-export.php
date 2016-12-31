@@ -259,6 +259,17 @@ class Export extends \Affiliate_WP_Export {
 	}
 
 	/**
+	 * Defines logic to execute once batch processing is complete.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @abstract
+	 */
+	public function finish() {
+		$this->delete_counts();
+	}
+
+	/**
 	 * Retrieves the current, stored count of processed items.
 	 *
 	 * @access protected

@@ -24,6 +24,15 @@ class CSV extends Batch\Export implements Exporter\CSV {
 	public $filetype = '.csv';
 
 	/**
+	 * Number of processed rows per step.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    int
+	 */
+	protected $rows = 0;
+
+	/**
 	 * Processes a single step (batch).
 	 *
 	 * @access public
@@ -51,7 +60,7 @@ class CSV extends Batch\Export implements Exporter\CSV {
 			return 'done';
 		}
 
-		$this->set_current_count( ++$current_count );
+		$this->set_current_count( $current_count + $this->rows );
 
 		return ++$this->step;
 	}
@@ -110,6 +119,7 @@ class CSV extends Batch\Export implements Exporter\CSV {
 			}
 
 			$this->stash_step_data( $row_data );
+			$this->rows = count( $data );
 
 			return $row_data;
 		}

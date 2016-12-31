@@ -75,7 +75,7 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 
 			$total_to_export = affiliate_wp()->affiliates->get_affiliates( $args, true );
 
-			$this->set_total_count( $total_to_export );
+			$this->set_total_count( absint( $total_to_export ) );
 		}
 	}
 

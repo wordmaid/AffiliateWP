@@ -199,14 +199,4 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 		return $message;
 	}
 
-	/**
-	 * Defines logic to execute once batch processing is complete.
-	 *
-	 * @access public
-	 * @since  2.0
-	 */
-	public function finish() {
-		$this->delete_counts();
-	}
-
 }

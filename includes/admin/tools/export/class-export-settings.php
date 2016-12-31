@@ -68,10 +68,9 @@ class Settings implements Exporter\Base {
 	 * @access public
 	 * @since  2.0
 	 *
-	 * @param int $step Optional. Current step. Default 1.
 	 * @return array $data Settings data for export.
 	 */
-	public function get_data( $step = 1 ) {
+	public function get_data() {
 		return get_option( 'affwp_settings' );
 	}
 

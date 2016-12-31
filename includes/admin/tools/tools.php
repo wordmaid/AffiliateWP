@@ -522,7 +522,7 @@ function affwp_process_batch_export_download() {
 		);
 	}
 
-	$export = new $batch['class'];
+	$export = new $batch['class']( $step = 0 );
 	$export->export();
 
 }

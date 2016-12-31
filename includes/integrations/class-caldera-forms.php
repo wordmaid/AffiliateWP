@@ -12,7 +12,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 
 		$this->context = 'caldera-forms';
 
-		add_action( 'caldera_forms_entry_saved', array( $this, 'entry_saved' ), 10, 3 );
+		add_action( 'caldera_forms_submit_complete', array( $this, 'submit_complete' ), 10, 3 );
 		add_action( 'caldera_forms_general_settings_panel', array( $this, 'add_settings' ) );
 
 		add_action( 'caldera_forms_pre_load_processors', array( $this, 'pre_load_processors' ), 10, 6 );
@@ -80,16 +80,15 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Records a 0.00 referral when the entry is saved
+	 * Records a $0.00 referral when the form submission is complete
 	 *
 	 * @access  public
 	 * @since   2.0
 	*/
-	public function entry_saved( $entry_id, $new_entry, $form ) {
+	public function submit_complete( $form, $referrer, $process_id ) {
 
 		/**
-		 * Forms without the affwp processor will generate a $0.00 referral
-		 * Forms with the affwp processor are handled via the AffiliateWP_Caldera_Forms_Processor class and will not go any further than this
+		 * Forms using the affwp processor will skip this method and are instead handled via the AffiliateWP_Caldera_Forms_Processor class
 		 */
 		if ( $form['processors'] ) {
 			foreach ( $form['processors'] as $processor ) {
@@ -99,6 +98,9 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 				}
 			}
 		}
+
+		$submission_data = Caldera_Forms::get_submission_data( $form );
+		$entry_id        = $submission_data['_entry_id'];
 
 		$args = array(
 			'entry_id'               => $entry_id,
@@ -155,7 +157,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 		$referral_id = $this->insert_pending_referral( $referral_total, $entry_id, $description );
 
 		// Mark referral complete (set to "unpaid" status)
-		if ( isset( $args['mark_referral_complete'] ) ) {
+		if ( ! empty( $args['mark_referral_complete'] && true === $args['mark_referral_complete'] ) ) {
 			$this->mark_referral_complete( $entry_id );
 		}
 

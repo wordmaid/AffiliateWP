@@ -40,9 +40,10 @@ class AffiliateWP_Caldera_Forms_Processor extends Caldera_Forms_Processor_Proces
 		$args = array(
 			'entry_id'               => $entry_id,
 			'referral_total'         => $referral_total,
-			'mark_referral_complete' => true
+			'mark_referral_complete' => false
 		);
 
+		// Add pending referral
 		$integration->add_pending_referral( $args, $form );
 
     }

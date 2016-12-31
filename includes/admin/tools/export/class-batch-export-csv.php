@@ -26,7 +26,7 @@ class CSV extends Batch\Export implements Exporter\CSV {
 	/**
 	 * Number of processed rows per step.
 	 *
-	 * @access public
+	 * @access protected
 	 * @since  2.0
 	 * @var    int
 	 */

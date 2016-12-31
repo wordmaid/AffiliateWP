@@ -83,10 +83,9 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export implements Export
 	 * @access public
 	 * @since  1.0
 	 *
-	 * @param int $step Optional. Current step. Default 1.
 	 * @return array $data Data for Export
 	 */
-	public function get_data( $step = 1 ) {
+	public function get_data() {
 
 		$args = array(
 			'status'       => $this->status,

@@ -157,7 +157,7 @@ function affwp_recount_tab() {
 						<p>
 							<input type="hidden" name="user_id" id="user_id" value="0"/>
 							<input type="hidden" name="affwp_action" value="recount_stats"/>
-							<?php submit_button( __( 'Recount', 'affiliate-wp' ), 'secondary', 'submit', false ); ?>
+							<?php submit_button( __( 'Recount', 'affiliate-wp' ), 'secondary', 'recount-stats-submit', false ); ?>
 						</p>
 					</form>
 				</div><!-- .inside -->
@@ -288,7 +288,7 @@ function affwp_export_import_tab() {
 							</select>
 						</p>
 						<p>
-							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'submit', false ); ?>
+							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'export-affiliates-submit', false ); ?>
 						</p>
 					</form>
 				</div><!-- .inside -->
@@ -316,7 +316,7 @@ function affwp_export_import_tab() {
 							<div class="description"><?php _e( 'To search for an affiliate, enter the affiliate&#8217;s login name, first name, or last name. Leave blank to export referrals for all affiliates.', 'affiliate-wp' ); ?></div>
 						</p>
 						<p>
-							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'submit', false ); ?>
+							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'export-referrals-submit', false ); ?>
 						</p>
 					</form>
 				</div><!-- .inside -->
@@ -330,7 +330,7 @@ function affwp_export_import_tab() {
 						<p><input type="hidden" name="affwp_action" value="export_settings" /></p>
 						<p>
 							<?php wp_nonce_field( 'affwp_export_nonce', 'affwp_export_nonce' ); ?>
-							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'submit', false ); ?>
+							<?php submit_button( __( 'Export', 'affiliate-wp' ), 'secondary', 'export-settings-submit', false ); ?>
 						</p>
 					</form>
 				</div><!-- .inside -->
@@ -347,7 +347,7 @@ function affwp_export_import_tab() {
 						<p>
 							<input type="hidden" name="affwp_action" value="import_settings" />
 							<?php wp_nonce_field( 'affwp_import_nonce', 'affwp_import_nonce' ); ?>
-							<?php submit_button( __( 'Import', 'affiliate-wp' ), 'secondary', 'submit', false ); ?>
+							<?php submit_button( __( 'Import', 'affiliate-wp' ), 'secondary', 'import-settings-submit', false ); ?>
 						</p>
 					</form>
 				</div><!-- .inside -->

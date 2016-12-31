@@ -380,6 +380,11 @@ table.affiliates #unpaid {
 	width: 95%;
 	height: 15px;
 }
+
+.affiliates_page_affiliate-wp-referrals .affwp-batch-progress {
+	position: relative;
+}
+
 .affwp-batch-progress div {
 	background: #ccc;
 	height: 100%;

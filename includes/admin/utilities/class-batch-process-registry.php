@@ -124,13 +124,13 @@ class Registry {
 	 * @param array  $process_args {
 	 *     Arguments for registering a new batch process.
 	 *
-	 *     @type string $class    Batch processor class to use.
-	 *     @type string $step_method Optional. Step method to use via `$class`.
+	 *     @type string $class Batch processor class to use.
+	 *     @type string $file  File containing the batch processor class.
 	 * }
 	 * @return \WP_Error|true True on successful registration, otherwise a WP_Error object.
 	 */
 	public function register_process( $batch_id, $process_args ) {
-		$process_args = wp_parse_args( $process_args,  array_fill_keys( array( 'class', 'file', 'step_method' ), '' ) );
+		$process_args = wp_parse_args( $process_args,  array_fill_keys( array( 'class', 'file' ), '' ) );
 
 		if ( empty( $process_args['class'] ) ) {
 			return new \WP_Error( 'invalid_batch_class', __( 'A batch process class must be specified', 'affiliate-wp' ) );
@@ -138,12 +138,6 @@ class Registry {
 
 		if ( empty( $process_args['file'] ) || 0 !== validate_file( $process_args['file'] ) ) {
 			return new \WP_Error( 'invalid_batch_class_file', __( 'An invalid class handler file has been supplied.', 'affiliate-wp' ) );
-		}
-
-		if ( ! method_exists( $process_args['class'], $process_args['step_method'] )
-			|| empty( $process_args['step_method'] )
-		) {
-			$process_args['step_method'] = 'process_step';
 		}
 
 		return $this->add_process( $batch_id, $process_args );
@@ -159,9 +153,8 @@ class Registry {
 	 * @param array  $attributes {
 	 *     Batch attributes.
 	 *
-	 *     @type string $class       Batch process handler class.
-	 *     @type string $file        Batch process handler class file.
-	 *     @type string $step_method Optional. Step method to use other than process_step().
+	 *     @type string $class Batch process handler class.
+	 *     @type string $file  Batch process handler class file.
 	 * }
 	 * @return true Always true.
 	 */

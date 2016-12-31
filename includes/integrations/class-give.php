@@ -24,6 +24,10 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 	*/
 	public function add_pending_referral( $payment_id = 0, $payment_data = array() ) {
 
+		if ( ! $this->was_referred() ) {
+			return false;
+		}
+
 	}
 
 }

@@ -134,8 +134,6 @@ function affwp_process_batch_request() {
 
 	$step = sanitize_text_field( $_REQUEST['step'] );
 
-	$is_exporter = method_exists( $class, 'can_export' );
-
 	/**
 	 * Instantiate the batch class.
 	 *
@@ -168,7 +166,7 @@ function affwp_process_batch_request() {
 			$response_data['message'] = $process->get_message( 'done' );
 
 			// If this is an export class and not an empty export, send the download URL.
-			if ( $is_exporter ) {
+			if ( method_exists( $process, 'can_export' ) ) {
 
 				if ( ! $process->is_empty ) {
 					$args = array(

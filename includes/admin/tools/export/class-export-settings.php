@@ -36,15 +36,6 @@ class Settings implements Exporter\Base {
 	public $export_type = 'settings';
 
 	/**
-	 * Capability needed to perform the current export.
-	 *
-	 * @access public
-	 * @since  2.0
-	 * @var    string
-	 */
-	public $capability = 'manage_affiliate_options';
-
-	/**
 	 * Handles sending the appropriate headers for exporting settings.
 	 *
 	 * @access public
@@ -60,6 +51,18 @@ class Settings implements Exporter\Base {
 		header( 'Content-Type: application/json; charset=utf-8' );
 		header( 'Content-Disposition: attachment; filename=affwp-settings-export-' . date( 'm-d-Y' ) . '.json' );
 		header( "Expires: 0" );
+	}
+
+	/**
+	 * Determines whether the current user has permission to perform the export.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @return bool True if the current user has permission, false if not.
+	 */
+	public function can_export() {
+		return current_user_can( 'manage_affiliate_options' );
 	}
 
 	/**

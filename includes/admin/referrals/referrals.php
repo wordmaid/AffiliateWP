@@ -68,9 +68,9 @@ function affwp_referrals_admin() {
 						 * admin screen.
 						 */
 						do_action( 'affwp_referrals_page_csv_export_form' );
-						?>
 
-						<input type="submit" value="<?php _e( 'Generate CSV File', 'affiliate-wp' ); ?>" class="button-secondary"/>
+						submit_button( __( 'Generate CSV File', 'affiliate-wp' ), 'secondary', 'generate-payouts-submit', false );
+						?>
 						<p><?php printf( __( 'This will mark all unpaid referrals in this timeframe as paid. To export referrals with a status other than <em>unpaid</em>, go to the <a href="%s">Tools &rarr; Export</a> page.', 'affiliate-wp' ), admin_url( 'admin.php?page=affiliate-wp-tools&tab=export_import' ) ); ?></p>
 					</p>
 				</form>

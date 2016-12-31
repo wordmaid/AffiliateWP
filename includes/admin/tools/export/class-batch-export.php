@@ -85,7 +85,7 @@ class Export extends \Affiliate_WP_Export {
 	 * @since  2.0
 	 * @var    int
 	 */
-	public $per_step;
+	public $per_step = 100;
 
 	/**
 	 * Sets up the batch export.

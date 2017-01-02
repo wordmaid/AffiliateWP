@@ -102,7 +102,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		add_action( 'wpcf7_submit', 'cf7pp_after_send_mail', 20, 2 );
 
 		// Mark referral complete.
-		add_action( 'wp_footer', array( $this, 'mark_referral_complete' ), 10, 2 );
+		add_action( 'wp_footer', array( $this, 'mark_referral_complete' ), 9999 );
 
 		// Revoke referral.
 		add_action( 'wp_footer', array( $this, 'revoke' ), 9999 );

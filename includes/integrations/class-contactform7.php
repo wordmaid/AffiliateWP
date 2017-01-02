@@ -75,17 +75,13 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		// Process paypal1 redirect after generating a Flamingo Inbound post
 		remove_action( 'wpcf7_mail_sent', 'cf7pp_after_send_mail' );
-		add_action( 'wpcf7_submit', 'cf7pp_after_send_mail', 20 );
-
-		/**
-		 * Referral generation hooks
-		 */
+		add_action( 'wpcf7_submit', 'cf7pp_after_send_mail', 20, 2 );
 
 		// Mark referral complete
-		// add_action( 'todo', array( $this, 'mark_referral_complete' ), 10, 2 );
+		add_action( 'todo', array( $this, 'mark_referral_complete' ), 10, 2 );
 
 		// Revoke referral.
-		// add_action( 'todo', array( $this, 'revoke_referral_on_refund' ), 10, 2 );
+		add_action( 'todo', array( $this, 'revoke_referral_on_refund' ), 10, 2 );
 
 		// Set reference
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
@@ -107,7 +103,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * To add support for others, use the filter in the `get_supported_gateways` method.
 	 *
 	 * @since  2.0
-	 *
+	 * @access private
 	 * @return array $gateways Contact Form 7 payment gateways supported by AffiliateWP core.
 	 */
 	private function _supported_gateways() {
@@ -115,6 +111,8 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			'contact-form-7-paypal-add-on',
 			'contact-form-7-paypal-extension'
 		);
+
+		return $gateways;
 	}
 
 	/**
@@ -198,7 +196,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * These options store data for the folowing:
 	 *
 	 * - `enable_all`: Whether all CF7 forms have referral tracking enabled.
-	 * - `enabled_forms`: Array defining which CF7 forms have AffiliateWP referral tracking enabled, specified by form ID.
+	 * - `enabled_forms`: An array which defines the CF7 forms that have AffiliateWP referral tracking enabled, specified by form ID.
 	 * - `has_paypal_1`: Whether the first PayPal add-on, `contact-form7-paypal-add-on`, is installed and active.
 	 * - `has_paypal_2`: Whether the second PayPal add-on, `contact-form7-paypal-extension`, is installed and active.
 	 *
@@ -520,7 +518,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 *
 	 * @since 2.0
 	 *
-	 * @param object $contactform CF7 form submission object.
+	 * @param object $contact_form CF7 form submission object.
 	 * @param object $result      Submitted CF7 form submission data.
 	 */
 	public function add_pending_referral( $contactform, $result ) {
@@ -546,7 +544,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 				$email        = get_post_meta( $form_id, '_cf7pp_email',  true );
 				$sku          = get_post_meta( $form_id, '_cf7pp_id',     true );
-				$reference    = $form_id . '-' . $sku;
+				$reference    = $form_id . '-' . date_i18n( 'Y-m-d' );
 				$description  = get_post_meta( $form_id, '_cf7pp_name',   true );
 				$base_amount  = floatval( get_post_meta( $form_id, '_cf7pp_price',  true ) );
 				$affiliate_id = $this->get_affiliate_id( $reference );
@@ -557,7 +555,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 				$email        = get_post_meta( $form_id, '_cf7pp_email',  true );
 				$sku          = get_post_meta( $form_id, '_cf7pp_id',     true );
-				$reference    = $form_id . '-' . $sku;
+				$reference    = $form_id . '-' . $contactform->timestamp;
 				$description  = get_post_meta( $form_id, '_cf7pp_name',   true );
 				$base_amount  = floatval( get_post_meta( $form_id, '_cf7pp_price',  true ) );
 				$affiliate_id = $this->get_affiliate_id( $reference );
@@ -568,8 +566,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			}
 
 			$this->insert_pending_referral( $referral_total, $reference, $description, $sku );
-
-			error_log( 'Da CF object: '. print_r( $contactform, true ) );
 
 			if ( empty( $referral_total ) ) {
 				$this->mark_referral_complete( affwp_get_referral( $reference ) );
@@ -590,10 +586,6 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		$this->complete_referral( $reference );
 
 		$referral    = affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context );
-
-		if($referral) {
-			error_log('there is a referral');
-		}
 
 		$amount      = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
 		$name        = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );

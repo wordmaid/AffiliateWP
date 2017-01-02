@@ -506,7 +506,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 			(array) $contactform, array(
 				'affwp_paypal_enabled'       => $enabled,
 				'affwp_customer_email'       => $email,
-				'affwp_purchase_amount'      => $amount,
+				'affwp_base_amount'          => $amount,
 				'affwp_referral_description' => $description,
 				'affwp_product_sku'          => $sku
 			)
@@ -542,30 +542,37 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		if ( $this->was_referred() ) {
 
-			$context = 'contactform7';
-
 			if ( 1 === $paypal1 || 1 == $paypal1 || '1' == $paypal1 ) {
 
-				$reference       = get_post_meta( $form_id, 'affwp_cf7_form_id',               true );
-				$description     = get_post_meta( $form_id, 'affwp_referral_description',      true );
-				$purchase_amount = floatval( get_post_meta( $form_id, 'affwp_purchase_amount', true ) );
+				$email        = get_post_meta( $form_id, '_cf7pp_email',  true );
+				$sku          = get_post_meta( $form_id, '_cf7pp_id',     true );
+				$reference    = $form_id . '-' . $sku;
+				$description  = get_post_meta( $form_id, '_cf7pp_name',   true );
+				$base_amount  = floatval( get_post_meta( $form_id, '_cf7pp_price',  true ) );
+				$affiliate_id = $this->get_affiliate_id( $reference );
 
-				$referral_total  = $this->calculate_referral_amount( $purchase_amount, $form_id );
-			} elseif ( $paypal2 ) {
-				$reference       = get_post_meta( $form_id, 'affwp_cf7_form_id',               true );
-				$description     = get_post_meta( $form_id, 'affwp_referral_description',      true );
-				$purchase_amount = floatval( get_post_meta( $form_id, 'affwp_purchase_amount', true ) );
+				$referral_total  = $this->calculate_referral_amount( $base_amount, $reference, $sku, $affiliate_id );
 
-				$referral_total  = $this->calculate_referral_amount( $purchase_amount, $form_id );
+			} elseif ( 1 === $paypal2 ) {
+
+				$email        = get_post_meta( $form_id, '_cf7pp_email',  true );
+				$sku          = get_post_meta( $form_id, '_cf7pp_id',     true );
+				$reference    = $form_id . '-' . $sku;
+				$description  = get_post_meta( $form_id, '_cf7pp_name',   true );
+				$base_amount  = floatval( get_post_meta( $form_id, '_cf7pp_price',  true ) );
+				$affiliate_id = $this->get_affiliate_id( $reference );
+
+				$referral_total  = $this->calculate_referral_amount( $base_amount, $reference, $sku, $affiliate_id );
 			} else {
 				return false;
 			}
 
+			$this->insert_pending_referral( $referral_total, $reference, $description, $sku );
 
-			$this->insert_pending_referral( $referral_total, $form_id, $description );
+			error_log( 'Da CF object: '. print_r( $contactform, true ) );
 
 			if ( empty( $referral_total ) ) {
-				$this->mark_referral_complete( $form_id );
+				$this->mark_referral_complete( affwp_get_referral( $reference ) );
 			}
 		}
 	}
@@ -576,13 +583,18 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 *
 	 * @since 2.0
 	 *
-	 * @param int $referral_id The referral ID.
+	 * @param mixed $reference The referral reference.
 	 */
-	public function mark_referral_complete( $referral_id ) {
+	public function mark_referral_complete( $reference ) {
 
-		$this->complete_referral( $post_id );
+		$this->complete_referral( $reference );
 
-		$referral    = affiliate_wp()->referrals->get_by( 'reference', $post_id, $this->context );
+		$referral    = affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context );
+
+		if($referral) {
+			error_log('there is a referral');
+		}
+
 		$amount      = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
 		$name        = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
 		$description = sprintf( __( 'AffiliateWP: Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
@@ -596,18 +608,18 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 *
 	 * @param int $referral_id The referral ID.
 	 */
-	public function revoke_referral_on_refund( $referral_id ) {
+	public function revoke_referral_on_refund( $reference ) {
 
-		$this->reject_referral( $post_id );
+		$this->reject_referral( $reference );
 
-		$referral        = affiliate_wp()->referrals->get_by( 'reference', $post_id, $this->context );
+		$referral        = affiliate_wp()->referrals->get_by( 'reference', $reference, $this->context );
 		$amount          = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
 		$name            = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
 		$description     = sprintf( __( 'AffiliateWP: Referral #%d for %s for %s rejected', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
 	}
 
 	/**
-	 * Link to Contact Form 7 Flamingo entry in the referral reference column
+	 * Link to Contact Form 7 form in the referral reference column.
 	 *
 	 * @since 2.0
 	 *

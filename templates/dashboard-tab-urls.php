@@ -1,11 +1,11 @@
+<?php
+$affiliate_id = affwp_get_affiliate_id();
+?>
 <div id="affwp-affiliate-dashboard-url-generator" class="affwp-tab-content">
 
 	<h4><?php _e( 'Referral URL Generator', 'affiliate-wp' ); ?></h4>
 
 	<?php
-
-	$affiliate_id = affwp_get_affiliate_id();
-
 	/**
 	 * Fires just prior to the affiliate Dashboard URLs tab content, in the affiliate area.
 	 *
@@ -14,7 +14,7 @@
 	do_action( 'affwp_affiliate_dashboard_urls_top', $affiliate_id ); ?>
 
 	<?php if ( 'id' == affwp_get_referral_format() ) : ?>
-		<p><?php printf( __( 'Your affiliate ID is: <strong>%s</strong>', 'affiliate-wp' ), affwp_get_affiliate_id() ); ?></p>
+		<p><?php printf( __( 'Your affiliate ID is: <strong>%s</strong>', 'affiliate-wp' ), $affiliate_id ); ?></p>
 	<?php elseif ( 'username' == affwp_get_referral_format() ) : ?>
 		<p><?php printf( __( 'Your affiliate username is: <strong>%s</strong>', 'affiliate-wp' ), affwp_get_affiliate_username() ); ?></p>
 	<?php endif; ?>

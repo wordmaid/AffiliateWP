@@ -1,5 +1,5 @@
 <?php
-	$affiliate_id = affwp_get_affiliate_id();
+$affiliate_id = affwp_get_affiliate_id();
 ?>
 <div id="affwp-affiliate-dashboard-referral-counts" class="affwp-tab-content">
 

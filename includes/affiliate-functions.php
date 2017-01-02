@@ -1091,6 +1091,11 @@ function affwp_update_affiliate( $data = array() ) {
 	 */
 	do_action( 'affwp_pre_update_affiliate', $affiliate, $args, $data );
 
+	// Change the affiliate's status if different from their old status
+	if ( $args['status'] !== $affiliate->status ) {
+		$status = affwp_set_affiliate_status( $affiliate_id, $args['status'] );
+	}
+
 	$updated = affiliate_wp()->affiliates->update( $affiliate_id, $args, '', 'affiliate' );
 
 	/**

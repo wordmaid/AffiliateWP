@@ -578,7 +578,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 				$email        = get_post_meta( $form_id, '_cf7pp_email',  true );
 				$sku          = get_post_meta( $form_id, '_cf7pp_id',     true );
-				$reference    = $form_id . '-' . date_i18n( 'Y-m-d' );
+				$reference    = $form_id . '-' . date_i18n( 'U' );
 				$description  = get_post_meta( $form_id, '_cf7pp_name',   true );
 				$base_amount  = floatval( get_post_meta( $form_id, '_cf7pp_price',  true ) );
 				$affiliate_id = $this->get_affiliate_id( $reference );
@@ -589,7 +589,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 				$email        = get_post_meta( $form_id, '_cf7pp_email',  true );
 				$sku          = get_post_meta( $form_id, '_cf7pp_id',     true );
-				$reference    = $form_id . '-' . $contactform->timestamp;
+				$reference    = $form_id . '-' . date_i18n( 'U' );
 				$description  = get_post_meta( $form_id, '_cf7pp_name',   true );
 				$base_amount  = floatval( get_post_meta( $form_id, '_cf7pp_price',  true ) );
 				$affiliate_id = $this->get_affiliate_id( $reference );
@@ -601,8 +601,25 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 			$this->insert_pending_referral( $referral_total, $reference, $description, $sku );
 
+			// Add query args to success and cancel urls.
+			add_query_arg(
+				array(
+					'affiliate_id' => $affiliate_id,
+					'reference'    => $reference
+					),
+				$this->return_url
+			);
+
+			add_query_arg(
+				array(
+					'affiliate_id' => $affiliate_id,
+					'reference'    => $reference
+					),
+				$this->cancel_url
+			);
+
 			if ( empty( $referral_total ) ) {
-				$this->mark_referral_complete( affwp_get_referral( $reference ) );
+				$this->mark_referral_complete( affwp_get_referral( $current_page_id, $reference ) );
 			}
 		}
 	}
@@ -611,10 +628,28 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * Updates the referral status when a PayPal refund or transaction completion occurs,
 	 * via the success or cancel pages provided in the PayPal add-ons.
 	 *
+	 * @param  int    $current_page_id  The current page ID.
 	 * @param mixed $reference The referral reference.
 	 * @since 2.0
 	 */
-	public function mark_referral_complete( $reference ) {
+	public function mark_referral_complete( $current_page_id = 0, $reference = '' ) {
+
+		$current_page_id = get_the_ID();
+
+		$reference = (isset( $_GET['reference'] ) ) ? $_GET['reference'] : false;
+
+		if ( ! $reference ) {
+			return;
+		}
+
+		$return_url     = $this->return_url;
+		$return_page    = get_page_by_path( basename( untrailingslashit( $return_url ) ) );
+		$return_page_id = absint( $return_page->ID );
+
+		// Bail if not on the form page or the return page.
+		if ( ! did_action( 'wpcf7_submit' ) || $return_page_id !== $current_page_id ) {
+			return false;
+		}
 
 		$this->complete_referral( $reference );
 
@@ -634,9 +669,15 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * @since 2.0                       current page ID does not match the PayPal cancel page ID.
 	 *
 	 */
-	public function revoke( $current_page_id, $reference ) {
+	public function revoke( $current_page_id = 0, $reference = '' ) {
 
 		$current_page_id = get_the_ID();
+
+		$reference = (isset( $_GET['reference'] ) ) ? $_GET['reference'] : false;
+
+		if ( ! $reference ) {
+			return;
+		}
 
 		$cancel_url     = $this->cancel_url;
 		$cancel_page    = get_page_by_path( basename( untrailingslashit( $cancel_url ) ) );

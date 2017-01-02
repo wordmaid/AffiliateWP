@@ -32,6 +32,24 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	public $supported_gateways;
 
 	/**
+	 * The PayPal transaction success page url
+	 * Specific to the paypal1 integration.
+	 *
+	 * @access public
+	 * @since 2.0
+	 */
+	public $return_url;
+
+	/**
+	 * The PayPal transaction cancellation page url
+	 * Specific to the paypal1 integration.
+	 *
+	 * @access public
+	 * @since 2.0
+	 */
+	public $cancel_url;
+
+	/**
 	 * @access  public
 	 * @see     Affiliate_WP_Base::init
 	 * @since   2.0
@@ -41,6 +59,12 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		$this->context = 'contactform7';
 
 		$this->supported_gateways = $this->get_supported_gateways();
+
+		// Set the success and cancel url
+		$paypal1_options = get_option( 'cf7pp_options' );
+		$this->return_url = $paypal1_options['return'];
+		$this->cancel_url = $paypal1_options['cancel'];
+
 
 		// Misc AffWP CF7 functions
 		$this->include_cf7_functions();
@@ -70,18 +94,28 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		// Add PayPal meta to the contact form submision object.
 		add_action( 'wpcf7_submit', array( $this, 'add_paypal_meta' ), 1, 2 );
 
-		// Add pending referral
+		// Add a pending referral.
 		add_filter( 'wpcf7_submit', array( $this, 'add_pending_referral' ), 10, 2 );
 
-		// Process paypal1 redirect after generating a Flamingo Inbound post
+		// Process paypal1 redirect after generating the initial referral.
 		remove_action( 'wpcf7_mail_sent', 'cf7pp_after_send_mail' );
 		add_action( 'wpcf7_submit', 'cf7pp_after_send_mail', 20, 2 );
 
-		// Mark referral complete
-		add_action( 'todo', array( $this, 'mark_referral_complete' ), 10, 2 );
+		// Mark referral complete.
+		add_action( 'wp_footer', array( $this, 'mark_referral_complete' ), 10, 2 );
 
 		// Revoke referral.
-		add_action( 'todo', array( $this, 'revoke_referral_on_refund' ), 10, 2 );
+		add_action( 'wp_footer', array( $this, 'revoke' ), 9999 );
+
+
+		/**
+		 * paypal2
+		 */
+
+		// Hook on the correct CF7 action
+		remove_action( 'wpcf7_add_shortcode', 'contact_form_7_paypal_submit' );
+		add_action( 'wpcf7_add_form_tag ',    'contact_form_7_paypal_submit', 10, 3 );
+
 
 		// Set reference
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
@@ -577,9 +611,8 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * Updates the referral status when a PayPal refund or transaction completion occurs,
 	 * via the success or cancel pages provided in the PayPal add-ons.
 	 *
-	 * @since 2.0
-	 *
 	 * @param mixed $reference The referral reference.
+	 * @since 2.0
 	 */
 	public function mark_referral_complete( $reference ) {
 
@@ -595,12 +628,24 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	/**
 	 * Update referral status. Fires when the cancel page url is hit from a PayPal transaction.
 	 *
-	 * @since 2.0
+	 * @param  string $reference        The reference.
+	 * @param  int    $current_page_id  The current page ID.
+	 * @return mixed void|bool          Returns nothing if successful, returns boolean false if the
+	 * @since 2.0                       current page ID does not match the PayPal cancel page ID.
 	 *
-	 *
-	 * @param int $referral_id The referral ID.
 	 */
-	public function revoke_referral_on_refund( $reference ) {
+	public function revoke( $current_page_id, $reference ) {
+
+		$current_page_id = get_the_ID();
+
+		$cancel_url     = $this->cancel_url;
+		$cancel_page    = get_page_by_path( basename( untrailingslashit( $cancel_url ) ) );
+		$cancel_page_id = absint( $cancel_page->ID );
+
+		// Bail if not on the cancel page
+		if ( $cancel_page_id !== $current_page_id ) {
+			return false;
+		}
 
 		$this->reject_referral( $reference );
 
@@ -613,12 +658,10 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	/**
 	 * Link to Contact Form 7 form in the referral reference column.
 	 *
-	 * @since 2.0
-	 *
-	 * @param int    $reference
-	 * @param object $referral
-	 *
+	 * @param  int    $reference
+	 * @param  object $referral
 	 * @return string
+	 * @since  2.0
 	 *
 	 */
 	public function reference_link( $reference, $referral ) {

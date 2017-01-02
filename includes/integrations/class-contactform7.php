@@ -621,12 +621,11 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 	 * @return string
 	 *
 	 */
-	public function reference_link( $reference = 0, $referral ) {
+	public function reference_link( $reference, $referral ) {
 
-		if ( empty( $referral->context ) || 'contactform7' != $referral->context ) {
-
-			return $reference;
-		}
+		// To provide a working link to the CF7 form,
+		// the date is stripped from the reference string.
+		$reference = strstr( $reference, '-', true );
 
 		$url = admin_url( 'admin.php?page=wpcf7&action=edit&post=' . $reference );
 

@@ -729,6 +729,11 @@ class Affiliate_WP_Settings {
 						'desc' => __( 'Check this box to enable debug mode. This will turn on error logging for the referral process to help identify problems.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
+					'referral_url_blacklist' => array(
+						'name' => __( 'Referral URL Blacklist', 'affiliate-wp' ),
+						'desc' => __( 'URLs placed in this box below will be prevented from making referrals. Enter URLs one per line.', 'affiliate-wp' ),
+						'type' => 'textarea'
+					),
 					'uninstall_on_delete' => array(
 						'name' => __( 'Remove Data on Uninstall?', 'affiliate-wp' ),
 						'desc' => __( 'Check this box if you would like AffiliateWP to completely remove all of its data when the plugin is deleted.', 'affiliate-wp' ),

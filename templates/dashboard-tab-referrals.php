@@ -1,3 +1,7 @@
+<?php
+$affiliate_id = affwp_get_affiliate_id();
+?>
+
 <div id="affwp-affiliate-dashboard-referrals" class="affwp-tab-content">
 
 	<h4><?php _e( 'Referrals', 'affiliate-wp' ); ?></h4>
@@ -5,21 +9,18 @@
 	<?php
 	$per_page  = 30;
 	$page      = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
-	$pages     = absint( ceil( affwp_count_referrals( affwp_get_affiliate_id() ) / $per_page ) );
+	$pages     = absint( ceil( affwp_count_referrals( $affiliate_id ) / $per_page ) );
 	$referrals = affiliate_wp()->referrals->get_referrals(
 		array(
 			'number'       => $per_page,
 			'offset'       => $per_page * ( $page - 1 ),
-			'affiliate_id' => affwp_get_affiliate_id(),
+			'affiliate_id' => $affiliate_id,
 			'status'       => array( 'paid', 'unpaid', 'rejected' ),
 		)
 	);
 	?>
 
 	<?php
-
-	$affiliate_id = affwp_get_affiliate_id();
-
 	/**
 	 * Fires before the referrals dashbaord data able within the referrals template.
 	 *
@@ -74,9 +75,6 @@
 	</table>
 
 	<?php
-
-	$affiliate_id = affwp_get_affiliate_id() ;
-
 	/**
 	 * Fires after the data table within the affiliate area referrals template.
 	 *

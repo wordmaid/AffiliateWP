@@ -255,7 +255,7 @@ jQuery(document).ready(function($) {
 					var data = {
 						batch_id: $( this ).data( 'batch_id' ),
 						nonce: $( this ).data( 'nonce' ),
-						form: form.serializeAssoc(),
+						form: $( this ).serializeAssoc(),
 					};
 
 					// Disable the button.

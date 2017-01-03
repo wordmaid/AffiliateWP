@@ -114,8 +114,7 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 
 		// Hook on the correct CF7 action
 		remove_action( 'wpcf7_add_shortcode', 'contact_form_7_paypal_submit' );
-		add_action( 'wpcf7_add_form_tag ',    'contact_form_7_paypal_submit', 10, 3 );
-
+		add_action( 'wpcf7_add_form_tag',     'contact_form_7_paypal_submit', 10, 3 );
 
 		// Set reference
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );

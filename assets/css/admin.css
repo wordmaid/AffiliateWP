@@ -372,10 +372,11 @@ table.affiliates #unpaid {
 	border-color: #eae9e9;
 	padding: 12px 12px 4px;
 	overflow: auto;
-	margin: 20px -12px -23px;
 }
-.notice-wrap .spinner {
+form .spinner {
 	margin: 4px 10px 8px;
+	position: relative;
+	float: none;
 }
 .admin-color-fresh .affwp-batch-progress div {
 	background: #0073aa;

@@ -264,7 +264,10 @@ jQuery(document).ready(function($) {
 					$( this ).find('.notice-wrap').remove();
 
 					// Add the progress bar.
-					$( this ).append( '<div class="notice-wrap"><span class="spinner is-active"></span><div class="affwp-batch-progress"><div></div></div></div>' );
+					$( this ).append( '<div class="notice-wrap"><div class="affwp-batch-progress"><div></div></div></div>' );
+
+					// Add the spinner.
+					submitButton.parent().append( '<span class="spinner is-active"></span>' );
 
 					// Start the process.
 					self.process_step( 1, data, self );
@@ -301,17 +304,20 @@ jQuery(document).ready(function($) {
 					if( response.data.done || response.data.error ) {
 
 						// We need to get the actual in progress form, not all forms on the page
-						var batch_form  = $('.affwp-batch-form').find('.affwp-batch-progress').parent().parent();
-						var notice_wrap = batch_form.find('.notice-wrap');
+						var	batchForm   = $('.affwp-batch-form').find('.affwp-batch-progress').parent().parent(),
+							spinner     = batchForm.find( '.spinner' ),
+							notice_wrap = batchForm.find('.notice-wrap');
 
-						batch_form.find('.button-disabled').removeClass('button-disabled');
+						batchForm.find('.button-disabled').removeClass('button-disabled');
 
 						if ( response.data.error ) {
 
+							spinner.remove();
 							notice_wrap.html('<div class="updated error"><p>' + response.data.error + '</p></div>');
 
 						} else if ( response.data.done ) {
 
+							spinner.remove();
 							notice_wrap.html('<div id="affwp-batch-success" class="updated notice is-dismissible"><p>' + response.data.message + '<span class="notice-dismiss"></span></p></div>');
 
 							if ( response.data.url ) {

@@ -106,6 +106,10 @@ class Registry {
 			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-export-referrals.php',
 		) );
 
+		//
+		// Other stuff.
+		//
+
 		// Generate Payout Log.
 		$this->register_process( 'generate-payouts', array(
 			'class' => 'AffWP\Utils\Batch_Process\Generate_Payouts',

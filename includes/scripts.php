@@ -114,7 +114,7 @@ function affwp_frontend_scripts_and_styles() {
 	}
 
 	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-	wp_register_style( 'affwp-forms', AFFILIATEWP_PLUGIN_URL . 'assets/css/forms' . $suffix . '.css', array( 'dashicons' ), AFFILIATEWP_VERSION );
+	wp_register_style( 'affwp-forms', AFFILIATEWP_PLUGIN_URL . 'assets/css/forms' . $suffix . '.css', array(), AFFILIATEWP_VERSION );
 
 	wp_register_script( 'affwp-recaptcha', 'https://www.google.com/recaptcha/api.js', array(), AFFILIATEWP_VERSION );
 	wp_register_script( 'affwp-frontend', AFFILIATEWP_PLUGIN_URL . 'assets/js/frontend' . $suffix . '.js', array( 'jquery' ), AFFILIATEWP_VERSION );
@@ -142,10 +142,24 @@ function affwp_frontend_scripts_and_styles() {
 	// Always enqueue the 'affwp-forms' stylesheet.
 	affwp_enqueue_style( 'affwp-forms' );
 
-	add_filter( 'affwp_enqueue_script_affwp-recaptcha', 'affwp_is_recaptcha_enabled' );
-
 }
 add_action( 'wp_enqueue_scripts', 'affwp_frontend_scripts_and_styles' );
+
+/**
+ * Filters whether to enqueue reCAPTCHA via AffiliateWP to maintain GravityForms compatibility.
+ *
+ * @since 1.9.8
+ *
+ * @param bool   $enqueue Whether to enqueue the script. Default true.
+ * @return bool Whether to enqueue the script.
+ */
+function affwp_enqueue_recaptcha_gravityforms_compat( $enqueue ) {
+	if ( wp_script_is( 'gform-recaptcha', 'enqueued' ) ) {
+		$enqueue = false;
+	}
+	return $enqueue;
+}
+add_filter( 'affwp_enqueue_script_affwp-recaptcha', 'affwp_enqueue_recaptcha_gravityforms_compat' );
 
 /**
  *  Load the frontend creative styles for the [affiliate_creative] and [affiliate_creatives] shortcodes

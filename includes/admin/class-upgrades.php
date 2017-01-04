@@ -83,6 +83,10 @@ class Affiliate_WP_Upgrades {
 			$this->v195_upgrade();
 		}
 
+		if ( version_compare( $version, '2.0', '<' ) ) {
+			$this->v20_upgrade();
+		}
+
 		// Inconsistency between current and saved version.
 		if ( version_compare( $version, AFFILIATEWP_VERSION, '<>' ) ) {
 			$this->upgraded = true;
@@ -437,6 +441,17 @@ class Affiliate_WP_Upgrades {
 		$this->log( 'Upgrade: The Payouts cache has been invalidated following the 1.9.5 upgrade routine.' );
 
 		$this->upgraded = true;
+	}
+
+	/**
+	 * Performs database upgrades for version 2.0.
+	 *
+	 * @since 2.0
+	 * @access private
+	 */
+	private function v20_upgrade() {
+		@affiliate_wp()->capabilities->add_caps();
+		$this->log( 'Upgrade: Core capabilities have been upgraded.' );
 	}
 
 }

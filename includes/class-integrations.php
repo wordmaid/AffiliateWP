@@ -24,6 +24,7 @@ class Affiliate_WP_Integrations {
 			'optimizemember' => 'OptimizeMember',
 			'paypal'         => 'PayPal',
 			'pmp'            => 'Paid Memberships Pro',
+			'pms'            => 'Paid Member Subscriptions',
 			'rcp'            => 'Restrict Content Pro',
 			's2member'       => 's2Member',
 			'shopp'	         => 'Shopp',
@@ -48,6 +49,9 @@ class Affiliate_WP_Integrations {
 
 		$enabled = apply_filters( 'affwp_enabled_integrations', $this->get_enabled_integrations() );
 
+		/**
+		 * Fires immediately prior to AffiliateWP integrations being loaded.
+		 */
 		do_action( 'affwp_integrations_load' );
 
 		foreach( $enabled as $filename => $integration ) {
@@ -58,6 +62,9 @@ class Affiliate_WP_Integrations {
 
 		}
 
+		/**
+		 * Fires immediately after all AffiliateWP integrations are loaded.
+		 */
 		do_action( 'affwp_integrations_loaded' );
 
 	}

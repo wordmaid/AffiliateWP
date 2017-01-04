@@ -202,6 +202,13 @@ abstract class Affiliate_WP_Base {
 
 		if ( affwp_set_referral_status( $referral->referral_id, 'unpaid' ) ) {
 
+			/**
+			 * Fires when completing a referral.
+			 *
+			 * @param int             $referral_id The referral ID.
+			 * @param \AffWP\Referral $referral    The referral object.
+			 * @param string          $reference   The referral reference.
+			 */
 			do_action( 'affwp_complete_referral', $referral->referral_id, $referral, $referral->reference );
 
 			if( $this->debug ) {

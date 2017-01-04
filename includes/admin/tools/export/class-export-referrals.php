@@ -60,7 +60,9 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 		$cols = array(
 			'affiliate_id'  => __( 'Affiliate ID', 'affiliate-wp' ),
 			'email'         => __( 'Email', 'affiliate-wp' ),
+			'name'          => __( 'Name', 'affiliate-wp' ),
 			'payment_email' => __( 'Payment Email', 'affiliate-wp' ),
+			'username'      => __( 'Username', 'affiliate-wp' ),
 			'amount'        => __( 'Amount', 'affiliate-wp' ),
 			'currency'      => __( 'Currency', 'affiliate-wp' ),
 			'description'   => __( 'Description', 'affiliate-wp' ),
@@ -103,7 +105,7 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 				 *
 				 * @since 1.9.5
 				 *
-				 * @param array           $line {
+				 * @param array           $referral_data {
 				 *     Single line of exported referral data
 				 *
 				 *     @type int    $affiliate_id  Affiliate ID.
@@ -120,13 +122,15 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 				 * }
 				 * @param \AffWP\Referral $referral Referral object.
 				 */
-				$data[] = apply_filters( 'affwp_referral_export_get_data_line', array(
+				$referral_data = apply_filters( 'affwp_referral_export_get_data_line', array(
 					'affiliate_id'  => $referral->affiliate_id,
 					'email'         => affwp_get_affiliate_email( $referral->affiliate_id ),
+					'name'          => affwp_get_affiliate_name( $affiliate->affiliate_id ),
 					'payment_email' => affwp_get_affiliate_payment_email( $referral->affiliate_id ),
+					'username'      => affwp_get_affiliate_login( $affiliate->affiliate_id ),
 					'amount'        => $referral->amount,
 					'currency'      => $referral->currency,
-					'description'   => str_replace(',', "\r\n", $referral->description),
+					'description'   => $referral->description,
 					'campaign'      => $referral->campaign,
 					'reference'     => $referral->reference,
 					'context'       => $referral->context,
@@ -134,11 +138,20 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 					'date'          => $referral->date
 				), $referral );
 
+				// Add slashing.
+				$data[] = array_map( function( $column ) {
+					return addslashes( preg_replace( "/\"/","'", $column ) );
+				}, $referral_data );
+
+				unset( $referral_data );
 			}
 
 		}
 
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data', $data );
+
+		/** This filter is documented in includes/admin/tools/export/class-export.php */
 		$data = apply_filters( 'affwp_export_get_data_' . $this->export_type, $data );
 
 		return $data;

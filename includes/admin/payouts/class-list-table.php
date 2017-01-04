@@ -298,7 +298,7 @@ class AffWP_Payouts_Table extends List_Table {
 		$links     = array();
 
 		foreach ( $referrals as $referral_id ) {
-			$links[] = affwp_admin_link( 'referrals', esc_html( $referral_id ), array(), array( 'action' => 'edit_referral', 'referral_id' => $referral_id ) );
+			$links[] = affwp_admin_link( 'referrals', esc_html( $referral_id ), array( 'action' => 'edit_referral', 'referral_id' => $referral_id ) );
 		}
 
 		$value = implode( ', ', $links );
@@ -332,7 +332,7 @@ class AffWP_Payouts_Table extends List_Table {
 			// If the owner exists, use it.
 			if ( $user ) {
 				$value = sprintf( '%1$s %2$s',
-					affwp_admin_link( 'payouts', esc_html( $user->data->display_name ), array(), array( 'owner' => $payout->owner ) ),
+					affwp_admin_link( 'payouts', esc_html( $user->data->display_name ), array( 'owner' => $payout->owner ) ),
 					sprintf( _x( '(User ID: %d)', 'payout owner ID', 'affiliate-wp' ),
 						esc_html( $payout->owner )
 					)

@@ -908,11 +908,11 @@ function affwp_admin_url( $type = '', $query_args = array() ) {
  *
  * @param string $type       Admin link type.
  * @param string $label      Link label.
- * @param array  $attributes Optional. Link attributes as key/value pairs.
  * @param array  $query_args Optional. Query arguments used to build the admin URL.
+ * @param array  $attributes Optional. Link attributes as key/value pairs.
  * @return string HTML markup for the admin link.
  */
-function affwp_admin_link( $type, $label, $attributes = array(), $query_args = array() ) {
+function affwp_admin_link( $type, $label, $query_args = array(), $attributes = array() ) {
 	$attributes = wp_parse_args( $attributes, array(
 		'href' => esc_url( affwp_admin_url( $type, $query_args ) )
 	) );

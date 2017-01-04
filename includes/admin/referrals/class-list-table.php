@@ -318,7 +318,6 @@ class AffWP_Referrals_Table extends List_Table {
 		$value = affwp_admin_link(
 			'referrals',
 			affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id ),
-			array(),
 			array( 'affiliate_id' => $referral->affiliate_id )
 		);
 

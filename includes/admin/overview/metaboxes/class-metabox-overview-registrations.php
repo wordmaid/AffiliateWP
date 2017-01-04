@@ -80,9 +80,9 @@ class Affiliate_Registrations extends Meta_Box implements Meta_Box\Base {
                             <td>
                                 <?php
                                 if( 'pending' == $affiliate->status ) {
-                                    echo affwp_admin_link( 'affiliates', __( 'Review', 'affiliate-wp' ), array(), array( 'action' => 'review_affiliate', 'affiliate_id' => $affiliate->affiliate_id ) );
+									echo affwp_admin_link( 'affiliates', __( 'Review', 'affiliate-wp' ), array( 'action' => 'review_affiliate', 'affiliate_id' => $affiliate->affiliate_id ) );
                                 } else {
-                                	echo affwp_admin_link( 'affiliates', __( 'View Report', 'affiliate-wp' ), array(), array( 'action' => 'view_affiliate', 'affiliate_id' => $affiliate->affiliate_id ) );
+									echo affwp_admin_link( 'affiliates', __( 'View Report', 'affiliate-wp' ), array( 'action' => 'view_affiliate', 'affiliate_id' => $affiliate->affiliate_id ) );
                                 }
                                 ?>
                             </td>

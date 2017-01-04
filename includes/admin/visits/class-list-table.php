@@ -171,7 +171,7 @@ class AffWP_Visits_Table extends List_Table {
 	 * @return string The affiliate
 	 */
 	function column_affiliate( $visit ) {
-		$value = affwp_admin_link( 'visits', affiliate_wp()->affiliates->get_affiliate_name( $visit->affiliate_id ), array(), array( 'affiliate' => $visit->affiliate_id ) );
+		$value = affwp_admin_link( 'visits', affiliate_wp()->affiliates->get_affiliate_name( $visit->affiliate_id ), array( 'affiliate' => $visit->affiliate_id ) );
 
 		/**
 		 * Filters the affiliate column of the visits list table.

@@ -472,7 +472,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	function column_unpaid( $affiliate ) {
 		$unpaid_count = affiliate_wp()->referrals->unpaid_count( '', $affiliate->affiliate_id );
 
-		$value = affwp_admin_link( 'referrals', $unpaid_count, array(), array( 'affiliate_id' => $affiliate->affiliate_id, 'status' => 'unpaid' ) );
+		$value = affwp_admin_link( 'referrals', $unpaid_count, array( 'affiliate_id' => $affiliate->affiliate_id, 'status' => 'unpaid' ) );
 
 		/**
 		 * Filters the unpaid referrals column data for the affiliates list table.
@@ -496,7 +496,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @return string The affiliate referrals link.
 	 */
 	function column_referrals( $affiliate ) {
-		$value = affwp_admin_link( 'referrals', $affiliate->referrals, array(), array( 'affiliate_id' => $affiliate->affiliate_id, 'status' => 'paid' ) );
+		$value = affwp_admin_link( 'referrals', $affiliate->referrals, array( 'affiliate_id' => $affiliate->affiliate_id, 'status' => 'paid' ) );
 
 		/**
 		 * Filters the referrals column data for the affiliates list table.
@@ -517,7 +517,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @return string visits link
 	 */
 	function column_visits( $affiliate ) {
-		$value = affwp_admin_link( 'visits', affwp_get_affiliate_visit_count( $affiliate->affiliate_id ), array(), array( 'affiliate' => $affiliate->affiliate_id ) );
+		$value = affwp_admin_link( 'visits', affwp_get_affiliate_visit_count( $affiliate->affiliate_id ), array( 'affiliate' => $affiliate->affiliate_id ) );
 
 		/**
 		 * Filters the username visits data for the affiliates list table.

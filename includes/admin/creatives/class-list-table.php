@@ -189,7 +189,7 @@ class AffWP_Creatives_Table extends List_Table {
 		// Get the creative's attachment ID based on the image URL
 		$attachment_id = attachment_url_to_postid( $creative->image );
 
-		return affwp_admin_link( 'creatives', wp_get_attachment_image( $attachment_id, 'thumbnail' ), array(), array( 'creative_id' => $creative->ID, 'action' => 'edit_creative' ) );
+		return affwp_admin_link( 'creatives', wp_get_attachment_image( $attachment_id, 'thumbnail' ), array( 'creative_id' => $creative->ID, 'action' => 'edit_creative' ) );
 
 	}
 

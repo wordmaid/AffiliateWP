@@ -49,22 +49,24 @@ function affwp_user_profile_fields( $user ) {
 					echo affwp_admin_link(
 						'affiliates',
 						__( 'Reports', 'affiliate-wp' ),
-						array( 'class' => 'button' ),
 						array(
 							'affwp_notice' => false,
 							'affiliate_id' => $affiliate->affiliate_id,
 							'action'       => 'view_affiliate'
-						) );
+						),
+						array( 'class' => 'button' )
+					);
 					echo ' ';
 					echo affwp_admin_link(
 						'affiliates',
 						__( 'Edit', 'affiliate-wp' ),
-						array( 'class' => 'button' ),
 						array(
 							'affwp_notice' => false,
 							'action'       => 'edit_affiliate',
 							'affiliate_id' => $affiliate->affiliate_id
-						) );
+						),
+						array( 'class' => 'button' )
+					);
 				else: ?>
 					<a href="<?php echo add_query_arg( array( 'user_id' => $user->ID, 'register_affiliate' => 1 ), admin_url( 'user-edit.php' ) ); ?>" class="button"><?php esc_attr_e( 'Register', 'affiliate-wp' ); ?></a>
 				<?php endif; ?>

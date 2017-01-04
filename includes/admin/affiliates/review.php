@@ -8,7 +8,7 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 ?>
 <div class="wrap">
 
-	<h2><?php _e( 'Review Affiliate', 'affiliate-wp' ); ?> <?php affwp_admin_link( 'affiliates', __( 'Go Back', 'affiliate-wp' ), array( 'class' => 'button-secondary' ) ); ?></h2>
+	<h2><?php _e( 'Review Affiliate', 'affiliate-wp' ); ?> <?php affwp_admin_link( 'affiliates', __( 'Go Back', 'affiliate-wp' ), array(), array( 'class' => 'button-secondary' ) ); ?></h2>
 
 	<form method="post" id="affwp_review_affiliate">
 

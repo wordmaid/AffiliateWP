@@ -254,11 +254,10 @@ class AffWP_Payouts_Table extends List_Table {
 	 * @return string Linked affiliate name and ID.
 	 */
 	function column_affiliate( $payout ) {
-		$url = add_query_arg( array(
-			'page'         => 'affiliate-wp-affiliates',
+		$url = affwp_admin_url( 'affiliates', array(
 			'action'       => 'view_affiliate',
 			'affiliate_id' => $payout->affiliate_id
-		), admin_url( 'admin.php' ) );
+		) );
 
 		$name      = affiliate_wp()->affiliates->get_affiliate_name( $payout->affiliate_id );
 		$affiliate = affwp_get_affiliate( $payout->affiliate_id );

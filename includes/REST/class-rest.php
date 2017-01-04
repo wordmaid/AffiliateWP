@@ -82,10 +82,7 @@ class Affiliate_WP_REST {
 			wp_die( sprintf( __( 'You do not have permission to %s API keys for this user.', 'affiliate-wp' ), $process ), __( 'Error', 'affiliate-wp' ), array( 'response' => 403 ) );
 		}
 
-		$query_args = array(
-			'page' => 'affiliate-wp-tools',
-			'tab'  => 'api_keys'
-		);
+		$query_args = array( 'tab' => 'api_keys' );
 
 		switch( $process ) {
 			case 'generate':
@@ -112,7 +109,7 @@ class Affiliate_WP_REST {
 				break;
 		}
 
-		wp_redirect( add_query_arg( $query_args, 'admin.php' ) );
+		wp_redirect( affwp_admin_url( 'tools', $query_args ) );
 
 		exit();
 	}

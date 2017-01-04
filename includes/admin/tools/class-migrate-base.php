@@ -34,15 +34,7 @@ class Affiliate_WP_Migrate_Base {
 
 	public function finish() {
 
-		$redirect = add_query_arg(
-			array(
-				'page' => 'affiliate-wp'
-			),
-			admin_url( 'admin.php' )
-		);
-
-		wp_safe_redirect( $redirect );
-
+		wp_safe_redirect( affwp_admin_url() );
 		exit;
 	}
 

@@ -370,11 +370,7 @@ function affwp_system_info_tab() {
 		return;
 	}
 
-	$action_url = add_query_arg( array(
-		'page' => 'affiliate-wp-tools',
-		'tab'  => 'system_info'
-	), admin_url( 'admin.php' ) );
-
+	$action_url = affwp_admin_url( 'tools', array( 'tab' => 'system_info' ) );
 	?>
 	<form action="<?php echo esc_url( $action_url ); ?>" method="post" dir="ltr">
 		<textarea readonly="readonly" onclick="this.focus(); this.select()" id="affwp-system-info-textarea" name="affwp-sysinfo" title="<?php esc_attr_e( 'To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'affiliate-wp' ); ?>">

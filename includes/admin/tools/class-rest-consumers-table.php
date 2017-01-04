@@ -218,12 +218,9 @@ class Consumers_Table extends List_Table  {
 	public function bulk_actions( $which = '' ) {
 		// These aren't really bulk actions but this outputs the markup in the right place.
 		if ( 'top' === $which ) :
-			$action_url = add_query_arg( array(
-				'page' => 'affiliate-wp-tools',
-				'tab'  => 'api_keys'
-			), 'admin.php' );
+			$action_url = affwp_admin_url( 'tools', array( 'tab' => 'api_keys' ) );
 			?>
-			<form id="api-key-generate-form" method="post" action="<?php echo esc_attr( $action_url ); ?>">
+			<form id="api-key-generate-form" method="post" action="<?php echo esc_url( $action_url ); ?>">
 				<input type="hidden" name="affwp_action" value="process_api_key" />
 				<input type="hidden" name="affwp_api_process" value="generate" />
 				<?php wp_nonce_field( 'affwp-api-nonce' ); ?>

@@ -87,7 +87,7 @@ class AffWP_Creatives_Table extends List_Table {
 	 * @return array $views All the views available
 	 */
 	public function get_views() {
-		$base           = admin_url( 'admin.php?page=affiliate-wp-creatives' );
+		$base           = affwp_admin_url( 'creatives' );
 
 		$current        = isset( $_GET['status'] ) ? $_GET['status'] : '';
 		$total_count    = '&nbsp;<span class="count">(' . $this->total_count    . ')</span>';
@@ -189,7 +189,7 @@ class AffWP_Creatives_Table extends List_Table {
 		// Get the creative's attachment ID based on the image URL
 		$attachment_id = attachment_url_to_postid( $creative->image );
 
-		return '<a href="' . admin_url( 'admin.php?page=affiliate-wp-creatives&creative_id=' . $creative->ID ) . '&action=edit_creative">' . wp_get_attachment_image( $attachment_id, 'thumbnail' ) . '</a>';
+		return affwp_admin_link( 'creatives', wp_get_attachment_image( $attachment_id, 'thumbnail' ), array(), array( 'creative_id' => $creative->ID, 'action' => 'edit_creative' ) );
 
 	}
 

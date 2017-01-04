@@ -50,7 +50,7 @@ function affwp_creatives_admin() {
 			do_action( 'affwp_creatives_page_top' );
 			?>
 
-			<form id="affwp-creatives-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-creatives' ); ?>">
+			<form id="affwp-creatives-filter" method="get" action="<?php echo esc_url( affwp_admin_url( 'creatives' ) ); ?>">
 
 				<input type="hidden" name="page" value="affiliate-wp-creatives" />
 

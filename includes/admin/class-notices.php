@@ -90,7 +90,7 @@ class Affiliate_WP_Admin_Notices {
 
 					$message = __( 'Affiliate updated successfully', 'affiliate-wp' );
 
-					$message .= '<p>'. sprintf( __( '<a href="%s">Back to Affiliates</a>', 'affiliate-wp' ), admin_url( 'admin.php?page=affiliate-wp-affiliates' ) ) .'</p>';
+					$message .= '<p>'. sprintf( __( '<a href="%s">Back to Affiliates</a>', 'affiliate-wp' ), esc_url( affwp_admin_url( 'affiliates' ) ) ) .'</p>';
 
 					break;
 
@@ -223,7 +223,7 @@ class Affiliate_WP_Admin_Notices {
 
 					$message = __( 'Creative updated successfully', 'affiliate-wp' );
 
-					$message .= '<p>'. sprintf( __( '<a href="%s">Back to Creatives</a>', 'affiliate-wp' ), admin_url( 'admin.php?page=affiliate-wp-creatives' ) ) .'</p>';
+					$message .= '<p>'. sprintf( __( '<a href="%s">Back to Creatives</a>', 'affiliate-wp' ), esc_url( affwp_admin_url( 'creatives' ) ) ) .'</p>';
 
 					break;
 
@@ -400,7 +400,7 @@ class Affiliate_WP_Admin_Notices {
 				$notice_query_args['affwp_notice'] = 'invalid_license';
 
 				echo '<div class="notice notice-info">';
-					echo '<p>' . sprintf( __( 'Please <a href="%s">enter and activate</a> your license key for AffiliateWP to enable automatic updates.', 'affiliate-wp' ), admin_url( 'admin.php?page=affiliate-wp-settings' ) ) . '</p>';
+					echo '<p>' . sprintf( __( 'Please <a href="%s">enter and activate</a> your license key for AffiliateWP to enable automatic updates.', 'affiliate-wp' ), esc_url( affwp_admin_url( 'settings' ) ) ) . '</p>';
 					echo '<p><a href="' . wp_nonce_url( add_query_arg( $notice_query_args ), 'affwp_dismiss_notice', 'affwp_dismiss_notice_nonce' ) . '">' . _x( 'Dismiss Notice', 'License', 'affiliate-wp' ) . '</a></p>';
 				echo '</div>';
 

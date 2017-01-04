@@ -867,12 +867,13 @@ function affwp_enqueue_script( $handle, $context = '' ) {
  *
  * @since 2.0
  *
- * @param string $type       Type of admin URL. Accepts 'affiliates', 'creatives', 'payouts',
- *                           'referrals', 'visits', 'settings', 'tools', or 'add-ons'.
+ * @param string $type       Optional. Type of admin URL. Accepts 'affiliates', 'creatives', 'payouts',
+ *                           'referrals', 'visits', 'settings', 'tools', or 'add-ons'. Default empty
+ *                           ('affiliate-wp').
  * @param array  $query_args Optional. Query arguments to append to the admin URL. Default empty array.
  * @return string Constructed admin URL.
  */
-function affwp_admin_url( $type, $query_args = array() ) {
+function affwp_admin_url( $type = '', $query_args = array() ) {
 	$page = 'affiliate-wp';
 
 	$whitelist = array(

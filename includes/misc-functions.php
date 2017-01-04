@@ -865,7 +865,7 @@ function affwp_enqueue_script( $handle, $context = '' ) {
 /**
  * Generates an AffiliateWP admin URL based on the given type.
  *
- * @since 1.9.6
+ * @since 2.0
  *
  * @param string $type       Type of admin URL. Accepts 'affiliates', 'creatives', 'payouts',
  *                           'referrals', 'visits', 'settings', 'tools', or 'add-ons'.
@@ -891,7 +891,7 @@ function affwp_admin_url( $type, $query_args = array() ) {
 	/**
 	 * Filters the AffiliateWP admin URL.
 	 *
-	 * @since 1.9.6
+	 * @since 2.0
 	 *
 	 * @param string $url        Admin URL.
 	 * @param string $type       Admin URL type.
@@ -903,7 +903,7 @@ function affwp_admin_url( $type, $query_args = array() ) {
 /**
  * Generates an AffiliateWP admin link based on the given type.
  *
- * @since 1.9.6
+ * @since 2.0
  *
  * @param string $type       Admin link type.
  * @param string $label      Link label.
@@ -934,7 +934,7 @@ function affwp_admin_link( $type, $label, $attributes = array(), $query_args = a
 	/**
 	 * Filters the AffiliateWP admin link output.
 	 *
-	 * @since 1.9.6
+	 * @since 2.0
 	 *
 	 * @param string $link       HTML markup for the admin link.
 	 * @param string $type       Admin link type.

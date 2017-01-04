@@ -6,75 +6,51 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 	 * Get thigns started
 	 *
 	 * @access  public
-	 * @since   1.9
+	 * @since   2.0
 	 */
 	public function init() {
 
-		$this->context = 'stripe'; 
+		$this->context = 'stripe';
 
-		add_action( 'wp_footer', array( $this, 'scripts' ) );
-		add_action( 'wp_ajax_affwp_maybe_insert_stripe_referral', array( $this, 'maybe_insert_referral' ) );
-		add_action( 'wp_ajax_nopriv_affwp_maybe_insert_stripe_referral', array( $this, 'maybe_insert_referral' ) );
-		add_action( 'init', array( $this, 'process_webhook' ) );
+		add_filter( 'sc_meta_values', array( $this, 'maybe_insert_referral' ) );
+		add_filter( 'sc_redirect_args', array( $this, 'mark_referral_complete' ), 10, 2 );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 
 	}
 
-	/**
-	 * Add JS to site footer for detecting Stripe form submissions
-	 *
-	 * @access  public
-	 * @since   1.9
-	*/
-	public function scripts() {
-?>
-		<script type="text/javascript">
-		var affwp_scripts;
-		jQuery(document).ready(function($) {
-
-			$('form .stripe-button-el').on('click', function(e) {
-
-				e.preventDefault();
-
-				$.ajax({
-					type: "POST",
-					data: {
-						action: 'affwp_maybe_insert_stripe_referral'
-					},
-					url: affwp_scripts.ajaxurl,
-					success: function (response) {
-
-					}
-
-				}).fail(function (response) {
-
-					if ( window.console && window.console.log ) {
-						console.log( response );
-					}
-
-				});
-
-			});
-		});
-		</script>
-<?php
-	}
 
 	/**
 	 * Create a referral during stripe form submission if customer was referred
 	 *
 	 * @access  public
-	 * @since   1.9
+	 * @since   2.0
 	*/
-	public function maybe_insert_referral() {
-
-		$response = array();
+	public function maybe_insert_referral( $meta ) {
 
 		if( $this->was_referred() ) {
 
-			$reference   = affiliate_wp()->tracking->get_visit_id() . '|' . $this->affiliate_id . '|' . time();
-			$referral_id = $this->insert_pending_referral( 0.01, $reference, __( 'Pending Stripe referral', 'affiliate-wp' ) );
+			$token       = sanitize_text_field( $_POST['stripeToken'] );
+			$amount      = round( sanitize_text_field( $_POST['sc-amount'] ) / 100, 2 );
+			$email       = sanitize_text_field( $_POST['stripeEmail'] );
+			$description = sanitize_text_field( $_POST['sc-description'] );
+
+			// This is used to look up the referral after completion
+			$_POST['affwpStripeToken'] = $token;
+
+			if( $this->is_affiliate_email( $email, $this->affiliate_id ) ) {
+
+				if( $this->debug ) {
+					$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				}
+
+				return;
+
+			}
+
+			$referral_total = $this->calculate_referral_amount( $amount, $token );
+
+			$referral_id = $this->insert_pending_referral( $referral_total, $token, $description );
 
 			if( $referral_id && $this->debug ) {
 
@@ -86,25 +62,41 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 			}
 
-			$response['ref'] = affiliate_wp()->tracking->get_visit_id() . '|' . $this->affiliate_id . '|' . $referral_id;
-
 		}
 
-		wp_send_json_success( $response );
+		return $meta;
 
 	}
 
 	/**
-	 * Process stripe IPN requests in order to mark referrals as Unpaid
+	 * Mark referral complete
 	 *
-	 * @access  public
-	 * @since   1.9
-	*/
-	public function process_webhook() {
+	 * @function mark_referral_complete()
+	 * @access public
+	 * @return array
+	 */
+	public function mark_referral_complete( $query_args, $charge ) {
 
-		if( empty( $_GET['affwp-listener'] ) || 'stripe' !== strtolower( $_GET['affwp-listener'] ) ) {
-			return;
+		if( $this->was_referred() && empty( $query_args['charge_failed'] ) && ! empty( $_POST['affwpStripeToken'] ) ) {
+
+			$token = sanitize_text_field( $_POST['affwpStripeToken'] );
+
+			$referral = affiliate_wp()->referrals->get_by( 'reference', $token, $this->context );
+			$referral = affwp_get_referral( $referral );
+
+			if( $referral ) {
+
+				$referral->reference = $charge->id;
+				$referral->custom    = $token;
+				$referral->save();
+
+			}
+
+			$this->complete_referral( $charge->id );
+
 		}
+
+		return $query_args;
 
 	}
 
@@ -112,7 +104,7 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 	 * Sets up the reference link in the Referrals table
 	 *
 	 * @access  public
-	 * @since   1.9
+	 * @since   2.0
 	*/
 	public function reference_link( $reference = 0, $referral ) {
 

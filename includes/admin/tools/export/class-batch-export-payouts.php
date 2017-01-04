@@ -157,7 +157,7 @@ class Export_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 	 */
 	public function process_step() {
 		if ( is_null( $this->status ) ) {
-			return new \WP_Error( 'no_status_found', __( 'No valid referral status was selected for export.', 'affiliate-wp' ) );
+			return new \WP_Error( 'no_status_found', __( 'No valid payout status was selected for export.', 'affiliate-wp' ) );
 		}
 
 		return parent::process_step();

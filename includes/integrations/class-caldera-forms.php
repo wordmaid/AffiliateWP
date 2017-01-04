@@ -72,6 +72,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 			array(
 				'id'       => 'total',
 				'label'    => __( 'Total', 'affiliate-wp' ),
+				'desc'     => __( 'This total will be used to calculate the referral amount. For example, if the referral rate is 10% and the total here is $100, the referral will be created at $10.', 'affiliate-wp' ),
 				'type'     => 'text',
 				'required' => true,
 				'magic'    => true,

@@ -14,6 +14,7 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 
 		add_action( 'give_insert_payment', array( $this, 'add_pending_referral' ), 99999, 2 );
 
+		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 	}
 
 	/**
@@ -49,7 +50,6 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 
 		// Get referral description
 		$desc = $this->get_referral_description( $payment_id );
-
 
 		if ( empty( $desc ) ) {
 
@@ -120,6 +120,24 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 		}
 
 		return $referral_description;
+
+	}
+
+	/**
+	 * Sets up the reference link in the Referrals table
+	 *
+	 * @access  public
+	 * @since   2.0
+	*/
+	public function reference_link( $reference = 0, $referral ) {
+
+		if ( empty( $referral->context ) || 'give' != $referral->context ) {
+			return $reference;
+		}
+
+		$url = admin_url( 'edit.php?post_type=give_forms&page=give-payment-history&view=view-order-details&id=' . $reference );
+
+		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 
 	}
 

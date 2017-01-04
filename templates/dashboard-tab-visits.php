@@ -7,6 +7,10 @@
 	</span>
 
 	<?php
+	if ( wp_script_is( 'affwp-forms', 'enqueued' ) ) {
+		affwp_enqueue_script( 'dashicons', 'visits' );
+	}
+
 	$per_page = 30;
 	$page     = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 	$pages    = absint( ceil( affwp_get_affiliate_visit_count( affwp_get_affiliate_id() ) / $per_page ) );
@@ -25,6 +29,7 @@
 				<th class="visit-url"><?php _e( 'URL', 'affiliate-wp' ); ?></th>
 				<th class="referring-url"><?php _e( 'Referring URL', 'affiliate-wp' ); ?></th>
 				<th class="referral-status"><?php _e( 'Converted', 'affiliate-wp' ); ?></th>
+				<th class="visit-date"><?php _e( 'Date', 'affiliate-wp' ); ?></th>
 			</tr>
 		</thead>
 
@@ -45,13 +50,16 @@
 								<i></i>
 							</span>
 						</td>
+						<td>
+							<?php echo esc_html( date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $visit->date ) ) ); ?>
+						</td>
 					</tr>
 				<?php endforeach; ?>
 
 			<?php else : ?>
 
 				<tr>
-					<td colspan="3"><?php _e( 'You have not received any visits yet.', 'affiliate-wp' ); ?></td>
+					<td colspan="4"><?php _e( 'You have not received any visits yet.', 'affiliate-wp' ); ?></td>
 				</tr>
 
 			<?php endif; ?>

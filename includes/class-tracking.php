@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * The Affiliate_WP_Tracking class.
+ *
+ * This class defines all primary methods by which
+ * AffiliateWP tracks referral activity.
+ *
+ * @since  1.0
+ * @uses   Affiliate_WP_Logging  Logs activity.
+ */
 class Affiliate_WP_Tracking {
 
 	private $referral_var;
@@ -54,6 +62,7 @@ class Affiliate_WP_Tracking {
 		add_action( 'wp_ajax_affwp_check_js', array( $this, 'check_js' ) );
 		add_action( 'wp_ajax_nopriv_affwp_check_js', array( $this, 'check_js' ) );
 
+		add_filter( 'paginate_links', array( $this, 'strip_referral_from_paged_urls' ), 100 );
 	}
 
 	/**
@@ -95,9 +104,10 @@ class Affiliate_WP_Tracking {
 		$defaults = array(
 			'amount'      => '',
 			'description' => '',
+			'reference'   => '',
 			'context'     => '',
 			'campaign'    => '',
-			'reference'   => ''
+			'status'      => ''
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -128,7 +138,7 @@ class Affiliate_WP_Tracking {
 			$args['campaign'] = sanitize_text_field( $_REQUEST['campaign'] );
 		}
 
-		$md5 = md5( $args['amount'] . $args['description'] . $args['reference'] . $args['context'] . $args['status'] );
+		$md5 = md5( $args['amount'] . $args['description'] . $args['reference'] . $args['context'] . $args['status'] . $args['campaign'] );
 
 ?>
 		<script type="text/javascript">
@@ -199,27 +209,40 @@ class Affiliate_WP_Tracking {
 
 		$affiliate_id = isset( $_POST['affiliate'] ) ? absint( $_POST['affiliate'] ) : '';
 		$is_valid     = $this->is_valid_affiliate( $affiliate_id );
+		$referrer     = isset( $_POST['referrer'] ) ? sanitize_text_field( $_POST['referrer'] ) : '';
 
 		if ( ! empty( $affiliate_id ) && $is_valid ) {
 
-			// Store the visit in the DB
-			$visit_id = affiliate_wp()->visits->add( array(
-				'affiliate_id' => $affiliate_id,
-				'ip'           => $this->get_ip(),
-				'url'          => sanitize_text_field( $_POST['url'] ),
-				'campaign'     => ! empty( $_POST['campaign'] ) ? sanitize_text_field( $_POST['campaign'] ) : '',
-				'referrer'     => sanitize_text_field( $_POST['referrer'] )
-			) );
+			if( ! affwp_is_url_banned( $referrer ) ) {
+				// Store the visit in the DB
+				$visit_id = affiliate_wp()->visits->add( array(
+					'affiliate_id' => $affiliate_id,
+					'ip'           => $this->get_ip(),
+					'url'          => sanitize_text_field( $_POST['url'] ),
+					'campaign'     => ! empty( $_POST['campaign'] ) ? sanitize_text_field( $_POST['campaign'] ) : '',
+					'referrer'     => $referrer,
+				) );
 
-			if( $this->debug ) {
-				$this->log( sprintf( 'Visit #%d recorded for affiliate #%d in track_visit()', $visit_id, $affiliate_id ) );
+				if( $this->debug ) {
+					$this->log( sprintf( 'Visit #%d recorded for affiliate #%d in track_visit()', $visit_id, $affiliate_id ) );
+				}
+
+				echo $visit_id;
+
+				exit;
+
+			} else {
+
+				if ( $this->debug ) {
+					$this->log( sprintf( '"%s" is a banned URL. A visit was not recorded.', $referrer ) );
+				}
+
+				die( '-2' );
 			}
 
-			echo $visit_id; exit;
+		} elseif ( ! $is_valid ) {
 
-		} else if( ! $is_valid ) {
-
-			if( $this->debug ) {
+			if ( $this->debug ) {
 				$this->log( 'Invalid affiliate ID during track_visit()' );
 			}
 
@@ -255,10 +278,10 @@ class Affiliate_WP_Tracking {
 				$this->log( sprintf( 'Valid affiliate ID, %d, in track_conversion()', $affiliate_id ) );
 			}
 
-			$md5 = md5( $_POST['amount'] . $_POST['description'] . $_POST['reference'] . $_POST['context'] . $_POST['status'] );
+			$md5 = md5( $_POST['amount'] . $_POST['description'] . $_POST['reference'] . $_POST['context'] . $_POST['status'] . $_POST['campaign'] );
 
 			if( $md5 !== $_POST['md5'] ) {
-				
+
 				if( $this->debug ) {
 					$this->log( sprintf( 'Invalid MD5 in track_conversion(). Needed: %s. Posted: %s', $md5, $_POST['md5'] ) );
 				}
@@ -360,20 +383,24 @@ class Affiliate_WP_Tracking {
 		$is_valid     = $this->is_valid_affiliate( $affiliate_id );
 		$visit_id     = $this->get_visit_id();
 
-		if( $is_valid && ! $visit_id ) {
+		if ( $is_valid && ! $visit_id ) {
+			if ( ( ! empty( $_SERVER['HTTP_REFERER'] ) && ! affwp_is_url_banned( sanitize_text_field( $_SERVER['HTTP_REFERER'] ) ) )
+				|| empty( $_SERVER['HTTP_REFERER'] )
+			) {
 
-			$this->set_affiliate_id( $affiliate_id );
+				$this->set_affiliate_id( $affiliate_id );
 
-			// Store the visit in the DB
-			$visit_id = affiliate_wp()->visits->add( array(
-				'affiliate_id' => $affiliate_id,
-				'ip'           => $this->get_ip(),
-				'url'          => $this->get_current_page_url(),
-				'campaign'     => $this->get_campaign(),
-				'referrer'     => ! empty( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
-			) );
+				// Store the visit in the DB
+				$visit_id = affiliate_wp()->visits->add( array(
+					'affiliate_id' => $affiliate_id,
+					'ip'           => $this->get_ip(),
+					'url'          => $this->get_current_page_url(),
+					'campaign'     => $this->get_campaign(),
+					'referrer'     => ! empty( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : ''
+				) );
 
-			$this->set_visit_id( $visit_id );
+				$this->set_visit_id( $visit_id );
+			}
 
 		} elseif( ! $is_valid ) {
 
@@ -417,8 +444,11 @@ class Affiliate_WP_Tracking {
 			$path = ! empty( $_SERVER['REQUEST_URI' ] ) ? $_SERVER['REQUEST_URI' ] : '';
 
 			if( false !== strpos( $path, $this->get_referral_var() . '/' ) ) {
-				$pieces = explode( '/', $path );
+
+				$pieces = explode( '/', str_replace( '?', '/', $path ) );
+				$pieces = array_map( 'sanitize_key', $pieces );
 				$key    = array_search( $this->get_referral_var(), $pieces );
+
 				if( $key ) {
 
 					$key += 1;
@@ -453,6 +483,7 @@ class Affiliate_WP_Tracking {
 
 		return $affiliate_id;
 	}
+
 
 	/**
 	 * Get the referral campaign
@@ -671,11 +702,11 @@ class Affiliate_WP_Tracking {
 	/**
 	 * Get the current page URL
 	 *
-	 * @since 1.0
+	 * @since  1.0
 	 * @global $post
 	 * @return string $page_url Current page URL
 	 */
-	function get_current_page_url() {
+	public function get_current_page_url() {
 		global $post;
 
 		if ( is_front_page() ) {
@@ -684,19 +715,7 @@ class Affiliate_WP_Tracking {
 
 		} else {
 
-			$page_url = 'http';
-
-			if ( isset( $_SERVER["HTTPS"] ) && $_SERVER["HTTPS"] == "on" ) {
-				$page_url .= "s";
-			}
-
-			$page_url .= "://";
-
-			if ( $_SERVER["SERVER_PORT"] != "80" ) {
-				$page_url .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-			} else {
-				$page_url .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-			}
+			$page_url = set_url_scheme( 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] );
 
 		}
 
@@ -739,9 +758,38 @@ class Affiliate_WP_Tracking {
 		if( $this->debug ) {
 
 			$this->logs->log( $message );
-			
+
 		}
-		
+
 	}
 
+	/**
+	 * Strips pretty referral bits from pagination links.
+	 *
+	 * @since 1.9
+	 * @access public
+	 *
+	 * @param string $link Pagination link.
+	 * @return string (Maybe) filtered pagination link.
+	 */
+	public function strip_referral_from_paged_urls( $link ) {
+		// Only mess with $link if there's pagination.
+		preg_match( '/page\/\d\/?/', $link, $matches );
+
+		if ( ! empty( $matches[0] ) ) {
+			$referral_var = $this->get_referral_var();
+
+			// Remove a non-pretty referral ID.
+			$link = remove_query_arg( $referral_var, $link );
+
+			// Remove a pretty referral ID or username.
+			preg_match( "/$referral_var\/(\w+)\//", $link, $pretty_matches );
+
+			if ( ! empty( $pretty_matches[0] ) ) {
+				$link = str_replace( $pretty_matches[0], '', $link );
+			}
+		}
+
+		return $link;
+	}
 }

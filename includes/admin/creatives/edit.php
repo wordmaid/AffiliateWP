@@ -7,7 +7,13 @@ $creative = affwp_get_creative( absint( $_GET['creative_id'] ) );
 
 	<form method="post" id="affwp_edit_creative">
 
-		<?php do_action( 'affwp_edit_creative_top', $creative ); ?>
+		<?php
+		/**
+		 * Fires at the top of the edit-creative admin screen.
+		 *
+		 * @param \AffWP\Creative $creative The creative object.
+		 */
+		do_action( 'affwp_edit_creative_top', $creative ); ?>
 
 		<table class="form-table">
 
@@ -45,7 +51,7 @@ $creative = affwp_get_creative( absint( $_GET['creative_id'] ) );
 
 				<td>
 					<input type="text" name="url" id="url" value="<?php echo esc_url( $creative->url ); ?>" class="regular-text" />
-					<p class="description"><?php _e( 'Where the creative should link to. The affiliate\'s referral ID will be automatically appended.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'Where the creative should link to. The affiliate&#8217;s referral ID will be automatically appended.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>
@@ -106,7 +112,14 @@ $creative = affwp_get_creative( absint( $_GET['creative_id'] ) );
 
 		</table>
 
-		<?php do_action( 'affwp_edit_creative_bottom', $creative ); ?>
+		<?php
+		/**
+		 * Fires at the bottom of the edit-creative admin screen.
+		 *
+		 * @param \AffWP\Creative $creative The creative object.
+		 */
+		do_action( 'affwp_edit_creative_bottom', $creative );
+		?>
 
 		<input type="hidden" name="affwp_action" value="update_creative" />
 

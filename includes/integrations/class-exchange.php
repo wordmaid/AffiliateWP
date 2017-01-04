@@ -288,12 +288,17 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
-
+		
+		$user_id      = 0;
+		$user_name    = '';
 		$coupon_id    = ! empty( $_REQUEST['post'] ) ? absint( $_REQUEST['post'] ) : 0;
 		$affiliate_id = get_post_meta( $coupon_id, 'affwp_coupon_affiliate', true );
-		$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
-		$user         = get_userdata( $user_id );
-		$user_name    = $user ? $user->user_login : '';
+		
+		if( $affiliate_id ) {
+			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
+			$user         = get_userdata( $user_id );
+			$user_name    = $user ? $user->user_login : '';
+		}
 ?>
 		<div class="field affwp-coupon">
 			<th scope="row" valign="top">
@@ -303,9 +308,7 @@ class Affiliate_WP_Exchange extends Affiliate_WP_Base {
 				<span class="affwp-ajax-search-wrap">
 					<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 					<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" />
-					<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 				</span>
-				<div id="affwp_user_search_results"></div>
 				<p class="description"><?php _e( 'If you would like to connect this coupon to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></p>
 			</td>
 		</div>

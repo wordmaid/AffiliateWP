@@ -2,83 +2,81 @@
 
 // retrieves a list of users via live search
 function affwp_search_users() {
-
-	if ( empty( $_POST['search'] ) ) {
-		die( '-1' );
+	if ( empty( $_REQUEST['term'] ) ) {
+		wp_die( -1 );
 	}
 
 	if ( ! current_user_can( 'manage_affiliates' ) ) {
-		die( '-1' );
+		wp_die( -1 );
 	}
 
-	$search_query = htmlentities2( trim( $_POST['search'] ) );
+	$search_query = htmlentities2( trim( $_REQUEST['term'] ) );
 
+	/**
+	 * Fires immediately prior to an AffiliateWP user search query.
+	 *
+	 * @param string $search_query The user search query.
+	 */
 	do_action( 'affwp_pre_search_users', $search_query );
 
-	$args = array();
+	$args = array(
+		'search_columns' => array( 'user_login', 'display_name', 'user_email' )
+	);
 
-	if ( isset( $_POST['status'] ) ) {
-		$status = mb_strtolower( htmlentities2( trim( $_POST['status'] ) ) );
+	if ( isset( $_REQUEST['status'] ) ) {
+		$status = mb_strtolower( htmlentities2( trim( $_REQUEST['status'] ) ) );
 
 		switch ( $status ) {
 			case 'none':
-				$affiliates = affiliate_wp()->affiliates->get_affiliates(
+				$affiliate_users = affiliate_wp()->affiliates->get_affiliates(
 					array(
-						'number' => 9999,
+						'number' => -1,
+						'fields' => 'user_id',
 					)
 				);
-				$args = array( 'exclude' => array_map( 'absint', wp_list_pluck( $affiliates, 'user_id' ) ) );
+				$args = array( 'exclude' => $affiliate_users );
 				break;
 			case 'any':
-				$affiliates = affiliate_wp()->affiliates->get_affiliates(
+				$affiliate_users = affiliate_wp()->affiliates->get_affiliates(
 					array(
-						'number' => 9999,
+						'number' => -1,
+						'fields' => 'user_id',
 					)
 				);
-				$args = array( 'include' => array_map( 'absint', wp_list_pluck( $affiliates, 'user_id' ) ) );
+				$args = array( 'include' => $affiliate_users );
 				break;
 			default:
-				$affiliates = affiliate_wp()->affiliates->get_affiliates(
+				$affiliate_users = affiliate_wp()->affiliates->get_affiliates(
 					array(
-						'number' => 9999,
+						'number' => -1,
 						'status' => $status,
+						'fields' => 'user_id',
 					)
 				);
-				$args = array( 'include' => array_map( 'absint', wp_list_pluck( $affiliates, 'user_id' ) ) );
+				$args = array( 'include' => $affiliate_users );
 		}
 	}
 
-	//make sure we filter the search columns so they only include the columns we want to search
-	//this filter was exposed by WordPress in WP 3.6.0
-	add_filter(
-		'user_search_columns',
-		function( $search_columns, $search, WP_User_Query $WP_User_Query ) {
-			return array( 'user_login', 'display_name', 'user_email' );
-		},
-		10,
-		3
-	);
+	// Add search string to args.
+	$args['search'] = '*' . mb_strtolower( htmlentities2( trim( $_REQUEST['term'] ) ) ) . '*';
 
-	//add search string to args
-	$args['search'] = '*' . mb_strtolower( htmlentities2( trim( $_POST['search'] ) ) ) . '*';
-	
-	//get users matching search
+	// Get users matching search.
 	$found_users = get_users( $args );
 
+	$user_list = array();
+
 	if ( $found_users ) {
-		$user_list = '<ul>';
-
 		foreach( $found_users as $user ) {
-			$user_list .= '<li><a href="#" data-id="' . esc_attr( $user->ID ) . '" data-login="' . esc_attr( $user->user_login ) . '">' . esc_html( $user->user_login ) . '</a></li>';
+			$label = empty( $user->user_email ) ? $user->user_login : "{$user->user_login} ({$user->user_email})";
+
+			$user_list[] = array(
+				'label'   => $label,
+				'value'   => $user->user_login,
+				'user_id' => $user->ID
+			);
 		}
-
-		$user_list .= '</ul>';
-
-		echo json_encode( array( 'results' => $user_list, 'id' => 'found' ) );
-	} else {
-		echo json_encode( array( 'results' => '<p>' . __( 'No users found', 'affiliate-wp' ) . '</p>', 'id' => 'fail' ) );
 	}
 
-	die();
+	wp_die( json_encode( $user_list ) );
 }
 add_action( 'wp_ajax_affwp_search_users', 'affwp_search_users' );

@@ -56,6 +56,9 @@ class Affiliate_WP_Register {
 			return;
 		}
 
+		/**
+		 * Fires immediately prior to processing an affiliate registration form.
+		 */
 		do_action( 'affwp_pre_process_register_form' );
 
 		if ( ! is_user_logged_in() ) {
@@ -68,6 +71,11 @@ class Affiliate_WP_Register {
 				if ( empty( $field ) ) {
 					$this->add_error( $value['error_id'], $value['error_message'] );
 				}
+
+				if ( 'affwp_user_url' === $field_name && false === filter_var( esc_url( $field ), FILTER_VALIDATE_URL ) ) {
+					$this->add_error( 'invalid_url', __( 'Please enter a valid website URL', 'affiliate-wp' ) );
+				}
+
 			}
 
 			if ( username_exists( $data['affwp_user_login'] ) ) {
@@ -80,6 +88,10 @@ class Affiliate_WP_Register {
 				} else {
 					$this->add_error( 'username_invalid', __( 'Invalid username', 'affiliate-wp' ) );
 				}
+			}
+
+			if ( strlen( $data['affwp_user_login'] ) > 60 ) {
+				$this->add_error( 'username_invalid_length', __( 'Invalid username. Must be between 1 and 60 characters.', 'affiliate-wp' ) );
 			}
 
 			if ( is_numeric( $data['affwp_user_login'] ) ) {
@@ -107,7 +119,7 @@ class Affiliate_WP_Register {
 			// Loop through required fields and show error message
 			foreach ( $this->required_fields() as $field_name => $value ) {
 
-				if( ! empty( $value['logged_out'] ) ) {
+				if ( ! empty( $value['logged_out'] ) ) {
 					continue;
 				}
 
@@ -130,13 +142,16 @@ class Affiliate_WP_Register {
 		}
 
 		if ( ! empty( $_POST['affwp_honeypot'] ) ) {
-			$this->add_error( 'spam', __( 'Nice try honey bear, don\'t touch our honey', 'affiliate-wp' ) );
+			$this->add_error( 'spam', __( 'Nice try honey bear, don&#8217;t touch our honey', 'affiliate-wp' ) );
 		}
 
 		if ( affwp_is_affiliate() ) {
 			$this->add_error( 'already_registered', __( 'You are already registered as an affiliate', 'affiliate-wp' ) );
 		}
 
+		/**
+		 * Fires after processing an affiliate registration form.
+		 */
 		do_action( 'affwp_process_register_form' );
 
 		// only log the user in if there are no errors
@@ -198,7 +213,7 @@ class Affiliate_WP_Register {
 			),
 			'affwp_user_login' 	=> array(
 				'error_id'      => 'empty_username',
-				'error_message' => __( 'Invalid username', 'affiliate-wp' ),
+				'error_message' => __( 'Invalid username. Must be between 1 and 60 characters.', 'affiliate-wp' ),
 				'logged_out'    => true
 			),
 			'affwp_user_url' 	=> array(
@@ -224,19 +239,22 @@ class Affiliate_WP_Register {
 
 		$status = affiliate_wp()->settings->get( 'require_approval' ) ? 'pending' : 'active';
 
-		if ( ! is_user_logged_in() ) {
-
+		if ( ! empty( $_POST['affwp_user_name'] ) ) {
 			$name       = explode( ' ', sanitize_text_field( $_POST['affwp_user_name'] ) );
 			$user_first = $name[0];
 			$user_last  = isset( $name[1] ) ? $name[1] : '';
+		} else {
+			$user_first = '';
+			$user_last  = '';
+		}
+
+		if ( ! is_user_logged_in() ) {
 
 			$args = array(
 				'user_login'    => sanitize_text_field( $_POST['affwp_user_login'] ),
 				'user_email'    => sanitize_text_field( $_POST['affwp_user_email'] ),
 				'user_pass'     => sanitize_text_field( $_POST['affwp_user_pass'] ),
-				'display_name'  => $user_first . ' ' . $user_last,
-				'first_name'    => $user_first,
-				'last_name'     => $user_last
+				'display_name'  => $user_first . ' ' . $user_last
 			);
 
 			$user_id = wp_insert_user( $args );
@@ -249,6 +267,9 @@ class Affiliate_WP_Register {
 
 		}
 
+		// update first and last name
+		wp_update_user( array( 'ID' => $user_id, 'first_name' => $user_first, 'last_name' => $user_last ) );
+
 		// promotion method
 		$promotion_method = isset( $_POST['affwp_promotion_method'] ) ? sanitize_text_field( $_POST['affwp_promotion_method'] ) : '';
 
@@ -257,7 +278,7 @@ class Affiliate_WP_Register {
 		}
 
 		// website URL
-		$website_url = isset( $_POST['affwp_user_url'] ) ? sanitize_text_field( $_POST['affwp_user_url'] ) : '';
+		$website_url = isset( $_POST['affwp_user_url'] ) ? esc_url( $_POST['affwp_user_url'] ) : '';
 
 		if ( $website_url ) {
 			wp_update_user( array( 'ID' => $user_id, 'user_url' => $website_url ) );
@@ -277,13 +298,24 @@ class Affiliate_WP_Register {
 		// Retrieve affiliate ID. Resolves issues with caching on some hosts, such as GoDaddy
 		$affiliate_id = affwp_get_affiliate_id( $user_id );
 
+		/**
+		 * Fires immediately after registering a user.
+		 *
+		 * @param int    $affiliate_id Affiliate ID.
+		 * @param string $status       Affiliate status.
+		 * @param array  $args         Data arguments used when registering the user.
+		 */
 		do_action( 'affwp_register_user', $affiliate_id, $status, $args );
 	}
 
 	/**
-	 * Log the user in
+	 * Logs the user in.
 	 *
 	 * @since 1.0
+	 *
+	 * @param  $user_id    The user ID.
+	 * @param  $user_login The `user_login` for the user.
+	 * @param  $remember   Whether or not the browser should remember the user login.
 	 */
 	private function log_user_in( $user_id = 0, $user_login = '', $remember = false ) {
 
@@ -293,6 +325,14 @@ class Affiliate_WP_Register {
 
 		wp_set_auth_cookie( $user_id, $remember );
 		wp_set_current_user( $user_id, $user_login );
+
+		/**
+		 * The `wp_login` action is fired here to maintain compatibility and stability of
+		 * any WordPress core features, plugins, or themes hooking onto it.
+		 *
+		 * @param  string   $user_login The `user_login` for the user.
+		 * @param  stdClass $user       The user object.
+		 */
 		do_action( 'wp_login', $user_login, $user );
 
 	}
@@ -300,8 +340,10 @@ class Affiliate_WP_Register {
 	/**
 	 * Register a user as an affiliate during user registration
 	 *
-	 * @since 1.1
+	 * @since  1.1
 	 * @return bool
+	 *
+	 * @param  $user_id The user ID.
 	 */
 	public function auto_register_user_as_affiliate( $user_id = 0 ) {
 
@@ -324,12 +366,13 @@ class Affiliate_WP_Register {
 		$args   = (array) $user['data'];
 
 		/**
-		 * Fires after a new user has been auto-registered as an affiliate
+		 * Fires immediately after a new user has been auto-registered as an affiliate
 		 *
 		 * @since  1.7
-		 * @param  int    $affiliate_id
-		 * @param  string $status
-		 * @param  array  $args
+		 *
+		 * @param int    $affiliate_id Affiliate ID.
+		 * @param string $status       The affiliate status.
+		 * @param array  $args         Affiliate data.
 		 */
 		do_action( 'affwp_auto_register_user', $affiliate_id, $status, $args );
 

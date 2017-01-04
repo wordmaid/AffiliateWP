@@ -73,57 +73,40 @@ jQuery(document).ready(function($) {
 
 	// datepicker
 	if( $('.affwp-datepicker').length ) {
-		$('.affwp-datepicker').datepicker();
+		$('.affwp-datepicker').datepicker({dateFormat: 'mm/dd/yy'});
 	}
 
-	var user_search_delay;
+	// Ajax user search.
+	$( '.affwp-user-search' ).each( function() {
+		var	$this    = $( this ),
+			$action  = 'affwp_search_users',
+			$search  = $this.val(),
+			$status  = $this.data( 'affwp-status'),
+			$user_id = $( '#user_id' );
 
-	// ajax user search
-	$('body').on( 'input change', '.affwp-user-search', function() {
-		clearTimeout( user_search_delay );
+		$this.autocomplete( {
+			source: ajaxurl + '?action=' + $action + '&term=' + $search + '&status=' + $status,
+			delay: 500,
+			minLength: 2,
+			position: { offset: '0, -1' },
+			select: function( event, data ) {
+				$user_id.val( data.item.user_id );
+			},
+			open: function() {
+				$this.addClass( 'open' );
+			},
+			close: function() {
+				$this.removeClass( 'open' );
+			}
+		} );
 
-		$('.affwp-ajax').hide();
-
-		var user_search = $(this).val(), status = $(this).data('affwp-status');
-
-		// delay search 500ms between keypress for performance
-		user_search_delay = setTimeout( function() {
-			$('.affwp-ajax').show();
-
-			data = {
-				action: 'affwp_search_users',
-				search: user_search,
-				status: status
-			};
-
-			$.ajax({
-				type: "POST",
-				data: data,
-				dataType: "json",
-				url: ajaxurl,
-				success: function (search_response) {
-					$('.affwp-ajax').hide();
-
-					$('#affwp_user_search_results').html('');
-
-					$(search_response.results).appendTo('#affwp_user_search_results');
-
-					if( $('.affwp-woo-coupon-field').length ) {
-						var height = $('.affwp-woo-coupon-field #affwp_user_search_results' ).height();
-						$('.affwp-woo-coupon-field #affwp_user_search_results').css('top', '-' + height + 'px' );
-					}
-				}
-			});
-		}, 500);
-	});
-
-	$('body').on('click.rcpSelectUser', '#affwp_user_search_results a', function(e) {
-		e.preventDefault();
-		var login = $(this).data('login'), id = $(this).data('id');
-		$('#user_name').val(login);
-		$('#user_id').val(id);
-		$('#affwp_user_search_results').html('');
-	});
+		// Unset the user_id input if the input is cleared.
+		$this.on( 'keyup', function() {
+			if ( ! this.value ) {
+				$user_id.val( '' );
+			}
+		} );
+	} );
 
 	// select image for creative
 	var file_frame;
@@ -227,4 +210,17 @@ jQuery(document).ready(function($) {
 
 	});
 
-});
+	/**
+	 * Enable meta box toggle states
+	 *
+	 * @since  1.9
+	 *
+	 * @param  typeof postboxes postboxes object
+	 *
+	 * @return {void}
+	 */
+	if ( typeof postboxes !== 'undefined' ) {
+		postboxes.add_postbox_toggles( pagenow );
+	}
+
+} );

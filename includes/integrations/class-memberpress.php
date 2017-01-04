@@ -18,6 +18,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 
 		add_action( 'mepr-txn-status-pending', array( $this, 'add_pending_referral' ), 10 );
 		add_action( 'mepr-txn-status-complete', array( $this, 'mark_referral_complete' ), 10 );
+		add_action( 'mepr-txn-status-confirmed', array( $this, 'mark_referral_complete' ), 10 );
 		add_action( 'mepr-txn-status-refunded', array( $this, 'revoke_referral_on_refund' ), 10 );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
@@ -32,11 +33,13 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Store a pending referraling when a one-time product is purchased
+	 * Store a pending referral when a one-time product is purchased
 	 *
 	 * @access  public
 	 * @since   1.5
-	*/
+	 *
+	 * @param MeprTransaction $txn Transaction.
+	 */
 	public function add_pending_referral( $txn ) {
 
 		// Check if an affiliate coupon was used
@@ -59,7 +62,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 
 			// Customers cannot refer themselves
 			if ( ! empty( $user->user_email ) && $this->is_affiliate_email( $user->user_email ) ) {
-			
+
 				if( $this->debug ) {
 					$this->log( 'Referral not created because affiliate\'s own account was used.' );
 				}
@@ -71,8 +74,24 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 				return; // Referrals are disabled on this membership
 			}
 
+			// Set the base amount from the transaction at the top of the stack.
+			$amount = $txn->amount;
+
+			// If there's a free trial subscription and rate type is percentage, override $amount.
+			if ( $txn->subscription()
+				&& ( $txn->subscription()->trial && 0 == intval( $txn->subscription()->trial_amount ) )
+				&& 'percentage' === affwp_get_affiliate_rate_type( $this->affiliate_id )
+			) {
+				$amount = $txn->subscription()->trial_amount;
+			}
+
+			// If there's coupon trial amount, override $amount.
+			if ( $txn->coupon() && $txn->coupon()->trial ) {
+				$amount = $txn->coupon()->trial_amount;
+			}
+
 			// get referral total
-			$referral_total = $this->calculate_referral_amount( $txn->amount, $txn->id, $txn->product_id );
+			$referral_total = $this->calculate_referral_amount( $amount, $txn->id, $txn->product_id );
 
 			// insert a pending referral
 			$this->insert_pending_referral( $referral_total, $txn->id, get_the_title( $txn->product_id ), array(), $txn->subscription_id );
@@ -122,7 +141,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 
 		}
 
-		$url = admin_url( 'admin.php?page=memberpress-trans&search=' . $reference );
+		$url = admin_url( 'admin.php?page=memberpress-trans&action=edit&id=' . $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 	}
@@ -253,10 +272,14 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 		add_filter( 'affwp_is_admin_page', '__return_true' );
 		affwp_admin_scripts();
 
+		$user_id      = 0;
+		$user_name    = '';
 		$affiliate_id = get_post_meta( $post->ID, 'affwp_discount_affiliate', true );
-		$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
-		$user         = get_userdata( $user_id );
-		$user_name    = $user ? $user->user_login : '';
+		if( $affiliate_id ) {
+			$user_id      = affwp_get_affiliate_user_id( $affiliate_id );
+			$user         = get_userdata( $user_id );
+			$user_name    = $user ? $user->user_login : '';
+		}
 		?>
 		<p class="form-field affwp-memberpress-coupon-field">
 			<label for="user_name"><?php _e( 'If you would like to connect this discount to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></label>
@@ -264,9 +287,7 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 				<span class="affwp-memberpress-coupon-input-wrap">
 					<input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
 					<input type="text" name="user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" />
-					<img class="affwp-ajax waiting" src="<?php echo admin_url('images/wpspin_light.gif'); ?>" style="display: none;"/>
 				</span>
-				<span id="affwp_user_search_results"></span>
 			</span>
 		</p>
 		<?php
@@ -341,6 +362,8 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 	 *
 	 * @access  public
 	 * @since   1.7.5
+	 *
+	 * @param MeprTransaction $txn Transaction.
 	*/
 	private function get_coupon_affiliate_id( $txn ) {
 		if( ! $coupon = $txn->coupon() ) {
@@ -349,9 +372,9 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 
 		$affiliate_id = get_post_meta( $coupon->ID, 'affwp_discount_affiliate', true );
 
-		if( $affiliate_id ) {
-			if( ! affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
-				continue;
+		if ( $affiliate_id ) {
+			if ( ! affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
+				return false;
 			}
 
 			return $affiliate_id;

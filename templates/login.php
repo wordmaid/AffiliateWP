@@ -4,12 +4,22 @@ affiliate_wp()->login->print_errors();
 ?>
 
 <form id="affwp-login-form" class="affwp-form" action="" method="post">
-	<?php do_action( 'affwp_affiliate_login_form_top' ); ?>
+	<?php
+	/**
+	 * Fires at the top of the affiliate login form template
+	 */
+	do_action( 'affwp_affiliate_login_form_top' );
+	?>
 
 	<fieldset>
 		<legend><?php _e( 'Log into Your Account', 'affiliate-wp' ); ?></legend>
 
-		<?php do_action( 'affwp_login_fields_before' ); ?>
+		<?php
+		/**
+		 * Fires immediately prior to the affiliate login form template fields.
+		 */
+		do_action( 'affwp_login_fields_before' );
+		?>
 
 		<p>
 			<label for="affwp-login-user-login"><?php _e( 'Username', 'affiliate-wp' ); ?></label>
@@ -38,8 +48,18 @@ affiliate_wp()->login->print_errors();
 			<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost Password?', 'affiliate-wp' ); ?></a>
 		</p>
 
-		<?php do_action( 'affwp_login_fields_after' ); ?>
+		<?php
+		/**
+		 * Fires immediately after the affiliate login form template fields.
+		 */
+		do_action( 'affwp_login_fields_after' );
+		?>
 	</fieldset>
 
-	<?php do_action( 'affwp_affiliate_login_form_bottom' ); ?>
+	<?php
+	/**
+	 * Fires at the bottom of the affiliate login form template (inside the form element).
+	 */
+	do_action( 'affwp_affiliate_login_form_bottom' );
+	?>
 </form>

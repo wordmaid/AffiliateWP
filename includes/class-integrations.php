@@ -26,6 +26,7 @@ class Affiliate_WP_Integrations {
 			'pmp'            => 'Paid Memberships Pro',
 			'pms'            => 'Paid Member Subscriptions',
 			'rcp'            => 'Restrict Content Pro',
+			'stripe'         => 'Stripe Checkout',
 			's2member'       => 's2Member',
 			'shopp'	         => 'Shopp',
 			'sproutinvoices' => 'Sprout Invoices',

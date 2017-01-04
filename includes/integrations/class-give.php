@@ -44,6 +44,83 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 			return false;
 		}
 
+		// Get referral total
+		$referral_total = $this->get_referral_total( $payment_id, $affiliate_id );
+
+		// Get referral description
+		$desc = $this->get_referral_description( $payment_id );
+
+
+		if ( empty( $desc ) ) {
+
+			if ( $this->debug ) {
+				$this->log( 'Referral not created due to empty description.' );
+			}
+
+			return;
+		}
+
+		// Insert a pending referral
+		$referral_id = $this->insert_pending_referral( $referral_total, $payment_id, $desc );
+
+	}
+
+
+	/**
+	 * Get the referral total
+	 *
+	 * @access  public
+	 * @since   2.0
+	*/
+	public function get_referral_total( $payment_id = 0, $affiliate_id = 0 ) {
+
+		$payment_amount = give_get_payment_amount( $payment_id );
+		$referral_total = $this->calculate_referral_amount( $payment_amount, $payment_id, '', $affiliate_id );
+
+		return $referral_total;
+
+	}
+
+	/**
+	 * Get the referral description
+	 *
+	 * @access  public
+	 * @since   2.0
+	*/
+	public function get_referral_description( $payment_id = 0 ) {
+
+		$payment_meta = give_get_payment_meta( $payment_id );
+
+		$form_id    = isset( $payment_meta['form_id'] ) ? $payment_meta['form_id'] : 0;
+		$price_id   = isset( $payment_meta['price_id'] ) ? $payment_meta['price_id'] : null;
+
+		$referral_description = isset( $payment_meta['form_title'] ) ? $payment_meta['form_title'] : '';
+
+		$separator  = '';
+
+		// If multi-level, append to the form title.
+		if ( give_has_variable_prices( $form_id ) ) {
+
+			//Only add separator if there is a form title.
+			if ( ! empty( $referral_description ) ) {
+				$referral_description .= ' ' . $separator . ' ';
+			}
+
+			if ( $price_id == 'custom' ) {
+
+				$custom_amount_text = get_post_meta( $form_id, '_give_custom_amount_text', true );
+				$referral_description .= ! empty( $custom_amount_text ) ? $custom_amount_text : __( 'Custom Amount', 'affiliate-wp' );
+
+			} else {
+
+				$referral_description .= give_get_price_option_name( $form_id, $price_id );
+
+			}
+
+		}
+
+		return $referral_description;
+
 	}
 
 }

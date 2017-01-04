@@ -13,14 +13,15 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 		$this->context = 'caldera-forms';
 
 		add_action( 'caldera_forms_submit_complete', array( $this, 'submit_complete' ), 10, 3 );
-		add_action( 'caldera_forms_general_settings_panel', array( $this, 'add_settings' ) );
 
+		// Register processor
 		add_action( 'caldera_forms_pre_load_processors', array( $this, 'pre_load_processors' ), 10, 6 );
+
+		// Load processor
 		add_action( 'caldera_forms_includes_complete', array( $this, 'load_processor' ), 10, 6 );
 
-		add_action( 'cf_stripe_post_successful_charge', array( $this, 'complete_payment_stripe' ), 10, 4 );
-		add_action( 'cf_braintree_success', array( $this, 'complete_payment_braintree' ), 10, 6 );
-		add_action( 'caldera_forms_submit_complete', array( $this, 'complete_payment_paypal' ), 10, 3 );
+		// Add settings
+		add_action( 'caldera_forms_general_settings_panel', array( $this, 'add_settings' ) );
 
 	}
 
@@ -99,9 +100,13 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 			}
 		}
 
+		// Get submission data
 		$submission_data = Caldera_Forms::get_submission_data( $form );
-		$entry_id        = $submission_data['_entry_id'];
 
+		// Get entry ID
+		$entry_id = $submission_data['_entry_id'];
+
+		// Set the arguments
 		$args = array(
 			'entry_id'               => $entry_id,
 			'referral_total'         => 0.00,
@@ -164,63 +169,41 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Mark referral as "unpaid" when the payment is successful in Stripe
-	 *
-	 * @access public
-	 * @since  2.0
-	 */
-	public function complete_payment_stripe( $return_charge, $transdata, $config, $form ) {
-
-		$submission_data = Caldera_Forms::get_submission_data( $form );
-		$entry_id        = $submission_data['_entry_id'];
-
-		$this->mark_referral_complete( $entry_id );
-	}
-
-	/**
-	 * Mark referral as "unpaid" when the payment is successful in Braintree
-	 *
-	 * @access public
-	 * @since  2.0
-	 */
-	public function complete_payment_braintree( $result, $order_id, $transaction, $config, $form, $proccesid ) {
-
-		$submission_data = Caldera_Forms::get_submission_data( $form );
-		$entry_id        = $submission_data['_entry_id'];
-
-		$this->mark_referral_complete( $entry_id );
-	}
-
-	/**
-	 * Mark referral as "unpaid" when the payment is successful in PayPal
-	 *
-	 * @access public
-	 * @since  2.0
-	 */
-	public function complete_payment_paypal( $form, $referrer, $process_id ) {
-
-		global $transdata;
-
-		$submission_data = Caldera_Forms::get_submission_data( $form );
-		$entry_id        = $submission_data['_entry_id'];
-
-		if ( ! empty( $transdata['paypal_express'] ) && ! empty( $transdata['paypal_express']['result'] ) ) {
-
-			if ( $transdata['paypal_express']['result']['payment_status'] === 'payment_status' ) {
-				$this->mark_referral_complete( $entry_id );
-			}
-		}
-
-	}
-
-	/**
 	 * Sets a referral to unpaid when payment is completed
 	 *
 	 * @access  public
 	 * @since   2.0
 	*/
-	public function mark_referral_complete( $entry_id = 0 ) {
+	public function mark_referral_complete( $entry_id = 0, $form, $process_id = null ) {
+
+		// Set entry ID to process ID so the referral can be completed
+		if ( $process_id ) {
+			$entry_id = $process_id;
+		}
+
+		// Complete the referral
 		$this->complete_referral( $entry_id );
+
+		/**
+		 * If there's a process ID then the form has a processor added
+		 * We need to swap the reference from the processor ID to the form's entry ID
+		 */
+		if ( ! empty( $process_id ) ) {
+
+			// Get submission data from $form object
+			$submission_data = Caldera_Forms::get_submission_data( $form );
+
+			// Get the entry ID
+			$entry_id = $submission_data['_entry_id'];
+
+			// Get the newly created referral based on the process ID
+			$existing = affiliate_wp()->referrals->get_by( 'reference', $process_id, $this->context );
+
+			// Swap our the processs ID for the entry ID
+			affiliate_wp()->referrals->update( $existing->referral_id, array( 'reference' => $entry_id ) );
+
+		}
+
 	}
 
 	/**

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-11-15 22:08:30+00:00\n"
+"POT-Creation-Date: 2017-01-04 20:36:31+00:00\n"
 "PO-Revision-Date: 2015-04-09 10:00-0600\n"
 "Last-Translator: Chris Christoff <chriscct7@gmail.com>\n"
 "Language-Team: Chris Christoff <chriscct7@gmail.com>\n"
@@ -36,7 +36,7 @@ msgstr ""
 
 #: includes/REST/class-rest.php:62 includes/REST/class-rest.php:66
 #: includes/REST/class-rest.php:79 includes/REST/class-rest.php:82
-#: includes/admin/AFFWP_Plugin_Updater.php:358
+#: includes/admin/AFFWP_Plugin_Updater.php:369
 #: includes/admin/affiliates/actions.php:20
 #: includes/admin/affiliates/actions.php:52
 #: includes/admin/affiliates/actions.php:56
@@ -45,7 +45,8 @@ msgstr ""
 #: includes/admin/affiliates/actions.php:138
 #: includes/admin/affiliates/actions.php:142
 #: includes/admin/class-addon-updater.php:283
-#: includes/admin/class-notices.php:414 includes/admin/creatives/actions.php:16
+#: includes/admin/class-notices.php:422
+#: includes/admin/creatives/actions.php:16
 #: includes/admin/creatives/actions.php:44
 #: includes/admin/creatives/actions.php:48
 #: includes/admin/creatives/actions.php:52
@@ -319,18 +320,18 @@ msgstr "去年"
 msgid "%1$s to %2$s"
 msgstr ""
 
-#: includes/admin/AFFWP_Plugin_Updater.php:196
+#: includes/admin/AFFWP_Plugin_Updater.php:201
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
 
-#: includes/admin/AFFWP_Plugin_Updater.php:204
+#: includes/admin/AFFWP_Plugin_Updater.php:209
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s "
 "or %5$supdate now%6$s."
 msgstr ""
 
-#: includes/admin/AFFWP_Plugin_Updater.php:358
+#: includes/admin/AFFWP_Plugin_Updater.php:369
 #: includes/admin/class-addon-updater.php:283
 #, fuzzy
 msgid "You do not have permission to install plugin updates"
@@ -386,7 +387,8 @@ msgstr "你没有权限删除加盟者"
 
 #: includes/admin/affiliates/actions.php:56
 #: includes/admin/affiliates/actions.php:142
-#: includes/admin/class-notices.php:414 includes/admin/creatives/actions.php:48
+#: includes/admin/class-notices.php:422
+#: includes/admin/creatives/actions.php:48
 #: includes/admin/referrals/actions.php:20
 #: includes/admin/referrals/actions.php:51
 #: includes/admin/referrals/actions.php:82
@@ -397,8 +399,8 @@ msgstr "安全检查失败"
 msgid "No affiliate IDs specified for deletion"
 msgstr "没有指定加盟id来删除"
 
-#: includes/admin/affiliates/affiliates.php:56 includes/admin/class-menu.php:11
-#: includes/admin/class-menu.php:13
+#: includes/admin/affiliates/affiliates.php:56
+#: includes/admin/class-menu.php:11 includes/admin/class-menu.php:13
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:23
 msgid "Affiliates"
 msgstr "加盟"
@@ -634,7 +636,8 @@ msgid ""
 "edit screen</a>."
 msgstr ""
 
-#: includes/admin/affiliates/edit.php:34 includes/admin/affiliates/edit.php:117
+#: includes/admin/affiliates/edit.php:34
+#: includes/admin/affiliates/edit.php:117
 msgid "A link to the user edit screen for this user."
 msgstr ""
 
@@ -957,178 +960,178 @@ msgstr ""
 msgid "Settings updated."
 msgstr "设置已更新。"
 
-#: includes/admin/class-notices.php:63
+#: includes/admin/class-notices.php:71
 #, fuzzy
 msgid "%d affiliate was added successfully."
 msgid_plural "%d affiliates were added successfully"
 msgstr[0] "加盟更新成功"
 msgstr[1] "加盟更新成功"
 
-#: includes/admin/class-notices.php:76
+#: includes/admin/class-notices.php:84
 #, fuzzy
 msgid "Affiliate wasn&#8217;t added, please try again."
 msgstr "加盟没有添加，请再试一次"
 
-#: includes/admin/class-notices.php:83
+#: includes/admin/class-notices.php:91
 msgid "Affiliate updated successfully"
 msgstr "加盟更新成功"
 
-#: includes/admin/class-notices.php:85
+#: includes/admin/class-notices.php:93
 msgid "<a href=\"%s\">Back to Affiliates</a>"
 msgstr "<a href=\"%s\">返回加盟</a>"
 
-#: includes/admin/class-notices.php:91
+#: includes/admin/class-notices.php:99
 msgid "Affiliate update failed, please try again"
 msgstr "更新加盟失败，请再试一次"
 
-#: includes/admin/class-notices.php:98
+#: includes/admin/class-notices.php:106
 msgid "Affiliate account(s) deleted successfully"
 msgstr "加盟账户成功删除"
 
-#: includes/admin/class-notices.php:104
+#: includes/admin/class-notices.php:112
 msgid "Affiliate deletion failed, please try again"
 msgstr "删除加盟失败，请再试一次"
 
-#: includes/admin/class-notices.php:111
+#: includes/admin/class-notices.php:119
 msgid "Affiliate account activated"
 msgstr "加盟账户激活"
 
-#: includes/admin/class-notices.php:117
+#: includes/admin/class-notices.php:125
 msgid "Affiliate account deactivated"
 msgstr "加盟账户已停用"
 
-#: includes/admin/class-notices.php:123
+#: includes/admin/class-notices.php:131
 msgid "Affiliate request was accepted"
 msgstr "加盟请求被接受"
 
-#: includes/admin/class-notices.php:129
+#: includes/admin/class-notices.php:137
 msgid "Affiliate request was rejected"
 msgstr "加盟请求被拒绝"
 
-#: includes/admin/class-notices.php:143
+#: includes/admin/class-notices.php:151
 #, fuzzy
 msgid "%d affiliate from WP Affiliate was added successfully."
 msgid_plural "%d affiliates from WP Affiliate were added successfully"
 msgstr[0] "加盟更新成功"
 msgstr[1] "加盟更新成功"
 
-#: includes/admin/class-notices.php:164
+#: includes/admin/class-notices.php:172
 #, fuzzy
 msgid "%d affiliate from Affiliates Pro was added successfully."
 msgid_plural "%d affiliates from Affiliates Pro were added successfully"
 msgstr[0] "加盟更新成功"
 msgstr[1] "加盟更新成功"
 
-#: includes/admin/class-notices.php:177
+#: includes/admin/class-notices.php:185
 msgid "Affiliate stats have been recounted!"
 msgstr "加盟数据已经讲述了!"
 
-#: includes/admin/class-notices.php:184
+#: includes/admin/class-notices.php:192
 msgid "Referral added successfully"
 msgstr "添加推广成功"
 
-#: includes/admin/class-notices.php:190
+#: includes/admin/class-notices.php:198
 msgid "Referral updated successfully"
 msgstr "推广成功更新"
 
-#: includes/admin/class-notices.php:196
+#: includes/admin/class-notices.php:204
 msgid "Referral update failed, please try again"
 msgstr "更新推广失败，请再试一次"
 
-#: includes/admin/class-notices.php:202
+#: includes/admin/class-notices.php:210
 msgid "Referral deleted successfully"
 msgstr "推广成功删除"
 
-#: includes/admin/class-notices.php:208
+#: includes/admin/class-notices.php:216
 msgid "Referral deletion failed, please try again"
 msgstr "删除推广失败，请再试一次"
 
-#: includes/admin/class-notices.php:216
+#: includes/admin/class-notices.php:224
 msgid "Creative updated successfully"
 msgstr "更新推广代码成功"
 
-#: includes/admin/class-notices.php:218
+#: includes/admin/class-notices.php:226
 msgid "<a href=\"%s\">Back to Creatives</a>"
 msgstr "<a href=\"%s\">返回推广代码</a>"
 
-#: includes/admin/class-notices.php:224
+#: includes/admin/class-notices.php:232
 msgid "Creative added successfully"
 msgstr "添加推广代码成功"
 
-#: includes/admin/class-notices.php:230
+#: includes/admin/class-notices.php:238
 msgid "Creative deleted successfully"
 msgstr "成功删除推广代码"
 
-#: includes/admin/class-notices.php:236
+#: includes/admin/class-notices.php:244
 msgid "Creative activated"
 msgstr "推广代码已激活"
 
-#: includes/admin/class-notices.php:242
+#: includes/admin/class-notices.php:250
 msgid "Creative deactivated"
 msgstr "推广代码已停用"
 
-#: includes/admin/class-notices.php:249
+#: includes/admin/class-notices.php:257
 msgid "Settings successfully imported"
 msgstr "设置成功导入"
 
-#: includes/admin/class-notices.php:257
+#: includes/admin/class-notices.php:265
 #, fuzzy
 msgid ""
 "Your license key expired on %s. Please <a href=\"%s\" target=\"_blank"
 "\">renew your license key</a>."
 msgstr "同意我们的<a href=\"%s\" target=\"_blank\">使用条款</a>"
 
-#: includes/admin/class-notices.php:269
+#: includes/admin/class-notices.php:277
 msgid ""
 "Your license key has been disabled. Please <a href=\"%s\" target=\"_blank"
 "\">contact support</a> for more information."
 msgstr ""
 
-#: includes/admin/class-notices.php:280
+#: includes/admin/class-notices.php:288
 msgid ""
 "Invalid license. Please <a href=\"%s\" target=\"_blank\">visit your account "
 "page</a> and verify it."
 msgstr ""
 
-#: includes/admin/class-notices.php:292
+#: includes/admin/class-notices.php:300
 msgid ""
 "Your %s is not active for this URL. Please <a href=\"%s\" target=\"_blank"
 "\">visit your account page</a> to manage your license key URLs."
 msgstr ""
 
-#: includes/admin/class-notices.php:303
+#: includes/admin/class-notices.php:311
 msgid "This appears to be an invalid license key for %s."
 msgstr ""
 
-#: includes/admin/class-notices.php:312
+#: includes/admin/class-notices.php:320
 msgid ""
 "Your license key has reached its activation limit. <a href=\"%s\">View "
 "possible upgrades</a> now."
 msgstr ""
 
-#: includes/admin/class-notices.php:321
+#: includes/admin/class-notices.php:329
 msgid "The API keys were successfully generated."
 msgstr ""
 
-#: includes/admin/class-notices.php:327
+#: includes/admin/class-notices.php:335
 msgid "The API keys could not be generated."
 msgstr ""
 
-#: includes/admin/class-notices.php:334
+#: includes/admin/class-notices.php:342
 msgid "The API keys were successfully regenerated."
 msgstr ""
 
-#: includes/admin/class-notices.php:340
+#: includes/admin/class-notices.php:348
 msgid "The API keys were successfully revoked."
 msgstr ""
 
-#: includes/admin/class-notices.php:386
+#: includes/admin/class-notices.php:394
 msgid ""
 "Your license key for AffiliateWP has expired. Please renew your license to "
 "re-enable automatic updates."
 msgstr ""
 
-#: includes/admin/class-notices.php:395
+#: includes/admin/class-notices.php:403
 msgid ""
 "Please <a href=\"%s\">enter and activate</a> your license key for "
 "AffiliateWP to enable automatic updates."
@@ -1149,7 +1152,7 @@ msgstr "没有指定推广代码为删除"
 
 #: includes/admin/creatives/class-list-table.php:116
 #: includes/admin/creatives/edit.php:43 includes/admin/creatives/new.php:42
-#: templates/dashboard-tab-visits.php:25
+#: templates/dashboard-tab-visits.php:29
 msgid "URL"
 msgstr "网址"
 
@@ -1276,7 +1279,7 @@ msgid "Recent Referral Visits"
 msgstr "最近访问"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:81
-#: templates/dashboard-tab-visits.php:45
+#: templates/dashboard-tab-visits.php:49
 #, fuzzy
 msgid "Visit converted: %s"
 msgstr "转换"
@@ -1440,7 +1443,7 @@ msgstr "参考"
 #: includes/admin/visits/class-list-table.php:109
 #: templates/dashboard-tab-payouts.php:34
 #: templates/dashboard-tab-referrals.php:27
-#: templates/dashboard-tab-visits.php:28
+#: templates/dashboard-tab-visits.php:32
 msgid "Date"
 msgstr "日期"
 
@@ -1467,14 +1470,16 @@ msgid "Apply"
 msgstr "应用"
 
 #: includes/admin/referrals/class-list-table.php:471
-#: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:295
-#: includes/admin/visits/visits.php:52 includes/class-graph.php:408
+#: includes/admin/referrals/referrals.php:52
+#: includes/admin/tools/tools.php:295 includes/admin/visits/visits.php:52
+#: includes/class-graph.php:408
 msgid "From - mm/dd/yyyy"
 msgstr "从 - mm/dd/yyyy"
 
 #: includes/admin/referrals/class-list-table.php:472
-#: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:296
-#: includes/admin/visits/visits.php:53 includes/class-graph.php:410
+#: includes/admin/referrals/referrals.php:53
+#: includes/admin/tools/tools.php:296 includes/admin/visits/visits.php:53
+#: includes/class-graph.php:410
 msgid "To - mm/dd/yyyy"
 msgstr "到 - mm/dd/yyyy"
 
@@ -2355,25 +2360,36 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-settings.php:680
+msgid "Opt into beta versions?"
+msgstr ""
+
+#: includes/admin/settings/class-settings.php:681
+msgid ""
+"Check this box if you would like to receive update notifications for beta "
+"releases. When beta versions are available, an update notification will be "
+"shown in your Plugins page."
+msgstr ""
+
+#: includes/admin/settings/class-settings.php:685
 msgid "Remove Data on Uninstall?"
 msgstr "删除数据卸载该插件吗?"
 
-#: includes/admin/settings/class-settings.php:681
+#: includes/admin/settings/class-settings.php:686
 msgid ""
 "Check this box if you would like AffiliateWP to completely remove all of its "
 "data when the plugin is deleted."
 msgstr "勾选此设置后，如果你删除该插件的所有数据，本插件将一并删除。"
 
-#: includes/admin/settings/class-settings.php:708
+#: includes/admin/settings/class-settings.php:713
 #, fuzzy
 msgid "Application Pending Email Subject"
 msgstr "加盟申请受理"
 
-#: includes/admin/settings/class-settings.php:709
+#: includes/admin/settings/class-settings.php:714
 msgid "Enter the subject line for pending affiliate application emails."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:711
+#: includes/admin/settings/class-settings.php:716
 #: includes/emails/actions.php:165
 #, fuzzy
 msgid "Your Affiliate Application Is Being Reviewed"
@@ -2381,43 +2397,43 @@ msgstr ""
 "在%s你的加盟申请已被接受!\n"
 "\n"
 
-#: includes/admin/settings/class-settings.php:714
+#: includes/admin/settings/class-settings.php:719
 #, fuzzy
 msgid "Application Pending Email Content"
 msgstr "加盟申请受理"
 
-#: includes/admin/settings/class-settings.php:715
+#: includes/admin/settings/class-settings.php:720
 msgid ""
 "Enter the email to send when an application is pending. HTML is accepted. "
 "Available template tags:"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:717
+#: includes/admin/settings/class-settings.php:722
 msgid "Hi {name}!"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:717
+#: includes/admin/settings/class-settings.php:722
 #: includes/emails/actions.php:170
 msgid "Thanks for your recent affiliate registration on {site_name}."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:717
+#: includes/admin/settings/class-settings.php:722
 #: includes/emails/actions.php:171
 msgid ""
 "We&#8217;re currently reviewing your affiliate application and will be in "
 "touch soon!"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:720
+#: includes/admin/settings/class-settings.php:725
 #, fuzzy
 msgid "Application Rejection Email Subject"
 msgstr "加盟申请受理"
 
-#: includes/admin/settings/class-settings.php:721
+#: includes/admin/settings/class-settings.php:726
 msgid "Enter the subject line for rejected affiliate application emails."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:723
+#: includes/admin/settings/class-settings.php:728
 #: includes/emails/actions.php:204
 #, fuzzy
 msgid "Your Affiliate Application Has Been Rejected"
@@ -2425,60 +2441,60 @@ msgstr ""
 "在%s你的加盟申请已被接受!\n"
 "\n"
 
-#: includes/admin/settings/class-settings.php:726
+#: includes/admin/settings/class-settings.php:731
 #, fuzzy
 msgid "Application Rejection Email Content"
 msgstr "加盟申请受理"
 
-#: includes/admin/settings/class-settings.php:727
+#: includes/admin/settings/class-settings.php:732
 msgid ""
 "Enter the email to send when an application is rejected. HTML is accepted. "
 "Available template tags:"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:729
+#: includes/admin/settings/class-settings.php:734
 msgid "Hi {name},"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:729
+#: includes/admin/settings/class-settings.php:734
 #: includes/emails/actions.php:209
 msgid ""
 "We regret to inform you that your recent affiliate registration on "
 "{site_name} was rejected."
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:894
+#: includes/admin/settings/class-settings.php:899
 msgid "Deactivate License"
 msgstr "禁用许可证"
 
-#: includes/admin/settings/class-settings.php:895
+#: includes/admin/settings/class-settings.php:900
 msgid "Your license is valid!"
 msgstr "您的许可证是有效的！"
 
-#: includes/admin/settings/class-settings.php:898
+#: includes/admin/settings/class-settings.php:903
 msgid "Renew Your License"
 msgstr "更新许可证"
 
-#: includes/admin/settings/class-settings.php:899
+#: includes/admin/settings/class-settings.php:904
 msgid ""
 "Your license has expired, renew today to continue getting updates and "
 "support!"
 msgstr "您的许可证过期了,现在更新继续获取更新和支持!"
 
-#: includes/admin/settings/class-settings.php:901
+#: includes/admin/settings/class-settings.php:906
 msgid "Activate License"
 msgstr "激活许可证"
 
-#: includes/admin/settings/class-settings.php:1000
+#: includes/admin/settings/class-settings.php:1005
 msgid ""
 "The callback function used for the <strong>%s</strong> setting is missing."
 msgstr "回调函数用于<strong>%s</strong> 设置丢失。"
 
-#: includes/admin/settings/class-settings.php:1075
+#: includes/admin/settings/class-settings.php:1080
 msgid "Upload File"
 msgstr ""
 
-#: includes/admin/settings/class-settings.php:1093
+#: includes/admin/settings/class-settings.php:1098
 #, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
@@ -2489,7 +2505,7 @@ msgstr ""
 "请输入您的许可证密钥，用于自动更新和<a href=\"%s\" target=\"_blank\">支持</"
 "a>."
 
-#: includes/admin/settings/class-settings.php:1113
+#: includes/admin/settings/class-settings.php:1118
 msgid ""
 "Debug mode is globally enabled via <code>AFFILIATE_WP_DEBUG</code> set in "
 "<code>wp-config.php</code>. This setting cannot be modified from this screen."
@@ -2829,7 +2845,7 @@ msgid "Landing Page"
 msgstr "登陆页面"
 
 #: includes/admin/visits/class-list-table.php:104
-#: templates/dashboard-tab-visits.php:26
+#: templates/dashboard-tab-visits.php:30
 msgid "Referring URL"
 msgstr "来源网站"
 
@@ -2843,12 +2859,12 @@ msgstr "IP"
 
 #: includes/admin/visits/class-list-table.php:108
 #: includes/admin/visits/visits.php:58 templates/dashboard-tab-stats.php:59
-#: templates/dashboard-tab-visits.php:27
+#: templates/dashboard-tab-visits.php:31
 msgid "Converted"
 msgstr "转换"
 
 #: includes/admin/visits/class-list-table.php:172
-#: templates/dashboard-tab-visits.php:42
+#: templates/dashboard-tab-visits.php:46
 msgid "Direct traffic"
 msgstr "直接访问"
 
@@ -3515,7 +3531,7 @@ msgstr ""
 msgid "Number of visits: %d"
 msgstr "未发现。"
 
-#: includes/creative-functions.php:32 includes/creative-functions.php:64
+#: includes/creative-functions.php:34 includes/creative-functions.php:65
 msgid "Creative"
 msgstr "创新"
 
@@ -4403,7 +4419,7 @@ msgid ""
 "referral."
 msgstr ""
 
-#: templates/dashboard-tab-visits.php:58
+#: templates/dashboard-tab-visits.php:62
 msgid "You have not received any visits yet."
 msgstr "您的推广地址还未产生任何流量。"
 
@@ -4509,7 +4525,7 @@ msgctxt "Integrations"
 msgid "Dismiss Notice"
 msgstr ""
 
-#: includes/admin/class-notices.php:387 includes/admin/class-notices.php:396
+#: includes/admin/class-notices.php:395 includes/admin/class-notices.php:404
 msgctxt "License"
 msgid "Dismiss Notice"
 msgstr ""

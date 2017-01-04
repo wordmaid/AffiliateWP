@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AffiliateWP\n"
 "Report-Msgid-Bugs-To: https://affiliatewp.com/support/\n"
-"POT-Creation-Date: 2016-11-15 22:08:30+00:00\n"
+"POT-Creation-Date: 2017-01-04 20:36:31+00:00\n"
 "PO-Revision-Date: 2016-08-10 09:05+0200\n"
 "Last-Translator: FX Bénard <fx@fxbenard.com>\n"
 "Language-Team: AffiliateWP <support@affiliatewp.com>\n"
@@ -40,7 +40,7 @@ msgstr ""
 
 #: includes/REST/class-rest.php:62 includes/REST/class-rest.php:66
 #: includes/REST/class-rest.php:79 includes/REST/class-rest.php:82
-#: includes/admin/AFFWP_Plugin_Updater.php:358
+#: includes/admin/AFFWP_Plugin_Updater.php:369
 #: includes/admin/affiliates/actions.php:20
 #: includes/admin/affiliates/actions.php:52
 #: includes/admin/affiliates/actions.php:56
@@ -49,7 +49,8 @@ msgstr ""
 #: includes/admin/affiliates/actions.php:138
 #: includes/admin/affiliates/actions.php:142
 #: includes/admin/class-addon-updater.php:283
-#: includes/admin/class-notices.php:414 includes/admin/creatives/actions.php:16
+#: includes/admin/class-notices.php:422
+#: includes/admin/creatives/actions.php:16
 #: includes/admin/creatives/actions.php:44
 #: includes/admin/creatives/actions.php:48
 #: includes/admin/creatives/actions.php:52
@@ -324,14 +325,14 @@ msgstr "L’année dernière"
 msgid "%1$s to %2$s"
 msgstr ""
 
-#: includes/admin/AFFWP_Plugin_Updater.php:196
+#: includes/admin/AFFWP_Plugin_Updater.php:201
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
 msgstr ""
 "Une nouvelle version de %1$s est disponible. %2$sAfficher les détails%4$s de "
 "la version %3$s."
 
-#: includes/admin/AFFWP_Plugin_Updater.php:204
+#: includes/admin/AFFWP_Plugin_Updater.php:209
 msgid ""
 "There is a new version of %1$s available. %2$sView version %3$s details%4$s "
 "or %5$supdate now%6$s."
@@ -339,7 +340,7 @@ msgstr ""
 "Une nouvelle version de %1$s est disponible. %2$sAfficher les détails%4$s de "
 "la version %3$s ou %5$smettre à jour maintenant%6$s."
 
-#: includes/admin/AFFWP_Plugin_Updater.php:358
+#: includes/admin/AFFWP_Plugin_Updater.php:369
 #: includes/admin/class-addon-updater.php:283
 msgid "You do not have permission to install plugin updates"
 msgstr ""
@@ -406,7 +407,8 @@ msgstr "Vous n’avez pas la permission pour supprimer les comptes d’affiliati
 
 #: includes/admin/affiliates/actions.php:56
 #: includes/admin/affiliates/actions.php:142
-#: includes/admin/class-notices.php:414 includes/admin/creatives/actions.php:48
+#: includes/admin/class-notices.php:422
+#: includes/admin/creatives/actions.php:48
 #: includes/admin/referrals/actions.php:20
 #: includes/admin/referrals/actions.php:51
 #: includes/admin/referrals/actions.php:82
@@ -417,8 +419,8 @@ msgstr "Échec du test de sécurité"
 msgid "No affiliate IDs specified for deletion"
 msgstr "Aucun ID Affilié spécifié pour la suppression"
 
-#: includes/admin/affiliates/affiliates.php:56 includes/admin/class-menu.php:11
-#: includes/admin/class-menu.php:13
+#: includes/admin/affiliates/affiliates.php:56
+#: includes/admin/class-menu.php:11 includes/admin/class-menu.php:13
 #: includes/admin/reports/tabs/class-affiliates-reports-tab.php:23
 msgid "Affiliates"
 msgstr "Affiliations"
@@ -659,7 +661,8 @@ msgstr ""
 "peut être modifié sur la<a href=\"%1$s\" alt=\"%2$s\">page de modification "
 "de l’utilisateur</a>."
 
-#: includes/admin/affiliates/edit.php:34 includes/admin/affiliates/edit.php:117
+#: includes/admin/affiliates/edit.php:34
+#: includes/admin/affiliates/edit.php:117
 msgid "A link to the user edit screen for this user."
 msgstr "Un lien vers la page de modification de cet utilisateur."
 
@@ -999,121 +1002,121 @@ msgstr ""
 msgid "Settings updated."
 msgstr "Réglages mis à jour."
 
-#: includes/admin/class-notices.php:63
+#: includes/admin/class-notices.php:71
 #, fuzzy
 msgid "%d affiliate was added successfully."
 msgid_plural "%d affiliates were added successfully"
 msgstr[0] "L’affilié a bien été mis à jour."
 msgstr[1] "L’affilié a bien été mis à jour."
 
-#: includes/admin/class-notices.php:76
+#: includes/admin/class-notices.php:84
 #, fuzzy
 msgid "Affiliate wasn&#8217;t added, please try again."
 msgstr "L’affilié n’a pas été ajouté, veuillez réessayer."
 
-#: includes/admin/class-notices.php:83
+#: includes/admin/class-notices.php:91
 msgid "Affiliate updated successfully"
 msgstr "L’affilié a bien été mis à jour."
 
-#: includes/admin/class-notices.php:85
+#: includes/admin/class-notices.php:93
 msgid "<a href=\"%s\">Back to Affiliates</a>"
 msgstr "<a href=\"%s\">Retour aux affilitions</a>"
 
-#: includes/admin/class-notices.php:91
+#: includes/admin/class-notices.php:99
 msgid "Affiliate update failed, please try again"
 msgstr "Echec de la mise à jour de l’affilié, veuillez réessayer"
 
-#: includes/admin/class-notices.php:98
+#: includes/admin/class-notices.php:106
 msgid "Affiliate account(s) deleted successfully"
 msgstr "Le(s) compte(s) d’affiliation ont bien été supprimé(s)."
 
-#: includes/admin/class-notices.php:104
+#: includes/admin/class-notices.php:112
 msgid "Affiliate deletion failed, please try again"
 msgstr "La suppression de l’affilié a échoué, veuillez réessayer"
 
-#: includes/admin/class-notices.php:111
+#: includes/admin/class-notices.php:119
 msgid "Affiliate account activated"
 msgstr "Compte d’affiliation activé"
 
-#: includes/admin/class-notices.php:117
+#: includes/admin/class-notices.php:125
 msgid "Affiliate account deactivated"
 msgstr "Compte d’affiliation désactivé"
 
-#: includes/admin/class-notices.php:123
+#: includes/admin/class-notices.php:131
 msgid "Affiliate request was accepted"
 msgstr "Demande d’affiliation acceptée"
 
-#: includes/admin/class-notices.php:129
+#: includes/admin/class-notices.php:137
 msgid "Affiliate request was rejected"
 msgstr "Demande d’affiliation a été rejetée"
 
-#: includes/admin/class-notices.php:143
+#: includes/admin/class-notices.php:151
 #, fuzzy
 msgid "%d affiliate from WP Affiliate was added successfully."
 msgid_plural "%d affiliates from WP Affiliate were added successfully"
 msgstr[0] "L’affilié a bien été mis à jour."
 msgstr[1] "L’affilié a bien été mis à jour."
 
-#: includes/admin/class-notices.php:164
+#: includes/admin/class-notices.php:172
 #, fuzzy
 msgid "%d affiliate from Affiliates Pro was added successfully."
 msgid_plural "%d affiliates from Affiliates Pro were added successfully"
 msgstr[0] "L’affilié a bien été mis à jour."
 msgstr[1] "L’affilié a bien été mis à jour."
 
-#: includes/admin/class-notices.php:177
+#: includes/admin/class-notices.php:185
 msgid "Affiliate stats have been recounted!"
 msgstr "Les stats affiliation ont été recomptés !"
 
-#: includes/admin/class-notices.php:184
+#: includes/admin/class-notices.php:192
 msgid "Referral added successfully"
 msgstr "Le parrainage a bien été ajouté."
 
-#: includes/admin/class-notices.php:190
+#: includes/admin/class-notices.php:198
 msgid "Referral updated successfully"
 msgstr "Le parrainage a bien été mis à jour."
 
-#: includes/admin/class-notices.php:196
+#: includes/admin/class-notices.php:204
 msgid "Referral update failed, please try again"
 msgstr "La mise à jour du parrainage a échoué, veuillez réessayer"
 
-#: includes/admin/class-notices.php:202
+#: includes/admin/class-notices.php:210
 msgid "Referral deleted successfully"
 msgstr "Le parrainage a bien été supprimé."
 
-#: includes/admin/class-notices.php:208
+#: includes/admin/class-notices.php:216
 msgid "Referral deletion failed, please try again"
 msgstr "Suppression parrainage a echoué, veuillez réessayer"
 
-#: includes/admin/class-notices.php:216
+#: includes/admin/class-notices.php:224
 msgid "Creative updated successfully"
 msgstr "Les bannières ont bien été mises à jour."
 
-#: includes/admin/class-notices.php:218
+#: includes/admin/class-notices.php:226
 msgid "<a href=\"%s\">Back to Creatives</a>"
 msgstr "<a href=\"%s\">Retour aux bannières</a>"
 
-#: includes/admin/class-notices.php:224
+#: includes/admin/class-notices.php:232
 msgid "Creative added successfully"
 msgstr "La bannière a bien été ajoutée."
 
-#: includes/admin/class-notices.php:230
+#: includes/admin/class-notices.php:238
 msgid "Creative deleted successfully"
 msgstr "La bannière a bien été supprimée."
 
-#: includes/admin/class-notices.php:236
+#: includes/admin/class-notices.php:244
 msgid "Creative activated"
 msgstr "Bannière activée"
 
-#: includes/admin/class-notices.php:242
+#: includes/admin/class-notices.php:250
 msgid "Creative deactivated"
 msgstr "Bannière désactivée"
 
-#: includes/admin/class-notices.php:249
+#: includes/admin/class-notices.php:257
 msgid "Settings successfully imported"
 msgstr "Les réglages ont bien été importés."
 
-#: includes/admin/class-notices.php:257
+#: includes/admin/class-notices.php:265
 #, fuzzy
 msgid ""
 "Your license key expired on %s. Please <a href=\"%s\" target=\"_blank"
@@ -1121,51 +1124,51 @@ msgid ""
 msgstr ""
 "Acceptez nos <a href=\"%s\" target=\"_blank\">Conditions d’utilisation</a>"
 
-#: includes/admin/class-notices.php:269
+#: includes/admin/class-notices.php:277
 msgid ""
 "Your license key has been disabled. Please <a href=\"%s\" target=\"_blank"
 "\">contact support</a> for more information."
 msgstr ""
 
-#: includes/admin/class-notices.php:280
+#: includes/admin/class-notices.php:288
 msgid ""
 "Invalid license. Please <a href=\"%s\" target=\"_blank\">visit your account "
 "page</a> and verify it."
 msgstr ""
 
-#: includes/admin/class-notices.php:292
+#: includes/admin/class-notices.php:300
 msgid ""
 "Your %s is not active for this URL. Please <a href=\"%s\" target=\"_blank"
 "\">visit your account page</a> to manage your license key URLs."
 msgstr ""
 
-#: includes/admin/class-notices.php:303
+#: includes/admin/class-notices.php:311
 msgid "This appears to be an invalid license key for %s."
 msgstr ""
 
-#: includes/admin/class-notices.php:312
+#: includes/admin/class-notices.php:320
 msgid ""
 "Your license key has reached its activation limit. <a href=\"%s\">View "
 "possible upgrades</a> now."
 msgstr ""
 
-#: includes/admin/class-notices.php:321
+#: includes/admin/class-notices.php:329
 msgid "The API keys were successfully generated."
 msgstr ""
 
-#: includes/admin/class-notices.php:327
+#: includes/admin/class-notices.php:335
 msgid "The API keys could not be generated."
 msgstr ""
 
-#: includes/admin/class-notices.php:334
+#: includes/admin/class-notices.php:342
 msgid "The API keys were successfully regenerated."
 msgstr ""
 
-#: includes/admin/class-notices.php:340
+#: includes/admin/class-notices.php:348
 msgid "The API keys were successfully revoked."
 msgstr ""
 
-#: includes/admin/class-notices.php:386
+#: includes/admin/class-notices.php:394
 msgid ""
 "Your license key for AffiliateWP has expired. Please renew your license to "
 "re-enable automatic updates."
@@ -1173,7 +1176,7 @@ msgstr ""
 "Votre clé de licence pour AffiliateWP a expirée. Veuillez-la renouveler pour "
 "continuer à recevoir les mises à jour automatiques."
 
-#: includes/admin/class-notices.php:395
+#: includes/admin/class-notices.php:403
 msgid ""
 "Please <a href=\"%s\">enter and activate</a> your license key for "
 "AffiliateWP to enable automatic updates."
@@ -1196,7 +1199,7 @@ msgstr "Aucun IDs de bannière n’a été spécifié pour la suppression"
 
 #: includes/admin/creatives/class-list-table.php:116
 #: includes/admin/creatives/edit.php:43 includes/admin/creatives/new.php:42
-#: templates/dashboard-tab-visits.php:25
+#: templates/dashboard-tab-visits.php:29
 msgid "URL"
 msgstr "URL"
 
@@ -1332,7 +1335,7 @@ msgid "Recent Referral Visits"
 msgstr "Récentes visites de parrainages"
 
 #: includes/admin/overview/metaboxes/class-metabox-overview-recent-referral-visits.php:81
-#: templates/dashboard-tab-visits.php:45
+#: templates/dashboard-tab-visits.php:49
 msgid "Visit converted: %s"
 msgstr "Visite convertie : %s"
 
@@ -1495,7 +1498,7 @@ msgstr "Référence"
 #: includes/admin/visits/class-list-table.php:109
 #: templates/dashboard-tab-payouts.php:34
 #: templates/dashboard-tab-referrals.php:27
-#: templates/dashboard-tab-visits.php:28
+#: templates/dashboard-tab-visits.php:32
 msgid "Date"
 msgstr "Date"
 
@@ -1522,14 +1525,16 @@ msgid "Apply"
 msgstr "Appliquer"
 
 #: includes/admin/referrals/class-list-table.php:471
-#: includes/admin/referrals/referrals.php:52 includes/admin/tools/tools.php:295
-#: includes/admin/visits/visits.php:52 includes/class-graph.php:408
+#: includes/admin/referrals/referrals.php:52
+#: includes/admin/tools/tools.php:295 includes/admin/visits/visits.php:52
+#: includes/class-graph.php:408
 msgid "From - mm/dd/yyyy"
 msgstr "Du - jj/mm/aaaa"
 
 #: includes/admin/referrals/class-list-table.php:472
-#: includes/admin/referrals/referrals.php:53 includes/admin/tools/tools.php:296
-#: includes/admin/visits/visits.php:53 includes/class-graph.php:410
+#: includes/admin/referrals/referrals.php:53
+#: includes/admin/tools/tools.php:296 includes/admin/visits/visits.php:53
+#: includes/class-graph.php:410
 msgid "To - mm/dd/yyyy"
 msgstr "Au - jj/mm/aaaa"
 
@@ -2457,10 +2462,21 @@ msgstr ""
 "identifier les problèmes."
 
 #: includes/admin/settings/class-settings.php:680
+msgid "Opt into beta versions?"
+msgstr ""
+
+#: includes/admin/settings/class-settings.php:681
+msgid ""
+"Check this box if you would like to receive update notifications for beta "
+"releases. When beta versions are available, an update notification will be "
+"shown in your Plugins page."
+msgstr ""
+
+#: includes/admin/settings/class-settings.php:685
 msgid "Remove Data on Uninstall?"
 msgstr "Supprimer les données lors de la désinstallation ?"
 
-#: includes/admin/settings/class-settings.php:681
+#: includes/admin/settings/class-settings.php:686
 msgid ""
 "Check this box if you would like AffiliateWP to completely remove all of its "
 "data when the plugin is deleted."
@@ -2468,24 +2484,24 @@ msgstr ""
 "Cochez cette case si vous souhaitez qu’AffiliateWP supprime complètement "
 "toutes ses données lorsque l’extension est supprimée."
 
-#: includes/admin/settings/class-settings.php:708
+#: includes/admin/settings/class-settings.php:713
 msgid "Application Pending Email Subject"
 msgstr "Sujet de l’e-mail de la demande en attente"
 
-#: includes/admin/settings/class-settings.php:709
+#: includes/admin/settings/class-settings.php:714
 msgid "Enter the subject line for pending affiliate application emails."
 msgstr "Saisissez le sujet des e-mails de demande d’affiliation en attente."
 
-#: includes/admin/settings/class-settings.php:711
+#: includes/admin/settings/class-settings.php:716
 #: includes/emails/actions.php:165
 msgid "Your Affiliate Application Is Being Reviewed"
 msgstr "Votre demande d’affiliation est en cours d’examen."
 
-#: includes/admin/settings/class-settings.php:714
+#: includes/admin/settings/class-settings.php:719
 msgid "Application Pending Email Content"
 msgstr "Contenu de l’e-mail d’attente"
 
-#: includes/admin/settings/class-settings.php:715
+#: includes/admin/settings/class-settings.php:720
 msgid ""
 "Enter the email to send when an application is pending. HTML is accepted. "
 "Available template tags:"
@@ -2493,16 +2509,16 @@ msgstr ""
 "Saisissez le message à envoyer lorsqu’une demande est en attente. Le HTML "
 "est autorisé. Balises de modèle disponibles :"
 
-#: includes/admin/settings/class-settings.php:717
+#: includes/admin/settings/class-settings.php:722
 msgid "Hi {name}!"
 msgstr "Bonjour {name} !"
 
-#: includes/admin/settings/class-settings.php:717
+#: includes/admin/settings/class-settings.php:722
 #: includes/emails/actions.php:170
 msgid "Thanks for your recent affiliate registration on {site_name}."
 msgstr "Merci pour votre récente demande d’affiliation sur {site_name}."
 
-#: includes/admin/settings/class-settings.php:717
+#: includes/admin/settings/class-settings.php:722
 #: includes/emails/actions.php:171
 #, fuzzy
 msgid ""
@@ -2512,24 +2528,24 @@ msgstr ""
 "Nous étudions votre demande d’affiliation, nous vous recontacterons "
 "prochainement !"
 
-#: includes/admin/settings/class-settings.php:720
+#: includes/admin/settings/class-settings.php:725
 msgid "Application Rejection Email Subject"
 msgstr "Sujet de l’e-mail du refus de la demande"
 
-#: includes/admin/settings/class-settings.php:721
+#: includes/admin/settings/class-settings.php:726
 msgid "Enter the subject line for rejected affiliate application emails."
 msgstr "Saisissez le sujet des e-mails de demande d’affiliation rejetée."
 
-#: includes/admin/settings/class-settings.php:723
+#: includes/admin/settings/class-settings.php:728
 #: includes/emails/actions.php:204
 msgid "Your Affiliate Application Has Been Rejected"
 msgstr "Votre demande d’affiliation a été rejetée"
 
-#: includes/admin/settings/class-settings.php:726
+#: includes/admin/settings/class-settings.php:731
 msgid "Application Rejection Email Content"
 msgstr "Contenu de l’e-mail de refus"
 
-#: includes/admin/settings/class-settings.php:727
+#: includes/admin/settings/class-settings.php:732
 msgid ""
 "Enter the email to send when an application is rejected. HTML is accepted. "
 "Available template tags:"
@@ -2537,11 +2553,11 @@ msgstr ""
 "Saisissez le message à envoyer lorsqu’une demande est rejetée. Le HTML est "
 "autorisé. Modèles de tags disponibles :"
 
-#: includes/admin/settings/class-settings.php:729
+#: includes/admin/settings/class-settings.php:734
 msgid "Hi {name},"
 msgstr "Bonjour {name},"
 
-#: includes/admin/settings/class-settings.php:729
+#: includes/admin/settings/class-settings.php:734
 #: includes/emails/actions.php:209
 msgid ""
 "We regret to inform you that your recent affiliate registration on "
@@ -2550,19 +2566,19 @@ msgstr ""
 "Nous avons le regret de vous informer que votre demande d’affiliation sur "
 "{site_name} a été rejetée."
 
-#: includes/admin/settings/class-settings.php:894
+#: includes/admin/settings/class-settings.php:899
 msgid "Deactivate License"
 msgstr "Désactiver la licence"
 
-#: includes/admin/settings/class-settings.php:895
+#: includes/admin/settings/class-settings.php:900
 msgid "Your license is valid!"
 msgstr "Votre licence est valide !"
 
-#: includes/admin/settings/class-settings.php:898
+#: includes/admin/settings/class-settings.php:903
 msgid "Renew Your License"
 msgstr "Renouveler votre licence"
 
-#: includes/admin/settings/class-settings.php:899
+#: includes/admin/settings/class-settings.php:904
 msgid ""
 "Your license has expired, renew today to continue getting updates and "
 "support!"
@@ -2570,22 +2586,22 @@ msgstr ""
 "Votre licence a expiré, renouvelez aujourd’hui pour continuer à bénéficier "
 "des mises à jour et de l’assistance!"
 
-#: includes/admin/settings/class-settings.php:901
+#: includes/admin/settings/class-settings.php:906
 msgid "Activate License"
 msgstr "Activer la licence"
 
-#: includes/admin/settings/class-settings.php:1000
+#: includes/admin/settings/class-settings.php:1005
 msgid ""
 "The callback function used for the <strong>%s</strong> setting is missing."
 msgstr ""
 "La fonction de rappel utilisée pour le paramètre <strong>%s</strong> est "
 "manquante."
 
-#: includes/admin/settings/class-settings.php:1075
+#: includes/admin/settings/class-settings.php:1080
 msgid "Upload File"
 msgstr "Télécharger fichier"
 
-#: includes/admin/settings/class-settings.php:1093
+#: includes/admin/settings/class-settings.php:1098
 #, fuzzy
 msgid ""
 "Your license key is globally defined via <code>AFFILIATEWP_LICENSE_KEY</"
@@ -2597,7 +2613,7 @@ msgstr ""
 "nécessaire pour bénéficier des mises à jour automatiques de l’extension et "
 "du <a href=\"%s\" target=\"_blank\">support</a>."
 
-#: includes/admin/settings/class-settings.php:1113
+#: includes/admin/settings/class-settings.php:1118
 msgid ""
 "Debug mode is globally enabled via <code>AFFILIATE_WP_DEBUG</code> set in "
 "<code>wp-config.php</code>. This setting cannot be modified from this screen."
@@ -2951,7 +2967,7 @@ msgid "Landing Page"
 msgstr "Page d’arrivée"
 
 #: includes/admin/visits/class-list-table.php:104
-#: templates/dashboard-tab-visits.php:26
+#: templates/dashboard-tab-visits.php:30
 msgid "Referring URL"
 msgstr "URL de référence"
 
@@ -2965,12 +2981,12 @@ msgstr "IP"
 
 #: includes/admin/visits/class-list-table.php:108
 #: includes/admin/visits/visits.php:58 templates/dashboard-tab-stats.php:59
-#: templates/dashboard-tab-visits.php:27
+#: templates/dashboard-tab-visits.php:31
 msgid "Converted"
 msgstr "Converti"
 
 #: includes/admin/visits/class-list-table.php:172
-#: templates/dashboard-tab-visits.php:42
+#: templates/dashboard-tab-visits.php:46
 msgid "Direct traffic"
 msgstr "Traffic direct"
 
@@ -3648,7 +3664,7 @@ msgstr "(L’utilisateur actuel ne sera pas supprimé)"
 msgid "Number of visits: %d"
 msgstr "Nombre de visites par page :"
 
-#: includes/creative-functions.php:32 includes/creative-functions.php:64
+#: includes/creative-functions.php:34 includes/creative-functions.php:65
 msgid "Creative"
 msgstr "Publicités"
 
@@ -4506,7 +4522,7 @@ msgstr ""
 "colonne liste le référent, et la troisième colonne indique si la visite à "
 "conduit à un parrainage."
 
-#: templates/dashboard-tab-visits.php:58
+#: templates/dashboard-tab-visits.php:62
 msgid "You have not received any visits yet."
 msgstr "Vous n’avez encore reçu aucune visite."
 
@@ -4615,7 +4631,7 @@ msgctxt "Integrations"
 msgid "Dismiss Notice"
 msgstr "Rejeter cette notification"
 
-#: includes/admin/class-notices.php:387 includes/admin/class-notices.php:396
+#: includes/admin/class-notices.php:395 includes/admin/class-notices.php:404
 msgctxt "License"
 msgid "Dismiss Notice"
 msgstr "Rejeter cette notification"

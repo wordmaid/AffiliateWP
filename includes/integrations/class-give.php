@@ -14,6 +14,8 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 
 		add_action( 'give_insert_payment', array( $this, 'add_pending_referral' ), 99999, 2 );
 
+		add_action( 'give_complete_form_donation', array( $this, 'mark_referral_complete' ), 10, 3 );
+
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 	}
 
@@ -121,6 +123,16 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 
 		return $referral_description;
 
+	}
+
+	/**
+	 * Sets a referral to unpaid when payment is completed
+	 *
+	 * @access  public
+	 * @since   2.0
+	*/
+	public function mark_referral_complete( $form_id, $payment_id = 0, $payment_meta ) {
+		$this->complete_referral( $payment_id );
 	}
 
 	/**

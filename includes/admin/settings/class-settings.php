@@ -676,6 +676,11 @@ class Affiliate_WP_Settings {
 						'desc' => __( 'Check this box to enable debug mode. This will turn on error logging for the referral process to help identify problems.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
+					'betas' => array(
+						'name' => __( 'Opt into beta versions?', 'affiliate-wp' ),
+						'desc' => __( 'Check this box if you would like to receive update notifications for beta releases. When beta versions are available, an update notification will be shown in your Plugins page.', 'affiliate-wp' ),
+						'type' => 'checkbox'
+					),
 					'uninstall_on_delete' => array(
 						'name' => __( 'Remove Data on Uninstall?', 'affiliate-wp' ),
 						'desc' => __( 'Check this box if you would like AffiliateWP to completely remove all of its data when the plugin is deleted.', 'affiliate-wp' ),
@@ -1286,7 +1291,7 @@ class Affiliate_WP_Settings {
 			if( ! empty( $api_params['site_data'] ) ) {
 
 				update_option( 'affwp_last_checkin', current_time( 'timestamp' ) );
-	
+
 			}
 
 			$status = $license_data->license;

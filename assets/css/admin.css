@@ -350,16 +350,11 @@ table.affiliates #unpaid {
 
 .affwp-batch-progress {
 	background: #ddd;
-	position: absolute;
-	bottom: 15px;
-	width: 95%;
 	height: 15px;
 }
-
 .affiliates_page_affiliate-wp-referrals .affwp-batch-progress {
 	position: relative;
 }
-
 .affwp-batch-progress div {
 	background: #ccc;
 	height: 100%;
@@ -370,8 +365,12 @@ table.affiliates #unpaid {
 	border-style: solid;
 	border-width: 1px 0;
 	border-color: #eae9e9;
-	padding: 12px 12px 4px;
+	padding: 12px;
 	overflow: auto;
+	margin: 20px -12px -23px;
+}
+.notice-wrap #affwp-batch-success {
+	margin: 5px 0;
 }
 form .spinner {
 	margin: 4px 10px 8px;

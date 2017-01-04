@@ -482,7 +482,7 @@ final class Affiliate_WP {
 				'item_name' => 'AffiliateWP',
 				'item_id'   => 17,
 				'author'    => 'Pippin Williamson',
-				'beta'      => $this->settings->get( 'betas' )
+				'beta'      => $this->settings->get( 'betas', false )
 			)
 		);
 

@@ -254,6 +254,7 @@ class Tests extends UnitTestCase {
 			array( $this->_build_admin_url( 'payouts' ),    affwp_admin_url( 'payouts' ) ),
 			array( $this->_build_admin_url( 'referrals' ),  affwp_admin_url( 'referrals' ) ),
 			array( $this->_build_admin_url( 'visits' ),     affwp_admin_url( 'visits' ) ),
+			array( $this->_build_admin_url( 'reports' ),    affwp_admin_url( 'reports' ) ),
 			array( $this->_build_admin_url( 'settings' ),   affwp_admin_url( 'settings' ) ),
 			array( $this->_build_admin_url( 'tools' ),      affwp_admin_url( 'tools' ) ),
 			array( $this->_build_admin_url( 'add-ons' ),    affwp_admin_url( 'add-ons' ) ),
@@ -263,10 +264,10 @@ class Tests extends UnitTestCase {
 	/**
 	 * Helper that builds a simple admin URL.
 	 *
-	 * @param string $type Admin URL type.
+	 * @param string $type Optional. Admin URL type. Default empty.
 	 * @return string Admin URL.
 	 */
-	protected function _build_admin_url( $type ) {
+	protected function _build_admin_url( $type = '' ) {
 		if ( ! empty( $type ) ) {
 			$type = "-{$type}";
 		}

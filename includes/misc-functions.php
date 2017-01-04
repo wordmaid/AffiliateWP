@@ -877,7 +877,7 @@ function affwp_admin_url( $type, $query_args = array() ) {
 
 	$whitelist = array(
 		'affiliates', 'creatives', 'payouts', 'referrals',
-		'visits', 'settings', 'tools', 'add-ons'
+		'visits', 'reports', 'settings', 'tools', 'add-ons'
 	);
 
 	if ( in_array( $type, $whitelist, true ) ) {

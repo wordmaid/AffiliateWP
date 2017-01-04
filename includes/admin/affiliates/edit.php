@@ -114,6 +114,28 @@ $notes            = affwp_get_affiliate_meta( $affiliate->affiliate_id, 'notes',
 			<tr class="form-row">
 
 				<th scope="row">
+					<label for="status"><?php _e( 'Affiliate Status', 'affiliate-wp' ); ?></label>
+				</th>
+
+				<td>
+					<select name="status" id="status">
+
+						<?php if ( 'rejected' === $affiliate->status ) : ?>
+							<option value="rejected" <?php selected( $affiliate->status, 'rejected' ); ?>><?php _e( 'Rejected', 'affiliate-wp' ); ?></option>
+						<?php endif; ?>
+
+						<option value="active" <?php selected( $affiliate->status, 'active' ); ?>><?php _e( 'Active', 'affiliate-wp' ); ?></option>
+						<option value="inactive" <?php selected( $affiliate->status, 'inactive' ); ?>><?php _e( 'Inactive', 'affiliate-wp' ); ?></option>
+						<option value="pending" <?php selected( $affiliate->status, 'pending' ); ?>><?php _e( 'Pending', 'affiliate-wp' ); ?></option>
+					</select>
+					<p class="description"><?php _e( 'The status assigned to the affiliate&#8217;s account. Updating the status could trigger account related events, such as email notifications.', 'affiliate-wp' ); ?></p>
+				</td>
+
+			</tr>
+
+			<tr class="form-row">
+
+				<th scope="row">
 					<label for="website"><?php _e( 'Website', 'affiliate-wp' ); ?></label>
 				</th>
 

@@ -17,7 +17,7 @@
 
 		<?php
 		/**
-		 *  Fires immediately before creatives in the creatives tab of the affiliate area.
+		 * Fires immediately before creatives in the creatives tab of the affiliate area.
 		 */
 		do_action( 'affwp_before_creatives' );
 		?>
@@ -44,7 +44,7 @@
 
 		<?php
 		/**
-		 *  Fires immediately after creatives in the creatives tab of the affiliate area.
+		 * Fires immediately after creatives in the creatives tab of the affiliate area.
 		 */
 		do_action( 'affwp_after_creatives' );
 		?>

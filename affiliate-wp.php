@@ -481,7 +481,8 @@ final class Affiliate_WP {
 				'license' 	=> $license_key,
 				'item_name' => 'AffiliateWP',
 				'item_id'   => 17,
-				'author' 	=> 'Pippin Williamson'
+				'author' 	=> 'Pippin Williamson',
+				'beta'      => $this->settings->get( 'betas' )
 			)
 		);
 

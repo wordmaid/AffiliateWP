@@ -25,7 +25,6 @@ class Affiliate_WP_Settings {
 		add_action( 'affwp_pre_get_registered_settings', array( $this, 'handle_global_debug_mode_setting' ) );
 
 		// Sanitization.
-		add_filter( 'affwp_settings_emails', array( $this, 'email_approval_settings' ) );
 		add_filter( 'affwp_settings_sanitize', array( $this, 'sanitize_referral_variable' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_text', array( $this, 'sanitize_text_fields' ), 10, 2 );
 		add_filter( 'affwp_settings_sanitize_url', array( $this, 'sanitize_url_fields' ), 10, 2 );
@@ -36,6 +35,11 @@ class Affiliate_WP_Settings {
 		// Capabilities
 		add_filter( 'option_page_capability_affwp_settings', array( $this, 'option_page_capability' ) );
 
+		// Filter the general settings
+		add_filter( 'affwp_settings_general', array( $this, 'required_registration_fields' ) );
+
+		// Filter the email settings
+		add_filter( 'affwp_settings_emails', array( $this, 'email_approval_settings' ) );
 	}
 
 	/**
@@ -560,7 +564,23 @@ class Affiliate_WP_Settings {
 						'type' => 'text',
 						'size' => 'small',
 						'std' => '.'
-					)
+					),
+					'form_settings' => array(
+						'name' => '<strong>' . __( 'Affiliate Form Settings', 'affiliate-wp' ) . '</strong>',
+						'type' => 'header'
+					),
+					'affiliate_area_forms' => array(
+						'name' => __( 'Affiliate Area Forms', 'affiliate-wp' ),
+						'desc' => sprintf( __( 'Select which form(s) to show on the Affiliate Area page. The affiliate registration form will only show if <a href="%s">Allow Affiliate Registration</a> is enabled.', 'affiliate-wp' ), admin_url( 'admin.php?page=affiliate-wp-settings&tab=misc' ) ),
+						'type' => 'select',
+						'options' => array(
+							'both'         => __( 'Affiliate Registration Form and Affiliate Login Form', 'affiliate-wp' ),
+							'registration' => __( 'Affiliate Registration Form Only', 'affiliate-wp' ),
+							'login'        => __( 'Affiliate Login Form Only', 'affiliate-wp' ),
+							'none'         => __( 'None', 'affiliate-wp' )
+
+						)
+					),
 				)
 			),
 			/** Integration Settings */
@@ -750,6 +770,39 @@ class Affiliate_WP_Settings {
 		 */
 		return apply_filters( 'affwp_settings', $settings );
 	}
+
+	/**
+	 * Required Registration Fields
+	 *
+	 * @since 2.0
+	 * @param array $general_settings
+	 * @return array
+	 */
+	function required_registration_fields( $general_settings ) {
+
+		if ( ! affiliate_wp()->settings->get( 'allow_affiliate_registration' ) ) {
+			return $general_settings;
+		}
+
+		$new_general_settings = array(
+			'required_registration_fields' => array(
+				'name' => __( 'Required Registration Fields', 'affiliate-wp' ),
+				'desc' => __( 'Select which fields should be required for affiliate registration. The <strong>Username</strong>, <strong>Account Email</strong> and <strong>Password</strong> form fields are always required.', 'affiliate-wp' ),
+				'type' => 'multicheck',
+				'options' => array(
+					'your_name'        => __( 'Your Name', 'affiliate-wp' ),
+					'website_url'      => __( 'Website URL', 'affiliate-wp' ),
+					'payment_email'    => __( 'Payment Email', 'affiliate-wp' ),
+					'promotion_method' => __( 'How will you promote us?', 'affiliate-wp' ),
+				)
+			)
+
+		);
+
+		return array_merge( $general_settings, $new_general_settings );
+
+	}
+
 
 	/**
 	 * Affiliate application approval settings

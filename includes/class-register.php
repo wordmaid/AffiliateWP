@@ -18,6 +18,7 @@ class Affiliate_WP_Register {
 		add_action( 'added_existing_user', array( $this, 'process_add_as_affiliate' ) );
 		add_action( 'admin_footer', array( $this, 'scripts' ) );
 
+		add_filter( 'affwp_register_required_fields', array( $this, 'maybe_required_fields' ) );
 	}
 
 	/**
@@ -103,7 +104,7 @@ class Affiliate_WP_Register {
 			}
 
 			if ( empty( $data['affwp_user_email'] ) || ! is_email( $data['affwp_user_email'] ) ) {
-				$this->add_error( 'email_invalid', __( 'Invalid email', 'affiliate-wp' ) );
+				$this->add_error( 'email_invalid', __( 'Invalid account email', 'affiliate-wp' ) );
 			}
 
 			if ( ! empty( $data['affwp_payment_email'] ) && $data['affwp_payment_email'] != $data['affwp_user_email'] && ! is_email( $data['affwp_payment_email'] ) ) {
@@ -228,6 +229,58 @@ class Affiliate_WP_Register {
 		);
 
 		return apply_filters( 'affwp_register_required_fields', $required_fields );
+	}
+
+
+
+	/**
+	 * Make fields required/not required, based on the "Required Registration Fields" admin setting
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @param  array $required_fields The required fields
+	 * @return array $required_fields The required fields
+	 *
+	 */
+	public function maybe_required_fields( $required_fields ) {
+
+		// Get the required fields from the settings
+		$required_registration_fields = affiliate_wp()->settings->get( 'required_registration_fields' );
+
+		/**
+		 * Fields that are already required by default
+		 */
+
+		// Your Name
+		if ( ! isset( $required_registration_fields['your_name'] ) ) {
+			unset( $required_fields['affwp_user_name'] );
+		}
+
+		// Website URL
+		if ( ! isset( $required_registration_fields['website_url'] ) ) {
+			unset( $required_fields['affwp_user_url'] );
+		}
+
+		/**
+		 * Fields that are not required by default
+		 */
+
+		// Payment Email
+		if ( isset( $required_registration_fields['payment_email'] ) ) {
+			$required_fields['affwp_payment_email']['error_id']      = 'empty_payment_email';
+			$required_fields['affwp_payment_email']['error_message'] = __( 'Please enter your payment email', 'affiliate-wp' );
+			$required_fields['affwp_payment_email']['logged_out']    = true;
+		}
+
+		// How will you promote us?
+		if ( isset( $required_registration_fields['promotion_method'] ) ) {
+			$required_fields['affwp_promotion_method']['error_id']      = 'empty_promotion_method';
+			$required_fields['affwp_promotion_method']['error_message'] = __( 'Please tell us how you will promote us', 'affiliate-wp' );
+			$required_fields['affwp_promotion_method']['logged_out']    = true;
+		}
+
+		return $required_fields;
+
 	}
 
 	/**

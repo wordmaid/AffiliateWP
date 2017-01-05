@@ -36,7 +36,8 @@ function affwp_process_settings_import() {
 	// Run the import.
 	$settings->import();
 
-	wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-tools&tab=export_import&affwp_notice=settings-imported' ) ); exit;
+	wp_safe_redirect( affwp_admin_url( 'tools', array( 'tab' => 'export_import', 'affwp_notice' => 'settings-imported' ) ) );
+	exit;
 
 }
 add_action( 'affwp_import_settings', 'affwp_process_settings_import' );

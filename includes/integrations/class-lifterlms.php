@@ -682,12 +682,12 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 
 				<div class="llms-metabox-field d-1of4">
 					<label><?php _e( 'Affiliate', 'affiliate-wp' ); ?></label>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $referral->affiliate_id ) ); ?>"><?php echo $affiliate_name; ?></a>
+					<?php echo affwp_admin_link( 'referrals', $affiliate_name, array( 'affiliate_id' => $referral->affiliate_id ) ); ?>
 				</div>
 
 				<div class="llms-metabox-field d-1of4">
 					<label><?php _e( 'Reference', 'affiliate-wp' ); ?></label>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=affiliate-wp-referrals&action=edit_referral&referral_id=' . $referral->referral_id ) ); ?>">#<?php echo $referral->referral_id; ?></a>
+					<?php echo affwp_admin_link( 'referrals', $referral->referral_id, array('action' => 'edit_referral', 'referral_id' => $referral->referral_id ) ); ?>
 				</div>
 
 			</div>
@@ -708,11 +708,11 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 							</tr>
 							<tr>
 								<td><label><?php _e( 'Affiliate', 'affiliate-wp' ); ?></label></td>
-								<td><a href="<?php echo esc_url( admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $referral->affiliate_id ) ); ?>"><?php echo $affiliate_name; ?></a></td>
+								<td><?php echo affwp_admin_link( 'referrals', $affiliate_name, array( 'affiliate_id' => $referral->affiliate_id ) ); ?></td>
 							</tr>
 							<tr>
 								<td><label><?php _e( 'Reference', 'affiliate-wp' ); ?></label></td>
-								<td><a href="<?php echo esc_url( admin_url( 'admin.php?page=affiliate-wp-referrals&action=edit_referral&referral_id=' . $referral->referral_id ) ); ?>">#<?php echo $referral->referral_id; ?></a></td>
+								<td><?php echo affwp_admin_link( 'referrals', $referral->referral_id, array( 'action' => 'edit_referral', 'referral_id' => $referral->referral_id ) ); ?></td>
 							</tr>
 						</table>
 					</td>

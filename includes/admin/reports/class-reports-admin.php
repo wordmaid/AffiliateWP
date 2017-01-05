@@ -54,34 +54,26 @@ class Reports {
 		switch( $active_tab ) {
 			case 'referrals':
 				$manage_button = sprintf( $manage_button_template,
-					esc_url( add_query_arg( array(
-						'page' => 'affiliate-wp-referrals'
-					), admin_url( 'admin.php' ) ) ),
+					esc_url( affwp_admin_url( 'referrals' ) ),
 					__( 'Manage Referrals', 'affiliate-wp' )
 				);
 				break;
 
 			case 'affiliates':
 				$manage_button = sprintf( $manage_button_template,
-					esc_url( add_query_arg( array(
-						'page' => 'affiliate-wp-affiliates'
-					), admin_url( 'admin.php' ) ) ),
+					esc_url( affwp_admin_url( 'affiliates' ) ),
 					__( 'Manage Affiliates', 'affiliate-wp' )
 				);
 
 				$manage_button .= sprintf( $manage_button_template,
-					esc_url( add_query_arg( array(
-						'page' => 'affiliate-wp-payouts',
-					), admin_url( 'admin.php' ) ) ),
+					esc_url( affwp_admin_url( 'payouts' ) ),
 					__( 'View Payouts', 'affiliate-wp' )
 				);
 				break;
 
 			case 'visits':
 				$manage_button = sprintf( $manage_button_template,
-					esc_url( add_query_arg( array(
-						'page' => 'affiliate-wp-visits'
-					), admin_url( 'admin.php' ) ) ),
+					esc_url( affwp_admin_url( 'visits' ) ),
 					__( 'Manage Visits', 'affiliate-wp' )
 				);
 				break;

@@ -53,7 +53,8 @@ class Affiliate_WP_Recount {
 
 		}
 
-		wp_redirect( admin_url( 'admin.php?page=affiliate-wp-tools&tab=recount&affwp_notice=stats_recounted' ) ); exit;
+		wp_redirect( affwp_admin_url( 'tools', array( 'tab' => 'recount', 'affwp_notice' => 'stats_recounted' ) ) );
+		exit;
 	}
 
 	/**

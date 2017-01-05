@@ -135,7 +135,7 @@ class AffWP_Referrals_Table extends List_Table {
 	public function get_views() {
 
 		$affiliate_id   = isset( $_GET['affiliate_id'] ) ? absint( $_GET['affiliate_id'] ) : '';
-		$base           = admin_url( 'admin.php?page=affiliate-wp-referrals' );
+		$base           = affwp_admin_url( 'referrals' );
 		$base           = $affiliate_id ? add_query_arg( 'affiliate_id', $affiliate_id, $base ) : $base;
 		$current        = isset( $_GET['status'] ) ? $_GET['status'] : '';
 		$total_count    = '&nbsp;<span class="count">(' . $this->total_count    . ')</span>';
@@ -315,15 +315,22 @@ class AffWP_Referrals_Table extends List_Table {
 	 */
 	public function column_affiliate( $referral ) {
 
+		$value = affwp_admin_link(
+			'referrals',
+			affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id ),
+			array( 'affiliate_id' => $referral->affiliate_id )
+		);
+
 		/**
 		 * Filters the referring affiliate column data in the referrals list table.
 		 *
 		 * You'll also need to specify the wrapping html for this value (defaults to
 		 * an anchor to the referral admin screen for this referral).
 		 *
-		 * @param int $affiliate_id The referring affiliate ID.
+		 * @param string          $value    Data shown in the Affiliate column.
+		 * @param \AffWP\Referral $referral The referral data.
 		 */
-		$value = apply_filters( 'affwp_referral_affiliate_column', '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $referral->affiliate_id ) . '">' . affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id ) . '</a>', $referral );
+		$value = apply_filters( 'affwp_referral_affiliate_column', $value, $referral );
 
 		/**
 		 * Filters the referring affiliate column data in the referrals list table.

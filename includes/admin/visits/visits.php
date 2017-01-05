@@ -49,7 +49,7 @@ function affwp_visits_admin() {
 
 		?>
 
-		<form id="affwp-visits-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp' ); ?>">
+		<form id="affwp-visits-filter" method="get" action="<?php echo esc_url( affwp_admin_url() ); ?>">
 			<?php $visits_table->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-affiliates' ); ?>
 			<span class="affwp-ajax-search-wrap">
 				<input type="text" name="user_name" id="user_name" class="affwp-user-search" value="<?php echo esc_attr( $affiliate_name ); ?>" data-affwp-status="any" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />

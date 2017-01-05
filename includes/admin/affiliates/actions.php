@@ -24,10 +24,10 @@ function affwp_process_add_affiliate( $data ) {
 
 	if ( $affiliate_id ) {
 
-		wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-affiliates&affwp_notice=affiliate_added' ) );
+		wp_safe_redirect( affwp_admin_url( 'affiliates', array( 'affwp_notice' => 'affiliate_added' ) ) );
 		exit;
 	} else {
-		wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-affiliates&affwp_notice=affiliate_added_failed' ) );
+		wp_safe_redirect( affwp_admin_url( 'affiliates', array( 'affwp_notice' => 'affiliate_added_failed' ) ) );
 		exit;
 	}
 
@@ -98,7 +98,7 @@ function affwp_process_affiliate_deletion( $data ) {
 
 	}
 
-	wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-affiliates&affwp_notice=affiliate_deleted' ) );
+	wp_safe_redirect( affwp_admin_url( 'affiliates', array( 'affwp_notice' => 'affiliate_deleted' ) ) );
 	exit;
 
 }
@@ -125,10 +125,10 @@ function affwp_process_update_affiliate( $data ) {
 	}
 
 	if ( affwp_update_affiliate( $data ) ) {
-		wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-affiliates&action=edit_affiliate&affwp_notice=affiliate_updated&affiliate_id=' . $data['affiliate_id'] ) );
+		wp_safe_redirect( affwp_admin_url( 'affiliates', array( 'action' => 'edit_affiliate', 'affwp_notice' => 'affiliate_updated', 'affiliate_id' => $data['affiliate_id'] ) ) );
 		exit;
 	} else {
-		wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-affiliates&affwp_notice=affiliate_update_failed' ) );
+		wp_safe_redirect( affwp_admin_url( 'affiliates', array( 'affwp_notice' => 'affiliate_update_failed' ) ) );
 		exit;
 	}
 
@@ -176,10 +176,10 @@ function affwp_process_affiliate_moderation( $data ) {
 	}
 
 	if ( affwp_set_affiliate_status( $data['affiliate_id'], $status ) ) {
-		wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-affiliates&affwp_notice=' . $notice . '&affiliate_id=' . $data['affiliate_id'] ) );
+		wp_safe_redirect( affwp_admin_url( 'affiliates', array( 'affwp_notice' => $notice, 'affiliate_id' => $data['affiliate_id'] ) ) );
 		exit;
 	} else {
-		wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-affiliates&affwp_notice=affiliate_update_failed' ) );
+		wp_safe_redirect( affwp_admin_url( 'affiliates', array( 'affwp_notice' => 'affiliate_update_failed' ) ) );
 		exit;
 	}
 

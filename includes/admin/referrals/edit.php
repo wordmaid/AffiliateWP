@@ -4,11 +4,10 @@ $referral = affwp_get_referral( absint( $_GET['referral_id'] ) );
 $payout = affwp_get_payout( $referral->payout_id );
 
 $disabled    = disabled( (bool) $payout, true, false );
-$payout_link = add_query_arg( array(
-	'page'      => 'affiliate-wp-payouts',
+$payout_link = affwp_admin_url( 'payouts', array(
 	'action'    => 'view_payout',
 	'payout_id' => $payout ? $payout->ID : 0
-), admin_url( 'admin.php' ) );
+) );
 
 ?>
 <div class="wrap">

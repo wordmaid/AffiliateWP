@@ -133,7 +133,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @return array $views All the views available
 	 */
 	public function get_views() {
-		$base           = admin_url( 'admin.php?page=affiliate-wp-affiliates' );
+		$base           = affwp_admin_url( 'affiliates' );
 
 		$current        = isset( $_GET['status'] ) ? $_GET['status'] : '';
 		$total_count    = '&nbsp;<span class="count">(' . $this->total_count    . ')</span>';
@@ -245,7 +245,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @return string Data shown in the Name column.
 	 */
 	function column_name( $affiliate ) {
-		$base         = admin_url( 'admin.php?page=affiliate-wp&affiliate_id=' . $affiliate->affiliate_id );
+		$base         = affwp_admin_url( 'affiliates', array( 'affiliate_id' => $affiliate->affiliate_id ) );
 		$row_actions  = array();
 		$name         = affiliate_wp()->affiliates->get_affiliate_name( $affiliate->affiliate_id );
 
@@ -472,7 +472,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	function column_unpaid( $affiliate ) {
 		$unpaid_count = affiliate_wp()->referrals->unpaid_count( '', $affiliate->affiliate_id );
 
-		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $affiliate->affiliate_id . '&status=unpaid' ) . '">' . $unpaid_count . '</a>';
+		$value = affwp_admin_link( 'referrals', $unpaid_count, array( 'affiliate_id' => $affiliate->affiliate_id, 'status' => 'unpaid' ) );
 
 		/**
 		 * Filters the unpaid referrals column data for the affiliates list table.
@@ -496,7 +496,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @return string The affiliate referrals link.
 	 */
 	function column_referrals( $affiliate ) {
-		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-referrals&affiliate_id=' . $affiliate->affiliate_id . '&status=paid' ) . '">' . $affiliate->referrals . '</a>';
+		$value = affwp_admin_link( 'referrals', $affiliate->referrals, array( 'affiliate_id' => $affiliate->affiliate_id, 'status' => 'paid' ) );
 
 		/**
 		 * Filters the referrals column data for the affiliates list table.
@@ -517,7 +517,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @return string visits link
 	 */
 	function column_visits( $affiliate ) {
-		$value = '<a href="' . admin_url( 'admin.php?page=affiliate-wp-visits&affiliate=' . $affiliate->affiliate_id ) . '">' . affwp_get_affiliate_visit_count( $affiliate->affiliate_id ) . '</a>';
+		$value = affwp_admin_link( 'visits', affwp_get_affiliate_visit_count( $affiliate->affiliate_id ), array( 'affiliate' => $affiliate->affiliate_id ) );
 
 		/**
 		 * Filters the username visits data for the affiliates list table.

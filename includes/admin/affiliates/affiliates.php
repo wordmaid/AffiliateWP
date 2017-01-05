@@ -67,7 +67,7 @@ function affwp_affiliates_admin() {
 			do_action( 'affwp_affiliates_page_top' );
 
 			?>
-			<form id="affwp-affiliates-filter" method="get" action="<?php echo admin_url( 'admin.php?page=affiliate-wp' ); ?>">
+			<form id="affwp-affiliates-filter" method="get" action="<?php echo esc_url( affwp_admin_url() ); ?>">
 				<?php $affiliates_table->search_box( __( 'Search', 'affiliate-wp' ), 'affwp-affiliates' ); ?>
 
 				<input type="hidden" name="page" value="affiliate-wp-affiliates" />

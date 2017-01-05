@@ -19,7 +19,6 @@ require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/system-info.php';
 
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-base-exporter.php';
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-csv-exporter.php';
-
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/interfaces/interface-base-importer.php';
 
 require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/import/import.php';
@@ -142,7 +141,7 @@ function affwp_recount_tab() {
 				<h3><span><?php _e( 'Recount Affiliate Stats', 'affiliate-wp' ); ?></span></h3>
 				<div class="inside">
 					<p><?php _e( 'Use this tool to recount affiliate statistics.', 'affiliate-wp' ); ?></p>
-					<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-tools&tab=recount' ); ?>">
+					<form method="post" enctype="multipart/form-data" action="<?php echo esc_url( affwp_admin_url( 'tools', array( 'tab' => 'recount' ) ) ); ?>">
 						<p>
 							<span class="affwp-ajax-search-wrap">
 								<input type="text" name="user_name" id="user_name" class="affwp-user-search" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>"/>
@@ -351,7 +350,7 @@ function affwp_export_import_tab() {
 				<h3><span><?php _e( 'Export Settings', 'affiliate-wp' ); ?></span></h3>
 				<div class="inside">
 					<p><?php _e( 'Export the AffiliateWP settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'affiliate-wp' ); ?></p>
-					<form method="post" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-tools&tab=export_import' ); ?>">
+					<form method="post" action="<?php echo esc_url( affwp_admin_url( 'tools', array( 'tab' => 'export_import' ) ) ); ?>">
 						<p><input type="hidden" name="affwp_action" value="export_settings" /></p>
 						<p>
 							<?php wp_nonce_field( 'affwp_export_nonce', 'affwp_export_nonce' ); ?>
@@ -365,7 +364,7 @@ function affwp_export_import_tab() {
 				<h3><span><?php _e( 'Import Settings', 'affiliate-wp' ); ?></span></h3>
 				<div class="inside">
 					<p><?php _e( 'Import the AffiliateWP settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'affiliate-wp' ); ?></p>
-					<form method="post" enctype="multipart/form-data" action="<?php echo admin_url( 'admin.php?page=affiliate-wp-tools&tab=export_import' ); ?>">
+					<form method="post" enctype="multipart/form-data" action="<?php echo esc_url( affwp_admin_url( 'tools', array( 'tab' => 'export_import' ) ) ); ?>">
 						<p>
 							<input type="file" name="import_file"/>
 						</p>
@@ -393,11 +392,7 @@ function affwp_system_info_tab() {
 		return;
 	}
 
-	$action_url = add_query_arg( array(
-		'page' => 'affiliate-wp-tools',
-		'tab'  => 'system_info'
-	), admin_url( 'admin.php' ) );
-
+	$action_url = affwp_admin_url( 'tools', array( 'tab' => 'system_info' ) );
 	?>
 	<form action="<?php echo esc_url( $action_url ); ?>" method="post" dir="ltr">
 		<textarea readonly="readonly" onclick="this.focus(); this.select()" id="affwp-system-info-textarea" name="affwp-sysinfo" title="<?php esc_attr_e( 'To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'affiliate-wp' ); ?>">
@@ -492,7 +487,8 @@ function affwp_clear_debug_log() {
 	$logs = new Affiliate_WP_Logging;
 	$logs->clear_log();
 
-	wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-tools&tab=debug' ) ); exit;
+	wp_safe_redirect( affwp_admin_url( 'tools', array( 'tab' => 'debug' ) ) );
+	exit;
 
 }
 add_action( 'admin_init', 'affwp_clear_debug_log' );

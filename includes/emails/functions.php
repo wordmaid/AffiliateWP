@@ -195,7 +195,7 @@ function affwp_email_tag_referral_rate( $affiliate_id = 0 ) {
  * @return string URL to the review page
  */
 function affwp_email_tag_review_url( $affiliate_id = 0 ) {
-	return admin_url( 'admin.php?page=affiliate-wp-affiliates&affiliate_id=' . absint( $affiliate_id ) . '&action=review_affiliate' );
+	return affwp_admin_url( 'affiliates', array( 'affiliate_id' => absint( $affiliate_id ), 'action' => 'review_affiliate' ) );
 }
 
 /**

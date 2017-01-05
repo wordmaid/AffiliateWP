@@ -1235,7 +1235,8 @@ class Affiliate_WP_Settings {
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) ) {
 
-			wp_safe_redirect( add_query_arg( array( 'affwp_notice' => 'license-http-failure', 'affwp_message' => $response->get_error_message(), 'affwp_success' => 'no' ), admin_url( 'admin.php?page=affiliate-wp-settings' ) ) ); exit;
+			wp_safe_redirect( affwp_admin_url( 'settings', array( 'affwp_notice' => 'license-http-failure', 'affwp_message' => $response->get_error_message(), 'affwp_success' => 'no' ) ) );
+			exit;
 
 		}
 
@@ -1246,11 +1247,13 @@ class Affiliate_WP_Settings {
 
 		if( 'valid' !== $license_data->license || empty( $license_data->success ) ) {
 
-			wp_safe_redirect( add_query_arg( array( 'affwp_notice' => 'license-' . $license_data->error, 'affwp_success' => 'no' ), admin_url( 'admin.php?page=affiliate-wp-settings' ) ) ); exit;
+			wp_safe_redirect( affwp_admin_url( 'settings', array( 'affwp_notice' => 'license-' . $license_data->error, 'affwp_success' => 'no' ) ) );
+			exit;
 
 		}
 
-		wp_safe_redirect( admin_url( 'admin.php?page=affiliate-wp-settings' ) ); exit;
+		wp_safe_redirect( affwp_admin_url( 'settings' ) );
+		exit;
 
 	}
 
@@ -1287,7 +1290,8 @@ class Affiliate_WP_Settings {
 			$success = false;
 			$message = $response->get_error_message();
 
-			wp_safe_redirect( add_query_arg( array( 'message' => $message, 'success' => $success ), admin_url( 'admin.php?page=affiliate-wp-settings' ) ) ); exit;
+			wp_safe_redirect( affwp_admin_url( 'settings', array( 'message' => $message, 'success' => $success ) ) );
+			exit;
 
 		}
 

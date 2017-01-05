@@ -27,42 +27,6 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 	}
 
 	/**
-	 * Adds per-donation referral rate settings input fields
-	 *
-	 * @access  public
-	 * @since   2.0
-	*/
-	public function donation_settings() {
-
-		$meta_boxes['form_affwp_options'] = array(
-			'id'           => 'form_affwp_options',
-			'title'        => esc_html__( 'AffiliateWP', 'affiliate-wp' ),
-			'object_types' => array( 'give_forms' ),
-			'context'      => 'side',
-			'priority'     => 'low', //Show above Content WYSIWYG
-			'fields'       => array(
-				array(
-					'name' => esc_html__( 'Allow Referrals', 'affiliate-wp' ),
-					'desc' => esc_html__( 'Enable affiliate referral creation for this donation form', 'affiliate-wp' ),
-					'id'   => '_affwp_give_allow_referrals',
-					'type' => 'checkbox'
-				),
-				array(
-					'name'        => esc_html__( 'Affiliate Rate', 'affiliate-wp' ),
-					'description' => esc_html__( 'This setting will be used to calculate affiliate earnings per-donation. Leave blank to use default affiliate rates.', 'affiliate-wp' ),
-					'id'          => '_affwp_give_product_rate',
-					'type'        => 'text_small'
-				)
-			)
-		);
-
-		foreach ( $meta_boxes as $box ) {
-			$cmb = new_cmb2_box( $box );
-		}
-
-	}
-
-	/**
 	 * Records a pending referral when a pending payment is created
 	 *
 	 * @access  public
@@ -152,7 +116,7 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 		// If multi-level, append to the form title.
 		if ( give_has_variable_prices( $form_id ) ) {
 
-			//Only add separator if there is a form title.
+			// Only add separator if there is a form title.
 			if ( ! empty( $referral_description ) ) {
 				$referral_description .= ' ' . $separator . ' ';
 			}
@@ -261,6 +225,42 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 		$url = admin_url( 'edit.php?post_type=give_forms&page=give-payment-history&view=view-order-details&id=' . $reference );
 
 		return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
+
+	}
+
+	/**
+	 * Adds per-donation referral rate settings input fields
+	 *
+	 * @access  public
+	 * @since   2.0
+	*/
+	public function donation_settings() {
+
+		$meta_boxes['form_affwp_options'] = array(
+			'id'           => 'form_affwp_options',
+			'title'        => esc_html__( 'AffiliateWP', 'affiliate-wp' ),
+			'object_types' => array( 'give_forms' ),
+			'context'      => 'side',
+			'priority'     => 'low', //Show above Content WYSIWYG
+			'fields'       => array(
+				array(
+					'name' => esc_html__( 'Allow Referrals', 'affiliate-wp' ),
+					'desc' => esc_html__( 'Enable affiliate referral creation for this donation form', 'affiliate-wp' ),
+					'id'   => '_affwp_give_allow_referrals',
+					'type' => 'checkbox'
+				),
+				array(
+					'name'        => esc_html__( 'Affiliate Rate', 'affiliate-wp' ),
+					'description' => esc_html__( 'This setting will be used to calculate affiliate earnings per-donation. Leave blank to use default affiliate rates.', 'affiliate-wp' ),
+					'id'          => '_affwp_give_product_rate',
+					'type'        => 'text_small'
+				)
+			)
+		);
+
+		foreach ( $meta_boxes as $box ) {
+			$cmb = new_cmb2_box( $box );
+		}
 
 	}
 

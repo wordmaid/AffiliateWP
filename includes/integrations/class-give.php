@@ -21,6 +21,45 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 		add_action( 'give_payment_delete', array( $this, 'revoke_referral_on_delete' ), 10 );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
+
+		// Per donation form referral rates
+		add_action( 'cmb2_init', array( $this, 'donation_settings' ), 6 );
+	}
+
+	/**
+	 * Adds per-donation referral rate settings input fields
+	 *
+	 * @access  public
+	 * @since   2.0
+	*/
+	public function donation_settings() {
+
+		$meta_boxes['form_affwp_options'] = array(
+			'id'           => 'form_affwp_options',
+			'title'        => esc_html__( 'AffiliateWP', 'affiliate-wp' ),
+			'object_types' => array( 'give_forms' ),
+			'context'      => 'side',
+			'priority'     => 'low', //Show above Content WYSIWYG
+			'fields'       => array(
+				array(
+					'name' => esc_html__( 'Allow Referrals', 'affiliate-wp' ),
+					'desc' => esc_html__( 'Enable affiliate referral creation for this donation form', 'affiliate-wp' ),
+					'id'   => '_affwp_give_allow_referrals',
+					'type' => 'checkbox'
+				),
+				array(
+					'name'        => esc_html__( 'Affiliate Rate', 'affiliate-wp' ),
+					'description' => esc_html__( 'This setting will be used to calculate affiliate earnings per-donation. Leave blank to use default affiliate rates.', 'affiliate-wp' ),
+					'id'          => '_affwp_give_product_rate',
+					'type'        => 'text_small'
+				)
+			)
+		);
+
+		foreach ( $meta_boxes as $box ) {
+			$cmb = new_cmb2_box( $box );
+		}
+
 	}
 
 	/**
@@ -32,6 +71,11 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 	public function add_pending_referral( $payment_id = 0, $payment_data = array() ) {
 
 		if ( ! $this->was_referred() ) {
+			return false;
+		}
+
+		// Block referral if donation form does not allow it
+		if ( ! get_post_meta( $payment_data['give_form_id'], '_affwp_give_allow_referrals', true ) ) {
 			return false;
 		}
 
@@ -79,8 +123,10 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 	*/
 	public function get_referral_total( $payment_id = 0, $affiliate_id = 0 ) {
 
+		$form_id = get_post_meta( $payment_id, '_give_payment_form_id', true );
+
 		$payment_amount = give_get_payment_amount( $payment_id );
-		$referral_total = $this->calculate_referral_amount( $payment_amount, $payment_id, '', $affiliate_id );
+		$referral_total = $this->calculate_referral_amount( $payment_amount, $payment_id, $form_id, $affiliate_id );
 
 		return $referral_total;
 

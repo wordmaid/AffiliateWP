@@ -3,7 +3,7 @@
 class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 	/**
-	 * Get thigns started
+	 * Get things started
 	 *
 	 * @access  public
 	 * @since   2.0

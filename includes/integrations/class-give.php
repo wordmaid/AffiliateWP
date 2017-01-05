@@ -15,6 +15,7 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 		add_action( 'give_insert_payment', array( $this, 'add_pending_referral' ), 99999, 2 );
 
 		add_action( 'give_complete_form_donation', array( $this, 'mark_referral_complete' ), 10, 3 );
+		add_action( 'give_complete_form_donation', array( $this, 'insert_payment_note' ), 10, 3 );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 	}
@@ -66,7 +67,6 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 		$referral_id = $this->insert_pending_referral( $referral_total, $payment_id, $desc );
 
 	}
-
 
 	/**
 	 * Get the referral total
@@ -133,6 +133,28 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 	*/
 	public function mark_referral_complete( $form_id, $payment_id = 0, $payment_meta ) {
 		$this->complete_referral( $payment_id );
+	}
+
+	/**
+	 * Insert payment note
+	 *
+	 * @access  public
+	 * @since   2.0
+	*/
+	public function insert_payment_note( $form_id, $payment_id = 0, $payment_meta ) {
+
+		$referral = affiliate_wp()->referrals->get_by( 'reference', $payment_id, $this->context );
+
+		if ( empty( $referral ) ) {
+			return;
+		}
+
+		$amount       = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
+		$affiliate_id = $referral->affiliate_id;
+		$name         = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
+
+		give_insert_payment_note( $payment_id, sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name ) );
+
 	}
 
 	/**

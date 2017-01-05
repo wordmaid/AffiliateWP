@@ -23,7 +23,7 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 
 		// Per donation form referral rates
-		add_action( 'cmb2_init', array( $this, 'donation_settings' ), 6 );
+		add_action( 'cmb2_init', array( $this, 'donation_settings' ) );
 	}
 
 	/**
@@ -241,7 +241,7 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 			'title'        => esc_html__( 'AffiliateWP', 'affiliate-wp' ),
 			'object_types' => array( 'give_forms' ),
 			'context'      => 'side',
-			'priority'     => 'low', //Show above Content WYSIWYG
+			'priority'     => 'low',
 			'fields'       => array(
 				array(
 					'name' => esc_html__( 'Allow Referrals', 'affiliate-wp' ),
@@ -250,10 +250,11 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 					'type' => 'checkbox'
 				),
 				array(
-					'name'        => esc_html__( 'Affiliate Rate', 'affiliate-wp' ),
-					'description' => esc_html__( 'This setting will be used to calculate affiliate earnings per-donation. Leave blank to use default affiliate rates.', 'affiliate-wp' ),
-					'id'          => '_affwp_give_product_rate',
-					'type'        => 'text_small'
+					'name'            => esc_html__( 'Affiliate Rate', 'affiliate-wp' ),
+					'description'     => esc_html__( 'This setting will be used to calculate affiliate earnings per-donation. Leave blank to use default affiliate rates.', 'affiliate-wp' ),
+					'id'              => '_affwp_give_product_rate',
+					'type'            => 'text_small',
+					'sanitization_cb' => 'affwp_abs_number_round',
 				)
 			)
 		);

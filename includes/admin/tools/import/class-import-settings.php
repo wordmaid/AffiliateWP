@@ -10,7 +10,7 @@
  */
 namespace AffWP\Utils\Importer;
 
-use AffWP\Utils\Importer\Base as Importer;
+use AffWP\Utils\Importer;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 2.0
  */
-class Settings implements Importer {
+class Settings implements Importer\Base {
 
 	/**
 	 * File contents to import.

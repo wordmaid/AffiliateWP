@@ -52,15 +52,15 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 				$this->log( 'Pending referral created successfully during insert_referral()' );
 
+				if( $this->complete_referral( $charge->id ) && $this->debug ) {
+
+					$this->log( 'Referral completed successfully during insert_referral()' );
+
+				}
+
 			} elseif ( $this->debug ) {
 
 				$this->log( 'Pending referral failed to be created during insert_referral()' );
-
-			}
-
-			if( $this->complete_referral( $charge->id ) && $this->debug ) {
-
-				$this->log( 'Referral completed successfully during insert_referral()' );
 
 			}
 

@@ -12,6 +12,7 @@ class Affiliate_WP_Integrations {
 
 		return apply_filters( 'affwp_integrations', array(
 			'edd'            => 'Easy Digital Downloads',
+			'caldera-forms'  => 'Caldera Forms',
 			'formidablepro'  => 'Formidable Pro',
 			'gravityforms'   => 'Gravity Forms',
 			'exchange'       => 'iThemes Exchange',

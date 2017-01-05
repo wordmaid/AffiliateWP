@@ -228,13 +228,14 @@ class Export_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 				 * @param \AffWP\Affiliate\Payout $payout Payout object.
 				 */
 				$payout_data = apply_filters( 'affwp_payout_export_get_data_line', array(
-					'payout_id'  => $payout->ID,
-					'affiliate'  => $affiliate,
-					'referrals'  => $payout->referrals,
-					'amount'     => $payout->amount,
-					'owner'      => $owner,
-					'status'     => $payout->status,
-					'date'       => date_i18n( $date_format, strtotime( $payout->date ) ),
+					'payout_id'     => $payout->ID,
+					'affiliate'     => $affiliate,
+					'referrals'     => $payout->referrals,
+					'amount'        => $payout->amount,
+					'owner'         => $owner,
+					'payout_method' => $payout->payout_method,
+					'status'        => $payout->status,
+					'date'          => date_i18n( $date_format, strtotime( $payout->date ) ),
 				), $payout );
 
 				// Add slashing.

@@ -12,7 +12,7 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 
 		$this->context = 'stripe';
 
-		add_action( 'simpay_charge_created', array( $this, 'insert_referral' ), 10, 2 );
+		add_action( 'simpay_charge_created', array( $this, 'insert_referral' ) );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 

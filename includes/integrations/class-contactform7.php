@@ -107,6 +107,9 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		// Revoke referral.
 		add_action( 'wp_footer', array( $this, 'revoke' ), 9999 );
 
+		// Inject inline redirect
+		add_action( 'wp_footer', array( $this, 'redirect' ), 9999 );
+
 
 		/**
 		 * paypal2
@@ -544,6 +547,63 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		);
 
 		return $contactform;
+	}
+
+	/**
+	 * Inject inline js to provide a $_GET args on form submission.
+	 *
+	 * @since  2.0
+	 *
+	 * @return void
+	 */
+	public function redirect() {
+
+		if ( ! did_action( 'wpcf7_init' ) ) {
+			return;
+		}
+	?>
+
+	<!-- AffiliateWP -->
+	<script type='text/javascript'>
+		jQuery(document).ready(function ($) {
+
+		  function affwp_cf7_redirect_args() {
+
+		    if (! $('body').has('.wpcf7-form')) {
+		    	return;
+		    }
+
+		    if ( ! AFFWP ) {
+		    	return;
+		    }
+
+		    var affwp_cf7_form = $('.wpcf7-form');
+		    var affwp_cf7_form_cancel = $(".wpcf7-form input[name='cancel_return']").attr('value');
+			var affwp_cf7_form_return = $(".wpcf7-form input[name='return']").attr('value');
+		    var affwp_cf7_action = affwp_cf7_form.attr('action');
+		    var affwp_cf7_form_id = affwp_cf7_action.substring( affwp_cf7_action.lastIndexOf("#wpcf7-f") + 8, affwp_cf7_action.lastIndexOf("-p"));
+		    var affwp_cf7_args = '?form_id=' + affwp_cf7_form_id;
+
+		    console.log( '[AffiliateWP] Originating CF7 form ID: ' + affwp_cf7_form_id);
+
+		    if (isNaN(affwp_cf7_form_id)) {
+		    	return;
+		    }
+
+		    affwp_cf7_form.attr('action', affwp_cf7_action + affwp_cf7_args);
+
+		    $(".wpcf7-form input[name='cancel_return']").attr('value', affwp_cf7_form_cancel + affwp_cf7_args );
+		    $(".wpcf7-form input[name='return']").attr('value', affwp_cf7_form_return + affwp_cf7_args);
+
+		  }
+
+		  affwp_cf7_redirect_args();
+
+		});
+	</script>
+	<!-- end AffiliateWP -->
+	<?php
+
 	}
 
 	/**

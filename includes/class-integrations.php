@@ -14,6 +14,7 @@ class Affiliate_WP_Integrations {
 			'edd'            => 'Easy Digital Downloads',
 			'caldera-forms'  => 'Caldera Forms',
 			'formidablepro'  => 'Formidable Pro',
+			'give'           => 'Give',
 			'gravityforms'   => 'Gravity Forms',
 			'exchange'       => 'iThemes Exchange',
 			'jigoshop'       => 'Jigoshop',

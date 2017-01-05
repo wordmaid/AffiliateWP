@@ -82,7 +82,7 @@ jQuery(document).ready(function($) {
 			$action  = 'affwp_search_users',
 			$search  = $this.val(),
 			$status  = $this.data( 'affwp-status'),
-			$user_id = $( '#user_id' );
+			$user_id = $this.siblings( '#user_id' );
 
 		$this.autocomplete( {
 			source: ajaxurl + '?action=' + $action + '&term=' + $search + '&status=' + $status,

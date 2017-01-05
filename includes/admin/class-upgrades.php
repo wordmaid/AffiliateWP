@@ -452,6 +452,18 @@ class Affiliate_WP_Upgrades {
 	private function v20_upgrade() {
 		@affiliate_wp()->capabilities->add_caps();
 		$this->log( 'Upgrade: Core capabilities have been upgraded.' );
+
+
+		// Update settings
+		@affiliate_wp()->settings->set( array(
+			'required_registration_fields' => array(
+				'your_name'   => __( 'Your Name', 'affiliate-wp' ),
+				'website_url' => __( 'Website URL', 'affiliate-wp' )
+			)
+		), $save = true );
+
+		$this->upgraded = true;
+
 	}
 
 }

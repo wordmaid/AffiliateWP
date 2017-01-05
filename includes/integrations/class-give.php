@@ -17,6 +17,8 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 		add_action( 'give_complete_form_donation', array( $this, 'mark_referral_complete' ), 10, 3 );
 		add_action( 'give_complete_form_donation', array( $this, 'insert_payment_note' ), 10, 3 );
 
+		add_action( 'give_payment_delete', array( $this, 'revoke_referral_on_delete' ), 10 );
+
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 	}
 
@@ -154,6 +156,22 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 		$name         = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_id );
 
 		give_insert_payment_note( $payment_id, sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name ) );
+
+	}
+
+	/**
+	 * Revokes a referral when a donation is deleted
+	 *
+	 * @access  public
+	 * @since   2.0
+	*/
+	public function revoke_referral_on_delete( $payment_id = 0 ) {
+
+		if ( ! affiliate_wp()->settings->get( 'revoke_on_refund' ) ) {
+			return;
+		}
+
+		$this->reject_referral( $payment_id );
 
 	}
 

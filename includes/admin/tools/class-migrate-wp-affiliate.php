@@ -93,12 +93,12 @@ class Affiliate_WP_Migrate_WP_Affiliate extends Affiliate_WP_Migrate_Base {
 				$inserted[] = $id;
 			}
 
-			if ( ! $current_count = $this->get_stored_data( 'affwp_migrate_affiliates_total_count' ) ) {
+			if ( ! $current_count = affiliate_wp()->utils->data->get( 'affwp_migrate_affiliates_total_count' ) ) {
 				$current_count = 0;
 			}
 			$current_count = $current_count + count( $inserted );
 
-			$this->store_data( 'affwp_migrate_affiliates_total_count', $current_count, array( '%s', '%d', '%s' ) );
+			affiliate_wp()->utils->data->write( 'affwp_migrate_affiliates_total_count', $current_count );
 
 			return true;
 

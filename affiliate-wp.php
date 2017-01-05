@@ -212,6 +212,15 @@ final class Affiliate_WP {
 	public $capabilities;
 
 	/**
+	 * The utilities class instance variable.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    Affiliate_WP_Utilities
+	 */
+	public $utils;
+
+	/**
 	 * Main Affiliate_WP Instance
 	 *
 	 * Insures that only one instance of Affiliate_WP exists in memory at any one
@@ -342,6 +351,7 @@ final class Affiliate_WP {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-affiliates-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-payouts-db.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-capabilities.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/class-utilities.php';
 
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
@@ -466,6 +476,7 @@ final class Affiliate_WP {
 		self::$instance->rewrites       = new Affiliate_WP_Rewrites;
 		self::$instance->REST           = new Affiliate_WP_REST;
 		self::$instance->capabilities   = new Affiliate_WP_Capabilities;
+		self::$instance->utils          = new Affiliate_WP_Utilities;
 
 		self::$instance->updater();
 	}

@@ -28,6 +28,15 @@ class Affiliate_WP_Export {
 	public $export_type = 'default';
 
 	/**
+	 * Capability needed to perform the current export.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    string
+	 */
+	public $capability = 'export_affiliate_data';
+
+	/**
 	 * Can we export?
 	 *
 	 * @access public
@@ -40,7 +49,7 @@ class Affiliate_WP_Export {
 		 *
 		 * @param string $capability Capability needed to perform an export.
 		 */
-		return (bool) current_user_can( apply_filters( 'affwp_export_capability', 'export_affiliate_data' ) );
+		return (bool) current_user_can( apply_filters( 'affwp_export_capability', $this->capability ) );
 	}
 
 	/**
@@ -119,10 +128,11 @@ class Affiliate_WP_Export {
 	}
 
 	/**
-	 * Get the data being exported
+	 * Retrieves the data being exported.
 	 *
 	 * @access public
-	 * @since 1.0
+	 * @since  1.0
+	 *
 	 * @return array $data Data for Export
 	 */
 	public function get_data() {
@@ -138,6 +148,19 @@ class Affiliate_WP_Export {
 			)
 		);
 
+		return $data;
+	}
+
+	/**
+	 * Prepares a batch of data for export.
+	 *
+	 * @access public
+	 * @since  2.0
+	 *
+	 * @param array $data Export data.
+	 * @return array Filtered export data.
+	 */
+	public function prepare_data( $data ) {
 		/**
 		 * Filters the export data.
 		 *
@@ -167,7 +190,7 @@ class Affiliate_WP_Export {
 	 * @return void
 	 */
 	public function csv_rows_out() {
-		$data = $this->get_data();
+		$data = $this->prepare_data( $this->get_data() );
 
 		$cols = $this->get_csv_cols();
 

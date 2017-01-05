@@ -11,6 +11,8 @@
  * @since       1.0
  */
 
+use AffWP\Utils\Exporter;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -19,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @since 1.0
  */
-class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
+class Affiliate_WP_Referral_Export extends Affiliate_WP_Export implements Exporter\CSV {
 
 	/**
 	 * Our export type. Used for export-type specific filters/actions
@@ -76,10 +78,11 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 	}
 
 	/**
-	 * Get the data being exported
+	 * Retrieves the data being exported.
 	 *
 	 * @access public
-	 * @since 1.0
+	 * @since  1.0
+	 *
 	 * @return array $data Data for Export
 	 */
 	public function get_data() {
@@ -125,9 +128,9 @@ class Affiliate_WP_Referral_Export extends Affiliate_WP_Export {
 				$referral_data = apply_filters( 'affwp_referral_export_get_data_line', array(
 					'affiliate_id'  => $referral->affiliate_id,
 					'email'         => affwp_get_affiliate_email( $referral->affiliate_id ),
-					'name'          => affwp_get_affiliate_name( $affiliate->affiliate_id ),
+					'name'          => affwp_get_affiliate_name( $referral->affiliate_id ),
 					'payment_email' => affwp_get_affiliate_payment_email( $referral->affiliate_id ),
-					'username'      => affwp_get_affiliate_login( $affiliate->affiliate_id ),
+					'username'      => affwp_get_affiliate_login( $referral->affiliate_id ),
 					'amount'        => $referral->amount,
 					'currency'      => $referral->currency,
 					'description'   => $referral->description,

@@ -584,11 +584,13 @@ class Affiliate_WP_Contact_Form_7 extends Affiliate_WP_Base {
 		    var affwp_cf7_form_id = affwp_cf7_action.substring( affwp_cf7_action.lastIndexOf("#wpcf7-f") + 8, affwp_cf7_action.lastIndexOf("-p"));
 		    var affwp_cf7_args = '?form_id=' + affwp_cf7_form_id;
 
-		    console.log( '[AffiliateWP] Originating CF7 form ID: ' + affwp_cf7_form_id);
 
 		    if (isNaN(affwp_cf7_form_id)) {
+			    console.log( '[AffiliateWP] Could not determine originating CF7 form ID.' );
 		    	return;
 		    }
+
+		    console.log( '[AffiliateWP] Originating CF7 form ID: ' + affwp_cf7_form_id);
 
 		    affwp_cf7_form.attr('action', affwp_cf7_action + affwp_cf7_args);
 

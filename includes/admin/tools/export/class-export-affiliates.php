@@ -11,6 +11,8 @@
  * @since       1.3
  */
 
+use AffWP\Utils\Exporter;
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -19,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @since 1.3
  */
-class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export {
+class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export implements Exporter\CSV {
 
 	/**
 	 * Our export type. Used for export-type specific filters/actions
@@ -62,10 +64,11 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export {
 	}
 
 	/**
-	 * Get the data being exported
+	 * Retrieves the data being exported.
 	 *
 	 * @access public
-	 * @since 1.3
+	 * @since  1.3
+	 *
 	 * @return array $data Data for Export
 	 */
 	public function get_data() {

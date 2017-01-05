@@ -58,7 +58,7 @@ class Affiliate_WP_Admin_Notices {
 					}
 
 					$migrate          = new Affiliate_WP_Migrate_Users;
-					$total_affiliates = (int) $migrate::get_items_total( 'affwp_migrate_users_total_count' );
+					$total_affiliates = (int) $migrate::get_items_total( 'affwp_migrate_users_current_count' );
 
 					/*
 					 * If $total_affiliates is 0 and we know 'affiliate_added' has been fired,
@@ -75,7 +75,7 @@ class Affiliate_WP_Admin_Notices {
 						'affiliate-wp'
 					), number_format_i18n( $total_affiliates ) );
 
-					$migrate::clear_items_total( 'affwp_migrate_users_total_count' );
+					$migrate::clear_items_total( 'affwp_migrate_users_current_count' );
 
 					break;
 

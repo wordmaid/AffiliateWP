@@ -77,6 +77,8 @@ class Affiliate_WP_Tracking {
 		var AFFWP = AFFWP || {};
 		AFFWP.referral_var = '<?php echo $this->get_referral_var(); ?>';
 		AFFWP.expiration = <?php echo $this->get_expiration_time(); ?>;
+		AFFWP.debug = <?php echo $this->debug; ?>;
+
 <?php if( 1 !== (int) get_option( 'affwp_js_works' ) )  : ?>
 		jQuery(document).ready(function($) {
 			// Check if JS is working properly. If it is, we update an update in the DB

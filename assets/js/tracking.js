@@ -156,7 +156,10 @@ jQuery(document).ready( function($) {
 				credit_last     : AFFWP.referral_credit_last,
 				campaign_cookie : campaign_cookie,
 				ref             : AFFWP.referral_var,
-				campaign        : affwp_get_query_vars()['campaign']
+				campaign        : affwp_get_query_vars()['campaign'],
+				integrations    : Array.from( affwp_debug_vars.integrations ),
+			    currency        : affwp_debug_vars.currency,
+			    version         : affwp_debug_vars.version
 			},
 			/**
 			 * Returns the current time via the performance timing API.
@@ -185,6 +188,7 @@ jQuery(document).ready( function($) {
 				}
 
 				console.affwp( 'Halting at ' + this.printTime() );
+
 				debugger;
 			},
 			/**
@@ -198,7 +202,7 @@ jQuery(document).ready( function($) {
 			 * @return void
 			 */
 			output: function( heading = '', debugData ) {
-				heading = 'Available debug data:'
+				heading = 'Available debug data:';
 				debugData = this.vars;
 				console.affwp( heading );
 				console.log( '\n' );

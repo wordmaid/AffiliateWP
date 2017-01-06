@@ -134,6 +134,7 @@ jQuery(document).ready( function($) {
 	}
 
 	if ( AFFWP.debug ) {
+
 		/**
 		 * Helpful utilities and data for debugging the JavaScript environment.
 		 *
@@ -142,7 +143,7 @@ jQuery(document).ready( function($) {
 		 * @since 2.0
 		 * @var
 		 */
-		AFFWP.debug_utility = {
+		affwp_debug_utility = {
 			/**
 			 * Various data pertaining to AffiliateWP (if available).
 			 *
@@ -157,10 +158,10 @@ jQuery(document).ready( function($) {
 				campaign_cookie : campaign_cookie,
 				ref             : AFFWP.referral_var,
 				campaign        : affwp_get_query_vars()['campaign'],
-				integrations    : Array.from( affwp_debug_vars.integrations ),
 			    currency        : affwp_debug_vars.currency,
 			    version         : affwp_debug_vars.version
 			},
+			integrations    : affwp_debug_vars.integrations,
 			/**
 			 * Returns the current time via the performance timing API.
 			 *
@@ -204,9 +205,13 @@ jQuery(document).ready( function($) {
 			output: function( heading = '', debugData ) {
 				heading = 'Available debug data:';
 				debugData = this.vars;
+				integrations = this.integrations;
+
 				console.affwp( heading );
 				console.log( '\n' );
 				console.table( debugData );
+				console.affwp( 'Integrations' );
+				console.table( integrations );
 			}
 		}
 
@@ -230,7 +235,7 @@ jQuery(document).ready( function($) {
 		 * An extension of the console.log prototype.
 		 *
 		 * Usage:
-		 * - Callable with `console.affwp( "The error or message" )`
+		 * - Callable with `console.log( "The error or message" )`
 		 * - Disambiguates the source of the error or message.
 		 *
 		 * @since  2.0
@@ -238,10 +243,11 @@ jQuery(document).ready( function($) {
 		 * @return void
 		 */
 		console.affwp = function( message ) {
+
 			console.log( '%c' + ' * AffiliateWP: ' + message, affwpConsoleStyles + ' *' );
 		};
 
-		AFFWP.debug_utility.output();
+		affwp_debug_utility.output();
 	}
 
 });

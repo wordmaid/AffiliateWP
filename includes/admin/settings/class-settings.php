@@ -1437,18 +1437,19 @@ class Affiliate_WP_Settings {
 	 * @static
 	 *
 	 * @param array $request_data POST or other data.
+	 * @param bool  $saving       Whether a saving operation is being performed. If true,
+	 *                            the already-saved key value will be ignored.
 	 * @return string License key.
 	 */
-	public static function get_license_key( $key = '' ) {
+	public static function get_license_key( $key = '', $saving = false ) {
 		if ( self::global_license_set() ) {
 			$license = AFFILIATEWP_LICENSE_KEY;
-		} elseif ( ! empty( $key ) ) {
+		} elseif ( ! empty( $key ) || true === $saving ) {
 			$license = $key;
-		} elseif ( empty( $key ) ) {
-			$license = '';
 		} else {
 			$license = affiliate_wp()->settings->get( 'license_key' );
 		}
+
 		return trim( $license );
 	}
 

@@ -35,7 +35,13 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 				$amount = round( $charge->amount / 100, 2 );
 			}
 
-			if( $this->is_affiliate_email( $charge->customer->email, $this->affiliate_id ) ) {
+			if( is_object( $charge->customer ) && ! empty( $charge->customer->email ) ) {
+				$email = $charge->customer->email;
+			} else {
+				$email = sanitize_text_field( $_POST['stripeEmail'] );
+			}
+
+			if( $this->is_affiliate_email( $email, $this->affiliate_id ) ) {
 
 				if( $this->debug ) {
 					$this->log( 'Referral not created because affiliate\'s own account was used.' );

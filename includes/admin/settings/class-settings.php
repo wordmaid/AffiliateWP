@@ -1444,6 +1444,8 @@ class Affiliate_WP_Settings {
 			$license = AFFILIATEWP_LICENSE_KEY;
 		} elseif ( ! empty( $key ) ) {
 			$license = $key;
+		} elseif ( empty( $key ) ) {
+			$license = '';
 		} else {
 			$license = affiliate_wp()->settings->get( 'license_key' );
 		}

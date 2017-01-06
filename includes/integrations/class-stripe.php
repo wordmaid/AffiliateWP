@@ -102,7 +102,7 @@ class Affiliate_WP_Stripe extends Affiliate_WP_Base {
 			'XPF',
 		);
 
-		return in_array( strtoupper( $currency ), $iz_zero );
+		return in_array( strtoupper( $currency ), $is_zero );
 	}
 
 	/**

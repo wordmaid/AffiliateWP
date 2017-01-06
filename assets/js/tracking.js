@@ -78,7 +78,7 @@ jQuery(document).ready( function($) {
 	 * @param  {int}    affiliate_id The affiliate ID.
 	 * @param  {string} url_campaign The campaign, if provided.
 	 *
-	 * @return {void}
+	 * @return void
 	 */
 	function affwp_track_visit( affiliate_id, url_campaign ) {
 

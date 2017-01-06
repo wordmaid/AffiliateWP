@@ -1463,7 +1463,7 @@ class Affiliate_WP_Settings {
 	 * @return bool True if the global license has been defined, otherwise false.
 	 */
 	public static function global_license_set() {
-		if ( defined( 'AFFILIATEWP_LICENSE_KEY' ) && is_string( AFFILIATEWP_LICENSE_KEY ) ) {
+		if ( defined( 'AFFILIATEWP_LICENSE_KEY' ) && ! empty( AFFILIATEWP_LICENSE_KEY ) ) {
 			return true;
 		}
 		return false;

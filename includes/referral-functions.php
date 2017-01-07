@@ -349,18 +349,14 @@ function affwp_get_banned_urls() {
 }
 
 /**
- * Determines if a URL is banned
+ * Determines if a URL is banned.
  *
  * @since 2.0
  *
- * @param string $url Optional. The URL to check against the black list. Default empty.
+ * @param string $url The URL to check against the black list.
  * @return bool True if banned, otherwise false.
  */
-function affwp_is_url_banned( $url = '' ) {
-	if( empty( $url ) ) {
-		$banned = false;
-	}
-
+function affwp_is_url_banned( $url ) {
 	$banned_urls = affwp_get_banned_urls();
 
 	if( ! is_array( $banned_urls ) || empty( $banned_urls ) ) {

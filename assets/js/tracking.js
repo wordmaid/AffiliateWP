@@ -70,6 +70,16 @@ jQuery(document).ready( function($) {
 
 	}
 
+	/**
+	 * Tracks an affiliate visit.
+	 *
+	 * @since  1.0
+	 *
+	 * @param  {int}    affiliate_id The affiliate ID.
+	 * @param  {string} url_campaign The campaign, if provided.
+	 *
+	 * @return void
+	 */
 	function affwp_track_visit( affiliate_id, url_campaign ) {
 
 		// Set the cookie and expire it after 24 hours
@@ -99,6 +109,13 @@ jQuery(document).ready( function($) {
 
 	}
 
+	/**
+	 * Gets url query variables from the current URL.
+	 *
+	 * @since  1.0
+	 *
+	 * @return {array} vars The url query variables in the current site url, if present.
+	 */
 	function affwp_get_query_vars() {
 		var vars = [], hash;
 		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');

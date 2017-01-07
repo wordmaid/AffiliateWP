@@ -158,8 +158,8 @@ jQuery(document).ready( function($) {
 				campaign_cookie : campaign_cookie,
 				ref             : AFFWP.referral_var,
 				campaign        : affwp_get_query_vars()['campaign'],
-			    currency        : affwp_debug_vars.currency,
-			    version         : affwp_debug_vars.version
+				currency        : affwp_debug_vars.currency,
+				version         : affwp_debug_vars.version
 			},
 			integrations    : affwp_debug_vars.integrations,
 			/**
@@ -221,14 +221,14 @@ jQuery(document).ready( function($) {
 		 * @since 2.0
 		 */
 		var affwpConsoleStyles = [
-		    'background: transparent'
-		    , 'border: 6px solid #E34F43'
-		    , 'color: black'
-		    , 'display: block'
-		    , 'line-height: 18px'
-		    , 'text-align: left'
-		    , 'margin: 4px'
-		    , 'font-weight: bold'
+			'background: transparent'
+			, 'border: 6px solid #E34F43'
+			, 'color: black'
+			, 'display: block'
+			, 'line-height: 18px'
+			, 'text-align: left'
+			, 'margin: 4px'
+			, 'font-weight: bold'
 		].join( ';' );
 
 		/**

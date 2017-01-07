@@ -67,6 +67,15 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * Runs during test teardown.
+	 */
+	public function tearDown() {
+		affiliate_wp()->settings->set( array( 'referral_url_blacklist' => '' ) );
+
+		parent::tearDown();
+	}
+
+	/**
 	 * @covers ::affwp_get_referral()
 	 */
 	public function test_get_referral_with_no_referral_should_return_false() {
@@ -412,5 +421,55 @@ class Tests extends UnitTestCase {
 		$new_count = affwp_get_affiliate_referral_count( self::$_affiliate_id );
 
 		$this->assertEquals( --$old_count, $new_count );
+	}
+
+	/**
+	 * @covers ::affwp_get_banned_urls()
+	 * @group settings
+	 */
+	public function test_get_banned_urls_should_return_urls_entered_one_per_line() {
+		$urls = array( 'https://google.com', 'http://google.de', 'http://google.co.nz' );
+
+		affiliate_wp()->settings->set( array( 'referral_url_blacklist' => implode( "\n", $urls ) ) );
+
+		$result = affwp_get_banned_urls();
+
+		$this->assertEqualSets( $urls, $result );
+	}
+
+	/**
+	 * @covers ::affwp_get_banned_urls()
+	 * @group settings
+	 */
+	public function test_get_banned_urls_should_return_empty_array_if_empty() {
+		$this->assertEmpty( affwp_get_banned_urls() );
+	}
+
+	/**
+	 * @covers ::affwp_is_url_banned()
+	 * @group settings
+	 */
+	public function test_is_url_banned_should_return_false_if_no_urls_are_set() {
+		$this->assertFalse( affwp_is_url_banned( WP_TESTS_DOMAIN ) );
+	}
+
+	/**
+	 * @covers ::affwp_is_url_banned()
+	 * @group settings
+	 */
+	public function test_is_url_banned_should_return_false_if_url_not_in_blacklist() {
+		affiliate_wp()->settings->set( array( 'referral_url_blacklist' => 'https://google.com' ) );
+
+		$this->assertFalse( affwp_is_url_banned( WP_TESTS_DOMAIN ) );
+	}
+
+	/**
+	 * @covers ::affwp_is_url_banned()
+	 * @group settings
+	 */
+	public function test_is_url_banned_should_return_true_if_url_is_in_blacklist() {
+		affiliate_wp()->settings->set( array( 'referral_url_blacklist' => WP_TESTS_DOMAIN ) );
+
+		$this->assertTrue( affwp_is_url_banned( WP_TESTS_DOMAIN ) );
 	}
 }

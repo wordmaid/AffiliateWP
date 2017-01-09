@@ -32,6 +32,15 @@ class Recount_Affiliate_Stats extends Utils\Batch_Process implements Batch\With_
 	public $capability = 'manage_affiliates';
 
 	/**
+	 * Number of affiliates to process per step.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    int
+	 */
+	public $per_step = 1;
+
+	/**
 	 * Initializes the batch process.
 	 *
 	 * This is the point where any relevant data should be initialized for use by the processor methods.
@@ -68,7 +77,9 @@ class Recount_Affiliate_Stats extends Utils\Batch_Process implements Batch\With_
 	 * @access public
 	 * @since  2.0
 	 */
-	public function process_step() {}
+	public function process_step() {
+
+	}
 
 	/**
 	 * Retrieves a message based on the given message code.

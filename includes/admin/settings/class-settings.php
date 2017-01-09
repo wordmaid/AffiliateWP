@@ -754,6 +754,11 @@ class Affiliate_WP_Settings {
 						'desc' => __( 'URLs placed in this box below will be prevented from making referrals. Enter URLs one per line.', 'affiliate-wp' ),
 						'type' => 'textarea'
 					),
+					'betas' => array(
+						'name' => __( 'Opt into beta versions?', 'affiliate-wp' ),
+						'desc' => __( 'Check this box if you would like to receive update notifications for beta releases. When beta versions are available, an update notification will be shown in your Plugins page.', 'affiliate-wp' ),
+						'type' => 'checkbox'
+					),
 					'uninstall_on_delete' => array(
 						'name' => __( 'Remove Data on Uninstall?', 'affiliate-wp' ),
 						'desc' => __( 'Check this box if you would like AffiliateWP to completely remove all of its data when the plugin is deleted.', 'affiliate-wp' ),

@@ -757,6 +757,77 @@ function affwp_decrease_affiliate_earnings( $affiliate, $amount = '' ) {
 }
 
 /**
+ * Increases an affiliate's unpaid earnings.
+ *
+ * @since 2.0
+ *
+ * @param \AffWP\Affiliate|int $affiliate Affiliate object or ID.
+ * @param float                $amount    Amount to increase unpaid earnings by.
+ * @return float|false New unpaid earnings value upon successful update, otherwise false.
+ */
+function affwp_increase_affiliate_unpaid_earnings( $affiliate, $amount ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		return false;
+	}
+
+	if ( empty( $amount ) || floatval( $amount ) <= 0 ) {
+		return false;
+	}
+
+	$unpaid_earnings = affwp_get_affiliate_unpaid_earnings( $affiliate );
+	$unpaid_earnings += $amount;
+	$unpaid_earnings = round( $unpaid_earnings, affwp_get_decimal_count() );
+
+	if ( affiliate_wp()->affiliates->update( $affiliate->ID, array( 'unpaid_earnings' => $unpaid_earnings ), '', 'affiliate' ) ) {
+
+		return $unpaid_earnings;
+
+	} else {
+
+		return false;
+
+	}
+}
+
+/**
+ * Decreases an affiliate's unpaid earnings.
+ *
+ * @since 2.0
+ *
+ * @param \AffWP\Affiliate|int $affiliate Affiliate object or ID.
+ * @param float                $amount    Amount to decrease unpaid earnings by.
+ * @return float|false New unpaid earnings value upon successful update, otherwise false.
+ */
+function affwp_decrease_affiliate_unpaid_earnings( $affiliate, $amount ) {
+	if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
+		return false;
+	}
+
+	if ( empty( $amount ) || floatval( $amount ) <= 0 ) {
+		return false;
+	}
+
+	$unpaid_earnings = affwp_get_affiliate_unpaid_earnings( $affiliate );
+	$unpaid_earnings -= $amount;
+	$unpaid_earnings = round( $unpaid_earnings, affwp_get_decimal_count() );
+
+	if ( $unpaid_earnings < 0 ) {
+		$unpaid_earnings = 0;
+	}
+
+	if ( affiliate_wp()->affiliates->update( $affiliate->ID, array( 'unpaid_earnings' => $unpaid_earnings ), '', 'affiliate' ) ) {
+
+		return $unpaid_earnings;
+
+	} else {
+
+		return false;
+
+	}
+
+}
+
+/**
  * Retrieves the number of paid referrals for an affiliate.
  *
  * @since 1.0

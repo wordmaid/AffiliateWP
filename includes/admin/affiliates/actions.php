@@ -4,11 +4,11 @@
  * Process the add affiliate request
  *
  * @since 1.2
- * @return void
+ * @return void|false
  */
 function affwp_process_add_affiliate( $data ) {
 
-	if ( empty( $data['user_id'] ) ) {
+	if ( empty( $data['user_id'] ) && empty( $data['user_name'] ) ) {
 		return false;
 	}
 

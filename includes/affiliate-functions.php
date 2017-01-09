@@ -1009,6 +1009,8 @@ function affwp_get_affiliate_campaigns( $affiliate = 0 ) {
  *     @type int    $referrals       Number of affiliate referrals.
  *     @type int    $visits          Number of visits.
  *     @type int    $user_id         User ID used to correspond to the affiliate.
+ *     @type string $user_name       User login. Used to retrieve the affiliate ID if `affiliate_id` and
+ *                                   `user_id` not given.
  *     @type string $notes           Notes about the affiliate for use by administrators.
  * }
  * @return int|false The ID for the newly-added affiliate, otherwise false.
@@ -1022,6 +1024,8 @@ function affwp_add_affiliate( $data = array() ) {
 	} else {
 		$status = 'active';
 	}
+
+	$data = affiliate_wp()->utils->process_post_data( $data, 'user_name' );
 
 	if ( empty( $data['user_id'] ) ) {
 		return false;

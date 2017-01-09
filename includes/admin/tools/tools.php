@@ -301,7 +301,6 @@ function affwp_export_import_tab() {
 						<p>
 							<span class="affwp-ajax-search-wrap">
 								<input type="text" name="user_name" id="user_name" class="affwp-user-search" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
-								<input type="hidden" name="user_id" id="user_id" value=""/>
 							</span>
 							<input type="text" class="affwp-datepicker" autocomplete="off" name="start_date" placeholder="<?php _e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
 							<input type="text" class="affwp-datepicker" autocomplete="off" name="end_date" placeholder="<?php _e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
@@ -329,7 +328,6 @@ function affwp_export_import_tab() {
 						<p>
 							<span class="affwp-ajax-search-wrap">
 								<input type="text" name="user_name" id="user_name" class="affwp-user-search" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
-								<input type="hidden" name="user_id" id="user_id" value=""/>
 							</span>
 							<input type="text" class="affwp-datepicker" autocomplete="off" name="start_date" placeholder="<?php _e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
 							<input type="text" class="affwp-datepicker" autocomplete="off" name="end_date" placeholder="<?php _e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>

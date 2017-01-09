@@ -4,7 +4,7 @@
  * Process the add referral request
  *
  * @since 1.2
- * @return void
+ * @return void|false
  */
 function affwp_process_add_referral( $data ) {
 

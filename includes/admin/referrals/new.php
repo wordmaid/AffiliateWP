@@ -24,7 +24,6 @@
 				<td>
 					<span class="affwp-ajax-search-wrap">
 						<input type="text" name="user_name" id="user_name" class="affwp-user-search" data-affwp-status="active" autocomplete="off" />
-						<input type="hidden" name="user_id" id="user_id" value="" />
 					</span>
 					<p class="description"><?php _e( 'Enter the name of the affiliate or enter a partial name or email to perform a search.', 'affiliate-wp' ); ?></p>
 				</td>

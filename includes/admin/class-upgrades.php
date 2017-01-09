@@ -450,6 +450,7 @@ class Affiliate_WP_Upgrades {
 	 * @access private
 	 */
 	private function v20_upgrade() {
+		// New primitive and meta capabilities.
 		@affiliate_wp()->capabilities->add_caps();
 		$this->log( 'Upgrade: Core capabilities have been upgraded.' );
 
@@ -461,9 +462,13 @@ class Affiliate_WP_Upgrades {
 				'website_url' => __( 'Website URL', 'affiliate-wp' )
 			)
 		), $save = true );
+		$this->log( 'Upgrade: The default required registration field settings have been configured.' );
+
+		// Affiliate schema update.
+		@affiliate_wp()->affiliates->create_table();
+		$this->log( 'Upgrade: The unpaid_earnings column has been added to the affiliates table.' );
 
 		$this->upgraded = true;
-
 	}
 
 }

@@ -109,6 +109,7 @@ class Tests extends UnitTestCase {
 			'payment_email'   => '%s',
 			'status'          => '%s',
 			'earnings'        => '%s',
+			'unpaid_earnings' => '%s',
 			'referrals'       => '%d',
 			'visits'          => '%d',
 			'date_registered' => '%s',

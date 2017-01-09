@@ -498,11 +498,12 @@ final class Affiliate_WP {
 
 		// setup the updater
 		$affwp_updater = new AFFWP_Plugin_Updater( 'https://affiliatewp.com', __FILE__, array(
-				'version' 	=> AFFILIATEWP_VERSION,
-				'license' 	=> $license_key,
+				'version'   => AFFILIATEWP_VERSION,
+				'license'   => $license_key,
 				'item_name' => 'AffiliateWP',
 				'item_id'   => 17,
-				'author' 	=> 'Pippin Williamson'
+				'author'    => 'Pippin Williamson',
+				'beta'      => $this->settings->get( 'betas', false )
 			)
 		);
 

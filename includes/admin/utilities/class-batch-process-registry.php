@@ -122,6 +122,11 @@ class Registry {
 			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/export/class-batch-generate-payouts.php',
 		) );
 
+		// Recount all affiliate stats.
+		$this->register_process( 'recount-affiliate-stats', array(
+			'class' => 'AffWP\Utils\Batch_Process\Recount_Affiliate_Stats',
+			'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/class-batch-recount-affiliate-stats.php',
+		) );
 	}
 
 	/**

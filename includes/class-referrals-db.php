@@ -217,6 +217,17 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 				}
 
+			} elseif( 'unpaid' === $referral->status ) {
+
+				if ( $referral->amount > $data['amount'] ) {
+
+					affwp_decrease_affiliate_unpaid_earnings( $referral->amount - $data['amount'] );
+
+				} elseif ( $referral->amount < $data['amount'] ) {
+
+					affwp_increase_affiliate_unpaid_earnings( $data['amount'] - $referral->amount );
+
+				}
 			}
 
 			return $update;

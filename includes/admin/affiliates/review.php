@@ -95,7 +95,7 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 
 				<td>
 					<textarea class="large-text" name="affwp_rejection_reason" rows="10"></textarea>
-					<p class="description"><?php _e( 'Leave blank if approving this affiliate', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'Leave blank if approving this affiliate.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>

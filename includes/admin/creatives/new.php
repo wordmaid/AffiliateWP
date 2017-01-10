@@ -36,7 +36,7 @@
 
 				<td>
 					<textarea name="description" id="description" class="large-text" rows="8"></textarea>
-					<p class="description"><?php _e( 'An optional description for this creative. This is displayed below the creative for affiliates.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'An optional description for this creative. This is visible to affiliates and is displayed below the creative.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>
@@ -49,7 +49,7 @@
 
 				<td>
 					<input type="text" name="url" id="url" class="regular-text" />
-					<p class="description"><?php _e( 'Where the creative should link to. The affiliate&#8217;s referral ID will be automatically appended.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'The URL this creative should link to. Based on your Referral Settings, the affiliate&#8217;s ID or username will be automatically appended.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>

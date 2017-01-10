@@ -492,7 +492,7 @@ class Affiliate_WP_Settings {
 					),
 					'referral_pretty_urls' => array(
 						'name' => __( 'Pretty Affiliate URLs', 'affiliate-wp' ),
-						'desc' => sprintf( __( 'Show pretty affiliate referrals to affiliates. For example: <strong>%s or %s</strong>', 'affiliate-wp' ), home_url( '/' ) . affiliate_wp()->tracking->get_referral_var() . '/1', home_url( '/' ) . trailingslashit( affiliate_wp()->tracking->get_referral_var() ) . $username ),
+						'desc' => sprintf( __( 'Show pretty affiliate referral URLs to affiliates. For example: <strong>%s or %s</strong>', 'affiliate-wp' ), home_url( '/' ) . affiliate_wp()->tracking->get_referral_var() . '/1', home_url( '/' ) . trailingslashit( affiliate_wp()->tracking->get_referral_var() ) . $username ),
 						'type' => 'checkbox'
 					),
 					'referral_credit_last' => array(
@@ -502,13 +502,13 @@ class Affiliate_WP_Settings {
 					),
 					'referral_rate_type' => array(
 						'name' => __( 'Referral Rate Type', 'affiliate-wp' ),
-						'desc' => __( 'Should referrals be based on a percentage or flat rate amounts?', 'affiliate-wp' ),
+						'desc' => __( 'Choose a referral rate type. Referrals can be based on either a percentage or a flat rate amount.', 'affiliate-wp' ),
 						'type' => 'select',
 						'options' => affwp_get_affiliate_rate_types()
 					),
 					'referral_rate' => array(
 						'name' => __( 'Referral Rate', 'affiliate-wp' ),
-						'desc' => __( 'Default referral rate. A percentage if Referral Rate Type is Percentage, a flat amount otherwise. Rates can be set for each affiliate individually as well.', 'affiliate-wp' ),
+						'desc' => __( 'The default referral rate. A percentage if the Referral Rate Type is set to Percentage, a flat amount otherwise. Referral rates can also be set for each individual affiliate.', 'affiliate-wp' ),
 						'type' => 'number',
 						'size' => 'small',
 						'step' => '0.01',
@@ -516,17 +516,17 @@ class Affiliate_WP_Settings {
 					),
 					'exclude_shipping' => array(
 						'name' => __( 'Exclude Shipping', 'affiliate-wp' ),
-						'desc' => __( 'Should shipping costs be excluded from referral calculations?', 'affiliate-wp' ),
+						'desc' => __( 'Exclude shipping costs from referral calculations.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'exclude_tax' => array(
 						'name' => __( 'Exclude Tax', 'affiliate-wp' ),
-						'desc' => __( 'Should taxes be excluded from referral calculations?', 'affiliate-wp' ),
+						'desc' => __( 'Exclude taxes from referral calculations.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'cookie_exp' => array(
 						'name' => __( 'Cookie Expiration', 'affiliate-wp' ),
-						'desc' => __( 'How many days should the referral tracking cookie be valid for?', 'affiliate-wp' ),
+						'desc' => __( 'Enter how many days the referral tracking cookie should be valid for.', 'affiliate-wp' ),
 						'type' => 'number',
 						'size' => 'small',
 						'std' => '1'
@@ -543,8 +543,8 @@ class Affiliate_WP_Settings {
 						'options' => affwp_get_currencies()
 					),
 					'currency_position' => array(
-						'name' => __( 'Currency Position', 'affiliate-wp' ),
-						'desc' => __( 'Choose the location of the currency sign.', 'affiliate-wp' ),
+						'name' => __( 'Currency Symbol Position', 'affiliate-wp' ),
+						'desc' => __( 'Choose the location of the currency symbol.', 'affiliate-wp' ),
 						'type' => 'select',
 						'options' => array(
 							'before' => __( 'Before - $10', 'affiliate-wp' ),
@@ -611,7 +611,7 @@ class Affiliate_WP_Settings {
 				array(
 					'disable_all_emails' => array(
 						'name' => __( 'Disable All Emails', 'affiliate-wp' ),
-						'desc' => __( 'Should all email notifications be disabled?', 'affiliate-wp' ),
+						'desc' => __( 'Disable all email notifications.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'email_logo' => array(
@@ -627,19 +627,19 @@ class Affiliate_WP_Settings {
 					),
 					'from_name' => array(
 						'name' => __( 'From Name', 'affiliate-wp' ),
-						'desc' => __( 'The name emails are said to come from. This should probably be your site name.', 'affiliate-wp' ),
+						'desc' => __( 'The name that emails come from. This is usually your site name.', 'affiliate-wp' ),
 						'type' => 'text',
 						'std' => get_bloginfo( 'name' )
 					),
 					'from_email' => array(
 						'name' => __( 'From Email', 'affiliate-wp' ),
-						'desc' => __( 'Email to send emails from. This will act as the "from" and "reply-to" address.', 'affiliate-wp' ),
+						'desc' => __( 'The email address to send emails from. This will act as the "from" and "reply-to" address.', 'affiliate-wp' ),
 						'type' => 'text',
 						'std' => get_bloginfo( 'admin_email' )
 					),
 					'registration_notifications' => array(
 						'name' => __( 'Notify Admin', 'affiliate-wp' ),
-						'desc' => __( 'Notify site admin of new affiliate registrations?', 'affiliate-wp' ),
+						'desc' => __( 'Notify site admin of new affiliate registrations.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'registration_subject' => array(
@@ -691,17 +691,17 @@ class Affiliate_WP_Settings {
 				array(
 					'allow_affiliate_registration' => array(
 						'name' => __( 'Allow Affiliate Registration', 'affiliate-wp' ),
-						'desc' => __( 'Should affiliates be able to register accounts for themselves?', 'affiliate-wp' ),
+						'desc' => __( 'Allow users to register affiliate accounts for themselves.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'require_approval' => array(
 						'name' => __( 'Require Approval', 'affiliate-wp' ),
-						'desc' => __( 'Require that site admins approve affiliates before they can begin earning referrals?', 'affiliate-wp' ),
+						'desc' => __( 'Require that Pending affiliate accounts must be approved before they can begin earning referrals.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'auto_register' => array(
 						'name' => __( 'Auto Register New Users', 'affiliate-wp' ),
-						'desc' => __( 'Automatically register new users as affiliates?', 'affiliate-wp' ),
+						'desc' => __( 'Automatically register new users as affiliates.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'logout_link' => array(
@@ -711,12 +711,12 @@ class Affiliate_WP_Settings {
 					),
 					'default_referral_url' => array(
 						'name' => __( 'Default Referral URL', 'affiliate-wp' ),
-						'desc' => __( 'The default referral URL shown in the affiliate area. Also changes the URL shown in the referral URL generator and {referral_url} email tag.', 'affiliate-wp' ),
+						'desc' => __( 'The default referral URL shown in the Affiliate Area. Also changes the URL shown in the Referral URL Generator and the {referral_url} email tag.', 'affiliate-wp' ),
 						'type' => 'url'
 					),
 					'recaptcha_enabled' => array(
 						'name' => __( 'Enable reCAPTCHA', 'affiliate-wp' ),
-						'desc' => __( 'Would you like to prevent bots from registering affiliate accounts using Google reCAPTCHA?', 'affiliate-wp' ),
+						'desc' => __( 'Prevent bots from registering affiliate accounts using Google reCAPTCHA.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'recaptcha_site_key' => array(
@@ -730,38 +730,39 @@ class Affiliate_WP_Settings {
 						'type' => 'text'
 					),
 					'revoke_on_refund' => array(
-						'name' => __( 'Reject Unpaid Referrals on Refund?', 'affiliate-wp' ),
-						'desc' => __( 'Should unpaid referrals get automatically rejected when the originating purchase is refunded or revoked?', 'affiliate-wp' ),
+						'name' => __( 'Reject Unpaid Referrals on Refund', 'affiliate-wp' ),
+						'desc' => __( 'Automatically reject Unpaid referrals when the originating purchase is refunded or revoked.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'tracking_fallback' => array(
-						'name' => __( 'Use Fallback Referral Tracking Method?', 'affiliate-wp' ),
-						'desc' => __( 'The method used to track referral links can fail on sites that have jQuery errors. Check this if referrals are not getting tracked properly.', 'affiliate-wp' ),
+						'name' => __( 'Use Fallback Referral Tracking Method', 'affiliate-wp' ),
+						'desc' => __( 'The method used to track referral links can fail on sites that have jQuery errors. Enable Fallback Tracking if referrals are not being tracked properly.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'ignore_zero_referrals' => array(
-						'name' => __( 'Ignore Zero Referrals?', 'affiliate-wp' ),
-						'desc' => __( 'Check this box if you would like AffiliateWP to completely ignore referrals for a zero total amount. This can be useful for multi-price products that start at zero, or if a discount was used, which resulted in a zero amount. Please note: if this setting is enabled and a visit results in a zero referral, then the visit would be considered not converted.', 'affiliate-wp' ),
+						'name' => __( 'Ignore Referrals with Zero Amount', 'affiliate-wp' ),
+						'desc' => __( 'Ignore referrals with a zero amount. This can be useful for multi-price products that start at zero, or if a discount was used which resulted in a zero amount. NOTE: If this setting is enabled and a visit results in a zero referral, the visit will be considered not converted.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'debug_mode' => array(
-						'name' => __( 'Enable Debug Mode?', 'affiliate-wp' ),
-						'desc' => __( 'Check this box to enable debug mode. This will turn on error logging for the referral process to help identify problems.', 'affiliate-wp' ),
+						'name' => __( 'Enable Debug Mode', 'affiliate-wp' ),
+						'desc' => __( 'Enable debug mode. This will turn on error logging for the referral process to help identify issues.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'referral_url_blacklist' => array(
 						'name' => __( 'Referral URL Blacklist', 'affiliate-wp' ),
-						'desc' => __( 'URLs placed in this box below will be prevented from making referrals. Enter URLs one per line.', 'affiliate-wp' ),
+						'desc' => __( 'URLs placed here will be blocked from generating referrals. Enter one URL per line. NOTE: This will only apply to new visits after the URL has been saved.', 'affiliate-wp' ),
 						'type' => 'textarea'
 					),
 					'betas' => array(
-						'name' => __( 'Opt into beta versions?', 'affiliate-wp' ),
-						'desc' => __( 'Check this box if you would like to receive update notifications for beta releases. When beta versions are available, an update notification will be shown in your Plugins page.', 'affiliate-wp' ),
+						'name' => __( 'Opt into Beta Versions', 'affiliate-wp' ),
+						'desc' => __( 'Receive update notifications for beta releases. When beta versions are available, an update notification will be shown on your Plugins page.
+', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					),
 					'uninstall_on_delete' => array(
-						'name' => __( 'Remove Data on Uninstall?', 'affiliate-wp' ),
-						'desc' => __( 'Check this box if you would like AffiliateWP to completely remove all of its data when the plugin is deleted.', 'affiliate-wp' ),
+						'name' => __( 'Remove Data on Uninstall', 'affiliate-wp' ),
+						'desc' => __( 'Remove all saved data for AffiliateWP when the plugin is deleted.', 'affiliate-wp' ),
 						'type' => 'checkbox'
 					)
 				)

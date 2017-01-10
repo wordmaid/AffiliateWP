@@ -36,7 +36,7 @@ $payout_link = affwp_admin_url( 'payouts', array(
 
 				<td>
 					<input class="small-text" type="text" name="affiliate_id" id="affiliate_id" value="<?php echo esc_attr( $referral->affiliate_id ); ?>" disabled="disabled"/>
-					<p class="description"><?php _e( 'The affiliate&#8217;s ID this referral belongs to. This value cannot be changed.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'The ID of the affiliate who generated this referral. This value cannot be changed.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>
@@ -128,7 +128,7 @@ $payout_link = affwp_admin_url( 'payouts', array(
 
 				<td>
 					<input type="text" name="context" id="context" value="<?php echo esc_attr( $referral->context ); ?>" <?php echo $readonly; ?> />
-					<p class="description"><?php _e( 'Context for this referral (optional). Usually this is used to help identify the payment system that was used for the transaction.', 'affiliate-wp' ); ?></p>
+					<p class="description"><?php _e( 'Context for this referral (optional). Usually this is used to identify the payment system or integration that was used for the transaction.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>

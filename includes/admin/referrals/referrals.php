@@ -57,11 +57,21 @@ function affwp_referrals_admin() {
 				do_action( 'affwp_referrals_page_buttons' );
 				?>
 
-				<form id="affwp-referrals-export-form" style="display:none;" class="affwp-batch-form" data-batch_id="generate-payouts" data-nonce="<?php echo esc_attr( wp_create_nonce( 'generate-payouts_step_nonce' ) ); ?>">
+				<form id="affwp-referrals-export-form" style="display:none;" class="affwp-batch-form" data-batch_id="generate-payouts" data-nonce="<?php echo esc_attr( wp_create_nonce( 'generate-payouts_step_nonce' ) ); ?>" data-ays="<?php esc_attr_e( 'Are you sure you want to generate the payout file? All included referrals will be marked as Paid.', 'affiliate-wp' ); ?>">
+					<h2><?php _e( 'Generate Payout File', 'affiliate-wp' ); ?></h2>
 					<p>
+						<span class="affwp-ajax-search-wrap">
+							<input type="text" name="user_name" id="user_name" class="affwp-user-search" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
+							<input type="hidden" name="user_id" id="user_id" value=""/>
+						</span>
+
 						<input type="text" class="affwp-datepicker" autocomplete="off" name="from" placeholder="<?php _e( 'From - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
 						<input type="text" class="affwp-datepicker" autocomplete="off" name="to" placeholder="<?php _e( 'To - mm/dd/yyyy', 'affiliate-wp' ); ?>"/>
 						<input type="text" class="affwp-text" name="minimum" placeholder="<?php esc_attr_e( 'Minimum amount', 'affiliate-wp' ); ?>"/>
+					</p>
+					<p><?php printf( __( 'This will mark all unpaid referrals in this timeframe as paid. To export referrals with a status other than <em>unpaid</em>, go to the <a href="%s">Tools &rarr; Export</a> page.', 'affiliate-wp' ), esc_url( affwp_admin_url( 'tools', array( 'tab' => 'export_import' ) ) ) ); ?></p>
+					<p><?php _e( 'To generate a payout for a specific affiliate, enter the affiliate&#8217;s login name, first name, or last name. Leave blank to generate a payout for any affiliates.', 'affiliate-wp' ); ?></p>
+					<p>
 						<?php
 						/**
 						 * Fires just prior to the Generate CSV File button in the referrals list table
@@ -71,7 +81,6 @@ function affwp_referrals_admin() {
 
 						submit_button( __( 'Generate CSV File', 'affiliate-wp' ), 'secondary', 'generate-payouts-submit', false );
 						?>
-						<p><?php printf( __( 'This will mark all unpaid referrals in this timeframe as paid. To export referrals with a status other than <em>unpaid</em>, go to the <a href="%s">Tools &rarr; Export</a> page.', 'affiliate-wp' ), esc_url( affwp_admin_url( 'tools', array( 'tab' => 'export_import' ) ) ) ); ?></p>
 					</p>
 				</form>
 

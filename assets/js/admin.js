@@ -65,12 +65,6 @@ jQuery(document).ready(function($) {
 		$('#affwp-referrals-export-form').slideToggle();
 	});
 
-	$('#affwp-referrals-export-form').submit(function() {
-		if( ! confirm( affwp_vars.confirm ) ) {
-			return false;
-		}
-	});
-
 	// datepicker
 	if( $('.affwp-datepicker').length ) {
 		$('.affwp-datepicker').datepicker({dateFormat: 'mm/dd/yy'});
@@ -240,6 +234,13 @@ jQuery(document).ready(function($) {
 				var submitButton = $(this).find( 'input[type="submit"]' );
 
 				if ( ! submitButton.hasClass( 'button-disabled' ) ) {
+
+					// Handle the Are You Sure (AYS) if present on the form element.
+					var ays = $( this ).data( 'ays' );
+
+					if ( ays.length && ! confirm( ays ) ) {
+						return;
+					}
 
 					var data = {
 						batch_id: $( this ).data( 'batch_id' ),

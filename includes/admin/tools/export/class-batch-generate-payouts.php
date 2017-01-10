@@ -59,6 +59,15 @@ class Generate_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 	public $referrals = array();
 
 	/**
+	 * ID of affiliate to generate a payout for.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    string
+	 */
+	public $affiliate_id = 0;
+
+	/**
 	 * Start and/or end dates to retrieve referrals for.
 	 *
 	 * @access public
@@ -88,6 +97,10 @@ class Generate_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 
 		if ( null !== $data ) {
 
+			if ( ! empty( $data['user_name'] ) && $affiliate = affwp_get_affiliate( $data['user_name'] ) ) {
+				$this->affiliate_id = $affiliate->ID;
+			}
+
 			if ( ! empty( $data['minimum'] ) ) {
 				$this->min_amount = sanitize_text_field( affwp_sanitize_amount( $data['minimum'] ) );
 			}
@@ -116,9 +129,10 @@ class Generate_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 
 		if ( false === $compiled_data ) {
 			$args = array(
-				'status' => 'unpaid',
-				'number' => -1,
-				'date'   => $this->date,
+				'status'       => 'unpaid',
+				'number'       => -1,
+				'date'         => $this->date,
+				'affiliate_id' => $this->affiliate_id,
 			);
 
 			$referrals_for_export = affiliate_wp()->referrals->get_referrals( $args );
@@ -255,14 +269,18 @@ class Generate_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 			case 'done':
 				$final_count = $this->get_current_count();
 
-				$message = sprintf(
-					_n(
-						'A payout log for %s affiliate was successfully generated.',
-						'A payout log for %s affiliates was successfully generated.',
-						$final_count,
-						'affiliate-wp'
-					), number_format_i18n( $final_count )
-				);
+				if ( ! $final_count ) {
+					$message = __( 'No unpaid referrals were found matching your criteria.', 'affiliate-wp' );
+				} else {
+					$message = sprintf(
+						_n(
+							'A payout log for %s affiliate was successfully generated.',
+							'A payout log for %s affiliates was successfully generated.',
+							$final_count,
+							'affiliate-wp'
+						), number_format_i18n( $final_count )
+					);
+				}
 				break;
 
 			default:

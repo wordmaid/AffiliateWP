@@ -102,6 +102,11 @@ add_action( 'affwp_process_delete_referral', 'affwp_process_delete_referral' );
 function affwp_generate_referral_payout_file( $data ) {
 
 	$export = new Affiliate_WP_Referral_Payout_Export;
+
+	if ( ! empty( $data['user_name'] ) && $affiliate = affwp_get_affiliate( $data['user_name'] ) ) {
+		$export->affiliate_id = $affiliate->ID;
+	}
+
 	$export->date = array(
 		'start' => $data['from'],
 		'end'   => $data['to'] . ' 23:59:59'

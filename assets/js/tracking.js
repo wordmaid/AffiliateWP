@@ -49,6 +49,7 @@ jQuery(document).ready( function($) {
 					if( ( '1' == credit_last && ref_cookie && ref_cookie != response.data.affiliate_id ) || ! ref_cookie ) {
 						affwp_track_visit( response.data.affiliate_id, campaign );
 					}
+
 				}
 			}
 
@@ -133,7 +134,7 @@ jQuery(document).ready( function($) {
 		return vars;
 	}
 
-	if ( AFFWP.debug ) {
+	if ( 1 === AFFWP.debug ) {
 
 		/**
 		 * Helpful utilities and data for debugging the JavaScript environment.
@@ -143,86 +144,136 @@ jQuery(document).ready( function($) {
 		 * @since 2.0
 		 * @var
 		 */
-		affwp_debug_utility = {
-			/**
-			 * Various data pertaining to AffiliateWP (if available).
-			 *
-			 * @since 2.0
-			 * @return {array} An array of debug variables.
-			 */
-			vars : {
-				ajax_url        : affwp_scripts.ajaxurl,
-				ref_cookie      : ref_cookie,
-				visit_cookie    : visit_cookie,
-				credit_last     : AFFWP.referral_credit_last,
-				campaign_cookie : campaign_cookie,
-				ref             : AFFWP.referral_var,
-				campaign        : affwp_get_query_vars()['campaign'],
-				currency        : affwp_debug_vars.currency,
-				version         : affwp_debug_vars.version
-			},
-			integrations    : affwp_debug_vars.integrations,
-			/**
-			 * Returns the current time via the performance timing API.
-			 *
-			 * @since  2.0
-			 * @return {int} The current browser client time.
-			 */
-			printTime: function() {
-				return performance.now();
-			},
-			/**
-			 * Halts all JavaScript at the given callable of AFFWP.debug_utility.halt().
-			 *
-			 * - Useful in implementing step-debuggers, and breakpoints.
-			 *
-			 * @since  2.0
-			 *
-			 * @param  {[type]} errorMessage Error message. Optional.
-			 *
-			 * @return void
-			 */
-			halt: function( errorMessage = '' ) {
-				if ( errorMessage ) {
-					console.affwp( errorMessage );
-					console.log( '\n' );
-				}
+		function affwp_get_cookie_item( item ) {
+			var re    = new RegExp(item + "=([^;]+)");
+			var value = re.exec(document.cookie);
+			return (value != null) ? unescape(value[1]) : null;
+		}
 
-				console.affwp( 'Halting at ' + this.printTime() );
-
-				debugger;
-			},
-			/**
-			 * Outputs any available debug data
-			 *
-			 * @since  2.0
-			 *
-			 * @param  {string} heading   Optional title heading. Renders before the tabular data output.
-			 * @param  {array} debugData  Available debug data.
-			 *
-			 * @return void
-			 */
-			output: function( heading = '', debugData ) {
-				heading = 'Available debug data:';
-				debugData = this.vars;
-				integrations = this.integrations;
-
-				console.affwp( heading );
-				console.log( '\n' );
-				console.table( debugData );
-				console.affwp( 'Integrations' );
-				console.table( integrations );
+		function affwp_debug_tests_assert_equals( a, b ) {
+			if ( 1 !== AFFWP.debug ) {
+				return false;
 			}
+
+			console.assert( a === b );
+		}
+
+		function affwp_debug_tests_assert_not_equals( a, b ) {
+			if ( 1 !== AFFWP.debug ) {
+				return false;
+			}
+
+			console.assert( a !== b );
+		}
+
+		function affwp_debug_tests_assert_greater_than( a, b ) {
+			if ( 1 !== AFFWP.debug ) {
+				return false;
+			}
+
+			console.assert( a > b );
+		}
+
+		function affwp_debug_tests_assert_less_than( a, b ) {
+			if ( 1 !== AFFWP.debug ) {
+				return false;
+			}
+
+			console.assert( a < b );
+		}
+
+		/**
+		 * Various data pertaining to AffiliateWP (if available).
+		 *
+		 * @since 2.0
+		 * @return {array} An array of debug variables.
+		 */
+		function affwp_debug_inline_vars() {
+			vars = {
+				ajax_url        : JSON.stringify( affwp_scripts.ajaxurl ),
+				ref             : JSON.stringify( AFFWP.referral_var ? AFFWP.referral_var : affwp_get_cookie_item( 'affwp_ref' ) ),
+				visit_cookie    : JSON.stringify( affwp_get_cookie_item( 'affwp_ref_visit_id' ) ),
+				credit_last     : JSON.stringify( AFFWP.referral_credit_last ),
+				campaign        : JSON.stringify( affwp_get_query_vars()['campaign'] ? affwp_get_query_vars()['campaign'] : affwp_get_cookie_item( 'affwp_campaign' ) ),
+				currency        : JSON.stringify( affwp_debug_vars.currency ),
+				version         : JSON.stringify( affwp_debug_vars.version )
+			}
+
+			return vars;
+		}
+
+		/**
+		 * Get all active integrations.
+		 *
+		 * @since  2.0
+		 *
+		 * @return {array} All active AffiliateWP integrations on the site.
+		 */
+		function affwp_debug_get_integrations() {
+			return affwp_debug_vars.integrations;
+		}
+
+		/**
+		 * Returns the current time via the performance timing API.
+		 *
+		 * @since  2.0
+		 * @return {int} The current browser client time.
+		 */
+		function affwp_debug_print_time() {
+			return performance.now();
+		}
+
+		/**
+		 * Halts all JavaScript at the given callable of AFFWP.debug_utility.halt().
+		 *
+		 * - Useful in implementing step-debuggers, and breakpoints.
+		 *
+		 * @since  2.0
+		 *
+		 * @param  {string} errorMessage Error message. Optional.
+		 *
+		 * @return void
+		 */
+		function affwp_debug_halt( errorMessage = '' ) {
+			if ( errorMessage ) {
+				console.affwp( errorMessage );
+				console.log( '\n' );
+			}
+
+			console.affwp( 'Halting at ' + affwp_debug_print_time() );
+
+			debugger;
+		}
+
+		/**
+		 * Outputs any available debug data
+		 *
+		 * @since  2.0
+		 *
+		 * @param  {string} heading    Optional title heading. Renders before the tabular data output.
+		 * @param  {array}  debugData  Available debug data.
+		 *
+		 * @return void
+		 */
+		function affwp_debug_output( heading = '', debugData ) {
+			var heading = 'Available debug data:';
+
+			console.affwp( heading );
+			console.log( '\n' );
+			console.table( affwp_debug_inline_vars() );
+			console.affwp( 'Integrations' );
+			console.table( affwp_debug_get_integrations() );
 		}
 
 		/**
 		 * Defines styles for AffiliateWP-related console output.
 		 *
 		 * @since 2.0
+		 * @see   console.affwp
 		 */
 		var affwpConsoleStyles = [
 			'background: transparent'
-			, 'border: 6px solid #E34F43'
+			, 'border-bottom: 2px solid #E34F43'
 			, 'color: black'
 			, 'display: block'
 			, 'line-height: 18px'
@@ -235,7 +286,7 @@ jQuery(document).ready( function($) {
 		 * An extension of the console.log prototype.
 		 *
 		 * Usage:
-		 * - Callable with `console.log( "The error or message" )`
+		 * - Callable with `console.affwp( "The error or message" )`
 		 * - Disambiguates the source of the error or message.
 		 *
 		 * @since  2.0
@@ -243,11 +294,11 @@ jQuery(document).ready( function($) {
 		 * @return void
 		 */
 		console.affwp = function( message ) {
-
 			console.log( '%c' + ' * AffiliateWP: ' + message, affwpConsoleStyles + ' *' );
-		};
+		}
 
-		affwp_debug_utility.output();
+		// Print debug info to the console.
+		affwp_debug_output();
 	}
-
 });
+

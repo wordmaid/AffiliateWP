@@ -1184,6 +1184,34 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::affwp_increase_affiliate_unpaid_earnings()
+	 */
+	public function test_increase_affiliate_unpaid_earnings_should_increase_unpaid_earnings() {
+		$current = affwp_get_affiliate_unpaid_earnings( self::$affiliates[0] );
+
+		// Increase by 10.
+		affwp_increase_affiliate_unpaid_earnings( self::$affiliates[0], 10 );
+
+		$this->assertSame( floatval( 10 ), affwp_get_affiliate_unpaid_earnings( self::$affiliates[0] ) );
+	}
+
+	/**
+	 * @covers ::affwp_decrease_affiliate_unpaid_earnings()
+	 */
+	public function test_decrease_affiliate_unpaid_earnings_should_decrease_unpaid_earnings() {
+		// Start at 10.
+		affwp_increase_affiliate_unpaid_earnings( self::$affiliates[0], 10 );
+
+		$old_unpaid_earnings = affwp_get_affiliate_unpaid_earnings( self::$affiliates[0] );
+
+		affwp_decrease_affiliate_unpaid_earnings( self::$affiliates[0], 10 );
+
+		$new_unpaid_earnings = affwp_get_affiliate_unpaid_earnings( self::$affiliates[0] );
+
+		$this->assertSame( $old_unpaid_earnings - 10, $new_unpaid_earnings );
+	}
+
+	/**
 	 * @covers ::affwp_get_affiliate_referral_count()
 	 */
 	public function test_get_affiliate_referral_count_with_invalid_affiliate_id_should_return_false() {

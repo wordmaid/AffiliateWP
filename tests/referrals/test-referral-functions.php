@@ -438,7 +438,7 @@ class Tests extends UnitTestCase {
 
 		$new_earnings = affwp_get_affiliate_earnings( self::$_affiliate_id );
 
-		$this->assertEquals( $old_earnings - 10, $new_earnings );
+		$this->assertSame( $old_earnings - 10, $new_earnings );
 	}
 
 	/**
@@ -455,6 +455,22 @@ class Tests extends UnitTestCase {
 		$new_count = affwp_get_affiliate_referral_count( self::$_affiliate_id );
 
 		$this->assertEquals( --$old_count, $new_count );
+	}
+
+	/**
+	 * @covers ::affwp_delete_referral()
+	 */
+	public function test_delete_referral_with_status_unpaid_should_decrease_unpaid_earnings() {
+		// Needs to be unpaid.
+		affwp_set_referral_status( self::$_referral_id, 'unpaid' );
+
+		$old_unpaid_earnings = affwp_get_affiliate_unpaid_earnings( self::$_affiliate_id );
+
+		affwp_delete_referral( self::$_referral_id );
+
+		$new_unpaid_earnings = affwp_get_affiliate_unpaid_earnings( self::$_affiliate_id );
+
+		$this->assertSame( $old_unpaid_earnings - 10, $new_unpaid_earnings );
 	}
 
 	/**

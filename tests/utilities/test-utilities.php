@@ -44,6 +44,20 @@ class Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers \Affiliate_WP_Utilities::$batch
+	 */
+	public function test_batch_should_be_an_AffWP_Utils_Batch_Process_Registry_instance() {
+		$this->assertInstanceOf( 'AffWP\Utils\Batch_Process\Registry', self::$utils->batch );
+	}
+
+	/**
+	 * @covers \Affiliate_WP_Utilities::$data
+	 */
+	public function test_data_should_be_an_AffWP_Utils_Data_Storage_instance() {
+		$this->assertInstanceOf( 'AffWP\Utils\Data_Storage', self::$utils->data );
+	}
+
+	/**
 	 * @covers \Affiliate_WP_Utilities::process_post_data()
 	 */
 	public function test_process_post_data_should_return_data_unchanged_if_old_key_empty() {

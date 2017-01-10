@@ -73,6 +73,11 @@ class Tests extends UnitTestCase {
 		// Clean up.
 		affiliate_wp()->settings->set( array( 'referral_rate_type' => 'percentage' ), true );
 
+		affiliate_wp()->affiliates->update( self::$affiliates[0], array(
+			'earnings'        => 0,
+			'unpaid_earnings' => 0,
+		) );
+
 		parent::tearDown();
 	}
 
@@ -1092,11 +1097,14 @@ class Tests extends UnitTestCase {
 	 * @covers ::affwp_get_affiliate_unpaid_earnings()
 	 */
 	public function test_get_affiliate_unpaid_earnings_with_valid_affiliate_id_should_return_unpaid_earnings() {
-		$referrals = $this->factory->referral->create_many( 3, array(
-			'affiliate_id' => self::$affiliates[0],
-			'amount'       => '1000',
-			'status'       => 'unpaid'
-		) );
+		// MUST use affwp_add_referral() to ensure earnings are increased.
+		for ( $i = 1; $i <= 3; $i++ ) {
+			$referrals[] = affwp_add_referral( array(
+				'affiliate_id' => self::$affiliates[0],
+				'amount'       => 1000,
+				'status'       => 'unpaid',
+			) );
+		}
 
 		$this->assertSame( 3000.0, affwp_get_affiliate_unpaid_earnings( self::$affiliates[0] ) );
 
@@ -1117,11 +1125,14 @@ class Tests extends UnitTestCase {
 	 * @covers ::affwp_get_affiliate_unpaid_earnings()
 	 */
 	public function test_get_affiliate_unpaid_earnings_with_valid_affiliate_object_should_return_unpaid_earnings() {
-		$referrals = $this->factory->referral->create_many( 2, array(
-			'affiliate_id' => self::$affiliates[0],
-			'amount'       => '2000',
-			'status'       => 'unpaid'
-		) );
+		// MUST use affwp_add_referral() to ensure earnings are increased.
+		for ( $i = 1; $i <= 2; $i++ ) {
+			$referrals[] = affwp_add_referral( array(
+				'affiliate_id' => self::$affiliates[0],
+				'amount'       => 2000,
+				'status'       => 'unpaid',
+			) );
+		}
 
 		$affiliate = affwp_get_affiliate( self::$affiliates[0] );
 		$this->assertSame( 4000.0, affwp_get_affiliate_unpaid_earnings( $affiliate ) );
@@ -1136,11 +1147,14 @@ class Tests extends UnitTestCase {
 	 * @covers ::affwp_get_affiliate_unpaid_earnings()
 	 */
 	public function test_get_affiliate_unpaid_earnings_formatted_true_should_return_formatted_unpaid_earnings() {
-		$referrals = $this->factory->referral->create_many( 3, array(
-			'affiliate_id' => self::$affiliates[0],
-			'amount'       => '50',
-			'status'       => 'unpaid'
-		) );
+		// MUST use affwp_add_referral() to ensure earnings are increased.
+		for ( $i = 1; $i <= 3; $i++ ) {
+			$referrals[] = affwp_add_referral( array(
+				'affiliate_id' => self::$affiliates[0],
+				'amount'       => 50,
+				'status'       => 'unpaid',
+			) );
+		}
 
 		$this->assertSame( '&#36;150.00', affwp_get_affiliate_unpaid_earnings( self::$affiliates[0], $formatted = true ) );
 

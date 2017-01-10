@@ -65,12 +65,6 @@ jQuery(document).ready(function($) {
 		$('#affwp-referrals-export-form').slideToggle();
 	});
 
-	$('#affwp-referrals-export-form').submit(function() {
-		if( ! confirm( affwp_vars.confirm ) ) {
-			return false;
-		}
-	});
-
 	// datepicker
 	if( $('.affwp-datepicker').length ) {
 		$('.affwp-datepicker').datepicker({dateFormat: 'mm/dd/yy'});
@@ -81,29 +75,18 @@ jQuery(document).ready(function($) {
 		var	$this    = $( this ),
 			$action  = 'affwp_search_users',
 			$search  = $this.val(),
-			$status  = $this.data( 'affwp-status'),
-			$user_id = $this.siblings( '#user_id' );
+			$status  = $this.data( 'affwp-status');
 
 		$this.autocomplete( {
 			source: ajaxurl + '?action=' + $action + '&term=' + $search + '&status=' + $status,
 			delay: 500,
 			minLength: 2,
 			position: { offset: '0, -1' },
-			select: function( event, data ) {
-				$user_id.val( data.item.user_id );
-			},
 			open: function() {
 				$this.addClass( 'open' );
 			},
 			close: function() {
 				$this.removeClass( 'open' );
-			}
-		} );
-
-		// Unset the user_id input if the input is cleared.
-		$this.on( 'keyup', function() {
-			if ( ! this.value ) {
-				$user_id.val( '' );
 			}
 		} );
 	} );
@@ -251,6 +234,13 @@ jQuery(document).ready(function($) {
 				var submitButton = $(this).find( 'input[type="submit"]' );
 
 				if ( ! submitButton.hasClass( 'button-disabled' ) ) {
+
+					// Handle the Are You Sure (AYS) if present on the form element.
+					var ays = $( this ).data( 'ays' );
+
+					if ( ays.length && ! confirm( ays ) ) {
+						return;
+					}
 
 					var data = {
 						batch_id: $( this ).data( 'batch_id' ),

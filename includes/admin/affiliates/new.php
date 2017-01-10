@@ -28,7 +28,6 @@ $default_rate = affwp_abs_number_round( $default_rate );
 				<td>
 					<span class="affwp-ajax-search-wrap">
 						<input type="text" name="user_name" id="user_name" class="affwp-user-search" data-affwp-status="none" autocomplete="off" />
-						<input type="hidden" name="user_id" id="user_id" value="" />
 					</span>
 					<p class="description"><?php _e( 'Begin typing the name of the affiliate to perform a search for their associated user account.', 'affiliate-wp' ); ?></p>
 				</td>

@@ -61,13 +61,13 @@ class Data_Storage {
 	/**
 	 * Derives the formats array based on the type of $value.
 	 *
-	 * @access protected
+	 * @access public
 	 * @since  2.0
 	 *
 	 * @param mixed $value Value to store.
 	 * @return array Formats array. First and last values will always be string ('%s').
 	 */
-	protected function get_data_formats( $value ) {
+	public function get_data_formats( $value ) {
 
 		switch( gettype( $value ) ) {
 			case 'integer':

@@ -60,7 +60,6 @@ function affwp_admin_scripts() {
 		'affwp_version'           => AFFILIATEWP_VERSION,
 		'currency_sign'           => affwp_currency_filter(''),
 		'currency_pos'            => affiliate_wp()->settings->get( 'currency_position', 'before' ),
-		'confirm'                 => __( 'Are you sure you want to generate the payout file? All included referrals will be marked as Paid.', 'affiliate-wp' ),
 		'confirm_delete_referral' => __( 'Are you sure you want to delete this referral?', 'affiliate-wp' ),
 	));
 

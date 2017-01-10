@@ -79,6 +79,9 @@ class Export_Payouts extends Batch\Export\CSV implements Batch\With_PreFetch {
 
 		if ( null !== $data ) {
 
+			$data = affiliate_wp()->utils->process_post_data( $data, 'user_name' );
+
+			// TODO: stop using affwp_get_affiliate_id()
 			if ( ! empty( $data['user_id'] ) ) {
 				if ( $affiliate_id = affwp_get_affiliate_id( absint( $data['user_id'] ) ) ) {
 					$this->affiliate_id = $affiliate_id;

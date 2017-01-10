@@ -40,6 +40,15 @@ class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export i
 	public $referrals = array();
 
 	/**
+	 * ID of the specific affiliate to include referrals for.
+	 *
+	 * @access public
+	 * @since  2.0
+	 * @var    int
+	 */
+	public $affiliate_id = 0;
+
+	/**
 	 * Constructor.
 	 *
 	 * @access public
@@ -166,9 +175,10 @@ class Affiliate_WP_Referral_Payout_Export extends Affiliate_WP_Referral_Export i
 	 */
 	public function get_referrals_for_export( $args = array() ) {
 		$args = wp_parse_args( $args, array(
-			'status' => 'unpaid',
-			'date'   => ! empty( $this->date ) ? $this->date : '',
-			'number' => -1
+			'status'       => 'unpaid',
+			'date'         => ! empty( $this->date ) ? $this->date : '',
+			'number'       => -1,
+			'affiliate_id' => $this->affiliate_id,
 		) );
 
 		return affiliate_wp()->referrals->get_referrals( $args );

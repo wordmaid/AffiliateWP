@@ -174,7 +174,9 @@ function affwp_set_referral_status( $referral, $new_status = '' ) {
  * @param array $data {
  *     Optional. Arguments for adding a new referral. Default empty array.
  *
+ *     @type int    $user_id      User ID. Used to retrieve the affiliate ID if `affiliate_id` not given.
  *     @type int    $affiliate_id Affiliate ID.
+ *     @type string $user_name    User login. Used to retrieve the affiliate ID if `affiliate_id` not given.
  *     @type float  $amount       Referral amount. Default empty.
  *     @type string $description  Description. Default empty.
  *     @type string $reference    Referral reference (usually product information). Default empty.
@@ -186,9 +188,11 @@ function affwp_set_referral_status( $referral, $new_status = '' ) {
  */
 function affwp_add_referral( $data = array() ) {
 
-	if ( empty( $data['user_id'] ) && empty( $data['affiliate_id'] ) ) {
+	if ( empty( $data['user_id'] ) && empty( $data['affiliate_id'] ) && empty( $data['user_name'] ) ) {
 		return 0;
 	}
+
+	$data = affiliate_wp()->utils->process_post_data( $data, 'user_name' );
 
 	if ( empty( $data['affiliate_id'] ) ) {
 

@@ -103,7 +103,6 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
 
         <div class="pms-meta-box-field-wrapper">
             <label for="user_name" class="pms-meta-box-field-label"><?php echo __( 'Affiliate Discount?', 'affiliate-wp' ); ?></label>
-            <input type="hidden" name="affwp_pms_user_id" id="user_id" value="<?php echo esc_attr( $user_id ); ?>" />
             <input type="text" name="affwp_pms_user_name" id="user_name" value="<?php echo esc_attr( $user_name ); ?>" class="affwp-user-search" data-affwp-status="active" autocomplete="off" style="min-width: 250px;"/>
             <p class="description"><?php echo __( 'If you would like to connect this discount to an affiliate, enter the name of the affiliate it belongs to.', 'affiliate-wp' ); ?></p>
         </div>
@@ -133,20 +132,9 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
             return;
         }
 
-        $user_id = '';
+        $data = affiliate_wp()->utils->process_post_data( $_POST, 'affwp_pms_user_name' );
 
-        // Get the user_id from the user_name, not from the posted user_id
-        if ( ! empty( $_POST['affwp_pms_user_name'] ) ) {
-
-            $user = get_user_by( 'login', sanitize_text_field( $_POST['affwp_pms_user_name'] ) );
-
-            if ( $user && affwp_is_affiliate( $user->ID ) ) {
-                $user_id = $user->ID;
-            }
-
-        }
-
-        $affiliate_id = affwp_get_affiliate_id( $user_id );
+        $affiliate_id = affwp_get_affiliate_id( $data['user_id'] );
 
         update_post_meta( $discount_code_id, '_affwp_pms_affiliate_id', $affiliate_id );
 

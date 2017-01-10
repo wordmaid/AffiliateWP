@@ -107,37 +107,41 @@ function affwp_set_referral_status( $referral, $new_status = '' ) {
 
 	if( affiliate_wp()->referrals->update( $referral->ID, array( 'status' => $new_status ), '', 'referral' ) ) {
 
-		if( 'paid' === $new_status ) {
-
-			affwp_increase_affiliate_earnings( $referral->affiliate_id, $referral->amount );
-			affwp_increase_affiliate_referral_count( $referral->affiliate_id );
-
-			if ( 'unpaid' === $old_status ) {
-				affwp_decrease_affiliate_unpaid_earnings( $referral->affiliate_id, $referral->amount );
-			}
-
-		} elseif ( 'paid' !== $new_status && 'paid' === $old_status ) {
-			if ( 'unpaid' === $new_status ) {
-				affwp_increase_affiliate_unpaid_earnings( $referral->affiliate_id, $referral->amount );
-			}
+		// Old status cleanup.
+		if ( 'paid' === $old_status ) {
 
 			// Reverse the effect of a paid referral.
 			affwp_decrease_affiliate_earnings( $referral->affiliate_id, $referral->amount );
 			affwp_decrease_affiliate_referral_count( $referral->affiliate_id );
 
-		} elseif ( 'unpaid' === $new_status && ( 'pending' === $old_status || 'rejected' === $old_status ) ) {
+		} elseif ( 'unpaid' === $old_status ) {
 
-			// Update the visit ID that spawned this referral
-			affiliate_wp()->visits->update( $referral->visit_id, array( 'referral_id' => $referral->ID ), '', 'visit' );
+			affwp_decrease_affiliate_unpaid_earnings( $referral->affiliate_id, $referral->amount );
 
-			/**
-			 * Fires when a referral is marked as accepted.
-			 *
-			 * @param int             $affiliate_id Referral affiliate ID.
-			 * @param \AffWP\Referral $referral     The referral object.
-			 */
-			do_action( 'affwp_referral_accepted', $referral->affiliate_id, $referral );
+		}
 
+		// New status.
+		if( 'paid' === $new_status ) {
+
+			affwp_increase_affiliate_earnings( $referral->affiliate_id, $referral->amount );
+			affwp_increase_affiliate_referral_count( $referral->affiliate_id );
+
+		} elseif ( 'unpaid' === $new_status ) {
+
+			affwp_increase_affiliate_unpaid_earnings( $referral->affiliate_id, $referral->amount );
+
+			if ( 'pending' === $old_status || 'rejected' === $old_status ) {
+				// Update the visit ID that spawned this referral
+				affiliate_wp()->visits->update( $referral->visit_id, array( 'referral_id' => $referral->ID ), '', 'visit' );
+
+				/**
+				 * Fires when a referral is marked as accepted.
+				 *
+				 * @param int             $affiliate_id Referral affiliate ID.
+				 * @param \AffWP\Referral $referral     The referral object.
+				 */
+				do_action( 'affwp_referral_accepted', $referral->affiliate_id, $referral );
+			}
 		}
 
 		/**

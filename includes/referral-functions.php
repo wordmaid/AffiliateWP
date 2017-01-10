@@ -251,14 +251,20 @@ function affwp_delete_referral( $referral ) {
 		return false;
 	}
 
-	if( $referral && 'paid' == $referral->status ) {
+	if ( $referral ) {
+		if ( 'paid' === $referral->status ) {
+			// This referral has already been paid, so decrease the affiliate's earnings
+			affwp_decrease_affiliate_earnings( $referral->affiliate_id, $referral->amount );
 
-		// This referral has already been paid, so decrease the affiliate's earnings
-		affwp_decrease_affiliate_earnings( $referral->affiliate_id, $referral->amount );
+			// Decrease the referral count
+			affwp_decrease_affiliate_referral_count( $referral->affiliate_id );
 
-		// Decrease the referral count
-		affwp_decrease_affiliate_referral_count( $referral->affiliate_id );
+		} elseif ( 'unpaid' === $referral->status ) {
 
+			// Decrease the unpaid earnings.
+			affwp_decrease_affiliate_unpaid_earnings( $referral->affiliate_id, $referral->amount );
+
+		}
 	}
 
 	if( affiliate_wp()->referrals->delete( $referral->ID, 'referral' ) ) {
